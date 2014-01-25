@@ -185,6 +185,10 @@ def groups(buildingName = None):
 
 
 
+@gui.route('/buildings/<buildingName>/rooms/<roomName>rules/add/')
+@gui.route('/buildings/<buildingName>/rooms/<roomName>/rules/add')
+def addRuleToRoom(buildingName = None, roomName = None):
+	return render_template('ruleForm.html')	
 
 
 

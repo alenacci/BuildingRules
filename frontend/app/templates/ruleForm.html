@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% block body %}
+  {% if session.logged_in %}
+
+
+	<h3>Add a new rule!</h3>
+	<br>
+
+	<form class="form-horizontal" action="#" method="POST">
+
+	  
+
+
+
+
+	  <div class="control-group">
+	    <label class="control-label" for="ruleString">Your new rule</label>
+	    <div class="controls">
+	      <input type="text" id="ruleString" name="ruleString"  class="span5" placeholder="if temperature is between 10 and 20 then turn off the heating">
+	    </div>
+	  </div>
+  
+	  <input type="text" value="{{buildingName}}">
+	  <input type="text" value="{{roomName}}">
+	  <input type="text" value="{{groupName}}">
+	  <input type="text" value="{{priority}}">
+
+
+	  <div class="control-group">
+	    <div class="controls">
+	      <button type="submit" class="btn">Save the new rule!</button>
+	    </div>
+	 </div>
+	
+	</form>
+
+	<br>
+	<br>
+
+  {% endif %}
+{% endblock %}
