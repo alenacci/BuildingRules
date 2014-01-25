@@ -13,12 +13,20 @@ class UsersManager:
 		user.retrieve()
 		return user
 
-	def getInfo(self, username):
-		user = User(username = username)		
-		user.retrieve()
-
-		return user.getDict()
+	def getInfo(self, username = None, uuid = None):
 		
+		if username:
+			user = User(username = username)		
+			user.retrieve()
+
+			return user.getDict()
+		elif uuid:
+			user = User(uuid = uuid)		
+			user.retrieve()
+
+			return user.getDict()
+		else:
+			raise MissingInputDataError("You need to specify at least the username or the uuid to gather user information")
 
 	def register(self, creatorUuid, newUserUsername, newUserPassword, newUserEmail, newUserPersonName, newUserLevel):
 

@@ -62,7 +62,24 @@ def userInfo(username = None):
 			session = SessionManager()
 			session.checkSessionValidity(sessionKey, userUuid)
 			userManager = UsersManager()			
-			return returnResult( userManager.getInfo(username) )		
+			return returnResult( userManager.getInfo(username = username) )		
+		except Exception as e:
+			return returnError(e)
+
+
+@api.route('/api/users/uuid/<uuid>', methods = ['POST'])
+def userInfoUuid(uuid = None):
+
+	if request.method == 'POST':
+
+		sessionKey = request.form['sessionKey']
+		userUuid = request.form['userUuid']		
+
+		try:
+			session = SessionManager()
+			session.checkSessionValidity(sessionKey, userUuid)
+			userManager = UsersManager()			
+			return returnResult( userManager.getInfo(uuid = uuid) )		
 		except Exception as e:
 			return returnError(e)
 
@@ -584,9 +601,11 @@ def returnError(errorException):
 	response["request-errorName"] = errorException.__class__.__name__
 	response["request-errorDescription"] = errorException.message
 
+	jsonContent = jsonify(response)
+
 	logging.exception("")
 
-	return returnResult( response )
+	return jsonContent
 
 
 def getBoolFromString(stringValue):
