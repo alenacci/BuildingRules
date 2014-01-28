@@ -100,7 +100,6 @@ def buildingDetail(buildingName = None):
 
 
 
-
 @gui.route('/buildings/<buildingName>/rooms/')
 @gui.route('/buildings/<buildingName>/rooms')
 def rooms(buildingName = None):
@@ -243,9 +242,12 @@ def groups(buildingName = None):
 @gui.route('/buildings/<buildingName>/groups/add', methods = ['GET', 'POST'])
 def addGroup(buildingName = None):
 
+
 	if not loggedIn():	return redirect(url_for('gui.login'))
 
-	#Retrieving the building roomList
+	##################################
+	# Retrieving the building roomList
+	##################################
 	response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms", {
 		'username' : session["username"], 
 		'buildingName' : buildingName, 
@@ -253,49 +255,85 @@ def addGroup(buildingName = None):
 		'userUuid' : session["userUuid"]
 	})
 
-	if successResponse(response):
-		roomList = response["rooms"]
-
-		if request.method == 'GET':
-			return render_template('groupForm.html', roomList = roomList)
-
-
-		elif request.method == 'POST':
-
-			description = request.form['description']
-
-			# Here creating the group	
-			response = rest.request("/api/users/<username>/buildings/<buildingName>/groups/add", {
-				'username' : session["username"], 
-				'buildingName' : buildingName, 
-				'description' : description,
-				'sessionKey' : session["sessionKey"], 
-				'userUuid' : session["userUuid"]
-			})
-
-			if not successResponse(response):
-				return render_template('error.html', error = response['request-errorDescription'])
-			else:
-				# now let us add each selected room to the created group
-				groupId = response['id']
-
-				for room in roomList:
-					response = rest.request("/api/users/<username>/buildings/<buildingName>/groups/<groupId>/rooms/<roomName>/add", {
-						'username' : session["username"], 
-						'buildingName' : buildingName, 
-						'groupId' : groupId,
-						'roomName' : room["roomName"],
-						'sessionKey' : session["sessionKey"], 
-						'userUuid' : session["userUuid"]
-					})
-
-					if not successResponse(response):
-						return render_template('error.html', error = response['request-errorDescription'])		
+	if not successResponse(response):
+		return render_template('error.html', error = response['request-errorDescription'])
+	
+	roomList = response["rooms"]
 
 
-			return redirect(url_for('gui.groups', buildingName = buildingName))
+	##################################
+	# Retrieving the rules categories
+	##################################
+	response = rest.request("/api/users/<username>/rules/categories", {
+		'username' : session["username"], 
+		'sessionKey' : session["sessionKey"], 
+		'userUuid' : session["userUuid"]
+	})
 
-	return render_template('error.html', error = response['request-errorDescription'])
+	if not successResponse(response):
+		return render_template('error.html', error = response['request-errorDescription'])
+
+	categories = response['categories']
+
+
+	##################################
+	# Now manaing POST and GET requests
+	##################################
+
+	if request.method == 'GET':
+		return render_template('groupForm.html', roomList = roomList, categories = categories)
+
+	elif request.method == 'POST':
+
+		description = request.form['description']
+		crossRoomsValidation = request.form['crossRoomsValidation'] if 'crossRoomsValidation' in request.form.keys() else False
+		crossRoomsValidationCategories = []
+
+
+		# CREATING THE LIST OF THE CHOSEN CATEGORIES
+		for category in categories:
+			currentKey = 'filter_by_' + category
+			if currentKey in request.form.keys():
+				if request.form[currentKey] == "True":
+					crossRoomsValidationCategories.append(category)
+
+		# NOW STORING THE NEW GROUP
+		response = rest.request("/api/users/<username>/buildings/<buildingName>/groups/add", {
+			'username' : session["username"], 
+			'buildingName' : buildingName, 
+			'description' : description,
+			'crossRoomsValidation' : crossRoomsValidation,
+			'crossRoomsValidationCategories' : json.dumps(crossRoomsValidationCategories, separators=(',',':')),
+			'sessionKey' : session["sessionKey"], 
+			'userUuid' : session["userUuid"]
+		})
+
+		if not successResponse(response):
+			return render_template('error.html', error = response['request-errorDescription'])
+
+		# now let us add each selected room to the created group
+		groupId = response['id']
+
+		# NOW ADDING EACH SELECTED ROOM TO THE CREATED GROUP
+		for room in roomList:
+
+			if ("room_" + room["roomName"]) in request.form.keys():
+				response = rest.request("/api/users/<username>/buildings/<buildingName>/groups/<groupId>/rooms/<roomName>/add", {
+					'username' : session["username"], 
+					'buildingName' : buildingName, 
+					'groupId' : groupId,
+					'roomName' : room["roomName"],
+					'sessionKey' : session["sessionKey"], 
+					'userUuid' : session["userUuid"]
+				})
+
+				if not successResponse(response):
+					return render_template('error.html', error = response['request-errorDescription'])		
+
+
+		return redirect(url_for('gui.groups', buildingName = buildingName))
+
+	
 
 
 

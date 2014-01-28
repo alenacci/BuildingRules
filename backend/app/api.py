@@ -67,6 +67,31 @@ def userInfo(username = None):
 			return returnError(e)
 
 
+@api.route('/api/users/<username>/rules/categories', methods = ['GET', 'POST'])
+def ruleCategories(username = None):
+
+	if request.method == 'POST':
+
+		sessionKey = request.form['sessionKey']
+		userUuid = request.form['userUuid']		
+
+		try:
+			session = SessionManager()
+			session.checkSessionValidity(sessionKey, userUuid)
+			userManager = UsersManager()			
+
+			categories = []
+			categories.append("UNKW")
+			categories.append("OTHERS")
+
+			result = {"categories" : categories}
+
+			return returnResult( result )		
+
+		except Exception as e:
+			return returnError(e)
+
+
 @api.route('/api/users/uuid/<uuid>', methods = ['POST'])
 def userInfoUuid(uuid = None):
 
@@ -372,13 +397,34 @@ def addGroupToBuilding(username = None, buildingName = None):
 		sessionKey = request.form['sessionKey']
 		userUuid = request.form['userUuid']	
 		description = request.form['description']	
+		crossRoomsValidation = request.form['crossRoomsValidation'] if 'crossRoomsValidation' in request.form.keys() else False							#BOOLEAN VALUE
+		crossRoomsValidationCategories = request.form['crossRoomsValidationCategories']	if 'crossRoomsValidationCategories' in request.form.keys() else None	#LIST IN JSON FORMAT	
 
 		try:
 			session = SessionManager()
 			session.checkSessionValidity(sessionKey, userUuid)
 			buildingsManager = BuildingsManager()
 		
-			return returnResult( buildingsManager.addGroup(buildingName = buildingName, description = description) )
+			return returnResult( buildingsManager.addGroup(buildingName = buildingName, description = description, crossRoomsValidation = crossRoomsValidation, crossRoomsValidationCategories = crossRoomsValidationCategories) )
+		except Exception as e:
+			return returnError(e)			
+
+@api.route('/api/users/<username>/buildings/<buildingName>/groups/<groupId>/edit', methods = ['POST'])
+def editGroupInBuilding(username = None, buildingName = None, groupId = None):
+	if request.method == 'POST':
+
+		sessionKey = request.form['sessionKey']
+		userUuid = request.form['userUuid']	
+		description = request.form['description']	
+		crossRoomsValidation = request.form['crossRoomsValidation'] if 'crossRoomsValidation' in request.form.keys() else False							#BOOLEAN VALUE
+		crossRoomsValidationCategories = request.form['crossRoomsValidationCategories']	if 'crossRoomsValidationCategories' in request.form.keys() else None	#LIST IN JSON FORMAT		
+
+		try:
+			session = SessionManager()
+			session.checkSessionValidity(sessionKey, userUuid)
+			buildingsManager = BuildingsManager()
+		
+			return returnResult( buildingsManager.editGroup(groupId = groupId, buildingName = buildingName, description = description, crossRoomsValidation = crossRoomsValidation, crossRoomsValidationCategories = crossRoomsValidationCategories) )
 		except Exception as e:
 			return returnError(e)
 

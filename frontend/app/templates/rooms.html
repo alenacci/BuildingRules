@@ -26,14 +26,16 @@
 									By:
 									{% if session.userUuid == rule.authorUuid%}
 										You
-										{% if not rule.groupId %}
-										- [<a href="{{request.path}}/{{room.roomName}}/rules/{{rule.id}}/edit">Edit</a>] [<a href="{{request.path}}/{{room.roomName}}/rules/{{rule.id}}/delete">Delete</a>]
-										{% endif %}
 									{% else %}
 										{{authorList.authorUuid.personName}} - <i>{{authorList.authorUuid.email}}</i>
 									{% endif %}
 
-									{% if rule.groupId %} (Group {{groupList[rule.groupId].description}}){% endif %}
+									{% if rule.groupId %} (Group {{rule.groupId }}-{{groupList[rule.groupId].description}}{% endif %}
+									{% if rule.roomName %} {% if rule.roomName == room.roomName %} {% else %} / Room {{rule.roomName}} {% endif %} {% endif %})
+
+									{% if rule.roomName %}
+									- [<a href="{{request.path}}/{{rule.roomName}}/rules/{{rule.id}}/edit">Edit</a>] [<a href="{{request.path}}/{{rule.roomName}}/rules/{{rule.id}}/delete">Delete</a>]
+									{% endif %}
 
 
 

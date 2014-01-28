@@ -26,7 +26,7 @@
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2014-01-22 00:25:22 +0000</string>
+	<string>2014-01-28 18:49:33 +0000</string>
 	<key>Modifier</key>
 	<string>Alessandro Nacci</string>
 	<key>NotesVisible</key>
@@ -389,8 +389,8 @@
 					<real>75</real>
 					<key>Points</key>
 					<array>
-						<string>{569.55696337252562, 313.3477299003747}</string>
-						<string>{959.9131407491285, 691.15214925024839}</string>
+						<string>{569.55669762382047, 313.34773207813072}</string>
+						<string>{959.90825229413929, 691.15226780265778}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -763,9 +763,8 @@ rule_priority: string}</string>
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
 \f0\b\fs24 \cf0 session_key: string\
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\b0 \cf0 user_uuid: int\
+\b0 user_uuid: int\
 exprire_timestamp: timestamp}</string>
 								<key>VerticalPad</key>
 								<integer>0</integer>
@@ -915,11 +914,11 @@ exprire_timestamp: timestamp}</string>
 					<key>OrthogonalBarPoint</key>
 					<string>{0, 0}</string>
 					<key>OrthogonalBarPosition</key>
-					<real>41.018764495849609</real>
+					<real>41.018524169921875</real>
 					<key>Points</key>
 					<array>
-						<string>{636.48205518559791, 494.00434983782986}</string>
-						<string>{732.51958338994427, 520.45167321973179}</string>
+						<string>{636.48152464861471, 494.38446748207792}</string>
+						<string>{732.51857248734768, 521.24207419824825}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -1017,8 +1016,8 @@ exprire_timestamp: timestamp}</string>
 					<real>237</real>
 					<key>Points</key>
 					<array>
-						<string>{695.99999868869781, 292.00001709581471}</string>
-						<string>{610.53959488853945, 605.51760075240782}</string>
+						<string>{695.99999727057411, 292.54348649089405}</string>
+						<string>{610.54303838448459, 605.51765739337509}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -1507,8 +1506,8 @@ trigger_id: int}</string>
 					<integer>138</integer>
 					<key>Points</key>
 					<array>
-						<string>{401.38698167637114, 211.4999931019635}</string>
-						<string>{401.01774796076558, 281.74101317409418}</string>
+						<string>{401.38698167637114, 211.49999310196355}</string>
+						<string>{401.01774796076558, 281.74101317410543}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -1923,8 +1922,8 @@ action_id: int}</string>
 					<real>77.503288269042969</real>
 					<key>Points</key>
 					<array>
-						<string>{289.49671071462262, 262.25898682588871}</string>
-						<string>{458.50328928537738, 281.74101317409418}</string>
+						<string>{289.49671071462262, 262.25898682589258}</string>
+						<string>{458.50328928537738, 281.74101317410543}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -2029,9 +2028,8 @@ action_id: int}</string>
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
 \f0\b\fs24 \cf0 id: int\
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\b0 \cf0 trigger_name: string\
+\b0 trigger_name: string\
 rule_antecedent: string\
 description: string}</string>
 								<key>VerticalPad</key>
@@ -2144,9 +2142,8 @@ description: string}</string>
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
 \f0\b\fs24 \cf0 id: int\
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\b0 \cf0 action_name: string\
+\b0 action_name: string\
 rule_consequent: string\
 description: string}</string>
 								<key>VerticalPad</key>
@@ -2301,8 +2298,8 @@ description: string}</string>
 					<key>Points</key>
 					<array>
 						<string>{771, 124}</string>
-						<string>{1006, 403}</string>
-						<string>{930.3834794369136, 466.2665444252757}</string>
+						<string>{1068, 396}</string>
+						<string>{930.41980888508874, 485.00536676778614}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -2321,7 +2318,7 @@ description: string}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{861, 313}, {17, 23}}</string>
+					<string>{{887, 328}, {17, 23}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -2443,8 +2440,8 @@ description: string}</string>
 					<real>54</real>
 					<key>Points</key>
 					<array>
-						<string>{857.44506588959348, 313.4913309424536}</string>
-						<string>{832.91369774511213, 443.50867201618024}</string>
+						<string>{882.68709248185007, 328.46136581494022}</string>
+						<string>{834.61705925702552, 443.5386408761122}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -2590,8 +2587,8 @@ description: string}</string>
 					<real>58.255744934082031</real>
 					<key>Points</key>
 					<array>
-						<string>{585.4457224667533, 313.24425484751634}</string>
-						<string>{818.56064162142968, 443.75574413643955}</string>
+						<string>{585.44571316416557, 313.24425490500442}</string>
+						<string>{818.56057614816166, 443.75574509499558}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -2696,9 +2693,8 @@ description: string}</string>
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
 \f0\b\fs24 \cf0 id: int\
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\b0 \cf0 priority: int
+\b0 priority: int
 \b \
 
 \b0 category: string\
@@ -2969,9 +2965,8 @@ last_edit_timestamp: timestamp}</string>
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
 \f0\b\fs24 \cf0 uuid: int\
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\b0 \cf0 email: string
+\b0 email: string
 \b \
 
 \b0 password: string\
@@ -3006,7 +3001,7 @@ level: int}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{854, 239}, {15, 23}}</string>
+					<string>{{867, 227}, {15, 23}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -3059,7 +3054,7 @@ level: int}</string>
 				</dict>
 				<dict>
 					<key>Bounds</key>
-					<string>{{717, 151}, {17, 23}}</string>
+					<string>{{723, 151}, {17, 23}}</string>
 					<key>Class</key>
 					<string>ShapedGraphic</string>
 					<key>FitText</key>
@@ -3125,11 +3120,11 @@ level: int}</string>
 					<key>OrthogonalBarPoint</key>
 					<string>{0, 0}</string>
 					<key>OrthogonalBarPosition</key>
-					<real>45.696567535400391</real>
+					<real>39.251865386962891</real>
 					<key>Points</key>
 					<array>
-						<string>{713.90113509519654, 151.30343078493644}</string>
-						<string>{851.93468580032584, 256.69656921506356}</string>
+						<string>{723.13645652449839, 151.24831150914198}</string>
+						<string>{884.80862973903606, 243.75204019839552}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -3416,8 +3411,8 @@ level: int}</string>
 					<integer>59</integer>
 					<key>Points</key>
 					<array>
-						<string>{636.5, 292.00001709581471}</string>
-						<string>{760.5, 292.00001709581471}</string>
+						<string>{636.49999666290626, 292.32572590414111}</string>
+						<string>{760.50000066210441, 292.77954629661946}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -3446,7 +3441,7 @@ level: int}</string>
 					<array>
 						<dict>
 							<key>Bounds</key>
-							<string>{{761, 257}, {201, 14}}</string>
+							<string>{{761, 244}, {273, 14}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
@@ -3487,7 +3482,7 @@ level: int}</string>
 						</dict>
 						<dict>
 							<key>Bounds</key>
-							<string>{{761, 271}, {201, 42}}</string>
+							<string>{{761, 258}, {273, 70}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
@@ -3523,9 +3518,10 @@ level: int}</string>
 
 \f0\b\fs24 \cf0 id: int\
 building_name: string\
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\b0 \cf0 description: string}</string>
+\b0 description: string\
+cross_room_validation: int\
+cross_room_validation_categories: list&lt;string&gt;}</string>
 								<key>VerticalPad</key>
 								<integer>0</integer>
 							</dict>
@@ -3637,9 +3633,8 @@ building_name: string\
 
 \f0\b\fs24 \cf0 room_name: string\
 building_name: string\
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\b0 \cf0 description: string}</string>
+\b0 description: string}</string>
 								<key>VerticalPad</key>
 								<integer>0</integer>
 							</dict>
@@ -3750,9 +3745,8 @@ building_name: string\
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
 \f0\b\fs24 \cf0 building_name: string\
-\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\b0 \cf0 label: string\
+\b0 label: string\
 description: string}</string>
 								<key>VerticalPad</key>
 								<integer>0</integer>
@@ -5997,7 +5991,7 @@ setRulePriority()\
 						</dict>
 						<dict>
 							<key>Bounds</key>
-							<string>{{289.21569168269758, 132.99999560231799}, {237.60784912109375, 140}}</string>
+							<string>{{289.21569168269758, 132.99999560231799}, {237.60784912109375, 154}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
@@ -6040,6 +6034,7 @@ checkUserBinding()\
 \
 addRoom()\
 addGroup()\
+editGroup()\
 }</string>
 								<key>VerticalPad</key>
 								<integer>0</integer>
@@ -6330,7 +6325,7 @@ addRoom()\
 	<key>WindowInfo</key>
 	<dict>
 		<key>CurrentSheet</key>
-		<integer>1</integer>
+		<integer>2</integer>
 		<key>ExpandedCanvases</key>
 		<array>
 			<dict>
@@ -6353,9 +6348,9 @@ addRoom()\
 		<key>SidebarWidth</key>
 		<integer>120</integer>
 		<key>VisibleRegion</key>
-		<string>{{-79, 144.44444305300044}, {1276.7676644684796, 811.11110329761789}}</string>
+		<string>{{-340, -2}, {1239.2157094472195, 787.25491668205484}}</string>
 		<key>Zoom</key>
-		<real>0.99000000953674316</real>
+		<real>1.0199999809265137</real>
 		<key>ZoomValues</key>
 		<array>
 			<array>

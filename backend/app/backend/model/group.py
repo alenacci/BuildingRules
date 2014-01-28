@@ -3,11 +3,13 @@ from app.backend.commons.errors import *
 from app.backend.commons.database import Database
 
 class Group:
-	def __init__(self, id = None, buildingName = None, description = None):
+	def __init__(self, id = None, buildingName = None, description = None, crossRoomsValidation = None, crossRoomsValidationCategories = None):
 
 			self.id = id
 			self.buildingName = buildingName
 			self.description = description
+			self.crossRoomsValidation = crossRoomsValidation
+			self.crossRoomsValidationCategories = crossRoomsValidationCategories
 
 	def getBuilding(self):
 		from app.backend.model.building import Building
@@ -107,13 +109,17 @@ class Group:
 		rule.delete()
 
 	def __replaceSqlQueryToken(self, queryTemplate):
-		if self.id 				!= None	:	queryTemplate = queryTemplate.replace("@@id@@", str(self.id))
-		if self.buildingName 	!= None	: 	queryTemplate = queryTemplate.replace("@@building_name@@", self.buildingName)
-		if self.description 	!= None	: 	queryTemplate = queryTemplate.replace("@@description@@", self.description)
+		if self.id 								!= None	:	queryTemplate = queryTemplate.replace("@@id@@", str(self.id))
+		if self.buildingName 					!= None	: 	queryTemplate = queryTemplate.replace("@@building_name@@", self.buildingName)
+		if self.description 					!= None	: 	queryTemplate = queryTemplate.replace("@@description@@", self.description)
+		if self.crossRoomsValidation 			!= None	: 	queryTemplate = queryTemplate.replace("@@cross_rooms_validation@@", str(int(self.crossRoomsValidation)))
+		if self.crossRoomsValidationCategories 	!= None	: 	queryTemplate = queryTemplate.replace("@@cross_rooms_validation_categories@@", json.dumps(self.crossRoomsValidationCategories, separators=(',',':')))
 
 		return queryTemplate
 
 	def store(self):
+
+
 		database = Database()
 		database.open()
 
@@ -122,14 +128,16 @@ class Group:
 		queryResult = database.executeReadQuery(query)
 
 		if int(queryResult[0][0]) > 0:
-			query = "UPDATE groups SET description = '@@description@@' WHERE id = '@@id@@' AND building_name = '@@building_name@@';"
+			query = "UPDATE groups SET description = '@@description@@', cross_rooms_validation = '@@cross_rooms_validation@@', cross_rooms_validation_categories = '@@cross_rooms_validation_categories@@' WHERE id = '@@id@@' AND building_name = '@@building_name@@';"
 		else:
-			query = "INSERT INTO groups (building_name, description) VALUES ('@@building_name@@', '@@description@@');"	
+			query = "INSERT INTO groups (building_name, description, cross_rooms_validation, cross_rooms_validation_categories) VALUES ('@@building_name@@', '@@description@@', '@@cross_rooms_validation@@', '@@cross_rooms_validation_categories@@');"	
 	
 		query = self.__replaceSqlQueryToken(query)
 		database.executeWriteQuery(query)
 		self.id = int(database.getLastInsertedId()) if not self.id else self.id
 		database.close()
+
+		print query
 
 
 	def retrieve(self):
@@ -149,6 +157,8 @@ class Group:
 			self.id = int(queryResult[0][0])
 			self.buildingName = queryResult[0][1]
 			self.description = queryResult[0][2]
+			self.crossRoomsValidation = bool(int(queryResult[0][3]))
+			self.crossRoomsValidationCategories = json.loads(queryResult[0][4])
 		else:
 			database.close()
 			raise Exception("Impossibile to find any group with the provided values")
@@ -175,6 +185,8 @@ class Group:
 		response["id"] = self.id
 		response["buildingName"] = self.buildingName
 		response["description"] = self.description
+		response["crossRoomsValidation"] = self.crossRoomsValidation
+		response["crossRoomsValidationCategories"] = self.crossRoomsValidationCategories 
 
 		return response	
 

@@ -37,6 +37,9 @@ class UnknownError(Exception):
 class MissingInputDataError(Exception):
 	pass
 
+class IncorrectInputDataTypeError(Exception):
+	pass
+
 class UsernameNotAvailableError(Exception):
 	pass
 

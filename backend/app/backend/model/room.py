@@ -216,9 +216,23 @@ class Room:
 			ruleList.append(rule)
 
 		if includeGroupsRules:
-			roomGroupList = self.getGroups()
-			for group in roomGroupList:
+			groupList = self.getGroups()
+
+
+
+			for group in groupList:
+				# Getting the rules expressed directly into this group (inheritance)
 				ruleList.extend(group.getRules())
+				
+				# If this is a cross room validation, getting the rules expressed into the other rooms into the same group		
+				if group.crossRoomsValidation:
+					for groupRoom in group.getRooms():
+						groupRoomRuleList = groupRoom.getRules()
+						for groupRoomRule in groupRoomRuleList:
+							if groupRoomRule.category in group.crossRoomsValidationCategories:
+								if groupRoomRule.buildingName != self.buildingName or groupRoomRule.roomName != self.roomName:
+									groupRoomRule.groupId = group.id
+									ruleList.append(groupRoomRule)
 
 		return ruleList
 

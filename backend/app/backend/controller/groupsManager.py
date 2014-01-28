@@ -138,6 +138,9 @@ class GroupsManager:
 			if ruleId: 
 				rule.id = ruleId
 				rule.setPriority(priority)
+
+			temporaryRuleSet[i].roomName = None	#Restoring null room number
+
 			return group.addRule(rule).getDict()
 		else:
 			raise RuleValidationError(ruleCheckErrorList)
