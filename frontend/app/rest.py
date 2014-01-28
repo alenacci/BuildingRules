@@ -4,12 +4,15 @@ import json
 
 def request(url, data):
 
+
 	keyToRemove = []
 	for key, value in data.iteritems():
 		keyToken = "<" + key + ">"
 		if keyToken in url:
 			url = url.replace(keyToken, str(value))
 			keyToRemove.append(key)
+
+
 
 	for key in keyToRemove:
 		del data[key]

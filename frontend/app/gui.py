@@ -55,7 +55,7 @@ def logout():
 			del session["userUuid"]
 			del session["username"]
 		else:
-			render_template('error.html', error = response['request-errorDescription'])
+			return render_template('error.html', error = response['request-errorDescription'])
 
 	return render_template('home.html')	
 
@@ -66,19 +66,17 @@ def logout():
 @gui.route('/buildings')
 def buildings():
 
-	if loggedIn():
+	if not loggedIn():	return redirect(url_for('gui.login'))
 		
-		response = rest.request("/api/users/<username>/buildings", {'username' : session["username"], 'sessionKey' : session["sessionKey"], 'userUuid' : session["userUuid"]})
+	response = rest.request("/api/users/<username>/buildings", {'username' : session["username"], 'sessionKey' : session["sessionKey"], 'userUuid' : session["userUuid"]})
 
-		if successResponse(response):
-			return render_template('buildings.html', buildings = response["buildings"])	
-		else:
-			render_template('error.html', error = response['request-errorDescription'])
-
+	if successResponse(response):
+		return render_template('buildings.html', buildings = response["buildings"])	
 	else:
-		print "error! you must login beofre"
+		return render_template('error.html', error = response['request-errorDescription'])
 
-	return redirect(url_for('gui.login'))
+
+	
 
 
 
@@ -87,19 +85,16 @@ def buildings():
 @gui.route('/buildings/<buildingName>/')
 @gui.route('/buildings/<buildingName>')
 def buildingDetail(buildingName = None):
-	if loggedIn():
+
+	if not loggedIn():	return redirect(url_for('gui.login'))
 		
-		response = rest.request("/api/users/<username>/buildings/<buildingName>", {'username' : session["username"], 'buildingName' : buildingName, 'sessionKey' : session["sessionKey"], 'userUuid' : session["userUuid"]})
+	response = rest.request("/api/users/<username>/buildings/<buildingName>", {'username' : session["username"], 'buildingName' : buildingName, 'sessionKey' : session["sessionKey"], 'userUuid' : session["userUuid"]})
 
-		if successResponse(response):
-			return render_template('buildingInfo.html', buildingInfo = response)	
-		else:
-			render_template('error.html', error = response['request-errorDescription'])
-
+	if successResponse(response):
+		return render_template('buildingInfo.html', buildingInfo = response)	
 	else:
-		print "error! you must login beofre"
+		return render_template('error.html', error = response['request-errorDescription'])
 
-	return redirect(url_for('gui.login'))
 
 
 
@@ -109,96 +104,347 @@ def buildingDetail(buildingName = None):
 @gui.route('/buildings/<buildingName>/rooms/')
 @gui.route('/buildings/<buildingName>/rooms')
 def rooms(buildingName = None):
-	if loggedIn():
+	
+	if not loggedIn():	return redirect(url_for('gui.login'))
 		
-		response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms", {'username' : session["username"], 'buildingName' : buildingName, 'sessionKey' : session["sessionKey"], 'userUuid' : session["userUuid"]})
+	response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms", {'username' : session["username"], 'buildingName' : buildingName, 'sessionKey' : session["sessionKey"], 'userUuid' : session["userUuid"]})
 
-		if successResponse(response):
-			roomList = response["rooms"]
-			roomRules = {}
-			authorList = {}
-			groupList = {}
-
-
-			# Now retrieving room rules
-			for room in roomList:
-				roomName = room["roomName"]
-				response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/rules", 
-					{
-					'username' : session["username"],
-					'buildingName' : buildingName, 
-					'roomName' : roomName,
-					'sessionKey' : session["sessionKey"],
-					'userUuid' : session["userUuid"],
-					'filterByAuthor' : False,
-					'includeGroupsRules' : True
-					})
-
-				if successResponse(response):
-					roomRules[roomName] = response["rules"]
-				else:
-					render_template('error.html', error = response['request-errorDescription'])
-					
-				# Getting rules author uuid and groupId. I'll use them later
-				for rule in roomRules[roomName]:
-					if rule["authorUuid"] not in authorList.keys() and rule["authorUuid"] != session["userUuid"]:
-						authorList[rule["authorUuid"]] = None
-					if rule["groupId"] and rule["groupId"] not in groupList.keys():
-						groupList[rule["groupId"]] = None
+	if successResponse(response):
+		roomList = response["rooms"]
+		roomRules = {}
+		authorList = {}
+		groupList = {}
 
 
-			# Getting user info per each stored uuid
-			for authorUuid in authorList.keys():
-				response = rest.request("/api/users/uuid/<uuid>", {'sessionKey' : session["sessionKey"], 'userUuid' : session["userUuid"]})
+		# Now retrieving room rules
+		for room in roomList:
+			roomName = room["roomName"]
+			response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/rules", 
+				{
+				'username' : session["username"],
+				'buildingName' : buildingName, 
+				'roomName' : roomName,
+				'sessionKey' : session["sessionKey"],
+				'userUuid' : session["userUuid"],
+				'filterByAuthor' : False,
+				'includeGroupsRules' : True
+				})
 
-				if successResponse(response):
-					authorList[authorUuid] = response
-				else:
-					render_template('error.html', error = response['request-errorDescription'])
+			if successResponse(response):
+				roomRules[roomName] = response["rules"]
+			else:
+				return render_template('error.html', error = response['request-errorDescription'])
+				
+			# Getting rules author uuid and groupId. I'll use them later
+			for rule in roomRules[roomName]:
+				if rule["authorUuid"] not in authorList.keys() and rule["authorUuid"] != session["userUuid"]:
+					authorList[rule["authorUuid"]] = None
+				if rule["groupId"] and rule["groupId"] not in groupList.keys():
+					groupList[rule["groupId"]] = None
 
-			# Getting group info per each stored groupID
-			for groupId in groupList.keys():
-				response = rest.request("/api/users/<username>/buildings/<buildingName>/groups/<groupId>", {'username' : session["username"], 'buildingName' : buildingName, 'groupId' : groupId, 'sessionKey' : session["sessionKey"], 'userUuid' : session["userUuid"]})
 
-				if successResponse(response):
-					groupList[groupId] = response
-				else:
-					render_template('error.html', error = response['request-errorDescription'])
+		# Getting user info per each stored uuid
+		for authorUuid in authorList.keys():
+			response = rest.request("/api/users/uuid/<uuid>", {'sessionKey' : session["sessionKey"], 'userUuid' : session["userUuid"]})
 
-			return render_template('rooms.html', roomList = roomList, roomRules = roomRules, authorList = authorList, groupList = groupList)	
-		else:
-			render_template('error.html', error = response['request-errorDescription'])
+			if successResponse(response):
+				authorList[authorUuid] = response
+			else:
+				return render_template('error.html', error = response['request-errorDescription'])
 
+		# Getting group info per each stored groupID
+		for groupId in groupList.keys():
+			response = rest.request("/api/users/<username>/buildings/<buildingName>/groups/<groupId>", {'username' : session["username"], 'buildingName' : buildingName, 'groupId' : groupId, 'sessionKey' : session["sessionKey"], 'userUuid' : session["userUuid"]})
+
+			if successResponse(response):
+				groupList[groupId] = response
+			else:
+				return render_template('error.html', error = response['request-errorDescription'])
+
+		return render_template('rooms.html', roomList = roomList, roomRules = roomRules, authorList = authorList, groupList = groupList)	
 	else:
-		print "error! you must login beofre"
-
-
-	return redirect(url_for('gui.login'))
-
+		return render_template('error.html', error = response['request-errorDescription'])
 
 @gui.route('/buildings/<buildingName>/groups/')
 @gui.route('/buildings/<buildingName>/groups')
 def groups(buildingName = None):
-	return render_template('home.html')
+
+	if not loggedIn():	return redirect(url_for('gui.login'))
+
+	response = rest.request("/api/users/<username>/buildings/<buildingName>/groups", {
+		'username' : session["username"], 
+		'buildingName' : buildingName, 
+		'sessionKey' : session["sessionKey"], 
+		'userUuid' : session["userUuid"]})
+
+	if not successResponse(response):
+		return render_template('error.html', error = response['request-errorDescription'])
+
+	groupList = response["groups"]
+	roomsGroup = {}
+	rulesGroup = {}
+	authorList = {}
+
+	for group in groupList:
+
+		# Getting the room list per each group
+		response = rest.request("/api/users/<username>/buildings/<buildingName>/groups/<groupId>/rooms", {
+			'username' : session["username"], 
+			'buildingName' : buildingName, 
+			'groupId' : group['id'],
+			'sessionKey' : session["sessionKey"], 
+			'userUuid' : session["userUuid"]
+		})
+
+
+		if not successResponse(response):
+			return render_template('error.html', error = response['request-errorDescription'])
+
+		if response["rooms"]:
+			roomsGroup[group['id']] = response["rooms"]
+
+
+		# Getting the rule list per each group
+		response = rest.request("/api/users/<username>/buildings/<buildingName>/groups/<groupId>/rules", {
+			'username' : session["username"], 
+			'buildingName' : buildingName, 
+			'groupId' : group['id'],
+			'sessionKey' : session["sessionKey"], 
+			'userUuid' : session["userUuid"]
+		})
+
+
+		if not successResponse(response):
+			return render_template('error.html', error = response['request-errorDescription'])
+
+		if response["rules"]:
+			rulesGroup[group['id']] = response["rules"]
+
+			for rule in rulesGroup[group['id']]:
+				if rule["authorUuid"] not in authorList.keys() and rule["authorUuid"] != session["userUuid"]:
+					authorList[rule["authorUuid"]] = None
+
+		# Getting user info per each stored uuid
+		for authorUuid in authorList.keys():
+			response = rest.request("/api/users/uuid/<uuid>", {'sessionKey' : session["sessionKey"], 'userUuid' : session["userUuid"]})
+
+			if successResponse(response):
+				authorList[authorUuid] = response
+			else:
+				return render_template('error.html', error = response['request-errorDescription'])
+
+
+	return render_template('groups.html', groupList = groupList, roomsGroup = roomsGroup, rulesGroup = rulesGroup, authorList = authorList)
+		
+
+
+
+@gui.route('/buildings/<buildingName>/groups/add/', methods = ['GET', 'POST'])
+@gui.route('/buildings/<buildingName>/groups/add', methods = ['GET', 'POST'])
+def addGroup(buildingName = None):
+
+	if not loggedIn():	return redirect(url_for('gui.login'))
+
+	#Retrieving the building roomList
+	response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms", {
+		'username' : session["username"], 
+		'buildingName' : buildingName, 
+		'sessionKey' : session["sessionKey"], 
+		'userUuid' : session["userUuid"]
+	})
+
+	if successResponse(response):
+		roomList = response["rooms"]
+
+		if request.method == 'GET':
+			return render_template('groupForm.html', roomList = roomList)
+
+
+		elif request.method == 'POST':
+
+			description = request.form['description']
+
+			# Here creating the group	
+			response = rest.request("/api/users/<username>/buildings/<buildingName>/groups/add", {
+				'username' : session["username"], 
+				'buildingName' : buildingName, 
+				'description' : description,
+				'sessionKey' : session["sessionKey"], 
+				'userUuid' : session["userUuid"]
+			})
+
+			if not successResponse(response):
+				return render_template('error.html', error = response['request-errorDescription'])
+			else:
+				# now let us add each selected room to the created group
+				groupId = response['id']
+
+				for room in roomList:
+					response = rest.request("/api/users/<username>/buildings/<buildingName>/groups/<groupId>/rooms/<roomName>/add", {
+						'username' : session["username"], 
+						'buildingName' : buildingName, 
+						'groupId' : groupId,
+						'roomName' : room["roomName"],
+						'sessionKey' : session["sessionKey"], 
+						'userUuid' : session["userUuid"]
+					})
+
+					if not successResponse(response):
+						return render_template('error.html', error = response['request-errorDescription'])		
+
+
+			return redirect(url_for('gui.groups', buildingName = buildingName))
+
+	return render_template('error.html', error = response['request-errorDescription'])
 
 
 
 
 
-@gui.route('/buildings/<buildingName>/rooms/<roomName>rules/add/')
-@gui.route('/buildings/<buildingName>/rooms/<roomName>/rules/add')
+@gui.route('/buildings/<buildingName>/rooms/<roomName>/rules/add/', methods = ['GET', 'POST'])
+@gui.route('/buildings/<buildingName>/rooms/<roomName>/rules/add', methods = ['GET', 'POST'])
 def addRuleToRoom(buildingName = None, roomName = None):
-	return render_template('ruleForm.html')	
+
+	if not loggedIn():	return redirect(url_for('gui.login'))
+
+	if request.method == 'POST':
+
+
+		ruleBody = request.form['ruleBody']
+		priority = request.form['priority']
+
+		
+		response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/rules/add", {
+					'username' : session["username"],
+					'buildingName' : buildingName,
+					'roomName' : roomName,
+					'priority' : priority, 
+					'ruleBody' : ruleBody, 
+					'sessionKey' : session["sessionKey"], 
+					'userUuid' : session["userUuid"]
+					})
+
+
+		if successResponse(response):
+			flash("The rule has been added correctly!")
+			return redirect(url_for('gui.rooms', buildingName = buildingName))
+		else:
+			return render_template('ruleForm.html', error = response['request-errorDescription'])
+
+	else:
+		return render_template('ruleForm.html')	
+
+
+@gui.route('/buildings/<buildingName>/groups/<groupId>/rules/add/', methods = ['GET', 'POST'])
+@gui.route('/buildings/<buildingName>/groups/<groupId>/rules/add', methods = ['GET', 'POST'])
+def addRuleToGroup(buildingName = None, groupId = None):
+
+	if not loggedIn():	return redirect(url_for('gui.login'))
+
+	if request.method == 'POST':
+
+
+		ruleBody = request.form['ruleBody']
+		priority = request.form['priority']
+
+		
+		response = rest.request("/api/users/<username>/buildings/<buildingName>/groups/<groupId>/rules/add", {
+					'username' : session["username"],
+					'buildingName' : buildingName,
+					'groupId' : groupId,
+					'priority' : priority, 
+					'ruleBody' : ruleBody, 
+					'sessionKey' : session["sessionKey"], 
+					'userUuid' : session["userUuid"]
+					})
+
+
+		if successResponse(response):
+			flash("The rule has been added correctly!")
+			return redirect(url_for('gui.groups', buildingName = buildingName))
+		else:
+			return render_template('ruleForm.html', error = response['request-errorDescription'])
+
+	else:
+		return render_template('ruleForm.html')	
 
 
 
 
+@gui.route('/buildings/<buildingName>/rooms/<roomName>/rules/<ruleId>/edit/', methods = ['GET', 'POST'])
+@gui.route('/buildings/<buildingName>/rooms/<roomName>/rules/<ruleId>/edit', methods = ['GET', 'POST'])
+def editRoomRule(buildingName = None, roomName = None, ruleId = None):
+
+	if not loggedIn():	return redirect(url_for('gui.login'))
+
+	if request.method == 'POST':
+
+		ruleBody = request.form['ruleBody']
+		priority = request.form['priority']
+
+	
+		response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/rules/<ruleId>/edit", {
+					'username' : session["username"],
+					'buildingName' : buildingName,
+					'roomName' : roomName,
+					'ruleId' : ruleId,
+					'priority' : priority, 
+					'ruleBody' : ruleBody, 
+					'sessionKey' : session["sessionKey"], 
+					'userUuid' : session["userUuid"]
+					})
+		
+		
+		if successResponse(response):
+			flash("The rule has been saved correctly!")
+			return redirect(url_for('gui.rooms', buildingName = buildingName))
+		else:
+			return render_template('ruleForm.html', error = response['request-errorDescription'])
+
+	else:
+
+		response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/rules/<ruleId>", {
+					'username' : session["username"],
+					'buildingName' : buildingName,
+					'roomName' : roomName,
+					'ruleId' : ruleId,
+					'sessionKey' : session["sessionKey"], 
+					'userUuid' : session["userUuid"]
+					})
+
+		if not successResponse(response):
+			return render_template('ruleForm.html', error = response['request-errorDescription'])
+
+		rule = response
+
+
+		return render_template('ruleForm.html', rule = rule)
 
 
 
+@gui.route('/buildings/<buildingName>/rooms/<roomName>/rules/<ruleId>/delete/', methods = ['GET'])
+@gui.route('/buildings/<buildingName>/rooms/<roomName>/rules/<ruleId>/delete', methods = ['GET'])
+def deleteRoomRule(buildingName = None, roomName = None, ruleId = None):
+
+	if not loggedIn():	return redirect(url_for('gui.login'))
 
 
+	response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/rules/<ruleId>/delete", {
+				'username' : session["username"],
+				'buildingName' : buildingName,
+				'roomName' : roomName,
+				'ruleId' : ruleId,
+				'sessionKey' : session["sessionKey"], 
+				'userUuid' : session["userUuid"]
+				})
 
+	if not successResponse(response):
+		return render_template('error.html', error = response['request-errorDescription'])
+
+	rule = response
+
+
+	return redirect(url_for('gui.rooms', buildingName = buildingName))
 
 
 

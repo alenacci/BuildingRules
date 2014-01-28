@@ -32,10 +32,13 @@ class RulePriority:
 		else:
 			query = "INSERT INTO rules_priority (building_name, room_name, rule_id, rule_priority) VALUES ('@@building_name@@', '@@room_name@@', '@@rule_id@@', '@@rule_priority@@');"	
 	
+
+
 		query = self.__replaceSqlQueryToken(query)
 		database.executeWriteQuery(query)
 		database.close()
 
+		print query
 
 	def retrieve(self):
 

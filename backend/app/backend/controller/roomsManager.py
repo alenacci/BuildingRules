@@ -127,6 +127,7 @@ class RoomsManager:
 			rule.antecedent = antecedent
 			rule.consequent = consequent
 			rule.authorUuid = authorUuid
+			rule.authorUuid = authorUuid			
 
 			editor = rule.getAuthor()
 
@@ -136,7 +137,7 @@ class RoomsManager:
 		room = Room(buildingName = buildingName, roomName = roomName)
 		room.retrieve()
 
-		if not rule.checkIfUnique():
+		if not ruleId and not rule.checkIfUnique():
 			raise DuplicatedRuleError("The submitted rule is already been saved for the considered room.")
 
 		# excludedRuleId is needed to ignore the rule that the user want to edit
@@ -158,7 +159,9 @@ class RoomsManager:
 		ruleCheckErrorList = rulesetChecker.check()
 
 		if len(ruleCheckErrorList) == 0:
-			if ruleId: rule.id = ruleId
+			if ruleId: 
+				rule.id = ruleId
+				rule.setPriority(priority)
 			return room.addRule(rule).getDict()
 		else:
 			raise RuleValidationError(ruleCheckErrorList)

@@ -6,25 +6,23 @@
 	<h3>Add a new rule!</h3>
 	<br>
 
-	<form class="form-horizontal" action="#" method="POST">
+	{% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
 
-	  
-
-
-
+	<form class="form-horizontal" action="{{request.path}}" method="POST">
 
 	  <div class="control-group">
-	    <label class="control-label" for="ruleString">Your new rule</label>
+	    <label class="control-label" for="ruleBody">Your new rule</label>
 	    <div class="controls">
-	      <input type="text" id="ruleString" name="ruleString"  class="span5" placeholder="if temperature is between 10 and 20 then turn off the heating">
+	      <input type="text" id="ruleBody" name="ruleBody"  class="span5" placeholder="if temperature is between 10 and 20 then turn off the heating" value="{% if rule %} if {{rule.antecedent}} then {{rule.consequent}} {% endif %}">
 	    </div>
 	  </div>
-  
-	  <input type="text" value="{{buildingName}}">
-	  <input type="text" value="{{roomName}}">
-	  <input type="text" value="{{groupName}}">
-	  <input type="text" value="{{priority}}">
 
+	  <div class="control-group">
+	    <label class="control-label" for="priority">Rule priority</label>
+	    <div class="controls">
+	      <bold class="muted">LOW</bold> <input type="range" min ="0" max="100" name="priority" id="priority" value="{% if rule %}{{rule.priority}}{% endif %}"> <bold class="muted">HIGH</bold>
+	    </div>
+	  </div>
 
 	  <div class="control-group">
 	    <div class="controls">

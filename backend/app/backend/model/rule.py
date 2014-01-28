@@ -45,6 +45,8 @@ class Rule:
 			raise RuleInitFailedError("Some parameters are missing")
 
 	def setPriority(self, priority, roomName = None, buildingName = None):
+
+
 		
 		from app.backend.model.rulePriority import RulePriority
 
@@ -109,6 +111,9 @@ class Rule:
 		return queryTemplate
 
 	def store(self):
+
+		updateQuery = False
+
 		database = Database()
 		database.open()
 
@@ -126,6 +131,7 @@ class Rule:
 					author_uuid = '@@author_uuid@@', antecedent = '@@antecedent@@', consequent = '@@consequent@@', enabled = '@@enabled@@', 
 					deleted = '@@deleted@@', creation_timestamp = '@@creation_timestamp@@', last_edit_timestamp = '@@last_edit_timestamp@@'
 					WHERE id = '@@id@@';"""
+			updateQuery = True
 		else:
 			if self.creationTimestamp == None:
 				self.creationTimestamp = datetime.datetime.now() 
@@ -141,7 +147,7 @@ class Rule:
 		self.id = int(database.getLastInsertedId()) if not self.id else self.id
 		database.close()
 
-		if not self.groupId:
+		if not self.groupId and not updateQuery:
 			from app.backend.model.rulePriority import RulePriority
 			rulePriority = RulePriority(buildingName = self.buildingName, roomName = self.roomName, ruleId = self.id, rulePriority = self.__priority)
 			rulePriority.store()

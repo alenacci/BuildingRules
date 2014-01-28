@@ -461,7 +461,7 @@ def setRulePriority(username = None, buildingName = None, roomName = None, ruleI
 
 
 @api.route('/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/rules/<ruleId>', methods = ['POST'])
-def gerRuleInfoFromRoom(username = None, buildingName = None, roomName = None, ruleId = None):
+def getRuleInfoFromRoom(username = None, buildingName = None, roomName = None, ruleId = None):
 	if request.method == 'POST':
 
 		sessionKey = request.form['sessionKey']

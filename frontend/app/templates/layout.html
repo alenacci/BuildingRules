@@ -44,7 +44,11 @@
 		          <li><a id="swatch-link" href="{{url_for('gui.login')}}">Login</a></li>
 		        </ul>
 		        <ul class="nav pull-right">
-		          <li><a href="#">username here</a></li>
+		          <li><a href="#">
+		          	{% if session %}
+		          		{{session.username}}
+		          	{% endif %}
+		          </a></li>
 		        </ul>
 		       </div>
 		     </div>

@@ -107,7 +107,7 @@ class GroupsManager:
 		group = Group(buildingName = buildingName, id = groupId)
 		group.retrieve()
 
-		if not rule.checkIfUnique():
+		if not ruleId and not rule.checkIfUnique():
 			raise DuplicatedRuleError("The submitted rule is already been saved for the considered group.")
 
 		# excludedRuleId is needed to ignore the rule that the user want to edit
@@ -135,7 +135,9 @@ class GroupsManager:
 			ruleCheckErrorList.extend(rulesetChecker.check())
 
 		if len(ruleCheckErrorList) == 0:
-			if ruleId: rule.id = ruleId
+			if ruleId: 
+				rule.id = ruleId
+				rule.setPriority(priority)
 			return group.addRule(rule).getDict()
 		else:
 			raise RuleValidationError(ruleCheckErrorList)
