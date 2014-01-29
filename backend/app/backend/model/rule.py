@@ -76,7 +76,7 @@ class Rule:
 
 	def getRoom(self):
 		from app.backend.model.room import Room
-		room = Room(roomName = self.roomName)
+		room = Room(roomName = self.roomName, buildingName = self.buildingName)
 		room.retrieve()
 		return room
 

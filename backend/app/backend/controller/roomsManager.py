@@ -99,7 +99,63 @@ class RoomsManager:
 	def addRule(self, priority, buildingName, roomName, authorUuid, ruleBody):
 		return self.__addOrModifyRule(priority = priority, buildingName = buildingName, roomName = roomName, authorUuid = authorUuid, ruleBody = ruleBody)
 
-	def editRule(self, ruleId, priority, buildingName, roomName, authorUuid, ruleBody):
+	def editRule(self, ruleId, priority, buildingName, roomName, editorUuid, ruleBody, groupId):
+
+
+		from app.backend.model.rule import Rule
+		oldRule = Rule(id = ruleId)
+		oldRule.retrieve()
+
+		from app.backend.model.user import User
+		author = User(uuid = oldRule.authorUuid)
+		author.retrieve()
+
+		editor = User(uuid = editorUuid)
+		editor.retrieve()
+
+		writePermission = False
+		errorMessage = ""
+
+
+		# If this room is not related to a room, I cannot modify it from this method
+		if not oldRule.roomName:
+			raise UserCredentialError("You cannot modify this group related rule.")
+
+		# If this rule is not about this building
+		if oldRule.buildingName != buildingName:
+			raise UserCredentialError("You cannot modify the rule of another building.")			
+			
+		if author.uuid != editor.uuid:
+
+			if not groupId and not oldRule.getRoom().roomName in list(r.roomName for r in editor.getRooms()):
+				raise UserCredentialError("You cannot modify a rule of a room you do not own.")				
+
+			#if oldRule.getRoom() not in editor.getRooms():
+			#	raise UserCredentialError("You cannot modify a rule of a room you do not own.")
+
+			if groupId:
+
+				from app.backend.model.group import Group
+				group = Group(buildingName = buildingName, id = groupId)
+				group.retrieve()
+
+				if not group:
+					raise UserCredentialError("You cannot modify a rule of a room you do not own.")				
+
+				if not group.crossRoomsValidation:
+					raise UserCredentialError("You cannot modify a rule you do not own.")
+
+				if not group.id in list(g.id for g in editor.getGroups()):
+					raise UserCredentialError("You cannot modify a rule belonging to a group you do not own.")
+
+				if not oldRule.getRoom().roomName in list(r.roomName for r in group.getRooms()):
+					raise UserCredentialError("You cannot modify a rule belonging to room that does not belongs to a group you do not own.")
+
+			if editor.level < author.level:
+				raise UserCredentialError("You do not have enough power to modify this rule")			
+
+		authorUuid = editorUuid	
+
 		return self.__addOrModifyRule(ruleId = ruleId, priority = priority, buildingName = buildingName, roomName = roomName, authorUuid = authorUuid, ruleBody = ruleBody)		
 
 	def __addOrModifyRule(self, priority = None, buildingName = None, roomName = None, authorUuid = None, ruleBody = None, ruleId = None):

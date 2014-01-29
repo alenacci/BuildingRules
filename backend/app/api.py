@@ -156,7 +156,7 @@ def buildingGroups(username = None, buildingName = None):
 			session.checkSessionValidity(sessionKey, userUuid)
 			buildingsManager = BuildingsManager()
 			buildingsManager.checkUserBinding(buildingName, username)
-			return returnResult( buildingsManager.getGroups(buildingName) )
+			return returnResult( buildingsManager.getGroups(buildingName = buildingName, username = username) )
 		except Exception as e:
 			return returnError(e)
 
@@ -193,7 +193,7 @@ def buildingRooms(username = None, buildingName = None):
 			session.checkSessionValidity(sessionKey, userUuid)
 			buildingsManager = BuildingsManager()
 			buildingsManager.checkUserBinding(buildingName, username)
-			return returnResult( buildingsManager.getRooms(buildingName) )
+			return returnResult( buildingsManager.getRooms(buildingName = buildingName, username = username) )
 		except Exception as e:
 			return returnError(e)
 
@@ -472,7 +472,10 @@ def editRuleInRoom(username = None, buildingName = None, roomName = None, ruleId
 		priority = request.form['priority']
 		ruleBody = request.form['ruleBody']
 
-		authorUuid = userUuid
+		groupId = request.form['groupId'] if 'groupId' in request.form.keys() else None
+
+		#authorUuid = userUuid
+		editorUuid = userUuid
 
 		try:
 			session = SessionManager()
@@ -481,7 +484,7 @@ def editRuleInRoom(username = None, buildingName = None, roomName = None, ruleId
 			buildingsManager.checkUserBinding(buildingName, username)
 			roomsManager = RoomsManager()
 
-			return returnResult( roomsManager.editRule(ruleId = ruleId, priority = priority, buildingName = buildingName, roomName = roomName, authorUuid = authorUuid, ruleBody = ruleBody) )
+			return returnResult( roomsManager.editRule(ruleId = ruleId, priority = priority, buildingName = buildingName, roomName = roomName, editorUuid = userUuid, ruleBody = ruleBody, groupId = groupId) )
 		except Exception as e:
 			return returnError(e)
 

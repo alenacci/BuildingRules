@@ -25,24 +25,48 @@ class BuildingsManager:
 
 		building.checkUserBinding(user)
 
-	def getGroups(self, buildingName):
+	def getGroups(self, buildingName, username = None):
 		building = Building(buildingName = buildingName)
 		building.retrieve()
 
 		groupList = []
-		for group in building.getGroups():
-			groupList.append(group.getDict())
+
+		if username:
+			from app.backend.model.user import User
+			user = User(username = username)
+			user.retrieve()
+
+			for buildingGroup in building.getGroups():
+				for userGroup in user.getGroups():
+					if buildingGroup.buildingName == userGroup.buildingName and buildingGroup.id == userGroup.id:
+						groupList.append(userGroup.getDict())
+		else:
+			for group in building.getGroups():
+				groupList.append(group.getDict())
 
 		return {"groups" : groupList}
 
 
-	def getRooms(self, buildingName):
+	def getRooms(self, buildingName, username = None):
 		building = Building(buildingName = buildingName)
 		building.retrieve()
 
 		roomList = []
-		for room in building.getRooms():
-			roomList.append(room.getDict())
+
+		if username:
+			from app.backend.model.user import User
+			user = User(username = username)
+			user.retrieve()
+
+			for buildingRoom in building.getRooms():
+				for userRoom in user.getRooms():
+					if buildingRoom.buildingName == userRoom.buildingName and buildingRoom.roomName == userRoom.roomName:
+						roomList.append(userRoom.getDict())
+		else:
+
+			for room in building.getRooms():
+				roomList.append(room.getDict())
+
 
 		return {"rooms" : roomList}
 

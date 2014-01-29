@@ -3,7 +3,11 @@
   {% if session.logged_in %}
 
 
-	<h3>Add a new rule!</h3>
+  	{% if rule %}
+		<h3>Rule Editing!</h3>
+	{% else %}
+		<h3>Add a new rule!</h3>
+	{% endif %}
 	<br>
 
 	{% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
@@ -29,7 +33,7 @@
 	      <button type="submit" class="btn">Save the new rule!</button>
 	    </div>
 	 </div>
-	
+
 	</form>
 
 	<br>

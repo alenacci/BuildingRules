@@ -42,8 +42,12 @@ class User:
 		print "TODO: non yet tested"
 
 		buildingList = []
+		buildingNameList = []
 		for room in self.getRooms():
-			buildingList.append(room.getBuilding())
+			currentBuilding = room.getBuilding()
+			if currentBuilding.buildingName not in buildingNameList:
+				buildingList.append(currentBuilding)
+				buildingNameList.append(currentBuilding.buildingName)
 
 		return buildingList
 

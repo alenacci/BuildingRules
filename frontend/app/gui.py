@@ -105,64 +105,71 @@ def buildingDetail(buildingName = None):
 def rooms(buildingName = None):
 	
 	if not loggedIn():	return redirect(url_for('gui.login'))
-		
+
 	response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms", {'username' : session["username"], 'buildingName' : buildingName, 'sessionKey' : session["sessionKey"], 'userUuid' : session["userUuid"]})
 
-	if successResponse(response):
-		roomList = response["rooms"]
-		roomRules = {}
-		authorList = {}
-		groupList = {}
-
-
-		# Now retrieving room rules
-		for room in roomList:
-			roomName = room["roomName"]
-			response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/rules", 
-				{
-				'username' : session["username"],
-				'buildingName' : buildingName, 
-				'roomName' : roomName,
-				'sessionKey' : session["sessionKey"],
-				'userUuid' : session["userUuid"],
-				'filterByAuthor' : False,
-				'includeGroupsRules' : True
-				})
-
-			if successResponse(response):
-				roomRules[roomName] = response["rules"]
-			else:
-				return render_template('error.html', error = response['request-errorDescription'])
-				
-			# Getting rules author uuid and groupId. I'll use them later
-			for rule in roomRules[roomName]:
-				if rule["authorUuid"] not in authorList.keys() and rule["authorUuid"] != session["userUuid"]:
-					authorList[rule["authorUuid"]] = None
-				if rule["groupId"] and rule["groupId"] not in groupList.keys():
-					groupList[rule["groupId"]] = None
-
-
-		# Getting user info per each stored uuid
-		for authorUuid in authorList.keys():
-			response = rest.request("/api/users/uuid/<uuid>", {'sessionKey' : session["sessionKey"], 'userUuid' : session["userUuid"]})
-
-			if successResponse(response):
-				authorList[authorUuid] = response
-			else:
-				return render_template('error.html', error = response['request-errorDescription'])
-
-		# Getting group info per each stored groupID
-		for groupId in groupList.keys():
-			response = rest.request("/api/users/<username>/buildings/<buildingName>/groups/<groupId>", {'username' : session["username"], 'buildingName' : buildingName, 'groupId' : groupId, 'sessionKey' : session["sessionKey"], 'userUuid' : session["userUuid"]})
-
-			if successResponse(response):
-				groupList[groupId] = response
-			else:
-				return render_template('error.html', error = response['request-errorDescription'])
-
-		return render_template('rooms.html', roomList = roomList, roomRules = roomRules, authorList = authorList, groupList = groupList)	
-	else:
+	if not successResponse(response):
 		return render_template('error.html', error = response['request-errorDescription'])
+	roomList = response["rooms"]
+	roomRules = {}
+	authorList = {}
+	groupList = {}
+
+
+	# Now retrieving room rules
+	for room in roomList:
+		roomName = room["roomName"]
+		response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/rules", 
+			{
+			'username' : session["username"],
+			'buildingName' : buildingName, 
+			'roomName' : roomName,
+			'sessionKey' : session["sessionKey"],
+			'userUuid' : session["userUuid"],
+			'filterByAuthor' : False,
+			'includeGroupsRules' : True
+			})
+
+		if successResponse(response):
+			roomRules[roomName] = response["rules"]
+		else:
+			return render_template('error.html', error = response['request-errorDescription'])
+			
+		# Getting rules author uuid and groupId. I'll use them later
+		for rule in roomRules[roomName]:
+			if rule["authorUuid"] not in authorList.keys() and rule["authorUuid"] != session["userUuid"]:
+				authorList[rule["authorUuid"]] = None
+			if rule["groupId"] and rule["groupId"] not in groupList.keys():
+				groupList[rule["groupId"]] = None
+
+
+	# Getting user info per each stored uuid
+	for authorUuid in authorList.keys():
+		response = rest.request("/api/users/uuid/<uuid>", {'sessionKey' : session["sessionKey"], 'uuid' : authorUuid, 'userUuid' : session["userUuid"]})
+
+		if successResponse(response):
+			authorList[authorUuid] = response
+		else:
+			return render_template('error.html', error = response['request-errorDescription'])
+
+	
+	print 
+	print authorList
+	print
+	
+
+	# Getting group info per each stored groupID
+	for groupId in groupList.keys():
+		response = rest.request("/api/users/<username>/buildings/<buildingName>/groups/<groupId>", {'username' : session["username"], 'buildingName' : buildingName, 'groupId' : groupId, 'sessionKey' : session["sessionKey"], 'userUuid' : session["userUuid"]})
+
+		if successResponse(response):
+			groupList[groupId] = response
+		else:
+			return render_template('error.html', error = response['request-errorDescription'])
+
+
+	return render_template('rooms.html', roomList = roomList, roomRules = roomRules, authorList = authorList, groupList = groupList)	
+
 
 @gui.route('/buildings/<buildingName>/groups/')
 @gui.route('/buildings/<buildingName>/groups')
@@ -408,10 +415,11 @@ def addRuleToGroup(buildingName = None, groupId = None):
 
 
 
-
+@gui.route('/buildings/<buildingName>/groups/<groupId>/rooms/<roomName>/rules/<ruleId>/edit/', methods = ['GET', 'POST'])
+@gui.route('/buildings/<buildingName>/groups/<groupId>/rooms/<roomName>/rules/<ruleId>/edit', methods = ['GET', 'POST'])
 @gui.route('/buildings/<buildingName>/rooms/<roomName>/rules/<ruleId>/edit/', methods = ['GET', 'POST'])
 @gui.route('/buildings/<buildingName>/rooms/<roomName>/rules/<ruleId>/edit', methods = ['GET', 'POST'])
-def editRoomRule(buildingName = None, roomName = None, ruleId = None):
+def editRoomRule(buildingName = None, roomName = None, ruleId = None, groupId = None):
 
 	if not loggedIn():	return redirect(url_for('gui.login'))
 
@@ -425,6 +433,7 @@ def editRoomRule(buildingName = None, roomName = None, ruleId = None):
 					'username' : session["username"],
 					'buildingName' : buildingName,
 					'roomName' : roomName,
+					'groupId' : groupId,
 					'ruleId' : ruleId,
 					'priority' : priority, 
 					'ruleBody' : ruleBody, 
@@ -457,7 +466,6 @@ def editRoomRule(buildingName = None, roomName = None, ruleId = None):
 
 
 		return render_template('ruleForm.html', rule = rule)
-
 
 
 @gui.route('/buildings/<buildingName>/rooms/<roomName>/rules/<ruleId>/delete/', methods = ['GET'])
