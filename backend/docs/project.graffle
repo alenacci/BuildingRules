@@ -26,7 +26,7 @@
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2014-01-30 02:01:14 +0000</string>
+	<string>2014-01-30 03:30:18 +0000</string>
 	<key>Modifier</key>
 	<string>Alessandro Nacci</string>
 	<key>NotesVisible</key>
@@ -343,11 +343,11 @@
 					<key>OrthogonalBarPoint</key>
 					<string>{0, 0}</string>
 					<key>OrthogonalBarPosition</key>
-					<real>29.512413024902344</real>
+					<real>29.512414932250977</real>
 					<key>Points</key>
 					<array>
-						<string>{209.4875821176918, 324.21120619501858}</string>
-						<string>{282.51240829167239, 340.79688909632171}</string>
+						<string>{209.48758446580388, 324.20920201301067}</string>
+						<string>{282.5124126372753, 340.79324026218649}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -384,11 +384,11 @@
 					<key>OrthogonalBarPoint</key>
 					<string>{0, 0}</string>
 					<key>OrthogonalBarPosition</key>
-					<real>29.507863998413086</real>
+					<real>29.507848739624023</real>
 					<key>Points</key>
 					<array>
-						<string>{209.49219546971145, 288.08940754355052}</string>
-						<string>{282.50792438538275, 275.03518970392849}</string>
+						<string>{209.49215693339804, 288.04925358741968}</string>
+						<string>{282.50785395914932, 274.96209054374623}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -4283,7 +4283,7 @@ description: string}</string>
 					<array>
 						<dict>
 							<key>Bounds</key>
-							<string>{{536.62744771231291, 892.18304249757136}, {237.60784912109375, 14}}</string>
+							<string>{{536.62747791190225, 910.919195303886}, {237.60784912109375, 14}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
@@ -4324,7 +4324,7 @@ description: string}</string>
 						</dict>
 						<dict>
 							<key>Bounds</key>
-							<string>{{536.62744771231291, 906.18304249757136}, {237.60784912109375, 28}}</string>
+							<string>{{536.62747791190225, 924.919195303886}, {237.60784912109375, 28}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
@@ -4368,7 +4368,7 @@ description: string}</string>
 						</dict>
 						<dict>
 							<key>Bounds</key>
-							<string>{{536.62744771231291, 934.18304249757136}, {237.60784912109375, 42}}</string>
+							<string>{{536.62747791190225, 952.919195303886}, {237.60784912109375, 56}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
@@ -4404,6 +4404,7 @@ description: string}</string>
 
 \f0\fs24 \cf0 \
 getAllTriggers()\
+translateTemplate()\
 }</string>
 								<key>VerticalPad</key>
 								<integer>0</integer>
@@ -4514,7 +4515,7 @@ getAllTriggers()\
 						</dict>
 						<dict>
 							<key>Bounds</key>
-							<string>{{536.62723440725483, 843.95958829205858}, {237.60784912109375, 42}}</string>
+							<string>{{536.62723440725483, 843.95958829205858}, {237.60784912109375, 56}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
@@ -4550,6 +4551,7 @@ getAllTriggers()\
 
 \f0\fs24 \cf0 \
 getAllActions()\
+translateTemplate()\
 }</string>
 								<key>VerticalPad</key>
 								<integer>0</integer>
@@ -6151,13 +6153,20 @@ getDict()\
 					<array>
 						<dict>
 							<key>Bounds</key>
-							<string>{{289.21574934754392, 817.20588642429811}, {237.60781860351562, 14}}</string>
+							<string>{{289.21573324617759, 711.50000517939361}, {237.60781860351562, 13}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
 							<string>Vertical</string>
 							<key>Flow</key>
 							<string>Resize</string>
+							<key>FontInfo</key>
+							<dict>
+								<key>Font</key>
+								<string>Helvetica-Bold</string>
+								<key>Size</key>
+								<real>12</real>
+							</dict>
 							<key>ID</key>
 							<integer>201</integer>
 							<key>Shape</key>
@@ -6183,7 +6192,7 @@ getDict()\
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
 
-\f0\b\fs24 \cf0 ActionManager()}</string>
+\f0\b\fs22 \cf0 ActionManager()}</string>
 								<key>VerticalPad</key>
 								<integer>0</integer>
 							</dict>
@@ -6192,13 +6201,20 @@ getDict()\
 						</dict>
 						<dict>
 							<key>Bounds</key>
-							<string>{{289.21574934754392, 831.20588642429811}, {237.60781860351562, 28}}</string>
+							<string>{{289.21573324617759, 724.50000517939361}, {237.60781860351562, 26}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
 							<string>Vertical</string>
 							<key>Flow</key>
 							<string>Resize</string>
+							<key>FontInfo</key>
+							<dict>
+								<key>Font</key>
+								<string>Helvetica-Bold</string>
+								<key>Size</key>
+								<real>12</real>
+							</dict>
 							<key>ID</key>
 							<integer>202</integer>
 							<key>Shape</key>
@@ -6226,7 +6242,7 @@ getDict()\
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\f0\fs24 \cf0 \
+\f0\fs22 \cf0 \
 }</string>
 								<key>VerticalPad</key>
 								<integer>0</integer>
@@ -6236,13 +6252,20 @@ getDict()\
 						</dict>
 						<dict>
 							<key>Bounds</key>
-							<string>{{289.21574934754392, 859.20588642429811}, {237.60781860351562, 98}}</string>
+							<string>{{289.21573324617759, 750.50000517939361}, {237.60781860351562, 104}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
 							<string>Vertical</string>
 							<key>Flow</key>
 							<string>Resize</string>
+							<key>FontInfo</key>
+							<dict>
+								<key>Font</key>
+								<string>Helvetica-Bold</string>
+								<key>Size</key>
+								<real>12</real>
+							</dict>
 							<key>ID</key>
 							<integer>203</integer>
 							<key>Shape</key>
@@ -6270,9 +6293,10 @@ getDict()\
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\f0\fs24 \cf0 \
+\f0\fs22 \cf0 \
 getInfo()\
 getAction()\
+getActionAndTemplateAndParameterValues()\
 getActionAndTemplate()\
 getActionCategories()\
 getActionDriver()\
@@ -6301,13 +6325,20 @@ getActionDriver()\
 					<array>
 						<dict>
 							<key>Bounds</key>
-							<string>{{289.21572051512067, 632.3529530011524}, {237.60781860351562, 14}}</string>
+							<string>{{287.17650598894824, 538.23530418237635}, {237.60781860351562, 13}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
 							<string>Vertical</string>
 							<key>Flow</key>
 							<string>Resize</string>
+							<key>FontInfo</key>
+							<dict>
+								<key>Font</key>
+								<string>Helvetica-Bold</string>
+								<key>Size</key>
+								<real>12</real>
+							</dict>
 							<key>ID</key>
 							<integer>197</integer>
 							<key>Shape</key>
@@ -6333,7 +6364,7 @@ getActionDriver()\
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
 
-\f0\b\fs24 \cf0 TriggerManager()}</string>
+\f0\b\fs22 \cf0 TriggerManager()}</string>
 								<key>VerticalPad</key>
 								<integer>0</integer>
 							</dict>
@@ -6342,13 +6373,20 @@ getActionDriver()\
 						</dict>
 						<dict>
 							<key>Bounds</key>
-							<string>{{289.21572051512067, 646.3529530011524}, {237.60781860351562, 28}}</string>
+							<string>{{287.17650598894824, 551.23530418237635}, {237.60781860351562, 26}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
 							<string>Vertical</string>
 							<key>Flow</key>
 							<string>Resize</string>
+							<key>FontInfo</key>
+							<dict>
+								<key>Font</key>
+								<string>Helvetica-Bold</string>
+								<key>Size</key>
+								<real>12</real>
+							</dict>
 							<key>ID</key>
 							<integer>198</integer>
 							<key>Shape</key>
@@ -6376,7 +6414,7 @@ getActionDriver()\
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\f0\fs24 \cf0 \
+\f0\fs22 \cf0 \
 }</string>
 								<key>VerticalPad</key>
 								<integer>0</integer>
@@ -6386,13 +6424,20 @@ getActionDriver()\
 						</dict>
 						<dict>
 							<key>Bounds</key>
-							<string>{{289.21572051512067, 674.3529530011524}, {237.60781860351562, 112}}</string>
+							<string>{{287.17650598894824, 577.23530418237635}, {237.60781860351562, 117}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
 							<string>Vertical</string>
 							<key>Flow</key>
 							<string>Resize</string>
+							<key>FontInfo</key>
+							<dict>
+								<key>Font</key>
+								<string>Helvetica-Bold</string>
+								<key>Size</key>
+								<real>12</real>
+							</dict>
 							<key>ID</key>
 							<integer>199</integer>
 							<key>Shape</key>
@@ -6420,10 +6465,11 @@ getActionDriver()\
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\f0\fs24 \cf0 \
+\f0\fs22 \cf0 \
 getInfo()\
 \
 getTrigger()\
+getTriggerAndTemplateAndParameterValues()\
 getTriggerAndTemplate()\
 getTriggerCategories() \
 getTriggerDriver()\
@@ -6452,13 +6498,20 @@ getTriggerDriver()\
 					<array>
 						<dict>
 							<key>Bounds</key>
-							<string>{{31.823529576760052, 306.94118120046096}, {237.60784912109375, 14}}</string>
+							<string>{{31.823529576760052, 306.94118120046096}, {237.60784912109375, 13}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
 							<string>Vertical</string>
 							<key>Flow</key>
 							<string>Resize</string>
+							<key>FontInfo</key>
+							<dict>
+								<key>Font</key>
+								<string>Helvetica-Bold</string>
+								<key>Size</key>
+								<real>12</real>
+							</dict>
 							<key>ID</key>
 							<integer>193</integer>
 							<key>Shape</key>
@@ -6484,7 +6537,7 @@ getTriggerDriver()\
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
 
-\f0\b\fs24 \cf0 SessionManager}</string>
+\f0\b\fs22 \cf0 SessionManager}</string>
 								<key>VerticalPad</key>
 								<integer>0</integer>
 							</dict>
@@ -6493,13 +6546,20 @@ getTriggerDriver()\
 						</dict>
 						<dict>
 							<key>Bounds</key>
-							<string>{{31.823529576760052, 320.94118120046096}, {237.60784912109375, 28}}</string>
+							<string>{{31.823529576760052, 319.94118120046096}, {237.60783386230469, 26}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
 							<string>Vertical</string>
 							<key>Flow</key>
 							<string>Resize</string>
+							<key>FontInfo</key>
+							<dict>
+								<key>Font</key>
+								<string>Helvetica-Bold</string>
+								<key>Size</key>
+								<real>12</real>
+							</dict>
 							<key>ID</key>
 							<integer>194</integer>
 							<key>Shape</key>
@@ -6527,7 +6587,7 @@ getTriggerDriver()\
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\f0\fs24 \cf0 \
+\f0\fs22 \cf0 \
 }</string>
 								<key>VerticalPad</key>
 								<integer>0</integer>
@@ -6537,13 +6597,20 @@ getTriggerDriver()\
 						</dict>
 						<dict>
 							<key>Bounds</key>
-							<string>{{31.823529576760052, 348.94118120046096}, {237.60784912109375, 56}}</string>
+							<string>{{31.823529576760052, 345.94118120046096}, {237.60784912109375, 52}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
 							<string>Vertical</string>
 							<key>Flow</key>
 							<string>Resize</string>
+							<key>FontInfo</key>
+							<dict>
+								<key>Font</key>
+								<string>Helvetica-Bold</string>
+								<key>Size</key>
+								<real>12</real>
+							</dict>
 							<key>ID</key>
 							<integer>195</integer>
 							<key>Shape</key>
@@ -6571,7 +6638,7 @@ getTriggerDriver()\
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\f0\fs24 \cf0 \
+\f0\fs22 \cf0 \
 login()\
 logout()\
 }</string>
@@ -6599,13 +6666,20 @@ logout()\
 					<array>
 						<dict>
 							<key>Bounds</key>
-							<string>{{289.2157210768392, 391.49999943828027}, {237.60784912109375, 14}}</string>
+							<string>{{289.21573605476914, 331.99997926629015}, {237.60784912109375, 13}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
 							<string>Vertical</string>
 							<key>Flow</key>
 							<string>Resize</string>
+							<key>FontInfo</key>
+							<dict>
+								<key>Font</key>
+								<string>Helvetica-Bold</string>
+								<key>Size</key>
+								<real>12</real>
+							</dict>
 							<key>ID</key>
 							<integer>189</integer>
 							<key>Shape</key>
@@ -6631,7 +6705,7 @@ logout()\
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
 
-\f0\b\fs24 \cf0 GroupsManager()}</string>
+\f0\b\fs22 \cf0 GroupsManager()}</string>
 								<key>VerticalPad</key>
 								<integer>0</integer>
 							</dict>
@@ -6640,13 +6714,20 @@ logout()\
 						</dict>
 						<dict>
 							<key>Bounds</key>
-							<string>{{289.2157210768392, 405.49999943828027}, {237.60784912109375, 28}}</string>
+							<string>{{289.21573605476914, 344.99997926629015}, {237.60784912109375, 26}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
 							<string>Vertical</string>
 							<key>Flow</key>
 							<string>Resize</string>
+							<key>FontInfo</key>
+							<dict>
+								<key>Font</key>
+								<string>Helvetica-Bold</string>
+								<key>Size</key>
+								<real>12</real>
+							</dict>
 							<key>ID</key>
 							<integer>190</integer>
 							<key>Shape</key>
@@ -6674,7 +6755,7 @@ logout()\
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\f0\fs24 \cf0 \
+\f0\fs22 \cf0 \
 }</string>
 								<key>VerticalPad</key>
 								<integer>0</integer>
@@ -6684,13 +6765,20 @@ logout()\
 						</dict>
 						<dict>
 							<key>Bounds</key>
-							<string>{{289.2157210768392, 433.49999943828027}, {237.60784912109375, 168}}</string>
+							<string>{{289.21573605476914, 370.99997926629015}, {237.60784912109375, 156}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
 							<string>Vertical</string>
 							<key>Flow</key>
 							<string>Resize</string>
+							<key>FontInfo</key>
+							<dict>
+								<key>Font</key>
+								<string>Helvetica-Bold</string>
+								<key>Size</key>
+								<real>12</real>
+							</dict>
 							<key>ID</key>
 							<integer>191</integer>
 							<key>Shape</key>
@@ -6718,7 +6806,7 @@ logout()\
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\f0\fs24 \cf0 \
+\f0\fs22 \cf0 \
 getInfo()\
 getRules()\
 getRooms()\
@@ -6754,13 +6842,20 @@ addRoom()\
 					<array>
 						<dict>
 							<key>Bounds</key>
-							<string>{{31.999991012508531, 459.8039301667294}, {237.60786437988281, 14}}</string>
+							<string>{{31.823508981648047, 424.88236254318463}, {237.60786437988281, 13}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
 							<string>Vertical</string>
 							<key>Flow</key>
 							<string>Resize</string>
+							<key>FontInfo</key>
+							<dict>
+								<key>Font</key>
+								<string>Helvetica-Bold</string>
+								<key>Size</key>
+								<real>12</real>
+							</dict>
 							<key>ID</key>
 							<integer>185</integer>
 							<key>Shape</key>
@@ -6786,7 +6881,7 @@ addRoom()\
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
 
-\f0\b\fs24 \cf0 RoomsManager}</string>
+\f0\b\fs22 \cf0 RoomsManager}</string>
 								<key>VerticalPad</key>
 								<integer>0</integer>
 							</dict>
@@ -6795,13 +6890,20 @@ addRoom()\
 						</dict>
 						<dict>
 							<key>Bounds</key>
-							<string>{{31.999991012508531, 473.8039301667294}, {237.60786437988281, 28}}</string>
+							<string>{{31.823508981648047, 437.88234812697294}, {237.60786437988281, 26}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
 							<string>Vertical</string>
 							<key>Flow</key>
 							<string>Resize</string>
+							<key>FontInfo</key>
+							<dict>
+								<key>Font</key>
+								<string>Helvetica-Bold</string>
+								<key>Size</key>
+								<real>12</real>
+							</dict>
 							<key>ID</key>
 							<integer>186</integer>
 							<key>Shape</key>
@@ -6829,7 +6931,7 @@ addRoom()\
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\f0\fs24 \cf0 \
+\f0\fs22 \cf0 \
 }</string>
 								<key>VerticalPad</key>
 								<integer>0</integer>
@@ -6839,13 +6941,20 @@ addRoom()\
 						</dict>
 						<dict>
 							<key>Bounds</key>
-							<string>{{31.999991012508531, 501.8039301667294}, {237.60786437988281, 266}}</string>
+							<string>{{31.823508981648047, 463.88234812697294}, {237.60786437988281, 247}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
 							<string>Vertical</string>
 							<key>Flow</key>
 							<string>Resize</string>
+							<key>FontInfo</key>
+							<dict>
+								<key>Font</key>
+								<string>Helvetica-Bold</string>
+								<key>Size</key>
+								<real>12</real>
+							</dict>
 							<key>ID</key>
 							<integer>187</integer>
 							<key>Shape</key>
@@ -6873,7 +6982,7 @@ addRoom()\
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\f0\fs24 \cf0 \
+\f0\fs22 \cf0 \
 getInfo()\
 getRules()\
 getTriggers()\
@@ -6916,13 +7025,20 @@ getGroups()\
 					<array>
 						<dict>
 							<key>Bounds</key>
-							<string>{{289.21569168269758, 90.999995602318009}, {233.5294189453125, 14}}</string>
+							<string>{{289.21569168269758, 90.999995602318009}, {233.5294189453125, 13}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
 							<string>Vertical</string>
 							<key>Flow</key>
 							<string>Resize</string>
+							<key>FontInfo</key>
+							<dict>
+								<key>Font</key>
+								<string>Helvetica-Bold</string>
+								<key>Size</key>
+								<real>12</real>
+							</dict>
 							<key>ID</key>
 							<integer>181</integer>
 							<key>Shape</key>
@@ -6948,7 +7064,7 @@ getGroups()\
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
 
-\f0\b\fs24 \cf0 BuildingsManager}</string>
+\f0\b\fs22 \cf0 BuildingsManager}</string>
 								<key>VerticalPad</key>
 								<integer>0</integer>
 							</dict>
@@ -6957,13 +7073,20 @@ getGroups()\
 						</dict>
 						<dict>
 							<key>Bounds</key>
-							<string>{{289.21569168269758, 104.99999560231801}, {233.5294189453125, 28}}</string>
+							<string>{{289.21569168269758, 103.99999560231801}, {233.5294189453125, 26}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
 							<string>Vertical</string>
 							<key>Flow</key>
 							<string>Resize</string>
+							<key>FontInfo</key>
+							<dict>
+								<key>Font</key>
+								<string>Helvetica-Bold</string>
+								<key>Size</key>
+								<real>12</real>
+							</dict>
 							<key>ID</key>
 							<integer>182</integer>
 							<key>Shape</key>
@@ -6991,7 +7114,7 @@ getGroups()\
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\f0\fs24 \cf0 \
+\f0\fs22 \cf0 \
 }</string>
 								<key>VerticalPad</key>
 								<integer>0</integer>
@@ -7001,13 +7124,20 @@ getGroups()\
 						</dict>
 						<dict>
 							<key>Bounds</key>
-							<string>{{289.21569168269758, 132.99999560231799}, {233.5294189453125, 182}}</string>
+							<string>{{289.21569168269758, 129.99999560231799}, {233.5294189453125, 169}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
 							<string>Vertical</string>
 							<key>Flow</key>
 							<string>Resize</string>
+							<key>FontInfo</key>
+							<dict>
+								<key>Font</key>
+								<string>Helvetica-Bold</string>
+								<key>Size</key>
+								<real>12</real>
+							</dict>
 							<key>ID</key>
 							<integer>183</integer>
 							<key>Shape</key>
@@ -7035,7 +7165,7 @@ getGroups()\
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\f0\fs24 \cf0 \
+\f0\fs22 \cf0 \
 getInfo()\
 getGroups()\
 getRooms()\
@@ -7130,13 +7260,20 @@ deleteGroup()}</string>
 					<array>
 						<dict>
 							<key>Bounds</key>
-							<string>{{32, 91}, {237.60784912109375, 14}}</string>
+							<string>{{32, 91}, {237.60784912109375, 13}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
 							<string>Vertical</string>
 							<key>Flow</key>
 							<string>Resize</string>
+							<key>FontInfo</key>
+							<dict>
+								<key>Font</key>
+								<string>Helvetica-Bold</string>
+								<key>Size</key>
+								<real>12</real>
+							</dict>
 							<key>ID</key>
 							<integer>132</integer>
 							<key>Shape</key>
@@ -7162,7 +7299,7 @@ deleteGroup()}</string>
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
 
-\f0\b\fs24 \cf0 UsersManager}</string>
+\f0\b\fs22 \cf0 UsersManager}</string>
 								<key>VerticalPad</key>
 								<integer>0</integer>
 							</dict>
@@ -7171,13 +7308,20 @@ deleteGroup()}</string>
 						</dict>
 						<dict>
 							<key>Bounds</key>
-							<string>{{32, 105}, {237.60784912109375, 28}}</string>
+							<string>{{32, 104}, {237.60784912109375, 26}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
 							<string>Vertical</string>
 							<key>Flow</key>
 							<string>Resize</string>
+							<key>FontInfo</key>
+							<dict>
+								<key>Font</key>
+								<string>Helvetica-Bold</string>
+								<key>Size</key>
+								<real>12</real>
+							</dict>
 							<key>ID</key>
 							<integer>133</integer>
 							<key>Shape</key>
@@ -7205,7 +7349,7 @@ deleteGroup()}</string>
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\f0\fs24 \cf0 \
+\f0\fs22 \cf0 \
 }</string>
 								<key>VerticalPad</key>
 								<integer>0</integer>
@@ -7215,13 +7359,20 @@ deleteGroup()}</string>
 						</dict>
 						<dict>
 							<key>Bounds</key>
-							<string>{{32, 133}, {237.60784912109375, 154}}</string>
+							<string>{{32, 130}, {237.60784912109375, 143}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
 							<string>Vertical</string>
 							<key>Flow</key>
 							<string>Resize</string>
+							<key>FontInfo</key>
+							<dict>
+								<key>Font</key>
+								<string>Helvetica-Bold</string>
+								<key>Size</key>
+								<real>12</real>
+							</dict>
 							<key>ID</key>
 							<integer>44</integer>
 							<key>Shape</key>
@@ -7249,7 +7400,7 @@ deleteGroup()}</string>
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\f0\fs24 \cf0 \
+\f0\fs22 \cf0 \
 getUser()\
 getInfo()\
 \
@@ -7803,7 +7954,7 @@ eventTriggered()\
 		<key>SidebarWidth</key>
 		<integer>120</integer>
 		<key>VisibleRegion</key>
-		<string>{{-340, 310.78431953700044}, {1239.2157094472195, 787.25491668205484}}</string>
+		<string>{{-340, 229.41176899576689}, {1239.2157094472195, 787.25491668205473}}</string>
 		<key>Zoom</key>
 		<real>1.0199999809265137</real>
 		<key>ZoomValues</key>

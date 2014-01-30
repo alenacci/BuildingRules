@@ -30,5 +30,22 @@ class Triggers:
 
 		return triggerList
 
+	def translateTemplate(self, language, triggerTemplate):
+
+		database = Database()
+		database.open()
+		query = "SELECT * FROM rule_translation_dictionary WHERE language = '@@language@@' AND original = '@@triggerTemplate@@';"
+		query = query.replace('@@language@@', language)
+		query = query.replace('@@triggerTemplate@@', triggerTemplate)
+		queryResult = database.executeReadQuery(query)
+		database.close()
+
+		if len(queryResult) > 0:
+			translation = queryResult[0][3]
+			return translation
+				
+		raise RuleTranslationNotFoundError("Impossibile to translate " + triggerTemplate)
+
+
 	def __str__(self):
 		return "Triggers: "

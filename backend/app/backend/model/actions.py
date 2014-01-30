@@ -30,5 +30,21 @@ class Actions:
 
 		return actionList
 
+	def translateTemplate(self, language, actionTemplate):
+
+		database = Database()
+		database.open()
+		query = "SELECT * FROM rule_translation_dictionary WHERE language = '@@language@@' AND original = '@@actionTemplate@@';"
+		query = query.replace('@@language@@', language)
+		query = query.replace('@@actionTemplate@@', actionTemplate)
+		queryResult = database.executeReadQuery(query)
+		database.close()
+
+		if len(queryResult) > 0:
+			translation = queryResult[0][3]
+			return translation
+				
+		raise RuleTranslationNotFoundError("Impossibile to translate " + actionTemplate)
+
 	def __str__(self):
 		return "Actions: "

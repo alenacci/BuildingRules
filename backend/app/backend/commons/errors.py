@@ -69,3 +69,6 @@ class RulePriorityError(Exception):
 
 class DriverNotFoundError(Exception):
 	pass
+
+class RuleTranslationNotFoundError(Exception):
+	pass

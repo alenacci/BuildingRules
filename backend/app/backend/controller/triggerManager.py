@@ -2,6 +2,7 @@ import json
 import random
 import string
 import datetime
+import re
 
 from app.backend.commons.errors import *
 from app.backend.model.trigger import Trigger
@@ -19,7 +20,7 @@ class TriggerManager:
 		return trigger.getDict()
 
 
-	def getTriggerAndTemplate(self, ruleAntecedent):
+	def getTriggerAndTemplateAndParameterValues(self, ruleAntecedent):
 
 		triggers = Triggers()
 		triggerList = triggers.getAllTriggers()
@@ -31,25 +32,29 @@ class TriggerManager:
 			# Where each template can be like
 			# "it is between %d AM and %d AM | it is between %d AM and %d PM | it is between %d PM and %d AM | it is between %d PM and %d PM"
 
-			# Each template is composed by different parts delimited by the different %d
-			# SO the template "it is between %d AM and %d AM" is made of "part0 %d part1 %d part2"
-
 			models = trigger.ruleAntecedent.split('|')
 
 			for model in models:
-				parts = model.split("@val")
+				parameterNumber = model.count("@val")
+				originalModel = model.strip()
+				model = model.replace("@val","(.+)").strip()
 
-				matches = 0
-				target = ruleAntecedent
-				for part in parts:
-					if part in target:
-						target = target.replace(part, "")
-						matches += 1
+				matchObj = re.match( model, ruleAntecedent, re.M|re.I)
 
-				if matches == len(parts):
-					return (trigger,model)
+				if matchObj:
+					parameterValues = []
+
+					for i in range(0,parameterNumber):
+						parameterValues.append(matchObj.group(i + 1))
+
+					return (trigger, originalModel, parameterValues)
 
 		raise NotWellFormedRuleError("Impossible to find any trigger corresponding to the following rule consequent > " + ruleAntecedent)
+
+
+	def getTriggerAndTemplate(self, ruleAntecedent):
+		trigger, template, parameterValues = self.getTriggerAndTemplateAndParameterValues(ruleAntecedent)
+		return (trigger, template)
 
 	def getTrigger(self, ruleAntecedent):
 
@@ -58,26 +63,17 @@ class TriggerManager:
 
 	def translateTrigger(self, ruleAntecedent):
 
-		print "TODO this method is not coded"
+		triggers = Triggers()
+		trigger, originalTemplate, parameterValues = self.getTriggerAndTemplateAndParameterValues(ruleAntecedent)
+		translationTemplate = triggers.translateTemplate('Z3', originalTemplate)
 
-		originalTemplate = "temperature is between @val and @val "
-		translationTemplate = "(and (< (tempInRoom 234)  @val) (> (tempInRoom 234)  @val))"
-
-		original = "temperature is between 20 and 30"
-
-		nonValuesTokens = originalTemplate.split("@val")
-
-		for nonValuesToken in nonValuesTokens:
-			original = original.replace(nonValuesToken, "#")
-
-		foundValues = filter(None,original.split("#"))
+		foundValues = parameterValues
 
 		translation = translationTemplate
-		while "@val" in translation:
-			translation = translation.replace("@val", foundValues.pop(), 1)
+		for value in foundValues:
+			translation = translation.replace("@val", value, 1)
 
 		return translation
-
 
 
 	def getTriggerCategories(self):

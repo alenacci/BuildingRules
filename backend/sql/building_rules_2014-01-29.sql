@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.34-0ubuntu0.12.04.1)
 # Database: building_rules
-# Generation Time: 2014-01-30 02:35:52 +0000
+# Generation Time: 2014-01-30 03:39:48 +0000
 # ************************************************************
 
 
@@ -200,6 +200,15 @@ CREATE TABLE `rule_translation_dictionary` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+LOCK TABLES `rule_translation_dictionary` WRITE;
+/*!40000 ALTER TABLE `rule_translation_dictionary` DISABLE KEYS */;
+
+INSERT INTO `rule_translation_dictionary` (`id`, `language`, `original`, `translation`)
+VALUES
+	(1,'Z3','it is between @val and @val','(and (> time @val) (< time @val))');
+
+/*!40000 ALTER TABLE `rule_translation_dictionary` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table rules
@@ -231,7 +240,7 @@ INSERT INTO `rules` (`id`, `priority`, `category`, `building_name`, `group_id`, 
 VALUES
 	(4,50,'UNKW','EEE',-1,'500',2,'temperature is between 10 and 22','turn off the heating',1,0,'2014-01-28 19:37:54','2014-01-28 19:37:54'),
 	(11,50,'HEATING','EEE',-1,'200',1,'temperature is between 10 and 1000','turn off the heating',1,0,'2014-01-29 17:04:35','2014-01-29 17:04:35'),
-	(12,50,'LIGHT','EEE',-1,'200',1,'it is sunny','turn on the light',1,0,'2014-01-29 18:33:27','2014-01-29 18:33:27');
+	(15,50,'LIGHT','EEE',-1,'200',1,'it is sunny','turn on the light',1,0,'2014-01-29 19:39:34','2014-01-29 19:39:34');
 
 /*!40000 ALTER TABLE `rules` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -260,6 +269,9 @@ VALUES
 	('EEE',200,7,6),
 	('EEE',200,11,50),
 	('EEE',200,12,50),
+	('EEE',200,13,50),
+	('EEE',200,14,10),
+	('EEE',200,15,50),
 	('EEE',300,2,91),
 	('EEE',500,3,68),
 	('EEE',500,4,50);
@@ -285,7 +297,8 @@ LOCK TABLES `sessions` WRITE;
 
 INSERT INTO `sessions` (`session_key`, `user_uuid`, `expire_timestamp`)
 VALUES
-	('PCXQ31-2984b7ade3ee212c77e67c7b21ec1926',2,'2020-01-29 19:23:03');
+	('PCXQ31-2984b7ade3ee212c77e67c7b21ec1926',2,'2020-01-29 19:23:03'),
+	('Z724ZU-61f223cd185c2adafd5bf08ce060a4a6',1,'2014-01-30 19:27:53');
 
 /*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -315,9 +328,9 @@ VALUES
 	(3,'TEMPERATURE','TEMPERATURE_HIGHER','temperature is higher than @val','check the temperature'),
 	(4,'TEMPERATURE','TEMPERATURE_LOWER','temperature is lower than @val','check temperature'),
 	(5,'TEMPERATURE','TEMPERATURE_RANGE','temperature is between @val and @val','check temperature'),
-	(6,'TIME','TIME_AFTER','it is after @val AM | it is after @val PM','check time'),
-	(7,'TIME','TIME_BEFORE','it is before @val AM | it is before @val PM','check time'),
-	(8,'TIME','TIME_RANGE','it is between @val AM and @val AM | it is between @val AM and @val PM | it is between @val PM and @val AM | it is between @val PM and @val PM ','check time'),
+	(6,'TIME','TIME_AFTER','it is after @val | it is after @val','check time'),
+	(7,'TIME','TIME_BEFORE','it is before @val | it is before @val','check time'),
+	(8,'TIME','TIME_RANGE','it is between @val and @val','check time'),
 	(9,'DATE','DATE_RANGE','it is between @val and @val','check day'),
 	(10,'WEATHER','SUNNY','it is sunny','check the weather'),
 	(11,'WEATHER','RAINY','it is rainy','check the weather');
