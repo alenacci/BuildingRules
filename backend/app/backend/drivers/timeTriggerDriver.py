@@ -4,8 +4,9 @@ import string
 import datetime
 
 from app.backend.commons.errors import *
+from app.backend.drivers.genericTriggerDriver import GenericTriggerDriver
 
-class TimeTriggerDriver:
+class TimeTriggerDriver(GenericTriggerDriver):
 
 
 	# parameters = {}

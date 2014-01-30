@@ -5,13 +5,7 @@ import datetime
 
 from app.backend.commons.errors import *
 
-class LightActionDriver:
-
-
-	# parameters = {}
-
-	# parameters["operation"] = "LIGHT_ON"
-	# parameters["operation"] = "LIGHT_OFF"
+class GenericActionDriver:
 
 	def __init__(self, parameters):
 		self.parameters = parameters
