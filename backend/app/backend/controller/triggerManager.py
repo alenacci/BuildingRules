@@ -19,7 +19,7 @@ class TriggerManager:
 		return trigger.getDict()
 
 
-	def getTrigger(self, ruleAntecedent):
+	def getTriggerAndTemplate(self, ruleAntecedent):
 
 		triggers = Triggers()
 		triggerList = triggers.getAllTriggers()
@@ -47,9 +47,38 @@ class TriggerManager:
 						matches += 1
 
 				if matches == len(parts):
-					return trigger
+					return (trigger,model)
 
 		raise NotWellFormedRuleError("Impossible to find any trigger corresponding to the following rule consequent > " + ruleAntecedent)
+
+	def getTrigger(self, ruleAntecedent):
+
+		trigger, template = self.getTriggerAndTemplate(ruleAntecedent)
+		return trigger
+
+	def translateTrigger(self, ruleAntecedent):
+
+		print "TODO this method is not coded"
+
+		originalTemplate = "temperature is between @val and @val "
+		translationTemplate = "(and (< (tempInRoom 234)  @val) (> (tempInRoom 234)  @val))"
+
+		original = "temperature is between 20 and 30"
+
+		nonValuesTokens = originalTemplate.split("@val")
+
+		for nonValuesToken in nonValuesTokens:
+			original = original.replace(nonValuesToken, "#")
+
+		foundValues = filter(None,original.split("#"))
+
+		translation = translationTemplate
+		while "@val" in translation:
+			translation = translation.replace("@val", foundValues.pop(), 1)
+
+		return translation
+
+
 
 	def getTriggerCategories(self):
 		

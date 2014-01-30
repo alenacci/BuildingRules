@@ -19,7 +19,7 @@ class ActionManager:
 		return action.getDict()
 
 
-	def getAction(self, ruleConsequent):
+	def getActionAndTemplate(self, ruleConsequent):
 
 		actions = Actions()
 		actionList = actions.getAllActions()
@@ -45,9 +45,15 @@ class ActionManager:
 						matches += 1
 
 				if matches == len(parts):
-					return action
+					return (action, model)
 
 		raise NotWellFormedRuleError("Impossible to find any action corresponding to the following rule consequent > " + ruleConsequent)
+
+	def getAction(self, ruleConsequent):
+		
+		action, template = self.getActionAndTemplate(ruleConsequent)
+		return action
+
 
 	def getActionCategories(self):
 		
