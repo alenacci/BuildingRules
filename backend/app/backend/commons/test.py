@@ -6,6 +6,20 @@ class Test:
 	def __init__(self):
 		pass
 
+	def test1(self):
+
+		from app.backend.controller.triggerManager import TriggerManager
+		from app.backend.controller.actionManager import ActionManager
+
+		triggerManager = TriggerManager()
+		print triggerManager.getTrigger(" it is between 10.00 AM and 8.00 PM")
+
+		actionManager = ActionManager()
+		print actionManager.getAction("turn on the heating")
+
+
+
+
 	def test0(self):
 
 		from app.backend.commons.database import Database

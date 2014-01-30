@@ -21,6 +21,9 @@ class Rule:
 			self.creationTimestamp = creationTimestamp
 			self.lastEditTimestamp = lastEditTimestamp
 
+	def __repr__(self):
+		return repr((self.getDict()))			
+
 	def getPriority(self, roomName = None, buildingName = None):
 
 		from app.backend.model.rulePriority import RulePriority

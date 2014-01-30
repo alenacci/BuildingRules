@@ -63,3 +63,9 @@ class RoomRulePriorityNotFoundError(Exception):
 
 class SessionNotFoundError(Exception):
 	pass
+
+class RulePriorityError(Exception):
+	pass
+
+class DriverNotFoundError(Exception):
+	pass

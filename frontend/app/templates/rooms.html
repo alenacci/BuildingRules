@@ -23,6 +23,7 @@
 				    		<p {% if rule.group != None %} class="muted"{% endif %}>
 				    			<b>if</b> {{rule.antecedent}} <b>then</b> {{rule.consequent}} 
 								<small class="muted">
+								<span class="badge">{{rule["priority"]}}</span>
 									By:
 									{% if session.userUuid == rule.authorUuid%}
 										You
@@ -45,11 +46,6 @@
 										- [<a href="{{request.path}}/{{rule.roomName}}/rules/{{rule.id}}/edit">Edit</a>] [<a href="{{request.path}}/{{rule.roomName}}/rules/{{rule.id}}/delete">Delete</a>]
 										{% endif %}
 									{% endif %}
-
-
-
-
-
 								</small>
 				    		</p>
 				    	</blockquote> 
@@ -60,18 +56,31 @@
 				  </div>
 				  <div class="span4">
 				    <div class="well">
-				      <h4>Sensors</h>
-				      <p>-</p>
+				      <h4>Sensors</h4>
+				      <p>
+				      	{% for trigger in triggerList[room.roomName] %}
+				      		{{trigger.description}}, 
+				      	{% endfor %}
+				      </p>
 				      <br>
 				      <h4>Actuators</h4>
-				      <p>-</p>
+				      <p>
+				      	{% for action in actionList[room.roomName] %}
+				      		{{action.description}}, 
+				      	{% endfor %}
+				      </p>
 				      <br>
 				      <h4>Occupants:</h4>
-				      <p>-</p>
+				      <p>
+				      	{% for user in userList[room.roomName] %}
+				      		{{user.username}}, 
+				      	{% endfor %}				      	
+				      </p>
 				      <br>
 				      <h4>Part of groups:</h4>
-				      <p>-</p>
-
+				      	{% for group in roomGroupList[room.roomName] %}
+				      		{{group.id}}:{{group.description}}, 
+				      	{% endfor %}				      	
 				    </div>
 				  </div>
 				</div>

@@ -13,10 +13,12 @@ from app.backend.controller.groupsManager import GroupsManager
 
 api = Blueprint('api', __name__, template_folder='templates')
 
-@api.route('/api/test')
+@api.route('/api/test', methods = ['GET', 'POST'])
 def test():
 	test = Test()
-	test.test0()
+	test.test1()
+	#test.test0()
+
 	return render_template('home.html')
 
 @api.route('/api')
@@ -80,9 +82,9 @@ def ruleCategories(username = None):
 			session.checkSessionValidity(sessionKey, userUuid)
 			userManager = UsersManager()			
 
-			categories = []
-			categories.append("UNKW")
-			categories.append("OTHERS")
+			from app.backend.controller.actionManager import ActionManager
+			actionManager = ActionManager()
+			categories = actionManager.getActionCategories()
 
 			result = {"categories" : categories}
 
@@ -178,6 +180,22 @@ def groupInfo(username = None, buildingName = None, groupId = None):
 		except Exception as e:
 			return returnError(e)
 
+@api.route('/api/users/<username>/buildings/<buildingName>/groups/<groupId>/delete', methods = ['POST'])
+def deleteGroup(username = None, buildingName = None, groupId = None):
+	if request.method == 'POST':
+
+		sessionKey = request.form['sessionKey']
+		userUuid = request.form['userUuid']		
+
+		try:
+			session = SessionManager()
+			session.checkSessionValidity(sessionKey, userUuid)
+			buildingsManager = BuildingsManager()
+			buildingsManager.checkUserBinding(buildingName, username)
+			
+			return returnResult( buildingsManager.deleteGroup(groupId = groupId, buildingName = buildingName) )
+		except Exception as e:
+			return returnError(e)
 
 
 @api.route('/api/users/<username>/buildings/<buildingName>/rooms', methods = ['POST'])
@@ -229,7 +247,24 @@ def roomInfo(username = None, buildingName = None, roomName = None):
 			buildingsManager.checkUserBinding(buildingName, username)
 			roomsManager = RoomsManager()
 
-			return returnResult( roomsManager.getInfo(roomName, buildingName) )
+			return returnResult( roomsManager.getInfo(roomName = roomName, buildingName = buildingName) )
+		except Exception as e:
+			return returnError(e)
+
+@api.route('/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/delete', methods = ['POST'])
+def deleteRoom(username = None, buildingName = None, roomName = None):
+	if request.method == 'POST':
+
+		sessionKey = request.form['sessionKey']
+		userUuid = request.form['userUuid']		
+
+		try:
+			session = SessionManager()
+			session.checkSessionValidity(sessionKey, userUuid)
+			buildingsManager = BuildingsManager()
+			buildingsManager.checkUserBinding(buildingName, username)
+
+			return returnResult( buildingsManager.deleteRoom(roomName = roomName, buildingName = buildingName) )
 		except Exception as e:
 			return returnError(e)
 
@@ -272,6 +307,42 @@ def roomActions(username = None, buildingName = None, roomName = None):
 			return returnError(e)
 
 
+@api.route('/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/users', methods = ['POST'])
+def roomUsers(username = None, buildingName = None, roomName = None):
+	if request.method == 'POST':
+
+		sessionKey = request.form['sessionKey']
+		userUuid = request.form['userUuid']		
+
+		try:
+			session = SessionManager()
+			session.checkSessionValidity(sessionKey, userUuid)
+			buildingsManager = BuildingsManager()
+			buildingsManager.checkUserBinding(buildingName, username)
+			roomsManager = RoomsManager()
+
+			return returnResult( roomsManager.getUsers(roomName = roomName, buildingName = buildingName) )
+		except Exception as e:
+			return returnError(e)
+
+@api.route('/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/groups', methods = ['POST'])
+def roomGroups(username = None, buildingName = None, roomName = None):
+	if request.method == 'POST':
+
+		sessionKey = request.form['sessionKey']
+		userUuid = request.form['userUuid']		
+
+		try:
+			session = SessionManager()
+			session.checkSessionValidity(sessionKey, userUuid)
+			buildingsManager = BuildingsManager()
+			buildingsManager.checkUserBinding(buildingName, username)
+			roomsManager = RoomsManager()
+
+			return returnResult( roomsManager.getGroups(roomName = roomName, buildingName = buildingName) )
+		except Exception as e:
+			return returnError(e)
+
 @api.route('/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/rules', methods = ['POST'])
 def roomRules(username = None, buildingName = None, roomName = None):
 
@@ -279,8 +350,9 @@ def roomRules(username = None, buildingName = None, roomName = None):
 
 		sessionKey = request.form['sessionKey']
 		userUuid = request.form['userUuid']		
-		filterByAuthor = getBoolFromString(request.form['filterByAuthor'])
-		includeGroupsRules = getBoolFromString(request.form['includeGroupsRules'])
+		filterByAuthor = getBoolFromString(request.form['filterByAuthor']) if 'filterByAuthor' in request.form.keys() else False
+		includeGroupsRules = getBoolFromString(request.form['includeGroupsRules']) if 'includeGroupsRules' in request.form.keys() else False
+		orderByPriority = getBoolFromString(request.form['orderByPriority']) if 'orderByPriority' in request.form.keys() else False
 
 		usernameFilter = username if filterByAuthor else None
 
@@ -291,7 +363,7 @@ def roomRules(username = None, buildingName = None, roomName = None):
 			buildingsManager.checkUserBinding(buildingName, username)
 			roomsManager = RoomsManager()
 
-			return returnResult( roomsManager.getRules(roomName = roomName, buildingName = buildingName, username = usernameFilter, includeGroupsRules = includeGroupsRules) )
+			return returnResult( roomsManager.getRules(roomName = roomName, buildingName = buildingName, username = usernameFilter, includeGroupsRules = includeGroupsRules, orderByPriority = orderByPriority) )
 		except Exception as e:
 			return returnError(e)
 

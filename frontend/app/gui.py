@@ -114,11 +114,18 @@ def rooms(buildingName = None):
 	roomRules = {}
 	authorList = {}
 	groupList = {}
+	triggerList = {}
+	actionList = {}
+	userList = {}
+	roomGroupList = {}
+
+
 
 
 	# Now retrieving room rules
 	for room in roomList:
 		roomName = room["roomName"]
+		
 		response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/rules", 
 			{
 			'username' : session["username"],
@@ -127,13 +134,94 @@ def rooms(buildingName = None):
 			'sessionKey' : session["sessionKey"],
 			'userUuid' : session["userUuid"],
 			'filterByAuthor' : False,
-			'includeGroupsRules' : True
+			'includeGroupsRules' : True,
+			'orderByPriority' : True
 			})
 
 		if successResponse(response):
 			roomRules[roomName] = response["rules"]
 		else:
 			return render_template('error.html', error = response['request-errorDescription'])
+
+
+		response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/users", 
+			{
+			'username' : session["username"],
+			'buildingName' : buildingName, 
+			'roomName' : roomName,
+			'sessionKey' : session["sessionKey"],
+			'userUuid' : session["userUuid"],
+			'filterByAuthor' : False,
+			'includeGroupsRules' : True,
+			'orderByPriority' : True
+			})
+
+		if successResponse(response):
+			userList[roomName] = response["users"]
+		else:
+			return render_template('error.html', error = response['request-errorDescription'])
+
+
+
+		response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/groups", 
+			{
+			'username' : session["username"],
+			'buildingName' : buildingName, 
+			'roomName' : roomName,
+			'sessionKey' : session["sessionKey"],
+			'userUuid' : session["userUuid"],
+			'filterByAuthor' : False,
+			'includeGroupsRules' : True,
+			'orderByPriority' : True
+			})
+
+		if successResponse(response):
+			roomGroupList[roomName] = response["groups"]
+		else:
+			return render_template('error.html', error = response['request-errorDescription'])
+
+
+		response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/triggers", 
+			{
+			'username' : session["username"],
+			'buildingName' : buildingName, 
+			'roomName' : roomName,
+			'sessionKey' : session["sessionKey"],
+			'userUuid' : session["userUuid"],
+			'filterByAuthor' : False,
+			'includeGroupsRules' : True,
+			'orderByPriority' : True
+			})
+
+		if successResponse(response):
+			triggerList[roomName] = response["triggers"]
+		else:
+			return render_template('error.html', error = response['request-errorDescription'])
+
+
+
+		response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/actions", 
+			{
+			'username' : session["username"],
+			'buildingName' : buildingName, 
+			'roomName' : roomName,
+			'sessionKey' : session["sessionKey"],
+			'userUuid' : session["userUuid"],
+			'filterByAuthor' : False,
+			'includeGroupsRules' : True,
+			'orderByPriority' : True
+			})
+
+		if successResponse(response):
+			print
+			print 
+			print
+			print response
+			actionList[roomName] = response["actions"]
+		else:
+			return render_template('error.html', error = response['request-errorDescription'])
+
+
 			
 		# Getting rules author uuid and groupId. I'll use them later
 		for rule in roomRules[roomName]:
@@ -153,11 +241,6 @@ def rooms(buildingName = None):
 			return render_template('error.html', error = response['request-errorDescription'])
 
 	
-	print 
-	print authorList
-	print
-	
-
 	# Getting group info per each stored groupID
 	for groupId in groupList.keys():
 		response = rest.request("/api/users/<username>/buildings/<buildingName>/groups/<groupId>", {'username' : session["username"], 'buildingName' : buildingName, 'groupId' : groupId, 'sessionKey' : session["sessionKey"], 'userUuid' : session["userUuid"]})
@@ -168,7 +251,7 @@ def rooms(buildingName = None):
 			return render_template('error.html', error = response['request-errorDescription'])
 
 
-	return render_template('rooms.html', roomList = roomList, roomRules = roomRules, authorList = authorList, groupList = groupList)	
+	return render_template('rooms.html', roomList = roomList, roomRules = roomRules, authorList = authorList, groupList = groupList, triggerList = triggerList, actionList = actionList, userList = userList, roomGroupList = roomGroupList)	
 
 
 @gui.route('/buildings/<buildingName>/groups/')
@@ -374,10 +457,10 @@ def addRuleToRoom(buildingName = None, roomName = None):
 			flash("The rule has been added correctly!")
 			return redirect(url_for('gui.rooms', buildingName = buildingName))
 		else:
-			return render_template('ruleForm.html', error = response['request-errorDescription'])
+			return render_template('ruleForm.html', error = response['request-errorDescription'], insertionForRoom = True)
 
 	else:
-		return render_template('ruleForm.html')	
+		return render_template('ruleForm.html', insertionForRoom = True)	
 
 
 @gui.route('/buildings/<buildingName>/groups/<groupId>/rules/add/', methods = ['GET', 'POST'])
@@ -408,10 +491,10 @@ def addRuleToGroup(buildingName = None, groupId = None):
 			flash("The rule has been added correctly!")
 			return redirect(url_for('gui.groups', buildingName = buildingName))
 		else:
-			return render_template('ruleForm.html', error = response['request-errorDescription'])
+			return render_template('ruleForm.html', error = response['request-errorDescription'], insertionForGroup = True)
 
 	else:
-		return render_template('ruleForm.html')	
+		return render_template('ruleForm.html', insertionForGroup = True)	
 
 
 
@@ -446,7 +529,7 @@ def editRoomRule(buildingName = None, roomName = None, ruleId = None, groupId = 
 			flash("The rule has been saved correctly!")
 			return redirect(url_for('gui.rooms', buildingName = buildingName))
 		else:
-			return render_template('ruleForm.html', error = response['request-errorDescription'])
+			return render_template('ruleForm.html', error = response['request-errorDescription'], insertionForRoom = True)
 
 	else:
 
@@ -460,12 +543,12 @@ def editRoomRule(buildingName = None, roomName = None, ruleId = None, groupId = 
 					})
 
 		if not successResponse(response):
-			return render_template('ruleForm.html', error = response['request-errorDescription'])
+			return render_template('ruleForm.html', error = response['request-errorDescription'], insertionForRoom = True)
 
 		rule = response
 
 
-		return render_template('ruleForm.html', rule = rule)
+		return render_template('ruleForm.html', rule = rule, insertionForRoom = True)
 
 
 @gui.route('/buildings/<buildingName>/rooms/<roomName>/rules/<ruleId>/delete/', methods = ['GET'])
@@ -495,18 +578,108 @@ def deleteRoomRule(buildingName = None, roomName = None, ruleId = None):
 
 
 
+@gui.route('/buildings/<buildingName>/groups/<groupId>/rules/<ruleId>/edit/', methods = ['GET', 'POST'])
+@gui.route('/buildings/<buildingName>/groups/<groupId>/rules/<ruleId>/edit', methods = ['GET', 'POST'])
+def editGroupRule(buildingName = None, groupId = None, ruleId = None):
+
+	if not loggedIn():	return redirect(url_for('gui.login'))
+
+	if request.method == 'POST':
+
+		ruleBody = request.form['ruleBody']
+		priority = request.form['priority']
+
+	
+		response = rest.request("/api/users/<username>/buildings/<buildingName>/groups/<groupId>/rules/<ruleId>/edit", {
+					'username' : session["username"],
+					'buildingName' : buildingName,
+					'groupId' : groupId,
+					'ruleId' : ruleId,
+					'priority' : priority, 
+					'ruleBody' : ruleBody, 
+					'sessionKey' : session["sessionKey"], 
+					'userUuid' : session["userUuid"]
+					})
+		
+		
+		if successResponse(response):
+			flash("The rule has been saved correctly!")
+			return redirect(url_for('gui.groups', buildingName = buildingName))
+		else:
+			return render_template('ruleForm.html', error = response['request-errorDescription'], insertionForGroup = True)
+
+	else:
+
+		response = rest.request("/api/users/<username>/buildings/<buildingName>/groups/<groupId>/rules/<ruleId>", {
+					'username' : session["username"],
+					'buildingName' : buildingName,
+					'groupId' : groupId,
+					'ruleId' : ruleId,
+					'sessionKey' : session["sessionKey"], 
+					'userUuid' : session["userUuid"]
+					})
+
+		if not successResponse(response):
+			return render_template('ruleForm.html', error = response['request-errorDescription'], insertionForGroup = True)
+
+		rule = response
+
+
+		return render_template('ruleForm.html', rule = rule, insertionForGroup = True)
 
 
 
 
 
+@gui.route('/buildings/<buildingName>/groups/<groupId>/rules/<ruleId>/delete/', methods = ['GET'])
+@gui.route('/buildings/<buildingName>/groups/<groupId>/rules/<ruleId>/delete', methods = ['GET'])
+def deleteGroupRule(buildingName = None, groupId = None, ruleId = None):
+
+	if not loggedIn():	return redirect(url_for('gui.login'))
+
+
+	response = rest.request("/api/users/<username>/buildings/<buildingName>/groups/<groupId>/rules/<ruleId>/delete", {
+				'username' : session["username"],
+				'buildingName' : buildingName,
+				'groupId' : groupId,
+				'ruleId' : ruleId,
+				'sessionKey' : session["sessionKey"], 
+				'userUuid' : session["userUuid"]
+				})
+
+	if not successResponse(response):
+		return render_template('error.html', error = response['request-errorDescription'])
+
+	rule = response
+
+
+	return redirect(url_for('gui.groups', buildingName = buildingName))
 
 
 
 
+@gui.route('/buildings/<buildingName>/groups/<groupId>/delete/', methods = ['GET'])
+@gui.route('/buildings/<buildingName>/groups/<groupId>/delete', methods = ['GET'])
+def deleteGroup(buildingName = None, groupId = None, ruleId = None):
+
+	if not loggedIn():	return redirect(url_for('gui.login'))
+
+	response = rest.request("/api/users/<username>/buildings/<buildingName>/groups/<groupId>/delete", {
+				'username' : session["username"],
+				'buildingName' : buildingName,
+				'groupId' : groupId,
+				'ruleId' : ruleId,
+				'sessionKey' : session["sessionKey"], 
+				'userUuid' : session["userUuid"]
+				})
+
+	if not successResponse(response):
+		return render_template('error.html', error = response['request-errorDescription'])
+
+	rule = response
 
 
-
+	return redirect(url_for('gui.groups', buildingName = buildingName))
 
 
 

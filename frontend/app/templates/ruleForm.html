@@ -10,6 +10,17 @@
 	{% endif %}
 	<br>
 
+	{% if insertionForGroup %}
+		<p>This form let you to add a rule to the choosen group.</p>
+	{% endif %}
+
+	{% if insertionForRoom %}
+		<p>This form let you to add a rule to the choosen room.</p>
+	{% endif %}
+
+
+	<br>
+
 	{% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
 
 	<form class="form-horizontal" action="{{request.path}}" method="POST">
@@ -24,7 +35,23 @@
 	  <div class="control-group">
 	    <label class="control-label" for="priority">Rule priority</label>
 	    <div class="controls">
-	      <bold class="muted">LOW</bold> <input type="range" min ="0" max="100" name="priority" id="priority" value="{% if rule %}{{rule.priority}}{% endif %}"> <bold class="muted">HIGH</bold>
+
+			{% if insertionForGroup %}
+				<bold class="muted">LOW</bold> <input type="range" min ="0" max="200" name="priority" id="priority" value="{% if rule %}{{rule.priority}}{% endif %}"> <bold class="muted">HIGH</bold>
+			{% endif %}
+
+			{% if insertionForRoom %}
+				<bold class="muted">LOW</bold> <input type="range" min ="0" max="100" name="priority" id="priority" value="{% if rule %}{{rule.priority}}{% endif %}"> <bold class="muted">HIGH</bold>
+			{% endif %}
+			<br>
+			<small class="muted"><b>Allowed priority values:</b></small>
+			{% if insertionForGroup %}
+				<br>
+				<small class="muted">Group priority: [0-200]</small>
+			{% endif %}
+			<br>
+			<small class="muted">Room priority: [0-100]</small>
+
 	    </div>
 	  </div>
 

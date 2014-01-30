@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.34-0ubuntu0.12.04.1)
 # Database: building_rules
-# Generation Time: 2014-01-18 03:11:42 +0000
+# Generation Time: 2014-01-30 01:10:48 +0000
 # ************************************************************
 
 
@@ -27,6 +27,7 @@ DROP TABLE IF EXISTS `actions`;
 
 CREATE TABLE `actions` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `category` varchar(11) DEFAULT NULL,
   `action_name` varchar(11) DEFAULT NULL,
   `rule_consequent` varchar(255) DEFAULT NULL,
   `description` longtext,
@@ -58,6 +59,8 @@ CREATE TABLE `groups` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `building_name` varchar(11) NOT NULL DEFAULT '',
   `description` longtext,
+  `cross_rooms_validation` int(11) DEFAULT NULL,
+  `cross_rooms_validation_categories` varchar(1024) DEFAULT '',
   PRIMARY KEY (`id`,`building_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -97,9 +100,9 @@ CREATE TABLE `rooms_actions` (
 DROP TABLE IF EXISTS `rooms_groups`;
 
 CREATE TABLE `rooms_groups` (
-  `group_id` int(11) NOT NULL DEFAULT '0',
+  `group_id` int(11) NOT NULL AUTO_INCREMENT,
   `building_name` varchar(11) NOT NULL DEFAULT '',
-  `room_name` int(11) NOT NULL DEFAULT '0',
+  `room_name` varchar(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`group_id`,`building_name`,`room_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -143,6 +146,35 @@ CREATE TABLE `rules` (
 
 
 
+# Dump of table rules_priority
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `rules_priority`;
+
+CREATE TABLE `rules_priority` (
+  `building_name` varchar(11) NOT NULL DEFAULT '0',
+  `room_name` int(11) NOT NULL DEFAULT '0',
+  `rule_id` int(11) NOT NULL DEFAULT '0',
+  `rule_priority` int(11) DEFAULT NULL,
+  PRIMARY KEY (`building_name`,`room_name`,`rule_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+# Dump of table sessions
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `sessions`;
+
+CREATE TABLE `sessions` (
+  `session_key` varchar(64) NOT NULL DEFAULT '',
+  `user_uuid` int(11) DEFAULT NULL,
+  `expire_timestamp` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`session_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
 # Dump of table triggers
 # ------------------------------------------------------------
 
@@ -150,7 +182,8 @@ DROP TABLE IF EXISTS `triggers`;
 
 CREATE TABLE `triggers` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `trigger_name` varchar(11) DEFAULT NULL,
+  `category` varchar(16) DEFAULT NULL,
+  `trigger_name` varchar(24) DEFAULT NULL,
   `rule_antecedent` varchar(255) DEFAULT NULL,
   `description` longtext,
   PRIMARY KEY (`id`)

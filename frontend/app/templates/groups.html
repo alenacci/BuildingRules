@@ -39,12 +39,15 @@
 							    		<p>
 							    			<b>if</b> {{rule.antecedent}} <b>then</b> {{rule.consequent}} 
 											<small class="muted">
+											<span class="badge">{{rule["priority"]}}</span>
 												By:
 												{% if session.userUuid == rule.authorUuid%}
 													You
 												{% else %}
 													{{authorList.authorUuid.personName}} - <i>{{authorList.authorUuid.email}}</i>
 												{% endif %}
+
+												[<a href="{{request.path}}/{{rule.groupId}}/rules/{{rule.id}}/edit">Edit</a>] [<a href="{{request.path}}/{{rule.groupId}}/rules/{{rule.id}}/delete">Delete</a>]
 
 											</small>
 							    		</p>
@@ -88,6 +91,7 @@
 				</div>
 				<br>
 				<a href="{{request.path}}/{{group.id}}/rules/add"><button type="button" class="btn">Add a new rule</button></a>
+				<a href="{{request.path}}/{{group.id}}/delete"><button type="button" class="btn">Delete this group (no confirmation)</button></a>
 				<br>				
 				<br>				
 				<br>				

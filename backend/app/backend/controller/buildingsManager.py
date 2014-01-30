@@ -84,6 +84,53 @@ class BuildingsManager:
 		return self.__addOrModifyGroup(buildingName = buildingName, description =description, crossRoomsValidation = crossRoomsValidation, crossRoomsValidationCategories = crossRoomsValidationCategories)
 
 
+	def deleteRoom(self, buildingName, roomName):
+
+		print "TODO not yet tested"
+		print "TODO table rules_priority not correctly updated"
+
+		from app.backend.model.room import Room
+		room = Room(roomName = roomName,  buildingName = buildingName)
+		room.retrieve()
+
+		ruleList = room.getRules()
+		triggerList = room.getTriggers()
+		actionList = room.getActions()
+
+		for rule in ruleList:
+			rule.delete()
+
+		for trigger in triggerList:
+			room.deleteTrigger(trigger)
+
+		for action in actionList:
+			room.deleteAction(action)
+
+		room.delete()
+
+		return {}
+
+	def deleteGroup(self, buildingName, groupId):
+
+		print "TODO not yet tested"
+
+		from app.backend.model.group import Group
+		group = Group(buildingName = buildingName, id = groupId)
+
+		roomList = group.getRooms()
+		ruleList = group.getRules()
+
+		for room in roomList:
+			group.deleteRoom(room)
+
+		for rule in ruleList:
+			rule.delete()
+
+		group.delete()
+
+		return {}
+
+
 	def editGroup(self, groupId, buildingName, description, crossRoomsValidation, crossRoomsValidationCategories):
 		return self.__addOrModifyGroup(buildingName = buildingName, description =description, crossRoomsValidation = crossRoomsValidation, crossRoomsValidationCategories = crossRoomsValidationCategories, groupId = groupId)
 

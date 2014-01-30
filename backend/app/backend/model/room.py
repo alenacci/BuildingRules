@@ -184,7 +184,7 @@ class Room:
 
 		return groupList
 
-	def getRules(self, author = None, includeGroupsRules = False, excludedRuleId = False):
+	def getRules(self, author = None, includeGroupsRules = False, excludedRuleId = False, excludeCrossRoomValidationRules = False):
 
 		print "TODO: this method has been partially tested - includeGroupsRules not tested"
 
@@ -225,7 +225,7 @@ class Room:
 				ruleList.extend(group.getRules())
 				
 				# If this is a cross room validation, getting the rules expressed into the other rooms into the same group		
-				if group.crossRoomsValidation:
+				if group.crossRoomsValidation and not excludeCrossRoomValidationRules:
 					for groupRoom in group.getRooms():
 						groupRoomRuleList = groupRoom.getRules()
 						for groupRoomRule in groupRoomRuleList:

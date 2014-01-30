@@ -12,7 +12,7 @@ class RoomsManager:
 		room.retrieve()
 		return room.getDict()
 
-	def getRules(self, roomName, buildingName, username = None, includeGroupsRules = False):
+	def getRules(self, roomName, buildingName, username = None, includeGroupsRules = False, orderByPriority = False):
 		room = Room(buildingName = buildingName, roomName = roomName)
 		room.retrieve()
 
@@ -25,6 +25,9 @@ class RoomsManager:
 			ruleList = room.getRules( author = user, includeGroupsRules = includeGroupsRules)
 		else:
 			ruleList = room.getRules( includeGroupsRules = includeGroupsRules )
+
+		if orderByPriority:
+			ruleList = sorted(ruleList, key=lambda rule: rule.getPriority(), reverse=True)
 
 		response = []
 		for rule in ruleList:
@@ -59,6 +62,34 @@ class RoomsManager:
 			
 
 		return {"actions" : response}
+
+
+	def getUsers(self, roomName, buildingName):
+		room = Room(buildingName = buildingName, roomName = roomName)
+		room.retrieve()
+
+		userList = room.getUsers( )
+
+		response = []
+		for user in userList:
+			response.append(user.getDict())
+			
+
+		return {"users" : response}
+
+	def getGroups(self, roomName, buildingName):
+		room = Room(buildingName = buildingName, roomName = roomName)
+		room.retrieve()
+
+		groupList = room.getGroups( )
+
+		response = []
+		for group in groupList:
+			response.append(group.getDict())
+			
+
+		return {"groups" : response}
+
 
 	def bindTrigger(self):
 		print "TODO: not yet implemented"
@@ -166,9 +197,15 @@ class RoomsManager:
 		except Exception as e:
 			raise NotWellFormedRuleError("There is a syntax error in the rule you are trying to save")
 
-		print "TODO Category automatic detection "
-		category = "UNKW"
 		
+		# Detecting rule category (by the rule-consequent)
+		from app.backend.controller.actionManager import ActionManager
+		actionManager = ActionManager()
+		category = actionManager.getAction(consequent).category
+		
+		if int(str(priority)) < 0 or int(str(priority)) > 200:
+			raise RulePriorityError("Rules for rooms must have a priority value between 0 and 100. You inserted " + str(priority))
+
 		from app.backend.model.rule import Rule
 		from app.backend.model.room import Room
 

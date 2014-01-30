@@ -81,8 +81,14 @@ class GroupsManager:
 		except Exception as e:
 			raise NotWellFormedRuleError("There is a syntax error in the rule you are trying to save")
 
-		print "TODO Category automatic detection "
-		category = "UNKW"
+		from app.backend.controller.actionManager import ActionManager
+		actionManager = ActionManager()
+		category = actionManager.getAction(consequent).category
+
+		if int(str(priority)) < 0 or int(str(priority)) > 200:
+			raise RulePriorityError("Rules for groups must have a priority value between 0 and 200. You inserted " + str(priority))
+
+
 		
 		from app.backend.model.rule import Rule
 		from app.backend.model.group import Group
@@ -119,7 +125,7 @@ class GroupsManager:
 		for room in groupRoomList:
 
 			temporaryRuleSet = []
-			temporaryRuleSet.extend(room.getRules(author = False, includeGroupsRules = False, excludedRuleId = False))
+			temporaryRuleSet.extend(room.getRules(author = False, includeGroupsRules = True, excludedRuleId = False, excludeCrossRoomValidationRules = True))
 			temporaryRuleSet.extend(group.getRules(excludedRuleId = excludedRuleId))
 			temporaryRuleSet.append(rule)
 
