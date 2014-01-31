@@ -110,6 +110,8 @@ def rooms(buildingName = None):
 
 	if not successResponse(response):
 		return render_template('error.html', error = response['request-errorDescription'])
+
+	notificationList = []
 	roomList = response["rooms"]
 	roomRules = {}
 	authorList = {}
@@ -120,6 +122,18 @@ def rooms(buildingName = None):
 	roomGroupList = {}
 
 
+	# Getting notifications
+	response = rest.request("/api/users/<username>/notifications", 
+		{
+		'username' : session["username"],
+		'sessionKey' : session["sessionKey"],
+		'userUuid' : session["userUuid"]
+		})
+
+	if successResponse(response):
+		notificationList = response["notifications"]
+	else:
+		return render_template('error.html', error = response['request-errorDescription'])
 
 
 	# Now retrieving room rules
@@ -251,7 +265,7 @@ def rooms(buildingName = None):
 			return render_template('error.html', error = response['request-errorDescription'])
 
 
-	return render_template('rooms.html', roomList = roomList, roomRules = roomRules, authorList = authorList, groupList = groupList, triggerList = triggerList, actionList = actionList, userList = userList, roomGroupList = roomGroupList)	
+	return render_template('rooms.html', roomList = roomList, roomRules = roomRules, authorList = authorList, groupList = groupList, triggerList = triggerList, actionList = actionList, userList = userList, roomGroupList = roomGroupList, notificationList = notificationList)	
 
 
 @gui.route('/buildings/<buildingName>/groups/')

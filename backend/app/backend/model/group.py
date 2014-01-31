@@ -192,4 +192,4 @@ class Group:
 
 
 	def __str__(self):
-		return "Group: " + str(self.id) + " - " + str(self.buildingName) + " - " + str(self.description)
+		return "Group " + str(json.dumps(self.getDict(), separators=(',',':')))

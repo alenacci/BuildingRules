@@ -72,3 +72,6 @@ class DriverNotFoundError(Exception):
 
 class RuleTranslationNotFoundError(Exception):
 	pass
+
+class NewNotificationMissingInputError(Exception):
+	pass

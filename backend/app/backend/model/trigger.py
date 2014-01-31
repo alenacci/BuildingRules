@@ -95,4 +95,4 @@ class Trigger:
 
 
 	def __str__(self):
-		return "Trigger: " + str(self.id) + " " + str(self.category) + " " + str(self.triggerName) + " " + str(self.ruleAntecedent) + " " + str(self.description)
+		return "Trigger " + str(json.dumps(self.getDict(), separators=(',',':')))

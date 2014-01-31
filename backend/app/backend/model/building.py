@@ -160,4 +160,4 @@ class Building:
 
 
 	def __str__(self):
-		return "Building: " + str(self.buildingName) + " - " + str(self.label) + " - " + str(self.description)
+		return "Building " + str(json.dumps(self.getDict(), separators=(',',':')))

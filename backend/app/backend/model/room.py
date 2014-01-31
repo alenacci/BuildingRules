@@ -360,5 +360,4 @@ class Room:
 
 
 	def __str__(self):
-		return "Room " + str(self.roomName) + " " + str(self.buildingName) + " " + str(self.description)
-
+		return "Room " + str(json.dumps(self.getDict(), separators=(',',':')))

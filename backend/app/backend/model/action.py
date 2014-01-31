@@ -97,4 +97,4 @@ class Action:
 		return response	
 
 	def __str__(self):
-		return "Action: " + str(self.id) + " " + str(self.category) + " " + str(self.actionName) + " " + str(self.ruleConsequent) + " " + str(self.description)
+		return "Action " + str(json.dumps(self.getDict(), separators=(',',':')))

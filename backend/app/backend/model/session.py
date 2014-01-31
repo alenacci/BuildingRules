@@ -79,4 +79,4 @@ class Session:
 		return response	
 
 	def __str__(self):
-		return "Sessions: " + str(self.sessionKey) + " " + str(self.userUuid) + " " + str(self.expireTimestamp)
+		return "Session " + str(json.dumps(self.getDict(), separators=(',',':')))

@@ -2,14 +2,25 @@
 {% block body %}
   {% if session.logged_in %}
 
+  	{% for notification in notificationList %}
+		<div class="alert alert-block">
+		  <button type="button" class="close" data-dismiss="alert">&times;</button>
+		  <h4>{{notification.messageSubject}}</h4>
+		  {{notification.messageText}}
+		</div>
+	{% endfor %}
+
 	<header class="jumbotron subhead" id="overview">
+
 	    <div class="span8">
 	      <h1>My Rooms</h1>
 	      <p class="lead">With this page you can create your own simple rules for your own personal spaces. Just add the rules inside the correct box and... that's all!</p>
 	    </div>
 	    <div class="span4">
 	    </div>
+
 	</header>
+
 
 	{% if roomList %}
 		<section id="typography">

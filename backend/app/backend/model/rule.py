@@ -227,6 +227,9 @@ class Rule:
 
 		database.close()
 
+	def getFullRepresentation(self):
+		return "if " + self.antecedent + " then " + self.consequent
+
 	def getStandardRepresentation(self):
 
 		if self.roomName:

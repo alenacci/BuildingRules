@@ -190,6 +190,5 @@ class User:
 		return response
 
 	def __str__(self):
-		return "User: " + str(self.uuid) + " - " + str(self.email) + " - " + str(self.personName) + " - " + str(self.level) 
-
+		return "User " + str(json.dumps(self.getDict(), separators=(',',':')))
 

@@ -65,7 +65,12 @@ class UsersManager:
 		return {"buildings" : response}
 
 	def getRoomList(self, username):
-		print "TODO: not yet implemented"
+		print "TODO: not yet tested"
+
+		user = User(username = username)		
+		user.retrieve()
+
+		return user.getRooms()
 
 	def addRoom(self, username):
 		print "TODO: not yet implemented"

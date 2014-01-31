@@ -68,6 +68,24 @@ def userInfo(username = None):
 		except Exception as e:
 			return returnError(e)
 
+@api.route('/api/users/<username>/notifications', methods = ['POST'])
+def userNotifications(username = None):
+
+	if request.method == 'POST':
+
+		sessionKey = request.form['sessionKey']
+		userUuid = request.form['userUuid']		
+
+		try:
+			session = SessionManager()
+			session.checkSessionValidity(sessionKey, userUuid)
+			from app.backend.controller.notificationsManager import NotificationsManager
+			notifications = NotificationsManager()
+			return returnResult( notifications.getNotifications(username = username, userUuid = userUuid) )		
+		except Exception as e:
+			return returnError(e)
+
+
 
 @api.route('/api/users/<username>/rules/categories', methods = ['GET', 'POST'])
 def ruleCategories(username = None):

@@ -187,7 +187,15 @@ class RoomsManager:
 
 		authorUuid = editorUuid	
 
-		return self.__addOrModifyRule(ruleId = ruleId, priority = priority, buildingName = buildingName, roomName = roomName, authorUuid = authorUuid, ruleBody = ruleBody)		
+		result = self.__addOrModifyRule(ruleId = ruleId, priority = priority, buildingName = buildingName, roomName = roomName, authorUuid = authorUuid, ruleBody = ruleBody)		
+
+		from app.backend.controller.notificationsManager import NotificationsManager
+		notifications = NotificationsManager()
+		messageSubject = "Rule modified in building " + str(buildingName) + " room " + str(roomName)
+		messageText = "The user " + str(editor.username) + " edited (or tried to edit) the rule <<" + str(oldRule.getFullRepresentation()) + ">>. The new rule is <<" + str(ruleBody) + ">>"
+		notifications.sendNotification(buildingName = buildingName, roomName = roomName, messageSubject = messageSubject, messageText = messageText) 
+
+		return result
 
 	def __addOrModifyRule(self, priority = None, buildingName = None, roomName = None, authorUuid = None, ruleBody = None, ruleId = None):
 

@@ -51,7 +51,25 @@ class GroupsManager:
 		return self.__addOrModifyRule(priority = priority, buildingName = buildingName, groupId = groupId,  authorUuid = authorUuid, ruleBody = ruleBody)
 
 	def editRule(self, ruleId = None, priority = None, buildingName = None, groupId = None, authorUuid = None, ruleBody = None):
-		return self.__addOrModifyRule(ruleId = ruleId, priority = priority, buildingName = buildingName, groupId = groupId, authorUuid = authorUuid, ruleBody = ruleBody)
+
+		from app.backend.model.rule import Rule
+		oldRule = Rule(id = ruleId)
+		oldRule.retrieve()
+
+		from app.backend.model.user import User
+		author = User(uuid = authorUuid)
+		author.retrieve()
+
+		result = self.__addOrModifyRule(ruleId = ruleId, priority = priority, buildingName = buildingName, groupId = groupId, authorUuid = authorUuid, ruleBody = ruleBody)
+
+		from app.backend.controller.notificationsManager import NotificationsManager
+		notifications = NotificationsManager()
+		messageSubject = "Rule modified in building " + str(buildingName) + " group " + str(groupId)
+		messageText = "The user " + str(author.username) + " edited (or tried to edit) the rule <<" + str(oldRule.getFullRepresentation()) + ">>. The new rule is <<" + str(ruleBody) + ">>"
+		notifications.sendNotification(buildingName = buildingName, groupId = groupId, messageSubject = messageSubject, messageText = messageText) 
+
+		return result
+		
 
 	def deleteRule(self, ruleId, buildingName, groupId):
 		group = Group(buildingName = buildingName, id = groupId)
