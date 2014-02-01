@@ -329,7 +329,7 @@ def groups(buildingName = None):
 
 		# Getting user info per each stored uuid
 		for authorUuid in authorList.keys():
-			response = rest.request("/api/users/uuid/<uuid>", {'sessionKey' : session["sessionKey"], 'userUuid' : session["userUuid"]})
+			response = rest.request("/api/users/uuid/<uuid>", {'sessionKey' : session["sessionKey"], 'uuid' : authorUuid, 'userUuid' : session["userUuid"]})
 
 			if successResponse(response):
 				authorList[authorUuid] = response

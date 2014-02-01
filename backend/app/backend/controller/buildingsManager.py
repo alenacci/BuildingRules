@@ -1,6 +1,7 @@
 import json
 from app.backend.commons.errors import *
 from app.backend.model.building import Building
+from app.backend.model.buildings import Buildings
 
 class BuildingsManager:
 	def __init__(self):
@@ -12,6 +13,15 @@ class BuildingsManager:
 		building.retrieve()
 
 		return building.getDict()
+
+	def getAllBuildings(self):
+		buildings = Buildings()
+		buildingList = []
+
+		for building in buildings.getAllBuildings():
+			buildingList.append(building.getDic())
+
+		return {"buildings" : buildingList}
 
 	def checkUserBinding(self, buildingName, username):
 
@@ -46,6 +56,11 @@ class BuildingsManager:
 
 		return {"groups" : groupList}
 
+	def getCrossRoomValidationGroups(self, buildingName, roomName = None, validationCategories = None):
+		building = Building(buildingName = buildingName)
+		building.retrieve()
+
+		return building.getCrossRoomValidationGroups(roomName = roomName, validationCategories = validationCategories)	
 
 	def getRooms(self, buildingName, username = None):
 		building = Building(buildingName = buildingName)

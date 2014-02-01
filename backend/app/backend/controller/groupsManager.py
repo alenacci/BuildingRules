@@ -43,6 +43,18 @@ class GroupsManager:
 		room = Room(buildingName = buildingName, roomName = roomName)
 		room.retrieve()
 
+
+		if group.crossRoomsValidation:
+			print "TODO This part of the method as not been tested"
+			# In this case we have to check that the room doesn't belong to another CrossRoomValidatioGroup
+			from app.backend.model.building import Building
+			building = Building(buildingName = buildingName)
+			building.retrive()
+			crvgList = building.getCrossRoomValidationGroups(roomName = roomName, validationCategories = group.crossRoomsValidationCategories)
+
+			if len(crvgList) > 0:
+				raise WrongBuildingGroupRipartition("A room can belong to only one cross validation group per category. Room " + roomName + " in already in group " + crvgList[0])
+
 		group.addRoom(room)
 
 		return room.getDict()

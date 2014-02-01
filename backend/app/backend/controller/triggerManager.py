@@ -42,10 +42,10 @@ class TriggerManager:
 				matchObj = re.match( model, ruleAntecedent, re.M|re.I)
 
 				if matchObj:
-					parameterValues = []
+					parameterValues = {}
 
 					for i in range(0,parameterNumber):
-						parameterValues.append(matchObj.group(i + 1))
+						parameterValues[str(i)] = matchObj.group(i + 1)
 
 					return (trigger, originalModel, parameterValues)
 
@@ -89,19 +89,21 @@ class TriggerManager:
 		return categories
 
 
-	def getTriggerDriver(self, trigger):
+	def getTriggerDriver(self, trigger, parameters = None):
 
 		from app.backend.drivers.timeTriggerDriver import TimeTriggerDriver
 
+		if not parameters:
+			parameters = {}
 
 		if trigger.triggerName == "TIME_AFTER":
-			driver = TimeTriggerDriver(parameters = {'operation' : 'AFTER'})
+			driver = TimeTriggerDriver(parameters.update({'operation' : 'AFTER'}))
 
 		if trigger.triggerName == "TIME_BEFORE":
-			driver = TimeTriggerDriver(parameters = {'operation' : 'BEFORE'})
+			driver = TimeTriggerDriver(parameters.update({'operation' : 'BEFORE'}))
 
 		if trigger.triggerName == "TIME_RANGE":
-			driver = TimeTriggerDriver(parameters = {'operation' : 'IN_RANGE'})
+			driver = TimeTriggerDriver(parameters.update({'operation' : 'IN_RANGE'}))
 
 		raise DriverNotFoundError("Impossibile to find any driver for the trigger " + str(trigger))
 

@@ -44,7 +44,7 @@
 												{% if session.userUuid == rule.authorUuid%}
 													You
 												{% else %}
-													{{authorList.authorUuid.personName}} - <i>{{authorList.authorUuid.email}}</i>
+													{{authorList[rule.authorUuid].personName}} - <i>{{authorList[rule.authorUuid].email}}</i>
 												{% endif %}
 
 												[<a href="{{request.path}}/{{rule.groupId}}/rules/{{rule.id}}/edit">Edit</a>] [<a href="{{request.path}}/{{rule.groupId}}/rules/{{rule.id}}/delete">Delete</a>]

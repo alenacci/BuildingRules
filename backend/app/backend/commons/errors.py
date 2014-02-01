@@ -75,3 +75,6 @@ class RuleTranslationNotFoundError(Exception):
 
 class NewNotificationMissingInputError(Exception):
 	pass
+
+class WrongBuildingGroupRipartition(Exception):
+	pass

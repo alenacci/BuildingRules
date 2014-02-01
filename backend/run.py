@@ -1,11 +1,27 @@
 #!venv/bin/python
-from app import app
+import sys
+import os
+import time
+from threading import Thread
+import datetime
+import subprocess
 
-# Load default config and override config from an environment variable
-app.config.update(dict(
-    DEBUG=True,
-    SECRET_KEY='development key'
-))
-app.config.from_envvar('FLASKR_SETTINGS', silent=True)
+__BACKEND_SERVER_PORT = "5003"
 
-app.run(host="192.168.199.141", port=5003)
+def startWebServer():
+	os.system("python runWebServer.py")
+
+def startDeamon():
+	os.system("python runDeamon.py")
+
+
+### MAIN STARTS HERE
+
+webServerThread = Thread(target = startWebServer)
+webServerThread.start()
+
+deamonThread = Thread(target = startDeamon)
+deamonThread.start()
+
+webServerThread.join()
+deamonThread.join()

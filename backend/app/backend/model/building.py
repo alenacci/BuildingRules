@@ -55,9 +55,92 @@ class Building:
 
 		return groupList
 
+	def getCrossRoomValidationGroups(self, roomName = None, validationCategories = None):
+
+		print "TODO: non yet tested"
+
+		from app.backend.model.group import Group
+		
+		query = "SELECT id FROM groups WHERE building_name = '@@building_name@@' AND cross_rooms_validation = '1';"
+
+		database = Database()
+		database.open()
+		query = self.__replaceSqlQueryToken(query)
+		queryResult = database.executeReadQuery(query)
+		database.close()
+
+		groupList = []
+		for groupRecord in queryResult:
+			group = Group(id = groupRecord[0], buildingName = self.buildingName)
+			group.retrieve()
+
+			if validationCategories:
+				queriedValidationCategories = set(validationCategories)
+				groupValidationCategories = set(crossRoomsValidationCategories)
+
+				if queriedValidationCategories.issubset(groupValidationCategories):
+					groupList.append(group)	
+
+			else:
+				groupList.append(group)
+
+		if not roomName and not validationCategories:
+			return groupList
+
+		
+		if roomName:
+			filteredGroupList = []
+			for group in groupList:
+
+				for room in group.getRooms():
+					if room.roomName == roomName:
+						filteredGroupList.append(group)
+
+			return filteredGroupList
+
+		raise UnknownError()
 
 	def getRules(self):		
-		print "TODO: non yet implemented"
+		print "TODO: non yet tested"
+
+		from app.backend.model.rule import Rule
+		
+		query = "SELECT * FROM rules WHERE building_name = '@@building_name@@';"
+
+		database = Database()
+		database.open()
+		query = self.__replaceSqlQueryToken(query)
+		queryResult = database.executeReadQuery(query)
+		database.close()
+
+		ruleList = []
+		for record in queryResult:
+
+			ruleId = record[0]
+			priority = int(record[1])
+			category = record[2]
+			buildingName = record[3]
+			authorUuid = int(record[6])
+			antecedent = record[7]
+			consequent = record[8]
+			enabled = bool(int(record[9]))
+			deleted = bool(int(record[10]))
+			creationTimestamp = record[11]
+			lastEditTimestamp = record[12]
+
+			groupId = int(record[4])
+			roomName = record[5]
+
+			groupId = groupId if groupId != -1 else None
+			roomName = roomName if roomName != "None" else None
+
+			rule = Rule(id = ruleId, priority = priority, category = category, buildingName = buildingName, authorUuid = authorUuid, 
+				antecedent = antecedent, consequent = consequent, enabled = enabled, deleted = deleted, creationTimestamp = creationTimestamp, lastEditTimestamp = lastEditTimestamp)
+
+			ruleList.append(rule)
+
+		return ruleList
+
 
 	def addRoom(self, room):
 		room.buildingName = self.buildingName

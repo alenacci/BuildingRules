@@ -26,7 +26,7 @@
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2014-01-31 02:21:33 +0000</string>
+	<string>2014-02-01 01:47:39 +0000</string>
 	<key>Modifier</key>
 	<string>Alessandro Nacci</string>
 	<key>NotesVisible</key>
@@ -346,8 +346,9 @@
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
 \f0\b\fs24 \cf0 id: int\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\b0 sendTimestamp: timestamp
+\b0 \cf0 sendTimestamp: timestamp
 \b \
 
 \b0 message_subject: string\
@@ -611,8 +612,8 @@ message_read: boolean}</string>
 					<real>29.512414932250977</real>
 					<key>Points</key>
 					<array>
-						<string>{209.48758521462042, 324.2085973786489}</string>
-						<string>{282.51241393587856, 340.79213943919075}</string>
+						<string>{209.48758551434886, 324.20833831726543}</string>
+						<string>{282.51241448565111, 340.79166778825737}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -652,8 +653,8 @@ message_read: boolean}</string>
 					<real>29.507846832275391</real>
 					<key>Points</key>
 					<array>
-						<string>{209.49215342117898, 288.04559771595291}</string>
-						<string>{282.5078475460499, 274.95543513045152}</string>
+						<string>{209.49215306513361, 288.04523154735455}</string>
+						<string>{282.50784693486639, 274.95476852362924}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -758,8 +759,9 @@ message_read: boolean}</string>
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
 \f0\b\fs24 \cf0 id: int\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\b0 langauge: string\
+\b0 \cf0 langauge: string\
 original: string\
 translation: string}</string>
 								<key>VerticalPad</key>
@@ -1436,8 +1438,9 @@ rule_priority: string}</string>
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
 \f0\b\fs24 \cf0 session_key: string\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\b0 user_uuid: int\
+\b0 \cf0 user_uuid: int\
 exprire_timestamp: timestamp}</string>
 								<key>VerticalPad</key>
 								<integer>0</integer>
@@ -2701,8 +2704,9 @@ action_id: int}</string>
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
 \f0\b\fs24 \cf0 id: int\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\b0 category: string\
+\b0 \cf0 category: string\
 trigger_name: string\
 rule_antecedent: string\
 description: string}</string>
@@ -2816,8 +2820,9 @@ description: string}</string>
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
 \f0\b\fs24 \cf0 id: int\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\b0 category: string\
+\b0 \cf0 category: string\
 action_name: string\
 rule_consequent: string\
 description: string}</string>
@@ -3368,8 +3373,9 @@ description: string}</string>
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
 \f0\b\fs24 \cf0 id: int\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\b0 priority: int
+\b0 \cf0 priority: int
 \b \
 
 \b0 category: string\
@@ -3640,8 +3646,9 @@ last_edit_timestamp: timestamp}</string>
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
 \f0\b\fs24 \cf0 uuid: int\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\b0 email: string
+\b0 \cf0 email: string
 \b \
 
 \b0 password: string\
@@ -4193,8 +4200,9 @@ level: int}</string>
 
 \f0\b\fs24 \cf0 id: int\
 building_name: string\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\b0 description: string\
+\b0 \cf0 description: string\
 cross_room_validation: int\
 cross_room_validation_categories: list&lt;string&gt;}</string>
 								<key>VerticalPad</key>
@@ -4308,8 +4316,9 @@ cross_room_validation_categories: list&lt;string&gt;}</string>
 
 \f0\b\fs24 \cf0 room_name: string\
 building_name: string\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\b0 description: string}</string>
+\b0 \cf0 description: string}</string>
 								<key>VerticalPad</key>
 								<integer>0</integer>
 							</dict>
@@ -4420,8 +4429,9 @@ building_name: string\
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
 \f0\b\fs24 \cf0 building_name: string\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\b0 label: string\
+\b0 \cf0 label: string\
 description: string}</string>
 								<key>VerticalPad</key>
 								<integer>0</integer>
@@ -4508,7 +4518,7 @@ description: string}</string>
 			<key>BackgroundGraphic</key>
 			<dict>
 				<key>Bounds</key>
-				<string>{{0, 0}, {1018, 1227}}</string>
+				<string>{{0, 0}, {806, 1248}}</string>
 				<key>Class</key>
 				<string>SolidGraphic</string>
 				<key>ID</key>
@@ -4532,7 +4542,7 @@ description: string}</string>
 			<key>CanvasOrigin</key>
 			<string>{0, 0}</string>
 			<key>CanvasSize</key>
-			<string>{1018, 1227}</string>
+			<string>{806, 1248}</string>
 			<key>ColumnAlign</key>
 			<integer>1</integer>
 			<key>ColumnSpacing</key>
@@ -4541,6 +4551,151 @@ description: string}</string>
 			<string>1 0/72 in = 1.0000 in</string>
 			<key>GraphicsList</key>
 			<array>
+				<dict>
+					<key>Class</key>
+					<string>TableGroup</string>
+					<key>Graphics</key>
+					<array>
+						<dict>
+							<key>Bounds</key>
+							<string>{{532.85036622304119, 1105.4342778599328}, {237.60784912109375, 14}}</string>
+							<key>Class</key>
+							<string>ShapedGraphic</string>
+							<key>FitText</key>
+							<string>Vertical</string>
+							<key>Flow</key>
+							<string>Resize</string>
+							<key>ID</key>
+							<integer>187</integer>
+							<key>Shape</key>
+							<string>Rectangle</string>
+							<key>Style</key>
+							<dict>
+								<key>fill</key>
+								<dict>
+									<key>GradientCenter</key>
+									<string>{-0.29411799999999999, -0.264706}</string>
+								</dict>
+								<key>shadow</key>
+								<dict>
+									<key>Draws</key>
+									<string>NO</string>
+								</dict>
+							</dict>
+							<key>Text</key>
+							<dict>
+								<key>Text</key>
+								<string>{\rtf1\ansi\ansicpg1252\cocoartf1265
+\cocoascreenfonts1{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\b\fs24 \cf0 Buildings}</string>
+								<key>VerticalPad</key>
+								<integer>0</integer>
+							</dict>
+							<key>TextPlacement</key>
+							<integer>0</integer>
+						</dict>
+						<dict>
+							<key>Bounds</key>
+							<string>{{532.85036622304119, 1119.434338895089}, {237.60784912109375, 28}}</string>
+							<key>Class</key>
+							<string>ShapedGraphic</string>
+							<key>FitText</key>
+							<string>Vertical</string>
+							<key>Flow</key>
+							<string>Resize</string>
+							<key>ID</key>
+							<integer>188</integer>
+							<key>Shape</key>
+							<string>Rectangle</string>
+							<key>Style</key>
+							<dict>
+								<key>fill</key>
+								<dict>
+									<key>GradientCenter</key>
+									<string>{-0.29411799999999999, -0.264706}</string>
+								</dict>
+								<key>shadow</key>
+								<dict>
+									<key>Draws</key>
+									<string>NO</string>
+								</dict>
+							</dict>
+							<key>Text</key>
+							<dict>
+								<key>Align</key>
+								<integer>0</integer>
+								<key>Text</key>
+								<string>{\rtf1\ansi\ansicpg1252\cocoartf1265
+\cocoascreenfonts1{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
+
+\f0\fs24 \cf0 \
+}</string>
+								<key>VerticalPad</key>
+								<integer>0</integer>
+							</dict>
+							<key>TextPlacement</key>
+							<integer>0</integer>
+						</dict>
+						<dict>
+							<key>Bounds</key>
+							<string>{{532.85036622304119, 1147.434338895089}, {237.60784912109375, 28}}</string>
+							<key>Class</key>
+							<string>ShapedGraphic</string>
+							<key>FitText</key>
+							<string>Vertical</string>
+							<key>Flow</key>
+							<string>Resize</string>
+							<key>ID</key>
+							<integer>189</integer>
+							<key>Shape</key>
+							<string>Rectangle</string>
+							<key>Style</key>
+							<dict>
+								<key>fill</key>
+								<dict>
+									<key>GradientCenter</key>
+									<string>{-0.29411799999999999, -0.264706}</string>
+								</dict>
+								<key>shadow</key>
+								<dict>
+									<key>Draws</key>
+									<string>NO</string>
+								</dict>
+							</dict>
+							<key>Text</key>
+							<dict>
+								<key>Align</key>
+								<integer>0</integer>
+								<key>Text</key>
+								<string>{\rtf1\ansi\ansicpg1252\cocoartf1265
+\cocoascreenfonts1{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
+
+\f0\fs24 \cf0 \
+getAllBuildings()}</string>
+								<key>VerticalPad</key>
+								<integer>0</integer>
+							</dict>
+							<key>TextPlacement</key>
+							<integer>0</integer>
+						</dict>
+					</array>
+					<key>GridH</key>
+					<array>
+						<integer>187</integer>
+						<integer>188</integer>
+						<integer>189</integer>
+						<array/>
+					</array>
+					<key>ID</key>
+					<integer>186</integer>
+				</dict>
 				<dict>
 					<key>Class</key>
 					<string>TableGroup</string>
@@ -5063,8 +5218,9 @@ translateTemplate()\
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
 \f0\b\fs24 \cf0 id: int\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720
 
-\b0 send_timstamp: timestamp
+\b0 \cf0 send_timstamp: timestamp
 \b \
 
 \b0 messageSubject: string\
@@ -6088,7 +6244,7 @@ description: string}</string>
 						</dict>
 						<dict>
 							<key>Bounds</key>
-							<string>{{284.31373080671966, 146.99999771426141}, {237.60784912109375, 252}}</string>
+							<string>{{284.31373080671966, 146.99999771426141}, {237.60784912109375, 280}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
@@ -6125,6 +6281,8 @@ description: string}</string>
 \f0\fs24 \cf0 List&lt;Room&gt; getRooms()\
 List&lt;Group&gt; getGroups()\
 List&lt;Rule&gt; getRules()\
+\
+getCrossRoomValidationGroups()\
 \
 addRoom(room)\
 addGroup(group)\
@@ -7769,7 +7927,7 @@ getGroups()\
 					<array>
 						<dict>
 							<key>Bounds</key>
-							<string>{{289.21569168269758, 90.999995602318009}, {233.5294189453125, 13}}</string>
+							<string>{{289.21569168269758, 73.764659866558432}, {233.5294189453125, 13}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
@@ -7817,7 +7975,7 @@ getGroups()\
 						</dict>
 						<dict>
 							<key>Bounds</key>
-							<string>{{289.21569168269758, 103.99999560231801}, {233.5294189453125, 26}}</string>
+							<string>{{289.21569168269758, 86.764659866558432}, {233.5294189453125, 26}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
@@ -7868,7 +8026,7 @@ getGroups()\
 						</dict>
 						<dict>
 							<key>Bounds</key>
-							<string>{{289.21569168269758, 129.99999560231799}, {233.5294189453125, 169}}</string>
+							<string>{{289.21569168269758, 112.76465986655842}, {233.5294189453125, 208}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
@@ -7913,6 +8071,9 @@ getGroups()\
 getInfo()\
 getGroups()\
 getRooms()\
+\
+getAllBuildings()\
+getCrossRoomValidationGroups()\
 \
 checkUserBinding()\
 \
@@ -8675,7 +8836,7 @@ eventTriggered()\
 	<key>WindowInfo</key>
 	<dict>
 		<key>CurrentSheet</key>
-		<integer>0</integer>
+		<integer>2</integer>
 		<key>ExpandedCanvases</key>
 		<array>
 			<dict>
@@ -8684,7 +8845,7 @@ eventTriggered()\
 			</dict>
 		</array>
 		<key>Frame</key>
-		<string>{{-1152, 216}, {1152, 842}}</string>
+		<string>{{302, 126}, {1152, 842}}</string>
 		<key>ListView</key>
 		<true/>
 		<key>OutlineWidth</key>
@@ -8698,9 +8859,9 @@ eventTriggered()\
 		<key>SidebarWidth</key>
 		<integer>120</integer>
 		<key>VisibleRegion</key>
-		<string>{{0, 74.226801934385733}, {1048.4535773231985, 708.24740179059722}}</string>
+		<string>{{-219, 0}, {997.05884217390997, 673.52942435936689}}</string>
 		<key>Zoom</key>
-		<real>0.97000002861022949</real>
+		<real>1.0199999809265137</real>
 		<key>ZoomValues</key>
 		<array>
 			<array>
