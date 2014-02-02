@@ -26,7 +26,7 @@
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2014-02-01 01:47:39 +0000</string>
+	<string>2014-02-02 02:57:16 +0000</string>
 	<key>Modifier</key>
 	<string>Alessandro Nacci</string>
 	<key>NotesVisible</key>
@@ -612,8 +612,8 @@ message_read: boolean}</string>
 					<real>29.512414932250977</real>
 					<key>Points</key>
 					<array>
-						<string>{209.48758551434886, 324.20833831726543}</string>
-						<string>{282.51241448565111, 340.79166778825737}</string>
+						<string>{209.48758551434886, 324.20833680570246}</string>
+						<string>{282.51241448565111, 340.7916650362784}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -653,8 +653,8 @@ message_read: boolean}</string>
 					<real>29.507846832275391</real>
 					<key>Points</key>
 					<array>
-						<string>{209.49215306513361, 288.04523154735455}</string>
-						<string>{282.50784693486639, 274.95476852362924}</string>
+						<string>{209.49215306513361, 288.0452315244786}</string>
+						<string>{282.50784693486639, 274.95476848198422}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -4518,7 +4518,7 @@ description: string}</string>
 			<key>BackgroundGraphic</key>
 			<dict>
 				<key>Bounds</key>
-				<string>{{0, 0}, {806, 1248}}</string>
+				<string>{{0, 0}, {1018, 1248}}</string>
 				<key>Class</key>
 				<string>SolidGraphic</string>
 				<key>ID</key>
@@ -4542,7 +4542,7 @@ description: string}</string>
 			<key>CanvasOrigin</key>
 			<string>{0, 0}</string>
 			<key>CanvasSize</key>
-			<string>{806, 1248}</string>
+			<string>{1018, 1248}</string>
 			<key>ColumnAlign</key>
 			<integer>1</integer>
 			<key>ColumnSpacing</key>
@@ -5969,7 +5969,7 @@ getPriority()\
 \
 \
 getFullRepresentation()\
-getStandardRepresentation()\
+\
 \
 getDict()\
 }</string>
@@ -8836,7 +8836,7 @@ eventTriggered()\
 	<key>WindowInfo</key>
 	<dict>
 		<key>CurrentSheet</key>
-		<integer>2</integer>
+		<integer>1</integer>
 		<key>ExpandedCanvases</key>
 		<array>
 			<dict>
@@ -8859,9 +8859,9 @@ eventTriggered()\
 		<key>SidebarWidth</key>
 		<integer>120</integer>
 		<key>VisibleRegion</key>
-		<string>{{-219, 0}, {997.05884217390997, 673.52942435936689}}</string>
+		<string>{{-5, 449.49494516493149}, {1027.2727173769333, 693.93938725462453}}</string>
 		<key>Zoom</key>
-		<real>1.0199999809265137</real>
+		<real>0.99000000953674316</real>
 		<key>ZoomValues</key>
 		<array>
 			<array>

@@ -230,15 +230,6 @@ class Rule:
 	def getFullRepresentation(self):
 		return "if " + self.antecedent + " then " + self.consequent
 
-	def getStandardRepresentation(self):
-
-		if self.roomName:
-			return "if " + self.antecedent + " in room " + str(self.roomName) + " then " + self.consequent
-		
-		if self.groupId:
-			return "if " + self.antecedent + " in group " + str(self.groupId) + " then " + self.consequent
-
-
 	def getDict(self, roomName = None, buildingName = None):
 	
 		response = {}

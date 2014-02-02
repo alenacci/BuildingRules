@@ -16,7 +16,7 @@ api = Blueprint('api', __name__, template_folder='templates')
 @api.route('/api/test', methods = ['GET', 'POST'])
 def test():
 	test = Test()
-	test.test1()
+	test.test2()
 	#test.test0()
 
 	return render_template('home.html')

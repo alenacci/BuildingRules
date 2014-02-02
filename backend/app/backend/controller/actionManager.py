@@ -61,17 +61,13 @@ class ActionManager:
 
 	def translateAction(self, ruleConsequent):
 
-		triggers = Triggers()
-		trigger, originalTemplate, parameterValues = self.getTriggerAndTemplateAndParameterValues(ruleConsequent)
-		translationTemplate = triggers.translateTemplate('Z3', originalTemplate)
-
-		foundValues = parameterValues
+		actions = Actions()
+		action, originalTemplate, parameterValues = self.getActionAndTemplateAndParameterValues(ruleConsequent)
+		translationTemplate = actions.translateTemplate('Z3', originalTemplate)
 
 		translation = translationTemplate
-		for value in foundValues:
-			translation = translation.replace("@val", value, 1)
 
-		return translation
+		return translation, action
 
 
 
@@ -88,18 +84,47 @@ class ActionManager:
 		return categories
 
 
-	def getActionDriver(self, action):
+	def getActionDriver(self, action, parameters = None):
 
-		from app.backend.drivers.lightActionDriver import LightActionDriver
+		from app.backend.drivers.lightActionDriver import RoomActionDriver
 
+		if not parameters:
+			parameters.update()
+
+		driver = None
 
 		if action.actionName == "LIGHT_ON":
-			driver = LightActionDriver(parameters = {'operation' : 'LIGHT_ON'})
+			driver = RoomActionDriver(parameters.update({'operation' : 'LIGHT_ON'}))
 
 		if action.actionName == "LIGHT_OFF":
-			driver = LightActionDriver(parameters = {'operation' : 'LIGHT_OFF'})
+			driver = RoomActionDriver(parameters.update({'operation' : 'LIGHT_OFF'}))
 
-		raise DriverNotFoundError("Impossibile to find any driver for the action " + str(action))
+		if action.actionName == "HEATING_ON":
+			driver = RoomActionDriver(parameters.update({'operation' : 'HEATING_ON'}))
+
+		if action.actionName == "HEATING_OFF":
+			driver = RoomActionDriver(parameters.update({'operation' : 'HEATING_OFF'}))
+
+		if action.actionName == "COOLING_ON":
+			driver = RoomActionDriver(parameters.update({'operation' : 'COOLING_ON'}))
+
+		if action.actionName == "COOLING_OFF":
+			driver = RoomActionDriver(parameters.update({'operation' : 'COOLING_OFF'}))
+
+		if action.actionName == "WINDOWS_OPEN":
+			driver = RoomActionDriver(parameters.update({'operation' : 'WINDOWS_OPEN'}))
+
+		if action.actionName == "WINDOWS_CLOSE":
+			driver = RoomActionDriver(parameters.update({'operation' : 'WINDOWS_CLOSE'}))
+
+		if action.actionName == "CURTAINS_OPEN":
+			driver = RoomActionDriver(parameters.update({'operation' : 'CURTAINS_OPEN'}))
+
+		if action.actionName == "CURTAINS_CLOSE":
+			driver = RoomActionDriver(parameters.update({'operation' : 'CURTAINS_CLOSE'}))
+
+		if not driver:
+			raise DriverNotFoundError("Impossibile to find any driver for the action " + str(action))
 
 
 	def __str__(self):

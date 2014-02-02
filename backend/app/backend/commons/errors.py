@@ -76,5 +76,8 @@ class RuleTranslationNotFoundError(Exception):
 class NewNotificationMissingInputError(Exception):
 	pass
 
-class WrongBuildingGroupRipartition(Exception):
+class WrongBuildingGroupRipartitionError(Exception):
+	pass
+
+class UnsupportedDriverParameterError(Exception):
 	pass

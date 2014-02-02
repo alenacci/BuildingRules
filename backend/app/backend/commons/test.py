@@ -6,6 +6,17 @@ class Test:
 	def __init__(self):
 		pass
 
+	def test2(self):
+		
+		from app.backend.model.room import Room
+		room = Room(buildingName="EEE", roomName="200")
+		ruleList = room.getRules()
+
+		from app.backend.controller.rulesetChecker import RulesetChecker
+		rulesetChecker = RulesetChecker(ruleList)
+		rulesetChecker.check()
+
+
 	def test1(self):
 
 		from app.backend.controller.triggerManager import TriggerManager

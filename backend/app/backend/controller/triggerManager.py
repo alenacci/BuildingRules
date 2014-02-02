@@ -61,19 +61,54 @@ class TriggerManager:
 		trigger, template = self.getTriggerAndTemplate(ruleAntecedent)
 		return trigger
 
+	def __translateParameters(self, triggerCategory, parameterValue):
+
+		value = parameterValue
+
+		if triggerCategory == "TIME":
+			
+			pm = False
+			if "PM" in value.upper():
+				pm = True
+			
+			if "." in value or ":" in value:
+				value = value.replace(":",".")
+				value = value[:value.find(".")]
+			
+			return value.replace("AM", "").replace("PM", "").replace("am", "").replace("pm", "")
+
+			if pm: value = str(int(value)+12)
+
+		if triggerCategory == "DATE":
+			import time
+			day = value[:value.find("/")]
+			month = value[value.find("/")+1:]
+			return str( time.strptime(day + " " + month + " 00", "%d %m %y").tm_yday )
+
+		if triggerCategory == "ROOM_TEMPERATURE" or triggerCategory == "ROOM_TEMPERATURE":
+			return value.replace("C", "").replace("F", "")
+
+		return value
+
+
 	def translateTrigger(self, ruleAntecedent):
 
 		triggers = Triggers()
 		trigger, originalTemplate, parameterValues = self.getTriggerAndTemplateAndParameterValues(ruleAntecedent)
 		translationTemplate = triggers.translateTemplate('Z3', originalTemplate)
 
-		foundValues = parameterValues
+		translatedParams = {}
+
+		for key,value in parameterValues.iteritems():
+			translatedParams[key] = self.__translateParameters(trigger.category, value)
 
 		translation = translationTemplate
-		for value in foundValues:
+		for i in range(0,len(parameterValues.keys())):
+
+			value = translatedParams[str(i)]
 			translation = translation.replace("@val", value, 1)
 
-		return translation
+		return translation, trigger, translatedParams
 
 
 	def getTriggerCategories(self):
@@ -91,21 +126,42 @@ class TriggerManager:
 
 	def getTriggerDriver(self, trigger, parameters = None):
 
-		from app.backend.drivers.timeTriggerDriver import TimeTriggerDriver
+		from app.backend.drivers.datetimeTriggerDriver import DatetimeTriggerDriver
+		from app.backend.drivers.roomTriggerDriver import RoomTriggerDriver
+		from app.backend.drivers.weatherTriggerDriver import WeatherTriggerDriver
+		from app.backend.drivers.fakeTriggerDriver import FakeTriggerDriver
 
 		if not parameters:
 			parameters = {}
 
-		if trigger.triggerName == "TIME_AFTER":
-			driver = TimeTriggerDriver(parameters.update({'operation' : 'AFTER'}))
+		driver = None
 
-		if trigger.triggerName == "TIME_BEFORE":
-			driver = TimeTriggerDriver(parameters.update({'operation' : 'BEFORE'}))
+		if trigger.triggerName == "OCCUPANCY_TRUE":
+			driver = RoomTriggerDriver(parameters.update({'operation' : 'CHECK_PRESENCE'}))
+
+		if trigger.triggerName == "OCCUPANCY_FALSE":
+			driver = RoomTriggerDriver(parameters.update({'operation' : 'CHECK_ABSENCE'}))
+
+		if trigger.triggerName == "ROOM_TEMPERATURE_RANGE":
+			driver = RoomTriggerDriver(parameters.update({'operation' : 'TEMPERATURE_IN_RANGE'}))
 
 		if trigger.triggerName == "TIME_RANGE":
-			driver = TimeTriggerDriver(parameters.update({'operation' : 'IN_RANGE'}))
+			driver = DatetimeTriggerDriver(parameters.update({'operation' : 'TIME_IN_RANGE'}))
 
-		raise DriverNotFoundError("Impossibile to find any driver for the trigger " + str(trigger))
+		if trigger.triggerName == "DATE_RANGE":
+			driver = DatetimeTriggerDriver(parameters.update({'operation' : 'DATE_IN_RANGE'}))
+
+		if trigger.triggerName == "EXT_TEMPERATURE_RANGE":
+			driver = WeatherTriggerDriver(parameters.update({'operation' : 'TEMPERATURE_IN_RANGE'}))
+
+		if trigger.triggerName == "SUNNY":
+			driver = WeatherTriggerDriver(parameters.update({'operation' : 'CHECK_SUNNY'}))
+
+		if trigger.triggerName == "NO_RULE":
+			driver = FakeTriggerDriver(parameters.update({'operation' : 'NO_RULE'}))
+
+		if not driver:
+			raise DriverNotFoundError("Impossibile to find any driver for the trigger " + str(trigger))
 
 
 	def __str__(self):

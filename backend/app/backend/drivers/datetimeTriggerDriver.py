@@ -6,7 +6,7 @@ import datetime
 from app.backend.commons.errors import *
 from app.backend.drivers.genericTriggerDriver import GenericTriggerDriver
 
-class TimeTriggerDriver(GenericTriggerDriver):
+class DatetimeTriggerDriver(GenericTriggerDriver):
 
 
 	# parameters = {}
@@ -25,7 +25,22 @@ class TimeTriggerDriver(GenericTriggerDriver):
 		self.parameters = parameters
 
 	def eventTriggered(self):
-		pass
+		import random
+
+		if parameters["operation"] == "DATE_IN_RANGE":
+			
+			print "TODO to be implemented"
+			return bool(random.getrandbits(1))
+
+		elif parameters["operation"] == "TIME_IN_RANGE":
+			
+			print "TODO to be implemented"
+			return bool(random.getrandbits(1))
+
+
+		else:
+			raise UnsupportedDriverParameterError()
+
 
 	def __str__(self):
-		return "TimeTriggerDriver: "
+		return "DatetimeTriggerDriver: "
