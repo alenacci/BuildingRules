@@ -23,21 +23,21 @@ class RoomTriggerDriver(GenericTriggerDriver):
 
 		import random
 
-		if parameters["operation"] == "CHECK_PRESENCE":
+		if self.parameters["operation"] == "CHECK_PRESENCE":
 			
 			print "TODO to be implemented"
 			return bool(random.getrandbits(1))
 
 
-		elif parameters["operation"] == "CHECK_ABSENCE":
+		elif self.parameters["operation"] == "CHECK_ABSENCE":
 			
 			print "TODO to be implemented"
-			return Fbool(random.getrandbits(1))
+			return bool(random.getrandbits(1))
 
-		elif parameters["operation"] == "TEMPERATURE_IN_RANGE":
+		elif self.parameters["operation"] == "TEMPERATURE_IN_RANGE":
 			
 			print "TODO to be implemented"
-			return Fbool(random.getrandbits(1))
+			return bool(random.getrandbits(1))
 
 		
 		else:

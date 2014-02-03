@@ -27,7 +27,7 @@ class FakeTriggerDriver(GenericTriggerDriver):
 	def eventTriggered(self):
 		import random
 
-		if parameters["operation"] == "NO_RULE":
+		if self.parameters["operation"] == "NO_RULE":
 			
 			return True
 		else:

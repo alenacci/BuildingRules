@@ -86,42 +86,50 @@ class ActionManager:
 
 	def getActionDriver(self, action, parameters = None):
 
-		from app.backend.drivers.lightActionDriver import RoomActionDriver
+		from app.backend.drivers.roomActionDriver import RoomActionDriver
 
 		if not parameters:
-			parameters.update()
-
-		driver = None
+			parameters = {}
 
 		if action.actionName == "LIGHT_ON":
-			driver = RoomActionDriver(parameters.update({'operation' : 'LIGHT_ON'}))
+			parameters.update({'operation' : 'LIGHT_ON'})
+			return  RoomActionDriver(parameters = parameters)
 
 		if action.actionName == "LIGHT_OFF":
-			driver = RoomActionDriver(parameters.update({'operation' : 'LIGHT_OFF'}))
+			parameters.update({'operation' : 'LIGHT_OFF'})
+			return  RoomActionDriver(parameters = parameters)
 
 		if action.actionName == "HEATING_ON":
-			driver = RoomActionDriver(parameters.update({'operation' : 'HEATING_ON'}))
+			parameters.update({'operation' : 'HEATING_ON'})
+			return  RoomActionDriver(parameters = parameters)
 
 		if action.actionName == "HEATING_OFF":
-			driver = RoomActionDriver(parameters.update({'operation' : 'HEATING_OFF'}))
+			parameters.update({'operation' : 'HEATING_OFF'})
+			return  RoomActionDriver(parameters = parameters)
 
 		if action.actionName == "COOLING_ON":
-			driver = RoomActionDriver(parameters.update({'operation' : 'COOLING_ON'}))
+			parameters.update({'operation' : 'COOLING_ON'})
+			return  RoomActionDriver(parameters = parameters)
 
 		if action.actionName == "COOLING_OFF":
-			driver = RoomActionDriver(parameters.update({'operation' : 'COOLING_OFF'}))
+			parameters.update({'operation' : 'COOLING_OFF'})
+			return  RoomActionDriver(parameters = parameters)
 
 		if action.actionName == "WINDOWS_OPEN":
-			driver = RoomActionDriver(parameters.update({'operation' : 'WINDOWS_OPEN'}))
+			parameters.update({'operation' : 'WINDOWS_OPEN'})
+			return  RoomActionDriver(parameters = parameters)
 
 		if action.actionName == "WINDOWS_CLOSE":
-			driver = RoomActionDriver(parameters.update({'operation' : 'WINDOWS_CLOSE'}))
+			parameters.update({'operation' : 'WINDOWS_CLOSE'})
+			return  RoomActionDriver(parameters = parameters)
 
 		if action.actionName == "CURTAINS_OPEN":
-			driver = RoomActionDriver(parameters.update({'operation' : 'CURTAINS_OPEN'}))
+			parameters.update({'operation' : 'CURTAINS_OPEN'})
+			return  RoomActionDriver(parameters = parameters)
 
 		if action.actionName == "CURTAINS_CLOSE":
-			driver = RoomActionDriver(parameters.update({'operation' : 'CURTAINS_CLOSE'}))
+			parameters.update({'operation' : 'CURTAINS_CLOSE'})
+			return  RoomActionDriver(parameters = parameters)
 
 		if not driver:
 			raise DriverNotFoundError("Impossibile to find any driver for the action " + str(action))

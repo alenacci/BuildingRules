@@ -19,31 +19,31 @@ class RoomActionDriver(GenericActionDriver):
 
 	def actuate(self):
 
-		if parameters["operation"] == "LIGHT_ON":			
+		if self.parameters["operation"] == "LIGHT_ON":			
 			print "TODO to be implemented"
 	
-		elif parameters["operation"] == "LIGHT_OFF":		
+		elif self.parameters["operation"] == "LIGHT_OFF":		
 			print "TODO to be implemented"
 			
-		elif parameters["operation"] == "HEATING_ON":		
+		elif self.parameters["operation"] == "HEATING_ON":		
 			print "TODO to be implemented"
 
-		elif parameters["operation"] == "HEATING_OFF":		
+		elif self.parameters["operation"] == "HEATING_OFF":		
 			print "TODO to be implemented"
 
-		elif parameters["operation"] == "COOLING_ON":		
+		elif self.parameters["operation"] == "COOLING_ON":		
 			print "TODO to be implemented"
 
-		elif parameters["operation"] == "COOLING_OFF":		
+		elif self.parameters["operation"] == "COOLING_OFF":		
 			print "TODO to be implemented"
 
-		elif parameters["operation"] == "WINDOWS_CLOSE":		
+		elif self.parameters["operation"] == "WINDOWS_CLOSE":		
 			print "TODO to be implemented"
 
-		elif parameters["operation"] == "CURTAINS_OPEN":		
+		elif self.parameters["operation"] == "CURTAINS_OPEN":		
 			print "TODO to be implemented"
 			
-		elif parameters["operation"] == "CURTAINS_CLOSE":		
+		elif self.parameters["operation"] == "CURTAINS_CLOSE":		
 			print "TODO to be implemented"
 
 		else:

@@ -27,12 +27,12 @@ class DatetimeTriggerDriver(GenericTriggerDriver):
 	def eventTriggered(self):
 		import random
 
-		if parameters["operation"] == "DATE_IN_RANGE":
+		if self.parameters["operation"] == "DATE_IN_RANGE":
 			
 			print "TODO to be implemented"
 			return bool(random.getrandbits(1))
 
-		elif parameters["operation"] == "TIME_IN_RANGE":
+		elif self.parameters["operation"] == "TIME_IN_RANGE":
 			
 			print "TODO to be implemented"
 			return bool(random.getrandbits(1))

@@ -113,6 +113,7 @@ class Building:
 		queryResult = database.executeReadQuery(query)
 		database.close()
 
+
 		ruleList = []
 		for record in queryResult:
 
@@ -134,7 +135,7 @@ class Building:
 			groupId = groupId if groupId != -1 else None
 			roomName = roomName if roomName != "None" else None
 
-			rule = Rule(id = ruleId, priority = priority, category = category, buildingName = buildingName, authorUuid = authorUuid, 
+			rule = Rule(id = ruleId, priority = priority, category = category, buildingName = buildingName, roomName = roomName, authorUuid = authorUuid, 
 				antecedent = antecedent, consequent = consequent, enabled = enabled, deleted = deleted, creationTimestamp = creationTimestamp, lastEditTimestamp = lastEditTimestamp)
 
 			ruleList.append(rule)

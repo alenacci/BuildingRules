@@ -27,22 +27,22 @@ class WeatherTriggerDriver(GenericTriggerDriver):
 	def eventTriggered(self):
 		import random
 
-		if parameters["operation"] == "TEMPERATURE_IN_RANGE":
+		if self.parameters["operation"] == "TEMPERATURE_IN_RANGE":
 			
 			print "TODO to be implemented"
 			return bool(random.getrandbits(1))
 
-		elif parameters["operation"] == "CHECK_SUNNY":
+		elif self.parameters["operation"] == "CHECK_SUNNY":
 			
 			print "TODO to be implemented"
 			return bool(random.getrandbits(1))
 
-		elif parameters["operation"] == "CHECK_RAINY":
+		elif self.parameters["operation"] == "CHECK_RAINY":
 			
 			print "TODO to be implemented"
 			return bool(random.getrandbits(1))
 
-		elif parameters["operation"] == "CHECK_CLOUDY":
+		elif self.parameters["operation"] == "CHECK_CLOUDY":
 			
 			print "TODO to be implemented"
 			return bool(random.getrandbits(1))

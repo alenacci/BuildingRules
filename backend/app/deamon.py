@@ -19,18 +19,24 @@ from app.backend.model.buildings import Buildings
 
 
 def checkRuleTrigger(rule):
+
 	triggerManager = TriggerManager()
 	trigger, originalModel, parameterValues = triggerManager.getTriggerAndTemplateAndParameterValues(rule.antecedent)
 	driver = triggerManager.getTriggerDriver(trigger, parameterValues)
 
-	return driver.eventTriggered()
+	if driver.eventTriggered():
+		flash("Rule " + str(rule.id) + " (" +  rule.buildingName + "." + rule.roomName + ") actuated; antecedent is '" + rule.antecedent + "'...")
+		return True
+
+	return False
 
 
 def executeRule(rule):
 	actionManager = ActionManager()
-	action, originalModel, parameterValues = actionManager.getTriggerAndTemplateAndParameterValues(rule.consequent)
-	driver = actionManager.getTriggerDriver(trigger, parameterValues)
+	action, originalModel, parameterValues = actionManager.getActionAndTemplateAndParameterValues(rule.consequent)
+	driver = actionManager.getActionDriver(action, parameterValues)
 
+	flash("Rule " + str(rule.id) + " (" +  rule.buildingName + "." + rule.roomName + ") actuated; consequent is '" + rule.consequent + "'...")
 	driver.actuate()
 
 def notifyIgnoredRule(rule):
@@ -40,16 +46,17 @@ def start():
 	flash("BuildingRules Deamon is active...")
 	while(1):
 		main()
-		time.sleep(30)
+		time.sleep(3)
 		
 def flash(message):
 	ts = time.time()
 	st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
-	print st + " > " + message 
+	print "BRulesDeamon> " + st + " > " + message 
 
 def main():
 
 	buildings = Buildings()
+	buildingsManager = BuildingsManager()
 	
 	
 	for building in buildings.getAllBuildings():
@@ -61,7 +68,7 @@ def main():
 		
 		# Getting all the triggered rules for the considered building	
 		buildingRules = building.getRules()
-		print buildingRules
+
 		if len(buildingRules):
 			for rule in buildingRules:
 				if rule.id not in triggeredRulesId and checkRuleTrigger(rule):

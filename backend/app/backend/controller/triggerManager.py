@@ -134,31 +134,37 @@ class TriggerManager:
 		if not parameters:
 			parameters = {}
 
-		driver = None
-
 		if trigger.triggerName == "OCCUPANCY_TRUE":
-			driver = RoomTriggerDriver(parameters.update({'operation' : 'CHECK_PRESENCE'}))
+			parameters.update({'operation' : 'CHECK_PRESENCE'})
+			return RoomTriggerDriver(parameters = parameters)
 
 		if trigger.triggerName == "OCCUPANCY_FALSE":
-			driver = RoomTriggerDriver(parameters.update({'operation' : 'CHECK_ABSENCE'}))
+			parameters.update({'operation' : 'CHECK_ABSENCE'})
+			return  RoomTriggerDriver(parameters = parameters)
 
 		if trigger.triggerName == "ROOM_TEMPERATURE_RANGE":
-			driver = RoomTriggerDriver(parameters.update({'operation' : 'TEMPERATURE_IN_RANGE'}))
+			parameters.update({'operation' : 'TEMPERATURE_IN_RANGE'})
+			return  RoomTriggerDriver(parameters = parameters)
 
 		if trigger.triggerName == "TIME_RANGE":
-			driver = DatetimeTriggerDriver(parameters.update({'operation' : 'TIME_IN_RANGE'}))
+			parameters.update({'operation' : 'TIME_IN_RANGE'})
+			return  DatetimeTriggerDriver(parameters = parameters)
 
 		if trigger.triggerName == "DATE_RANGE":
-			driver = DatetimeTriggerDriver(parameters.update({'operation' : 'DATE_IN_RANGE'}))
+			parameters.update({'operation' : 'DATE_IN_RANGE'})
+			return  DatetimeTriggerDriver(parameters = parameters)
 
 		if trigger.triggerName == "EXT_TEMPERATURE_RANGE":
-			driver = WeatherTriggerDriver(parameters.update({'operation' : 'TEMPERATURE_IN_RANGE'}))
+			parameters.update({'operation' : 'TEMPERATURE_IN_RANGE'})
+			return  WeatherTriggerDriver(parameters = parameters)
 
 		if trigger.triggerName == "SUNNY":
-			driver = WeatherTriggerDriver(parameters.update({'operation' : 'CHECK_SUNNY'}))
+			parameters.update({'operation' : 'CHECK_SUNNY'})
+			return  WeatherTriggerDriver(parameters = parameters)
 
 		if trigger.triggerName == "NO_RULE":
-			driver = FakeTriggerDriver(parameters.update({'operation' : 'NO_RULE'}))
+			parameters.update({'operation' : 'NO_RULE'})
+			return  FakeTriggerDriver(parameters = parameters)
 
 		if not driver:
 			raise DriverNotFoundError("Impossibile to find any driver for the trigger " + str(trigger))
