@@ -565,6 +565,57 @@ def editRoomRule(buildingName = None, roomName = None, ruleId = None, groupId = 
 		return render_template('ruleForm.html', rule = rule, insertionForRoom = True)
 
 
+
+@gui.route('/buildings/<buildingName>/rooms/<roomName>/rules/<ruleId>/disable/', methods = ['GET'])
+@gui.route('/buildings/<buildingName>/rooms/<roomName>/rules/<ruleId>/disable', methods = ['GET'])
+def disableRoomRule(buildingName = None, roomName = None, ruleId = None):
+
+	if not loggedIn():	return redirect(url_for('gui.login'))
+
+
+	response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/rules/<ruleId>/disable", {
+				'username' : session["username"],
+				'buildingName' : buildingName,
+				'roomName' : roomName,
+				'ruleId' : ruleId,
+				'sessionKey' : session["sessionKey"], 
+				'userUuid' : session["userUuid"]
+				})
+
+	if not successResponse(response):
+		return render_template('error.html', error = response['request-errorDescription'])
+
+	rule = response
+
+
+	return redirect(url_for('gui.rooms', buildingName = buildingName))
+
+
+@gui.route('/buildings/<buildingName>/rooms/<roomName>/rules/<ruleId>/enable/', methods = ['GET'])
+@gui.route('/buildings/<buildingName>/rooms/<roomName>/rules/<ruleId>/enable', methods = ['GET'])
+def enableRoomRule(buildingName = None, roomName = None, ruleId = None):
+
+	if not loggedIn():	return redirect(url_for('gui.login'))
+
+
+	response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/rules/<ruleId>/enable", {
+				'username' : session["username"],
+				'buildingName' : buildingName,
+				'roomName' : roomName,
+				'ruleId' : ruleId,
+				'sessionKey' : session["sessionKey"], 
+				'userUuid' : session["userUuid"]
+				})
+
+	if not successResponse(response):
+		return render_template('error.html', error = response['request-errorDescription'])
+
+	rule = response
+
+
+	return redirect(url_for('gui.rooms', buildingName = buildingName))
+
+
 @gui.route('/buildings/<buildingName>/rooms/<roomName>/rules/<ruleId>/delete/', methods = ['GET'])
 @gui.route('/buildings/<buildingName>/rooms/<roomName>/rules/<ruleId>/delete', methods = ['GET'])
 def deleteRoomRule(buildingName = None, roomName = None, ruleId = None):

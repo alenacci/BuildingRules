@@ -25,11 +25,32 @@ class Rule:
 	def __repr__(self):
 		return repr((self.getDict()))			
 
+	def disable(self):
+		if self.id:
+			self.enabled = False
+			self.store()
+
+	def enable(self):
+		if self.id:
+			self.enabled = True
+			self.store()
+
+	def delete(self):
+		if self.id:
+			self.deleted = True
+			self.store()
+
+	def undoDelete(self):
+		if self.id:
+			self.deleted = False
+			self.store()
+
 	def getPriority(self, roomName = None, buildingName = None):
 
 		from app.backend.model.rulePriority import RulePriority
 
-		if self.groupId and not (roomName and buildingName):
+
+		if self.groupId and not roomName:
 			return self.__priority
 		elif self.groupId and roomName and buildingName:
 			try:
@@ -51,10 +72,18 @@ class Rule:
 	def setPriority(self, priority, roomName = None, buildingName = None):
 
 
+		print ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+		print roomName
+
+		print self.groupId
+
+		if not roomName:
+			print "weeeeee"
+
 		
 		from app.backend.model.rulePriority import RulePriority
 
-		if self.groupId and not (roomName and buildingName):
+		if self.groupId and not roomName:
 			self.__priority = priority
 		elif self.groupId and roomName and buildingName:
 			rulePriority = RulePriority(buildingName = buildingName, roomName = roomName, ruleId = self.id, rulePriority = priority)

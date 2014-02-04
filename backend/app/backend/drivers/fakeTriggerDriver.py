@@ -32,7 +32,7 @@ class FakeTriggerDriver(GenericTriggerDriver):
 			
 			return True
 		else:
-			raise UnsupportedDriverParameterError()
+			raise UnsupportedDriverParameterError(self.parameters["operation"])
 
 
 	def __str__(self):

@@ -84,3 +84,9 @@ class UnsupportedDriverParameterError(Exception):
 
 class WeatherInfoError(Exception):
 	pass
+
+class TooManyInputParametersError(Exception):
+	pass
+
+class BuildingDepotError(Exception):
+	pass

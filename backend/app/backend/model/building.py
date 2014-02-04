@@ -101,12 +101,15 @@ class Building:
 
 		raise UnknownError()
 
-	def getRules(self):		
-		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ") : non yet tested"
+	def getRules(self, includeDisabled = False, includeDeleted = False):		
+		
 
 		from app.backend.model.rule import Rule
 		
-		query = "SELECT * FROM rules WHERE building_name = '@@building_name@@';"
+		query = "SELECT * FROM rules WHERE building_name = '@@building_name@@'"
+		query += " AND enabled='1'" if not includeDisabled else ""
+		query += " AND deleted='0'" if not includeDeleted else ""
+		query += ";"
 
 		database = Database()
 		database.open()

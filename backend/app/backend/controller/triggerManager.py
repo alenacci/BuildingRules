@@ -90,7 +90,7 @@ class TriggerManager:
 			month = value[value.find("/")+1:]
 			return str( time.strptime(day + " " + month + " 00", "%d %m %y").tm_yday )
 
-		if triggerCategory == "ROOM_TEMPERATURE" or triggerCategory == "ROOM_TEMPERATURE":
+		if triggerCategory == "ROOM_TEMPERATURE" or triggerCategory == "EXT_TEMPERATURE":
 			return value.replace("C", "").replace("F", "")
 
 		return value

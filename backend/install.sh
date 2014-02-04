@@ -8,6 +8,7 @@ source venv/bin/activate
 pip install flask==0.9
 pip install MySQL-python
 pip install requests
+pip install httplib2
 
 wget http://www.alessandronacci.com/repo/BuildingRulesInstaller/z3-x64-ubuntu-12.04.zip
 unzip z3-x64-ubuntu-12.04.zip -d tools/z3

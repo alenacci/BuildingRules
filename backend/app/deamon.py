@@ -24,8 +24,13 @@ from app.backend.model.buildings import Buildings
 def checkRuleTrigger(rule):
 
 	triggerManager = TriggerManager()
-	trigger, originalModel, parameterValues = triggerManager.getTriggerAndTemplateAndParameterValues(rule.antecedent)
-	driver = triggerManager.getTriggerDriver(trigger, parameterValues)
+	trigger, originalModel, parameters = triggerManager.getTriggerAndTemplateAndParameterValues(rule.antecedent)
+	
+	parameters.update({'buildingName' : rule.buildingName})
+	if rule.roomName: parameters.update({'roomName' : rule.roomName})
+	if rule.groupId: parameters.update({'groupId' : rule.groupId})
+	
+	driver = triggerManager.getTriggerDriver(trigger, parameters)
 
 
 	message = "Rule " + str(rule.id) + " (" + str(rule.buildingName)
@@ -43,8 +48,13 @@ def checkRuleTrigger(rule):
 
 def executeRule(rule):
 	actionManager = ActionManager()
-	action, originalModel, parameterValues = actionManager.getActionAndTemplateAndParameterValues(rule.consequent)
-	driver = actionManager.getActionDriver(action, parameterValues)
+	action, originalModel, parameters = actionManager.getActionAndTemplateAndParameterValues(rule.consequent)
+
+	parameters.update({'buildingName' : rule.buildingName})
+	if rule.roomName: parameters.update({'roomName' : rule.roomName})
+	if rule.groupId: parameters.update({'groupId' : rule.groupId})
+
+	driver = actionManager.getActionDriver(action, parameters)
 
 	message = "Rule " + str(rule.id) + " (" + str(rule.buildingName)
 	if rule.groupId: message += ".g[" + str(rule.groupId) + "]"
@@ -138,21 +148,34 @@ def main():
 						raise WrongBuildingGroupRipartitionError(roomName + " has been found to be part of two different Cross Room Validation Groups. This is not allowed.")
 
 				elif rule.groupId and not rule.roomName:
+
 					# Here we are selecting those rules that have been specified of a specific group.
-					# In this case, this rules has to be copied inside each room roomScheduledRules set.
+					# Those groups can be standard groups or CRV GROUPS on a specific category. In the first case, i have to add a copy of the rule in each of the group rooms.
+					# In the second case I have to add the rule to the corresponding CRVG dict (if the rule category is right).
 
-					groupRoomList = groupsManager.getRooms(buildingName = building.buildingName, groupId = rule.groupId)["rooms"]
+					if groupsManager.isCrossRoomsValidationGroup(buildingName = building.buildingName, groupId = rule.groupId, crossRoomsValidationCategory = rule.category):
 
-					for room in groupRoomList:
+						if not rule.groupId in crvgScheduledRules.keys():
+							crvgScheduledRules[rule.groupId] = []
+						
+						crvgScheduledRules[rule.groupId].append(rule)
 
-						roomName = room["roomName"]
-						newRule = copy.copy(rule)			# I need to copy the object to modify the room name
-						newRule.roomName = roomName
 
-						if not roomName in roomScheduledRules.keys():
-							roomScheduledRules[roomName] = []
+					else:		
+						# In this case, this rules has to be copied inside each room roomScheduledRules set.
 
-						roomScheduledRules[roomName].append(newRule)
+						groupRoomList = groupsManager.getRooms(buildingName = building.buildingName, groupId = rule.groupId)["rooms"]
+
+						for room in groupRoomList:
+
+							roomName = room["roomName"]
+							newRule = copy.copy(rule)			# I need to copy the object to modify the room name
+							newRule.roomName = roomName
+
+							if not roomName in roomScheduledRules.keys():
+								roomScheduledRules[roomName] = []
+
+							roomScheduledRules[roomName].append(newRule)
 
 
 				else:
@@ -160,7 +183,6 @@ def main():
 
 			flash(building.buildingName + " - Number of rooms: " + str(len(roomScheduledRules.keys())), "gray")
 			flash(building.buildingName + " - Number of CRV Groups: " + str(len(crvgScheduledRules.keys())), "gray")
-
 
 			flash("Executing actions for rooms...", "blue")
 			# Executing the rules per each room

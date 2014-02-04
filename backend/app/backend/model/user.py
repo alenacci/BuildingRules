@@ -70,14 +70,19 @@ class User:
 		return groupList
 
 
-	def getCreatedRules(self):
+	def getCreatedRules(self, includeDisabled = False, includeDeleted = False):
 
 		from app.backend.model.rule import Rule
 
+
+		query = "SELECT id FROM rules WHERE author_uuid = '@@uuid@@'"
+		query += " AND enabled='1'" if not includeDisabled else ""
+		query += " AND deleted='0'" if not includeDeleted else ""
+		query += ";"
+
+
 		database = Database()
 		database.open()
-
-		query = "SELECT id FROM rules WHERE author_uuid = '@@uuid@@';"
 		query = self.__replaceSqlQueryToken(query)
 		queryResult = database.executeReadQuery(query)
 		database.close()

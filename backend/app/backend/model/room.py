@@ -185,30 +185,32 @@ class Room:
 
 		return groupList
 
-	def getRules(self, author = None, includeGroupsRules = False, excludedRuleId = False, excludeCrossRoomValidationRules = False):
-
-		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ") : this method has been partially tested - includeGroupsRules not tested"
+	def getRules(self, author = None, includeGroupsRules = False, excludedRuleId = False, excludeCrossRoomValidationRules = False, includeDisabled = False, includeDeleted = False):
 
 		from app.backend.model.rule import Rule
 		
 		if author:
-			query = "SELECT id FROM rules WHERE room_name = '@@room_name@@' AND author_uuid = '@@author_uuid@@' @@__EXCLUDED_RULE_ID__@@;"
+			query = "SELECT id FROM rules WHERE room_name = '@@room_name@@' AND author_uuid = '@@author_uuid@@' @@__EXCLUDED_RULE_ID__@@"
 			query = query.replace("@@author_uuid@@", str(author.uuid))
 		else:
-			query = "SELECT id FROM rules WHERE room_name = '@@room_name@@' @@__EXCLUDED_RULE_ID__@@;"
+			query = "SELECT id FROM rules WHERE room_name = '@@room_name@@' @@__EXCLUDED_RULE_ID__@@"
 
 		if excludedRuleId:
 			query = query.replace("@@__EXCLUDED_RULE_ID__@@", "AND NOT id = " + str(excludedRuleId))
 		else:
 			query = query.replace("@@__EXCLUDED_RULE_ID__@@", "")
 
-
+		query += " AND enabled='1'" if not includeDisabled else ""
+		query += " AND deleted='0'" if not includeDeleted else ""
+		query += ";"
 
 		database = Database()
 		database.open()
 		query = self.__replaceSqlQueryToken(query)
 		queryResult = database.executeReadQuery(query)
 		database.close()
+
+		print query
 
 		ruleList = []
 		for ruleRecord in queryResult:
@@ -218,8 +220,6 @@ class Room:
 
 		if includeGroupsRules:
 			groupList = self.getGroups()
-
-
 
 			for group in groupList:
 				# Getting the rules expressed directly into this group (inheritance)
@@ -248,6 +248,13 @@ class Room:
 
 	def deleteRule(self, rule):
 		rule.delete()
+
+	def disableRule(self, rule):
+		rule.disable()
+
+	def enableRule(self, rule):
+		rule.enable()
+
 
 	def addUser(self, user):
 		self.isClassInitialized()

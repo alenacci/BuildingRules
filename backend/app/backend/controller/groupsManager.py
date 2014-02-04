@@ -25,6 +25,22 @@ class GroupsManager:
 			
 		return {"rules" : response}
 
+	def isCrossRoomsValidationGroup(self, groupId, buildingName, crossRoomsValidationCategory = None):
+		group = Group(buildingName = buildingName, id = groupId)
+		group.retrieve()
+
+		if group.crossRoomsValidation:		
+
+			if crossRoomsValidationCategory:
+				if crossRoomsValidationCategory in group.crossRoomsValidationCategories:
+					return True
+				else:
+					return False
+			else:
+				return True
+
+		else:
+			return False
 
 	def getRooms(self, groupId, buildingName):
 		group = Group(buildingName = buildingName, id = groupId)
@@ -129,6 +145,7 @@ class GroupsManager:
 		else:
 			rule = Rule(id = ruleId)
 			rule.retrieve()
+			print rule
 			author = rule.getAuthor()
 
 			
@@ -160,9 +177,6 @@ class GroupsManager:
 			temporaryRuleSet.extend(group.getRules(excludedRuleId = excludedRuleId))
 			temporaryRuleSet.append(rule)
 
-			for i in range(0, len(temporaryRuleSet)):
-				temporaryRuleSet[i].groupId = None
-			
 
 			from app.backend.controller.rulesetChecker import RulesetChecker
 			rulesetChecker = RulesetChecker(temporaryRuleSet)
@@ -170,10 +184,23 @@ class GroupsManager:
 			ruleCheckErrorList.extend(rulesetChecker.check())
 
 		if len(ruleCheckErrorList) == 0:
-			if ruleId: 
+			
+			if ruleId: 	#if i'm in edit mode
 				rule.id = ruleId
 				rule.setPriority(priority)
 
+			# Disabling rules in all the groups rooms since they have to be validated again
+
+			for room in groupRoomList:
+			
+				from app.backend.controller.notificationsManager import NotificationsManager
+				notifications = NotificationsManager()
+				messageSubject = "Group " +  str(groupId) + " changed your room " + str(room.roomName) + " policy."
+				messageText =  "Some rules in group " + str(groupId) + " have been changed. Since your room " + str(room.roomName) + " belongs to that group, you have to revalidate all your rules."
+				notifications.sendNotification(buildingName = buildingName, roomName = room.roomName, messageSubject = messageSubject, messageText = messageText) 
+				
+				for r in room.getRules(includeGroupsRules = False, excludeCrossRoomValidationRules = True):
+					r.disable()
 
 			return group.addRule(rule).getDict()
 		else:

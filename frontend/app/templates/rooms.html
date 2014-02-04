@@ -31,8 +31,10 @@
 				    <hr>
 				    {% for rule in roomRules[room.roomName] %}
 				    	<blockquote>
-				    		<p {% if rule.group != None %} class="muted"{% endif %}>
-				    			<b>if</b> {{rule.antecedent}} <b>then</b> {{rule.consequent}} 
+				    		<p {% if rule.enabled %} {% else %} class="muted" {% endif %}>
+				    			{% if rule.enabled %} {% else %} <strike> {% endif %}
+				    				<b>if</b> {{rule.antecedent}} <b>then</b> {{rule.consequent}} 
+				    			{% if rule.enabled %} {% else %} </strike> {% endif %}
 								<small class="muted">
 								<span class="badge">{{rule["priority"]}}</span>
 									By:
@@ -54,7 +56,12 @@
 									- [<a href="{{request.path}}/../groups/{{rule.groupId}}/rooms/{{rule.roomName}}/rules/{{rule.id}}/edit">Edit</a>] [<a href="{{request.path}}/{{rule.roomName}}/rules/{{rule.id}}/delete">Delete</a>]
 									{% else %}
 										{% if rule.roomName %}
-										- [<a href="{{request.path}}/{{rule.roomName}}/rules/{{rule.id}}/edit">Edit</a>] [<a href="{{request.path}}/{{rule.roomName}}/rules/{{rule.id}}/delete">Delete</a>]
+											- [<a href="{{request.path}}/{{rule.roomName}}/rules/{{rule.id}}/edit">Edit</a>] [<a href="{{request.path}}/{{rule.roomName}}/rules/{{rule.id}}/delete">Delete</a>]
+											{% if rule.enabled %}
+												[<a href="{{request.path}}/{{rule.roomName}}/rules/{{rule.id}}/disable">Disable</a>]
+											{% else %}
+												[<a href="{{request.path}}/{{rule.roomName}}/rules/{{rule.id}}/enable">Enable</a>]
+											{% endif %}
 										{% endif %}
 									{% endif %}
 								</small>

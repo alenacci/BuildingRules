@@ -46,11 +46,15 @@ class Group:
 		return roomList
 
 
-	def getRules(self, excludedRuleId = False):		
+	def getRules(self, excludedRuleId = False, includeDisabled = False, includeDeleted = False):		
 
 		from app.backend.model.rule import Rule
 
-		query = "SELECT id FROM rules WHERE group_id = '@@id@@' @@__EXCLUDED_RULE_ID__@@;"
+		query = "SELECT id FROM rules WHERE group_id = '@@id@@' @@__EXCLUDED_RULE_ID__@@"
+		query += " AND enabled='1'" if not includeDisabled else ""
+		query += " AND deleted='0'" if not includeDeleted else ""
+		query += ";"
+
 
 		if excludedRuleId:
 			query = query.replace("@@__EXCLUDED_RULE_ID__@@", "AND NOT id = " + str(excludedRuleId))

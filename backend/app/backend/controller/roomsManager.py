@@ -13,7 +13,7 @@ class RoomsManager:
 		room.retrieve()
 		return room.getDict()
 
-	def getRules(self, roomName, buildingName, username = None, includeGroupsRules = False, orderByPriority = False):
+	def getRules(self, roomName, buildingName, username = None, includeGroupsRules = False, orderByPriority = False,  includeDisabled = False):
 		room = Room(buildingName = buildingName, roomName = roomName)
 		room.retrieve()
 
@@ -23,9 +23,9 @@ class RoomsManager:
 			from app.backend.model.user import User
 			user = User(username = username)
 			user.retrieve()
-			ruleList = room.getRules( author = user, includeGroupsRules = includeGroupsRules)
+			ruleList = room.getRules( author = user, includeGroupsRules = includeGroupsRules, includeDisabled = includeDisabled)
 		else:
-			ruleList = room.getRules( includeGroupsRules = includeGroupsRules )
+			ruleList = room.getRules( includeGroupsRules = includeGroupsRules,  includeDisabled = includeDisabled )
 
 		if orderByPriority:
 			ruleList = sorted(ruleList, key=lambda rule: rule.getPriority(), reverse=True)
@@ -110,6 +110,31 @@ class RoomsManager:
 
 		return {}
 
+	def disableRule(self, ruleId, buildingName, roomName):
+		room = Room(buildingName = buildingName, roomName = roomName)
+		room.retrieve()
+
+		from app.backend.model.rule import Rule
+		rule = Rule(id = ruleId)
+		rule.retrieve()
+
+		room.disableRule(rule)
+
+		return {}
+
+	def enableRule(self, ruleId, buildingName, roomName, editorUuid):
+		room = Room(buildingName = buildingName, roomName = roomName)
+		room.retrieve()
+
+		from app.backend.model.rule import Rule
+		rule = Rule(id = ruleId)
+		rule.retrieve()
+
+		return self.editRule(ruleId = rule.id, priority = rule.getPriority(), buildingName = buildingName,  roomName = roomName, 
+					editorUuid = editorUuid, groupId = rule.groupId, ruleBody = None, 
+					antecedent = rule.antecedent, consequent = rule.consequent, enabled = True)
+
+
 	def getRuleInfo(self, buildingName = None, roomName = None, ruleId = None):
 		from app.backend.model.rule import Rule
 		rule = Rule(id = ruleId, buildingName = buildingName, roomName = roomName)
@@ -131,7 +156,14 @@ class RoomsManager:
 	def addRule(self, priority, buildingName, roomName, authorUuid, ruleBody):
 		return self.__addOrModifyRule(priority = priority, buildingName = buildingName, roomName = roomName, authorUuid = authorUuid, ruleBody = ruleBody)
 
-	def editRule(self, ruleId, priority, buildingName, roomName, editorUuid, ruleBody, groupId):
+	def editRule(self, ruleId, priority, buildingName, roomName, editorUuid, groupId, ruleBody = None, antecedent = None, consequent = None, enabled = True):
+
+		if not ruleBody:
+			if not antecedent: raise MissingInputDataError("")
+			if not consequent: raise MissingInputDataError("")
+
+		if ruleBody and antecedent: raise TooManyInputParametersError("")
+		if ruleBody and consequent: raise TooManyInputParametersError("")
 
 
 		from app.backend.model.rule import Rule
@@ -188,7 +220,7 @@ class RoomsManager:
 
 		authorUuid = editorUuid	
 
-		result = self.__addOrModifyRule(ruleId = ruleId, priority = priority, buildingName = buildingName, roomName = roomName, authorUuid = authorUuid, ruleBody = ruleBody)		
+		result = self.__addOrModifyRule(ruleId = ruleId, priority = priority, buildingName = buildingName, roomName = roomName, authorUuid = authorUuid, ruleBody = ruleBody, antecedent = antecedent, consequent = consequent, enabled = enabled)		
 
 		from app.backend.controller.notificationsManager import NotificationsManager
 		notifications = NotificationsManager()
@@ -198,13 +230,14 @@ class RoomsManager:
 
 		return result
 
-	def __addOrModifyRule(self, priority = None, buildingName = None, roomName = None, authorUuid = None, ruleBody = None, ruleId = None):
+	def __addOrModifyRule(self, priority = None, buildingName = None, roomName = None, authorUuid = None, ruleBody = None, ruleId = None, antecedent = None, consequent = None, enabled = True):
 
-		try:
-			antecedent = ruleBody.split("then")[0].replace("if ", "").strip()
-			consequent = ruleBody.split("then")[1].strip()
-		except Exception as e:
-			raise NotWellFormedRuleError("There is a syntax error in the rule you are trying to save")
+		if ruleBody:
+			try:
+				antecedent = ruleBody.split("then")[0].replace("if ", "").strip()
+				consequent = ruleBody.split("then")[1].strip()
+			except Exception as e:
+				raise NotWellFormedRuleError("There is a syntax error in the rule you are trying to save")
 
 		
 		# Detecting rule category (by the rule-consequent)
@@ -229,7 +262,8 @@ class RoomsManager:
 			rule.antecedent = antecedent
 			rule.consequent = consequent
 			rule.authorUuid = authorUuid
-			rule.authorUuid = authorUuid			
+			rule.authorUuid = authorUuid	
+			rule.enabled = enabled		
 
 			editor = rule.getAuthor()
 

@@ -381,7 +381,7 @@ def roomRules(username = None, buildingName = None, roomName = None):
 			buildingsManager.checkUserBinding(buildingName, username)
 			roomsManager = RoomsManager()
 
-			return returnResult( roomsManager.getRules(roomName = roomName, buildingName = buildingName, username = usernameFilter, includeGroupsRules = includeGroupsRules, orderByPriority = orderByPriority) )
+			return returnResult( roomsManager.getRules(roomName = roomName, buildingName = buildingName, username = usernameFilter, includeGroupsRules = includeGroupsRules, orderByPriority = orderByPriority, includeDisabled = True) )
 		except Exception as e:
 			return returnError(e)
 
@@ -635,6 +635,44 @@ def deleteRuleInRoom(username = None, buildingName = None, roomName = None, rule
 			return returnResult( roomsManager.deleteRule(ruleId = ruleId, buildingName = buildingName, roomName = roomName) )
 		except Exception as e:
 			return returnError(e)
+
+@api.route('/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/rules/<ruleId>/disable', methods = ['POST'])
+def disableRuleInRoom(username = None, buildingName = None, roomName = None, ruleId = None):
+	if request.method == 'POST':
+
+		sessionKey = request.form['sessionKey']
+		userUuid = request.form['userUuid']	
+
+		try:
+			session = SessionManager()
+			session.checkSessionValidity(sessionKey, userUuid)
+			buildingsManager = BuildingsManager()
+			buildingsManager.checkUserBinding(buildingName, username)
+			roomsManager = RoomsManager()
+
+			return returnResult( roomsManager.disableRule(ruleId = ruleId, buildingName = buildingName, roomName = roomName) )
+		except Exception as e:
+			return returnError(e)
+
+@api.route('/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/rules/<ruleId>/enable', methods = ['POST'])
+def enableRuleInRoom(username = None, buildingName = None, roomName = None, ruleId = None):
+	if request.method == 'POST':
+
+		sessionKey = request.form['sessionKey']
+		userUuid = request.form['userUuid']	
+
+		try:
+			session = SessionManager()
+			session.checkSessionValidity(sessionKey, userUuid)
+			buildingsManager = BuildingsManager()
+			buildingsManager.checkUserBinding(buildingName, username)
+			roomsManager = RoomsManager()
+
+			return returnResult( roomsManager.enableRule(ruleId = ruleId, buildingName = buildingName, roomName = roomName, editorUuid = userUuid) )
+		except Exception as e:
+			return returnError(e)
+
+
 
 @api.route('/api/users/<username>/buildings/<buildingName>/groups/<groupId>/rules/add', methods = ['POST'])
 def addRuleToGroup(username = None, buildingName = None, groupId = None):
