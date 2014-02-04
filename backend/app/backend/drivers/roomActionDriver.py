@@ -1,3 +1,4 @@
+import sys
 import json
 import random
 import string
@@ -20,31 +21,31 @@ class RoomActionDriver(GenericActionDriver):
 	def actuate(self):
 
 		if self.parameters["operation"] == "LIGHT_ON":			
-			print "TODO to be implemented"
+			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
 	
 		elif self.parameters["operation"] == "LIGHT_OFF":		
-			print "TODO to be implemented"
+			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
 			
 		elif self.parameters["operation"] == "HEATING_ON":		
-			print "TODO to be implemented"
+			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
 
 		elif self.parameters["operation"] == "HEATING_OFF":		
-			print "TODO to be implemented"
+			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
 
 		elif self.parameters["operation"] == "COOLING_ON":		
-			print "TODO to be implemented"
+			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
 
 		elif self.parameters["operation"] == "COOLING_OFF":		
-			print "TODO to be implemented"
+			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
 
 		elif self.parameters["operation"] == "WINDOWS_CLOSE":		
-			print "TODO to be implemented"
+			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
 
 		elif self.parameters["operation"] == "CURTAINS_OPEN":		
-			print "TODO to be implemented"
+			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
 			
 		elif self.parameters["operation"] == "CURTAINS_CLOSE":		
-			print "TODO to be implemented"
+			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
 
 		else:
 			raise UnsupportedDriverParameterError()

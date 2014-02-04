@@ -1,3 +1,4 @@
+import sys
 import os
 import sys
 import subprocess
@@ -108,7 +109,7 @@ class RulesetChecker:
 
 			
 			if "unsat" in z3Output:
-				error =  "There is a conflict in the rules!"
+				error =  "There is a conflict in the rules! " + assertion
 				print error
 				self.errorList.append(error)
 				return self.errorList

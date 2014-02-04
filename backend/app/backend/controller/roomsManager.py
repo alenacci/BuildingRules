@@ -1,3 +1,4 @@
+import sys
 import json
 from app.backend.commons.errors import *
 from app.backend.model.room import Room
@@ -92,10 +93,10 @@ class RoomsManager:
 
 
 	def bindTrigger(self):
-		print "TODO: not yet implemented"
+		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ") : not yet implemented"
 
 	def bindAction(self):
-		print "TODO: not yet implemented"
+		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ") : not yet implemented"
 
 	def deleteRule(self, ruleId, buildingName, roomName):
 		room = Room(buildingName = buildingName, roomName = roomName)

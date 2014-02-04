@@ -1,3 +1,4 @@
+import sys
 import json
 import datetime
 from app.backend.commons.errors import *
@@ -216,7 +217,7 @@ class Rule:
 
 
 	def delete(self):
-		print "TODO: Consistency check not performed - Rule class"
+		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ") : Consistency check not performed - Rule class"
 
 		database = Database()
 		database.open()

@@ -1,3 +1,4 @@
+import sys
 import json
 import random
 import string
@@ -75,9 +76,13 @@ class TriggerManager:
 				value = value.replace(":",".")
 				value = value[:value.find(".")]
 			
-			return value.replace("AM", "").replace("PM", "").replace("am", "").replace("pm", "")
+		
+			value = value.replace("AM", "").replace("PM", "").replace("am", "").replace("pm", "")
+			if pm: value = int(value)+12
+			
+			return str(value)
 
-			if pm: value = str(int(value)+12)
+
 
 		if triggerCategory == "DATE":
 			import time
@@ -162,12 +167,19 @@ class TriggerManager:
 			parameters.update({'operation' : 'CHECK_SUNNY'})
 			return  WeatherTriggerDriver(parameters = parameters)
 
+		if trigger.triggerName == "RAINY":
+			parameters.update({'operation' : 'CHECK_RAINY'})
+			return  WeatherTriggerDriver(parameters = parameters)
+
+		if trigger.triggerName == "CLOUDY":
+			parameters.update({'operation' : 'CHECK_CLOUDY'})
+			return  WeatherTriggerDriver(parameters = parameters)
+
 		if trigger.triggerName == "NO_RULE":
 			parameters.update({'operation' : 'NO_RULE'})
 			return  FakeTriggerDriver(parameters = parameters)
 
-		if not driver:
-			raise DriverNotFoundError("Impossibile to find any driver for the trigger " + str(trigger))
+		raise DriverNotFoundError("Impossibile to find any driver for the trigger " + str(trigger))
 
 
 	def __str__(self):

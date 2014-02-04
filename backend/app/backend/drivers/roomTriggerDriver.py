@@ -1,7 +1,9 @@
+import sys
 import json
 import random
 import string
 import datetime
+import sys
 
 from app.backend.commons.errors import *
 from app.backend.drivers.genericTriggerDriver import GenericTriggerDriver
@@ -24,19 +26,18 @@ class RoomTriggerDriver(GenericTriggerDriver):
 		import random
 
 		if self.parameters["operation"] == "CHECK_PRESENCE":
-			
-			print "TODO to be implemented"
+			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
 			return bool(random.getrandbits(1))
 
 
 		elif self.parameters["operation"] == "CHECK_ABSENCE":
 			
-			print "TODO to be implemented"
+			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
 			return bool(random.getrandbits(1))
 
 		elif self.parameters["operation"] == "TEMPERATURE_IN_RANGE":
 			
-			print "TODO to be implemented"
+			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
 			return bool(random.getrandbits(1))
 
 		

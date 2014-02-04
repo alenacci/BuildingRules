@@ -2,6 +2,7 @@ import sys
 import time
 import datetime
 
+from app.backend.commons.console import flash
 from app.backend.commons.errors import *
 from app.backend.controller.buildingsManager import BuildingsManager
 from app.backend.controller.triggerManager import TriggerManager
@@ -25,8 +26,10 @@ def checkRuleTrigger(rule):
 	driver = triggerManager.getTriggerDriver(trigger, parameterValues)
 
 	if driver.eventTriggered():
-		flash("Rule " + str(rule.id) + " (" +  rule.buildingName + "." + rule.roomName + ") actuated; antecedent is '" + rule.antecedent + "'...")
+		flash("Rule " + str(rule.id) + " (" +  rule.buildingName + "." + rule.roomName + ") actuated; antecedent is '" + rule.antecedent + "'...", "green")
 		return True
+	else:
+		flash("Rule " + str(rule.id) + " (" +  rule.buildingName + "." + rule.roomName + ") NOT actuated; antecedent is '" + rule.antecedent + "'...", "red")
 
 	return False
 
@@ -45,14 +48,15 @@ def notifyIgnoredRule(rule):
 def start():
 	flash("BuildingRules Deamon is active...")
 	while(1):
-		main()
-		time.sleep(3)
-		
-def flash(message):
-	ts = time.time()
-	st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
-	print "BRulesDeamon> " + st + " > " + message 
+		try:
+			main()
+		except Exception as e:
+			import logging
+			logging.exception("")
+			flash(e.message)
 
+		time.sleep(15)
+		
 def main():
 
 	buildings = Buildings()
@@ -77,8 +81,8 @@ def main():
 					triggeredRulesId.append(rule.id)
 
 
-			flash(building.buildingName + " - Total rules: " + str(len(buildingRules)))
-			flash(building.buildingName + " - Triggered rules: " + str(len(triggeredRules)))
+			flash(building.buildingName + " - Total rules: " + str(len(buildingRules)), "gray")
+			flash(building.buildingName + " - Triggered rules: " + str(len(triggeredRules)), "gray")
 
 
 			# Now, let us partition rules among "Pure-Room-Rules" and "CRVG-Rules"
@@ -130,8 +134,8 @@ def main():
 					raise UnknownError("The rule with id " + rule.id + " has both the groupId and roomName field not null.")
 
 
-			flash(building.buildingName + " - Number of rooms: " + str(len(roomScheduledRules.keys())))
-			flash(building.buildingName + " - Number of CRV Groups: " + str(len(crvgScheduledRules.keys())))
+			flash(building.buildingName + " - Number of rooms: " + str(len(roomScheduledRules.keys())), "gray")
+			flash(building.buildingName + " - Number of CRV Groups: " + str(len(crvgScheduledRules.keys())), "gray")
 
 			# Executing the rules per each room
 			# In the case I have the same action category, I'll take the action with higher priority

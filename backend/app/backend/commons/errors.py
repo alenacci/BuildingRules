@@ -81,3 +81,6 @@ class WrongBuildingGroupRipartitionError(Exception):
 
 class UnsupportedDriverParameterError(Exception):
 	pass
+
+class WeatherInfoError(Exception):
+	pass

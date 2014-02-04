@@ -1,3 +1,4 @@
+import sys
 import json
 from app.backend.commons.errors import *
 from app.backend.commons.database import Database
@@ -64,7 +65,7 @@ class RulePriority:
 	def delete(self):
 
 		if not (self.buildingName and self.roomName and self.ruleId): raise MissingInputDataError("Missing input to get a rule priority")
-		print "TODO: Consistency check not performed - RulePriority class"
+		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ") : Consistency check not performed - RulePriority class"
 
 		database = Database()
 		database.open()

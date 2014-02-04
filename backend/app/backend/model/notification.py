@@ -1,3 +1,4 @@
+import sys
 import json
 import datetime
 from app.backend.commons.errors import *
@@ -98,7 +99,7 @@ class Notification:
 
 	def delete(self):
 
-		print "TODO: Consistency check not performed - Trigger class"
+		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ") : Consistency check not performed - Trigger class"
 
 		database = Database()
 		database.open()

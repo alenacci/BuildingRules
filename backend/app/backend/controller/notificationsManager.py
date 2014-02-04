@@ -1,3 +1,4 @@
+import sys
 import json
 from app.backend.commons.errors import *
 from app.backend.model.notification import Notification
@@ -9,7 +10,7 @@ class NotificationsManager:
 
 	def sendNotification(self, userUuid = None, buildingName = None, groupId = None, roomName = None, messageSubject = None, messageText = None):
 		
-		print "TODO not yet tested"
+		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  not yet tested"
 
 		if not messageSubject:
 			raise NewNotificationMissingInputError("messageSubject is mandatory to send a new notification")

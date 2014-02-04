@@ -1,7 +1,9 @@
+import sys
 import json
 import random
 import string
 import datetime
+import time
 
 from app.backend.commons.errors import *
 from app.backend.drivers.genericTriggerDriver import GenericTriggerDriver
@@ -23,18 +25,57 @@ class DatetimeTriggerDriver(GenericTriggerDriver):
 
 	def __init__(self, parameters):
 		self.parameters = parameters
+		
+
+	def __getIntFromDate(self, date):
+		day = date[:date.find("/")]
+		month = date[date.find("/")+1:]
+		numericalDate =  int(str( time.strptime(day + " " + month + " 00", "%d %m %y").tm_yday ))
+
+		return numericalDate
+
+	def __getIntFromTime(self, time):
+		pm = False
+		if "PM" in time.upper():
+			pm = True
+		
+		if "." in time or ":" in time:
+			time = time.replace(":",".")
+			time = time[:time.find(".")]
+		
+		time = int(time.replace("AM", "").replace("PM", "").replace("am", "").replace("pm", ""))
+		if pm: time = int(time)+12
+		
+		return str(time)
+
+
 
 	def eventTriggered(self):
-		import random
 
 		if self.parameters["operation"] == "DATE_IN_RANGE":
+
+			par0 = self.__getIntFromDate(self.parameters['0'])
+			par1 = self.__getIntFromDate(self.parameters['1'])
+			today = self.__getIntFromDate(str((time.strftime("%d/%m"))))
+
+			if today >= par0 and today <= par1:
+				return True
+			else:
+				return False
 			
-			print "TODO to be implemented"
 			return bool(random.getrandbits(1))
 
 		elif self.parameters["operation"] == "TIME_IN_RANGE":
-			
-			print "TODO to be implemented"
+
+			par0 = self.__getIntFromTime(self.parameters['0'])
+			par1 = self.__getIntFromTime(self.parameters['1'])
+			now = self.__getIntFromTime((time.strftime("%H")))
+
+			if now >= par0 and now <= par1:
+				return True
+			else:
+				return False
+
 			return bool(random.getrandbits(1))
 
 

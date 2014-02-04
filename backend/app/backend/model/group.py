@@ -1,3 +1,4 @@
+import sys
 import json
 from app.backend.commons.errors import *
 from app.backend.commons.database import Database
@@ -20,7 +21,7 @@ class Group:
 
 
 	def getRooms(self):
-		print "TODO: non yet tested"
+		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ") : non yet tested"
 		
 		from app.backend.model.room import Room
 
@@ -167,7 +168,7 @@ class Group:
 
 
 	def delete(self):
-		print "TODO: Consistency check not performed - Group class"
+		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ") : Consistency check not performed - Group class"
 
 		database = Database()
 		database.open()

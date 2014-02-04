@@ -1,3 +1,4 @@
+import sys
 import json
 from app.backend.commons.errors import *
 from app.backend.model.building import Building
@@ -101,8 +102,8 @@ class BuildingsManager:
 
 	def deleteRoom(self, buildingName, roomName):
 
-		print "TODO not yet tested"
-		print "TODO table rules_priority not correctly updated"
+		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  not yet tested"
+		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  table rules_priority not correctly updated"
 
 		from app.backend.model.room import Room
 		room = Room(roomName = roomName,  buildingName = buildingName)
@@ -127,7 +128,7 @@ class BuildingsManager:
 
 	def deleteGroup(self, buildingName, groupId):
 
-		print "TODO not yet tested"
+		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  not yet tested"
 
 		from app.backend.model.group import Group
 		group = Group(buildingName = buildingName, id = groupId)

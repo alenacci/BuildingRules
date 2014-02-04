@@ -14,14 +14,22 @@ def startWebServer():
 def startDeamon():
 	os.system("python runDeamon.py")
 
+def startWeatherService():
+	os.system("python runWeatherService.py")
+
 
 ### MAIN STARTS HERE
 
 webServerThread = Thread(target = startWebServer)
 webServerThread.start()
 
+weatherServiceThread = Thread(target = startWeatherService)
+weatherServiceThread.start()
+
 deamonThread = Thread(target = startDeamon)
 deamonThread.start()
+
+
 
 webServerThread.join()
 deamonThread.join()

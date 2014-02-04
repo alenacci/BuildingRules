@@ -1,3 +1,4 @@
+import sys
 import json
 import random
 import string
@@ -131,8 +132,8 @@ class ActionManager:
 			parameters.update({'operation' : 'CURTAINS_CLOSE'})
 			return  RoomActionDriver(parameters = parameters)
 
-		if not driver:
-			raise DriverNotFoundError("Impossibile to find any driver for the action " + str(action))
+		
+		raise DriverNotFoundError("Impossibile to find any driver for the action " + str(action))
 
 
 	def __str__(self):

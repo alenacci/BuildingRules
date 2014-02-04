@@ -1,3 +1,4 @@
+import sys
 import json
 from app.backend.commons.errors import *
 from app.backend.model.user import User
@@ -65,7 +66,7 @@ class UsersManager:
 		return {"buildings" : response}
 
 	def getRoomList(self, username):
-		print "TODO: not yet tested"
+		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ") : not yet tested"
 
 		user = User(username = username)		
 		user.retrieve()
@@ -73,7 +74,7 @@ class UsersManager:
 		return user.getRooms()
 
 	def addRoom(self, username):
-		print "TODO: not yet implemented"
+		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ") : not yet implemented"
 
 	def __str__(self):
 		return "UserManager: "

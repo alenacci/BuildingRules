@@ -1,3 +1,4 @@
+import sys
 import json
 from app.backend.commons.errors import *
 from app.backend.commons.database import Database
@@ -39,7 +40,7 @@ class User:
 
 	def getBuildings(self):		
 		
-		print "TODO: non yet tested"
+		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ") : non yet tested"
 
 		buildingList = []
 		buildingNameList = []
@@ -53,7 +54,7 @@ class User:
 
 	def getGroups(self):
 		
-		print "TODO: non yet tested"
+		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ") : non yet tested"
 
 		groupList = []
 		groupIdList = []
@@ -167,7 +168,7 @@ class User:
 
 	def delete(self):
 
-		print "TODO: Consistency check not performed into table users_rooms"
+		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ") : Consistency check not performed into table users_rooms"
 
 		database = Database()
 		database.open()

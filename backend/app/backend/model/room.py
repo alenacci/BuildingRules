@@ -1,3 +1,4 @@
+import sys
 import json
 from app.backend.commons.errors import *
 from app.backend.commons.database import Database
@@ -12,7 +13,7 @@ class Room:
 
 
 	def getActions(self):
-		print "TODO: non yet tested"
+		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ") : non yet tested"
 
 		from app.backend.model.action import Action
 
@@ -37,7 +38,7 @@ class Room:
 
 
 	def getTriggers(self):
-		print "TODO: non yet tested"
+		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ") : non yet tested"
 
 		from app.backend.model.trigger import Trigger
 
@@ -62,7 +63,7 @@ class Room:
 
 	def addAction(self, action):
 
-		print "TODO: non yet tested"
+		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ") : non yet tested"
 
 		self.isClassInitialized()
 
@@ -78,7 +79,7 @@ class Room:
 
 
 	def deleteAction(self, action):
-		print "TODO: non yet tested"		
+		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ") : non yet tested"		
 
 		self.isClassInitialized()
 
@@ -94,7 +95,7 @@ class Room:
 
 
 	def addTrigger(self, trigger):
-		print "TODO: non yet tested"
+		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ") : non yet tested"
 
 		self.isClassInitialized()
 
@@ -110,7 +111,7 @@ class Room:
 
 
 	def deleteTrigger(self, trigger):
-		print "TODO: non yet tested"		
+		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ") : non yet tested"		
 
 		self.isClassInitialized()
 
@@ -127,7 +128,7 @@ class Room:
 
 	def getUsers(self):
 
-		print "TODO: non yet tested"
+		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ") : non yet tested"
 
 		from app.backend.model.user import User
 
@@ -160,7 +161,7 @@ class Room:
 
 	def getGroups(self):
 
-		print "TODO: non yet tested"
+		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ") : non yet tested"
 
 		from app.backend.model.group import Group
 
@@ -186,7 +187,7 @@ class Room:
 
 	def getRules(self, author = None, includeGroupsRules = False, excludedRuleId = False, excludeCrossRoomValidationRules = False):
 
-		print "TODO: this method has been partially tested - includeGroupsRules not tested"
+		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ") : this method has been partially tested - includeGroupsRules not tested"
 
 		from app.backend.model.rule import Rule
 		
@@ -330,7 +331,7 @@ class Room:
 
 	def delete(self):
 
-		print "TODO: Consistency check not performed into table users_rooms"
+		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ") : Consistency check not performed into table users_rooms"
 
 		self.isClassInitialized()
 

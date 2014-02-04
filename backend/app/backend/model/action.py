@@ -1,3 +1,4 @@
+import sys
 import json
 from app.backend.commons.errors import *
 from app.backend.commons.database import Database
@@ -73,7 +74,7 @@ class Action:
 
 	def delete(self):
 
-		print "TODO: Consistency check not performed - Action class"
+		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ") : Consistency check not performed - Action class"
 
 		database = Database()
 		database.open()

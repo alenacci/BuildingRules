@@ -1,3 +1,4 @@
+import sys
 import json
 from app.backend.commons.errors import *
 from app.backend.model.group import Group
@@ -45,7 +46,7 @@ class GroupsManager:
 
 
 		if group.crossRoomsValidation:
-			print "TODO This part of the method as not been tested"
+			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  This part of the method as not been tested"
 			# In this case we have to check that the room doesn't belong to another CrossRoomValidatioGroup
 			from app.backend.model.building import Building
 			building = Building(buildingName = buildingName)
