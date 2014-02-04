@@ -77,7 +77,7 @@ class Building:
 
 			if validationCategories:
 				queriedValidationCategories = set(validationCategories)
-				groupValidationCategories = set(crossRoomsValidationCategories)
+				groupValidationCategories = set(group.crossRoomsValidationCategories)
 
 				if queriedValidationCategories.issubset(groupValidationCategories):
 					groupList.append(group)	
@@ -136,9 +136,10 @@ class Building:
 			groupId = groupId if groupId != -1 else None
 			roomName = roomName if roomName != "None" else None
 
-			rule = Rule(id = ruleId, priority = priority, category = category, buildingName = buildingName, roomName = roomName, authorUuid = authorUuid, 
+			rule = Rule(id = ruleId, priority = priority, category = category, buildingName = buildingName, groupId = groupId, roomName = roomName, authorUuid = authorUuid, 
 				antecedent = antecedent, consequent = consequent, enabled = enabled, deleted = deleted, creationTimestamp = creationTimestamp, lastEditTimestamp = lastEditTimestamp)
 
+	
 			ruleList.append(rule)
 
 		return ruleList

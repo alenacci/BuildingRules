@@ -1,9 +1,11 @@
 import sys
 import time
 import datetime
+import copy
 
 from app.backend.commons.console import flash
 from app.backend.commons.errors import *
+from app.backend.controller.groupsManager import GroupsManager
 from app.backend.controller.buildingsManager import BuildingsManager
 from app.backend.controller.triggerManager import TriggerManager
 from app.backend.controller.actionManager import ActionManager
@@ -25,11 +27,16 @@ def checkRuleTrigger(rule):
 	trigger, originalModel, parameterValues = triggerManager.getTriggerAndTemplateAndParameterValues(rule.antecedent)
 	driver = triggerManager.getTriggerDriver(trigger, parameterValues)
 
+
+	message = "Rule " + str(rule.id) + " (" + str(rule.buildingName)
+	if rule.groupId: message += ".g[" + str(rule.groupId) + "]"
+	if rule.roomName: message += ".r[" + str(rule.roomName) + "]"
+
 	if driver.eventTriggered():
-		flash("Rule " + str(rule.id) + " (" +  rule.buildingName + "." + rule.roomName + ") actuated; antecedent is '" + rule.antecedent + "'...", "green")
+		flash(message + ") actuated; antecedent is '" + rule.antecedent + "'...", "green")
 		return True
 	else:
-		flash("Rule " + str(rule.id) + " (" +  rule.buildingName + "." + rule.roomName + ") NOT actuated; antecedent is '" + rule.antecedent + "'...", "red")
+		flash(message + ") NOT actuated; antecedent is '" + rule.antecedent + "'...", "red")
 
 	return False
 
@@ -39,7 +46,12 @@ def executeRule(rule):
 	action, originalModel, parameterValues = actionManager.getActionAndTemplateAndParameterValues(rule.consequent)
 	driver = actionManager.getActionDriver(action, parameterValues)
 
-	flash("Rule " + str(rule.id) + " (" +  rule.buildingName + "." + rule.roomName + ") actuated; consequent is '" + rule.consequent + "'...")
+	message = "Rule " + str(rule.id) + " (" + str(rule.buildingName)
+	if rule.groupId: message += ".g[" + str(rule.groupId) + "]"
+	if rule.roomName: message += ".r[" + str(rule.roomName) + "]"
+
+
+	flash(message + ") actuated; consequent is '" + rule.consequent + "'...")
 	driver.actuate()
 
 def notifyIgnoredRule(rule):
@@ -59,13 +71,19 @@ def start():
 		
 def main():
 
+	print
+	print
+	print
+	flash("Starting the actuation process...", "yellow")
+
 	buildings = Buildings()
 	buildingsManager = BuildingsManager()
+	groupsManager = GroupsManager()
 	
 	
 	for building in buildings.getAllBuildings():
 
-		flash("Running actions for building '" + building.buildingName + "'...")
+		flash("Running actions for building '" + building.buildingName + "'...", "blue")
 
 		triggeredRules = []
 		triggeredRulesId = []
@@ -123,20 +141,28 @@ def main():
 					# Here we are selecting those rules that have been specified of a specific group.
 					# In this case, this rules has to be copied inside each room roomScheduledRules set.
 
-					groupRoomList = groupsManager.getRooms(buildingName = building.name, groupId = rule.groupId)["rooms"]
+					groupRoomList = groupsManager.getRooms(buildingName = building.buildingName, groupId = rule.groupId)["rooms"]
 
 					for room in groupRoomList:
+
 						roomName = room["roomName"]
-						rule.roomName = roomName
-						roomScheduledRules[roomName].append(rule)
+						newRule = copy.copy(rule)			# I need to copy the object to modify the room name
+						newRule.roomName = roomName
+
+						if not roomName in roomScheduledRules.keys():
+							roomScheduledRules[roomName] = []
+
+						roomScheduledRules[roomName].append(newRule)
+
 
 				else:
 					raise UnknownError("The rule with id " + rule.id + " has both the groupId and roomName field not null.")
 
-
 			flash(building.buildingName + " - Number of rooms: " + str(len(roomScheduledRules.keys())), "gray")
 			flash(building.buildingName + " - Number of CRV Groups: " + str(len(crvgScheduledRules.keys())), "gray")
 
+
+			flash("Executing actions for rooms...", "blue")
 			# Executing the rules per each room
 			# In the case I have the same action category, I'll take the action with higher priority
 			for roomName in roomScheduledRules.keys():
@@ -153,6 +179,7 @@ def main():
 					else:
 						flash(building.buildingName + " - Room " + roomName + ", ruleId " + str(rule.id) + " ignored.")
 
+			flash("Executing actions for CRV Groups...", "blue")
 			for crvgId in crvgScheduledRules.keys():
 				ruleList = crvgScheduledRules[crvgId]
 
@@ -169,4 +196,4 @@ def main():
 						flash(building.buildingName + " - CRVGroup " + str(crvgId) + ", ruleId " + str(rule.id) + " ignored.")
 						notifyIgnoredRule(rule)
 
-		flash("The actuation process is ended.")
+	flash("The actuation process is ended.", "yellow")

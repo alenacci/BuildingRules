@@ -153,7 +153,6 @@ class Group:
 		query = self.__replaceSqlQueryToken(query)
 		queryResult = database.executeReadQuery(query)
 
-
 		if len(queryResult) > 0:
 			self.id = int(queryResult[0][0])
 			self.buildingName = queryResult[0][1]
