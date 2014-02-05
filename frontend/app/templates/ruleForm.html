@@ -92,6 +92,9 @@
 
               <select name="action_0" id="action_0" onchange="compose()">
                 <option>Select an action</option><option>turn on the light</option><option>turn off the light</option><option>turn on the heating</option><option>turn off the heating</option><option>turn on the cooling</option><option>turn off the cooling</option><option>open the windows</option><option>close the windows</option><option>open curtains</option><option>close curtains</option>
+                {% if insertionForGroup %}
+                  <option>no rule specified</option>
+                {% endif  %}
               </select>  
               <a href="javascript:compose();"><button class="btn btn-small btn-primary" type="button">Compose the rule!</button></a>
 
