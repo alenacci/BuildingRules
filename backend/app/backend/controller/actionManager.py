@@ -6,6 +6,7 @@ import datetime
 import re
 
 from app.backend.commons.errors import *
+from app.backend.commons.inputDataChecker import checkData
 from app.backend.model.action import Action
 from app.backend.model.actions import Actions
 
@@ -15,6 +16,7 @@ class ActionManager:
 		pass
 
 	def getInfo(self, actionName):
+		checkData(locals())
 	
 		action = Action(actionName = actionName)
 		action.retrive()
@@ -22,6 +24,7 @@ class ActionManager:
 
 
 	def getActionAndTemplateAndParameterValues(self, ruleConsequent):
+		checkData(locals())
 
 		actions = Actions()
 		actionList = actions.getAllActions()
@@ -52,15 +55,19 @@ class ActionManager:
 
 
 	def getActionAndTemplate(self, ruleConsequent):
+		checkData(locals())
+
 		action, template, parameterValues = self.getActionAndTemplateAndParameterValues(ruleConsequent)
 		return (action, template)
 
 	def getAction(self, ruleConsequent):
+		checkData(locals())
 
 		action, template = self.getActionAndTemplate(ruleConsequent)
 		return action
 
 	def translateAction(self, ruleConsequent):
+		checkData(locals())
 
 		actions = Actions()
 		action, originalTemplate, parameterValues = self.getActionAndTemplateAndParameterValues(ruleConsequent)
@@ -73,6 +80,8 @@ class ActionManager:
 
 
 	def getActionCategories(self):
+		checkData(locals())
+
 		
 		actions = Actions()
 		actionList = actions.getAllActions()
@@ -86,6 +95,7 @@ class ActionManager:
 
 
 	def getActionDriver(self, action, parameters = None):
+		checkData(locals())
 
 		from app.backend.drivers.roomActionDriver import RoomActionDriver
 

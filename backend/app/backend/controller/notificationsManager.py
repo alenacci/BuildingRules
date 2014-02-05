@@ -1,6 +1,7 @@
 import sys
 import json
 from app.backend.commons.errors import *
+from app.backend.commons.inputDataChecker import checkData
 from app.backend.model.notification import Notification
 from app.backend.model.notifications import Notifications
 
@@ -14,6 +15,8 @@ class NotificationsManager:
 		pass
 
 	def sendNotification(self, userUuid = None, buildingName = None, groupId = None, roomName = None, messageSubject = None, messageText = None):
+		checkData(locals())
+
 		
 		if not messageSubject:
 			raise NewNotificationMissingInputError("messageSubject is mandatory to send a new notification")
@@ -75,6 +78,8 @@ class NotificationsManager:
 		return {}
 
 	def sendNotificationByEmail(self, recipientUuid, messageSubject, messageText):
+		checkData(locals())
+
 		from app.backend.model.user import User
 		recipientUser = User(uuid = recipientUuid)
 		recipientUser.retrieve()
@@ -104,18 +109,24 @@ class NotificationsManager:
 
 
 	def setNotificationAsRead(self, notificationId):
+		checkData(locals())
+
 
 		notification = Notification(id = notificationId)	
 		notification.setAsRead()
 		return {}
 
 	def setNotificationAsUnread(self, notificationId):
+		checkData(locals())
+
 		
 		notification = Notification(id = notificationId)
 		notification.setAsUnread()
 		return {}
 
 	def getNotifications(self, userUuid, username, automaticallySetAsRead = True):
+		checkData(locals())
+		
 
 		from app.backend.model.user import User
 		user = User(username = username)

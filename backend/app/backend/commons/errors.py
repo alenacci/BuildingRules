@@ -93,3 +93,7 @@ class BuildingDepotError(Exception):
 
 class AlredyAssignedPriorityError(Exception):
 	pass
+
+class BadInputError(Exception):
+	pass
+	

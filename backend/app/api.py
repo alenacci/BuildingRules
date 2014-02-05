@@ -30,7 +30,7 @@ def login(username = None):
 
 	if request.method == 'POST':
 
-		password = request.form['password']
+		password = validateInput(request.form['password'])
 		session = SessionManager()
 		
 		try:
@@ -57,8 +57,8 @@ def userInfo(username = None):
 
 	if request.method == 'POST':
 
-		sessionKey = request.form['sessionKey']
-		userUuid = request.form['userUuid']		
+		sessionKey = validateInput(request.form['sessionKey'])
+		userUuid = validateInput(request.form['userUuid'])		
 
 		try:
 			session = SessionManager()
@@ -73,8 +73,8 @@ def userNotifications(username = None):
 
 	if request.method == 'POST':
 
-		sessionKey = request.form['sessionKey']
-		userUuid = request.form['userUuid']		
+		sessionKey = validateInput(request.form['sessionKey'])
+		userUuid = validateInput(request.form['userUuid'])		
 
 		try:
 			session = SessionManager()
@@ -92,8 +92,8 @@ def ruleCategories(username = None):
 
 	if request.method == 'POST':
 
-		sessionKey = request.form['sessionKey']
-		userUuid = request.form['userUuid']		
+		sessionKey = validateInput(request.form['sessionKey'])
+		userUuid = validateInput(request.form['userUuid'])		
 
 		try:
 			session = SessionManager()
@@ -117,8 +117,8 @@ def userInfoUuid(uuid = None):
 
 	if request.method == 'POST':
 
-		sessionKey = request.form['sessionKey']
-		userUuid = request.form['userUuid']		
+		sessionKey = validateInput(request.form['sessionKey'])
+		userUuid = validateInput(request.form['userUuid'])		
 
 		try:
 			session = SessionManager()
@@ -134,8 +134,8 @@ def userBuildings(username = None):
 
 	if request.method == 'POST':
 
-		sessionKey = request.form['sessionKey']
-		userUuid = request.form['userUuid']		
+		sessionKey = validateInput(request.form['sessionKey'])
+		userUuid = validateInput(request.form['userUuid'])		
 
 		try:
 			session = SessionManager()
@@ -150,8 +150,8 @@ def buildingInfo(username = None, buildingName = None):
 
 	if request.method == 'POST':
 
-		sessionKey = request.form['sessionKey']
-		userUuid = request.form['userUuid']		
+		sessionKey = validateInput(request.form['sessionKey'])
+		userUuid = validateInput(request.form['userUuid'])		
 
 		try:
 			session = SessionManager()
@@ -168,8 +168,8 @@ def buildingGroups(username = None, buildingName = None):
 
 	if request.method == 'POST':
 
-		sessionKey = request.form['sessionKey']
-		userUuid = request.form['userUuid']		
+		sessionKey = validateInput(request.form['sessionKey'])
+		userUuid = validateInput(request.form['userUuid'])		
 
 		try:
 			session = SessionManager()
@@ -184,8 +184,8 @@ def buildingGroups(username = None, buildingName = None):
 def groupInfo(username = None, buildingName = None, groupId = None):
 	if request.method == 'POST':
 
-		sessionKey = request.form['sessionKey']
-		userUuid = request.form['userUuid']		
+		sessionKey = validateInput(request.form['sessionKey'])
+		userUuid = validateInput(request.form['userUuid'])		
 
 		try:
 			session = SessionManager()
@@ -202,8 +202,8 @@ def groupInfo(username = None, buildingName = None, groupId = None):
 def deleteGroup(username = None, buildingName = None, groupId = None):
 	if request.method == 'POST':
 
-		sessionKey = request.form['sessionKey']
-		userUuid = request.form['userUuid']		
+		sessionKey = validateInput(request.form['sessionKey'])
+		userUuid = validateInput(request.form['userUuid'])		
 
 		try:
 			session = SessionManager()
@@ -221,8 +221,8 @@ def buildingRooms(username = None, buildingName = None):
 
 	if request.method == 'POST':
 
-		sessionKey = request.form['sessionKey']
-		userUuid = request.form['userUuid']		
+		sessionKey = validateInput(request.form['sessionKey'])
+		userUuid = validateInput(request.form['userUuid'])		
 
 		try:
 			session = SessionManager()
@@ -237,8 +237,8 @@ def buildingRooms(username = None, buildingName = None):
 def groupRooms(username = None, buildingName = None, groupId = None):
 	if request.method == 'POST':
 
-		sessionKey = request.form['sessionKey']
-		userUuid = request.form['userUuid']		
+		sessionKey = validateInput(request.form['sessionKey'])
+		userUuid = validateInput(request.form['userUuid'])		
 
 		try:
 			session = SessionManager()
@@ -255,8 +255,8 @@ def groupRooms(username = None, buildingName = None, groupId = None):
 def roomInfo(username = None, buildingName = None, roomName = None):
 	if request.method == 'POST':
 
-		sessionKey = request.form['sessionKey']
-		userUuid = request.form['userUuid']		
+		sessionKey = validateInput(request.form['sessionKey'])
+		userUuid = validateInput(request.form['userUuid'])		
 
 		try:
 			session = SessionManager()
@@ -273,8 +273,8 @@ def roomInfo(username = None, buildingName = None, roomName = None):
 def deleteRoom(username = None, buildingName = None, roomName = None):
 	if request.method == 'POST':
 
-		sessionKey = request.form['sessionKey']
-		userUuid = request.form['userUuid']		
+		sessionKey = validateInput(request.form['sessionKey'])
+		userUuid = validateInput(request.form['userUuid'])		
 
 		try:
 			session = SessionManager()
@@ -291,8 +291,8 @@ def deleteRoom(username = None, buildingName = None, roomName = None):
 def roomTriggers(username = None, buildingName = None, roomName = None):
 	if request.method == 'POST':
 
-		sessionKey = request.form['sessionKey']
-		userUuid = request.form['userUuid']		
+		sessionKey = validateInput(request.form['sessionKey'])
+		userUuid = validateInput(request.form['userUuid'])		
 
 		try:
 			session = SessionManager()
@@ -310,8 +310,8 @@ def roomTriggers(username = None, buildingName = None, roomName = None):
 def roomActions(username = None, buildingName = None, roomName = None):
 	if request.method == 'POST':
 
-		sessionKey = request.form['sessionKey']
-		userUuid = request.form['userUuid']		
+		sessionKey = validateInput(request.form['sessionKey'])
+		userUuid = validateInput(request.form['userUuid'])		
 
 		try:
 			session = SessionManager()
@@ -329,8 +329,8 @@ def roomActions(username = None, buildingName = None, roomName = None):
 def roomUsers(username = None, buildingName = None, roomName = None):
 	if request.method == 'POST':
 
-		sessionKey = request.form['sessionKey']
-		userUuid = request.form['userUuid']		
+		sessionKey = validateInput(request.form['sessionKey'])
+		userUuid = validateInput(request.form['userUuid'])		
 
 		try:
 			session = SessionManager()
@@ -347,8 +347,8 @@ def roomUsers(username = None, buildingName = None, roomName = None):
 def roomGroups(username = None, buildingName = None, roomName = None):
 	if request.method == 'POST':
 
-		sessionKey = request.form['sessionKey']
-		userUuid = request.form['userUuid']		
+		sessionKey = validateInput(request.form['sessionKey'])
+		userUuid = validateInput(request.form['userUuid'])		
 
 		try:
 			session = SessionManager()
@@ -366,11 +366,11 @@ def roomRules(username = None, buildingName = None, roomName = None):
 
 	if request.method == 'POST':
 
-		sessionKey = request.form['sessionKey']
-		userUuid = request.form['userUuid']		
-		filterByAuthor = getBoolFromString(request.form['filterByAuthor']) if 'filterByAuthor' in request.form.keys() else False
-		includeGroupsRules = getBoolFromString(request.form['includeGroupsRules']) if 'includeGroupsRules' in request.form.keys() else False
-		orderByPriority = getBoolFromString(request.form['orderByPriority']) if 'orderByPriority' in request.form.keys() else False
+		sessionKey = validateInput(request.form['sessionKey'])
+		userUuid = validateInput(request.form['userUuid'])		
+		filterByAuthor = getBoolFromString(validateInput(request.form['filterByAuthor'])) if 'filterByAuthor' in request.form.keys() else False
+		includeGroupsRules = getBoolFromString(validateInput(request.form['includeGroupsRules'])) if 'includeGroupsRules' in request.form.keys() else False
+		orderByPriority = getBoolFromString(validateInput(request.form['orderByPriority'])) if 'orderByPriority' in request.form.keys() else False
 
 		usernameFilter = username if filterByAuthor else None
 
@@ -391,8 +391,8 @@ def roomRules(username = None, buildingName = None, roomName = None):
 def groupRules(username = None, buildingName = None, groupId = None):
 	if request.method == 'POST':
 
-		sessionKey = request.form['sessionKey']
-		userUuid = request.form['userUuid']		
+		sessionKey = validateInput(request.form['sessionKey'])
+		userUuid = validateInput(request.form['userUuid'])		
 
 		try:
 			session = SessionManager()
@@ -425,8 +425,8 @@ def registerUser(username = None):
 	
 	if request.method == 'POST':
 
-		sessionKey = request.form['sessionKey']
-		userUuid = request.form['userUuid']		
+		sessionKey = validateInput(request.form['sessionKey'])
+		userUuid = validateInput(request.form['userUuid'])		
 
 		creatorUuid = userUuid
 		newUserUsername = username
@@ -448,9 +448,9 @@ def addRoomToBuilding(username = None, buildingName = None, roomName = None):
 
 	if request.method == 'POST':
 
-		sessionKey = request.form['sessionKey']
-		userUuid = request.form['userUuid']	
-		description = request.form['description']	
+		sessionKey = validateInput(request.form['sessionKey'])
+		userUuid = validateInput(request.form['userUuid'])	
+		description = validateInput(request.form['description'])	
 
 		try:
 			session = SessionManager()
@@ -466,8 +466,8 @@ def addRoomToBuilding(username = None, buildingName = None, roomName = None):
 def addRoomToGroup(username = None, buildingName = None, groupId = None, roomName = None):
 	if request.method == 'POST':
 
-		sessionKey = request.form['sessionKey']
-		userUuid = request.form['userUuid']		
+		sessionKey = validateInput(request.form['sessionKey'])
+		userUuid = validateInput(request.form['userUuid'])		
 
 		try:
 			session = SessionManager()
@@ -484,11 +484,11 @@ def addRoomToGroup(username = None, buildingName = None, groupId = None, roomNam
 def addGroupToBuilding(username = None, buildingName = None):
 	if request.method == 'POST':
 
-		sessionKey = request.form['sessionKey']
-		userUuid = request.form['userUuid']	
-		description = request.form['description']	
-		crossRoomsValidation = request.form['crossRoomsValidation'] if 'crossRoomsValidation' in request.form.keys() else False							#BOOLEAN VALUE
-		crossRoomsValidationCategories = request.form['crossRoomsValidationCategories']	if 'crossRoomsValidationCategories' in request.form.keys() else None	#LIST IN JSON FORMAT	
+		sessionKey = validateInput(request.form['sessionKey'])
+		userUuid = validateInput(request.form['userUuid'])	
+		description = validateInput(request.form['description'])	
+		crossRoomsValidation = validateInput(request.form['crossRoomsValidation']) if 'crossRoomsValidation' in request.form.keys() else False							#BOOLEAN VALUE
+		crossRoomsValidationCategories = validateInput(request.form['crossRoomsValidationCategories'])	if 'crossRoomsValidationCategories' in request.form.keys() else None	#LIST IN JSON FORMAT	
 
 		try:
 			session = SessionManager()
@@ -503,11 +503,11 @@ def addGroupToBuilding(username = None, buildingName = None):
 def editGroupInBuilding(username = None, buildingName = None, groupId = None):
 	if request.method == 'POST':
 
-		sessionKey = request.form['sessionKey']
-		userUuid = request.form['userUuid']	
-		description = request.form['description']	
-		crossRoomsValidation = request.form['crossRoomsValidation'] if 'crossRoomsValidation' in request.form.keys() else False							#BOOLEAN VALUE
-		crossRoomsValidationCategories = request.form['crossRoomsValidationCategories']	if 'crossRoomsValidationCategories' in request.form.keys() else None	#LIST IN JSON FORMAT		
+		sessionKey = validateInput(request.form['sessionKey'])
+		userUuid = validateInput(request.form['userUuid'])	
+		description = validateInput(request.form['description'])	
+		crossRoomsValidation = validateInput(request.form['crossRoomsValidation']) if 'crossRoomsValidation' in request.form.keys() else False							#BOOLEAN VALUE
+		crossRoomsValidationCategories = validateInput(request.form['crossRoomsValidationCategories'])	if 'crossRoomsValidationCategories' in request.form.keys() else None	#LIST IN JSON FORMAT		
 
 		try:
 			session = SessionManager()
@@ -532,11 +532,11 @@ def bindActionToRoom(username = None, buildingName = None, roomName = None):
 def addRuleToRoom(username = None, buildingName = None, roomName = None):
 	if request.method == 'POST':
 
-		sessionKey = request.form['sessionKey']
-		userUuid = request.form['userUuid']	
+		sessionKey = validateInput(request.form['sessionKey'])
+		userUuid = validateInput(request.form['userUuid'])	
 
-		priority = request.form['priority']
-		ruleBody = request.form['ruleBody']
+		priority = validateInput(request.form['priority'])
+		ruleBody = validateInput(request.form['ruleBody'])
 
 		authorUuid = userUuid
 
@@ -556,11 +556,11 @@ def addRuleToRoom(username = None, buildingName = None, roomName = None):
 def editRuleInRoom(username = None, buildingName = None, roomName = None, ruleId = None):
 	if request.method == 'POST':
 
-		sessionKey = request.form['sessionKey']
-		userUuid = request.form['userUuid']	
+		sessionKey = validateInput(request.form['sessionKey'])
+		userUuid = validateInput(request.form['userUuid'])	
 
-		priority = request.form['priority']
-		ruleBody = request.form['ruleBody']
+		priority = validateInput(request.form['priority'])
+		ruleBody = validateInput(request.form['ruleBody'])
 
 		groupId = request.form['groupId'] if 'groupId' in request.form.keys() else None
 
@@ -582,9 +582,9 @@ def editRuleInRoom(username = None, buildingName = None, roomName = None, ruleId
 def setRulePriority(username = None, buildingName = None, roomName = None, ruleId = None):
 	if request.method == 'POST':
 
-		sessionKey = request.form['sessionKey']
-		userUuid = request.form['userUuid']	
-		priority = request.form['priority']
+		sessionKey = validateInput(request.form['sessionKey'])
+		userUuid = validateInput(request.form['userUuid'])	
+		priority = validateInput(request.form['priority'])
 
 
 		try:
@@ -603,8 +603,8 @@ def setRulePriority(username = None, buildingName = None, roomName = None, ruleI
 def getRuleInfoFromRoom(username = None, buildingName = None, roomName = None, ruleId = None):
 	if request.method == 'POST':
 
-		sessionKey = request.form['sessionKey']
-		userUuid = request.form['userUuid']	
+		sessionKey = validateInput(request.form['sessionKey'])
+		userUuid = validateInput(request.form['userUuid'])	
 
 		try:
 			session = SessionManager()
@@ -622,8 +622,8 @@ def getRuleInfoFromRoom(username = None, buildingName = None, roomName = None, r
 def deleteRuleInRoom(username = None, buildingName = None, roomName = None, ruleId = None):
 	if request.method == 'POST':
 
-		sessionKey = request.form['sessionKey']
-		userUuid = request.form['userUuid']	
+		sessionKey = validateInput(request.form['sessionKey'])
+		userUuid = validateInput(request.form['userUuid'])	
 
 		try:
 			session = SessionManager()
@@ -640,8 +640,8 @@ def deleteRuleInRoom(username = None, buildingName = None, roomName = None, rule
 def disableRuleInRoom(username = None, buildingName = None, roomName = None, ruleId = None):
 	if request.method == 'POST':
 
-		sessionKey = request.form['sessionKey']
-		userUuid = request.form['userUuid']	
+		sessionKey = validateInput(request.form['sessionKey'])
+		userUuid = validateInput(request.form['userUuid'])	
 
 		try:
 			session = SessionManager()
@@ -658,8 +658,8 @@ def disableRuleInRoom(username = None, buildingName = None, roomName = None, rul
 def enableRuleInRoom(username = None, buildingName = None, roomName = None, ruleId = None):
 	if request.method == 'POST':
 
-		sessionKey = request.form['sessionKey']
-		userUuid = request.form['userUuid']	
+		sessionKey = validateInput(request.form['sessionKey'])
+		userUuid = validateInput(request.form['userUuid'])	
 
 		try:
 			session = SessionManager()
@@ -678,11 +678,11 @@ def enableRuleInRoom(username = None, buildingName = None, roomName = None, rule
 def addRuleToGroup(username = None, buildingName = None, groupId = None):
 	if request.method == 'POST':
 
-		sessionKey = request.form['sessionKey']
-		userUuid = request.form['userUuid']	
+		sessionKey = validateInput(request.form['sessionKey'])
+		userUuid = validateInput(request.form['userUuid'])	
 
-		priority = request.form['priority']
-		ruleBody = request.form['ruleBody']
+		priority = validateInput(request.form['priority'])
+		ruleBody = validateInput(request.form['ruleBody'])
 
 		authorUuid = userUuid
 
@@ -702,11 +702,11 @@ def addRuleToGroup(username = None, buildingName = None, groupId = None):
 def editRuleInGroup(username = None, buildingName = None, groupId = None, ruleId = None):
 	if request.method == 'POST':
 
-		sessionKey = request.form['sessionKey']
-		userUuid = request.form['userUuid']	
+		sessionKey = validateInput(request.form['sessionKey'])
+		userUuid = validateInput(request.form['userUuid'])	
 
-		priority = request.form['priority']
-		ruleBody = request.form['ruleBody']
+		priority = validateInput(request.form['priority'])
+		ruleBody = validateInput(request.form['ruleBody'])
 
 		authorUuid = userUuid
 
@@ -726,8 +726,8 @@ def editRuleInGroup(username = None, buildingName = None, groupId = None, ruleId
 def gerRuleInfoFromGroup(username = None, buildingName = None, groupId = None, ruleId = None):
 	if request.method == 'POST':
 
-		sessionKey = request.form['sessionKey']
-		userUuid = request.form['userUuid']	
+		sessionKey = validateInput(request.form['sessionKey'])
+		userUuid = validateInput(request.form['userUuid'])	
 
 		try:
 			session = SessionManager()
@@ -745,8 +745,8 @@ def gerRuleInfoFromGroup(username = None, buildingName = None, groupId = None, r
 def deleteRuleInGroup(username = None, buildingName = None, groupId = None, ruleId = None):
 	if request.method == 'POST':
 
-		sessionKey = request.form['sessionKey']
-		userUuid = request.form['userUuid']	
+		sessionKey = validateInput(request.form['sessionKey'])
+		userUuid = validateInput(request.form['userUuid'])	
 
 		try:
 			session = SessionManager()
@@ -788,3 +788,9 @@ def returnError(errorException):
 def getBoolFromString(stringValue):
 	if stringValue.upper() == "TRUE": return True
 	return False
+
+def validateInput(formValue):
+	if "'" in formValue or '"' in formValue:
+		return ""
+
+	return formValue

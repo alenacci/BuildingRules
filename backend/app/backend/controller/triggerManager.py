@@ -6,6 +6,7 @@ import datetime
 import re
 
 from app.backend.commons.errors import *
+from app.backend.commons.inputDataChecker import checkData
 from app.backend.model.trigger import Trigger
 from app.backend.model.triggers import Triggers
 
@@ -15,13 +16,15 @@ class TriggerManager:
 		pass
 
 	def getInfo(self, triggerName):
-	
+		checkData(locals())
+
 		trigger = Action(triggerName = triggerName)
 		trigger.retrive()
 		return trigger.getDict()
 
 
 	def getTriggerAndTemplateAndParameterValues(self, ruleAntecedent):
+		checkData(locals())
 
 		triggers = Triggers()
 		triggerList = triggers.getAllTriggers()
@@ -55,10 +58,13 @@ class TriggerManager:
 
 
 	def getTriggerAndTemplate(self, ruleAntecedent):
+		checkData(locals())
+
 		trigger, template, parameterValues = self.getTriggerAndTemplateAndParameterValues(ruleAntecedent)
 		return (trigger, template)
 
 	def getTrigger(self, ruleAntecedent):
+		checkData(locals())
 
 		trigger, template = self.getTriggerAndTemplate(ruleAntecedent)
 		return trigger
@@ -107,6 +113,7 @@ class TriggerManager:
 
 
 	def translateTrigger(self, ruleAntecedent):
+		checkData(locals())
 
 		triggers = Triggers()
 		trigger, originalTemplate, parameterValues = self.getTriggerAndTemplateAndParameterValues(ruleAntecedent)
@@ -127,6 +134,7 @@ class TriggerManager:
 
 
 	def getTriggerCategories(self):
+		checkData(locals())
 		
 		triggers = Triggers()
 		triggerList = triggers.getAllTriggers()
@@ -140,6 +148,7 @@ class TriggerManager:
 
 
 	def getTriggerDriver(self, trigger, parameters = None):
+		checkData(locals())
 
 		from app.backend.drivers.datetimeTriggerDriver import DatetimeTriggerDriver
 		from app.backend.drivers.roomTriggerDriver import RoomTriggerDriver

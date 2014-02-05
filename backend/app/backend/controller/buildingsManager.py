@@ -1,6 +1,7 @@
 import sys
 import json
 from app.backend.commons.errors import *
+from app.backend.commons.inputDataChecker import checkData
 from app.backend.model.building import Building
 from app.backend.model.buildings import Buildings
 
@@ -9,6 +10,7 @@ class BuildingsManager:
 		pass
 
 	def getInfo(self, buildingName):
+		checkData(locals())
 	
 		building = Building(buildingName = buildingName)
 		building.retrieve()
@@ -16,6 +18,8 @@ class BuildingsManager:
 		return building.getDict()
 
 	def getAllBuildings(self):
+		checkData(locals())
+
 		buildings = Buildings()
 		buildingList = []
 
@@ -25,6 +29,8 @@ class BuildingsManager:
 		return {"buildings" : buildingList}
 
 	def checkUserBinding(self, buildingName, username):
+		checkData(locals())
+
 
 		from app.backend.model.user import User
 
@@ -37,6 +43,8 @@ class BuildingsManager:
 		building.checkUserBinding(user)
 
 	def getGroups(self, buildingName, username = None):
+		checkData(locals())
+
 		building = Building(buildingName = buildingName)
 		building.retrieve()
 
@@ -58,12 +66,16 @@ class BuildingsManager:
 		return {"groups" : groupList}
 
 	def getCrossRoomValidationGroups(self, buildingName, roomName = None, validationCategories = None):
+		checkData(locals())
+
 		building = Building(buildingName = buildingName)
 		building.retrieve()
 
 		return building.getCrossRoomValidationGroups(roomName = roomName, validationCategories = validationCategories)	
 
 	def getRooms(self, buildingName, username = None):
+		checkData(locals())
+
 		building = Building(buildingName = buildingName)
 		building.retrieve()
 
@@ -87,6 +99,8 @@ class BuildingsManager:
 		return {"rooms" : roomList}
 
 	def addRoom(self, roomName, buildingName, description):
+		checkData(locals())
+
 		
 		from app.backend.model.room import Room
 		room = Room(roomName = roomName,  buildingName = buildingName, description = description)
@@ -97,10 +111,13 @@ class BuildingsManager:
 		return building.addRoom(room).getDict()
 		
 	def addGroup(self, buildingName, description, crossRoomsValidation, crossRoomsValidationCategories):
+		checkData(locals())
+
 		return self.__addOrModifyGroup(buildingName = buildingName, description =description, crossRoomsValidation = crossRoomsValidation, crossRoomsValidationCategories = crossRoomsValidationCategories)
 
 
 	def deleteRoom(self, buildingName, roomName):
+		checkData(locals())
 
 		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  not yet tested"
 		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  table rules_priority not correctly updated"
@@ -127,6 +144,7 @@ class BuildingsManager:
 		return {}
 
 	def deleteGroup(self, buildingName, groupId):
+		checkData(locals())
 
 		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  not yet tested"
 
@@ -148,10 +166,12 @@ class BuildingsManager:
 
 
 	def editGroup(self, groupId, buildingName, description, crossRoomsValidation, crossRoomsValidationCategories):
+		checkData(locals())
+		
 		return self.__addOrModifyGroup(buildingName = buildingName, description =description, crossRoomsValidation = crossRoomsValidation, crossRoomsValidationCategories = crossRoomsValidationCategories, groupId = groupId)
 
 	def __addOrModifyGroup(self, buildingName, description, crossRoomsValidation, crossRoomsValidationCategories, groupId = None):
-
+		checkData(locals())
 
 
 		if type(crossRoomsValidation) == int:

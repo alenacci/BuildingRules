@@ -1,6 +1,7 @@
 import sys
 import json
 from app.backend.commons.errors import *
+from app.backend.commons.inputDataChecker import checkData
 from app.backend.model.user import User
 
 
@@ -9,12 +10,14 @@ class UsersManager:
 		pass
 
 	def getUser(self, username, password = None):
+		checkData(locals())
 		
 		user = User(username = username, password = password)		
 		user.retrieve()
 		return user
 
 	def getInfo(self, username = None, uuid = None):
+		checkData(locals())
 		
 		if username:
 			user = User(username = username)		
@@ -30,6 +33,7 @@ class UsersManager:
 			raise MissingInputDataError("You need to specify at least the username or the uuid to gather user information")
 
 	def register(self, creatorUuid, newUserUsername, newUserPassword, newUserEmail, newUserPersonName, newUserLevel):
+		checkData(locals())
 
 		creatorUser = User(uuid = creatorUuid)		
 		creatorUser.retrieve()
@@ -54,6 +58,8 @@ class UsersManager:
 
 
 	def getBuildingList(self, username):
+		checkData(locals())
+
 		user = User(username = username)		
 		user.retrieve()
 
@@ -66,6 +72,8 @@ class UsersManager:
 		return {"buildings" : response}
 
 	def getRoomList(self, username):
+		checkData(locals())
+
 		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ") : not yet tested"
 
 		user = User(username = username)		
@@ -74,6 +82,8 @@ class UsersManager:
 		return user.getRooms()
 
 	def addRoom(self, username):
+		checkData(locals())
+		
 		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ") : not yet implemented"
 
 	def __str__(self):

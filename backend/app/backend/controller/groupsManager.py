@@ -1,6 +1,7 @@
 import sys
 import json
 from app.backend.commons.errors import *
+from app.backend.commons.inputDataChecker import checkData
 from app.backend.model.group import Group
 
 class GroupsManager:
@@ -8,12 +9,16 @@ class GroupsManager:
 		pass
 
 	def getInfo(self, groupId, buildingName):
+		checkData(locals())
+
 		group = Group(buildingName = buildingName, id = groupId)
 		group.retrieve()
 		return group.getDict()
 
 
 	def getRules(self, groupId, buildingName):
+		checkData(locals())
+
 		group = Group(buildingName = buildingName, id = groupId)
 		group.retrieve()
 
@@ -26,6 +31,8 @@ class GroupsManager:
 		return {"rules" : response}
 
 	def isCrossRoomsValidationGroup(self, groupId, buildingName, crossRoomsValidationCategory = None):
+		checkData(locals())
+
 		group = Group(buildingName = buildingName, id = groupId)
 		group.retrieve()
 
@@ -43,6 +50,8 @@ class GroupsManager:
 			return False
 
 	def getRooms(self, groupId, buildingName):
+		checkData(locals())
+
 		group = Group(buildingName = buildingName, id = groupId)
 		group.retrieve()
 
@@ -53,6 +62,8 @@ class GroupsManager:
 		return {"rooms" : roomList}		
 
 	def addRoom(self, groupId, roomName, buildingName):
+		checkData(locals())
+
 		group = Group(buildingName = buildingName, id = groupId)
 		group.retrieve()
 
@@ -77,6 +88,8 @@ class GroupsManager:
 		return room.getDict()
 
 	def addRule(self, priority = None, buildingName = None, groupId = None, authorUuid = None, ruleBody = None):
+		checkData(locals())
+
 		return self.__addOrModifyRule(priority = priority, buildingName = buildingName, groupId = groupId,  authorUuid = authorUuid, ruleBody = ruleBody)
 
 	def editRule(self, ruleId = None, priority = None, buildingName = None, groupId = None, authorUuid = None, ruleBody = None):
@@ -101,6 +114,8 @@ class GroupsManager:
 		
 
 	def deleteRule(self, ruleId, buildingName, groupId):
+		checkData(locals())
+
 		group = Group(buildingName = buildingName, id = groupId)
 		group.retrieve()
 
@@ -113,6 +128,8 @@ class GroupsManager:
 		return {}
 
 	def getRuleInfo(self, buildingName = None, groupId = None, ruleId = None):
+		checkData(locals())
+
 		from app.backend.model.rule import Rule
 		rule = Rule(id = ruleId, buildingName = buildingName, groupId = groupId)
 		rule.retrieve()
@@ -121,6 +138,8 @@ class GroupsManager:
 
 
 	def __addOrModifyRule(self, priority = None, buildingName = None, groupId = None, authorUuid = None, ruleBody = None, ruleId = None):
+		checkData(locals())
+		
 
 		try:
 			antecedent = ruleBody.split("then")[0].replace("if ", "").strip()

@@ -5,6 +5,7 @@ import string
 import datetime
 
 from app.backend.commons.errors import *
+from app.backend.commons.inputDataChecker import checkData
 from app.backend.model.session import Session
 
 class SessionManager:
@@ -13,6 +14,11 @@ class SessionManager:
                 pass
 
         def login(self, username, password):
+                checkData(locals())
+
+                if len(password) == 0 or len(username) == 0:
+                        raise MissingInputDataError("Insert username and password!")
+
                 from app.backend.controller.usersManager import UsersManager
 
                 usersManager = UsersManager()
@@ -40,6 +46,8 @@ class SessionManager:
                         return None
                 
         def checkSessionValidity(self,sessionKey,userUuid):
+                checkData(locals())
+
                 session = Session(sessionKey = sessionKey, userUuid = userUuid)
                 session.retrieve()
 
@@ -54,6 +62,7 @@ class SessionManager:
                         raise SessionExpiredError("The requested session is expired")
 
         def logout(self, username):
+                checkData(locals())
 
                 from app.backend.controller.usersManager import UsersManager
                 usersManager = UsersManager()                

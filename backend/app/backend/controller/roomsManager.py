@@ -1,6 +1,7 @@
 import sys
 import json
 from app.backend.commons.errors import *
+from app.backend.commons.inputDataChecker import checkData
 from app.backend.model.room import Room
 
 
@@ -9,11 +10,15 @@ class RoomsManager:
 		pass
 
 	def getInfo(self, roomName, buildingName):
+		checkData(locals())
+
 		room = Room(buildingName = buildingName, roomName = roomName)
 		room.retrieve()
 		return room.getDict()
 
 	def getRules(self, roomName, buildingName, username = None, includeGroupsRules = False, orderByPriority = False,  includeDisabled = False):
+		checkData(locals())
+
 		room = Room(buildingName = buildingName, roomName = roomName)
 		room.retrieve()
 
@@ -39,6 +44,8 @@ class RoomsManager:
 
 
 	def getTriggers(self, roomName, buildingName):
+		checkData(locals())
+
 		room = Room(buildingName = buildingName, roomName = roomName)
 		room.retrieve()
 
@@ -52,6 +59,8 @@ class RoomsManager:
 		return {"triggers" : response}
 
 	def getActions(self, roomName, buildingName):
+		checkData(locals())
+
 		room = Room(buildingName = buildingName, roomName = roomName)
 		room.retrieve()
 
@@ -66,6 +75,8 @@ class RoomsManager:
 
 
 	def getUsers(self, roomName, buildingName):
+		checkData(locals())
+
 		room = Room(buildingName = buildingName, roomName = roomName)
 		room.retrieve()
 
@@ -79,6 +90,8 @@ class RoomsManager:
 		return {"users" : response}
 
 	def getGroups(self, roomName, buildingName):
+		checkData(locals())
+
 		room = Room(buildingName = buildingName, roomName = roomName)
 		room.retrieve()
 
@@ -93,12 +106,18 @@ class RoomsManager:
 
 
 	def bindTrigger(self):
+		checkData(locals())
+
 		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ") : not yet implemented"
 
 	def bindAction(self):
+		checkData(locals())
+
 		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ") : not yet implemented"
 
 	def deleteRule(self, ruleId, buildingName, roomName):
+		checkData(locals())
+
 		room = Room(buildingName = buildingName, roomName = roomName)
 		room.retrieve()
 
@@ -111,6 +130,8 @@ class RoomsManager:
 		return {}
 
 	def disableRule(self, ruleId, buildingName, roomName):
+		checkData(locals())
+
 		room = Room(buildingName = buildingName, roomName = roomName)
 		room.retrieve()
 
@@ -123,6 +144,8 @@ class RoomsManager:
 		return {}
 
 	def enableRule(self, ruleId, buildingName, roomName, editorUuid):
+		checkData(locals())
+
 		room = Room(buildingName = buildingName, roomName = roomName)
 		room.retrieve()
 
@@ -136,6 +159,8 @@ class RoomsManager:
 
 
 	def getRuleInfo(self, buildingName = None, roomName = None, ruleId = None):
+		checkData(locals())
+
 		from app.backend.model.rule import Rule
 		rule = Rule(id = ruleId, buildingName = buildingName, roomName = roomName)
 		rule.retrieve()
@@ -144,6 +169,8 @@ class RoomsManager:
 
 
 	def setRulePriority(self, buildingName, roomName, ruleId, rulePriority):
+		checkData(locals())
+
 
 		from app.backend.model.rule import Rule
 		rule = Rule(id = ruleId, buildingName = buildingName, roomName = roomName)
@@ -154,9 +181,13 @@ class RoomsManager:
 
 
 	def addRule(self, priority, buildingName, roomName, authorUuid, ruleBody):
+		checkData(locals())
+
 		return self.__addOrModifyRule(priority = priority, buildingName = buildingName, roomName = roomName, authorUuid = authorUuid, ruleBody = ruleBody)
 
 	def editRule(self, ruleId, priority, buildingName, roomName, editorUuid, groupId, ruleBody = None, antecedent = None, consequent = None, enabled = True):
+		checkData(locals())
+
 
 		if not ruleBody:
 			if not antecedent: raise MissingInputDataError("")
@@ -231,6 +262,8 @@ class RoomsManager:
 		return result
 
 	def __addOrModifyRule(self, priority = None, buildingName = None, roomName = None, authorUuid = None, ruleBody = None, ruleId = None, antecedent = None, consequent = None, enabled = True):
+		checkData(locals())
+		
 
 		if ruleBody:
 			try:
