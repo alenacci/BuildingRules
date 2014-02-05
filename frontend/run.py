@@ -3,6 +3,7 @@ from app import app
 
 import socket
 server_ip = str(socket.gethostbyname(socket.gethostname()))
+if server_ip == "127.0.1.1" : server_ip = "192.168.199.141"
 
 # Load default config and override config from an environment variable
 app.config.update(dict(

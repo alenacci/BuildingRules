@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.34-0ubuntu0.12.04.1)
 # Database: building_rules
-# Generation Time: 2014-02-05 19:24:45 +0000
+# Generation Time: 2014-02-05 21:08:29 +0000
 # ************************************************************
 
 
@@ -71,8 +71,7 @@ LOCK TABLES `buildings` WRITE;
 
 INSERT INTO `buildings` (`building_name`, `label`, `description`)
 VALUES
-	('CSE','Compt','Computer'),
-	('EEE','Elect ','Elettronica');
+	('CSE','CSE','Computer Science Eng');
 
 /*!40000 ALTER TABLE `buildings` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -92,17 +91,6 @@ CREATE TABLE `groups` (
   PRIMARY KEY (`id`,`building_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-LOCK TABLES `groups` WRITE;
-/*!40000 ALTER TABLE `groups` DISABLE KEYS */;
-
-INSERT INTO `groups` (`id`, `building_name`, `description`, `cross_rooms_validation`, `cross_rooms_validation_categories`)
-VALUES
-	(14,'EEE','test1',1,'[\"COOLING\", \"CURTAINS\"]'),
-	(15,'EEE','test1',1,'[\"HEATING\"]'),
-	(17,'EEE','test gerarichia2',0,'[]');
-
-/*!40000 ALTER TABLE `groups` ENABLE KEYS */;
-UNLOCK TABLES;
 
 
 # Dump of table notifications
@@ -120,27 +108,6 @@ CREATE TABLE `notifications` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-LOCK TABLES `notifications` WRITE;
-/*!40000 ALTER TABLE `notifications` DISABLE KEYS */;
-
-INSERT INTO `notifications` (`id`, `send_timestamp`, `message_subject`, `message_text`, `recipient_uuid`, `message_read`)
-VALUES
-	(17,'2014-02-04 17:44:30','Rule modified in building EEE room B224','The user alenacci edited (or tried to edit) the rule <<if room temperature is between 70F and 89F then turn on the heating>>. The new rule is <<None>>',1,1),
-	(18,'2014-02-04 18:14:37','Rule modified in building EEE room B200B','The user alenacci edited (or tried to edit) the rule <<if it is rainy then close the windows>>. The new rule is << if it is rainy then close the windows >>',1,1),
-	(19,'2014-02-04 18:17:49','Rule modified in building EEE room B224','The user alenacci edited (or tried to edit) the rule <<if room temperature is between 70F and 89F then turn on the heating>>. The new rule is <<None>>',1,1),
-	(20,'2014-02-05 11:20:32','Group 14 changed your room B200B policy.','Some rules in group 14 have been changed. Since your room B200B belongs to that group, you have to revalidate all your rules.',1,0),
-	(21,'2014-02-05 11:20:32','Group 14 changed your room B200B policy.','Some rules in group 14 have been changed. Since your room B200B belongs to that group, you have to revalidate all your rules.',3,0),
-	(22,'2014-02-05 11:20:32','Rule modified in building EEE group 14','The user admin edited (or tried to edit) the rule <<if external temperature is between 55F and 70F then turn on the cooling>>. The new rule is << if external temperature is between 55F and 70F then turn on the cooling >>',1,0),
-	(23,'2014-02-05 11:20:32','Rule modified in building EEE group 14','The user admin edited (or tried to edit) the rule <<if external temperature is between 55F and 70F then turn on the cooling>>. The new rule is << if external temperature is between 55F and 70F then turn on the cooling >>',3,0),
-	(24,'2014-02-05 11:20:37','Group 14 changed your room B200B policy.','Some rules in group 14 have been changed. Since your room B200B belongs to that group, you have to revalidate all your rules.',1,0),
-	(25,'2014-02-05 11:20:37','Group 14 changed your room B200B policy.','Some rules in group 14 have been changed. Since your room B200B belongs to that group, you have to revalidate all your rules.',3,0),
-	(26,'2014-02-05 11:20:37','Rule modified in building EEE group 14','The user admin edited (or tried to edit) the rule <<if external temperature is between 55F and 70F then turn on the cooling>>. The new rule is << if external temperature is between 55F and 70F then turn on the cooling >>',1,0),
-	(27,'2014-02-05 11:20:37','Rule modified in building EEE group 14','The user admin edited (or tried to edit) the rule <<if external temperature is between 55F and 70F then turn on the cooling>>. The new rule is << if external temperature is between 55F and 70F then turn on the cooling >>',3,0),
-	(28,'2014-02-05 11:21:09','Group 14 changed your room B200B policy.','Some rules in group 14 have been changed. Since your room B200B belongs to that group, you have to revalidate all your rules.',1,0),
-	(29,'2014-02-05 11:21:09','Group 14 changed your room B200B policy.','Some rules in group 14 have been changed. Since your room B200B belongs to that group, you have to revalidate all your rules.',3,0);
-
-/*!40000 ALTER TABLE `notifications` ENABLE KEYS */;
-UNLOCK TABLES;
 
 
 # Dump of table rooms
@@ -160,8 +127,8 @@ LOCK TABLES `rooms` WRITE;
 
 INSERT INTO `rooms` (`room_name`, `building_name`, `description`)
 VALUES
-	('B200B','EEE','Descr'),
-	('B224','EEE','Desc2');
+	('2140','CSE','Bharathan office'),
+	('2142','CSE','Alessandro Office');
 
 /*!40000 ALTER TABLE `rooms` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -179,6 +146,34 @@ CREATE TABLE `rooms_actions` (
   PRIMARY KEY (`room_name`,`building_name`,`action_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+LOCK TABLES `rooms_actions` WRITE;
+/*!40000 ALTER TABLE `rooms_actions` DISABLE KEYS */;
+
+INSERT INTO `rooms_actions` (`room_name`, `building_name`, `action_id`)
+VALUES
+	('2140','CSE',1),
+	('2140','CSE',2),
+	('2140','CSE',3),
+	('2140','CSE',4),
+	('2140','CSE',5),
+	('2140','CSE',6),
+	('2140','CSE',7),
+	('2140','CSE',8),
+	('2140','CSE',9),
+	('2140','CSE',10),
+	('2142','CSE',1),
+	('2142','CSE',2),
+	('2142','CSE',3),
+	('2142','CSE',4),
+	('2142','CSE',5),
+	('2142','CSE',6),
+	('2142','CSE',7),
+	('2142','CSE',8),
+	('2142','CSE',9),
+	('2142','CSE',10);
+
+/*!40000 ALTER TABLE `rooms_actions` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table rooms_groups
@@ -193,19 +188,6 @@ CREATE TABLE `rooms_groups` (
   PRIMARY KEY (`group_id`,`building_name`,`room_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-LOCK TABLES `rooms_groups` WRITE;
-/*!40000 ALTER TABLE `rooms_groups` DISABLE KEYS */;
-
-INSERT INTO `rooms_groups` (`group_id`, `building_name`, `room_name`)
-VALUES
-	(14,'EEE','B200B'),
-	(15,'EEE','B200B'),
-	(15,'EEE','B224'),
-	(17,'EEE','B200B'),
-	(17,'EEE','B224');
-
-/*!40000 ALTER TABLE `rooms_groups` ENABLE KEYS */;
-UNLOCK TABLES;
 
 
 # Dump of table rooms_triggers
@@ -220,6 +202,36 @@ CREATE TABLE `rooms_triggers` (
   PRIMARY KEY (`room_name`,`building_name`,`trigger_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+LOCK TABLES `rooms_triggers` WRITE;
+/*!40000 ALTER TABLE `rooms_triggers` DISABLE KEYS */;
+
+INSERT INTO `rooms_triggers` (`room_name`, `building_name`, `trigger_id`)
+VALUES
+	('2140','CSE',1),
+	('2140','CSE',2),
+	('2140','CSE',5),
+	('2140','CSE',8),
+	('2140','CSE',9),
+	('2140','CSE',10),
+	('2140','CSE',11),
+	('2140','CSE',12),
+	('2140','CSE',13),
+	('2140','CSE',14),
+	('2140','CSE',15),
+	('2142','CSE',1),
+	('2142','CSE',2),
+	('2142','CSE',5),
+	('2142','CSE',8),
+	('2142','CSE',9),
+	('2142','CSE',10),
+	('2142','CSE',11),
+	('2142','CSE',12),
+	('2142','CSE',13),
+	('2142','CSE',14),
+	('2142','CSE',15);
+
+/*!40000 ALTER TABLE `rooms_triggers` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table rule_translation_dictionary
@@ -288,16 +300,6 @@ CREATE TABLE `rules` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-LOCK TABLES `rules` WRITE;
-/*!40000 ALTER TABLE `rules` DISABLE KEYS */;
-
-INSERT INTO `rules` (`id`, `priority`, `category`, `building_name`, `group_id`, `room_name`, `author_uuid`, `antecedent`, `consequent`, `enabled`, `deleted`, `creation_timestamp`, `last_edit_timestamp`)
-VALUES
-	(59,54,'WINDOWS','EEE',17,'None',1,'room temperature is between 70F and 80F','open the windows',1,0,'2014-02-04 12:18:44','2014-02-04 12:18:44'),
-	(61,136,'COOLING','EEE',14,'None',3,'external temperature is between 55F and 70F','turn on the cooling',1,0,'2014-02-04 12:40:53','2014-02-04 12:40:53');
-
-/*!40000 ALTER TABLE `rules` ENABLE KEYS */;
-UNLOCK TABLES;
 
 
 # Dump of table rules_priority
@@ -313,26 +315,6 @@ CREATE TABLE `rules_priority` (
   PRIMARY KEY (`building_name`,`room_name`,`rule_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-LOCK TABLES `rules_priority` WRITE;
-/*!40000 ALTER TABLE `rules_priority` DISABLE KEYS */;
-
-INSERT INTO `rules_priority` (`building_name`, `room_name`, `rule_id`, `rule_priority`)
-VALUES
-	('EEE','B200B',53,50),
-	('EEE','B200B',55,50),
-	('EEE','B200B',56,50),
-	('EEE','B200B',57,50),
-	('EEE','B200B',63,50),
-	('EEE','B200B',64,50),
-	('EEE','B200B',65,50),
-	('EEE','B200B',66,50),
-	('EEE','B200B',67,50),
-	('EEE','B200B',68,76),
-	('EEE','B224',54,50),
-	('EEE','B224',62,73);
-
-/*!40000 ALTER TABLE `rules_priority` ENABLE KEYS */;
-UNLOCK TABLES;
 
 
 # Dump of table sessions
@@ -352,20 +334,7 @@ LOCK TABLES `sessions` WRITE;
 
 INSERT INTO `sessions` (`session_key`, `user_uuid`, `expire_timestamp`)
 VALUES
-	('32O9V6-76be44ed341a08bf2e4c1e7fa77f7587',1,'2014-02-05 18:52:01'),
-	('47CP2S-6f14912f427ab6b2d28ed7f5ce77ac06',3,'2014-02-06 11:22:03'),
-	('BGH4SW-17da697dbe5f74c7d7f00255974476f7',1,'2014-02-05 17:51:25'),
-	('CTNFEK-98d90762493cd22452a1ef90d4c496c0',1,'2014-02-05 17:51:37'),
-	('DWVU9Q-2075cb209095ac88005e5f263def23f1',1,'2014-02-05 15:32:08'),
-	('EXT1H6-50372c60961b5317419e1faa9dcc66b0',1,'2014-02-02 16:38:22'),
-	('F2OZD4-b29f453cc4663d96e97799efecfbb82c',1,'2014-02-05 17:57:18'),
-	('HJRW9Q-9e5a644f216399e69937ed803b96330b',1,'2014-02-04 12:22:24'),
-	('JE0A9V-3722eebf4dc8b616ba23173c90b92c7b',1,'2014-02-05 17:51:06'),
-	('KEPY6W-7359de432b1c291ade045128a21b55a3',1,'2014-02-05 18:12:14'),
-	('LAJ2EE-853297922ad2aefb91c3de51bf50a32a',1,'2014-02-05 11:22:18'),
-	('NZFJ0I-14533f48f0e0ee08557d5cfae488ba33',1,'2014-02-05 11:19:51'),
-	('T8Q353-55aca4764e8ba8618c762b1c743214fe',1,'2014-02-05 17:51:12'),
-	('XQHLV3-b85086e124e2c47b1b2fd2ead25beded',1,'2014-02-05 17:57:54');
+	('MKXBQH-344cac27feec6439255fb07054aecccd',1,'2014-02-06 13:06:31');
 
 /*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -426,9 +395,8 @@ LOCK TABLES `users` WRITE;
 
 INSERT INTO `users` (`uuid`, `username`, `email`, `password`, `person_name`, `level`)
 VALUES
-	(1,'alenacci','alenacci@gmail.com','1234','Alessandro Nacci',6),
-	(2,'guest','alenacci+guest@gmail.com','1234','Guest',6),
-	(3,'admin','alenacci+admin@gmail.com','admin','admin',100);
+	(1,'anacci','alenacci@gmail.com','alexnaccix','Alessandro Nacci',10),
+	(2,'bbalaji','bbalaji@cs.ucsd.edu','bbalaji2014','Bharathan Balaji',10);
 
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -451,10 +419,8 @@ LOCK TABLES `users_rooms` WRITE;
 
 INSERT INTO `users_rooms` (`room_name`, `building_name`, `user_uuid`)
 VALUES
-	('B200B','EEE',1),
-	('B200B','EEE',3),
-	('B224','EEE',1),
-	('B224','EEE',3);
+	('2140','CSE',2),
+	('2142','CSE',1);
 
 /*!40000 ALTER TABLE `users_rooms` ENABLE KEYS */;
 UNLOCK TABLES;

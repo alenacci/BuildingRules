@@ -57,6 +57,7 @@ class Trigger:
 		queryResult = database.executeReadQuery(query)
 
 
+
 		if len(queryResult) > 0:
 			self.id = queryResult[0][0]
 			self.category = queryResult[0][1]
