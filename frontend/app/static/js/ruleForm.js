@@ -137,7 +137,7 @@ function compose()
 	actionText = actionBox.options[actionBox.selectedIndex].text;
 
 
-	if (index == 1 || index == 2 || index == 8 || index == 9 || index == 10){
+	if (index == 1 || index == 2 || index == 8 || index == 9 || index == 10 || index == 11){
 		ruleBody.value = "if " + triggerText + " then " + actionText;
 	}
 

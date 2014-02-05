@@ -5,9 +5,9 @@
 # http://www.sequelpro.com/
 # http://code.google.com/p/sequel-pro/
 #
-# Host: 127.0.0.1 (MySQL 5.5.34-0ubuntu0.12.04.1)
+# Host: 127.0.0.1 (MySQL 5.5.35-0ubuntu0.12.04.2)
 # Database: building_rules
-# Generation Time: 2014-02-05 21:08:29 +0000
+# Generation Time: 2014-02-05 22:56:21 +0000
 # ************************************************************
 
 
@@ -91,6 +91,16 @@ CREATE TABLE `groups` (
   PRIMARY KEY (`id`,`building_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+LOCK TABLES `groups` WRITE;
+/*!40000 ALTER TABLE `groups` DISABLE KEYS */;
+
+INSERT INTO `groups` (`id`, `building_name`, `description`, `cross_rooms_validation`, `cross_rooms_validation_categories`)
+VALUES
+	(1,'CSE','WeekendManager',0,'[]'),
+	(2,'CSE','DefaultRules',0,'[]');
+
+/*!40000 ALTER TABLE `groups` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table notifications
@@ -108,6 +118,28 @@ CREATE TABLE `notifications` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+LOCK TABLES `notifications` WRITE;
+/*!40000 ALTER TABLE `notifications` DISABLE KEYS */;
+
+INSERT INTO `notifications` (`id`, `send_timestamp`, `message_subject`, `message_text`, `recipient_uuid`, `message_read`)
+VALUES
+	(1,'2014-02-05 14:46:46','Rule modified in building CSE room 2142','The user anacci edited (or tried to edit) the rule <<if today is Sunday then turn off the light>>. The new rule is << if today is Sunday then turn off the light >>',1,1),
+	(2,'2014-02-05 14:46:46','Rule modified in building CSE room 2142','The user anacci edited (or tried to edit) the rule <<if today is Sunday then turn off the light>>. The new rule is << if today is Sunday then turn off the light >>',3,0),
+	(3,'2014-02-05 14:47:39','Rule modified in building CSE room 2142','The user anacci edited (or tried to edit) the rule <<if today is Sunday then turn on the heating>>. The new rule is << if today is Sunday then turn on the heating >>',1,1),
+	(4,'2014-02-05 14:47:39','Rule modified in building CSE room 2142','The user anacci edited (or tried to edit) the rule <<if today is Sunday then turn on the heating>>. The new rule is << if today is Sunday then turn on the heating >>',3,0),
+	(5,'2014-02-05 14:47:46','Rule modified in building CSE room 2142','The user anacci edited (or tried to edit) the rule <<if today is Sunday then close the windows>>. The new rule is << if today is Sunday then close the windows >>',1,1),
+	(6,'2014-02-05 14:47:46','Rule modified in building CSE room 2142','The user anacci edited (or tried to edit) the rule <<if today is Sunday then close the windows>>. The new rule is << if today is Sunday then close the windows >>',3,0),
+	(7,'2014-02-05 14:47:50','Rule modified in building CSE room 2142','The user anacci edited (or tried to edit) the rule <<if today is Sunday then turn off the cooling>>. The new rule is << if today is Sunday then turn off the cooling >>',1,1),
+	(8,'2014-02-05 14:47:50','Rule modified in building CSE room 2142','The user anacci edited (or tried to edit) the rule <<if today is Sunday then turn off the cooling>>. The new rule is << if today is Sunday then turn off the cooling >>',3,0),
+	(9,'2014-02-05 14:48:02','Rule modified in building CSE room 2142','The user anacci edited (or tried to edit) the rule <<if it is rainy then close the windows>>. The new rule is << if it is rainy then close the windows >>',1,1),
+	(10,'2014-02-05 14:48:02','Rule modified in building CSE room 2142','The user anacci edited (or tried to edit) the rule <<if it is rainy then close the windows>>. The new rule is << if it is rainy then close the windows >>',3,0),
+	(11,'2014-02-05 14:52:33','Group 1 changed your room 2140 policy.','Some rules in group 1 have been changed. Since your room 2140 belongs to that group, you have to revalidate all your rules.',2,0),
+	(12,'2014-02-05 14:52:33','Group 1 changed your room 2140 policy.','Some rules in group 1 have been changed. Since your room 2140 belongs to that group, you have to revalidate all your rules.',3,0),
+	(13,'2014-02-05 14:52:33','Group 1 changed your room 2142 policy.','Some rules in group 1 have been changed. Since your room 2142 belongs to that group, you have to revalidate all your rules.',1,0),
+	(14,'2014-02-05 14:52:33','Group 1 changed your room 2142 policy.','Some rules in group 1 have been changed. Since your room 2142 belongs to that group, you have to revalidate all your rules.',3,0);
+
+/*!40000 ALTER TABLE `notifications` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table rooms
@@ -188,6 +220,18 @@ CREATE TABLE `rooms_groups` (
   PRIMARY KEY (`group_id`,`building_name`,`room_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+LOCK TABLES `rooms_groups` WRITE;
+/*!40000 ALTER TABLE `rooms_groups` DISABLE KEYS */;
+
+INSERT INTO `rooms_groups` (`group_id`, `building_name`, `room_name`)
+VALUES
+	(1,'CSE','2140'),
+	(1,'CSE','2142'),
+	(2,'CSE','2140'),
+	(2,'CSE','2142');
+
+/*!40000 ALTER TABLE `rooms_groups` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table rooms_triggers
@@ -300,6 +344,22 @@ CREATE TABLE `rules` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+LOCK TABLES `rules` WRITE;
+/*!40000 ALTER TABLE `rules` DISABLE KEYS */;
+
+INSERT INTO `rules` (`id`, `priority`, `category`, `building_name`, `group_id`, `room_name`, `author_uuid`, `antecedent`, `consequent`, `enabled`, `deleted`, `creation_timestamp`, `last_edit_timestamp`)
+VALUES
+	(1,64,'HEATING','CSE',-1,'2142',1,'room temperature is between 60F and 70F','turn on the heating',0,0,'2014-02-05 14:44:55','2014-02-05 14:44:55'),
+	(2,71,'WINDOWS','CSE',-1,'2142',1,'it is rainy','close the windows',0,0,'2014-02-05 14:45:13','2014-02-05 14:45:13'),
+	(3,90,'HEATING','CSE',-1,'2142',1,'today is Sunday','turn on the heating',0,0,'2014-02-05 14:45:48','2014-02-05 14:45:48'),
+	(4,97,'COOLING','CSE',-1,'2142',1,'today is Sunday','turn off the cooling',0,0,'2014-02-05 14:46:05','2014-02-05 14:46:05'),
+	(5,92,'WINDOWS','CSE',-1,'2142',1,'today is Sunday','close the windows',0,0,'2014-02-05 14:46:19','2014-02-05 14:46:19'),
+	(6,50,'LIGHT','CSE',-1,'2142',1,'today is Sunday','turn off the light',0,0,'2014-02-05 14:46:38','2014-02-05 14:46:38'),
+	(7,50,'HEATING','CSE',-1,'2142',1,'external temperature is between 78F and 83F','turn on the heating',0,0,'2014-02-05 14:48:55','2014-02-05 14:48:55'),
+	(8,0,'LIGHT','CSE',1,'None',3,'today is Sunday','turn off the light',1,0,'2014-02-05 14:52:33','2014-02-05 14:52:33');
+
+/*!40000 ALTER TABLE `rules` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table rules_priority
@@ -315,6 +375,21 @@ CREATE TABLE `rules_priority` (
   PRIMARY KEY (`building_name`,`room_name`,`rule_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+LOCK TABLES `rules_priority` WRITE;
+/*!40000 ALTER TABLE `rules_priority` DISABLE KEYS */;
+
+INSERT INTO `rules_priority` (`building_name`, `room_name`, `rule_id`, `rule_priority`)
+VALUES
+	('CSE','2142',1,64),
+	('CSE','2142',2,100),
+	('CSE','2142',3,80),
+	('CSE','2142',4,80),
+	('CSE','2142',5,80),
+	('CSE','2142',6,80),
+	('CSE','2142',7,50);
+
+/*!40000 ALTER TABLE `rules_priority` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table sessions
@@ -334,7 +409,10 @@ LOCK TABLES `sessions` WRITE;
 
 INSERT INTO `sessions` (`session_key`, `user_uuid`, `expire_timestamp`)
 VALUES
-	('MKXBQH-344cac27feec6439255fb07054aecccd',1,'2014-02-06 13:06:31');
+	('2E0BHS-b1bd283e62fbebccece6c2fa21c73d3b',3,'2014-02-06 14:52:44'),
+	('L1YZXU-4bc1d77f33fee129f001affc660ad7ea',1,'2014-02-06 13:17:06'),
+	('Y4K0WT-796ad46109eccabca80ec118ab10b92d',1,'2014-02-06 13:16:16'),
+	('ZKIZAC-ff6651e2e2907ab97962ed374263f415',1,'2014-02-06 14:33:31');
 
 /*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -396,7 +474,8 @@ LOCK TABLES `users` WRITE;
 INSERT INTO `users` (`uuid`, `username`, `email`, `password`, `person_name`, `level`)
 VALUES
 	(1,'anacci','alenacci@gmail.com','alexnaccix','Alessandro Nacci',10),
-	(2,'bbalaji','bbalaji@cs.ucsd.edu','bbalaji2014','Bharathan Balaji',10);
+	(2,'bbalaji','bbalaji@cs.ucsd.edu','bbalaji2014','Bharathan Balaji',10),
+	(3,'admin','alenacci+admin@gmail.com','brules_admin_14','administrator',100);
 
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -420,7 +499,9 @@ LOCK TABLES `users_rooms` WRITE;
 INSERT INTO `users_rooms` (`room_name`, `building_name`, `user_uuid`)
 VALUES
 	('2140','CSE',2),
-	('2142','CSE',1);
+	('2140','CSE',3),
+	('2142','CSE',1),
+	('2142','CSE',3);
 
 /*!40000 ALTER TABLE `users_rooms` ENABLE KEYS */;
 UNLOCK TABLES;
