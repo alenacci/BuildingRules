@@ -24,3 +24,8 @@ backend/build/
 backend/tools/z3/z3/
 frontend/venv/
 frontend/build/
+
+# Logging folders
+###################
+backend/logs
+frontend/logs
