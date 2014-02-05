@@ -8,4 +8,7 @@ app.config.update(dict(
 ))
 app.config.from_envvar('FLASKR_SETTINGS', silent=True)
 
-app.run(host="192.168.199.141", port=5003)
+import socket
+server_ip = str(socket.gethostbyname(socket.gethostname()))
+
+app.run(host=server_ip, port=5003)
