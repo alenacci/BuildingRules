@@ -172,9 +172,18 @@ class GroupsManager:
 		groupRoomList = group.getRooms()
 		for room in groupRoomList:
 
+			groupRules = group.getRules(excludedRuleId = excludedRuleId)
+
+			# Checking that a priority is unique over the same category	
+			for r in groupRules:
+				if str(r.category) == str(category) and int(r.getPriority()) == int(priority):
+					raise AlredyAssignedPriorityError("In group " + str(groupId) + " the priority " + str(priority) + " has alredy been assigned to another rule with the same category!")
+
+
 			temporaryRuleSet = []
 			temporaryRuleSet.extend(room.getRules(author = False, includeGroupsRules = True, excludedRuleId = False, excludeCrossRoomValidationRules = True))
-			temporaryRuleSet.extend(group.getRules(excludedRuleId = excludedRuleId))
+			temporaryRuleSet.extend(groupRules)
+
 			temporaryRuleSet.append(rule)
 
 

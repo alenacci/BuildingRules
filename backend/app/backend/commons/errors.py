@@ -90,3 +90,6 @@ class TooManyInputParametersError(Exception):
 
 class BuildingDepotError(Exception):
 	pass
+
+class AlredyAssignedPriorityError(Exception):
+	pass

@@ -1,6 +1,12 @@
 
 var ruleNumber = 1;
 
+function updatePriority(value)
+{
+	priorityTextBox = document.getElementById('priorityTextBox');
+	priorityTextBox.value = value;
+}
+
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
@@ -185,7 +191,6 @@ function init()
 		hide('date_box_' + i);
 		
 	}
-
 
 }
 

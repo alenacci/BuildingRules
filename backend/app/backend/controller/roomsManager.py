@@ -248,6 +248,8 @@ class RoomsManager:
 		if int(str(priority)) < 0 or int(str(priority)) > 200:
 			raise RulePriorityError("Rules for rooms must have a priority value between 0 and 100. You inserted " + str(priority))
 
+
+
 		from app.backend.model.rule import Rule
 		from app.backend.model.room import Room
 
@@ -279,8 +281,15 @@ class RoomsManager:
 		# excludedRuleId is needed to ignore the rule that the user want to edit
 		excludedRuleId = ruleId if ruleId else None		
 
+		roomRules = room.getRules(author = False, includeGroupsRules = True, excludedRuleId = excludedRuleId)
+
+		# Checking that a priority is unique over the same category	
+		for r in roomRules:
+			if str(r.category) == str(category) and int(r.getPriority()) == int(priority):
+				raise AlredyAssignedPriorityError("In room " + roomName + " the priority " + str(priority) + " has alredy been assigned to another rule with the same category!")
+
 		temporaryRuleSet = []
-		temporaryRuleSet.extend(room.getRules(author = False, includeGroupsRules = True, excludedRuleId = excludedRuleId))
+		temporaryRuleSet.extend(roomRules)
 		temporaryRuleSet.append(rule)
 
 

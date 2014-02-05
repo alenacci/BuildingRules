@@ -40,7 +40,7 @@
               <h3 class="muted">IF</h3>
               <select name="trigger_0" id="trigger_0" onchange="triggerSelected(0)">
                 <option>Select a trigger</option>
-                <option value="someone is in the room the room">someone is in the room</option><option value="nobody is in the room in the room ">nobody is in the room</option><option value="room temperature is between">room temperature is between</option><option value="external temperature is between">external temperature is between</option><option value="time is between">time is is between</option><option value="the date is between">the date is between</option><option value="today is">today is</option><option value="it is sunny">it is sunny</option><option value="it is rainy">it is rainy</option><option value="it is rainy">it is cloudy</option>
+                <option value="someone is in the room the room">someone is in the room</option><option value="nobody is in the room in the room ">nobody is in the room</option><option value="room temperature is between">room temperature is between</option><option value="external temperature is between">external temperature is between</option><option value="time is between">time is between</option><option value="the date is between">the date is between</option><option value="today is">today is</option><option value="it is sunny">it is sunny</option><option value="it is rainy">it is rainy</option><option value="it is rainy">it is cloudy</option>
               </select>
 
               <div id="temperature_box_0">
@@ -110,12 +110,15 @@
 	    <div class="controls">
 
 			{% if insertionForGroup %}
-				<bold class="muted">LOW</bold> <input type="range" min ="0" max="200" name="priority" id="priority" value="{% if rule %}{{rule.priority}}{% endif %}"> <bold class="muted">HIGH</bold>
+				<bold class="muted">LOW</bold> <input type="range" min ="0" max="200" name="priority" id="priority" value="{% if rule %}{{rule.priority}}{% endif %}" onchange="updatePriority(this.value);"> <bold class="muted">HIGH</bold>
+        <input type="text" name="priorityTextBox" id="priorityTextBox" readonly="" class="input-small" value="{% if rule %}{{rule.priority}}{% else %}100{% endif %}">
 			{% endif %}
 
 			{% if insertionForRoom %}
-				<bold class="muted">LOW</bold> <input type="range" min ="0" max="100" name="priority" id="priority" value="{% if rule %}{{rule.priority}}{% endif %}"> <bold class="muted">HIGH</bold>
+				<bold class="muted">LOW</bold> <input type="range" min ="0" max="100" name="priority" id="priority" value="{% if rule %}{{rule.priority}}{% endif %}" onchange="updatePriority(this.value);"> <bold class="muted">HIGH</bold>
+        <input type="text" name="priorityTextBox" id="priorityTextBox" readonly="" class="input-small" value="{% if rule %}{{rule.priority}}{% else %}50{% endif %}">
 			{% endif %}
+      
 			<br>
 			<small class="muted"><b>Allowed priority values:</b></small>
 			{% if insertionForGroup %}
