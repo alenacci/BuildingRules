@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.34-0ubuntu0.12.04.1)
 # Database: building_rules
-# Generation Time: 2014-02-02 02:58:12 +0000
+# Generation Time: 2014-02-05 19:24:45 +0000
 # ************************************************************
 
 
@@ -92,6 +92,17 @@ CREATE TABLE `groups` (
   PRIMARY KEY (`id`,`building_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+LOCK TABLES `groups` WRITE;
+/*!40000 ALTER TABLE `groups` DISABLE KEYS */;
+
+INSERT INTO `groups` (`id`, `building_name`, `description`, `cross_rooms_validation`, `cross_rooms_validation_categories`)
+VALUES
+	(14,'EEE','test1',1,'[\"COOLING\", \"CURTAINS\"]'),
+	(15,'EEE','test1',1,'[\"HEATING\"]'),
+	(17,'EEE','test gerarichia2',0,'[]');
+
+/*!40000 ALTER TABLE `groups` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table notifications
@@ -114,15 +125,19 @@ LOCK TABLES `notifications` WRITE;
 
 INSERT INTO `notifications` (`id`, `send_timestamp`, `message_subject`, `message_text`, `recipient_uuid`, `message_read`)
 VALUES
-	(32,'2014-02-01 16:43:08','Rule modified in building EEE room 200','The user alenacci edited (or tried to edit) the rule <<if someone is in the room then turn on the heating>>. The new rule is << if someone is in the room then turn on the heating >>',1,1),
-	(33,'2014-02-01 16:43:12','Rule modified in building EEE room 200','The user alenacci edited (or tried to edit) the rule <<if time is between 7AM and 3PM then close the windows>>. The new rule is << if time is between 7AM and 3PM then close the windows >>',1,1),
-	(34,'2014-02-01 16:43:16','Rule modified in building EEE room 200','The user alenacci edited (or tried to edit) the rule <<if room temperature is between 10C and 20C then turn off the heating>>. The new rule is << if room temperature is between 10C and 20C then turn off the heating >>',1,1),
-	(35,'2014-02-01 16:47:00','Rule modified in building EEE room 200','The user alenacci edited (or tried to edit) the rule <<if no rule specified then turn off the heating>>. The new rule is << if no rule specified then turn off the heating >>',1,1),
-	(36,'2014-02-01 18:36:38','Rule modified in building EEE room 200','The user alenacci edited (or tried to edit) the rule <<if room temperature is between 10 and 20 then turn off the light>>. The new rule is << if room temperature is between 10 and 19 then turn off the light >>',1,1),
-	(37,'2014-02-01 18:36:44','Rule modified in building EEE room 200','The user alenacci edited (or tried to edit) the rule <<if room temperature is between 22 and 400 then turn off the light>>. The new rule is << if room temperature is between 2 and 400 then turn off the light >>',1,1),
-	(38,'2014-02-01 18:39:15','Rule modified in building EEE room 200','The user alenacci edited (or tried to edit) the rule <<if room temperature is between 2 and 400 then turn off the light>>. The new rule is << if room temperature is between 20 and 400 then turn off the light >>',1,1),
-	(39,'2014-02-01 18:40:51','Rule modified in building EEE room 200','The user alenacci edited (or tried to edit) the rule <<if room temperature is between 15 and 20 then turn off the heating>>. The new rule is << if room temperature is between 15 and 20 then turn on the heating >>',1,1),
-	(40,'2014-02-01 18:53:14','Rule modified in building EEE room 200','The user alenacci edited (or tried to edit) the rule <<if room temperature is between 23 and 25 then turn off the heating>>. The new rule is << if room temperature is between 23 and 25 then turn off the heating >>',1,1);
+	(17,'2014-02-04 17:44:30','Rule modified in building EEE room B224','The user alenacci edited (or tried to edit) the rule <<if room temperature is between 70F and 89F then turn on the heating>>. The new rule is <<None>>',1,1),
+	(18,'2014-02-04 18:14:37','Rule modified in building EEE room B200B','The user alenacci edited (or tried to edit) the rule <<if it is rainy then close the windows>>. The new rule is << if it is rainy then close the windows >>',1,1),
+	(19,'2014-02-04 18:17:49','Rule modified in building EEE room B224','The user alenacci edited (or tried to edit) the rule <<if room temperature is between 70F and 89F then turn on the heating>>. The new rule is <<None>>',1,1),
+	(20,'2014-02-05 11:20:32','Group 14 changed your room B200B policy.','Some rules in group 14 have been changed. Since your room B200B belongs to that group, you have to revalidate all your rules.',1,0),
+	(21,'2014-02-05 11:20:32','Group 14 changed your room B200B policy.','Some rules in group 14 have been changed. Since your room B200B belongs to that group, you have to revalidate all your rules.',3,0),
+	(22,'2014-02-05 11:20:32','Rule modified in building EEE group 14','The user admin edited (or tried to edit) the rule <<if external temperature is between 55F and 70F then turn on the cooling>>. The new rule is << if external temperature is between 55F and 70F then turn on the cooling >>',1,0),
+	(23,'2014-02-05 11:20:32','Rule modified in building EEE group 14','The user admin edited (or tried to edit) the rule <<if external temperature is between 55F and 70F then turn on the cooling>>. The new rule is << if external temperature is between 55F and 70F then turn on the cooling >>',3,0),
+	(24,'2014-02-05 11:20:37','Group 14 changed your room B200B policy.','Some rules in group 14 have been changed. Since your room B200B belongs to that group, you have to revalidate all your rules.',1,0),
+	(25,'2014-02-05 11:20:37','Group 14 changed your room B200B policy.','Some rules in group 14 have been changed. Since your room B200B belongs to that group, you have to revalidate all your rules.',3,0),
+	(26,'2014-02-05 11:20:37','Rule modified in building EEE group 14','The user admin edited (or tried to edit) the rule <<if external temperature is between 55F and 70F then turn on the cooling>>. The new rule is << if external temperature is between 55F and 70F then turn on the cooling >>',1,0),
+	(27,'2014-02-05 11:20:37','Rule modified in building EEE group 14','The user admin edited (or tried to edit) the rule <<if external temperature is between 55F and 70F then turn on the cooling>>. The new rule is << if external temperature is between 55F and 70F then turn on the cooling >>',3,0),
+	(28,'2014-02-05 11:21:09','Group 14 changed your room B200B policy.','Some rules in group 14 have been changed. Since your room B200B belongs to that group, you have to revalidate all your rules.',1,0),
+	(29,'2014-02-05 11:21:09','Group 14 changed your room B200B policy.','Some rules in group 14 have been changed. Since your room B200B belongs to that group, you have to revalidate all your rules.',3,0);
 
 /*!40000 ALTER TABLE `notifications` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -145,7 +160,8 @@ LOCK TABLES `rooms` WRITE;
 
 INSERT INTO `rooms` (`room_name`, `building_name`, `description`)
 VALUES
-	('200','EEE','Descr');
+	('B200B','EEE','Descr'),
+	('B224','EEE','Desc2');
 
 /*!40000 ALTER TABLE `rooms` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -177,6 +193,19 @@ CREATE TABLE `rooms_groups` (
   PRIMARY KEY (`group_id`,`building_name`,`room_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+LOCK TABLES `rooms_groups` WRITE;
+/*!40000 ALTER TABLE `rooms_groups` DISABLE KEYS */;
+
+INSERT INTO `rooms_groups` (`group_id`, `building_name`, `room_name`)
+VALUES
+	(14,'EEE','B200B'),
+	(15,'EEE','B200B'),
+	(15,'EEE','B224'),
+	(17,'EEE','B200B'),
+	(17,'EEE','B224');
+
+/*!40000 ALTER TABLE `rooms_groups` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table rooms_triggers
@@ -230,7 +259,8 @@ VALUES
 	(17,'Z3','close the windows','(not (openWindows 1))'),
 	(18,'Z3','open the curtains','(openCurtains 1)'),
 	(19,'Z3','close the curtains','(not (openCurtains 1))'),
-	(20,'Z3','no rule specified','(noRule 1)');
+	(20,'Z3','no rule specified','(noRule 1)'),
+	(21,'Z3','today is @val','(= (today 1) @val)');
 
 /*!40000 ALTER TABLE `rule_translation_dictionary` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -263,10 +293,8 @@ LOCK TABLES `rules` WRITE;
 
 INSERT INTO `rules` (`id`, `priority`, `category`, `building_name`, `group_id`, `room_name`, `author_uuid`, `antecedent`, `consequent`, `enabled`, `deleted`, `creation_timestamp`, `last_edit_timestamp`)
 VALUES
-	(31,50,'HEATING','EEE',-1,'200',1,'room temperature is between 15 and 20','turn on the heating',1,0,'2014-02-01 18:40:41','2014-02-01 18:40:41'),
-	(32,50,'HEATING','EEE',-1,'200',1,'room temperature is between 23 and 25','turn off the heating',1,0,'2014-02-01 18:41:12','2014-02-01 18:41:12'),
-	(33,50,'COOLING','EEE',-1,'200',1,'external temperature is between 25 and 33','turn on the cooling',1,0,'2014-02-01 18:42:10','2014-02-01 18:42:10'),
-	(34,50,'COOLING','EEE',-1,'200',1,'external temperature is between 3 and 18','turn off the cooling',1,0,'2014-02-01 18:42:37','2014-02-01 18:42:37');
+	(59,54,'WINDOWS','EEE',17,'None',1,'room temperature is between 70F and 80F','open the windows',1,0,'2014-02-04 12:18:44','2014-02-04 12:18:44'),
+	(61,136,'COOLING','EEE',14,'None',3,'external temperature is between 55F and 70F','turn on the cooling',1,0,'2014-02-04 12:40:53','2014-02-04 12:40:53');
 
 /*!40000 ALTER TABLE `rules` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -279,7 +307,7 @@ DROP TABLE IF EXISTS `rules_priority`;
 
 CREATE TABLE `rules_priority` (
   `building_name` varchar(11) NOT NULL DEFAULT '0',
-  `room_name` int(11) NOT NULL DEFAULT '0',
+  `room_name` varchar(11) NOT NULL DEFAULT '0',
   `rule_id` int(11) NOT NULL DEFAULT '0',
   `rule_priority` int(11) DEFAULT NULL,
   PRIMARY KEY (`building_name`,`room_name`,`rule_id`)
@@ -290,23 +318,18 @@ LOCK TABLES `rules_priority` WRITE;
 
 INSERT INTO `rules_priority` (`building_name`, `room_name`, `rule_id`, `rule_priority`)
 VALUES
-	('EEE',200,18,50),
-	('EEE',200,19,61),
-	('EEE',200,20,50),
-	('EEE',200,21,77),
-	('EEE',200,22,0),
-	('EEE',200,23,50),
-	('EEE',200,24,50),
-	('EEE',200,25,50),
-	('EEE',200,26,50),
-	('EEE',200,27,50),
-	('EEE',200,28,50),
-	('EEE',200,29,50),
-	('EEE',200,30,50),
-	('EEE',200,31,50),
-	('EEE',200,32,50),
-	('EEE',200,33,50),
-	('EEE',200,34,50);
+	('EEE','B200B',53,50),
+	('EEE','B200B',55,50),
+	('EEE','B200B',56,50),
+	('EEE','B200B',57,50),
+	('EEE','B200B',63,50),
+	('EEE','B200B',64,50),
+	('EEE','B200B',65,50),
+	('EEE','B200B',66,50),
+	('EEE','B200B',67,50),
+	('EEE','B200B',68,76),
+	('EEE','B224',54,50),
+	('EEE','B224',62,73);
 
 /*!40000 ALTER TABLE `rules_priority` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -329,7 +352,20 @@ LOCK TABLES `sessions` WRITE;
 
 INSERT INTO `sessions` (`session_key`, `user_uuid`, `expire_timestamp`)
 VALUES
-	('EXT1H6-50372c60961b5317419e1faa9dcc66b0',1,'2014-02-02 16:38:22');
+	('32O9V6-76be44ed341a08bf2e4c1e7fa77f7587',1,'2014-02-05 18:52:01'),
+	('47CP2S-6f14912f427ab6b2d28ed7f5ce77ac06',3,'2014-02-06 11:22:03'),
+	('BGH4SW-17da697dbe5f74c7d7f00255974476f7',1,'2014-02-05 17:51:25'),
+	('CTNFEK-98d90762493cd22452a1ef90d4c496c0',1,'2014-02-05 17:51:37'),
+	('DWVU9Q-2075cb209095ac88005e5f263def23f1',1,'2014-02-05 15:32:08'),
+	('EXT1H6-50372c60961b5317419e1faa9dcc66b0',1,'2014-02-02 16:38:22'),
+	('F2OZD4-b29f453cc4663d96e97799efecfbb82c',1,'2014-02-05 17:57:18'),
+	('HJRW9Q-9e5a644f216399e69937ed803b96330b',1,'2014-02-04 12:22:24'),
+	('JE0A9V-3722eebf4dc8b616ba23173c90b92c7b',1,'2014-02-05 17:51:06'),
+	('KEPY6W-7359de432b1c291ade045128a21b55a3',1,'2014-02-05 18:12:14'),
+	('LAJ2EE-853297922ad2aefb91c3de51bf50a32a',1,'2014-02-05 11:22:18'),
+	('NZFJ0I-14533f48f0e0ee08557d5cfae488ba33',1,'2014-02-05 11:19:51'),
+	('T8Q353-55aca4764e8ba8618c762b1c743214fe',1,'2014-02-05 17:51:12'),
+	('XQHLV3-b85086e124e2c47b1b2fd2ead25beded',1,'2014-02-05 17:57:54');
 
 /*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -362,8 +398,9 @@ VALUES
 	(10,'WEATHER','SUNNY','it is sunny','check the weather'),
 	(11,'WEATHER','RAINY','it is rainy','check the weather'),
 	(12,'ROOM_TEMPERATURE','ROOM_TEMPERATURE_RANGE','room temperature is between @val and @val','check temperature'),
-	(13,'WEATHER','RAINY','it is cloudy','check the weather'),
-	(14,'DEFAULT_STATUS','NO_RULE','no rule specified','default rule');
+	(13,'WEATHER','CLOUDY','it is cloudy','check the weather'),
+	(14,'DEFAULT_STATUS','NO_RULE','no rule specified','default rule'),
+	(15,'DAY','TODAY','today is @val','rules for the current day');
 
 /*!40000 ALTER TABLE `triggers` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -390,8 +427,8 @@ LOCK TABLES `users` WRITE;
 INSERT INTO `users` (`uuid`, `username`, `email`, `password`, `person_name`, `level`)
 VALUES
 	(1,'alenacci','alenacci@gmail.com','1234','Alessandro Nacci',6),
-	(2,'guest','guest@brules.com','1234','Guest',6),
-	(3,'admin','admin','admin','admin',100);
+	(2,'guest','alenacci+guest@gmail.com','1234','Guest',6),
+	(3,'admin','alenacci+admin@gmail.com','admin','admin',100);
 
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -414,7 +451,10 @@ LOCK TABLES `users_rooms` WRITE;
 
 INSERT INTO `users_rooms` (`room_name`, `building_name`, `user_uuid`)
 VALUES
-	('200','EEE',1);
+	('B200B','EEE',1),
+	('B200B','EEE',3),
+	('B224','EEE',1),
+	('B224','EEE',3);
 
 /*!40000 ALTER TABLE `users_rooms` ENABLE KEYS */;
 UNLOCK TABLES;
