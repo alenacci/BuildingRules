@@ -78,6 +78,16 @@ class DatetimeTriggerDriver(GenericTriggerDriver):
 
 			return bool(random.getrandbits(1))
 
+		elif self.parameters["operation"] == "TIME_IN_RANGE":
+
+			par0 = int(self.__getIntFromTime(self.parameters['0']))
+			today = int(datetime.datetime.today().weekday() + 1)
+
+			if today == par0:
+				return True
+			else:
+				return False
+
 
 		else:
 			raise UnsupportedDriverParameterError(self.parameters["operation"])

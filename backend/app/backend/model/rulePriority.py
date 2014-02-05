@@ -39,7 +39,6 @@ class RulePriority:
 		database.executeWriteQuery(query)
 		database.close()
 
-		print query
 
 	def retrieve(self):
 

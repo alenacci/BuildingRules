@@ -39,6 +39,7 @@ class TriggerManager:
 				parameterNumber = model.count("@val")
 				originalModel = model.strip()
 				model = model.replace("@val","(.+)").strip()
+	
 
 				matchObj = re.match( model, ruleAntecedent, re.M|re.I)
 
@@ -82,13 +83,22 @@ class TriggerManager:
 			
 			return str(value)
 
-
-
 		if triggerCategory == "DATE":
 			import time
 			day = value[:value.find("/")]
 			month = value[value.find("/")+1:]
 			return str( time.strptime(day + " " + month + " 00", "%d %m %y").tm_yday )
+
+		if triggerCategory == "DAY":
+			if value.upper().startswith("MON"): return str(1)
+			if value.upper().startswith("TUE"): return str(2)
+			if value.upper().startswith("WED"): return str(3)
+			if value.upper().startswith("THU"): return str(4)
+			if value.upper().startswith("FRI"): return str(5)
+			if value.upper().startswith("SAT"): return str(6)
+			if value.upper().startswith("SUN"): return str(7)
+			raise NotWellFormedRuleError("Impossibile to understand the mentioned name of the week.")
+
 
 		if triggerCategory == "ROOM_TEMPERATURE" or triggerCategory == "EXT_TEMPERATURE":
 			return value.replace("C", "").replace("F", "")
@@ -157,6 +167,10 @@ class TriggerManager:
 
 		if trigger.triggerName == "DATE_RANGE":
 			parameters.update({'operation' : 'DATE_IN_RANGE'})
+			return  DatetimeTriggerDriver(parameters = parameters)
+
+		if trigger.triggerName == "TODAY":
+			parameters.update({'operation' : 'TODAY'})
 			return  DatetimeTriggerDriver(parameters = parameters)
 
 		if trigger.triggerName == "EXT_TEMPERATURE_RANGE":

@@ -63,7 +63,6 @@ class Notification:
 			query = "INSERT INTO notifications (send_timestamp, message_subject, message_text, recipient_uuid, message_read) VALUES ('@@send_timestamp@@', '@@message_subject@@', '@@message_text@@', '@@recipient_uuid@@', '@@message_read@@');"	
 	
 		query = self.__replaceSqlQueryToken(query)
-		print query
 		database.executeWriteQuery(query)
 		database.close()
 

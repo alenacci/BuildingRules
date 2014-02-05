@@ -142,7 +142,6 @@ class Group:
 		self.id = int(database.getLastInsertedId()) if not self.id else self.id
 		database.close()
 
-		print query
 
 
 	def retrieve(self):

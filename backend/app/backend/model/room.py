@@ -210,7 +210,6 @@ class Room:
 		queryResult = database.executeReadQuery(query)
 		database.close()
 
-		print query
 
 		ruleList = []
 		for ruleRecord in queryResult:

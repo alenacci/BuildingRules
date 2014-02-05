@@ -36,7 +36,7 @@
 		         <span class="icon-bar"></span>
 		         <span class="icon-bar"></span>
 		       </a>
-		       <a class="brand" href="../">BuildingRules</a>
+		       <a class="brand" href="/">BuildingRules</a>
 		       <div class="nav-collapse collapse" id="main-menu">
 		        <ul class="nav" id="main-menu-left">
 		          <li><a id="swatch-link" href="{{url_for('gui.buildings')}}">Home</a></li>
@@ -53,18 +53,6 @@
 		          	{% endif %}
 		          </a></li>
 		        </ul>
-		        {% if session.logged_in %}
-			        <ul class="nav pull-right">
-						<div class="btn-group">
-							<a class="btn dropdown-toggle" data-toggle="dropdown" href="{{base_path}}/{{selected_building}}">Change Building<span class="caret"></span></a>
-							<ul class="dropdown-menu">
-								{% for b in session.buildings %}
-									<li><a tabindex="-1" href="">{{b.buildingName}}</a></li>
-								{% endfor %}
-							</ul>
-						</div>
-			        </ul>
-		        {% endif %}
 		       </div>
 		     </div>
 		   </div>
