@@ -15,3 +15,5 @@ unzip z3-x64-ubuntu-12.04.zip -d tools/z3
 rm z3-x64-ubuntu-12.04.zip
 mv tools/z3/z3-4.3.2.a5335270042c-x64-ubuntu-12.04 tools/z3/z3
 rm -r tools/z3/__MACOSX
+
+mkdir logs
