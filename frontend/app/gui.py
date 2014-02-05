@@ -9,6 +9,10 @@ gui = Blueprint('gui', __name__, template_folder='templates')
 
 @gui.route('/')
 def index():
+
+	if loggedIn():
+		return redirect(url_for('gui.buildings'))
+
 	return render_template('home.html')
 
 @gui.route('/login/', methods = ['GET', 'POST'])
@@ -23,12 +27,21 @@ def login():
 
 		response = rest.request("/api/users/<username>/login", {'username' : username, 'password' : password})
 
-
 		if successResponse(response):
 			session["logged_in"] = True
 			session["sessionKey"] = response["sessionKey"]
 			session["userUuid"] = response["userUuid"]
 			session["username"] = username
+			
+
+			response = rest.request("/api/users/<username>", {'username' : session["username"], 'sessionKey' : session["sessionKey"], 'userUuid' : session["userUuid"]})
+			if not successResponse(response): render_template('error.html', error = response['request-errorDescription'])
+			session["userLevel"] = response["level"]
+			session["userEmail"] = response["email"]
+
+			response = rest.request("/api/users/<username>/buildings", {'username' : session["username"], 'sessionKey' : session["sessionKey"], 'userUuid' : session["userUuid"]})
+			if not successResponse(response): render_template('error.html', error = response['request-errorDescription'])
+			session["buildings"] = response["buildings"]
 
 			return redirect(url_for('gui.index'))
 		else:
@@ -70,6 +83,10 @@ def buildings():
 		
 	response = rest.request("/api/users/<username>/buildings", {'username' : session["username"], 'sessionKey' : session["sessionKey"], 'userUuid' : session["userUuid"]})
 
+	if len(response["buildings"]) == 1:
+		buildingName = response["buildings"][0]["buildingName"]
+		return redirect(url_for('gui.buildingDetail', buildingName = buildingName))		
+
 	if successResponse(response):
 		return render_template('buildings.html', buildings = response["buildings"])	
 	else:
@@ -87,6 +104,9 @@ def buildings():
 def buildingDetail(buildingName = None):
 
 	if not loggedIn():	return redirect(url_for('gui.login'))
+
+	if int(session["userLevel"]) < 100:
+		return redirect(url_for('gui.rooms', buildingName = buildingName))
 		
 	response = rest.request("/api/users/<username>/buildings/<buildingName>", {'username' : session["username"], 'buildingName' : buildingName, 'sessionKey' : session["sessionKey"], 'userUuid' : session["userUuid"]})
 

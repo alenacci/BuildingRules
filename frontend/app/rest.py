@@ -1,6 +1,9 @@
 from app import app
 import requests
 import json
+import logging
+import datetime
+import time
 
 def request(url, data):
 
@@ -20,7 +23,15 @@ def request(url, data):
 	url = "http://" + app.config['API_SERVER_IP'] + ":" + str(app.config['API_SERVER_PORT']) + url
 	headers = {'Accept-Language': 'en-us', 'Content-Type': 'application/x-www-form-urlencoded', 'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate'}
 	
-	print "API_REQUEST: Contacting " + url + " with params " + str(data)
+
+	message = "API_REQUEST: Contacting " + url + " with params " + str(data)
+	ts = time.time()
+	st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
+	message = "BRulesDeamon> " + st + " > " + message 
+	logging.basicConfig(filename='logs/api_requests.log',level=logging.DEBUG)
+	logging.info(message)
+	print message
+
 
 	r = requests.post(url, data=data, headers=headers)
 

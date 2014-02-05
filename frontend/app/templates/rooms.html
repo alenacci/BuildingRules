@@ -53,7 +53,9 @@
 									{% endif %}
 
 									{% if rule.groupId and rule.roomName %}
-									- [<a href="{{request.path}}/../groups/{{rule.groupId}}/rooms/{{rule.roomName}}/rules/{{rule.id}}/edit">Edit</a>] [<a href="{{request.path}}/{{rule.roomName}}/rules/{{rule.id}}/delete">Delete</a>]
+									- [<a href="{{request.path}}/../groups/{{rule.groupId}}/rooms/{{rule.roomName}}/rules/{{rule.id}}/edit">Edit</a>]
+									  [<a href="{{request.path}}/{{rule.roomName}}/rules/{{rule.id}}/delete">Delete</a>]
+									  
 									{% else %}
 										{% if rule.roomName %}
 											- [<a href="{{request.path}}/{{rule.roomName}}/rules/{{rule.id}}/edit">Edit</a>] [<a href="{{request.path}}/{{rule.roomName}}/rules/{{rule.id}}/delete">Delete</a>]

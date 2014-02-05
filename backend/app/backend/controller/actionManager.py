@@ -41,10 +41,10 @@ class ActionManager:
 				matchObj = re.match( model, ruleConsequent, re.M|re.I)
 
 				if matchObj:
-					parameterValues = []
+					parameterValues = {}
 
 					for i in range(0,parameterNumber):
-						parameterValues.append(matchObj.group(i + 1))
+						parameterValues[str(i)] = matchObj.group(i + 1)
 
 					return (action, originalModel, parameterValues)
 

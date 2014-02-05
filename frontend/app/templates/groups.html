@@ -83,6 +83,7 @@
 						<h5>Group type</h5>
 						{% if group.crossRoomsValidation %}
 							<p>Cross-Room Validator</p>
+							{{group['crossRoomsValidationCategories']}}
 						{% else %}
 							<p>Single-Room Validator</p>
 						{% endif %}

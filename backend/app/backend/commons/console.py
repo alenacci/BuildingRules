@@ -3,12 +3,17 @@ import sys
 import time
 import datetime
 import json
+import logging
+
 
 def flash(message, color = None):
 	ts = time.time()
 	st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
 
-	message = "BRulesDeamon> " + st + " > " + message 
+	message = "BRules> " + str(st) + " > " + str(message)
+
+	logging.basicConfig(filename='logs/deamon.log',level=logging.DEBUG)
+	logging.info(message)
 
 	if color:
 		if color == "red":
@@ -23,3 +28,4 @@ def flash(message, color = None):
 			message =  '\033[1;30m' + message + '\033[1;m'			
 
 	print message
+

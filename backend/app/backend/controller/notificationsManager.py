@@ -4,14 +4,17 @@ from app.backend.commons.errors import *
 from app.backend.model.notification import Notification
 from app.backend.model.notifications import Notifications
 
+import imaplib
+import smtplib  
+import email
+
+
 class NotificationsManager:
 	def __init__(self):
 		pass
 
 	def sendNotification(self, userUuid = None, buildingName = None, groupId = None, roomName = None, messageSubject = None, messageText = None):
 		
-		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  not yet tested"
-
 		if not messageSubject:
 			raise NewNotificationMissingInputError("messageSubject is mandatory to send a new notification")
 
@@ -71,6 +74,34 @@ class NotificationsManager:
 
 		return {}
 
+	def sendNotificationByEmail(self, recipientUuid, messageSubject, messageText):
+		from app.backend.model.user import User
+		recipientUser = User(uuid = recipientUuid)
+		recipientUser.retrieve()
+		
+		recipient = recipientUser.email
+		subject = "[BuldingRules Notification] " + messageSubject
+		message = messageText
+
+		self.__send_message(recipient = recipient, subject = subject, message = message)
+
+	def __send_message(self, recipient, subject, message):
+
+		__MAIN_ADDRESS = 'energybox.buildingrules@gmail.com'
+		__MAIN_PASSWORD  = 'buildingdepot'
+
+		fromaddr = __MAIN_ADDRESS 
+		toaddrs  = recipient
+
+		complete_msg = 'Subject: %s\n\n%s' % (subject, message)
+		  
+		# The actual mail send  
+		server = smtplib.SMTP('smtp.gmail.com:587')  
+		server.starttls()  
+		server.login(__MAIN_ADDRESS,__MAIN_PASSWORD )  
+		server.sendmail(fromaddr, toaddrs, complete_msg)  
+		server.quit()  
+
 
 	def setNotificationAsRead(self, notificationId):
 
@@ -84,7 +115,7 @@ class NotificationsManager:
 		notification.setAsUnread()
 		return {}
 
-	def getNotifications(self, userUuid, username):
+	def getNotifications(self, userUuid, username, automaticallySetAsRead = True):
 
 		from app.backend.model.user import User
 		user = User(username = username)
@@ -98,7 +129,7 @@ class NotificationsManager:
 		notificationList = []
 
 		for notification in notifications.retrieveNotifications(userUuid = userUuid):
-			notification.setAsRead()
+			if automaticallySetAsRead: notification.setAsRead()
 			notificationList.append(notification.getDict())
 		
 		return {"notifications" : notificationList}

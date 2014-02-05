@@ -39,17 +39,32 @@
 		       <a class="brand" href="../">BuildingRules</a>
 		       <div class="nav-collapse collapse" id="main-menu">
 		        <ul class="nav" id="main-menu-left">
-		          <li><a id="swatch-link" href="{{url_for('gui.buildings')}}">Buildings</a></li>
-		          <li><a id="swatch-link" href="{{url_for('gui.logout')}}">Logout</a></li>		          
-		          <li><a id="swatch-link" href="{{url_for('gui.login')}}">Login</a></li>
+		          <li><a id="swatch-link" href="{{url_for('gui.buildings')}}">Home</a></li>
+		          {% if session.logged_in %}
+		          	<li><a id="swatch-link" href="{{url_for('gui.logout')}}">Logout</a></li>		          
+		          {% else %}
+		          	<li><a id="swatch-link" href="{{url_for('gui.login')}}">Login</a></li>
+		          {% endif %}
 		        </ul>
 		        <ul class="nav pull-right">
 		          <li><a href="#">
-		          	{% if session %}
+		          	{% if session.logged_in %}
 		          		{{session.username}}
 		          	{% endif %}
 		          </a></li>
 		        </ul>
+		        {% if session.logged_in %}
+			        <ul class="nav pull-right">
+						<div class="btn-group">
+							<a class="btn dropdown-toggle" data-toggle="dropdown" href="{{base_path}}/{{selected_building}}">Change Building<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								{% for b in session.buildings %}
+									<li><a tabindex="-1" href="">{{b.buildingName}}</a></li>
+								{% endfor %}
+							</ul>
+						</div>
+			        </ul>
+		        {% endif %}
 		       </div>
 		     </div>
 		   </div>
@@ -74,13 +89,26 @@
 		  <hr>
 
 		  <footer id="footer">
-		  	<p>BuildingRules 0.1</p>
+		  	<p><a href="http://www.alessandronacci.com/energybox/buildingrules">BuildingRules 0.1 - EnergyBox Project - BuildingRules</a></p>
+		  	<p>JOL Laboratory - Telecom Italia 2014 - UCSD Synergy Lab</p>
 		    <p class="pull-right"><a href="#top">Back to top</a></p>
-		    <div class="links">
-		      <a href="">JOL S-Cube Lab</a>
-		      <a href="">Synergy Lab</a>
-		    </div>
 		  </footer>
+
+
+		  <br>
+		  <br>
+			<div align="center">
+				<img src="http://www.alessandronacci.com/energybox/buildingrules/survey/images/energyBoxLogo.png"> 
+				<img src="http://www.alessandronacci.com/energybox/buildingrules/survey/images/telecomItaliaLogo.png">
+				<img src="http://www.alessandronacci.com/energybox/buildingrules/survey/images/logo_polimi.png">
+				<img src="http://www.alessandronacci.com/energybox/buildingrules/survey/images/jolLogo.png">
+			</div>
+			<div align="center">
+	        	<img src="http://www.alessandronacci.com/energybox/buildingrules/survey/images/ucsd_logos.png"> 
+	      	</div>
+	      <br>
+	      <br>
+	      <br>
 
 		</div><!-- /container -->
 

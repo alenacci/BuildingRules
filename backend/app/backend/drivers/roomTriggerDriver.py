@@ -50,16 +50,25 @@ class RoomTriggerDriver(GenericTriggerDriver):
 
 		elif self.parameters["operation"] == "TEMPERATURE_IN_RANGE":
 
-			#print self.parameters["buildingName"]
-			#print self.parameters["roomName"]
-			#print self.parameters["groupId"]
 
-			sensor_uuid = self.get_uuid_from_context('Zone Temperature', 'B200B')
+			try:
+				buildingName = self.parameters["buildingName"]
+				roomName = self.parameters["roomName"]
+			except:
+				raise MissingInputDataError("BuildingName and roomName are needed to check the temperature")
+			
+			currentScale = "F"
+			sensor_uuid = self.get_uuid_from_context('Zone Temperature', roomName)
 			temperature = self.read_present_value_by_uuid(sensor_uuid)
 
+			temperature = float(temperature)
+
+
+			if temperature >= float(self.parameters['0'].upper().replace(currentScale, "").strip()) and temperature <= float(self.parameters['1'].upper().replace(currentScale, "").strip()):
+				return True
+			else:
+				return False
 			
-			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
-			return bool(random.getrandbits(1))
 
 		
 		else:

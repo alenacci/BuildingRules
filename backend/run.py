@@ -17,6 +17,9 @@ def startDeamon():
 def startWeatherService():
 	os.system("python runWeatherService.py")
 
+def startMailService():
+	os.system("python runMailService.py")
+
 
 ### MAIN STARTS HERE
 
@@ -25,6 +28,9 @@ webServerThread.start()
 
 weatherServiceThread = Thread(target = startWeatherService)
 weatherServiceThread.start()
+
+mailServiceThread = Thread(target = startMailService)
+mailServiceThread.start()
 
 deamonThread = Thread(target = startDeamon)
 deamonThread.start()
