@@ -41,6 +41,10 @@
               <select name="trigger_0" id="trigger_0" onchange="triggerSelected(0)">
                 <option>Select a trigger</option>
                 <option value="someone is in the room the room">someone is in the room</option><option value="nobody is in the room in the room ">nobody is in the room</option><option value="room temperature is between">room temperature is between</option><option value="external temperature is between">external temperature is between</option><option value="time is between">time is between</option><option value="the date is between">the date is between</option><option value="today is">today is</option><option value="it is sunny">it is sunny</option><option value="it is rainy">it is rainy</option><option value="it is rainy">it is cloudy</option>
+                {% if insertionForGroup %}
+                  <option>no rule specified</option>
+                {% endif  %}
+                
               </select>
 
               <div id="temperature_box_0">
@@ -92,9 +96,6 @@
 
               <select name="action_0" id="action_0" onchange="compose()">
                 <option>Select an action</option><option>turn on the light</option><option>turn off the light</option><option>turn on the heating</option><option>turn off the heating</option><option>turn on the cooling</option><option>turn off the cooling</option><option>open the windows</option><option>close the windows</option><option>open curtains</option><option>close curtains</option>
-                {% if insertionForGroup %}
-                  <option>no rule specified</option>
-                {% endif  %}
               </select>  
               <a href="javascript:compose();"><button class="btn btn-small btn-primary" type="button">Compose the rule!</button></a>
 
