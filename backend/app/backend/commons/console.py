@@ -14,6 +14,7 @@ def flash(message, color = None):
 
 	logging.basicConfig(filename='logs/deamon.log',level=logging.DEBUG)
 	logging.info(message)
+	#logging.exception("")
 
 	if color:
 		if color == "red":
