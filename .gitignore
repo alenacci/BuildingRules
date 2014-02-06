@@ -24,7 +24,8 @@ backend/build/
 backend/tools/z3/z3/
 frontend/venv/
 frontend/build/
-
+backend/tools/weather/weather.json
+backend/tools/weather/weather.old.json
 # Logging folders
 ###################
 backend/logs
