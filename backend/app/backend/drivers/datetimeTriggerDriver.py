@@ -78,7 +78,7 @@ class DatetimeTriggerDriver(GenericTriggerDriver):
 
 			return bool(random.getrandbits(1))
 
-		elif self.parameters["operation"] == "TIME_IN_RANGE":
+		elif self.parameters["operation"] == "TODAY":
 
 			par0 = int(self.__getIntFromTime(self.parameters['0']))
 			today = int(datetime.datetime.today().weekday() + 1)
