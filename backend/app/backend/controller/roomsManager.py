@@ -16,8 +16,9 @@ class RoomsManager:
 		room.retrieve()
 		return room.getDict()
 
-	def getRules(self, roomName, buildingName, username = None, includeGroupsRules = False, orderByPriority = False,  includeDisabled = False):
-		checkData(locals())
+	def getRules(self, roomName, buildingName, username = None, includeGroupsRules = False, orderByPriority = False,  includeDisabled = False, categoriesFilter = None):
+		checkData(locals(), ["categoriesFilter"])
+		if categoriesFilter: checkData(json.loads(categoriesFilter))
 
 		room = Room(buildingName = buildingName, roomName = roomName)
 		room.retrieve()
@@ -28,9 +29,9 @@ class RoomsManager:
 			from app.backend.model.user import User
 			user = User(username = username)
 			user.retrieve()
-			ruleList = room.getRules( author = user, includeGroupsRules = includeGroupsRules, includeDisabled = includeDisabled)
+			ruleList = room.getRules( author = user, includeGroupsRules = includeGroupsRules, includeDisabled = includeDisabled, categoriesFilter = categoriesFilter)
 		else:
-			ruleList = room.getRules( includeGroupsRules = includeGroupsRules,  includeDisabled = includeDisabled )
+			ruleList = room.getRules( includeGroupsRules = includeGroupsRules,  includeDisabled = includeDisabled , categoriesFilter = categoriesFilter)
 
 		if orderByPriority:
 			ruleList = sorted(ruleList, key=lambda rule: rule.getPriority(), reverse=True)

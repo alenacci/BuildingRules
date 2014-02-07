@@ -185,7 +185,7 @@ class Room:
 
 		return groupList
 
-	def getRules(self, author = None, includeGroupsRules = False, excludedRuleId = False, excludeCrossRoomValidationRules = False, includeDisabled = False, includeDeleted = False):
+	def getRules(self, author = None, includeGroupsRules = False, excludedRuleId = False, excludeCrossRoomValidationRules = False, includeDisabled = False, includeDeleted = False, categoriesFilter = None):
 
 		from app.backend.model.rule import Rule
 		
@@ -202,6 +202,17 @@ class Room:
 
 		query += " AND enabled='1'" if not includeDisabled else ""
 		query += " AND deleted='0'" if not includeDeleted else ""
+
+		if categoriesFilter:
+			query += " AND (@@__CATEGORY_FILTERS__@@)"
+			categoryFilterQuery = ""
+
+			for category in json.loads(categoriesFilter):
+				categoryFilterQuery += "category = '" + category + "' OR "
+
+			query = query.replace("@@__CATEGORY_FILTERS__@@", categoryFilterQuery)
+			query = query.replace(" OR )", ")")
+
 		query += ";"
 
 		database = Database()
@@ -209,6 +220,8 @@ class Room:
 		query = self.__replaceSqlQueryToken(query)
 		queryResult = database.executeReadQuery(query)
 		database.close()
+
+		print query
 
 
 		ruleList = []

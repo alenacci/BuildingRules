@@ -111,7 +111,8 @@ class BuildingsManager:
 		return building.addRoom(room).getDict()
 		
 	def addGroup(self, buildingName, description, crossRoomsValidation, crossRoomsValidationCategories):
-		checkData(locals())
+		checkData(locals(), ["crossRoomsValidationCategories"])
+		if crossRoomsValidation: checkData(json.loads(crossRoomsValidationCategories))
 
 		return self.__addOrModifyGroup(buildingName = buildingName, description =description, crossRoomsValidation = crossRoomsValidation, crossRoomsValidationCategories = crossRoomsValidationCategories)
 
@@ -166,12 +167,12 @@ class BuildingsManager:
 
 
 	def editGroup(self, groupId, buildingName, description, crossRoomsValidation, crossRoomsValidationCategories):
-		checkData(locals())
+		checkData(locals(), ["crossRoomsValidationCategories"])
+		if crossRoomsValidation: checkData(json.loads(crossRoomsValidationCategories))
 		
 		return self.__addOrModifyGroup(buildingName = buildingName, description =description, crossRoomsValidation = crossRoomsValidation, crossRoomsValidationCategories = crossRoomsValidationCategories, groupId = groupId)
 
 	def __addOrModifyGroup(self, buildingName, description, crossRoomsValidation, crossRoomsValidationCategories, groupId = None):
-		checkData(locals())
 
 
 		if type(crossRoomsValidation) == int:

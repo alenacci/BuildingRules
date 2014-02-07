@@ -371,6 +371,15 @@ def roomRules(username = None, buildingName = None, roomName = None):
 		filterByAuthor = getBoolFromString(validateInput(request.form['filterByAuthor'])) if 'filterByAuthor' in request.form.keys() else False
 		includeGroupsRules = getBoolFromString(validateInput(request.form['includeGroupsRules'])) if 'includeGroupsRules' in request.form.keys() else False
 		orderByPriority = getBoolFromString(validateInput(request.form['orderByPriority'])) if 'orderByPriority' in request.form.keys() else False
+		
+		try:
+			print request.form['categoriesFilter']
+			categoriesFilter = request.form['categoriesFilter'] if 'categoriesFilter' in request.form.keys() else None
+		except Exception as e:
+			return returnError(e)
+
+		print categoriesFilter
+		
 
 		usernameFilter = username if filterByAuthor else None
 
@@ -381,7 +390,7 @@ def roomRules(username = None, buildingName = None, roomName = None):
 			buildingsManager.checkUserBinding(buildingName, username)
 			roomsManager = RoomsManager()
 
-			return returnResult( roomsManager.getRules(roomName = roomName, buildingName = buildingName, username = usernameFilter, includeGroupsRules = includeGroupsRules, orderByPriority = orderByPriority, includeDisabled = True) )
+			return returnResult( roomsManager.getRules(roomName = roomName, buildingName = buildingName, username = usernameFilter, includeGroupsRules = includeGroupsRules, orderByPriority = orderByPriority, includeDisabled = True, categoriesFilter = categoriesFilter) )
 		except Exception as e:
 			return returnError(e)
 
@@ -488,7 +497,7 @@ def addGroupToBuilding(username = None, buildingName = None):
 		userUuid = validateInput(request.form['userUuid'])	
 		description = validateInput(request.form['description'])	
 		crossRoomsValidation = validateInput(request.form['crossRoomsValidation']) if 'crossRoomsValidation' in request.form.keys() else False							#BOOLEAN VALUE
-		crossRoomsValidationCategories = validateInput(request.form['crossRoomsValidationCategories'])	if 'crossRoomsValidationCategories' in request.form.keys() else None	#LIST IN JSON FORMAT	
+		crossRoomsValidationCategories = request.form['crossRoomsValidationCategories']	if 'crossRoomsValidationCategories' in request.form.keys() else None	#LIST IN JSON FORMAT	
 
 		try:
 			session = SessionManager()
