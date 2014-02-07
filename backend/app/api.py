@@ -373,12 +373,9 @@ def roomRules(username = None, buildingName = None, roomName = None):
 		orderByPriority = getBoolFromString(validateInput(request.form['orderByPriority'])) if 'orderByPriority' in request.form.keys() else False
 		
 		try:
-			print request.form['categoriesFilter']
 			categoriesFilter = request.form['categoriesFilter'] if 'categoriesFilter' in request.form.keys() else None
 		except Exception as e:
 			return returnError(e)
-
-		print categoriesFilter
 		
 
 		usernameFilter = username if filterByAuthor else None
