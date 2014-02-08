@@ -46,13 +46,24 @@ class Group:
 		return roomList
 
 
-	def getRules(self, excludedRuleId = False, includeDisabled = False, includeDeleted = False):		
+	def getRules(self, excludedRuleId = False, includeDisabled = False, includeDeleted = False, categoriesFilter = None):		
 
 		from app.backend.model.rule import Rule
 
 		query = "SELECT id FROM rules WHERE group_id = '@@id@@' @@__EXCLUDED_RULE_ID__@@"
 		query += " AND enabled='1'" if not includeDisabled else ""
 		query += " AND deleted='0'" if not includeDeleted else ""
+
+		if categoriesFilter:
+			query += " AND (@@__CATEGORY_FILTERS__@@)"
+			categoryFilterQuery = ""
+
+			for category in json.loads(categoriesFilter):
+				categoryFilterQuery += "category = '" + category + "' OR "
+
+			query = query.replace("@@__CATEGORY_FILTERS__@@", categoryFilterQuery)
+			query = query.replace(" OR )", ")")
+
 		query += ";"
 
 

@@ -120,11 +120,43 @@ def buildingDetail(buildingName = None):
 
 
 
-@gui.route('/buildings/<buildingName>/rooms/')
-@gui.route('/buildings/<buildingName>/rooms')
+@gui.route('/buildings/<buildingName>/rooms/', methods = ['GET', 'POST'])
+@gui.route('/buildings/<buildingName>/rooms', methods = ['GET', 'POST'])
 def rooms(buildingName = None):
 	
 	if not loggedIn():	return redirect(url_for('gui.login'))
+
+
+	##################################
+	# Retrieving the rules categories
+	##################################
+	response = rest.request("/api/users/<username>/rules/categories", {
+		'username' : session["username"], 
+		'sessionKey' : session["sessionKey"], 
+		'userUuid' : session["userUuid"]
+	})
+
+	if not successResponse(response):
+		return render_template('error.html', error = response['request-errorDescription'])
+
+	categories = response['categories']
+
+	categoriesFilterList = []
+	# CREATING THE LIST OF THE CHOSEN CATEGORIES
+	for category in categories:
+		currentKey = 'filter_by_' + category
+		if currentKey in request.form.keys():
+			if request.form[currentKey] == "True":
+				categoriesFilterList.append(category)
+
+	if len(categoriesFilterList) == 0:
+		categoriesFilter = None
+	else:
+		categoriesFilter = json.dumps(categoriesFilterList, separators=(',',':'))
+			
+	print ">>>>>>>>>>>>"
+	print categoriesFilterList
+	print categoriesFilter
 
 	response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms", {'username' : session["username"], 'buildingName' : buildingName, 'sessionKey' : session["sessionKey"], 'userUuid' : session["userUuid"]})
 
@@ -160,6 +192,7 @@ def rooms(buildingName = None):
 	for room in roomList:
 		roomName = room["roomName"]
 		
+
 		response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/rules", 
 			{
 			'username' : session["username"],
@@ -169,7 +202,8 @@ def rooms(buildingName = None):
 			'userUuid' : session["userUuid"],
 			'filterByAuthor' : False,
 			'includeGroupsRules' : True,
-			'orderByPriority' : True
+			'orderByPriority' : True,
+			'categoriesFilter' : categoriesFilter
 			})
 
 		if successResponse(response):
@@ -285,7 +319,7 @@ def rooms(buildingName = None):
 			return render_template('error.html', error = response['request-errorDescription'])
 
 
-	return render_template('rooms.html', roomList = roomList, roomRules = roomRules, authorList = authorList, groupList = groupList, triggerList = triggerList, actionList = actionList, userList = userList, roomGroupList = roomGroupList, notificationList = notificationList)	
+	return render_template('rooms.html', roomList = roomList, roomRules = roomRules, authorList = authorList, groupList = groupList, triggerList = triggerList, actionList = actionList, userList = userList, roomGroupList = roomGroupList, notificationList = notificationList, categories = categories, categoriesFilter = categoriesFilter)	
 
 
 @gui.route('/buildings/<buildingName>/groups/')
@@ -360,6 +394,22 @@ def groups(buildingName = None):
 	return render_template('groups.html', groupList = groupList, roomsGroup = roomsGroup, rulesGroup = rulesGroup, authorList = authorList)
 		
 
+@gui.route('/buildings/<buildingName>/groups/<groupId>/')
+@gui.route('/buildings/<buildingName>/groups/<groupId>')
+def groupDetail(buildingName = None, groupId = None):
+
+	if not loggedIn():	return redirect(url_for('gui.login'))
+	
+	response = rest.request("/api/users/<username>/buildings/<buildingName>/groups/<groupId>", {'groupId' : groupId, 'username' : session["username"], 'buildingName' : buildingName, 'sessionKey' : session["sessionKey"], 'userUuid' : session["userUuid"]})
+	if not successResponse(response): return render_template('error.html', error = response['request-errorDescription'])
+	groupInfo = response
+
+	response = rest.request("/api/users/<username>/buildings/<buildingName>/groups/<groupId>/rooms", {'groupId' : groupId, 'username' : session["username"], 'buildingName' : buildingName, 'sessionKey' : session["sessionKey"], 'userUuid' : session["userUuid"]})
+	if not successResponse(response): return render_template('error.html', error = response['request-errorDescription'])
+	rooms = response["rooms"]
+	
+	return render_template('groupInfo.html', groupInfo = groupInfo, rooms = rooms)	
+		
 
 
 @gui.route('/buildings/<buildingName>/groups/add/', methods = ['GET', 'POST'])

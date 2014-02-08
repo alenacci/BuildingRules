@@ -2,6 +2,15 @@
 {% block body %}
   {% if session.logged_in %}
 
+	<script type="text/javascript">
+	var popupStyle = "top=10, left=10, width=350, height=250, status=no, menubar=no, toolbar=no, scrollbars=yes";
+	
+	function openPopup(url) 
+	{
+		window.open(url, "", popupStyle);
+	}
+	</script>
+
   	{% for notification in notificationList %}
 		<div class="alert alert-block">
 		  <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -21,12 +30,28 @@
 
 	</header>
 
-	<div class="bs-docs-example">
-        <p><small>This line of text is meant to be treated as fine print.</small></p>
-    </div>
-
 	{% if roomList %}
 		<section id="typography">
+
+			<div class="form-actions">
+				<form action="{{request.path}}" method="post">
+					<h3>Filter rules by category: </h3>
+					<small><b>NOTE:</b> IF NO FILTER IL SELECTED ALL THE RULES WILL BE SHOWN</small>
+					<br>
+					<br>
+					{% for category in categories %}
+						<label class="checkbox inline">
+							<input type="checkbox" id="inlineCheckbox1" value="True" name="filter_by_{{category}}" {% if categoriesFilter %} {% if category in categoriesFilter %} checked {% endif %} {% endif %}> {{category}}
+						</label>
+					{% endfor %}
+					<button type="submit" class="btn btn-primary btn-small">Filter now!</button>
+					<br>
+					
+
+				</form>
+			</div>
+
+
 			{% for room in roomList %}
 				<div class="row"> 
 				  <div class="span8">
@@ -100,9 +125,10 @@
 				      	{% endfor %}				      	
 				      </p>
 				      <br>
-				      <h4>Part of groups:</h4>
+				      <h4>Part of groups: <br> <small>Click on the group name to see the room list</small></h4>
+
 				      	{% for group in roomGroupList[room.roomName] %}
-				      		{{group.id}}:{{group.description}}, 
+				      		<a href="javascript:openPopup('{{request.path}}/../groups/{{group.id}}');">{{group.id}}:{{group.description}}</a>, 
 				      	{% endfor %}				      	
 				    </div>
 				  </div>

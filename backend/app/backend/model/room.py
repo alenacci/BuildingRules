@@ -221,7 +221,6 @@ class Room:
 		queryResult = database.executeReadQuery(query)
 		database.close()
 
-		print query
 
 
 		ruleList = []
@@ -235,12 +234,12 @@ class Room:
 
 			for group in groupList:
 				# Getting the rules expressed directly into this group (inheritance)
-				ruleList.extend(group.getRules())
+				ruleList.extend(group.getRules(categoriesFilter = categoriesFilter))
 				
 				# If this is a cross room validation, getting the rules expressed into the other rooms into the same group		
 				if group.crossRoomsValidation and not excludeCrossRoomValidationRules:
 					for groupRoom in group.getRooms():
-						groupRoomRuleList = groupRoom.getRules()
+						groupRoomRuleList = groupRoom.getRules(categoriesFilter = categoriesFilter)
 						for groupRoomRule in groupRoomRuleList:
 							if groupRoomRule.category in group.crossRoomsValidationCategories:
 								if groupRoomRule.buildingName != self.buildingName or groupRoomRule.roomName != self.roomName:
