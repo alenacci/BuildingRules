@@ -83,14 +83,17 @@ def buildings():
 		
 	response = rest.request("/api/users/<username>/buildings", {'username' : session["username"], 'sessionKey' : session["sessionKey"], 'userUuid' : session["userUuid"]})
 
+	if not successResponse(response):
+		return render_template('error.html', error = response['request-errorDescription'])
+
+	if "buildings" not in response.keys():
+		return render_template('error.html', error = response['request-errorDescription'])		
+
 	if len(response["buildings"]) == 1:
 		buildingName = response["buildings"][0]["buildingName"]
 		return redirect(url_for('gui.buildingDetail', buildingName = buildingName))		
 
-	if successResponse(response):
-		return render_template('buildings.html', buildings = response["buildings"])	
-	else:
-		return render_template('error.html', error = response['request-errorDescription'])
+	return render_template('buildings.html', buildings = response["buildings"])	
 
 
 	
