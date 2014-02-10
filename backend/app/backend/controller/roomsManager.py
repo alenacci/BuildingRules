@@ -326,6 +326,7 @@ class RoomsManager:
 		temporaryRuleSet.extend(roomRules)
 		temporaryRuleSet.append(rule)
 
+		#print temporaryRuleSet
 
 		for i in range(0, len(temporaryRuleSet)):
 			temporaryRuleSet[i].groupId = None
@@ -334,7 +335,6 @@ class RoomsManager:
 
 		from app.backend.controller.rulesetChecker import RulesetChecker
 		rulesetChecker = RulesetChecker(temporaryRuleSet)
-
 		ruleCheckErrorList = rulesetChecker.check()
 
 		if len(ruleCheckErrorList) == 0:
@@ -343,6 +343,15 @@ class RoomsManager:
 				rule.setPriority(priority)
 			return room.addRule(rule).getDict()
 		else:
+			from app.backend.commons.console import flash
+			
+			logMessage = "authorUuid =  " + str(authorUuid) + ", "
+			logMessage += "buildingName =  " + str(buildingName) + ", "
+			logMessage += "roomName =  " + str(roomName) + ", "
+			logMessage += "ruleSetDescr =  " + str(temporaryRuleSet) + ", "
+			logMessage += "newRule =  " + str(rule)
+
+			flash("RuleValidationError: " + logMessage)
 			raise RuleValidationError(ruleCheckErrorList)
 
 	def __str__(self):

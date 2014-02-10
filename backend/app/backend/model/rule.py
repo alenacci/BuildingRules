@@ -64,7 +64,7 @@ class Rule:
 				rulePriority = RulePriority(buildingName = self.buildingName, roomName = self.roomName, ruleId = self.id)
 				rulePriority.retrieve()			
 				return rulePriority.rulePriority
-			except RoomRulePriorityNotFoundError as e:
+			except Exception as e:
 				return self.__priority
 		else:
 			raise RuleInitFailedError("Some parameters are missing")

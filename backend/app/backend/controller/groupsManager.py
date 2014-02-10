@@ -232,6 +232,17 @@ class GroupsManager:
 
 			return group.addRule(rule).getDict()
 		else:
+
+			from app.backend.commons.console import flash
+			
+			logMessage = "authorUuid =  " + str(authorUuid) + ", "
+			logMessage += "buildingName =  " + str(buildingName) + ", "
+			logMessage += "gropuId =  " + str(groupId) + ", "
+			logMessage += "ruleSetDescr =  " + str(temporaryRuleSet) + ", "
+			logMessage += "newRule =  " + str(rule)
+
+			flash("RuleValidationError: " + logMessage)
+
 			raise RuleValidationError(ruleCheckErrorList)
 
 	def __str__(self):
