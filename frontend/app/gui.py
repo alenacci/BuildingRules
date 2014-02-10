@@ -62,9 +62,11 @@ def logout():
 
 		response = rest.request("/api/users/<username>/logout", {'username' : session["username"]})
 
+		del session["logged_in"]
+		del session["sessionKey"]
+
+
 		if successResponse(response):
-			del session["logged_in"]
-			del session["sessionKey"]
 			del session["userUuid"]
 			del session["username"]
 		else:
