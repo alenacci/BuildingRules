@@ -27,10 +27,10 @@ def request(url, data):
 	message = "API_REQUEST: Contacting " + url + " with params " + str(data)
 	ts = time.time()
 	st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
-	message = "BRulesDeamon> " + st + " > " + message 
+	messageLogging = "BRulesDeamon> " + st + " > " + message 
 	logging.basicConfig(filename='logs/api_requests.log',level=logging.DEBUG)
-	logging.info(message)
-	print message
+	logging.info(messageLogging)
+	print messageLogging
 
 
 	r = requests.post(url, data=data, headers=headers)
