@@ -10,8 +10,6 @@ def createQuery(template, params):
 	return query
 
 
-
-
 queries = []
 
 lastUserUuid = 10
@@ -70,6 +68,38 @@ thermalZones[11] = [2154]
 thermalZones[12] = [2107, 2144]
 thermalZones[13] = [3208]
 
+
+standardRoomTriggers = []
+standardRoomTriggers.append("INSERT INTO `rooms_triggers` (`room_name`, `building_name`, `trigger_id`) VALUES ('@@roomName@@', 'CSE', 1);")
+standardRoomTriggers.append("INSERT INTO `rooms_triggers` (`room_name`, `building_name`, `trigger_id`) VALUES ('@@roomName@@', 'CSE', 2);")
+standardRoomTriggers.append("INSERT INTO `rooms_triggers` (`room_name`, `building_name`, `trigger_id`) VALUES ('@@roomName@@', 'CSE', 5);")
+standardRoomTriggers.append("INSERT INTO `rooms_triggers` (`room_name`, `building_name`, `trigger_id`) VALUES ('@@roomName@@', 'CSE', 8);")
+standardRoomTriggers.append("INSERT INTO `rooms_triggers` (`room_name`, `building_name`, `trigger_id`) VALUES ('@@roomName@@', 'CSE', 9);")
+standardRoomTriggers.append("INSERT INTO `rooms_triggers` (`room_name`, `building_name`, `trigger_id`) VALUES ('@@roomName@@', 'CSE', 10);")
+standardRoomTriggers.append("INSERT INTO `rooms_triggers` (`room_name`, `building_name`, `trigger_id`) VALUES ('@@roomName@@', 'CSE', 11);")
+standardRoomTriggers.append("INSERT INTO `rooms_triggers` (`room_name`, `building_name`, `trigger_id`) VALUES ('@@roomName@@', 'CSE', 12);")
+standardRoomTriggers.append("INSERT INTO `rooms_triggers` (`room_name`, `building_name`, `trigger_id`) VALUES ('@@roomName@@', 'CSE', 13);")
+standardRoomTriggers.append("INSERT INTO `rooms_triggers` (`room_name`, `building_name`, `trigger_id`) VALUES ('@@roomName@@', 'CSE', 14);")
+standardRoomTriggers.append("INSERT INTO `rooms_triggers` (`room_name`, `building_name`, `trigger_id`) VALUES ('@@roomName@@', 'CSE', 15);")
+
+standardRoomActions = []
+standardRoomActions.append("INSERT INTO `rooms_actions` (`room_name`, `building_name`, `action_id`) VALUES ('@@roomName@@', 'CSE', 1),")
+standardRoomActions.append("INSERT INTO `rooms_actions` (`room_name`, `building_name`, `action_id`) VALUES ('@@roomName@@', 'CSE', 2),")
+standardRoomActions.append("INSERT INTO `rooms_actions` (`room_name`, `building_name`, `action_id`) VALUES ('@@roomName@@', 'CSE', 3),")
+standardRoomActions.append("INSERT INTO `rooms_actions` (`room_name`, `building_name`, `action_id`) VALUES ('@@roomName@@', 'CSE', 4),")
+standardRoomActions.append("INSERT INTO `rooms_actions` (`room_name`, `building_name`, `action_id`) VALUES ('@@roomName@@', 'CSE', 5),")
+standardRoomActions.append("INSERT INTO `rooms_actions` (`room_name`, `building_name`, `action_id`) VALUES ('@@roomName@@', 'CSE', 6),")
+standardRoomActions.append("INSERT INTO `rooms_actions` (`room_name`, `building_name`, `action_id`) VALUES ('@@roomName@@', 'CSE', 7),")
+standardRoomActions.append("INSERT INTO `rooms_actions` (`room_name`, `building_name`, `action_id`) VALUES ('@@roomName@@', 'CSE', 8),")
+standardRoomActions.append("INSERT INTO `rooms_actions` (`room_name`, `building_name`, `action_id`) VALUES ('@@roomName@@', 'CSE', 9),")
+standardRoomActions.append("INSERT INTO `rooms_actions` (`room_name`, `building_name`, `action_id`) VALUES ('@@roomName@@', 'CSE', 10);")
+
+
+
+
+
+
+
 newRoomSqlTempl = "INSERT INTO `rooms` (`room_name`, `building_name`, `description`) VALUES ('@@roomName@@', 'CSE', '@@description@@');"
 
 for roomName in commonRooms.keys():
@@ -82,6 +112,20 @@ for roomName in groupA_common + groupB_common:
 	queries.append( createQuery(newRoomSqlTempl, {'roomName': roomName, 'description': "Meeting Room"}) )
 
 queries.append( createQuery(newRoomSqlTempl, {'roomName': laboratoryRoom, 'description': "Laboratory"}) )
+
+
+for roomName in commonRooms.keys() + groupA_members + groupB_members + groupA_common + groupB_common + [laboratoryRoom]:
+
+	for roomTriggerBindSqlTempl in standardRoomTriggers:
+		queries.append( createQuery(roomTriggerBindSqlTempl, {'roomName': roomName}) )
+
+	for roomActionBindSqlTempl in standardRoomActions:
+		queries.append( createQuery(roomActionBindSqlTempl, {'roomName': roomName}) )
+
+
+
+
+
 
 
 userRoomBindSqlTempl = "INSERT INTO `users_rooms` (`room_name`, `building_name`, `user_uuid`) VALUES ('@@roomName@@', 'CSE', @@userUuid@@);"
@@ -110,6 +154,11 @@ for roomName in roomOccupancy.keys():
 		lastUserUuid += 1
 
 
+
+
+
+
+
 createGroupSqlTempl = "INSERT INTO `groups` (`building_name`, `description`, `cross_rooms_validation`, `cross_rooms_validation_categories`) VALUES ('CSE', '@@description@@', @@crossRoomValidation@@, '[@@crossRoomValidationCategories@@]');"
 roomGroupBindSqlTempl = "INSERT INTO `rooms_groups` (`group_id`, `building_name`, `room_name`) VALUES (@@groupId@@, 'CSE', '@@roomName@@');"
 
@@ -118,6 +167,10 @@ queries.append( createQuery(createGroupSqlTempl, {'description' : 'Room Group A'
 for roomName in groupA_members:
 	queries.append( createQuery(roomGroupBindSqlTempl, {'groupId': lastGroupId, 'roomName': roomName}) )
 lastGroupId += 1
+
+
+
+
 
 
 queries.append( createQuery(createGroupSqlTempl, {'description' : 'Room Group B', 'crossRoomValidation' : 0, 'crossRoomValidationCategories' : ''}) )
@@ -133,6 +186,10 @@ for i in range(0, len(thermalZones)):
 			queries.append( createQuery(roomGroupBindSqlTempl, {'groupId': lastGroupId, 'roomName': roomName}) )
 		lastGroupId += 1
 		thZonesCount += 1
+
+
+
+
 
 
 for q in queries:
