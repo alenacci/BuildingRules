@@ -2,6 +2,13 @@
 {% block body %}
   {% if session.logged_in %}
 
+	<script type="text/javascript" src="{{ url_for('static', filename='js/rooms.js') }}"></script>
+	<script>
+	window.onload = function(){
+	init();
+	};
+	</script>
+
 	<script type="text/javascript">
 	var popupStyle = "top=10, left=10, width=350, height=250, status=no, menubar=no, toolbar=no, scrollbars=yes";
 	
@@ -34,6 +41,18 @@
 		<section id="typography">
 
 			<div class="form-actions">
+				<a class="btn btn-lg btn-success" href="javascript:showMaps()" id="btnShowMaps">Show Maps</a>
+				<a class="btn btn-lg btn-success" href="javascript:hideMaps()" id="btnHideMaps">Hide Maps</a>
+				<a class="btn btn-lg btn-success" href="javascript:showThermalZoneMaps()" id="btnShowThMaps">Show Thermal Zones Maps</a>
+				<a class="btn btn-lg btn-success" href="javascript:showAccessMaps()" id="btnShowAccMaps">Show Access Rights Maps</a>
+			  	<img src="{{url_for('static', filename='roomMaps/')}}{{mapFileName}}" id="accessMap">
+			  	<img src="{{url_for('static', filename='roomMaps/thermalZonesMap.png')}}" id="thZoneMap">
+			 </div>
+
+
+			<br>
+
+			<div class="form-actions">
 				<form action="{{request.path}}" method="post">
 					<h3>Filter rules by category: </h3>
 					<small><b>NOTE:</b> IF NO FILTER IS SELECTED ALL THE RULES WILL BE SHOWN</small>
@@ -51,11 +70,10 @@
 				</form>
 			</div>
 
-
 			{% for room in roomList %}
 				<div class="row"> 
 				  <div class="span8">
-				    <h3>Room {{room.roomName}}</h3>
+				    <h3>Room {{room.roomName}} - {{room.description}}</h3>
 				    <hr>
 				    {% for rule in roomRules[room.roomName] %}
 				    	<blockquote>

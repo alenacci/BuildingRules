@@ -3,6 +3,7 @@ import json
 from app.backend.commons.errors import *
 from app.backend.commons.inputDataChecker import checkData
 from app.backend.model.user import User
+from app.backend.model.users import Users
 
 
 class UsersManager:
@@ -45,10 +46,21 @@ class UsersManager:
 			if not(newUserUsername and newUserPassword and newUserEmail and newUserPersonName and newUserLevel):
 				raise MissingInputDataError("Some input data are missing to register a new user")
 
-			user = User(username = newUserUsername, password = newUserPassword, email = newUserEmail, personName = newUserPersonName, level = newUserLevel)
-			user.store()
+			users = Users()
+			freeUserSlot = users.getFirstFreeUserSlot()
 
-			return user.getDict()
+			freeUserSlot.username = newUserUsername
+			freeUserSlot.password = newUserPassword
+			freeUserSlot.email = newUserEmail
+			freeUserSlot.personName = newUserPersonName
+			freeUserSlot.store()
+
+			return freeUserSlot.getDict()
+
+			#user = User(username = newUserUsername, password = newUserPassword, email = newUserEmail, personName = newUserPersonName, level = newUserLevel)
+			#user.store()
+
+			#return user.getDict()
 
 
 	def register(self, creatorUuid, newUserUsername, newUserPassword, newUserEmail, newUserPersonName, newUserLevel):

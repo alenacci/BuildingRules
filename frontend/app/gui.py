@@ -183,10 +183,6 @@ def rooms(buildingName = None):
 	else:
 		categoriesFilter = json.dumps(categoriesFilterList, separators=(',',':'))
 			
-	print ">>>>>>>>>>>>"
-	print categoriesFilterList
-	print categoriesFilter
-
 	response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms", {'username' : session["username"], 'buildingName' : buildingName, 'sessionKey' : session["sessionKey"], 'userUuid' : session["userUuid"]})
 
 	if not successResponse(response):
@@ -202,6 +198,12 @@ def rooms(buildingName = None):
 	userList = {}
 	roomGroupList = {}
 
+	# Finding the map to show (remove me! - only for experiment) REMOVE ME REMOVE ME 
+	mapFileName = "blankMap.png"
+	for r in roomList:
+		if r["description"] == "Office Room":
+			mapFileName = r["roomName"] + ".png"
+	# REMOVE ME REMOVE ME REMOVE ME REMOVE ME REMOVE ME REMOVE ME REMOVE ME 
 
 	# Getting notifications
 	response = rest.request("/api/users/<username>/notifications", 
@@ -348,7 +350,7 @@ def rooms(buildingName = None):
 			return render_template('error.html', error = response['request-errorDescription'])
 
 
-	return render_template('rooms.html', roomList = roomList, roomRules = roomRules, authorList = authorList, groupList = groupList, triggerList = triggerList, actionList = actionList, userList = userList, roomGroupList = roomGroupList, notificationList = notificationList, categories = categories, categoriesFilter = categoriesFilter)	
+	return render_template('rooms.html', roomList = roomList, roomRules = roomRules, authorList = authorList, groupList = groupList, triggerList = triggerList, actionList = actionList, userList = userList, roomGroupList = roomGroupList, notificationList = notificationList, categories = categories, categoriesFilter = categoriesFilter, mapFileName = mapFileName)	
 
 
 @gui.route('/buildings/<buildingName>/groups/')
