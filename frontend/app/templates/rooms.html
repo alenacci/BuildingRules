@@ -50,8 +50,6 @@
 			 </div>
 
 
-			<br>
-
 			<div class="form-actions">
 				<form action="{{request.path}}" method="post">
 					<h3>Filter rules by category: </h3>
@@ -76,7 +74,7 @@
 				    <h3>Room {{room.roomName}} - {{room.description}}</h3>
 				    <hr>
 				    {% for rule in roomRules[room.roomName] %}
-				    	<blockquote>
+				    	<blockquote {% if rule.id in activeRoomRules[room.roomName] %} style="color:#77AE3B;" {% endif %}>
 				    		<p {% if rule.enabled %} {% else %} class="muted" {% endif %}>
 				    			{% if rule.enabled %} {% else %} <strike> {% endif %}
 				    				<b>if</b> {{rule.antecedent}} <b>then</b> {{rule.consequent}} 

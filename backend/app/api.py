@@ -287,6 +287,24 @@ def roomInfo(username = None, buildingName = None, roomName = None):
 		except Exception as e:
 			return returnError(e)
 
+@api.route('/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/activeRules', methods = ['POST'])
+def roomActiveRules(username = None, buildingName = None, roomName = None):
+	if request.method == 'POST':
+
+		sessionKey = validateInput(request.form['sessionKey'])
+		userUuid = validateInput(request.form['userUuid'])		
+
+		try:
+			session = SessionManager()
+			session.checkSessionValidity(sessionKey, userUuid)
+			buildingsManager = BuildingsManager()
+			buildingsManager.checkUserBinding(buildingName, username)
+			roomsManager = RoomsManager()
+			return returnResult( roomsManager.getActiveRulesId(roomName = roomName, buildingName = buildingName) )
+		except Exception as e:
+			return returnError(e)
+
+
 @api.route('/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/delete', methods = ['POST'])
 def deleteRoom(username = None, buildingName = None, roomName = None):
 	if request.method == 'POST':

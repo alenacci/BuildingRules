@@ -110,6 +110,7 @@ queries.append( "TRUNCATE TABLE rules_priority;" )
 queries.append( "TRUNCATE TABLE sessions;" )
 queries.append( "TRUNCATE TABLE users;" )
 queries.append( "TRUNCATE TABLE users_rooms;" )
+queries.append( "TRUNCATE TABLE active_rules;" )
 
 
 newRoomSqlTempl = "INSERT INTO `rooms` (`room_name`, `building_name`, `description`) VALUES ('@@roomName@@', 'CSE', '@@description@@');"

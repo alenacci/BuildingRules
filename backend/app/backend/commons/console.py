@@ -12,9 +12,10 @@ def flash(message, color = None):
 
 	message = "BRules> " + str(st) + " > " + str(message)
 
-	logging.basicConfig(filename='logs/deamon.log',level=logging.DEBUG)
+	logging.basicConfig(filename='logs/deamon.log')
+	logging.getLogger().addHandler(logging.StreamHandler())
 	logging.info(message)
-	#logging.exception("")
+	logging.exception("")
 
 	if color:
 		if color == "red":

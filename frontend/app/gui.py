@@ -197,6 +197,7 @@ def rooms(buildingName = None):
 	actionList = {}
 	userList = {}
 	roomGroupList = {}
+	activeRoomRules = {}
 
 	# Finding the map to show (remove me! - only for experiment) REMOVE ME REMOVE ME 
 	mapFileName = "blankMap.png"
@@ -242,6 +243,22 @@ def rooms(buildingName = None):
 		else:
 			return render_template('error.html', error = response['request-errorDescription'])
 
+		response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/activeRules", 
+			{
+			'username' : session["username"],
+			'buildingName' : buildingName, 
+			'roomName' : roomName,
+			'sessionKey' : session["sessionKey"],
+			'userUuid' : session["userUuid"],
+			'filterByAuthor' : False
+			})
+
+		if successResponse(response):
+			activeRoomRules[roomName] = response["activeRules"]
+		else:
+			return render_template('error.html', error = response['request-errorDescription'])
+
+
 
 		response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/users", 
 			{
@@ -249,10 +266,7 @@ def rooms(buildingName = None):
 			'buildingName' : buildingName, 
 			'roomName' : roomName,
 			'sessionKey' : session["sessionKey"],
-			'userUuid' : session["userUuid"],
-			'filterByAuthor' : False,
-			'includeGroupsRules' : True,
-			'orderByPriority' : True
+			'userUuid' : session["userUuid"]
 			})
 
 		if successResponse(response):
@@ -268,10 +282,7 @@ def rooms(buildingName = None):
 			'buildingName' : buildingName, 
 			'roomName' : roomName,
 			'sessionKey' : session["sessionKey"],
-			'userUuid' : session["userUuid"],
-			'filterByAuthor' : False,
-			'includeGroupsRules' : True,
-			'orderByPriority' : True
+			'userUuid' : session["userUuid"]
 			})
 
 		if successResponse(response):
@@ -286,10 +297,7 @@ def rooms(buildingName = None):
 			'buildingName' : buildingName, 
 			'roomName' : roomName,
 			'sessionKey' : session["sessionKey"],
-			'userUuid' : session["userUuid"],
-			'filterByAuthor' : False,
-			'includeGroupsRules' : True,
-			'orderByPriority' : True
+			'userUuid' : session["userUuid"]
 			})
 
 		if successResponse(response):
@@ -305,10 +313,7 @@ def rooms(buildingName = None):
 			'buildingName' : buildingName, 
 			'roomName' : roomName,
 			'sessionKey' : session["sessionKey"],
-			'userUuid' : session["userUuid"],
-			'filterByAuthor' : False,
-			'includeGroupsRules' : True,
-			'orderByPriority' : True
+			'userUuid' : session["userUuid"]
 			})
 
 		if successResponse(response):
@@ -350,7 +355,7 @@ def rooms(buildingName = None):
 			return render_template('error.html', error = response['request-errorDescription'])
 
 
-	return render_template('rooms.html', roomList = roomList, roomRules = roomRules, authorList = authorList, groupList = groupList, triggerList = triggerList, actionList = actionList, userList = userList, roomGroupList = roomGroupList, notificationList = notificationList, categories = categories, categoriesFilter = categoriesFilter, mapFileName = mapFileName)	
+	return render_template('rooms.html', roomList = roomList, roomRules = roomRules, authorList = authorList, groupList = groupList, triggerList = triggerList, actionList = actionList, userList = userList, roomGroupList = roomGroupList, notificationList = notificationList, categories = categories, categoriesFilter = categoriesFilter, mapFileName = mapFileName, activeRoomRules = activeRoomRules)	
 
 
 @gui.route('/buildings/<buildingName>/groups/')

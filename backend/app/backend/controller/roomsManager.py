@@ -43,6 +43,14 @@ class RoomsManager:
 
 		return {"rules" : response}
 
+	def getActiveRulesId(self, roomName, buildingName):
+		checkData(locals(), ["categoriesFilter"])
+	
+		from app.backend.model.rules import Rules
+		rules = Rules()
+		return {"activeRules" : rules.getActiveRulesId(buildingName = buildingName, roomName = roomName)} 
+
+
 
 	def getTriggers(self, roomName, buildingName):
 		checkData(locals())

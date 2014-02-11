@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.34-0ubuntu0.12.04.1)
 # Database: building_rules
-# Generation Time: 2014-02-11 19:03:44 +0000
+# Generation Time: 2014-02-11 21:23:38 +0000
 # ************************************************************
 
 
@@ -54,6 +54,29 @@ VALUES
 UNLOCK TABLES;
 
 
+# Dump of table active_rules
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `active_rules`;
+
+CREATE TABLE `active_rules` (
+  `building_name` varchar(11) DEFAULT NULL,
+  `room_name` varchar(11) DEFAULT NULL,
+  `rule_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+LOCK TABLES `active_rules` WRITE;
+/*!40000 ALTER TABLE `active_rules` DISABLE KEYS */;
+
+INSERT INTO `active_rules` (`building_name`, `room_name`, `rule_id`)
+VALUES
+	('CSE','2107',2),
+	('CSE','2107',1);
+
+/*!40000 ALTER TABLE `active_rules` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
 # Dump of table buildings
 # ------------------------------------------------------------
 
@@ -96,15 +119,16 @@ LOCK TABLES `groups` WRITE;
 
 INSERT INTO `groups` (`id`, `building_name`, `description`, `cross_rooms_validation`, `cross_rooms_validation_categories`)
 VALUES
-	(1,'CSE','Room Group A',0,'[]'),
-	(2,'CSE','Room Group B',0,'[]'),
-	(3,'CSE','Thermal Zone 1',1,'[HEATING]'),
-	(4,'CSE','Thermal Zone 2',1,'[HEATING]'),
-	(5,'CSE','Thermal Zone 3',1,'[HEATING]'),
-	(6,'CSE','Thermal Zone 4',1,'[HEATING]'),
-	(7,'CSE','Thermal Zone 5',1,'[HEATING]'),
-	(8,'CSE','Thermal Zone 6',1,'[HEATING]'),
-	(9,'CSE','Thermal Zone 7',1,'[HEATING]');
+	(1,'CSE','Administrator Group',0,'[]'),
+	(2,'CSE','Room Group A',0,'[]'),
+	(3,'CSE','Room Group B',0,'[]'),
+	(4,'CSE','Thermal Zone 1',1,'[\"HEATING\"]'),
+	(5,'CSE','Thermal Zone 2',1,'[\"HEATING\"]'),
+	(6,'CSE','Thermal Zone 3',1,'[\"HEATING\"]'),
+	(7,'CSE','Thermal Zone 4',1,'[\"HEATING\"]'),
+	(8,'CSE','Thermal Zone 5',1,'[\"HEATING\"]'),
+	(9,'CSE','Thermal Zone 6',1,'[\"HEATING\"]'),
+	(10,'CSE','Thermal Zone 7',1,'[\"HEATING\"]');
 
 /*!40000 ALTER TABLE `groups` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -125,6 +149,179 @@ CREATE TABLE `notifications` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+LOCK TABLES `notifications` WRITE;
+/*!40000 ALTER TABLE `notifications` DISABLE KEYS */;
+
+INSERT INTO `notifications` (`id`, `send_timestamp`, `message_subject`, `message_text`, `recipient_uuid`, `message_read`)
+VALUES
+	(1,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',1,0),
+	(2,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',2,0),
+	(3,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',3,0),
+	(4,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',4,0),
+	(5,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',5,0),
+	(6,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',6,0),
+	(7,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',7,1),
+	(8,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',8,0),
+	(9,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',9,0),
+	(10,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',10,0),
+	(11,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',11,0),
+	(12,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',12,0),
+	(13,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',13,0),
+	(14,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',14,0),
+	(15,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',15,0),
+	(16,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',16,0),
+	(17,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',17,0),
+	(18,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',18,0),
+	(19,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',19,0),
+	(20,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',20,0),
+	(21,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',21,0),
+	(22,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',22,0),
+	(23,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',23,0),
+	(24,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',24,0),
+	(25,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',25,0),
+	(26,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',26,0),
+	(27,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',27,0),
+	(28,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',28,0),
+	(29,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',29,0),
+	(30,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',30,0),
+	(31,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',31,0),
+	(32,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',32,0),
+	(33,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',33,0),
+	(34,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',34,0),
+	(35,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',35,0),
+	(36,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',36,0),
+	(37,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',37,0),
+	(38,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',38,0),
+	(39,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',39,0),
+	(40,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',40,0),
+	(41,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',41,0),
+	(42,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',42,0),
+	(43,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',43,0),
+	(44,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',44,0),
+	(45,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',45,0),
+	(46,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',46,0),
+	(47,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',47,0),
+	(48,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',48,0),
+	(49,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',49,0),
+	(50,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',50,0),
+	(51,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',51,0),
+	(52,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',52,0),
+	(53,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',53,0),
+	(54,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',54,0),
+	(55,'2014-02-11 12:55:32','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if someone is in the room then turn off the heating>>. The new rule is <<if today is Tuesday then turn on the light>>',55,0),
+	(56,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',1,0),
+	(57,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',2,0),
+	(58,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',3,0),
+	(59,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',4,0),
+	(60,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',5,0),
+	(61,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',6,0),
+	(62,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',7,1),
+	(63,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',8,0),
+	(64,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',9,0),
+	(65,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',10,0),
+	(66,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',11,0),
+	(67,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',12,0),
+	(68,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',13,0),
+	(69,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',14,0),
+	(70,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',15,0),
+	(71,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',16,0),
+	(72,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',17,0),
+	(73,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',18,0),
+	(74,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',19,0),
+	(75,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',20,0),
+	(76,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',21,0),
+	(77,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',22,0),
+	(78,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',23,0),
+	(79,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',24,0),
+	(80,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',25,0),
+	(81,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',26,0),
+	(82,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',27,0),
+	(83,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',28,0),
+	(84,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',29,0),
+	(85,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',30,0),
+	(86,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',31,0),
+	(87,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',32,0),
+	(88,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',33,0),
+	(89,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',34,0),
+	(90,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',35,0),
+	(91,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',36,0),
+	(92,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',37,0),
+	(93,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',38,0),
+	(94,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',39,0),
+	(95,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',40,0),
+	(96,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',41,0),
+	(97,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',42,0),
+	(98,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',43,0),
+	(99,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',44,0),
+	(100,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',45,0),
+	(101,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',46,0),
+	(102,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',47,0),
+	(103,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',48,0),
+	(104,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',49,0),
+	(105,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',50,0),
+	(106,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',51,0),
+	(107,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',52,0),
+	(108,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',53,0),
+	(109,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',54,0),
+	(110,'2014-02-11 13:20:53','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Wednesday then turn on the cooling>>. The new rule is <<if today is Monday then turn off the cooling>>',55,0),
+	(111,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',1,0),
+	(112,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',2,0),
+	(113,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',3,0),
+	(114,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',4,0),
+	(115,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',5,0),
+	(116,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',6,0),
+	(117,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',7,1),
+	(118,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',8,0),
+	(119,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',9,0),
+	(120,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',10,0),
+	(121,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',11,0),
+	(122,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',12,0),
+	(123,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',13,0),
+	(124,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',14,0),
+	(125,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',15,0),
+	(126,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',16,0),
+	(127,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',17,0),
+	(128,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',18,0),
+	(129,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',19,0),
+	(130,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',20,0),
+	(131,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',21,0),
+	(132,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',22,0),
+	(133,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',23,0),
+	(134,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',24,0),
+	(135,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',25,0),
+	(136,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',26,0),
+	(137,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',27,0),
+	(138,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',28,0),
+	(139,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',29,0),
+	(140,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',30,0),
+	(141,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',31,0),
+	(142,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',32,0),
+	(143,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',33,0),
+	(144,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',34,0),
+	(145,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',35,0),
+	(146,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',36,0),
+	(147,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',37,0),
+	(148,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',38,0),
+	(149,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',39,0),
+	(150,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',40,0),
+	(151,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',41,0),
+	(152,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',42,0),
+	(153,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',43,0),
+	(154,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',44,0),
+	(155,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',45,0),
+	(156,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',46,0),
+	(157,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',47,0),
+	(158,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',48,0),
+	(159,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',49,0),
+	(160,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',50,0),
+	(161,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',51,0),
+	(162,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',52,0),
+	(163,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',53,0),
+	(164,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',54,0),
+	(165,'2014-02-11 13:21:12','Rule modified in building CSE room 2107','The user e edited (or tried to edit) the rule <<if today is Monday then turn off the cooling>>. The new rule is <<if today is Tuesday then turn off the cooling>>',55,0);
+
+/*!40000 ALTER TABLE `notifications` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table rooms
@@ -452,7 +649,9 @@ LOCK TABLES `rooms_groups` WRITE;
 
 INSERT INTO `rooms_groups` (`group_id`, `building_name`, `room_name`)
 VALUES
+	(1,'CSE','2107'),
 	(1,'CSE','2108'),
+	(1,'CSE','2109'),
 	(1,'CSE','2111'),
 	(1,'CSE','2112'),
 	(1,'CSE','2116'),
@@ -460,30 +659,52 @@ VALUES
 	(1,'CSE','2122'),
 	(1,'CSE','2126'),
 	(1,'CSE','2128'),
-	(2,'CSE','2132'),
-	(2,'CSE','2134'),
-	(2,'CSE','2136'),
-	(2,'CSE','2138'),
-	(2,'CSE','2203'),
-	(2,'CSE','2215'),
-	(2,'CSE','2217'),
-	(2,'CSE','2231'),
-	(3,'CSE','2108'),
-	(3,'CSE','2112'),
-	(4,'CSE','2111'),
-	(4,'CSE','2116'),
-	(5,'CSE','2118'),
-	(5,'CSE','2122'),
-	(6,'CSE','2132'),
-	(6,'CSE','2134'),
-	(7,'CSE','2136'),
-	(7,'CSE','2138'),
-	(7,'CSE','2231'),
-	(8,'CSE','2203'),
-	(8,'CSE','2215'),
-	(8,'CSE','2217'),
-	(9,'CSE','2107'),
-	(9,'CSE','2144');
+	(1,'CSE','2132'),
+	(1,'CSE','2134'),
+	(1,'CSE','2136'),
+	(1,'CSE','2138'),
+	(1,'CSE','2140'),
+	(1,'CSE','2144'),
+	(1,'CSE','2154'),
+	(1,'CSE','2203'),
+	(1,'CSE','2215'),
+	(1,'CSE','2217'),
+	(1,'CSE','2230'),
+	(1,'CSE','2231'),
+	(1,'CSE','3113'),
+	(1,'CSE','3208'),
+	(2,'CSE','2108'),
+	(2,'CSE','2111'),
+	(2,'CSE','2112'),
+	(2,'CSE','2116'),
+	(2,'CSE','2118'),
+	(2,'CSE','2122'),
+	(2,'CSE','2126'),
+	(2,'CSE','2128'),
+	(3,'CSE','2132'),
+	(3,'CSE','2134'),
+	(3,'CSE','2136'),
+	(3,'CSE','2138'),
+	(3,'CSE','2203'),
+	(3,'CSE','2215'),
+	(3,'CSE','2217'),
+	(3,'CSE','2231'),
+	(4,'CSE','2108'),
+	(4,'CSE','2112'),
+	(5,'CSE','2111'),
+	(5,'CSE','2116'),
+	(6,'CSE','2118'),
+	(6,'CSE','2122'),
+	(7,'CSE','2132'),
+	(7,'CSE','2134'),
+	(8,'CSE','2136'),
+	(8,'CSE','2138'),
+	(8,'CSE','2231'),
+	(9,'CSE','2203'),
+	(9,'CSE','2215'),
+	(9,'CSE','2217'),
+	(10,'CSE','2107'),
+	(10,'CSE','2144');
 
 /*!40000 ALTER TABLE `rooms_groups` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -841,6 +1062,16 @@ CREATE TABLE `rules` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+LOCK TABLES `rules` WRITE;
+/*!40000 ALTER TABLE `rules` DISABLE KEYS */;
+
+INSERT INTO `rules` (`id`, `priority`, `category`, `building_name`, `group_id`, `room_name`, `author_uuid`, `antecedent`, `consequent`, `enabled`, `deleted`, `creation_timestamp`, `last_edit_timestamp`)
+VALUES
+	(1,50,'HEATING','CSE',-1,'2107',7,'today is Tuesday','turn on the light',1,0,'2014-02-11 12:30:48','2014-02-11 12:30:48'),
+	(2,50,'COOLING','CSE',-1,'2107',7,'today is Tuesday','turn off the cooling',1,0,'2014-02-11 13:13:36','2014-02-11 13:13:36');
+
+/*!40000 ALTER TABLE `rules` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table rules_priority
@@ -856,6 +1087,16 @@ CREATE TABLE `rules_priority` (
   PRIMARY KEY (`building_name`,`room_name`,`rule_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+LOCK TABLES `rules_priority` WRITE;
+/*!40000 ALTER TABLE `rules_priority` DISABLE KEYS */;
+
+INSERT INTO `rules_priority` (`building_name`, `room_name`, `rule_id`, `rule_priority`)
+VALUES
+	('CSE','2107',1,50),
+	('CSE','2107',2,66);
+
+/*!40000 ALTER TABLE `rules_priority` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table sessions
@@ -870,6 +1111,15 @@ CREATE TABLE `sessions` (
   PRIMARY KEY (`session_key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+LOCK TABLES `sessions` WRITE;
+/*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
+
+INSERT INTO `sessions` (`session_key`, `user_uuid`, `expire_timestamp`)
+VALUES
+	('2DJFM0-28299a83c27091b403f8506113c25978',3,'2014-02-12 12:11:04');
+
+/*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table triggers
@@ -916,7 +1166,7 @@ CREATE TABLE `users` (
   `uuid` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(11) NOT NULL DEFAULT '',
   `email` varchar(64) DEFAULT NULL,
-  `password` varchar(24) DEFAULT NULL,
+  `password` varchar(128) DEFAULT NULL,
   `person_name` varchar(24) DEFAULT NULL,
   `level` int(11) DEFAULT NULL,
   PRIMARY KEY (`uuid`)
@@ -927,7 +1177,61 @@ LOCK TABLES `users` WRITE;
 
 INSERT INTO `users` (`uuid`, `username`, `email`, `password`, `person_name`, `level`)
 VALUES
-	(1,'admin','energybox.buildingrules@','brulesAdmin2014','Administrator',100);
+	(1,'admin','energybox.buildingrules@gmail.com','brulesAdmin2014','Administrator',100),
+	(2,'c','c','c','c',10),
+	(3,'a','a','a','a',10),
+	(4,'b','b','b','b',10),
+	(5,'q','q','q','q',10),
+	(6,'w','w','w','w',10),
+	(7,'e','e','e','ee',10),
+	(8,'user_6','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User6',10),
+	(9,'user_7','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User7',10),
+	(10,'user_8','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User8',10),
+	(11,'user_9','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User9',10),
+	(12,'user_10','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User10',10),
+	(13,'user_11','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User11',10),
+	(14,'user_12','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User12',10),
+	(15,'user_13','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User13',10),
+	(16,'user_14','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User14',10),
+	(17,'user_15','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User15',10),
+	(18,'user_16','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User16',10),
+	(19,'user_17','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User17',10),
+	(20,'user_18','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User18',10),
+	(21,'user_19','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User19',10),
+	(22,'user_20','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User20',10),
+	(23,'user_21','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User21',10),
+	(24,'user_22','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User22',10),
+	(25,'user_23','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User23',10),
+	(26,'user_24','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User24',10),
+	(27,'user_25','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User25',10),
+	(28,'user_26','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User26',10),
+	(29,'user_27','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User27',10),
+	(30,'user_28','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User28',10),
+	(31,'user_29','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User29',10),
+	(32,'user_30','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User30',10),
+	(33,'user_31','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User31',10),
+	(34,'user_32','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User32',10),
+	(35,'user_33','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User33',10),
+	(36,'user_34','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User34',10),
+	(37,'user_35','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User35',10),
+	(38,'user_36','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User36',10),
+	(39,'user_37','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User37',10),
+	(40,'user_38','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User38',10),
+	(41,'user_39','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User39',10),
+	(42,'user_40','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User40',10),
+	(43,'user_41','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User41',10),
+	(44,'user_42','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User42',10),
+	(45,'user_43','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User43',10),
+	(46,'user_44','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User44',10),
+	(47,'user_45','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User45',10),
+	(48,'user_46','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User46',10),
+	(49,'user_47','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User47',10),
+	(50,'user_48','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User48',10),
+	(51,'user_49','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User49',10),
+	(52,'user_50','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User50',10),
+	(53,'user_51','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User51',10),
+	(54,'user_52','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User52',10),
+	(55,'user_53','--','verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword','User53',10);
 
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;

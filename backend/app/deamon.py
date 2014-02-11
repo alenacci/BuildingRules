@@ -11,6 +11,7 @@ from app.backend.controller.triggerManager import TriggerManager
 from app.backend.controller.actionManager import ActionManager
 
 from app.backend.model.buildings import Buildings
+from app.backend.model.rules import Rules
 
 # REMEMBER
 # After the rule partioning among pure rule and CRVG-rules, the attributes of the rule classes are changed in this way:
@@ -64,6 +65,9 @@ def executeRule(rule):
 	flash(message + ") actuated; consequent is '" + rule.consequent + "'...")
 	driver.actuate()
 
+	rules = Rules()
+	rules.setActiveRule(buildingName = rule.buildingName, roomName = rule.roomName, ruleId = rule.id)
+
 def notifyIgnoredRule(rule):
 	pass
 
@@ -89,7 +93,9 @@ def main():
 	buildings = Buildings()
 	buildingsManager = BuildingsManager()
 	groupsManager = GroupsManager()
-	
+	rules = Rules()
+
+	rules.resetActiveRules()
 	
 	for building in buildings.getAllBuildings():
 
