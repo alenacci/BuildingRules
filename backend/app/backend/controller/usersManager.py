@@ -32,6 +32,25 @@ class UsersManager:
 		else:
 			raise MissingInputDataError("You need to specify at least the username or the uuid to gather user information")
 
+	def registerTemporary(self, newUserUsername, newUserPassword, newUserEmail, newUserPersonName, newUserLevel = 10):
+		checkData(locals())
+
+		try:
+			user = User(username = newUserUsername)
+			user.retrieve()
+			raise UsernameNotAvailableError("The username " + newUserUsername + " has been alredy assigned")
+
+		except UserNotFoundError as e:
+		
+			if not(newUserUsername and newUserPassword and newUserEmail and newUserPersonName and newUserLevel):
+				raise MissingInputDataError("Some input data are missing to register a new user")
+
+			user = User(username = newUserUsername, password = newUserPassword, email = newUserEmail, personName = newUserPersonName, level = newUserLevel)
+			user.store()
+
+			return user.getDict()
+
+
 	def register(self, creatorUuid, newUserUsername, newUserPassword, newUserEmail, newUserPersonName, newUserLevel):
 		checkData(locals())
 

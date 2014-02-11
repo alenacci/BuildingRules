@@ -265,6 +265,9 @@ class RoomsManager:
 	def __addOrModifyRule(self, priority = None, buildingName = None, roomName = None, authorUuid = None, ruleBody = None, ruleId = None, antecedent = None, consequent = None, enabled = True):
 		checkData(locals())
 		
+		import time,datetime
+		startTimeMilliseconds = long((time.time() + 0.5) * 1000)
+
 
 		if ruleBody:
 			try:
@@ -341,6 +344,14 @@ class RoomsManager:
 			if ruleId: 
 				rule.id = ruleId
 				rule.setPriority(priority)
+
+
+			from app.backend.commons.console import flash
+			endTimeMilliseconds = long((time.time() + 0.5) * 1000)
+			opTimeMilliseconds = endTimeMilliseconds - startTimeMilliseconds
+			flash("GroupsRuleVerification [SUCCESS]: #rules=" + str(len(temporaryRuleSet)) + " - opTimeMilliseconds:" + str(opTimeMilliseconds))
+
+
 			return room.addRule(rule).getDict()
 		else:
 			from app.backend.commons.console import flash
@@ -352,6 +363,12 @@ class RoomsManager:
 			logMessage += "newRule =  " + str(rule)
 
 			flash("RuleValidationError: " + logMessage)
+
+			endTimeMilliseconds = long((time.time() + 0.5) * 1000)
+			opTimeMilliseconds = endTimeMilliseconds - startTimeMilliseconds
+			flash("GroupsRuleVerification [FAILED]: #rules=" + str(len(temporaryRuleSet)) + " - opTimeMilliseconds:" + str(opTimeMilliseconds))
+
+
 			raise RuleValidationError(ruleCheckErrorList)
 
 	def __str__(self):

@@ -26,7 +26,7 @@
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2014-02-05 01:42:42 +0000</string>
+	<string>2014-02-11 00:46:04 +0000</string>
 	<key>Modifier</key>
 	<string>Alessandro Nacci</string>
 	<key>NotesVisible</key>
@@ -612,8 +612,8 @@ message_read: boolean}</string>
 					<real>29.512414932250977</real>
 					<key>Points</key>
 					<array>
-						<string>{209.48758551434886, 324.20833615807078}</string>
-						<string>{282.51241448565111, 340.79166385718844}</string>
+						<string>{209.48758551434886, 324.20833615429297}</string>
+						<string>{282.51241448565111, 340.7916638503105}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -653,8 +653,8 @@ message_read: boolean}</string>
 					<real>29.507846832275391</real>
 					<key>Points</key>
 					<array>
-						<string>{209.49215306513361, 288.04523152218735}</string>
-						<string>{282.50784693486639, 274.95476847781305}</string>
+						<string>{209.49215306513361, 288.04523152218724}</string>
+						<string>{282.50784693486639, 274.95476847781282}</string>
 					</array>
 					<key>Style</key>
 					<dict>
@@ -4518,7 +4518,7 @@ description: string}</string>
 			<key>BackgroundGraphic</key>
 			<dict>
 				<key>Bounds</key>
-				<string>{{0, 0}, {1018, 1315}}</string>
+				<string>{{0, 0}, {1018, 1351}}</string>
 				<key>Class</key>
 				<string>SolidGraphic</string>
 				<key>ID</key>
@@ -4542,7 +4542,7 @@ description: string}</string>
 			<key>CanvasOrigin</key>
 			<string>{0, 0}</string>
 			<key>CanvasSize</key>
-			<string>{1018, 1315}</string>
+			<string>{1018, 1351}</string>
 			<key>ColumnAlign</key>
 			<integer>1</integer>
 			<key>ColumnSpacing</key>
@@ -4558,7 +4558,7 @@ description: string}</string>
 					<array>
 						<dict>
 							<key>Bounds</key>
-							<string>{{284.31377026616434, 1172.363591192985}, {237.60781860351562, 14}}</string>
+							<string>{{284.31377026616434, 1208.363591192985}, {237.6077880859375, 14}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
@@ -4599,7 +4599,7 @@ description: string}</string>
 						</dict>
 						<dict>
 							<key>Bounds</key>
-							<string>{{284.31377026616434, 1186.363591192985}, {237.60781860351562, 28}}</string>
+							<string>{{284.31377026616434, 1222.363591192985}, {237.6077880859375, 28}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
@@ -4643,7 +4643,7 @@ description: string}</string>
 						</dict>
 						<dict>
 							<key>Bounds</key>
-							<string>{{284.31377026616434, 1214.363591192985}, {237.60781860351562, 28}}</string>
+							<string>{{284.31377026616434, 1250.363591192985}, {237.6077880859375, 28}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
@@ -5287,7 +5287,7 @@ translateTemplate()\
 					<array>
 						<dict>
 							<key>Bounds</key>
-							<string>{{284.31359415528163, 905.79795574341608}, {237.60784912109375, 14}}</string>
+							<string>{{284.31359415528163, 941.79795574341608}, {237.60784912109375, 14}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
@@ -5328,7 +5328,7 @@ translateTemplate()\
 						</dict>
 						<dict>
 							<key>Bounds</key>
-							<string>{{284.31359415528163, 919.79795574341608}, {237.60784912109375, 84}}</string>
+							<string>{{284.31359415528163, 955.79795574341608}, {237.60784912109375, 84}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
@@ -5380,7 +5380,7 @@ messageRead: boolean}</string>
 						</dict>
 						<dict>
 							<key>Bounds</key>
-							<string>{{284.31359415528163, 1003.797955743416}, {237.60784912109375, 154}}</string>
+							<string>{{284.31359415528163, 1039.797955743416}, {237.60784912109375, 154}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
@@ -5449,7 +5449,7 @@ detDict()}</string>
 					<array>
 						<dict>
 							<key>Bounds</key>
-							<string>{{284.31360694573021, 723.23231626537279}, {237.60787963867188, 14}}</string>
+							<string>{{284.31360694573021, 759.23231626537279}, {237.60791015625, 14}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
@@ -5490,7 +5490,7 @@ detDict()}</string>
 						</dict>
 						<dict>
 							<key>Bounds</key>
-							<string>{{284.31360694573021, 737.23231626537279}, {237.60787963867188, 56}}</string>
+							<string>{{284.31360694573021, 773.23231626537279}, {237.60791015625, 56}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
@@ -5536,7 +5536,7 @@ rulePriority: int}</string>
 						</dict>
 						<dict>
 							<key>Bounds</key>
-							<string>{{284.31360694573021, 793.23231626537279}, {237.60787963867188, 98}}</string>
+							<string>{{284.31360694573021, 829.23231626537279}, {237.60791015625, 98}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
@@ -5811,7 +5811,7 @@ getDict()\
 					<array>
 						<dict>
 							<key>Bounds</key>
-							<string>{{284.31372985275345, 428.66666530621467}, {237.60784912109375, 14}}</string>
+							<string>{{284.31372985275345, 464.66666530621467}, {237.60784912109375, 14}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
@@ -5852,7 +5852,7 @@ getDict()\
 						</dict>
 						<dict>
 							<key>Bounds</key>
-							<string>{{284.31372985275345, 442.66666530621467}, {237.60784912109375, 42}}</string>
+							<string>{{284.31372985275345, 478.66666530621467}, {237.60784912109375, 42}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
@@ -5897,7 +5897,7 @@ description: string}</string>
 						</dict>
 						<dict>
 							<key>Bounds</key>
-							<string>{{284.31372985275345, 484.66666530621467}, {237.60784912109375, 224}}</string>
+							<string>{{284.31372985275345, 520.66666530621467}, {237.60784912109375, 224}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
@@ -6396,7 +6396,7 @@ description: string}</string>
 						</dict>
 						<dict>
 							<key>Bounds</key>
-							<string>{{284.31373080671966, 146.99999771426141}, {237.60784912109375, 280}}</string>
+							<string>{{284.31373080671966, 146.99999771426141}, {237.60784912109375, 294}}</string>
 							<key>Class</key>
 							<string>ShapedGraphic</string>
 							<key>FitText</key>
@@ -6433,6 +6433,7 @@ description: string}</string>
 \f0\fs24 \cf0 List&lt;Room&gt; getRooms()\
 List&lt;Group&gt; getGroups()\
 List&lt;Rule&gt; getRules()\
+getUnassignedRooms()\
 \
 getCrossRoomValidationGroups()\
 \
@@ -9018,7 +9019,7 @@ eventTriggered()\
 		<key>SidebarWidth</key>
 		<integer>120</integer>
 		<key>VisibleRegion</key>
-		<string>{{-5, 603.03029722126757}, {1027.2727173769333, 693.93938725462453}}</string>
+		<string>{{-5, 0}, {1027.2727173769333, 693.93938725462453}}</string>
 		<key>Zoom</key>
 		<real>0.99000000953674316</real>
 		<key>ZoomValues</key>

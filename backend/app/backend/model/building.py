@@ -35,6 +35,27 @@ class Building:
 
 		return roomList
 
+	def getUnassignedRooms(self):
+
+		from app.backend.model.room import Room
+		
+		query = "SELECT * FROM rooms where (room_name,building_name) NOT IN (SELECT room_name,building_name FROM users_rooms) AND building_name='@@building_name@@'"
+
+		database = Database()
+		database.open()
+		query = self.__replaceSqlQueryToken(query)
+		queryResult = database.executeReadQuery(query)
+		database.close()
+
+		roomList = []
+		for roomRecord in queryResult:
+			room = Room(roomName = roomRecord[0], buildingName = self.buildingName)
+			room.retrieve()
+			roomList.append(room)
+
+		return roomList
+
+
 	def getGroups(self):
 		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ") : non yet tested"
 

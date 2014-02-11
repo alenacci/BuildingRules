@@ -41,6 +41,24 @@ def login(username = None):
 			return returnError(e)
 		
 
+@api.route('/api/users/<username>/register', methods = ['POST'])
+def register(username = None):
+
+	if request.method == 'POST':
+
+		password = validateInput(request.form['password'])
+		personName = validateInput(request.form['personName'])
+		email = validateInput(request.form['email'])
+		
+		usersManager = UsersManager()
+		
+		try:
+			return returnResult( usersManager.registerTemporary(newUserUsername = username, newUserPassword = password, newUserEmail = email, newUserPersonName = personName) )
+
+		except Exception as e:
+			return returnError(e)
+		
+
 @api.route('/api/users/<username>/logout', methods = ['GET', 'POST'])
 def logout(username = None):
 	

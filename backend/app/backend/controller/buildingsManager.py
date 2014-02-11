@@ -98,6 +98,20 @@ class BuildingsManager:
 
 		return {"rooms" : roomList}
 
+	def getUnassignedRooms(self, buildingName):
+		checkData(locals())
+
+		building = Building(buildingName = buildingName)
+		building.retrieve()
+
+		roomList = []
+
+		for room in building.getUnassignedRooms():
+			roomList.append(room.getDict())
+
+		return {"rooms" : roomList}
+
+
 	def addRoom(self, roomName, buildingName, description):
 		checkData(locals())
 

@@ -139,6 +139,9 @@ class GroupsManager:
 
 	def __addOrModifyRule(self, priority = None, buildingName = None, groupId = None, authorUuid = None, ruleBody = None, ruleId = None):
 		checkData(locals())
+
+		import time,datetime
+		startTimeMilliseconds = long((time.time() + 0.5) * 1000)
 		
 
 		try:
@@ -227,8 +230,13 @@ class GroupsManager:
 				messageText =  "Some rules in group " + str(groupId) + " have been changed. Since your room " + str(room.roomName) + " belongs to that group, you have to revalidate all your rules."
 				notifications.sendNotification(buildingName = buildingName, roomName = room.roomName, messageSubject = messageSubject, messageText = messageText) 
 				
-				for r in room.getRules(includeGroupsRules = False, excludeCrossRoomValidationRules = True):
-					r.disable()
+				#for r in room.getRules(includeGroupsRules = False, excludeCrossRoomValidationRules = True):
+				#	r.disable()
+
+			from app.backend.commons.console import flash
+			endTimeMilliseconds = long((time.time() + 0.5) * 1000)
+			opTimeMilliseconds = endTimeMilliseconds - startTimeMilliseconds
+			flash("GroupsRuleVerification [SUCCESS]: #rules=" + str(len(temporaryRuleSet)) + " - opTimeMilliseconds:" + str(opTimeMilliseconds))
 
 			return group.addRule(rule).getDict()
 		else:
@@ -243,7 +251,11 @@ class GroupsManager:
 
 			flash("RuleValidationError: " + logMessage)
 
-			raise RuleValidationError(ruleCheckErrorList)
+			endTimeMilliseconds = long((time.time() + 0.5) * 1000)
+			opTimeMilliseconds = endTimeMilliseconds - startTimeMilliseconds
+			flash("GroupsRuleVerification [FAILED]: #rules=" + str(len(temporaryRuleSet)) + " - opTimeMilliseconds:" + str(opTimeMilliseconds))
+
+			raise RuleValidationError(ruleCheckErrorList + " Error in room " + room.roomName)
 
 	def __str__(self):
 		return "GroupsManager: "

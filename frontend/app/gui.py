@@ -50,6 +50,30 @@ def login():
 	return render_template('login.html', error=error)	
 
 
+@gui.route('/register/', methods = ['GET', 'POST'])
+@gui.route('/register', methods = ['GET', 'POST'])
+def register():
+	error = None
+
+	if request.method == 'POST':
+
+		username = request.form['username']
+		password = request.form['password']
+		personName = request.form['personName']
+		email = request.form['email']
+
+		response = rest.request("/api/users/<username>/register", {'username' : username, 'password' : password, 'personName' : personName, 'email' : email})
+
+		if successResponse(response):
+
+			userUuid = response["uuid"]
+
+			return render_template('registrationOk.html', userUuid=userUuid)	
+		else:
+			error = response['request-errorDescription']
+
+	return render_template('registerUser.html', error=error)	
+
 
 
 
