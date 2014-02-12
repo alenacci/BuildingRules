@@ -41,12 +41,20 @@
 		<section id="typography">
 
 			<div class="form-actions">
-				<a class="btn btn-lg btn-success" href="javascript:showMaps()" id="btnShowMaps">Show Maps</a>
-				<a class="btn btn-lg btn-success" href="javascript:hideMaps()" id="btnHideMaps">Hide Maps</a>
-				<a class="btn btn-lg btn-success" href="javascript:showThermalZoneMaps()" id="btnShowThMaps">Show Thermal Zones Maps</a>
-				<a class="btn btn-lg btn-success" href="javascript:showAccessMaps()" id="btnShowAccMaps">Show Access Rights Maps</a>
-			  	<img src="{{url_for('static', filename='roomMaps/')}}{{mapFileName}}" id="accessMap">
-			  	<img src="{{url_for('static', filename='roomMaps/thermalZonesMap.png')}}" id="thZoneMap">
+				<a class="btn btn-lg btn-success" href="javascript:showMaps()" id="btnShowMaps">Show Map</a>
+				<a class="btn btn-lg btn-success" href="javascript:hideMaps()" id="btnHideMaps">Hide Map</a>
+				<a class="btn btn-lg btn-success" href="javascript:showThermalZoneMaps()" id="btnShowThMaps">Show Thermal Zones Map</a>
+				<a class="btn btn-lg btn-success" href="javascript:showAccessMaps()" id="btnShowAccMaps">Show Access Rights Map</a>
+			  	<div id="accessMap">
+			  		<img src="{{url_for('static', filename='roomMaps/')}}{{mapFileName}}">
+			  		<br>
+			  		<b>This maps shows the rooms you can access</b>
+			  	</div>
+			  	<div id="thZoneMap">
+			  		<img src="{{url_for('static', filename='roomMaps/thermalZonesMap.png')}}">
+			  		<br>
+			  		<b>This maps shows how the thermal zones are organized</b>
+			  	</div>
 			 </div>
 
 

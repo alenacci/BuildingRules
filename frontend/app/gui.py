@@ -15,6 +15,12 @@ def index():
 
 	return render_template('home.html')
 
+@gui.route('/partecipate/')
+@gui.route('/partecipate')
+def partecipate():
+	return render_template('partecipate.html')
+
+
 @gui.route('/login/', methods = ['GET', 'POST'])
 @gui.route('/login', methods = ['GET', 'POST'])
 def login():
@@ -50,9 +56,10 @@ def login():
 	return render_template('login.html', error=error)	
 
 
+@gui.route('/register/<source>', methods = ['GET', 'POST'])
 @gui.route('/register/', methods = ['GET', 'POST'])
 @gui.route('/register', methods = ['GET', 'POST'])
-def register():
+def register(source = None):
 	error = None
 
 	if request.method == 'POST':
@@ -72,7 +79,7 @@ def register():
 		else:
 			error = response['request-errorDescription']
 
-	return render_template('registerUser.html', error=error)	
+	return render_template('registerUser.html', error=error, source = source)	
 
 
 
