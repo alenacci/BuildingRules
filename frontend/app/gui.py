@@ -95,6 +95,8 @@ def logout():
 
 		del session["logged_in"]
 		del session["sessionKey"]
+		if "alreadyLoggedIn" in session.keys(): 
+			del session["alreadyLoggedIn"]
 
 
 		if successResponse(response):
@@ -362,7 +364,13 @@ def rooms(buildingName = None):
 			return render_template('error.html', error = response['request-errorDescription'])
 
 
-	return render_template('rooms.html', roomList = roomList, roomRules = roomRules, authorList = authorList, groupList = groupList, triggerList = triggerList, actionList = actionList, userList = userList, roomGroupList = roomGroupList, notificationList = notificationList, categories = categories, categoriesFilter = categoriesFilter, mapFileName = mapFileName, activeRoomRules = activeRoomRules)	
+	if "alreadyLoggedIn" in session.keys():
+		alreadyLoggedIn = True
+	else:
+		session["alreadyLoggedIn"] = True
+		alreadyLoggedIn = False
+
+	return render_template('rooms.html', roomList = roomList, roomRules = roomRules, authorList = authorList, groupList = groupList, triggerList = triggerList, actionList = actionList, userList = userList, roomGroupList = roomGroupList, notificationList = notificationList, categories = categories, categoriesFilter = categoriesFilter, mapFileName = mapFileName, activeRoomRules = activeRoomRules, alreadyLoggedIn = alreadyLoggedIn)	
 
 
 @gui.route('/buildings/<buildingName>/groups/')
