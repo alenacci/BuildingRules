@@ -14,7 +14,7 @@ class Mturk:
 	def __replaceSqlQueryToken(self, queryTemplate):
 		if self.id 			!= None	: 	queryTemplate = queryTemplate.replace("@@id@@", str(self.id))
 		if self.day		 	!= None	: 	queryTemplate = queryTemplate.replace("@@day@@", str(self.day))
-		if self.userUuid 	!= None	: 	queryTemplate = queryTemplate.replace("@@user_uuid@@", str(self.user_uuid))
+		if self.userUuid 	!= None	: 	queryTemplate = queryTemplate.replace("@@user_uuid@@", str(self.userUuid))
 		if self.token		!= None	: 	queryTemplate = queryTemplate.replace("@@token@@", self.token)
 
 		return queryTemplate
@@ -24,14 +24,14 @@ class Mturk:
 		database = Database()
 		database.open()
 
-		query = "SELECT COUNT(id) FROM mturks WHERE id = '@@id@@';"
+		query = "SELECT COUNT(id) FROM mturk WHERE id = '@@id@@';"
 		query = self.__replaceSqlQueryToken(query)
 		queryResult = database.executeReadQuery(query)
 
 		if int(queryResult[0][0]) > 0:
-			query = "UPDATE mturks SET day = '@@day@@', user_uuid = '@@user_uuid@@', token = '@@token@@' WHERE id = '@@id@@';"
+			query = "UPDATE mturk SET day = '@@day@@', user_uuid = '@@user_uuid@@', token = '@@token@@' WHERE id = '@@id@@';"
 		else:
-			query = "INSERT INTO mturks (day, user_uuid, token) VALUES ('@@day@@', '@@user_uuid@@', '@@token@@');"	
+			query = "INSERT INTO mturk (day, user_uuid, token) VALUES ('@@day@@', '@@user_uuid@@', '@@token@@');"	
 	
 		query = self.__replaceSqlQueryToken(query)
 		database.executeWriteQuery(query)
@@ -41,17 +41,18 @@ class Mturk:
 	def retrieve(self):
 
 		if self.id:
-			query = "SELECT * FROM mturks WHERE id = '@@id@@';"
-		if self.day and self.userUuid:
-			query = "SELECT * FROM mturks WHERE day = '@@day@@' AND user_uuid = '@@user_uuid@@' ;"
+			query = "SELECT * FROM mturk WHERE id = '@@id@@';"
+		if self.day != None and self.userUuid != None:
+			query = "SELECT * FROM mturk WHERE day = '@@day@@' AND user_uuid = '@@user_uuid@@' ;"
 		else:
 			raise MissingInputDataError("Impossibile to query any Mturk with missing parameters")
 
 		database = Database()
 		database.open()
-
 		query = self.__replaceSqlQueryToken(query)
 		queryResult = database.executeReadQuery(query)
+
+
 
 		if len(queryResult) > 0:
 			self.id = queryResult[0][0]
@@ -69,7 +70,7 @@ class Mturk:
 		database = Database()
 		database.open()
 
-		query = "DELETE FROM mturks WHERE id = '@@id@@';"
+		query = "DELETE FROM mturk WHERE id = '@@id@@';"
 		query = self.__replaceSqlQueryToken(query)
 		database.executeWriteQuery(query)
 

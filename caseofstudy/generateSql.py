@@ -1,5 +1,7 @@
 import sys
 import MySQLdb
+import string
+import random
 
 
 
@@ -111,6 +113,8 @@ queries.append( "TRUNCATE TABLE sessions;" )
 queries.append( "TRUNCATE TABLE users;" )
 queries.append( "TRUNCATE TABLE users_rooms;" )
 queries.append( "TRUNCATE TABLE active_rules;" )
+queries.append( "TRUNCATE TABLE mturk;" )
+
 
 
 newRoomSqlTempl = "INSERT INTO `rooms` (`room_name`, `building_name`, `description`) VALUES ('@@roomName@@', 'CSE', '@@description@@');"
@@ -146,7 +150,16 @@ roomGroupBindSqlTempl = "INSERT INTO `rooms_groups` (`group_id`, `building_name`
 queries.append("INSERT INTO `users` (`username`, `email`, `password`, `person_name`, `level`) VALUES ('admin', 'energybox.buildingrules@gmail.com', 'brulesAdmin2014', 'Administrator', 100);")
 
 for i in range(0,54):
-	queries.append("INSERT INTO `users` (`username`, `email`, `password`, `person_name`, `level`) VALUES ('user_" + str(i) + "', '--', 'verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword', 'User" + str(i) + "', 10);")
+	uuid = currentUserUuid + i
+	queries.append("INSERT INTO `users` (`username`, `email`, `password`, `person_name`, `level`) VALUES ('user_" + str(uuid) + "', '--', 'verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword', 'User" + str(uuid) + "', 10);")
+
+	for day in range(0,8):
+		token = str(uuid) + "-" + str(day) + "-" + ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(16))
+		query = "INSERT INTO `mturk` (`day`, `user_uuid`, `token`) VALUES (@@day@@, @@user_uuid@@, '@@token@@');"
+		query = query.replace("@@day@@", str(day))
+		query = query.replace("@@user_uuid@@", str(uuid))
+		query = query.replace("@@token@@", str(token))
+		queries.append(query)
 
 # Adding the administrator to all rooms
 for roomName in allRooms:

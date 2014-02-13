@@ -8,6 +8,8 @@ from app.backend.model.rules import Rules
 from app.backend.model.mturk import Mturk
 import time
 import datetime
+from datetime import timedelta
+
 
 class MTurkManager:
 	def __init__(self):
@@ -20,7 +22,13 @@ class MTurkManager:
 
 	def getTodayToken(self, userUuid):
 
-		days = ['2014-02-13','2014-02-14','2014-02-15','2014-02-16','2014-02-17','2014-02-18','2014-02-19']
+		user = User(uuid = userUuid)
+		user.retrieve()
+
+		days = []
+		for i in range(0,7):
+			days.append( (user.registrationTimestamp + timedelta(days=i)).strftime("%Y-%m-%d"))
+		
 		today = str(time.strftime("%Y-%m-%d"))
 
 		if today not in days:
@@ -28,8 +36,6 @@ class MTurkManager:
 		
 		day = days.index(today)
 
-		user = User(uuid = userUuid)
-		user.retrieve()
 
 		userRules = user.getCreatedRules()
 
@@ -44,15 +50,26 @@ class MTurkManager:
 
 		result = {}
 
-		requiredUserActions = [10, 8, 7, 5 , 4, 3, 2]
+		#requiredUserActions = [10, 8, 7, 5 , 4, 3, 2]
+		requiredUserActions = [2, 2, 2, 2 , 2, 2, 2]
 		
 		if userActionsCount >= requiredUserActions[day]:
+			result["taskCompleted"] = True
 			result["message"] = "You completed your today task!"
 			result["token"] = self._getTokenFromDb(userUuid = userUuid, day = day)
 		else:
 			result["message"] = "You have still to perform " + str(requiredUserActions[day] - userActionsCount) + " actions on the rule sets!"
+			result["taskCompleted"] = False
+		
+		result["currentDay"] = day + 1
+		result["serverDatetime"] = str(time.strftime("%Y-%m-%d %H:%M:%S"))
 
-		return result
+		if day == 6 and result["taskCompleted"]:
+			result["experimentCompleted"] = True
+		else:
+			result["experimentCompleted"] = False
+ 
+		return {"mturk-status" : result}
 
 		
 

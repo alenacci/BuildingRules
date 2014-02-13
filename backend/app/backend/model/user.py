@@ -1,11 +1,13 @@
 import sys
 import json
+import datetime
 from app.backend.commons.errors import *
 from app.backend.commons.database import Database
 
 
+
 class User:
-	def __init__(self, uuid = None, username = None, email = None, password = None, personName = None, level = None):
+	def __init__(self, uuid = None, username = None, email = None, password = None, personName = None, level = None, registrationTimestamp = None):
 		
 		self.uuid = uuid
 		self.username = username
@@ -13,6 +15,7 @@ class User:
 		self.password = password
 		self.personName = personName
 		self.level = level
+		self.registrationTimestamp = registrationTimestamp
 
 	def getRooms(self):
 
@@ -103,17 +106,21 @@ class User:
 		rule.delete()			
 
 	def __replaceSqlQueryToken(self, queryTemplate):
-		if self.uuid 		!= None	: queryTemplate = queryTemplate.replace("@@uuid@@", str(self.uuid))
-		if self.username	!= None	: queryTemplate = queryTemplate.replace("@@username@@", self.username)
-		if self.email		!= None	: queryTemplate = queryTemplate.replace("@@email@@", self.email)
-		if self.password	!= None	: queryTemplate = queryTemplate.replace("@@password@@", self.password)
-		if self.personName 	!= None	: queryTemplate = queryTemplate.replace("@@person_name@@", self.personName)
-		if self.level		!= None	: queryTemplate = queryTemplate.replace("@@level@@", str(self.level))
+		if self.uuid 					!= None	: queryTemplate = queryTemplate.replace("@@uuid@@", str(self.uuid))
+		if self.username				!= None	: queryTemplate = queryTemplate.replace("@@username@@", self.username)
+		if self.email					!= None	: queryTemplate = queryTemplate.replace("@@email@@", self.email)
+		if self.password				!= None	: queryTemplate = queryTemplate.replace("@@password@@", self.password)
+		if self.personName 				!= None	: queryTemplate = queryTemplate.replace("@@person_name@@", self.personName)
+		if self.level					!= None	: queryTemplate = queryTemplate.replace("@@level@@", str(self.level))
+		if self.registrationTimestamp	!= None	: queryTemplate = queryTemplate.replace("@@registration_timestamp@@", self.registrationTimestamp.strftime('%Y-%m-%d %H:%M:%S'))
 
 		return queryTemplate
 
 
 	def store(self):
+
+		if not self.registrationTimestamp:
+			self.registrationTimestamp = datetime.datetime.now() 
 
 		database = Database()
 		database.open()
@@ -123,9 +130,9 @@ class User:
 		queryResult = database.executeReadQuery(query)
 
 		if int(queryResult[0][0]) > 0:
-			query = "UPDATE users SET username = '@@username@@', email = '@@email@@', password = '@@password@@', person_name = '@@person_name@@', level = '@@level@@' WHERE uuid = '@@uuid@@';"
+			query = "UPDATE users SET username = '@@username@@', email = '@@email@@', password = '@@password@@', person_name = '@@person_name@@', level = '@@level@@', registration_timestamp = '@@registration_timestamp@@' WHERE uuid = '@@uuid@@';"
 		else:
-			query = "INSERT INTO users (username, email, password, person_name, level) VALUES ('@@username@@','@@email@@', '@@password@@', '@@person_name@@', '@@level@@');"
+			query = "INSERT INTO users (username, email, password, person_name, level, registration_timestamp) VALUES ('@@username@@','@@email@@', '@@password@@', '@@person_name@@', '@@level@@', '@@registration_timestamp@@');"
 	
 		query = self.__replaceSqlQueryToken(query)
 		database.executeWriteQuery(query)
@@ -159,6 +166,8 @@ class User:
 			self.password = queryResult[0][3]
 			self.personName = queryResult[0][4]
 			self.level = int(queryResult[0][5])
+			self.registrationTimestamp = queryResult[0][6]
+
 		else:
 			database.close()
 			raise UserNotFoundError("Impossibile to find any user with the provided values")
@@ -188,6 +197,7 @@ class User:
 		response["email"] = self.email
 		response["personName"] = self.personName
 		response["level"] = self.level
+		response["registrationTimestamp"] = self.registrationTimestamp.strftime('%Y-%m-%d %H:%M:%S') if self.registrationTimestamp else None
 
 		return response
 

@@ -27,7 +27,7 @@
 
 	<br>
 
-	{% if error %}<p class=error><strong>Error:</strong> {{ error }}{% endif %}
+
 
 	<form class="form-horizontal" action="{{request.path}}" method="POST">
 
@@ -95,9 +95,9 @@
               <h3 class="muted">THEN</h3>
 
               <select name="action_0" id="action_0" onchange="compose()">
-                <option>Select an action</option><option>turn on the light</option><option>turn off the light</option><option>turn on the heating</option><option>turn off the heating</option><option>turn on the cooling</option><option>turn off the cooling</option><option>open the windows</option><option>close the windows</option><option>open curtains</option><option>close curtains</option>
+                <option>Select an action</option><option>turn on the light</option><option>turn off the light</option><option>turn on the heating</option><option>turn off the heating</option><option>turn on the cooling</option><option>turn off the cooling</option><option>open the windows</option><option>close the windows</option><option>open the curtains</option><option>close the curtains</option>
               </select>  
-              <a href="javascript:compose();"><button class="btn btn-small btn-primary" type="button">Compose the rule!</button></a>
+              <a href="javascript:compose();"><button class="btn" type="button">Compose the rule!</button></a>
 
       </div>
 	  </div>
@@ -137,7 +137,11 @@
 
 	  <div class="control-group">
 	    <div class="controls">
-	      <button type="submit" class="btn">Save the new rule!</button>
+      {% if rule %}
+	      <button type="submit" class="btn btn-large btn-primary">Save the modifications!</button>
+      {% else %}
+        <button type="submit" class="btn btn-large btn-primary">Save the new rule!</button>
+      {% endif %}
 	    </div>
 	 </div>
 

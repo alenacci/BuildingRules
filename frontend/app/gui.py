@@ -207,6 +207,7 @@ def rooms(buildingName = None):
 	userList = {}
 	roomGroupList = {}
 	activeRoomRules = {}
+	mTurkStatus = {}
 
 	# Finding the map to show (remove me! - only for experiment) REMOVE ME REMOVE ME 
 	mapFileName = "blankMap.png"
@@ -228,6 +229,19 @@ def rooms(buildingName = None):
 	else:
 		return render_template('error.html', error = response['request-errorDescription'])
 
+
+	# Getting mTurk status
+	response = rest.request("/api/users/<username>/mturk", 
+		{
+		'username' : session["username"],
+		'sessionKey' : session["sessionKey"],
+		'userUuid' : session["userUuid"]
+		})
+
+	if successResponse(response):
+		mTurkStatus = response["mturk-status"]
+	else:
+		return render_template('error.html', error = response['request-errorDescription'])
 
 	# Now retrieving room rules
 	for room in roomList:
@@ -370,7 +384,7 @@ def rooms(buildingName = None):
 		session["alreadyLoggedIn"] = True
 		alreadyLoggedIn = False
 
-	return render_template('rooms.html', roomList = roomList, roomRules = roomRules, authorList = authorList, groupList = groupList, triggerList = triggerList, actionList = actionList, userList = userList, roomGroupList = roomGroupList, notificationList = notificationList, categories = categories, categoriesFilter = categoriesFilter, mapFileName = mapFileName, activeRoomRules = activeRoomRules, alreadyLoggedIn = alreadyLoggedIn)	
+	return render_template('rooms.html', roomList = roomList, roomRules = roomRules, authorList = authorList, groupList = groupList, triggerList = triggerList, actionList = actionList, userList = userList, roomGroupList = roomGroupList, notificationList = notificationList, categories = categories, categoriesFilter = categoriesFilter, mapFileName = mapFileName, activeRoomRules = activeRoomRules, alreadyLoggedIn = alreadyLoggedIn, mTurkStatus = mTurkStatus)	
 
 
 @gui.route('/buildings/<buildingName>/groups/')

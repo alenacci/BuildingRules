@@ -38,23 +38,14 @@
 	  </div>
 	</div>
 
-
-
-
-  	{% for notification in notificationList %}
-		<div class="alert alert-block">
-		  <button type="button" class="close" data-dismiss="alert">&times;</button>
-		  <h4>{{notification.messageSubject}}</h4>
-		  {{notification.messageText}}
-		</div>
-	{% endfor %}
-
 	<header class="jumbotron subhead" id="overview">
 
 	    <div class="span8">
 	      <h1>My Rooms</h1>
 	      <p class="lead">With this page you can create your own simple rules for your own personal spaces. Just add the rules inside the correct box and... that's all!</p>
 	      <br>
+	      <a href="#rulesPanel" role="button" class="btn btn-primary ">Go to the rules panel!</a>
+	      <a href="#mturkPanel" role="button" class="btn">Go to the Amazon mTurk panel!</a>
 	      <a href="#myModal" role="button" class="btn" data-toggle="modal" id="showGuideButton">Show the Video User Guide!</a>
 	    </div>
 	    <div class="span4">
@@ -73,7 +64,7 @@
 			<div class="form-actions">
 				<a class="btn btn-lg btn-success" href="javascript:showMaps()" id="btnShowMaps">Show Map</a>
 				<a class="btn btn-lg btn-success" href="javascript:hideMaps()" id="btnHideMaps">Hide Map</a>
-				<a class="btn btn-lg btn-success" href="javascript:showThermalZoneMaps()" id="btnShowThMaps">Show Thermal Zones Map</a>
+				<a class="btn btn-lg btn-success" href="javascript:showThermalZoneMaps()" id="btnShowThMaps">Show Shared Actuation Zones Map</a>
 				<a class="btn btn-lg btn-success" href="javascript:showAccessMaps()" id="btnShowAccMaps">Show Access Rights Map</a>
 			  	<div id="accessMap">
 			  		<img src="{{url_for('static', filename='roomMaps/')}}{{mapFileName}}">
@@ -83,10 +74,42 @@
 			  	<div id="thZoneMap">
 			  		<img src="{{url_for('static', filename='roomMaps/thermalZonesMap.png')}}">
 			  		<br>
-			  		<b>This maps shows how the thermal zones are organized</b>
+			  		<b>If your room has the same color of another room, you will share all the rules about the HEATING!</b>
 			  	</div>
 			 </div>
 
+			 <a name="mturkPanel" id="mturkPanel"></a>
+
+
+			<div class="form-actions">
+				<h3 align="center">Amazon Mechanical Turk</h3>
+				<h6 align="center">Experiment day: {{mTurkStatus.currentDay}}/7 - Current datetime: {{mTurkStatus.serverDatetime}}</h6>
+
+				{% if mTurkStatus.experimentCompleted %}
+					<div class="alert alert-success">
+						<h5 align="center">You completed the whole expriment!</h5> 
+						<h6 align="center">Now log into MTurk and copy and paste all the token you received in this week!</h6> 
+					</div>
+				{% endif %}
+
+				{% if mTurkStatus.taskCompleted %}
+					<div class="alert alert-success">
+						<h5 align="center">Today task completed</h5>
+						<h6 align="center">Please insert the following token into the Amazon mTurk form to get your money.</h6>
+						<h6 align="center">{{mTurkStatus.token}}</h6>
+					</div>
+					<div class="alert alert-block" align="center">
+						<strong>STORE THIS TOKEN RIGHT NOW!</strong> <br> Store this token somewhere on your computer before refreshing the page! 
+					</div>
+				{% else %}
+					<div class="alert alert-block" align="center">
+						<h5>Today task NOT completed</h5>
+						<h6 align="center">{{mTurkStatus.message}}</h6>
+					</div>
+				{% endif %}
+			 </div>
+
+			<a name="rulesPanel" id="rulesPanel"></a>
 
 			<div class="form-actions">
 				<form action="{{request.path}}" method="post">
