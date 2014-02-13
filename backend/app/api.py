@@ -10,6 +10,7 @@ from app.backend.controller.sessionManager import SessionManager
 from app.backend.controller.buildingsManager import BuildingsManager
 from app.backend.controller.roomsManager import RoomsManager
 from app.backend.controller.groupsManager import GroupsManager
+from app.backend.controller.feedbackManager import FeedbackManager
 from app.backend.controller.mTurkManager import MTurkManager
 
 api = Blueprint('api', __name__, template_folder='templates')
@@ -100,6 +101,28 @@ def mturkInfo(username = None):
 			session.checkSessionValidity(sessionKey, userUuid)
 			mTurkManager = MTurkManager()			
 			return returnResult( mTurkManager.getTodayToken(userUuid = userUuid) )		
+		except Exception as e:
+			return returnError(e)
+
+
+@api.route('/api/users/<username>/feedbacks/store', methods = ['POST'])
+def storeFeedback(username = None):
+
+	if request.method == 'POST':
+
+		sessionKey = validateInput(request.form['sessionKey'])
+		userUuid = validateInput(request.form['userUuid'])		
+
+		authorUuid = userUuid
+		alternativeContact = validateInput(request.form['alternativeContact'])		
+		score = validateInput(request.form['score'])
+		message = validateInput(request.form['message'])
+
+		try:
+			session = SessionManager()
+			session.checkSessionValidity(sessionKey, userUuid)
+			feedbackManager = FeedbackManager()			
+			return returnResult( feedbackManager.storeFeedback(authorUuid = authorUuid, alternativeContact = alternativeContact, score = score, message = message) )		
 		except Exception as e:
 			return returnError(e)
 

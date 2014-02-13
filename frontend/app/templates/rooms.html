@@ -45,7 +45,6 @@
 	      <p class="lead">With this page you can create your own simple rules for your own personal spaces. Just add the rules inside the correct box and... that's all!</p>
 	      <br>
 	      <a href="#rulesPanel" role="button" class="btn btn-primary ">Go to the rules panel!</a>
-	      <a href="#mturkPanel" role="button" class="btn">Go to the Amazon mTurk panel!</a>
 	      <a href="#myModal" role="button" class="btn" data-toggle="modal" id="showGuideButton">Show the Video User Guide!</a>
 	    </div>
 	    <div class="span4">
@@ -60,23 +59,6 @@
 		<section id="typography">
 
 
-
-			<div class="form-actions">
-				<a class="btn btn-lg btn-success" href="javascript:showMaps()" id="btnShowMaps">Show Map</a>
-				<a class="btn btn-lg btn-success" href="javascript:hideMaps()" id="btnHideMaps">Hide Map</a>
-				<a class="btn btn-lg btn-success" href="javascript:showThermalZoneMaps()" id="btnShowThMaps">Show Shared Actuation Zones Map</a>
-				<a class="btn btn-lg btn-success" href="javascript:showAccessMaps()" id="btnShowAccMaps">Show Access Rights Map</a>
-			  	<div id="accessMap">
-			  		<img src="{{url_for('static', filename='roomMaps/')}}{{mapFileName}}">
-			  		<br>
-			  		<b>This maps shows the rooms you can access</b>
-			  	</div>
-			  	<div id="thZoneMap">
-			  		<img src="{{url_for('static', filename='roomMaps/thermalZonesMap.png')}}">
-			  		<br>
-			  		<b>If your room has the same color of another room, you will share all the rules about the HEATING!</b>
-			  	</div>
-			 </div>
 
 			 <a name="mturkPanel" id="mturkPanel"></a>
 
@@ -103,15 +85,47 @@
 
 				{% if mTurkStatus.experimentCompleted %}
 					<div class="alert alert-success">
-						<h4 align="center">You completed the whole expriment!</h4> 
+						<h4 align="center">You completed the whole expriment!</h4	> 
 						<h6 align="center">Now log into MTurk and copy and paste all the token you received in this week!</h6> 
 					</div>
 				{% endif %}
-			
+				
+				<hr>
+
+				<div align="center">
+					<h5>Do you have any suggestion? Or do you want to give us score? Use this form!</h5>
+					<form class="form-inline" action="{{url_for('gui.sendFeedback')}}" method="POST">
+						<input name="alternativeContact" class="span3" type="email"  class="input-small" placeholder="Your email (if you want)...">
+						<input name="score" type="text" class="input-small" placeholder="Score [0/10]...">
+						<input name="message" type="text" class="input-xxlarge" placeholder="Put here your feedback message...">
+						<button type="submit" class="btn">Send feedback</button>
+					</form>
+				</div>
 
 			 </div>
 
-			<a name="rulesPanel" id="rulesPanel"></a>
+
+			 <a name="rulesPanel" id="rulesPanel"></a>
+
+			<div class="form-actions">
+				<a class="btn btn-lg btn-success" href="javascript:showMaps()" id="btnShowMaps">Show Map</a>
+				<a class="btn btn-lg btn-success" href="javascript:hideMaps()" id="btnHideMaps">Hide Map</a>
+				<a class="btn btn-lg btn-success" href="javascript:showThermalZoneMaps()" id="btnShowThMaps">Show Shared Actuation Zones Map</a>
+				<a class="btn btn-lg btn-success" href="javascript:showAccessMaps()" id="btnShowAccMaps">Show Access Rights Map</a>
+			  	<div id="accessMap">
+			  		<img src="{{url_for('static', filename='roomMaps/')}}{{mapFileName}}">
+			  		<br>
+			  		<b>This maps shows the rooms you can access</b>
+			  	</div>
+			  	<div id="thZoneMap">
+			  		<img src="{{url_for('static', filename='roomMaps/thermalZonesMap.png')}}">
+			  		<br>
+			  		<b>If your room has the same color of another room, you will share all the rules about the HEATING!</b>
+			  	</div>
+			 </div>
+
+
+			
 
 			<div class="form-actions">
 				<form action="{{request.path}}" method="post">

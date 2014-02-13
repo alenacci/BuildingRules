@@ -84,7 +84,6 @@ def register(source = None):
 
 
 
-
 @gui.route('/logout/')
 @gui.route('/logout')
 def logout():
@@ -883,7 +882,32 @@ def deleteGroup(buildingName = None, groupId = None, ruleId = None):
 
 
 
+@gui.route('/feedbacks/send/', methods = ['POST'])
+@gui.route('/feedbacks/send', methods = ['POST'])
+def sendFeedback():
 
+	if not loggedIn():	return redirect(url_for('gui.login'))
+
+	if request.method == 'POST':
+
+		alternativeContact = request.form['alternativeContact']
+		score = request.form['score']
+		message = request.form['message']
+
+		response = rest.request("/api/users/<username>/feedbacks/store", {
+					'sessionKey' : session["sessionKey"], 
+					'userUuid' : session["userUuid"],
+					'alternativeContact' : alternativeContact,
+					'score' : score,
+					'message' : message
+					})
+
+		if not successResponse(response):
+			return render_template('error.html', error = response['request-errorDescription'])
+
+		flash("Thanks for your feedback!")
+
+	return redirect(url_for('gui.index'))
 
 
 

@@ -50,8 +50,8 @@ class MTurkManager:
 
 		result = {}
 
-		requiredUserActions = [10, 8, 7, 5 , 4, 3, 2]
-		
+		#requiredUserActions = [10, 8, 7, 5 , 4, 3, 2]
+		requiredUserActions = [2, 2, 1, 1 , 1, 1, 1]
 		
 		if userActionsCount >= requiredUserActions[day]:
 			result["taskCompleted"] = True
