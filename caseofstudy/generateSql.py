@@ -114,6 +114,8 @@ queries.append( "TRUNCATE TABLE users;" )
 queries.append( "TRUNCATE TABLE users_rooms;" )
 queries.append( "TRUNCATE TABLE active_rules;" )
 queries.append( "TRUNCATE TABLE mturk;" )
+queries.append( "TRUNCATE TABLE logs;" )
+queries.append( "TRUNCATE TABLE feedbacks;" )
 
 
 totalUsers = 0
