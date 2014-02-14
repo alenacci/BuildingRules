@@ -1,6 +1,8 @@
 import json
 import time
 from flask import request, session, g, redirect, url_for, abort, render_template, flash, jsonify, Blueprint
+import time
+import datetime
 
 from app import app
 import rest
@@ -21,6 +23,18 @@ def index():
 @gui.route('/partecipate')
 def partecipate():
 	return render_template('partecipate.html')
+
+@gui.route('/mturkinfo/')
+@gui.route('/mturkinfo')
+def mturkinfo():
+	return render_template('mturkinfo.html')
+
+
+@gui.route('/userguide/')
+@gui.route('/userguide')
+def userguide():
+	return render_template('userguide.html')
+
 
 
 @gui.route('/login/', methods = ['GET', 'POST'])
@@ -55,7 +69,8 @@ def login():
 		else:
 			error = response['request-errorDescription']
 
-	return render_template('login.html', error=error)	
+	currentDatetime = str(time.strftime("%Y-%m-%d %H:%M:%S"))
+	return render_template('login.html', error=error, currentDatetime = currentDatetime)	
 
 
 @gui.route('/register/<source>', methods = ['GET', 'POST'])

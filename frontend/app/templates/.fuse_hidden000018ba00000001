@@ -31,7 +31,7 @@
 	    <h3 id="myModalLabel">User Guide</h3>
 	  </div>
 	  <div class="modal-body" align="center">
-	    <iframe width="670" height="410" src="//www.youtube.com/embed/p_J9PcgyATc?rel=0&vq=hd720" frameborder="0" allowfullscreen></iframe>
+	    <iframe width="670" height="410" src="//www.youtube.com/embed/hqoghKelQ6E?rel=0&vq=hd720" frameborder="0" allowfullscreen></iframe>
 	  </div>
 	  <div class="modal-body">
 		We are conducting an academic experiment to gauge the ease of use of a new technology to manage Smart Buildings. The technology is a web application that allows you to specify policies you would want in your office. You can set policies like turn on office lights when it is raining, or turn on cooling when temperature is 75F. The software makes sure that you don't conflict other employees in the office or the policies set by the building manager. 
@@ -93,7 +93,7 @@
 
 
 	<header class="jumbotron subhead" id="overview">
-	<a name="buildingMap" id="buildingMap"></a>
+
 	    <div class="span8">
 	      <h1>My Rooms</h1>
 	      <p class="lead">With this page you can create your own simple rules for your own personal spaces. Just add the rules inside the correct box and... that's all!</p>
@@ -153,14 +153,7 @@
 			</div>
 
 			{% for room in roomList %}
-
-
-				<a name="roomMenu_{{room.roomName}}" id="roomMenu_{{room.roomName}}"></a>
 				<div class="row"> 
-				<br>
-				<br>
-				<br>
-
 				  <div class="span8">
 				    <h3>Room {{room.roomName}} - {{room.description}}</h3>
 				    <hr>
@@ -205,9 +198,6 @@
 				    		</p>
 				    	</blockquote> 
 				    {% endfor %}
-					<br>
-			      	<a href="{{request.path}}/{{room.roomName}}/rules/add"><button type="button" class="btn  btn-primary ">Add a new rule</button></a>
-
 
 				    
 
@@ -240,10 +230,13 @@
 				      	{% for group in roomGroupList[room.roomName] %}
 				      		<a href="javascript:openPopup('{{request.path}}/../groups/{{group.id}}');">{{group.id}}:{{group.description}}</a>, 
 				      	{% endfor %}				      	
-
 				    </div>
 				  </div>
 				</div>
+				<br>
+				<a href="{{request.path}}/{{room.roomName}}/rules/add"><button type="button" class="btn">Add a new rule</button></a>
+				<br>
+				<br>
 		  	{% endfor %}
 		</section>
 	{% endif %}
