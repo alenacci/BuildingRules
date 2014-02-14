@@ -48,7 +48,22 @@ function showThermalZoneMaps()
 	show("btnHideMaps");
 }
 
+function hideMTurk()
+{
+	hide('mturkPanel');
+	hide('btnHideMTurk');
+	show('btnShowMTurk');
+}
+
+function showMTurk()
+{
+	show('mturkPanel');
+	hide('btnShowMTurk');
+	show('btnHideMTurk');
+}
+
 function init()
 {
 	showAccessMaps();
+	showMTurk();
 }

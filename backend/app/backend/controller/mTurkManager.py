@@ -51,6 +51,7 @@ class MTurkManager:
 		result = {}
 
 		requiredUserActions = [10, 8, 7, 5 , 4, 3, 2]
+		#requiredUserActions = [2, 8, 7, 5 , 4, 3, 2]
 		
 		
 		if userActionsCount >= requiredUserActions[day]:

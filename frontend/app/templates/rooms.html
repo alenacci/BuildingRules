@@ -33,10 +33,64 @@
 	  <div class="modal-body">
 	    <iframe width="530" height="360" src="//www.youtube.com/embed/hqoghKelQ6E?rel=0" frameborder="0" allowfullscreen></iframe>
 	  </div>
+	  <div class="modal-body">
+		We are conducting an academic experiment to gauge the ease of use of a new technology to manage Smart Buildings. The technology is a web application that allows you to specify policies you would want in your office. You can set policies like turn on office lights when it is raining, or turn on cooling when temperature is 75F. The software makes sure that you don't conflict other employees in the office or the policies set by the building manager. 
+	  </div>
 	  <div class="modal-footer">
 	    <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Close</button>
 	  </div>
 	</div>
+
+
+
+
+	<div class="form-actions"> 
+		<a class="btn btn-lg btn-success" href="javascript:hideMTurk()" id="btnHideMTurk">Hide this panel</a>
+		<a class="btn btn-lg btn-success" href="javascript:showMTurk()" id="btnShowMTurk">Show mTurk Panel</a>
+		<div id="mturkPanel">
+			<h3 align="center">Amazon Mechanical Turk</h3>
+			<h6 align="center">Experiment day: {{mTurkStatus.currentDay}}/7 - Current datetime: {{mTurkStatus.serverDatetime}}</h6>
+
+			{% if mTurkStatus.taskCompleted %}
+				<div class="alert alert-success">
+					<h5 align="center">Today task completed</h5>
+					<h6 align="center">Please insert the following token into the Amazon mTurk form to get your money.</h6>
+					<h6 align="center">{{mTurkStatus.token}}</h6>
+				</div>
+				<div class="alert alert-block" align="center">
+					<strong>STORE THIS TOKEN RIGHT NOW!</strong> <br> Store this token somewhere on your computer before refreshing the page! 
+				</div>
+			{% else %}
+				<div class="alert alert-block" align="center">
+					<h5>Today task NOT completed</h5>
+					<h6 align="center">{{mTurkStatus.message}}</h6>
+				</div>
+			{% endif %}
+
+			{% if mTurkStatus.experimentCompleted %}
+				<div class="alert alert-success">
+					<h4 align="center">You completed the whole expriment!</h4	> 
+					<h6 align="center">Now log into MTurk and copy and paste all the token you received in this week!</h6> 
+				</div>
+			{% endif %}
+
+			<hr>
+
+			<div align="center">
+				<h5>Do you have any suggestion? Or do you want to give us a score? Use this form!</h5>
+				<form class="form-inline" action="{{url_for('gui.sendFeedback')}}" method="POST">
+					<input name="alternativeContact" class="span3" type="email"  class="input-small" placeholder="Your email (if you want)...">
+					<input name="score" type="text" class="input-small" placeholder="Score [0/10]...">
+					<input name="message" type="text" class="input-xxlarge" placeholder="Put here your feedback message...">
+					<button type="submit" class="btn">Send feedback</button>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<br>
+	
+
 
 	<header class="jumbotron subhead" id="overview">
 
@@ -57,53 +111,6 @@
 
 	{% if roomList %}
 		<section id="typography">
-
-
-
-			 <a name="mturkPanel" id="mturkPanel"></a>
-
-
-			<div class="form-actions">
-				<h3 align="center">Amazon Mechanical Turk</h3>
-				<h6 align="center">Experiment day: {{mTurkStatus.currentDay}}/7 - Current datetime: {{mTurkStatus.serverDatetime}}</h6>
-
-				{% if mTurkStatus.taskCompleted %}
-					<div class="alert alert-success">
-						<h5 align="center">Today task completed</h5>
-						<h6 align="center">Please insert the following token into the Amazon mTurk form to get your money.</h6>
-						<h6 align="center">{{mTurkStatus.token}}</h6>
-					</div>
-					<div class="alert alert-block" align="center">
-						<strong>STORE THIS TOKEN RIGHT NOW!</strong> <br> Store this token somewhere on your computer before refreshing the page! 
-					</div>
-				{% else %}
-					<div class="alert alert-block" align="center">
-						<h5>Today task NOT completed</h5>
-						<h6 align="center">{{mTurkStatus.message}}</h6>
-					</div>
-				{% endif %}
-
-				{% if mTurkStatus.experimentCompleted %}
-					<div class="alert alert-success">
-						<h4 align="center">You completed the whole expriment!</h4	> 
-						<h6 align="center">Now log into MTurk and copy and paste all the token you received in this week!</h6> 
-					</div>
-				{% endif %}
-				
-				<hr>
-
-				<div align="center">
-					<h5>Do you have any suggestion? Or do you want to give us score? Use this form!</h5>
-					<form class="form-inline" action="{{url_for('gui.sendFeedback')}}" method="POST">
-						<input name="alternativeContact" class="span3" type="email"  class="input-small" placeholder="Your email (if you want)...">
-						<input name="score" type="text" class="input-small" placeholder="Score [0/10]...">
-						<input name="message" type="text" class="input-xxlarge" placeholder="Put here your feedback message...">
-						<button type="submit" class="btn">Send feedback</button>
-					</form>
-				</div>
-
-			 </div>
-
 
 			 <a name="rulesPanel" id="rulesPanel"></a>
 

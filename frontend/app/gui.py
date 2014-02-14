@@ -7,6 +7,8 @@ import rest
 
 gui = Blueprint('gui', __name__, template_folder='templates')
 
+@gui.route('/<source>/')
+@gui.route('/<source>')
 @gui.route('/')
 def index():
 

@@ -38,22 +38,22 @@ laboratoryRoom = 3113
 
 roomOccupancy = {}
 roomOccupancy[2108] = 1
-roomOccupancy[2112] = 5
+roomOccupancy[2112] = 7
 roomOccupancy[2116] = 3
 roomOccupancy[2111] = 3
 roomOccupancy[2118] = 1
-roomOccupancy[2122] = 7
-roomOccupancy[2126] = 1
-roomOccupancy[2128] = 9
+roomOccupancy[2122] = 9
+roomOccupancy[2126] = 2
+roomOccupancy[2128] = 12
 
-roomOccupancy[2203] = 1
-roomOccupancy[2215] = 5
-roomOccupancy[2217] = 1
-roomOccupancy[2231] = 1
-roomOccupancy[2138] = 7
-roomOccupancy[2136] = 3
-roomOccupancy[2134] = 3
-roomOccupancy[2132] = 3
+roomOccupancy[2203] = 2
+roomOccupancy[2215] = 7
+roomOccupancy[2217] = 2
+roomOccupancy[2231] = 2
+roomOccupancy[2138] = 9
+roomOccupancy[2136] = 5
+roomOccupancy[2134] = 5
+roomOccupancy[2132] = 5
 
 
 thermalZones = [0] * 14
@@ -116,6 +116,10 @@ queries.append( "TRUNCATE TABLE active_rules;" )
 queries.append( "TRUNCATE TABLE mturk;" )
 
 
+totalUsers = 0
+for room, userNumber in roomOccupancy.iteritems():
+	totalUsers += userNumber
+
 
 newRoomSqlTempl = "INSERT INTO `rooms` (`room_name`, `building_name`, `description`) VALUES ('@@roomName@@', 'CSE', '@@description@@');"
 
@@ -149,7 +153,7 @@ roomGroupBindSqlTempl = "INSERT INTO `rooms_groups` (`group_id`, `building_name`
 # Creating the administator
 queries.append("INSERT INTO `users` (`username`, `email`, `password`, `person_name`, `level`) VALUES ('admin', 'energybox.buildingrules@gmail.com', 'brulesAdmin2014', 'Administrator', 100);")
 
-for i in range(0,54):
+for i in range(0,totalUsers):
 	uuid = currentUserUuid + i
 	queries.append("INSERT INTO `users` (`username`, `email`, `password`, `person_name`, `level`) VALUES ('user_" + str(uuid) + "', '--', 'verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword', 'User" + str(uuid) + "', 10);")
 
