@@ -99,6 +99,8 @@ standardRoomActions.append("INSERT INTO `rooms_actions` (`room_name`, `building_
 standardRoomActions.append("INSERT INTO `rooms_actions` (`room_name`, `building_name`, `action_id`) VALUES ('@@roomName@@', 'CSE', 10);")
 
 
+
+
 allRooms = commonRooms.keys() + groupA_members + groupB_members + groupA_common + groupB_common + [laboratoryRoom]
 
 queries.append( "TRUNCATE TABLE groups;" )
