@@ -37,7 +37,10 @@ def main():
 
 	if restReadDone:
 
-		if os.path.isfile(__SERVICE_FILE_PATH + "weather.json"):
+		if not os.path.exists(__SERVICE_FILE_PATH):
+			os.makedirs(__SERVICE_FILE_PATH)
+
+		if os.path.exists(__SERVICE_FILE_PATH + "weather.json"):
 			shutil.copy2(__SERVICE_FILE_PATH + "weather.json", __SERVICE_FILE_PATH + "weather.old.json")
 		
 		out_file = open(__SERVICE_FILE_PATH + "weather.json","w")
