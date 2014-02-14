@@ -448,7 +448,7 @@ class RoomsManager:
 			from app.backend.commons.console import flash
 			endTimeMilliseconds = long((time.time() + 0.5) * 1000)
 			opTimeMilliseconds = endTimeMilliseconds - startTimeMilliseconds
-			flash("RoomRuleVerification [SUCCESS]: #rules=" + str(len(temporaryRuleSet)) + " - opTimeMilliseconds:" + str(opTimeMilliseconds))
+			flash("RoomRuleVerification [SUCCESS]: roomName = " + str(roomName) +" #rules=" + str(len(temporaryRuleSet)) + " - opTimeMilliseconds:" + str(opTimeMilliseconds))
 
 
 			return room.addRule(rule).getDict()
@@ -465,7 +465,7 @@ class RoomsManager:
 
 			endTimeMilliseconds = long((time.time() + 0.5) * 1000)
 			opTimeMilliseconds = endTimeMilliseconds - startTimeMilliseconds
-			flash("RoomRuleVerification [FAILED]: #rules=" + str(len(temporaryRuleSet)) + " - opTimeMilliseconds:" + str(opTimeMilliseconds))
+			flash("RoomRuleVerification [FAILED]: roomName = " + str(roomName) +" #rules=" + str(len(temporaryRuleSet)) + " - opTimeMilliseconds:" + str(opTimeMilliseconds))
 
 
 			raise RuleValidationError(ruleCheckErrorList)

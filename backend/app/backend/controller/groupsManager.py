@@ -235,7 +235,7 @@ class GroupsManager:
 			from app.backend.commons.console import flash
 			endTimeMilliseconds = long((time.time() + 0.5) * 1000)
 			opTimeMilliseconds = endTimeMilliseconds - startTimeMilliseconds
-			flash("GroupsRuleVerification [SUCCESS]: #rules=" + str(len(temporaryRuleSet)) + " - opTimeMilliseconds:" + str(opTimeMilliseconds))
+			flash("GroupsRuleVerification [SUCCESS]: groupId = " + str(groupId) +" #rules=" + str(len(temporaryRuleSet)) + " - opTimeMilliseconds:" + str(opTimeMilliseconds))
 
 			return group.addRule(rule).getDict()
 		else:
@@ -252,7 +252,7 @@ class GroupsManager:
 
 			endTimeMilliseconds = long((time.time() + 0.5) * 1000)
 			opTimeMilliseconds = endTimeMilliseconds - startTimeMilliseconds
-			flash("GroupsRuleVerification [FAILED]: #rules=" + str(len(temporaryRuleSet)) + " - opTimeMilliseconds:" + str(opTimeMilliseconds))
+			flash("GroupsRuleVerification [FAILED]: groupId = " + str(groupId) +" #rules=" + str(len(temporaryRuleSet)) + " - opTimeMilliseconds:" + str(opTimeMilliseconds))
 
 			raise RuleValidationError(ruleCheckErrorList + " Error in room " + room.roomName)
 
