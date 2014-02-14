@@ -226,7 +226,7 @@ class GroupsManager:
 				from app.backend.controller.notificationsManager import NotificationsManager
 				notifications = NotificationsManager()
 				messageSubject = "Group " +  str(groupId) + " changed your room " + str(room.roomName) + " policy."
-				messageText =  "Some rules in group " + str(groupId) + " have been changed. Since your room " + str(room.roomName) + " belongs to that group, you have to revalidate all your rules."
+				messageText =  "Some rules in group " + str(groupId) + " have been changed."
 				notifications.sendNotification(buildingName = buildingName, roomName = room.roomName, messageSubject = messageSubject, messageText = messageText) 
 				
 				#for r in room.getRules(includeGroupsRules = False, excludeCrossRoomValidationRules = True):
