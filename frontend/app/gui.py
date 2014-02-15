@@ -60,6 +60,8 @@ def login():
 			if not successResponse(response): render_template('error.html', error = response['request-errorDescription'])
 			session["userLevel"] = response["level"]
 			session["userEmail"] = response["email"]
+			session["maxRoomPriority"] = response["maxRoomPriority"]
+			session["maxGroupPriority"] = response["maxGroupPriority"]
 
 			response = rest.request("/api/users/<username>/buildings", {'username' : session["username"], 'sessionKey' : session["sessionKey"], 'userUuid' : session["userUuid"]})
 			if not successResponse(response): render_template('error.html', error = response['request-errorDescription'])
@@ -118,13 +120,12 @@ def logout():
 		if successResponse(response):
 			del session["userUuid"]
 			del session["username"]
+			del session["maxRoomPriority"]
+			del session["maxGroupPriority"]
 		else:
 			return render_template('error.html', error = response['request-errorDescription'])
 
 	return render_template('home.html')	
-
-
-
 
 @gui.route('/buildings/')
 @gui.route('/buildings')

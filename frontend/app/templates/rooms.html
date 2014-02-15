@@ -12,6 +12,9 @@
 	document.getElementById('showGuideButton').click();
 	{% endif %}
 	};
+	{% for category in categories %}
+		ruleCategories.push("{{category}}");
+	{% endfor %}
 	</script>
 
 	<script type="text/javascript">
@@ -132,26 +135,6 @@
 			 </div>
 
 
-			
-
-			<div class="form-actions">
-				<form action="{{request.path}}" method="post">
-					<h3>Filter rules by category: </h3>
-					<small><b>NOTE:</b> IF NO FILTER IS SELECTED ALL THE RULES WILL BE SHOWN</small>
-					<br>
-					<br>
-					{% for category in categories %}
-						<label class="checkbox inline">
-							<input type="checkbox" id="inlineCheckbox1" value="True" name="filter_by_{{category}}" {% if categoriesFilter %} {% if category in categoriesFilter %} checked {% endif %} {% endif %}> {{category}}
-						</label>
-					{% endfor %}
-					<button type="submit" class="btn btn-primary btn-small">Filter now!</button>
-					<br>
-					
-
-				</form>
-			</div>
-
 			{% for room in roomList %}
 
 
@@ -163,9 +146,15 @@
 
 				  <div class="span8">
 				    <h3>Room {{room.roomName}} - {{room.description}}</h3>
+					<div class="btn-group">
+					  <a href="javascript:filterByRuleCategory('{{room.roomName}}','SHOWALL')"><button class="btn active" id="btn_{{room.roomName}}_SHOWALL">SHOW ALL</button></a>
+					  {% for category in categories %}
+					  	<a href="javascript:filterByRuleCategory('{{room.roomName}}','{{category}}')"><button class="btn" id="btn_{{room.roomName}}_{{category}}">{{category}}</button></a>
+					  {% endfor %}
+					</div>				    
 				    <hr>
 				    {% for rule in roomRules[room.roomName] %}
-				    	<blockquote {% if rule.id in activeRoomRules[room.roomName] %} style="color:#77AE3B;" {% endif %}>
+				    	<blockquote {% if rule.id in activeRoomRules[room.roomName] %} style="color:#77AE3B;" {% endif %} class="rule_{{room.roomName}}_{{rule.category}}">
 				    		<p {% if rule.enabled %} {% else %} class="muted" {% endif %}>
 				    			{% if rule.enabled %} {% else %} <strike> {% endif %}
 				    				<b>if</b> {{rule.antecedent}} <b>then</b> {{rule.consequent}} 

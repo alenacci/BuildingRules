@@ -17,6 +17,19 @@ class User:
 		self.level = level
 		self.registrationTimestamp = registrationTimestamp
 
+	def getMaxRoomPriority(self):
+		if self.level:
+			return int(10 * self.level)
+
+		raise ClassNotInitializedError("Missing input data")
+
+	def getMaxGroupPriority(self):
+		if self.level:
+			return int(20 * self.level)
+
+		raise ClassNotInitializedError("Missing input data")
+
+
 	def getRooms(self):
 
 		from app.backend.model.room import Room
@@ -198,6 +211,8 @@ class User:
 		response["personName"] = self.personName
 		response["level"] = self.level
 		response["registrationTimestamp"] = self.registrationTimestamp.strftime('%Y-%m-%d %H:%M:%S') if self.registrationTimestamp else None
+		response["maxRoomPriority"] = self.getMaxRoomPriority()
+		response["maxGroupPriority"] = self.getMaxGroupPriority()
 
 		return response
 

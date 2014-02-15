@@ -154,11 +154,13 @@ class GroupsManager:
 		actionManager = ActionManager()
 		category = actionManager.getAction(consequent).category
 
-		if int(str(priority)) < 0 or int(str(priority)) > 200:
-			raise RulePriorityError("Rules for groups must have a priority value between 0 and 200. You inserted " + str(priority))
+		from app.backend.model.user import User
+		author = User(uuid = authorUuid)
+		author.retrieve()
 
+		if int(str(priority)) < 0 or int(str(priority)) > author.getMaxGroupPriority():
+			raise RulePriorityError("You can specify rules for groups with a priority value between 0 and " + str(author.getMaxRoomPriority()) + ". You inserted " + str(priority))
 
-		
 		from app.backend.model.rule import Rule
 		from app.backend.model.group import Group
 
