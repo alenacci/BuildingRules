@@ -90,7 +90,7 @@ class ActionManager:
 		translatedParams = {}
 
 		for key,value in parameterValues.iteritems():
-			translatedParams[key] = self.__translateParameters(trigger.category, value)
+			translatedParams[key] = self.__translateParameters(action.category, value)
 
 
 		translation = translationTemplate
@@ -144,20 +144,20 @@ class ActionManager:
 			parameters.update({'operation' : 'HVAC_OFF'})
 			return  RoomActionDriver(parameters = parameters)
 
-		if action.actionName == "HVAC_TEMP":
-			parameters.update({'operation' : 'HVAC_TEMP'})
+		if action.actionName == "SET_TEMPERATURE":
+			parameters.update({'operation' : 'SET_TEMPERATURE'})
 			return  RoomActionDriver(parameters = parameters)
 
-		if action.actionName == "HVAC_HUM":
-			parameters.update({'operation' : 'HVAC_HUM'})
+		if action.actionName == "SET_HUMIDITY":
+			parameters.update({'operation' : 'SET_HUMIDITY'})
 			return  RoomActionDriver(parameters = parameters)
 
-		if action.actionName == "COFEE_ON":
-			parameters.update({'operation' : 'COFEE_ON'})
+		if action.actionName == "COFFEE_ON":
+			parameters.update({'operation' : 'COFFEE_ON'})
 			return  RoomActionDriver(parameters = parameters)
 
-		if action.actionName == "COFEE_OFF":
-			parameters.update({'operation' : 'COFEE_OFF'})
+		if action.actionName == "COFFEE_OFF":
+			parameters.update({'operation' : 'COFFEE_OFF'})
 			return  RoomActionDriver(parameters = parameters)
 
 		if action.actionName == "PRINTER_ON":
@@ -180,8 +180,8 @@ class ActionManager:
 			parameters.update({'operation' : 'DESKLIGHT_ON'})
 			return  RoomActionDriver(parameters = parameters)
 
-		if action.actionName == "DESKLGHT_OFF":
-			parameters.update({'operation' : 'DESKLGHT_OFF'})
+		if action.actionName == "DESKLIGHT_OFF":
+			parameters.update({'operation' : 'DESKLIGHT_OFF'})
 			return  RoomActionDriver(parameters = parameters)
 
 		if action.actionName == "DISPLAYMONITOR_ON":

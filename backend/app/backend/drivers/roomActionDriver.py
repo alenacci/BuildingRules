@@ -32,16 +32,16 @@ class RoomActionDriver(GenericActionDriver):
 		elif self.parameters["operation"] == "HVAC_OFF":		
 			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
 
-		elif self.parameters["operation"] == "HVAC_TEMP":		
+		elif self.parameters["operation"] == "SET_TEMPERATURE":		
 			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
 
-		elif self.parameters["operation"] == "HVAC_HUM":		
+		elif self.parameters["operation"] == "SET_HUMIDITY":		
 			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
 
-		elif self.parameters["operation"] == "COFEE_ON":		
+		elif self.parameters["operation"] == "COFFEE_ON":		
 			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
 
-		elif self.parameters["operation"] == "COFEE_OFF":		
+		elif self.parameters["operation"] == "COFFEE_OFF":		
 			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
 
 		elif self.parameters["operation"] == "PRINTER_ON":		

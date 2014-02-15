@@ -10,31 +10,31 @@
   };
   </script>
 
-    {% if rule %}
-    <h3>Rule Editing!</h3>
-  {% else %}
-    <h3>Add a new rule!</h3>
-  {% endif %}
-  <br>
+  	{% if rule %}
+		<h3>Rule Editing!</h3>
+	{% else %}
+		<h3>Add a new rule!</h3>
+	{% endif %}
+	<br>
 
-  {% if insertionForGroup %}
-    <p>This form let you to add a rule to the choosen group.</p>
-  {% endif %}
+	{% if insertionForGroup %}
+		<p>This form let you to add a rule to the choosen group.</p>
+	{% endif %}
 
-  {% if insertionForRoom %}
-    <p>This form let you to add a rule to the choosen room.</p>
-  {% endif %}
+	{% if insertionForRoom %}
+		<p>This form let you to add a rule to the choosen room.</p>
+	{% endif %}
 
 
-  <br>
+	<br>
 
-  <form class="form-horizontal" action="{{request.path}}" method="POST">
+	<form class="form-horizontal" action="{{request.path}}" method="POST">
 
-    <div class="control-group">
-      <label class="control-label" for="ruleBody">Your new rule</label>
-      <div class="controls">
-        <input readonly type="text" id="ruleBody" name="ruleBody" class="input-xxlarge" style="font-size: x-small" placeholder="" value="{% if rule %} if {{rule.antecedent}} then {{rule.consequent}} {% endif %}" onclick="ruleBodyAlert();">
-      
+	  <div class="control-group">
+	    <label class="control-label" for="ruleBody">Your new rule</label>
+	    <div class="controls">
+	      <input readonly type="text" id="ruleBody" name="ruleBody"  class="span5" placeholder="" value="{% if rule %} if {{rule.antecedent}} then {{rule.consequent}} {% endif %}" onclick="ruleBodyAlert();">
+	    
 
               <h3 class="muted">IF</h3>
               <select name="trigger_0" id="trigger_0" onchange="triggerSelected()">
@@ -99,60 +99,43 @@
               </select>  
 
               <div id="action_temperature_box">
-                    <br>
-                    <bold class="muted">Desired temperature</bold> <input type="range" min ="60" max="83" name="desired_temperature" id="desired_temperature" value="70" onchange="updateTemperatureSetpoint()"><bold class="muted">F</bold> 
-                    <br>
-                    <bold class="muted">Accepted range</bold> <input type="range" min ="3" max="7" name="accepted_temperature_range" id="accepted_temperature_range" value="4" onchange="updateTemperatureSetpoint()">
-                    <bold class="muted">%</bold> 
-                    
-                    <input type="hidden" id="tempSetpoint_min" value"">
-                    <input type="hidden" id="tempSetpoint_max" value"">
-                    
-                    <div style="width:300px;" >
-                        
-                        <table width="100%">
-                          <tr>
-                            <td id="tempSetpoint_bar_min" style="background-color:#FFFF66;" align="right">-</td>
-                            <td id="tempSetpoint_bar_value"  style="background-color:#CCFF66;" width="20%"  align="center" >-</td>
-                            <td id="tempSetpoint_bar_max" style="background-color:#FFFF66;"  align="left">-</td>
-                          </tr>
-                        </table>
-                        <br>
-                        <br>
+                  
+                <br>
+                <bold class="muted">Desired temperature</bold> <input type="range" min ="60" max="83" name="desired_temperature" id="desired_temperature" value="70" onchange="updateTemperatureSetpoint()">
+                <br>
+                <bold class="muted">Accepted range</bold> <input type="range" min ="3" max="7" name="accepted_temperature_range" id="accepted_temperature_range" value="4" onchange="updateTemperatureSetpoint()">
+                <br>
+                <br>
 
-                    </div>
+                <input type="text" id="tempSetpoint_min" value"">
+                <input type="text" id="tempSetpoint_max" value"">
+
+                <input type="text" id="temp1" value"">
+                <input type="text" id="temp2" value"">
+                <input type="text" id="temp3" value"">
+
+
+
+                <div style="width:300px;">
+                  <div class="progress">
+                    <div class="bar bar-warning" style="width: 45%; text-align:right" id="tempSetpoint_bar_min">80F &nbsp&nbsp </div>
+                    <div class="bar bar-success" style="width: 10%;" id="tempSetpoint_bar_value">75 F</div>
+                    <div class="bar bar-warning" style="width: 45%; text-align:left" id="tempSetpoint_bar_max">&nbsp &nbsp 90F</div>
+                  </div>
+                </div>
+
+
               </div>
 
 
               <div id="action_humidity_box">
-                    <br>
-                    <bold class="muted">Desired humidity</bold> <input type="range" min ="10" max="90" name="desired_humidity" id="desired_humidity" value="70" onchange="updateHumiditySetpoint()"><bold class="muted">%</bold> 
-                    <br>
-                    <bold class="muted">Accepted range</bold> <input type="range" min ="3" max="7" name="accepted_humidity_range" id="accepted_humidity_range" value="4" onchange="updateHumiditySetpoint()">
-                    <bold class="muted">%</bold> 
-                    
-                    <input type="hidden" id="humiditySetpoint_min" value"">
-                    <input type="hidden" id="humiditySetpoint_max" value"">
-                    
-                    <div style="width:300px;" >
-                        
-                        <table width="100%">
-                          <tr>
-                            <td id="humiditySetpoint_bar_min" style="background-color:#FFFF66;" align="right">-</td>
-                            <td id="humiditySetpoint_bar_value"  style="background-color:#CCFF66;" width="20%"  align="center" >-</td>
-                            <td id="humiditySetpoint_bar_max" style="background-color:#FFFF66;"  align="left">-</td>
-                          </tr>
-                        </table>
-                        <br>
-                        <br>
-
-                    </div>
+                  action_humidity_box
               </div>
 
               <a href="javascript:compose();"><button class="btn" type="button">Compose the rule!</button></a>
 
       </div>
-    </div>
+	  </div>
 
     <br>
     <br>
@@ -163,46 +146,46 @@
 
           
 
-    <div class="control-group">
-      <label class="control-label" for="priority">Rule priority</label>
-      <div class="controls">
+	  <div class="control-group">
+	    <label class="control-label" for="priority">Rule priority</label>
+	    <div class="controls">
 
-      {% if insertionForGroup %}
-        <bold class="muted">LOW</bold> <input type="range" min ="0" max="{{session.maxGroupPriority}}" name="priority" id="priority" value="{% if rule %}{{rule.priority}}{% endif %}" onchange="updatePriority(this.value);"> <bold class="muted">HIGH</bold>
+			{% if insertionForGroup %}
+				<bold class="muted">LOW</bold> <input type="range" min ="0" max="{{session.maxGroupPriority}}" name="priority" id="priority" value="{% if rule %}{{rule.priority}}{% endif %}" onchange="updatePriority(this.value);"> <bold class="muted">HIGH</bold>
         <input type="text" name="priorityTextBox" id="priorityTextBox" readonly="" class="input-small" value="{% if rule %}{{rule.priority}}{% else %}{{session.maxGroupPriority // 2}}{% endif %}">
-      {% endif %}
+			{% endif %}
 
-      {% if insertionForRoom %}
-        <bold class="muted">LOW</bold> <input type="range" min ="0" max="{{session.maxRoomPriority}}" name="priority" id="priority" value="{% if rule %}{{rule.priority}}{% endif %}" onchange="updatePriority(this.value);"> <bold class="muted">HIGH</bold>
+			{% if insertionForRoom %}
+				<bold class="muted">LOW</bold> <input type="range" min ="0" max="{{session.maxRoomPriority}}" name="priority" id="priority" value="{% if rule %}{{rule.priority}}{% endif %}" onchange="updatePriority(this.value);"> <bold class="muted">HIGH</bold>
         <input type="text" name="priorityTextBox" id="priorityTextBox" readonly="" class="input-small" value="{% if rule %}{{rule.priority}}{% else %}{{session.maxRoomPriority // 2}}{% endif %}">
-      {% endif %}
+			{% endif %}
       
-      <br>
-      <small class="muted"><b>Allowed priority values:</b></small>
-      {% if insertionForGroup %}
-        <br>
-        <small class="muted">Group priority: [0-{{session.maxGroupPriority}}]</small>
-      {% endif %}
-      <br>
-      <small class="muted">Room priority: [0-{{session.maxRoomPriority}}]</small>
+			<br>
+			<small class="muted"><b>Allowed priority values:</b></small>
+			{% if insertionForGroup %}
+				<br>
+				<small class="muted">Group priority: [0-{{session.maxGroupPriority}}]</small>
+			{% endif %}
+			<br>
+			<small class="muted">Room priority: [0-{{session.maxRoomPriority}}]</small>
 
-      </div>
-    </div>
+	    </div>
+	  </div>
 
-    <div class="control-group">
-      <div class="controls">
+	  <div class="control-group">
+	    <div class="controls">
       {% if rule %}
-        <button type="submit" class="btn btn-large btn-primary">Save the modifications!</button>
+	      <button type="submit" class="btn btn-large btn-primary">Save the modifications!</button>
       {% else %}
         <button type="submit" class="btn btn-large btn-primary">Save the new rule!</button>
       {% endif %}
-      </div>
-   </div>
+	    </div>
+	 </div>
 
-  </form>
+	</form>
 
-  <br>
-  <br>
+	<br>
+	<br>
 
 
 

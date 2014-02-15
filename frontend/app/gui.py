@@ -617,7 +617,8 @@ def addRuleToRoom(buildingName = None, roomName = None):
 
 		if successResponse(response):
 			flash("The rule has been added correctly!")
-			return redirect(url_for('gui.rooms', buildingName = buildingName))
+			#return redirect(url_for('gui.rooms', buildingName = buildingName))
+			return redirect('/buildings/' + buildingName + '/rooms' + '#roomMenu_' + roomName)
 		else:
 			return render_template('ruleForm.html', error = response['request-errorDescription'], insertionForRoom = True)
 
@@ -780,7 +781,8 @@ def editRoomRule(buildingName = None, roomName = None, ruleId = None, groupId = 
 		
 		if successResponse(response):
 			flash("The rule has been saved correctly!")
-			return redirect(url_for('gui.rooms', buildingName = buildingName))
+			#return redirect(url_for('gui.rooms', buildingName = buildingName))
+			return redirect('/buildings/' + buildingName + '/rooms' + '#roomMenu_' + roomName)
 		else:
 			return render_template('ruleForm.html', error = response['request-errorDescription'], insertionForRoom = True)
 
@@ -800,8 +802,50 @@ def editRoomRule(buildingName = None, roomName = None, ruleId = None, groupId = 
 
 		rule = response
 
+		response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/triggers", 
+			{
+			'username' : session["username"],
+			'buildingName' : buildingName, 
+			'roomName' : roomName,
+			'sessionKey' : session["sessionKey"],
+			'userUuid' : session["userUuid"]
+			})
 
-		return render_template('ruleForm.html', rule = rule, insertionForRoom = True)
+		if successResponse(response):
+			triggerList = response["triggers"]
+		else:
+			return render_template('error.html', error = response['request-errorDescription'])
+
+
+
+		response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/actions", 
+			{
+			'username' : session["username"],
+			'buildingName' : buildingName, 
+			'roomName' : roomName,
+			'sessionKey' : session["sessionKey"],
+			'userUuid' : session["userUuid"]
+			})
+
+		if successResponse(response):
+			actionList = response["actions"]
+		else:
+			return render_template('error.html', error = response['request-errorDescription'])
+
+
+		availableTriggers = []
+		for trigger in triggerList:
+			availableTriggers.append( trigger["ruleAntecedent"].split("@val")[0].strip() )
+
+
+		availableActions = []
+		for action in actionList:
+			availableActions.append( action["ruleConsequent"].split("@val")[0].strip() )
+
+		availableTriggers = sorted(availableTriggers)
+		availableActions = sorted(availableActions)
+
+		return render_template('ruleForm.html', rule = rule, insertionForRoom = True, availableTriggers = availableTriggers, availableActions = availableActions)
 
 
 
@@ -827,7 +871,8 @@ def disableRoomRule(buildingName = None, roomName = None, ruleId = None):
 	rule = response
 
 
-	return redirect(url_for('gui.rooms', buildingName = buildingName))
+	#return redirect(url_for('gui.rooms', buildingName = buildingName))
+	return redirect('/buildings/' + buildingName + '/rooms' + '#roomMenu_' + roomName)
 
 
 @gui.route('/buildings/<buildingName>/rooms/<roomName>/rules/<ruleId>/enable/', methods = ['GET'])
@@ -852,7 +897,8 @@ def enableRoomRule(buildingName = None, roomName = None, ruleId = None):
 	rule = response
 
 
-	return redirect(url_for('gui.rooms', buildingName = buildingName))
+	#return redirect(url_for('gui.rooms', buildingName = buildingName))
+	return redirect('/buildings/' + buildingName + '/rooms' + '#roomMenu_' + roomName)
 
 
 @gui.route('/buildings/<buildingName>/rooms/<roomName>/rules/<ruleId>/delete/', methods = ['GET'])
@@ -877,7 +923,8 @@ def deleteRoomRule(buildingName = None, roomName = None, ruleId = None):
 	rule = response
 
 
-	return redirect(url_for('gui.rooms', buildingName = buildingName))
+	#return redirect(url_for('gui.rooms', buildingName = buildingName))
+	return redirect('/buildings/' + buildingName + '/rooms' + '#roomMenu_' + roomName)
 
 
 
@@ -928,8 +975,51 @@ def editGroupRule(buildingName = None, groupId = None, ruleId = None):
 
 		rule = response
 
+		response = rest.request("/api/users/<username>/buildings/<buildingName>/groups/<groupId>/triggers", 
+			{
+			'username' : session["username"],
+			'buildingName' : buildingName, 
+			'groupId' : groupId,
+			'sessionKey' : session["sessionKey"],
+			'userUuid' : session["userUuid"]
+			})
 
-		return render_template('ruleForm.html', rule = rule, insertionForGroup = True)
+		if successResponse(response):
+			print response
+			triggerList = response["triggers"]
+		else:
+			return render_template('error.html', error = response['request-errorDescription'])
+
+
+
+		response = rest.request("/api/users/<username>/buildings/<buildingName>/groups/<groupId>/actions", 
+			{
+			'username' : session["username"],
+			'buildingName' : buildingName, 
+			'groupId' : groupId,
+			'sessionKey' : session["sessionKey"],
+			'userUuid' : session["userUuid"]
+			})
+
+		if successResponse(response):
+			actionList = response["actions"]
+		else:
+			return render_template('error.html', error = response['request-errorDescription'])
+
+
+		availableTriggers = []
+		for trigger in triggerList:
+			availableTriggers.append( trigger["ruleAntecedent"].split("@val")[0].strip() )
+
+
+		availableActions = []
+		for action in actionList:
+			availableActions.append( action["ruleConsequent"].split("@val")[0].strip() )
+
+		availableTriggers = sorted(availableTriggers)
+		availableActions = sorted(availableActions)
+
+		return render_template('ruleForm.html', rule = rule, insertionForGroup = True,availableTriggers = availableTriggers, availableActions = availableActions)
 
 
 

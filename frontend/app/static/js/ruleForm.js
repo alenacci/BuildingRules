@@ -179,6 +179,12 @@ function compose()
 	triggerBox = document.getElementById("trigger_" + groupId);
 	actionBox = document.getElementById("action_" + groupId);
 
+	humiditySetpointMinBox = document.getElementById("humiditySetpoint_min");
+	humiditySetpointMaxBox = document.getElementById("humiditySetpoint_max");
+	tempSetpointMinBox = document.getElementById("tempSetpoint_min");
+	tempSetpointMaxBox = document.getElementById("tempSetpoint_max");
+
+
 	temperatureFrom = document.getElementById("temperature_from_" + groupId);
 	temperatureTo = document.getElementById("temperature_to_" + groupId);
 
@@ -200,24 +206,29 @@ function compose()
 
 
 	triggerCategory = getTriggerCategory(triggerText);
+	actionCategory = getActionCategory(actionText);
+
+
+	antecent = ""
+	consequent = ""
 
 
 	if (triggerCategory == "DEFAULT"){
-		ruleBody.value = "if " + triggerText + " then " + actionText;
+		antecent = "if " + triggerText;
 	}
 
 	if (triggerCategory == "TEMPERATURE")
 	{
 		tempFromText = temperatureFrom.options[temperatureFrom.selectedIndex].text;
 		tempToText = temperatureTo.options[temperatureTo.selectedIndex].text;
-		ruleBody.value = "if " + triggerText + " " + tempFromText + " and " + tempToText + " then " + actionText;	
+		antecent = "if " + triggerText + " " + tempFromText + " and " + tempToText;
 	}
 
 	if (triggerCategory == "TIME")
 	{
 		timeFromText = timeFrom.options[timeFrom.selectedIndex].text;
 		timeToText = timeTo.options[timeTo.selectedIndex].text;
-		ruleBody.value =  "if " + triggerText + " " + timeFromText + " and " + timeToText + " then " + actionText;	
+		antecent=  "if " + triggerText + " " + timeFromText + " and " + timeToText;
 	}
 
 	if (triggerCategory == "DATE")
@@ -227,29 +238,109 @@ function compose()
 		dateDayToText = dateDayTo.options[dateDayTo.selectedIndex].text;
 		dateMonthToText = dateMonthTo.options[dateMonthTo.selectedIndex].text;
 
-		ruleBody.value =  "if " + triggerText + " " + dateDayFromText + "/" + dateMonthFromText + " and " + dateDayToText + "/" + dateMonthToText + " then " + actionText;	
+		antecent =  "if " + triggerText + " " + dateDayFromText + "/" + dateMonthFromText + " and " + dateDayToText + "/" + dateMonthToText;
 	}
 
 	if (triggerCategory == "DAY")
 	{
 		dayText = day.options[day.selectedIndex].text;
-		ruleBody.value =  "if " + triggerText + " " + dayText + " then " + actionText;	
+		antecent=  "if " + triggerText + " " + dayText;
 	}
+
+	if (actionCategory == "DEFAULT")
+	{
+		consequent = actionText;
+	}
+
+	if (actionCategory == "TEMPERATURE")
+	{
+		consequent = actionText + " " + tempSetpointMinBox.value + " and " + tempSetpointMaxBox.value;
+	}
+
+
+
+	if (actionCategory == "HUMIDITY")
+	{
+		consequent = actionText + " " + humiditySetpointMinBox.value + " and " + humiditySetpointMaxBox.value;
+	}
+
+
+	ruleBody.value = antecent + " then " + consequent
 
 
 }
 
 
+function updateHumiditySetpoint()
+{
+
+	unit = "%"
+	
+	desiredValueBox = document.getElementById("desired_humidity");
+	rangeValueBox = document.getElementById("accepted_humidity_range");
+	humiditySetpointMinBox = document.getElementById("humiditySetpoint_min");
+	humiditySetpointMaxBox = document.getElementById("humiditySetpoint_max");
+
+	maxAllowedTemp = desiredValueBox.max;
+	minAllowedTemp = desiredValueBox.min;
+
+	desiredValue = desiredValueBox.value;
+	rangeValue = rangeValueBox.value;
+
+	humiditySetpointMin = parseInt(desiredValue) - parseInt(rangeValue);
+	humiditySetpointMax = parseInt(desiredValue) + parseInt(rangeValue);
+
+	orangeArea = humiditySetpointMin - minAllowedTemp;
+	orangeArea_perc = parseInt(rangeValue) * 5;
+
+	
+	document.getElementById("humiditySetpoint_bar_value").width = orangeArea_perc + "%" ;
+	
+	document.getElementById("humiditySetpoint_bar_min").innerHTML = humiditySetpointMin + unit;
+	document.getElementById("humiditySetpoint_bar_value").innerHTML = desiredValue + unit;
+	document.getElementById("humiditySetpoint_bar_max").innerHTML = humiditySetpointMax + unit;
+	
+	humiditySetpointMinBox.value = humiditySetpointMin + unit;
+	humiditySetpointMaxBox.value = humiditySetpointMax + unit;
+
+	compose();
+
+
+}
+
 function updateTemperatureSetpoint()
 {
-	
-	desiredValue = document.getElementById("desired_temperature");
-	rangeValue = document.getElementById("accepted_temperature_range");
 
-	alert(desiredValue.value);
-	alert(desiredValue.value);
+	unit = "F"
+	
+	desiredValueBox = document.getElementById("desired_temperature");
+	rangeValueBox = document.getElementById("accepted_temperature_range");
+	tempSetpointMinBox = document.getElementById("tempSetpoint_min");
+	tempSetpointMaxBox = document.getElementById("tempSetpoint_max");
+
+	maxAllowedTemp = desiredValueBox.max;
+	minAllowedTemp = desiredValueBox.min;
+
+	desiredValue = desiredValueBox.value;
+	rangeValue = rangeValueBox.value;
+
+	tempSetpointMin = parseInt(desiredValue) - parseInt(rangeValue);
+	tempSetpointMax = parseInt(desiredValue) + parseInt(rangeValue);
+
+	orangeArea = tempSetpointMin - minAllowedTemp;
+	orangeArea_perc = parseInt(rangeValue) * 5;
 
 	
+	document.getElementById("tempSetpoint_bar_value").width = orangeArea_perc + "%" ;
+	
+	document.getElementById("tempSetpoint_bar_min").innerHTML = tempSetpointMin + unit;
+	document.getElementById("tempSetpoint_bar_value").innerHTML = desiredValue + unit;
+	document.getElementById("tempSetpoint_bar_max").innerHTML = tempSetpointMax + unit;
+	
+	tempSetpointMinBox.value = tempSetpointMin + unit;
+	tempSetpointMaxBox.value = tempSetpointMax + unit;
+
+	compose();
 
 
 }

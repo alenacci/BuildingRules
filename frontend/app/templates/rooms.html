@@ -146,10 +146,11 @@
 
 				  <div class="span8">
 				    <h3>Room {{room.roomName}} - {{room.description}}</h3>
-					<div class="btn-group">
-					  <a href="javascript:filterByRuleCategory('{{room.roomName}}','SHOWALL')"><button class="btn active" id="btn_{{room.roomName}}_SHOWALL">SHOW ALL</button></a>
+					<div class="btn-toolbar">
+					  <a href="javascript:filterByRuleCategory('{{room.roomName}}','SHOWALL')"><button class="btn active" id="btn_{{room.roomName}}_SHOWALL" style="font-size: x-small" >SHOW ALL</button></a>
 					  {% for category in categories %}
-					  	<a href="javascript:filterByRuleCategory('{{room.roomName}}','{{category}}')"><button class="btn" id="btn_{{room.roomName}}_{{category}}">{{category}}</button></a>
+					  	<a href="javascript:filterByRuleCategory('{{room.roomName}}','{{category}}')"><button class="btn" id="btn_{{room.roomName}}_{{category}}" style="font-size: x-small">{{category}}</button></a>
+					  	{{loop.counter }}
 					  {% endfor %}
 					</div>				    
 				    <hr>
