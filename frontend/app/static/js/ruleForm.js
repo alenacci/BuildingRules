@@ -54,7 +54,8 @@ function getTriggerCategory(triggerText)
 	if (triggerText == "room temperature is between") return "TEMPERATURE";
 	if (triggerText == "external temperature is between") return "TEMPERATURE";
 	if (triggerText == "time is between") return "TIME";
-	if (triggerText == "the date is between") return "DAY";
+	if (triggerText == "the date is between") return "DATE";
+	if (triggerText == "today is") return "DAY";
 
 	return "DEFAULT";
 }
