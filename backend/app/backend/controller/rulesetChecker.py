@@ -45,7 +45,7 @@ class RulesetChecker:
 		for rule in self.ruleList:
 
 			translatedAntecedent, trigger, parameters = triggerManager.translateTrigger(rule.antecedent) 
-			translatedConsequent, action = actionManager.translateAction(rule.consequent)
+			translatedConsequent, action, parameters = actionManager.translateAction(rule.consequent)
 
 
 			currentRuleAssertion = assertionTemplate.replace("@@RULE_ANTECEDENT@@", translatedAntecedent)

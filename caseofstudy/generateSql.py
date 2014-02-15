@@ -76,15 +76,16 @@ thermalZones[13] = [3208]
 standardRoomTriggers = []
 standardRoomTriggers.append("INSERT INTO `rooms_triggers` (`room_name`, `building_name`, `trigger_id`) VALUES ('@@roomName@@', 'CSE', 1);")
 standardRoomTriggers.append("INSERT INTO `rooms_triggers` (`room_name`, `building_name`, `trigger_id`) VALUES ('@@roomName@@', 'CSE', 2);")
+standardRoomTriggers.append("INSERT INTO `rooms_triggers` (`room_name`, `building_name`, `trigger_id`) VALUES ('@@roomName@@', 'CSE', 3);")
+standardRoomTriggers.append("INSERT INTO `rooms_triggers` (`room_name`, `building_name`, `trigger_id`) VALUES ('@@roomName@@', 'CSE', 4);")
 standardRoomTriggers.append("INSERT INTO `rooms_triggers` (`room_name`, `building_name`, `trigger_id`) VALUES ('@@roomName@@', 'CSE', 5);")
+standardRoomTriggers.append("INSERT INTO `rooms_triggers` (`room_name`, `building_name`, `trigger_id`) VALUES ('@@roomName@@', 'CSE', 6);")
+standardRoomTriggers.append("INSERT INTO `rooms_triggers` (`room_name`, `building_name`, `trigger_id`) VALUES ('@@roomName@@', 'CSE', 7);")
 standardRoomTriggers.append("INSERT INTO `rooms_triggers` (`room_name`, `building_name`, `trigger_id`) VALUES ('@@roomName@@', 'CSE', 8);")
 standardRoomTriggers.append("INSERT INTO `rooms_triggers` (`room_name`, `building_name`, `trigger_id`) VALUES ('@@roomName@@', 'CSE', 9);")
 standardRoomTriggers.append("INSERT INTO `rooms_triggers` (`room_name`, `building_name`, `trigger_id`) VALUES ('@@roomName@@', 'CSE', 10);")
-standardRoomTriggers.append("INSERT INTO `rooms_triggers` (`room_name`, `building_name`, `trigger_id`) VALUES ('@@roomName@@', 'CSE', 11);")
 standardRoomTriggers.append("INSERT INTO `rooms_triggers` (`room_name`, `building_name`, `trigger_id`) VALUES ('@@roomName@@', 'CSE', 12);")
 standardRoomTriggers.append("INSERT INTO `rooms_triggers` (`room_name`, `building_name`, `trigger_id`) VALUES ('@@roomName@@', 'CSE', 13);")
-standardRoomTriggers.append("INSERT INTO `rooms_triggers` (`room_name`, `building_name`, `trigger_id`) VALUES ('@@roomName@@', 'CSE', 14);")
-standardRoomTriggers.append("INSERT INTO `rooms_triggers` (`room_name`, `building_name`, `trigger_id`) VALUES ('@@roomName@@', 'CSE', 15);")
 
 standardRoomActions = []
 standardRoomActions.append("INSERT INTO `rooms_actions` (`room_name`, `building_name`, `action_id`) VALUES ('@@roomName@@', 'CSE', 1);")
@@ -97,7 +98,17 @@ standardRoomActions.append("INSERT INTO `rooms_actions` (`room_name`, `building_
 standardRoomActions.append("INSERT INTO `rooms_actions` (`room_name`, `building_name`, `action_id`) VALUES ('@@roomName@@', 'CSE', 8);")
 standardRoomActions.append("INSERT INTO `rooms_actions` (`room_name`, `building_name`, `action_id`) VALUES ('@@roomName@@', 'CSE', 9);")
 standardRoomActions.append("INSERT INTO `rooms_actions` (`room_name`, `building_name`, `action_id`) VALUES ('@@roomName@@', 'CSE', 10);")
-
+standardRoomActions.append("INSERT INTO `rooms_actions` (`room_name`, `building_name`, `action_id`) VALUES ('@@roomName@@', 'CSE', 11);")
+standardRoomActions.append("INSERT INTO `rooms_actions` (`room_name`, `building_name`, `action_id`) VALUES ('@@roomName@@', 'CSE', 12);")
+standardRoomActions.append("INSERT INTO `rooms_actions` (`room_name`, `building_name`, `action_id`) VALUES ('@@roomName@@', 'CSE', 13);")
+standardRoomActions.append("INSERT INTO `rooms_actions` (`room_name`, `building_name`, `action_id`) VALUES ('@@roomName@@', 'CSE', 14);")
+standardRoomActions.append("INSERT INTO `rooms_actions` (`room_name`, `building_name`, `action_id`) VALUES ('@@roomName@@', 'CSE', 15);")
+standardRoomActions.append("INSERT INTO `rooms_actions` (`room_name`, `building_name`, `action_id`) VALUES ('@@roomName@@', 'CSE', 16);")
+standardRoomActions.append("INSERT INTO `rooms_actions` (`room_name`, `building_name`, `action_id`) VALUES ('@@roomName@@', 'CSE', 17);")
+standardRoomActions.append("INSERT INTO `rooms_actions` (`room_name`, `building_name`, `action_id`) VALUES ('@@roomName@@', 'CSE', 18);")
+standardRoomActions.append("INSERT INTO `rooms_actions` (`room_name`, `building_name`, `action_id`) VALUES ('@@roomName@@', 'CSE', 19);")
+standardRoomActions.append("INSERT INTO `rooms_actions` (`room_name`, `building_name`, `action_id`) VALUES ('@@roomName@@', 'CSE', 20);")
+standardRoomActions.append("INSERT INTO `rooms_actions` (`room_name`, `building_name`, `action_id`) VALUES ('@@roomName@@', 'CSE', 21);")
 
 
 

@@ -66,6 +66,20 @@ class ActionManager:
 		action, template = self.getActionAndTemplate(ruleConsequent)
 		return action
 
+	def __translateParameters(self, actionCategory, parameterValue):
+
+		value = parameterValue
+
+		if actionCategory == "HVAC_TEMP":
+			return value.replace("C", "").replace("F", "")
+
+		if actionCategory == "HVAC_HUM":
+			return value.replace("%", "")
+
+		return value
+
+
+
 	def translateAction(self, ruleConsequent):
 		checkData(locals())
 
@@ -73,9 +87,21 @@ class ActionManager:
 		action, originalTemplate, parameterValues = self.getActionAndTemplateAndParameterValues(ruleConsequent)
 		translationTemplate = actions.translateTemplate('Z3', originalTemplate)
 
+		translatedParams = {}
+
+		for key,value in parameterValues.iteritems():
+			translatedParams[key] = self.__translateParameters(trigger.category, value)
+
+
 		translation = translationTemplate
 
-		return translation, action
+		for i in range(0,len(parameterValues.keys())):
+
+			value = translatedParams[str(i)]
+			translation = translation.replace("@val", value, 1)
+
+
+		return translation, action, translatedParams
 
 
 
@@ -110,20 +136,64 @@ class ActionManager:
 			parameters.update({'operation' : 'LIGHT_OFF'})
 			return  RoomActionDriver(parameters = parameters)
 
-		if action.actionName == "HEATING_ON":
-			parameters.update({'operation' : 'HEATING_ON'})
+		if action.actionName == "HVAC_ON":
+			parameters.update({'operation' : 'HVAC_OFF'})
 			return  RoomActionDriver(parameters = parameters)
 
-		if action.actionName == "HEATING_OFF":
-			parameters.update({'operation' : 'HEATING_OFF'})
+		if action.actionName == "HVAC_OFF":
+			parameters.update({'operation' : 'HVAC_OFF'})
 			return  RoomActionDriver(parameters = parameters)
 
-		if action.actionName == "COOLING_ON":
-			parameters.update({'operation' : 'COOLING_ON'})
+		if action.actionName == "HVAC_TEMP":
+			parameters.update({'operation' : 'HVAC_TEMP'})
 			return  RoomActionDriver(parameters = parameters)
 
-		if action.actionName == "COOLING_OFF":
-			parameters.update({'operation' : 'COOLING_OFF'})
+		if action.actionName == "HVAC_HUM":
+			parameters.update({'operation' : 'HVAC_HUM'})
+			return  RoomActionDriver(parameters = parameters)
+
+		if action.actionName == "COFEE_ON":
+			parameters.update({'operation' : 'COFEE_ON'})
+			return  RoomActionDriver(parameters = parameters)
+
+		if action.actionName == "COFEE_OFF":
+			parameters.update({'operation' : 'COFEE_OFF'})
+			return  RoomActionDriver(parameters = parameters)
+
+		if action.actionName == "PRINTER_ON":
+			parameters.update({'operation' : 'PRINTER_ON'})
+			return  RoomActionDriver(parameters = parameters)
+
+		if action.actionName == "PRINTER_OFF":
+			parameters.update({'operation' : 'PRINTER_OFF'})
+			return  RoomActionDriver(parameters = parameters)
+
+		if action.actionName == "COMPUTER_ON":
+			parameters.update({'operation' : 'COMPUTER_ON'})
+			return  RoomActionDriver(parameters = parameters)
+
+		if action.actionName == "COMPUTER_OFF":
+			parameters.update({'operation' : 'COMPUTER_OFF'})
+			return  RoomActionDriver(parameters = parameters)
+
+		if action.actionName == "DESKLIGHT_ON":
+			parameters.update({'operation' : 'DESKLIGHT_ON'})
+			return  RoomActionDriver(parameters = parameters)
+
+		if action.actionName == "DESKLGHT_OFF":
+			parameters.update({'operation' : 'DESKLGHT_OFF'})
+			return  RoomActionDriver(parameters = parameters)
+
+		if action.actionName == "DISPLAYMONITOR_ON":
+			parameters.update({'operation' : 'DISPLAYMONITOR_ON'})
+			return  RoomActionDriver(parameters = parameters)
+
+		if action.actionName == "DISPLAYMONITOR_OFF":
+			parameters.update({'operation' : 'DISPLAYMONITOR_OFF'})
+			return  RoomActionDriver(parameters = parameters)
+
+		if action.actionName == "SEND_COMPLAIN":
+			parameters.update({'operation' : 'DISPLAYMONITOR_OFF'})
 			return  RoomActionDriver(parameters = parameters)
 
 		if action.actionName == "WINDOWS_OPEN":

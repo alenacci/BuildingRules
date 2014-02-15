@@ -7,14 +7,6 @@
   window.onload = function(){
     init();
 
-  {% for trigger in availableTriggers %}
-    availableTriggers.push("{{trigger}}");
-  {% endfor %}
-
-  {% for action in availableActions %}
-    availableActions.push("{{action}}");
-  {% endfor %}
-
   };
   </script>
 
@@ -47,11 +39,9 @@
               <h3 class="muted">IF</h3>
               <select name="trigger_0" id="trigger_0" onchange="triggerSelected()">
                 <option>Select a trigger</option>
-                <option value="someone is in the room">someone is in the room</option><option value="nobody is in the room">nobody is in the room</option><option value="room temperature is between">room temperature is between</option><option value="external temperature is between">external temperature is between</option><option value="time is between">time is between</option><option value="the date is between">the date is between</option><option value="today is">today is</option><option value="it is sunny">it is sunny</option><option value="it is rainy">it is rainy</option><option value="it is rainy">it is cloudy</option>
-                {% if insertionForGroup %}
-                  <option>no rule specified</option>
-                {% endif  %}
-                
+                  {% for trigger in availableTriggers %}
+                    <option>{{trigger}}</option>
+                  {% endfor %}               
               </select>
 
               <div id="temperature_box_0">
@@ -101,9 +91,38 @@
 
               <h3 class="muted">THEN</h3>
 
-              <select name="action_0" id="action_0" onchange="compose()">
-                <option>Select an action</option><option>turn on the light</option><option>turn off the light</option><option>turn on the heating</option><option>turn off the heating</option><option>turn on the cooling</option><option>turn off the cooling</option><option>open the windows</option><option>close the windows</option><option>open the curtains</option><option>close the curtains</option>
+              <select name="action_0" id="action_0" onchange="actionSelected()">
+                <option>Select an action</option>
+                {% for action in availableActions %}
+                  <option>{{action}}</option>
+                {% endfor %}               
               </select>  
+
+              <div id="action_temperature_box">
+                  
+                <br>
+                <bold class="muted">Desired temperature</bold> <input type="range" min ="60" max="83" name="desired_temperature" id="desired_temperature" value="70" onchange="updateTemperatureSetpoint()">
+                <br>
+                <bold class="muted">Accepted range</bold> <input type="range" min ="3" max="7" name="accepted_temperature_range" id="accepted_range" value="4" onchange="updateTemperatureSetpoint()">
+                <br>
+                <br>
+
+                <div style="width:300px;">
+                  <div class="progress">
+                    <div class="bar bar-warning" style="width: 45%; text-align:right">80F &nbsp&nbsp </div>
+                    <div class="bar bar-success" style="width: 10%;">75 F</div>
+                    <div class="bar bar-warning" style="width: 45%; text-align:left">&nbsp &nbsp 90F</div>
+                  </div>
+                </div>
+
+
+              </div>
+
+
+              <div id="action_humidity_box">
+                  action_humidity_box
+              </div>
+
               <a href="javascript:compose();"><button class="btn" type="button">Compose the rule!</button></a>
 
       </div>
@@ -115,13 +134,6 @@
 
 
 
-	      <div style="width:300px;">
-      <div class="progress">
-        <div class="bar bar-warning" style="width: 45%; text-align:right">80F &nbsp&nbsp </div>
-        <div class="bar bar-success" style="width: 10%;">75 F</div>
-        <div class="bar bar-warning" style="width: 45%; text-align:left">&nbsp &nbsp 90F</div>
-      </div>
-    </div>
 
           
 

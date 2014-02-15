@@ -154,6 +154,7 @@ class TriggerManager:
 		from app.backend.drivers.roomTriggerDriver import RoomTriggerDriver
 		from app.backend.drivers.weatherTriggerDriver import WeatherTriggerDriver
 		from app.backend.drivers.fakeTriggerDriver import FakeTriggerDriver
+		from app.backend.drivers.externalAppTriggerDriver import ExternalAppTriggerDriver
 
 		if not parameters:
 			parameters = {}
@@ -201,6 +202,14 @@ class TriggerManager:
 		if trigger.triggerName == "NO_RULE":
 			parameters.update({'operation' : 'NO_RULE'})
 			return  FakeTriggerDriver(parameters = parameters)
+
+		if trigger.triggerName == "DEMANDE_REPONSE":
+			parameters.update({'operation' : 'DEMANDE_REPONSE'})
+			return  ExternalAppTriggerDriver(parameters = parameters)
+
+		if trigger.triggerName == "CALENDAR_MEETING":
+			parameters.update({'operation' : 'CALENDAR_MEETING'})
+			return  ExternalAppTriggerDriver(parameters = parameters)
 
 		raise DriverNotFoundError("Impossibile to find any driver for the trigger " + str(trigger))
 

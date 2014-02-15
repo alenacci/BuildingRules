@@ -1,6 +1,3 @@
-availableTriggers = ["Select a trigger"];
-availableActions = ["Select an action"];
-
 var ruleNumber = 1;
 
 function updatePriority(value)
@@ -45,48 +42,93 @@ function hideAllTriggerSubBox()
 	hide('date_box_' + groupId);	
 }
 
+function hideAllActionSubBox()
+{
+	hide('action_temperature_box');
+	hide('action_humidity_box');
+}
+
+function getTriggerCategory(triggerText)
+{
+
+	if (triggerText == "room temperature is between") return "TEMPERATURE";
+	if (triggerText == "external temperature is between") return "TEMPERATURE";
+	if (triggerText == "time is between") return "TIME";
+	if (triggerText == "the date is between") return "DAY";
+
+	return "DEFAULT";
+}
+
+function getActionCategory(actionText)
+{
+
+	if (actionText == "Select an action") return "NOT_VALID";
+	if (actionText == "set temperature between") return "TEMPERATURE";
+	if (actionText == "set humidity between") return "HUMIDITY";
+
+	return "DEFAULT";
+}
+
+
 function triggerSelected()
 {
 
 	groupId = 0;
 
-
 	triggerBox = document.getElementById("trigger_" + groupId)
-	index = triggerBox.selectedIndex;
-
 	triggerText = triggerBox.options[triggerBox.selectedIndex].text;
 
+	hideAllTriggerSubBox();
 
-	if (availableTriggers.indexOf(triggerText) == -1){
-		alert("This trigger is not available in this room!");
-		triggerBox.selectedIndex = 0;
-		hideAllTriggerSubBox();
-		return
-	}
-	
-	hideAllTriggerSubBox()
+	triggerCategory = getTriggerCategory(triggerText);
 
-	if (index == 3 || index == 4)	
+	if (triggerCategory == "TEMPERATURE")	
 	{
 		show('temperature_box_' + groupId);
 	}
 
-	if (index == 5)	
+	if (triggerCategory == "TIME")	
 	{
 		show('time_box_' + groupId);
 	}
 
-	if (index == 6)	
+	if (triggerCategory == "DATE")	
 	{
 		show('date_box_' + groupId);
 	}
 
-
-	if (index == 7)	
+	if (triggerCategory == "DAY")	
 	{
 		show('day_box_' + groupId);
 	}
 
+
+}
+
+function actionSelected()
+{
+	actionBox = document.getElementById("action_" + groupId);
+	actionText = actionBox.options[actionBox.selectedIndex].text;
+
+	actionCategory = getActionCategory(actionText);
+
+	hideAllActionSubBox();
+
+	
+	if (actionCategory == "DEFAULT")
+	{
+		compose();
+	}
+
+	if (actionCategory == "TEMPERATURE")
+	{
+		show('action_temperature_box');
+	}
+
+	if (actionCategory == "HUMIDITY")
+	{
+		show('action_humidity_box');
+	}
 
 }
 
@@ -134,8 +176,8 @@ function compose()
 
 	groupId = 0;
 
-	triggerBox = document.getElementById("trigger_" + groupId)
-	actionBox = document.getElementById("action_" + groupId)
+	triggerBox = document.getElementById("trigger_" + groupId);
+	actionBox = document.getElementById("action_" + groupId);
 
 	temperatureFrom = document.getElementById("temperature_from_" + groupId);
 	temperatureTo = document.getElementById("temperature_to_" + groupId);
@@ -150,46 +192,35 @@ function compose()
 
 	day = document.getElementById("day_" + groupId);
 
-	index = triggerBox.selectedIndex;
-
 	ruleBody = document.getElementById('ruleBody');
 
 	triggerText = triggerBox.options[triggerBox.selectedIndex].text;
 	actionText = actionBox.options[actionBox.selectedIndex].text;
 
-	if (availableTriggers.indexOf(triggerText) == -1){
-		alert("This trigger is not available in this room!");
-		triggerBox.selectedIndex = 0;
-		return
-	}
-
-	if (availableActions.indexOf(actionText) == -1){
-		alert("This action is not available in this room!");
-		actionBox.selectedIndex = 0;
-		return
-	}
 
 
+	triggerCategory = getTriggerCategory(triggerText);
 
-	if (index == 1 || index == 2 || index == 8 || index == 9 || index == 10 || index == 11){
+
+	if (triggerCategory == "DEFAULT"){
 		ruleBody.value = "if " + triggerText + " then " + actionText;
 	}
 
-	if (index == 3 || index == 4)
+	if (triggerCategory == "TEMPERATURE")
 	{
 		tempFromText = temperatureFrom.options[temperatureFrom.selectedIndex].text;
 		tempToText = temperatureTo.options[temperatureTo.selectedIndex].text;
 		ruleBody.value = "if " + triggerText + " " + tempFromText + " and " + tempToText + " then " + actionText;	
 	}
 
-	if (index == 5)
+	if (triggerCategory == "TIME")
 	{
 		timeFromText = timeFrom.options[timeFrom.selectedIndex].text;
 		timeToText = timeTo.options[timeTo.selectedIndex].text;
 		ruleBody.value =  "if " + triggerText + " " + timeFromText + " and " + timeToText + " then " + actionText;	
 	}
 
-	if (index == 6)
+	if (triggerCategory == "DATE")
 	{
 		dateDayFromText = dateDayFrom.options[dateDayFrom.selectedIndex].text;
 		dateMonthFromText = dateMonthFrom.options[dateMonthFrom.selectedIndex].text;
@@ -199,11 +230,26 @@ function compose()
 		ruleBody.value =  "if " + triggerText + " " + dateDayFromText + "/" + dateMonthFromText + " and " + dateDayToText + "/" + dateMonthToText + " then " + actionText;	
 	}
 
-	if (index == 7)
+	if (triggerCategory == "DAY")
 	{
 		dayText = day.options[day.selectedIndex].text;
 		ruleBody.value =  "if " + triggerText + " " + dayText + " then " + actionText;	
 	}
+
+
+}
+
+
+function updateTemperatureSetpoint()
+{
+	
+	desiredValue = document.getElementById("desired_temperature");
+	rangeValue = document.getElementById("accepted_temperature_range");
+
+	alert(desiredValue.value);
+	alert(desiredValue.value);
+
+	
 
 
 }
@@ -218,6 +264,7 @@ function init()
 {
 
 	hideAllTriggerSubBox();
+	hideAllActionSubBox();
 }
 
 

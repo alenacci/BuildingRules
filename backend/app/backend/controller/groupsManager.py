@@ -136,6 +136,31 @@ class GroupsManager:
 
 		return rule.getDict()
 
+	def getTriggers(self, buildingName = None, groupId = None):
+		checkData(locals())
+
+		from app.backend.model.triggers import Triggers
+		triggers = Triggers()
+
+		triggerList = []
+		for trigger in triggers.getAllTriggers():
+			triggerList.append(trigger.getDict())
+
+		return {"triggers" : triggerList}
+
+
+	def getActions(self, buildingName = None, groupId = None):
+		checkData(locals())
+
+		from app.backend.model.actions import Actions
+		actions = Actions()
+
+		actionList = []
+		for action in actions.getAllActions():
+			actionList.append(action.getDict())
+
+		return {"actions" : actionList}
+
 
 	def __addOrModifyRule(self, priority = None, buildingName = None, groupId = None, authorUuid = None, ruleBody = None, ruleId = None):
 		checkData(locals())

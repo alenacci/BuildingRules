@@ -25,19 +25,52 @@ class RoomActionDriver(GenericActionDriver):
 	
 		elif self.parameters["operation"] == "LIGHT_OFF":		
 			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
+
+		elif self.parameters["operation"] == "HVAC_ON":		
+			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
+
+		elif self.parameters["operation"] == "HVAC_OFF":		
+			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
+
+		elif self.parameters["operation"] == "HVAC_TEMP":		
+			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
+
+		elif self.parameters["operation"] == "HVAC_HUM":		
+			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
+
+		elif self.parameters["operation"] == "COFEE_ON":		
+			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
+
+		elif self.parameters["operation"] == "COFEE_OFF":		
+			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
+
+		elif self.parameters["operation"] == "PRINTER_ON":		
+			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
+
+		elif self.parameters["operation"] == "PRINTER_OFF":		
+			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
+
+		elif self.parameters["operation"] == "COMPUTER_ON":		
+			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
+
+		elif self.parameters["operation"] == "COMPUTER_OFF":		
+			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
+
+		elif self.parameters["operation"] == "DESKLIGHT_ON":		
+			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
+
+		elif self.parameters["operation"] == "DESKLIGHT_OFF":		
+			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
+
+		elif self.parameters["operation"] == "DISPLAYMONITOR_ON":		
+			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
+
+		elif self.parameters["operation"] == "DISPLAYMONITOR_OFF":		
+			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
+
+		elif self.parameters["operation"] == "SEND_COMPLAIN":		
+			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
 			
-		elif self.parameters["operation"] == "HEATING_ON":		
-			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
-
-		elif self.parameters["operation"] == "HEATING_OFF":		
-			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
-
-		elif self.parameters["operation"] == "COOLING_ON":		
-			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
-
-		elif self.parameters["operation"] == "COOLING_OFF":		
-			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
-
 		elif self.parameters["operation"] == "WINDOWS_OPEN":		
 			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
 

@@ -310,6 +310,41 @@ def groupRooms(username = None, buildingName = None, groupId = None):
 			return returnError(e)
 
 
+@api.route('/api/users/<username>/buildings/<buildingName>/groups/<groupId>/triggers', methods = ['POST'])
+def getGroupTriggers(username = None, buildingName = None, groupId = None):
+	if request.method == 'POST':
+
+		sessionKey = validateInput(request.form['sessionKey'])
+		userUuid = validateInput(request.form['userUuid'])		
+
+		try:
+			session = SessionManager()
+			session.checkSessionValidity(sessionKey, userUuid)
+			buildingsManager = BuildingsManager()
+			buildingsManager.checkUserBinding(buildingName, username)
+			groupsManager = GroupsManager()
+			return returnResult( groupsManager.getTriggers(groupId = groupId, buildingName = buildingName) )
+		except Exception as e:
+			return returnError(e)
+
+
+@api.route('/api/users/<username>/buildings/<buildingName>/groups/<groupId>/actions', methods = ['POST'])
+def getGroupActions(username = None, buildingName = None, groupId = None):
+	if request.method == 'POST':
+
+		sessionKey = validateInput(request.form['sessionKey'])
+		userUuid = validateInput(request.form['userUuid'])		
+
+		try:
+			session = SessionManager()
+			session.checkSessionValidity(sessionKey, userUuid)
+			buildingsManager = BuildingsManager()
+			buildingsManager.checkUserBinding(buildingName, username)
+			groupsManager = GroupsManager()
+			return returnResult( groupsManager.getActions(groupId = groupId, buildingName = buildingName) )
+		except Exception as e:
+			return returnError(e)
+
 @api.route('/api/users/<username>/buildings/<buildingName>/rooms/<roomName>', methods = ['POST'])
 def roomInfo(username = None, buildingName = None, roomName = None):
 	if request.method == 'POST':

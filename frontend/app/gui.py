@@ -663,6 +663,9 @@ def addRuleToRoom(buildingName = None, roomName = None):
 		for action in actionList:
 			availableActions.append( action["ruleConsequent"].split("@val")[0].strip() )
 
+		availableTriggers = sorted(availableTriggers)
+		availableActions = sorted(availableActions)
+
 
 		return render_template('ruleForm.html', insertionForRoom = True, availableTriggers = availableTriggers, availableActions = availableActions)	
 
@@ -695,10 +698,56 @@ def addRuleToGroup(buildingName = None, groupId = None):
 			flash("The rule has been added correctly!")
 			return redirect(url_for('gui.groups', buildingName = buildingName))
 		else:
-			return render_template('ruleForm.html', error = response['request-errorDescription'], insertionForGroup = True)
+			return render_template('ruleForm.html', error = response['request-errorDescription'], insertionForGroup = True,  availableTriggers = availableTriggers, availableActions = availableActions)
 
 	else:
-		return render_template('ruleForm.html', insertionForGroup = True)	
+
+		response = rest.request("/api/users/<username>/buildings/<buildingName>/groups/<groupId>/triggers", 
+			{
+			'username' : session["username"],
+			'buildingName' : buildingName, 
+			'groupId' : groupId,
+			'sessionKey' : session["sessionKey"],
+			'userUuid' : session["userUuid"]
+			})
+
+		if successResponse(response):
+			print response
+			triggerList = response["triggers"]
+		else:
+			return render_template('error.html', error = response['request-errorDescription'])
+
+
+
+		response = rest.request("/api/users/<username>/buildings/<buildingName>/groups/<groupId>/actions", 
+			{
+			'username' : session["username"],
+			'buildingName' : buildingName, 
+			'groupId' : groupId,
+			'sessionKey' : session["sessionKey"],
+			'userUuid' : session["userUuid"]
+			})
+
+		if successResponse(response):
+			actionList = response["actions"]
+		else:
+			return render_template('error.html', error = response['request-errorDescription'])
+
+
+		availableTriggers = []
+		for trigger in triggerList:
+			availableTriggers.append( trigger["ruleAntecedent"].split("@val")[0].strip() )
+
+
+		availableActions = []
+		for action in actionList:
+			availableActions.append( action["ruleConsequent"].split("@val")[0].strip() )
+
+		availableTriggers = sorted(availableTriggers)
+		availableActions = sorted(availableActions)
+
+
+		return render_template('ruleForm.html', insertionForGroup = True,  availableTriggers = availableTriggers, availableActions = availableActions)	
 
 
 
