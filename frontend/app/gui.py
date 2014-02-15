@@ -357,10 +357,6 @@ def rooms(buildingName = None):
 			})
 
 		if successResponse(response):
-			print
-			print 
-			print
-			print response
 			actionList[roomName] = response["actions"]
 		else:
 			return render_template('error.html', error = response['request-errorDescription'])
@@ -626,7 +622,49 @@ def addRuleToRoom(buildingName = None, roomName = None):
 			return render_template('ruleForm.html', error = response['request-errorDescription'], insertionForRoom = True)
 
 	else:
-		return render_template('ruleForm.html', insertionForRoom = True)	
+
+		response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/triggers", 
+			{
+			'username' : session["username"],
+			'buildingName' : buildingName, 
+			'roomName' : roomName,
+			'sessionKey' : session["sessionKey"],
+			'userUuid' : session["userUuid"]
+			})
+
+		if successResponse(response):
+			triggerList = response["triggers"]
+		else:
+			return render_template('error.html', error = response['request-errorDescription'])
+
+
+
+		response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/actions", 
+			{
+			'username' : session["username"],
+			'buildingName' : buildingName, 
+			'roomName' : roomName,
+			'sessionKey' : session["sessionKey"],
+			'userUuid' : session["userUuid"]
+			})
+
+		if successResponse(response):
+			actionList = response["actions"]
+		else:
+			return render_template('error.html', error = response['request-errorDescription'])
+
+
+		availableTriggers = []
+		for trigger in triggerList:
+			availableTriggers.append( trigger["ruleAntecedent"].split("@val")[0].strip() )
+
+
+		availableActions = []
+		for action in actionList:
+			availableActions.append( action["ruleConsequent"].split("@val")[0].strip() )
+
+
+		return render_template('ruleForm.html', insertionForRoom = True, availableTriggers = availableTriggers, availableActions = availableActions)	
 
 
 @gui.route('/buildings/<buildingName>/groups/<groupId>/rules/add/', methods = ['GET', 'POST'])

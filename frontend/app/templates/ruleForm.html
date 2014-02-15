@@ -6,6 +6,15 @@
   <script>
   window.onload = function(){
     init();
+
+  {% for trigger in availableTriggers %}
+    availableTriggers.push("{{trigger}}");
+  {% endfor %}
+
+  {% for action in availableActions %}
+    availableActions.push("{{action}}");
+  {% endfor %}
+
   };
   </script>
 
@@ -27,8 +36,6 @@
 
 	<br>
 
-
-
 	<form class="form-horizontal" action="{{request.path}}" method="POST">
 
 	  <div class="control-group">
@@ -38,9 +45,9 @@
 	    
 
               <h3 class="muted">IF</h3>
-              <select name="trigger_0" id="trigger_0" onchange="triggerSelected(0)">
+              <select name="trigger_0" id="trigger_0" onchange="triggerSelected()">
                 <option>Select a trigger</option>
-                <option value="someone is in the room the room">someone is in the room</option><option value="nobody is in the room in the room ">nobody is in the room</option><option value="room temperature is between">room temperature is between</option><option value="external temperature is between">external temperature is between</option><option value="time is between">time is between</option><option value="the date is between">the date is between</option><option value="today is">today is</option><option value="it is sunny">it is sunny</option><option value="it is rainy">it is rainy</option><option value="it is rainy">it is cloudy</option>
+                <option value="someone is in the room">someone is in the room</option><option value="nobody is in the room">nobody is in the room</option><option value="room temperature is between">room temperature is between</option><option value="external temperature is between">external temperature is between</option><option value="time is between">time is between</option><option value="the date is between">the date is between</option><option value="today is">today is</option><option value="it is sunny">it is sunny</option><option value="it is rainy">it is rainy</option><option value="it is rainy">it is cloudy</option>
                 {% if insertionForGroup %}
                   <option>no rule specified</option>
                 {% endif  %}

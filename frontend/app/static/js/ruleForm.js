@@ -1,3 +1,5 @@
+availableTriggers = ["Select a trigger"];
+availableActions = ["Select an action"];
 
 var ruleNumber = 1;
 
@@ -33,17 +35,36 @@ function hide(elementId)
 	document.getElementById(elementId).style.display = "none";
 }
 
-function triggerSelected(groupId)
+function hideAllTriggerSubBox()
 {
 
-	triggerBox = document.getElementById("trigger_" + groupId)
-	index = triggerBox.selectedIndex;
-	
-	
+	groupId = 0;
 	hide('temperature_box_' + groupId);
 	hide('time_box_' + groupId);
 	hide('day_box_' + groupId);
-	hide('date_box_' + groupId);
+	hide('date_box_' + groupId);	
+}
+
+function triggerSelected()
+{
+
+	groupId = 0;
+
+
+	triggerBox = document.getElementById("trigger_" + groupId)
+	index = triggerBox.selectedIndex;
+
+	triggerText = triggerBox.options[triggerBox.selectedIndex].text;
+
+
+	if (availableTriggers.indexOf(triggerText) == -1){
+		alert("This trigger is not available in this room!");
+		triggerBox.selectedIndex = 0;
+		hideAllTriggerSubBox();
+		return
+	}
+	
+	hideAllTriggerSubBox()
 
 	if (index == 3 || index == 4)	
 	{
@@ -136,6 +157,19 @@ function compose()
 	triggerText = triggerBox.options[triggerBox.selectedIndex].text;
 	actionText = actionBox.options[actionBox.selectedIndex].text;
 
+	if (availableTriggers.indexOf(triggerText) == -1){
+		alert("This trigger is not available in this room!");
+		triggerBox.selectedIndex = 0;
+		return
+	}
+
+	if (availableActions.indexOf(actionText) == -1){
+		alert("This action is not available in this room!");
+		actionBox.selectedIndex = 0;
+		return
+	}
+
+
 
 	if (index == 1 || index == 2 || index == 8 || index == 9 || index == 10 || index == 11){
 		ruleBody.value = "if " + triggerText + " then " + actionText;
@@ -183,15 +217,7 @@ function ruleBodyAlert()
 function init()
 {
 
-	for (var i=0; i<= 19; i++)
-	{
-		hide('temperature_box_' + i);
-		hide('time_box_' + i);
-		hide('day_box_' + i);
-		hide('date_box_' + i);
-		
-	}
-
+	hideAllTriggerSubBox();
 }
 
 
