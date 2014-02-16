@@ -15,6 +15,19 @@
 	{% for category in categories %}
 		ruleCategories.push("{{category}}");
 	{% endfor %}
+
+
+	{% if mTurkStatus.experimentCompleted %}
+		// THIS IS NEED TO SHOW THE END OF EXPERIMENT MESSAGE
+		alert("You finished your experiment!")
+		window.location.hash="mTurkPanel";
+	{% else %}
+		{% if mTurkStatus.taskCompleted %}
+			alert("You finished your today task!")
+			window.location.hash="mTurkPanel";
+		{% endif %}
+	{% endif %}
+
 	</script>
 
 	<script type="text/javascript">
@@ -48,8 +61,9 @@
 
 
 	<div class="form-actions"> 
+		<a name="mTurkPanel" id="mTurkPanel"></a>
 		<a class="btn btn-lg btn-success" href="javascript:hideMTurk()" id="btnHideMTurk">Hide this panel</a>
-		<a class="btn btn-lg btn-success" href="javascript:showMTurk()" id="btnShowMTurk">Show mTurk Panel</a>
+		<a class="btn btn-lg btn-success" href="javascript:showMTurk()" id="btnShowMTurk">Show experiment Panel</a>
 		<div id="mturkPanel">
 			<h3 align="center">Research Experiment Panel</h3>
 			<h6 align="center">Experiment day: {{mTurkStatus.currentDay}}/7 - Current datetime: {{mTurkStatus.serverDatetime}} GMT-8</h6>
@@ -57,7 +71,7 @@
 			{% if mTurkStatus.taskCompleted %}
 				<div class="alert alert-success">
 					<h5 align="center">Today task completed</h5>
-					<h6 align="center">Please insert the following token into the Amazon mTurk form to get your money.</h6>
+					<h6 align="center">At the end of the week you have to insert this token as proof of your work to get the Amazon Gift Card.</h6>
 					<h6 align="center">{{mTurkStatus.token}}</h6>
 				</div>
 				<div class="alert alert-block" align="center">
@@ -73,7 +87,7 @@
 			{% if mTurkStatus.experimentCompleted %}
 				<div class="alert alert-success">
 					<h4 align="center">You completed the whole expriment!</h4	> 
-					<h6 align="center">Now log into MTurk and copy and paste all the token you received in this week!</h6> 
+					<h6 align="center">Now <a href="https://docs.google.com/forms/d/1Z8HbFdFRbn09NFuQmetSp8bX1HJqt86_MK_dR8UMwz8/viewform" target="_blank">click here</a> to insert all your token as a work proof and finally get your Amazon Gift Card!</h6>
 				</div>
 			{% endif %}
 
@@ -115,7 +129,7 @@
 	{% if roomList %}
 		<section id="typography">
 
-			 <a name="rulesPanel" id="rulesPanel"></a>
+			<a name="rulesPanel" id="rulesPanel"></a>
 
 			<div class="form-actions">
 				<a class="btn btn-lg btn-success" href="javascript:showMaps()" id="btnShowMaps">Show Map</a>
