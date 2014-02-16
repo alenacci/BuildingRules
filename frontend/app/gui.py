@@ -620,7 +620,7 @@ def addRuleToRoom(buildingName = None, roomName = None):
 			#return redirect(url_for('gui.rooms', buildingName = buildingName))
 			return redirect('/buildings/' + buildingName + '/rooms' + '#roomMenu_' + roomName)
 		else:
-			return render_template('ruleForm.html', error = response['request-errorDescription'], insertionForRoom = True)
+			return render_template('error.html', error = response['request-errorDescription'], insertionForRoom = True)
 
 	else:
 
