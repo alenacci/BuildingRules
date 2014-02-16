@@ -21,7 +21,7 @@ def start():
 			logging.exception("")
 			flash(e.message)
 
-		time.sleep(600)
+		time.sleep(43200)
 		
 
 def main():
