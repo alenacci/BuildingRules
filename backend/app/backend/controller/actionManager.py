@@ -212,6 +212,38 @@ class ActionManager:
 			parameters.update({'operation' : 'CURTAINS_CLOSE'})
 			return  RoomActionDriver(parameters = parameters)
 
+		if action.actionName == "PROJECTOR_ON":
+			parameters.update({'operation' : 'PROJECTOR_ON'})
+			return  RoomActionDriver(parameters = parameters)
+
+		if action.actionName == "PROJECTOR_OFF":
+			parameters.update({'operation' : 'PROJECTOR_OFF'})
+			return  RoomActionDriver(parameters = parameters)
+
+		if action.actionName == "AUDIO_ON":
+			parameters.update({'operation' : 'AUDIO_ON'})
+			return  RoomActionDriver(parameters = parameters)
+
+		if action.actionName == "AUDIO_OFF":
+			parameters.update({'operation' : 'AUDIO_OFF'})
+			return  RoomActionDriver(parameters = parameters)
+
+		if action.actionName == "EXHAUST_FAN_ON":
+			parameters.update({'operation' : 'EXHAUST_FAN_ON'})
+			return  RoomActionDriver(parameters = parameters)
+
+		if action.actionName == "EXHAUST_FAN_OFF":
+			parameters.update({'operation' : 'EXHAUST_FAN_OFF'})
+			return  RoomActionDriver(parameters = parameters)
+
+		if action.actionName == "FUME_HOODS_ON":
+			parameters.update({'operation' : 'FUME_HOODS_ON'})
+			return  RoomActionDriver(parameters = parameters)
+
+		if action.actionName == "FUME_HOODS_OFF":
+			parameters.update({'operation' : 'FUME_HOODS_OFF'})
+			return  RoomActionDriver(parameters = parameters)
+
 		
 		raise DriverNotFoundError("Impossibile to find any driver for the action " + str(action))
 

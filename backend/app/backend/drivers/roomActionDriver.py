@@ -83,6 +83,30 @@ class RoomActionDriver(GenericActionDriver):
 		elif self.parameters["operation"] == "CURTAINS_CLOSE":		
 			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
 
+		elif self.parameters["operation"] == "PROJECTOR_ON":		
+			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
+			
+		elif self.parameters["operation"] == "PROJECTOR_OFF":		
+			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
+
+		elif self.parameters["operation"] == "AUDIO_ON":		
+			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
+			
+		elif self.parameters["operation"] == "AUDIO_OFF":		
+			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
+
+		elif self.parameters["operation"] == "EXHAUST_FAN_ON":		
+			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
+			
+		elif self.parameters["operation"] == "EXHAUST_FAN_OFF":		
+			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
+
+		elif self.parameters["operation"] == "FUME_HOODS_ON":		
+			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
+			
+		elif self.parameters["operation"] == "FUME_HOODS_OFF":		
+			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
+
 		else:
 			raise UnsupportedDriverParameterError(self.parameters["operation"])
 
