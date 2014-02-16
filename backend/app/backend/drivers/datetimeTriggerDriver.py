@@ -57,8 +57,6 @@ class DatetimeTriggerDriver(GenericTriggerDriver):
 		if day.upper().startswith("FRI"): return str(5)
 		if day.upper().startswith("SAT"): return str(6)
 		if day.upper().startswith("SUN"): return str(7)
-		
-		return day
 
 
 	def eventTriggered(self):

@@ -34,7 +34,7 @@ def checkRuleTrigger(rule):
 	for triggerInfo in translatedTriggers["triggers"]:
 
 		trigger = triggerInfo["trigger"]
-		parameters = triggerInfo["translatedParams"]
+		parameters = triggerInfo["parameterValues"]
 
 	
 		parameters.update({'buildingName' : rule.buildingName})

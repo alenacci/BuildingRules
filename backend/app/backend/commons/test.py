@@ -22,6 +22,11 @@ class Test:
 			print trigger["trigger"]
 			print trigger["translatedParams"]
 
+		ruleList = []
+		from app.backend.model.rule import Rule
+		ruleList.append(Rule())
+
+
 	def test2(self):
 		
 		from app.backend.model.room import Room

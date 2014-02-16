@@ -140,7 +140,9 @@ class TriggerManager:
 			currentTrigger = {}
 			currentTrigger["translation"] = translation
 			currentTrigger["trigger"] = trigger
+			currentTrigger["parameterValues"] = parameterValues
 			currentTrigger["translatedParams"] = translatedParams
+			
 
 			translatedTriggers.append(currentTrigger)
 

@@ -1,4 +1,5 @@
-var ruleNumber = 1;
+var triggerPortions = 1;
+var maxTriggerPortions = 5;
 
 function updatePriority(value)
 {
@@ -32,10 +33,9 @@ function hide(elementId)
 	document.getElementById(elementId).style.display = "none";
 }
 
-function hideAllTriggerSubBox()
+function hideAllTriggerSubBox(groupId)	
 {
 
-	groupId = 0;
 	hide('temperature_box_' + groupId);
 	hide('time_box_' + groupId);
 	hide('day_box_' + groupId);
@@ -71,15 +71,13 @@ function getActionCategory(actionText)
 }
 
 
-function triggerSelected()
+function triggerSelected(groupId)
 {
-
-	groupId = 0;
 
 	triggerBox = document.getElementById("trigger_" + groupId)
 	triggerText = triggerBox.options[triggerBox.selectedIndex].text;
 
-	hideAllTriggerSubBox();
+	hideAllTriggerSubBox(groupId);
 
 	triggerCategory = getTriggerCategory(triggerText);
 
@@ -108,7 +106,7 @@ function triggerSelected()
 
 function actionSelected()
 {
-	actionBox = document.getElementById("action_" + groupId);
+	actionBox = document.getElementById("action_0");
 	actionText = actionBox.options[actionBox.selectedIndex].text;
 
 	actionCategory = getActionCategory(actionText);
@@ -133,38 +131,7 @@ function actionSelected()
 
 }
 
-function addRule()
-{
 
-	if (ruleNumber == 19)
-	{
-		alert("No more rule available!");
-		return
-	}
-
-	ruleNumber += 1;
-
-	show('div_rule_' + ruleNumber);
-	show('hr_rule_' + ruleNumber);
-
-}
-
-function removeRule()
-{
-
-	if (ruleNumber == 0)
-	{
-		alert("You cannot remove rule #1!");
-		return
-	}
-
-	
-	hide('div_rule_' + ruleNumber);
-	hide('hr_rule_' + ruleNumber);
-
-	ruleNumber -= 1;
-
-}
 
 function goToConfirmPage() {
     setTimeout(function () {
@@ -175,78 +142,78 @@ function goToConfirmPage() {
 function compose()
 {
 
-	groupId = 0;
+	antecent = "if ";
 
-	triggerBox = document.getElementById("trigger_" + groupId);
-	actionBox = document.getElementById("action_" + groupId);
+	for (var i=0; i < triggerPortions; i++){
+
+		groupId = i;
+
+		triggerBox = document.getElementById("trigger_" + groupId);
+		temperatureFrom = document.getElementById("temperature_from_" + groupId);
+		temperatureTo = document.getElementById("temperature_to_" + groupId);
+		timeFrom = document.getElementById("time_from_" + groupId);
+		timeTo = document.getElementById("time_to_" + groupId);
+		dateDayFrom = document.getElementById("date_day_from_" + groupId);
+		dateMonthFrom = document.getElementById("date_month_from_" + groupId);
+		dateDayTo = document.getElementById("date_day_to_" + groupId);
+		dateMonthTo = document.getElementById("date_month_to_" + groupId);
+		day = document.getElementById("day_" + groupId);
+		triggerText = triggerBox.options[triggerBox.selectedIndex].text;
+		
+		triggerCategory = getTriggerCategory(triggerText);
+
+		if (triggerCategory == "DEFAULT"){
+			antecent += triggerText + ", ";
+		}
+
+		if (triggerCategory == "TEMPERATURE")
+		{
+			tempFromText = temperatureFrom.options[temperatureFrom.selectedIndex].text;
+			tempToText = temperatureTo.options[temperatureTo.selectedIndex].text;
+			antecent += triggerText + " " + tempFromText + " and " + tempToText + ", ";
+		}
+
+		if (triggerCategory == "TIME")
+		{
+			timeFromText = timeFrom.options[timeFrom.selectedIndex].text;
+			timeToText = timeTo.options[timeTo.selectedIndex].text;
+			antecent += triggerText + " " + timeFromText + " and " + timeToText + ", ";
+		}
+
+		if (triggerCategory == "DATE")
+		{
+			dateDayFromText = dateDayFrom.options[dateDayFrom.selectedIndex].text;
+			dateMonthFromText = dateMonthFrom.options[dateMonthFrom.selectedIndex].text;
+			dateDayToText = dateDayTo.options[dateDayTo.selectedIndex].text;
+			dateMonthToText = dateMonthTo.options[dateMonthTo.selectedIndex].text;
+
+			antecent += triggerText + " " + dateDayFromText + "/" + dateMonthFromText + " and " + dateDayToText + "/" + dateMonthToText + ", ";
+		}
+
+		if (triggerCategory == "DAY")
+		{
+			dayText = day.options[day.selectedIndex].text;
+			antecent += triggerText + " " + dayText + ", ";
+		}
+
+	}
+
+	antecent = antecent.slice(0, -2);
+
+	actionBox = document.getElementById("action_0");
 
 	humiditySetpointMinBox = document.getElementById("humiditySetpoint_min");
 	humiditySetpointMaxBox = document.getElementById("humiditySetpoint_max");
 	tempSetpointMinBox = document.getElementById("tempSetpoint_min");
 	tempSetpointMaxBox = document.getElementById("tempSetpoint_max");
 
+	
 
-	temperatureFrom = document.getElementById("temperature_from_" + groupId);
-	temperatureTo = document.getElementById("temperature_to_" + groupId);
-
-	timeFrom = document.getElementById("time_from_" + groupId);
-	timeTo = document.getElementById("time_to_" + groupId);
-
-	dateDayFrom = document.getElementById("date_day_from_" + groupId);
-	dateMonthFrom = document.getElementById("date_month_from_" + groupId);
-	dateDayTo = document.getElementById("date_day_to_" + groupId);
-	dateMonthTo = document.getElementById("date_month_to_" + groupId);
-
-	day = document.getElementById("day_" + groupId);
-
-	ruleBody = document.getElementById('ruleBody');
-
-	triggerText = triggerBox.options[triggerBox.selectedIndex].text;
 	actionText = actionBox.options[actionBox.selectedIndex].text;
-
-
-
-	triggerCategory = getTriggerCategory(triggerText);
+	
 	actionCategory = getActionCategory(actionText);
-
-
-	antecent = ""
 	consequent = ""
 
-
-	if (triggerCategory == "DEFAULT"){
-		antecent = "if " + triggerText;
-	}
-
-	if (triggerCategory == "TEMPERATURE")
-	{
-		tempFromText = temperatureFrom.options[temperatureFrom.selectedIndex].text;
-		tempToText = temperatureTo.options[temperatureTo.selectedIndex].text;
-		antecent = "if " + triggerText + " " + tempFromText + " and " + tempToText;
-	}
-
-	if (triggerCategory == "TIME")
-	{
-		timeFromText = timeFrom.options[timeFrom.selectedIndex].text;
-		timeToText = timeTo.options[timeTo.selectedIndex].text;
-		antecent=  "if " + triggerText + " " + timeFromText + " and " + timeToText;
-	}
-
-	if (triggerCategory == "DATE")
-	{
-		dateDayFromText = dateDayFrom.options[dateDayFrom.selectedIndex].text;
-		dateMonthFromText = dateMonthFrom.options[dateMonthFrom.selectedIndex].text;
-		dateDayToText = dateDayTo.options[dateDayTo.selectedIndex].text;
-		dateMonthToText = dateMonthTo.options[dateMonthTo.selectedIndex].text;
-
-		antecent =  "if " + triggerText + " " + dateDayFromText + "/" + dateMonthFromText + " and " + dateDayToText + "/" + dateMonthToText;
-	}
-
-	if (triggerCategory == "DAY")
-	{
-		dayText = day.options[day.selectedIndex].text;
-		antecent=  "if " + triggerText + " " + dayText;
-	}
 
 	if (actionCategory == "DEFAULT")
 	{
@@ -258,14 +225,12 @@ function compose()
 		consequent = actionText + " " + tempSetpointMinBox.value + " and " + tempSetpointMaxBox.value;
 	}
 
-
-
 	if (actionCategory == "HUMIDITY")
 	{
 		consequent = actionText + " " + humiditySetpointMinBox.value + " and " + humiditySetpointMaxBox.value;
 	}
 
-
+	ruleBody = document.getElementById('ruleBody');
 	ruleBody.value = antecent + " then " + consequent
 
 
@@ -348,15 +313,45 @@ function updateTemperatureSetpoint()
 
 function ruleBodyAlert()
 {
-	alert("Please use the menu below to compose the rule! :) ")
+	alert("Please use the 'Rule Composer' below to create your rule! :) ")
 	
 }
+
+function addTriggerPortion()
+{
+	if (triggerPortions < maxTriggerPortions)
+	{
+		show("triggerPortion_" + triggerPortions);
+		triggerPortions = triggerPortions + 1;
+	} else {
+		alert("You reached the maximum number of rule triggers per rule!")
+	}
+}
+
+function removeTriggerPortion()
+{
+	if (triggerPortions > 1)
+	{
+		triggerPortions = triggerPortions - 1;
+		hide("triggerPortion_" + triggerPortions);
+	} else {
+		alert("You have to insert at least one trigger per rule!")
+	}
+}
+
 
 function init()
 {
 
-	hideAllTriggerSubBox();
+	hideAllTriggerSubBox(0);
+	
+	for (var i=1; i < maxTriggerPortions; i++){
+		hideAllTriggerSubBox(i);
+		hide("triggerPortion_" + i)
+	}
+
 	hideAllActionSubBox();
 }
 
 
+	
