@@ -386,6 +386,11 @@
                     </div>
               </div>
 
+              <div id="action_blind_box">
+                <bold class="muted">OPEN</bold> <input type="range" min ="0" max="100" name="actionBlind" id="actionBlind" value="50" onchange="updateActionBlind(this.value);"> <bold class="muted">CLOSED</bold>
+                <input type="text" name="actionBlindText" id="actionBlindText" readonly="" class="input-small" value="">
+              </div>
+
               <a href="javascript:compose();"><button class="btn" type="button">Compose the rule!</button></a>
 
       </div>

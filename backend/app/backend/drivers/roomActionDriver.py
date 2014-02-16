@@ -107,6 +107,10 @@ class RoomActionDriver(GenericActionDriver):
 		elif self.parameters["operation"] == "FUME_HOODS_OFF":		
 			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
 
+		elif self.parameters["operation"] == "SET_BLIND":		
+			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
+
+
 		else:
 			raise UnsupportedDriverParameterError(self.parameters["operation"])
 

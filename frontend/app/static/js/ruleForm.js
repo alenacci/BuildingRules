@@ -7,6 +7,14 @@ function updatePriority(value)
 	priorityTextBox.value = value;
 }
 
+function updateActionBlind(value)
+{
+	actionBlindTextBox = document.getElementById('actionBlindText');
+	actionBlindTextBox.value = value + "%";
+
+	compose();
+}
+
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
@@ -46,6 +54,7 @@ function hideAllActionSubBox()
 {
 	hide('action_temperature_box');
 	hide('action_humidity_box');
+	hide('action_blind_box');
 }
 
 function getTriggerCategory(triggerText)
@@ -66,6 +75,7 @@ function getActionCategory(actionText)
 	if (actionText == "Select an action") return "NOT_VALID";
 	if (actionText == "set temperature between") return "TEMPERATURE";
 	if (actionText == "set humidity between") return "HUMIDITY";
+	if (actionText == "set blind to") return "BLIND";
 
 	return "DEFAULT";
 }
@@ -128,6 +138,12 @@ function actionSelected()
 	{
 		show('action_humidity_box');
 	}
+
+	if (actionCategory == "BLIND")
+	{
+		show('action_blind_box');
+	}
+
 
 }
 
@@ -206,7 +222,7 @@ function compose()
 	humiditySetpointMaxBox = document.getElementById("humiditySetpoint_max");
 	tempSetpointMinBox = document.getElementById("tempSetpoint_min");
 	tempSetpointMaxBox = document.getElementById("tempSetpoint_max");
-
+	actionBlindTextBox = document.getElementById("actionBlindText");
 	
 
 	actionText = actionBox.options[actionBox.selectedIndex].text;
@@ -229,6 +245,12 @@ function compose()
 	{
 		consequent = actionText + " " + humiditySetpointMinBox.value + " and " + humiditySetpointMaxBox.value;
 	}
+
+	if (actionCategory == "BLIND")
+	{
+		consequent = actionText + " " + actionBlindTextBox.value;
+	}
+
 
 	ruleBody = document.getElementById('ruleBody');
 	ruleBody.value = antecent + " then " + consequent

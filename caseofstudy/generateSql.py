@@ -129,7 +129,7 @@ standardRoomActions.append("INSERT INTO `rooms_actions` (`room_name`, `building_
 standardRoomActions.append("INSERT INTO `rooms_actions` (`room_name`, `building_name`, `action_id`) VALUES ('@@roomName@@', 'CSE', 27);")
 standardRoomActions.append("INSERT INTO `rooms_actions` (`room_name`, `building_name`, `action_id`) VALUES ('@@roomName@@', 'CSE', 28);")
 standardRoomActions.append("INSERT INTO `rooms_actions` (`room_name`, `building_name`, `action_id`) VALUES ('@@roomName@@', 'CSE', 29);")
-
+standardRoomActions.append("INSERT INTO `rooms_actions` (`room_name`, `building_name`, `action_id`) VALUES ('@@roomName@@', 'CSE', 30);")
 
 
 allRooms = commonRooms.keys() + groupA_members + groupB_members + groupA_common + groupB_common + [laboratoryRoom]
@@ -184,16 +184,23 @@ for roomName in allRooms:
 		if (i < 8) or (i == 18):	addAction = True
 		if (i == 8 or i == 9) and roomCategory == "KITCHEN": addAction = True
 		if (i >= 10 and i <= 17) and roomCategory == "OFFICE": addAction = True
-		if (i == 19 or i == 20) and roomCategory == "OFFICE": addAction = True
-		if (i == 19 or i == 20) and roomCategory == "LABORATORY": addAction = True
-		if (i == 19 or i == 20) and roomCategory == "MEETING": addAction = True
-		if (i == 19 or i == 20) and roomCategory == "CONFERENCE": addAction = True
+
+		#if (i == 19 or i == 20) and roomCategory == "OFFICE": addAction = True
+		#if (i == 19 or i == 20) and roomCategory == "LABORATORY": addAction = True
+		#if (i == 19 or i == 20) and roomCategory == "MEETING": addAction = True
+		#if (i == 19 or i == 20) and roomCategory == "CONFERENCE": addAction = True
 
 		if (i >= 21 and i <= 24) and roomCategory == "MEETING": addAction = True
 		if (i >= 21 and i <= 24) and roomCategory == "CONFERENCE": addAction = True
 
 		if (i == 25 or i == 26) and roomCategory == "KITCHEN": addAction = True
 		if (i == 27 or i == 28) and roomCategory == "LABORATORY": addAction = True
+
+		if (i == 29) and roomCategory == "OFFICE": addAction = True
+		if (i == 29) and roomCategory == "LABORATORY": addAction = True
+		if (i == 29) and roomCategory == "MEETING": addAction = True
+		if (i == 29) and roomCategory == "CONFERENCE": addAction = True
+
 
 		if addAction:
 			queries.append( createQuery(roomActionBindSqlTempl, {'roomName': roomName}) )

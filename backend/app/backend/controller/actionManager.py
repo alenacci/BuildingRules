@@ -76,6 +76,9 @@ class ActionManager:
 		if actionCategory == "HVAC_HUM":
 			return value.replace("%", "")
 
+		if actionCategory == "BLIND":
+			return value.replace("%", "")
+
 		return value
 
 
@@ -242,6 +245,10 @@ class ActionManager:
 
 		if action.actionName == "FUME_HOODS_OFF":
 			parameters.update({'operation' : 'FUME_HOODS_OFF'})
+			return  RoomActionDriver(parameters = parameters)
+
+		if action.actionName == "SET_BLIND":
+			parameters.update({'operation' : 'SET_BLIND'})
 			return  RoomActionDriver(parameters = parameters)
 
 		

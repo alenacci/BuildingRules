@@ -28,6 +28,7 @@
 (declare-fun cloudy (Int) Bool)
 (declare-fun day (Int) Int)
 (declare-fun today (Int) Int)
+(declare-fun blind (Int) Int)
 (assert (forall ((x Int)) (and (=> (sunny x) (not (rainy x))) (=> (rainy x) (not (sunny  x))))))
 (assert (forall ((x Int)) (and ( <= (time x) 23 ) ( >= (time x) 0 ))))
 (assert (forall ((x Int)) (and ( <= (day x) 366 ) ( >= (day x) 0 ))))
