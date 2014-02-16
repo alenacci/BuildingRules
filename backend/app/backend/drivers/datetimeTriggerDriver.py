@@ -58,8 +58,7 @@ class DatetimeTriggerDriver(GenericTriggerDriver):
 		if day.upper().startswith("SAT"): return str(6)
 		if day.upper().startswith("SUN"): return str(7)
 		
-
-
+		return day
 
 
 	def eventTriggered(self):
@@ -91,7 +90,6 @@ class DatetimeTriggerDriver(GenericTriggerDriver):
 			return bool(random.getrandbits(1))
 
 		elif self.parameters["operation"] == "TODAY":
-
 			par0 = int(self.__getIntFromDay(self.parameters['0']))
 			today = int(datetime.datetime.today().weekday() + 1)
 

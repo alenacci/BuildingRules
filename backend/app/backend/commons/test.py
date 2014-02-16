@@ -7,6 +7,21 @@ class Test:
 	def __init__(self):
 		pass
 
+
+	def test3(self):
+
+		from app.backend.controller.triggerManager import TriggerManager
+
+		triggerManager = TriggerManager()
+		translatedTriggers = triggerManager.translateTrigger("someone is in the room, it is cloudy, it is rainy, time is between 10:00 and 11:00")
+
+		print translatedTriggers["translation"]
+
+		for trigger in translatedTriggers["triggers"]:
+			print trigger["translation"]
+			print trigger["trigger"]
+			print trigger["translatedParams"]
+
 	def test2(self):
 		
 		from app.backend.model.room import Room

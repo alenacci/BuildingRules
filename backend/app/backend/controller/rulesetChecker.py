@@ -44,9 +44,10 @@ class RulesetChecker:
 
 		for rule in self.ruleList:
 
-			translatedAntecedent, trigger, parameters = triggerManager.translateTrigger(rule.antecedent) 
+			translatedTriggers = triggerManager.translateTrigger(rule.antecedent) 
 			translatedConsequent, action, parameters = actionManager.translateAction(rule.consequent)
 
+			translatedAntecedent = translatedTriggers["translation"]
 
 			currentRuleAssertion = assertionTemplate.replace("@@RULE_ANTECEDENT@@", translatedAntecedent)
 			currentRuleAssertion = currentRuleAssertion.replace("@@RULE_CONSEQUENT@@",  translatedConsequent)
@@ -54,17 +55,21 @@ class RulesetChecker:
 			# Adding the current rule to the theorem body
 			theoremBody.append(currentRuleAssertion)
 
-			# Now saving, in cas e of range based trigger, which intervals has to be checked
-			if trigger.triggerName in rangeTriggersName.keys():
+			# Now saving, in case of range based trigger, which intervals has to be checked
+			for translatedTrigger in translatedTriggers["triggers"]:
+				trigger = translatedTrigger["trigger"]
+				parameters = translatedTrigger["translatedParams"]
+
+				if trigger.triggerName in rangeTriggersName.keys():
+					
+					if trigger.triggerName not in parametersIntervals.keys():
+						parametersIntervals[trigger.triggerName] = []
+					
+					parametersIntervals[trigger.triggerName].append(int(parameters['0']))
+					parametersIntervals[trigger.triggerName].append(int(parameters['1']))
 				
-				if trigger.triggerName not in parametersIntervals.keys():
-					parametersIntervals[trigger.triggerName] = []
-				
-				parametersIntervals[trigger.triggerName].append(int(parameters['0']))
-				parametersIntervals[trigger.triggerName].append(int(parameters['1']))
-			
-			else:
-				theoremAssertions.append('(assert ' + translatedAntecedent + ')')
+				else:
+					theoremAssertions.append('(assert ' + translatedAntecedent + ')')
 
 
 		for triggerName in parametersIntervals.keys():

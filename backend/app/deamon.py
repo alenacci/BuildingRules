@@ -25,26 +25,36 @@ from app.backend.model.rules import Rules
 def checkRuleTrigger(rule):
 
 	triggerManager = TriggerManager()
-	trigger, originalModel, parameters = triggerManager.getTriggerAndTemplateAndParameterValues(rule.antecedent)
-	
-	parameters.update({'buildingName' : rule.buildingName})
-	if rule.roomName: parameters.update({'roomName' : rule.roomName})
-	if rule.groupId: parameters.update({'groupId' : rule.groupId})
-	
-	driver = triggerManager.getTriggerDriver(trigger, parameters)
-
+	#trigger, originalModel, parameters = triggerManager.getTriggerAndTemplateAndParameterValues(rule.antecedent)
+	translatedTriggers = triggerManager.translateTrigger(rule.antecedent) 
 
 	message = "Rule " + str(rule.id) + " (" + str(rule.buildingName)
-	if rule.groupId: message += ".g[" + str(rule.groupId) + "]"
-	if rule.roomName: message += ".r[" + str(rule.roomName) + "]"
+	
+	flash(message + ") checking the '" + rule.antecedent + "'...", "gray")
+	for triggerInfo in translatedTriggers["triggers"]:
 
-	if driver.eventTriggered():
-		flash(message + ") actuated; antecedent is '" + rule.antecedent + "'...", "green")
-		return True
-	else:
-		flash(message + ") NOT actuated; antecedent is '" + rule.antecedent + "'...", "red")
+		trigger = triggerInfo["trigger"]
+		parameters = triggerInfo["translatedParams"]
 
-	return False
+	
+		parameters.update({'buildingName' : rule.buildingName})
+		if rule.roomName: parameters.update({'roomName' : rule.roomName})
+		if rule.groupId: parameters.update({'groupId' : rule.groupId})
+		
+		driver = triggerManager.getTriggerDriver(trigger, parameters)
+		
+		if rule.groupId: message += ".g[" + str(rule.groupId) + "]"
+		if rule.roomName: message += ".r[" + str(rule.roomName) + "]"
+
+		if driver.eventTriggered():
+			flash(message + ") the antecedent portion '" + trigger.ruleAntecedent + "' is TRUE...", "green")
+		else:
+			flash(message + ") the antecedent portion '" + trigger.ruleAntecedent + "' is FALSE...", "red")
+			flash(message + ") NOT ACTUATED - the antecedent '" + rule.antecedent + "' is FALSE...", "red")
+			return False
+
+	flash(message + ") ACTUATED the antecedent '" + rule.antecedent + "' is TRUE...", "green")
+	return True
 
 
 def executeRule(rule):

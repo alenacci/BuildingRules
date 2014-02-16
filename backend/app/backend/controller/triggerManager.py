@@ -115,22 +115,46 @@ class TriggerManager:
 	def translateTrigger(self, ruleAntecedent):
 		checkData(locals())
 
-		triggers = Triggers()
-		trigger, originalTemplate, parameterValues = self.getTriggerAndTemplateAndParameterValues(ruleAntecedent)
-		translationTemplate = triggers.translateTemplate('Z3', originalTemplate)
+		translatedTriggers = []
+		ruleAntecedent = ruleAntecedent.split(",")
 
-		translatedParams = {}
+		for currentAntecedent in ruleAntecedent:
 
-		for key,value in parameterValues.iteritems():
-			translatedParams[key] = self.__translateParameters(trigger.category, value)
+			currentAntecedent = currentAntecedent.strip()
 
-		translation = translationTemplate
-		for i in range(0,len(parameterValues.keys())):
+			triggers = Triggers()
+			trigger, originalTemplate, parameterValues = self.getTriggerAndTemplateAndParameterValues(currentAntecedent)
+			translationTemplate = triggers.translateTemplate('Z3', originalTemplate)
 
-			value = translatedParams[str(i)]
-			translation = translation.replace("@val", value, 1)
+			translatedParams = {}
 
-		return translation, trigger, translatedParams
+			for key,value in parameterValues.iteritems():
+				translatedParams[key] = self.__translateParameters(trigger.category, value)
+
+			translation = translationTemplate
+			for i in range(0,len(parameterValues.keys())):
+
+				value = translatedParams[str(i)]
+				translation = translation.replace("@val", value, 1)
+
+			currentTrigger = {}
+			currentTrigger["translation"] = translation
+			currentTrigger["trigger"] = trigger
+			currentTrigger["translatedParams"] = translatedParams
+
+			translatedTriggers.append(currentTrigger)
+
+		translationTemplate = "(and @@first_arg@@ @@second_arg@@)"		
+		translation = translatedTriggers[0]["translation"]
+		
+		for i in range(1,len(translatedTriggers)):
+			translation = (translationTemplate.replace('@@first_arg@@', translation)).replace('@@second_arg@@', translatedTriggers[i]["translation"])
+
+		result = {}
+		result["translation"] = translation
+		result["triggers"] = translatedTriggers
+
+		return result
 
 
 	def getTriggerCategories(self):
