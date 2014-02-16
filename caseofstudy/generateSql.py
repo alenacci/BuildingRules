@@ -13,6 +13,17 @@ def createQuery(template, params):
 
 	return query
 
+def getRoomCategory(roomName):
+	
+	if roomName == 2107:	return "KITCHEN"
+	if roomName == 2144:	return "STORAGE"
+	if roomName == 3208:	return "CONFERENCE"
+	if roomName == 3208:	return "LOBBY"
+	if roomName == 2140:	return "MEETING"
+	if roomName == 2154:	return "MEETING"
+	if roomName == 3113:	return "LABORATORY"
+	
+	return "OFFICE"
 
 queries = []
 
@@ -23,7 +34,7 @@ commonRooms = {}
 commonRooms[2107] = "Kitchen"
 commonRooms[2144] = "Storage"
 commonRooms[3208] = "Conference Room"
-commonRooms[2230] = "Study Room"
+commonRooms[2130] = "Study Room"
 commonRooms[2109] = "Lobby"
 
 groupA_members = [2108, 2112, 2116, 2111, 2118, 2122, 2126, 2128]
@@ -83,7 +94,7 @@ standardRoomTriggers.append("INSERT INTO `rooms_triggers` (`room_name`, `buildin
 standardRoomTriggers.append("INSERT INTO `rooms_triggers` (`room_name`, `building_name`, `trigger_id`) VALUES ('@@roomName@@', 'CSE', 7);")
 standardRoomTriggers.append("INSERT INTO `rooms_triggers` (`room_name`, `building_name`, `trigger_id`) VALUES ('@@roomName@@', 'CSE', 8);")
 standardRoomTriggers.append("INSERT INTO `rooms_triggers` (`room_name`, `building_name`, `trigger_id`) VALUES ('@@roomName@@', 'CSE', 9);")
-standardRoomTriggers.append("INSERT INTO `rooms_triggers` (`room_name`, `building_name`, `trigger_id`) VALUES ('@@roomName@@', 'CSE', 10);")
+#standardRoomTriggers.append("INSERT INTO `rooms_triggers` (`room_name`, `building_name`, `trigger_id`) VALUES ('@@roomName@@', 'CSE', 10);")
 standardRoomTriggers.append("INSERT INTO `rooms_triggers` (`room_name`, `building_name`, `trigger_id`) VALUES ('@@roomName@@', 'CSE', 11);")
 #standardRoomTriggers.append("INSERT INTO `rooms_triggers` (`room_name`, `building_name`, `trigger_id`) VALUES ('@@roomName@@', 'CSE', 12);")
 #standardRoomTriggers.append("INSERT INTO `rooms_triggers` (`room_name`, `building_name`, `trigger_id`) VALUES ('@@roomName@@', 'CSE', 13);")
@@ -164,10 +175,28 @@ for roomName in allRooms:
 	for roomTriggerBindSqlTempl in standardRoomTriggers:
 		queries.append( createQuery(roomTriggerBindSqlTempl, {'roomName': roomName}) )
 
-	for roomActionBindSqlTempl in standardRoomActions:
-		queries.append( createQuery(roomActionBindSqlTempl, {'roomName': roomName}) )
+	for i in range(0, len(standardRoomActions)):
+		roomActionBindSqlTempl = standardRoomActions[i]
+		roomCategory = getRoomCategory(roomName)
 
+		addAction = False
 
+		if (i < 8) or (i == 18):	addAction = True
+		if (i == 8 or i == 9) and roomCategory == "KITCHEN": addAction = True
+		if (i >= 10 and i <= 17) and roomCategory == "OFFICE": addAction = True
+		if (i == 19 or i == 20) and roomCategory == "OFFICE": addAction = True
+		if (i == 19 or i == 20) and roomCategory == "LABORATORY": addAction = True
+		if (i == 19 or i == 20) and roomCategory == "MEETING": addAction = True
+		if (i == 19 or i == 20) and roomCategory == "CONFERENCE": addAction = True
+
+		if (i >= 21 and i <= 24) and roomCategory == "MEETING": addAction = True
+		if (i >= 21 and i <= 24) and roomCategory == "CONFERENCE": addAction = True
+
+		if (i == 25 or i == 26) and roomCategory == "KITCHEN": addAction = True
+		if (i == 27 or i == 28) and roomCategory == "LABORATORY": addAction = True
+
+		if addAction:
+			queries.append( createQuery(roomActionBindSqlTempl, {'roomName': roomName}) )
 
 userRoomBindSqlTempl = "INSERT INTO `users_rooms` (`room_name`, `building_name`, `user_uuid`) VALUES ('@@roomName@@', 'CSE', @@userUuid@@);"
 createGroupSqlTempl = "INSERT INTO `groups` (`building_name`, `description`, `cross_rooms_validation`, `cross_rooms_validation_categories`) VALUES ('CSE', '@@description@@', @@crossRoomValidation@@, '[@@crossRoomValidationCategories@@]');"
