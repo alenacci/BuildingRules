@@ -25,6 +25,7 @@ backend/tools/z3/z3/
 frontend/venv/
 frontend/build/
 backend/tools/weather/
+backend/tools/dbDump/
 # Logging folders
 ###################
 backend/logs

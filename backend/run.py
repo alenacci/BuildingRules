@@ -20,6 +20,9 @@ def startWeatherService():
 def startMailService():
 	os.system("python runMailService.py")
 
+def startDatabaseDumper():
+	os.system("python runDatabaseDumper.py")
+
 
 ### MAIN STARTS HERE
 
@@ -32,10 +35,11 @@ weatherServiceThread.start()
 mailServiceThread = Thread(target = startMailService)
 #mailServiceThread.start()
 
+databaseDumperThread = Thread(target = startDatabaseDumper)
+databaseDumperThread.start()
+
 deamonThread = Thread(target = startDeamon)
 deamonThread.start()
-
-
 
 webServerThread.join()
 deamonThread.join()
