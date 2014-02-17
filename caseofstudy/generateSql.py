@@ -215,7 +215,18 @@ queries.append("INSERT INTO `users` (`username`, `email`, `password`, `person_na
 
 for i in range(0,totalUsers):
 	uuid = currentUserUuid + i
-	queries.append("INSERT INTO `users` (`username`, `email`, `password`, `person_name`, `level`) VALUES ('user_" + str(uuid) + "', '--', 'verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword', 'User" + str(uuid) + "', 10);")
+	
+
+	user_password_0 = "verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword"
+	user_password_1 = "another_verycomplexpasswordverycomplex-54--$$$-1-2-passwordverycomplexpassword"
+	query = "INSERT INTO `users` (`username`, `email`, `password`, `person_name`, `level`) VALUES ('user_" + str(uuid) + "', '--', '@@user_password@@', 'User" + str(uuid) + "', 10);"
+	
+	if i < 50:
+		query = query.replace('@@user_password@@', user_password_0)
+	else:
+		query = query.replace('@@user_password@@', user_password_1)
+
+	queries.append(query)
 
 	for day in range(0,8):
 		token = str(uuid) + "-" + str(day) + "-" + ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(16))
