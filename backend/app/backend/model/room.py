@@ -13,7 +13,6 @@ class Room:
 
 
 	def getActions(self):
-		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ") : non yet tested"
 
 		from app.backend.model.action import Action
 
@@ -38,7 +37,6 @@ class Room:
 
 
 	def getTriggers(self):
-		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ") : non yet tested"
 
 		from app.backend.model.trigger import Trigger
 
@@ -128,7 +126,7 @@ class Room:
 
 	def getUsers(self):
 
-		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ") : non yet tested"
+
 
 		from app.backend.model.user import User
 
@@ -161,7 +159,6 @@ class Room:
 
 	def getGroups(self):
 
-		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ") : non yet tested"
 
 		from app.backend.model.group import Group
 

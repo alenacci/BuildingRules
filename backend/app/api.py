@@ -10,6 +10,7 @@ from app.backend.controller.sessionManager import SessionManager
 from app.backend.controller.buildingsManager import BuildingsManager
 from app.backend.controller.roomsManager import RoomsManager
 from app.backend.controller.groupsManager import GroupsManager
+from app.backend.controller.mTurkManager import MTurkManager
 
 api = Blueprint('api', __name__, template_folder='templates')
 
@@ -85,6 +86,23 @@ def userInfo(username = None):
 			return returnResult( userManager.getInfo(username = username) )		
 		except Exception as e:
 			return returnError(e)
+
+@api.route('/api/users/<username>/mturk', methods = ['POST'])
+def mturkInfo(username = None):
+
+	if request.method == 'POST':
+
+		sessionKey = validateInput(request.form['sessionKey'])
+		userUuid = validateInput(request.form['userUuid'])		
+
+		try:
+			session = SessionManager()
+			session.checkSessionValidity(sessionKey, userUuid)
+			mTurkManager = MTurkManager()			
+			return returnResult( mTurkManager.getTodayToken(userUuid = userUuid) )		
+		except Exception as e:
+			return returnError(e)
+
 
 @api.route('/api/users/<username>/notifications', methods = ['POST'])
 def userNotifications(username = None):
@@ -674,7 +692,7 @@ def deleteRuleInRoom(username = None, buildingName = None, roomName = None, rule
 			buildingsManager.checkUserBinding(buildingName, username)
 			roomsManager = RoomsManager()
 
-			return returnResult( roomsManager.deleteRule(ruleId = ruleId, buildingName = buildingName, roomName = roomName) )
+			return returnResult( roomsManager.deleteRule(ruleId = ruleId, buildingName = buildingName, roomName = roomName, editorUuid = userUuid) )
 		except Exception as e:
 			return returnError(e)
 
@@ -692,7 +710,7 @@ def disableRuleInRoom(username = None, buildingName = None, roomName = None, rul
 			buildingsManager.checkUserBinding(buildingName, username)
 			roomsManager = RoomsManager()
 
-			return returnResult( roomsManager.disableRule(ruleId = ruleId, buildingName = buildingName, roomName = roomName) )
+			return returnResult( roomsManager.disableRule(ruleId = ruleId, buildingName = buildingName, roomName = roomName, editorUuid = userUuid) )
 		except Exception as e:
 			return returnError(e)
 

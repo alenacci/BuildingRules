@@ -167,7 +167,6 @@ class GroupsManager:
 		else:
 			rule = Rule(id = ruleId)
 			rule.retrieve()
-			print rule
 			author = rule.getAuthor()
 
 			

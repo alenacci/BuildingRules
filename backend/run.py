@@ -30,7 +30,7 @@ weatherServiceThread = Thread(target = startWeatherService)
 weatherServiceThread.start()
 
 mailServiceThread = Thread(target = startMailService)
-mailServiceThread.start()
+#mailServiceThread.start()
 
 deamonThread = Thread(target = startDeamon)
 deamonThread.start()

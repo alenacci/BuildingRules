@@ -124,7 +124,7 @@ class RoomsManager:
 
 		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ") : not yet implemented"
 
-	def deleteRule(self, ruleId, buildingName, roomName):
+	def deleteRule(self, ruleId, buildingName, roomName, editorUuid):
 		checkData(locals())
 
 		room = Room(buildingName = buildingName, roomName = roomName)
@@ -133,12 +133,58 @@ class RoomsManager:
 		from app.backend.model.rule import Rule
 		rule = Rule(id = ruleId)
 		rule.retrieve()
+
+		from app.backend.model.user import User
+		editor = User(uuid = editorUuid)
+		editor.retrieve()
+		
+		author = User(uuid = rule.authorUuid)
+		author.retrieve()
+
+
+		# If this room is not related to a room, I cannot modify it from this method
+		if not rule.roomName:
+			raise UserCredentialError("You cannot modify this group related rule.")
+
+		# If this rule is not about this building
+		if rule.buildingName != buildingName:
+			raise UserCredentialError("You cannot modify the rule of another building.")			
+			
+		if author.uuid != editor.uuid:
+
+			if not groupId and not rule.getRoom().roomName in list(r.roomName for r in editor.getRooms()):
+				raise UserCredentialError("You cannot modify a rule of a room you do not own.")				
+
+			#if rule.getRoom() not in editor.getRooms():
+			#	raise UserCredentialError("You cannot modify a rule of a room you do not own.")
+
+			if groupId:
+
+				from app.backend.model.group import Group
+				group = Group(buildingName = buildingName, id = groupId)
+				group.retrieve()
+
+				if not group:
+					raise UserCredentialError("You cannot delete a rule of a room you do not own.")				
+
+				if not group.crossRoomsValidation:
+					raise UserCredentialError("You cannot delete a rule you do not own.")
+
+				if not group.id in list(g.id for g in editor.getGroups()):
+					raise UserCredentialError("You cannot delete a rule belonging to a group you do not own.")
+
+				if not rule.getRoom().roomName in list(r.roomName for r in group.getRooms()):
+					raise UserCredentialError("You cannot delete a rule belonging to room that does not belongs to a group you do not own.")
+
+			if editor.level < author.level:
+				raise UserCredentialError("You do not have enough power to delete this rule")			
+
 
 		room.deleteRule(rule)
 
 		return {}
 
-	def disableRule(self, ruleId, buildingName, roomName):
+	def disableRule(self, ruleId, buildingName, roomName, editorUuid):
 		checkData(locals())
 
 		room = Room(buildingName = buildingName, roomName = roomName)
@@ -147,6 +193,51 @@ class RoomsManager:
 		from app.backend.model.rule import Rule
 		rule = Rule(id = ruleId)
 		rule.retrieve()
+
+		from app.backend.model.user import User
+		editor = User(uuid = editorUuid)
+		editor.retrieve()
+		
+		author = User(uuid = rule.authorUuid)
+		author.retrieve()
+
+
+		# If this room is not related to a room, I cannot modify it from this method
+		if not rule.roomName:
+			raise UserCredentialError("You cannot disable this group related rule.")
+
+		# If this rule is not about this building
+		if rule.buildingName != buildingName:
+			raise UserCredentialError("You cannot disable the rule of another building.")			
+			
+		if author.uuid != editor.uuid:
+
+			if not groupId and not rule.getRoom().roomName in list(r.roomName for r in editor.getRooms()):
+				raise UserCredentialError("You cannot disable a rule of a room you do not own.")				
+
+			#if rule.getRoom() not in editor.getRooms():
+			#	raise UserCredentialError("You cannot modify a rule of a room you do not own.")
+
+			if groupId:
+
+				from app.backend.model.group import Group
+				group = Group(buildingName = buildingName, id = groupId)
+				group.retrieve()
+
+				if not group:
+					raise UserCredentialError("You cannot disable a rule of a room you do not own.")				
+
+				if not group.crossRoomsValidation:
+					raise UserCredentialError("You cannot disable a rule you do not own.")
+
+				if not group.id in list(g.id for g in editor.getGroups()):
+					raise UserCredentialError("You cannot disable a rule belonging to a group you do not own.")
+
+				if not rule.getRoom().roomName in list(r.roomName for r in group.getRooms()):
+					raise UserCredentialError("You cannot disable a rule belonging to room that does not belongs to a group you do not own.")
+
+			if editor.level < author.level:
+				raise UserCredentialError("You do not have enough power to disable this rule")	
 
 		room.disableRule(rule)
 
@@ -357,7 +448,7 @@ class RoomsManager:
 			from app.backend.commons.console import flash
 			endTimeMilliseconds = long((time.time() + 0.5) * 1000)
 			opTimeMilliseconds = endTimeMilliseconds - startTimeMilliseconds
-			flash("GroupsRuleVerification [SUCCESS]: #rules=" + str(len(temporaryRuleSet)) + " - opTimeMilliseconds:" + str(opTimeMilliseconds))
+			flash("RoomRuleVerification [SUCCESS]: #rules=" + str(len(temporaryRuleSet)) + " - opTimeMilliseconds:" + str(opTimeMilliseconds))
 
 
 			return room.addRule(rule).getDict()
@@ -374,7 +465,7 @@ class RoomsManager:
 
 			endTimeMilliseconds = long((time.time() + 0.5) * 1000)
 			opTimeMilliseconds = endTimeMilliseconds - startTimeMilliseconds
-			flash("GroupsRuleVerification [FAILED]: #rules=" + str(len(temporaryRuleSet)) + " - opTimeMilliseconds:" + str(opTimeMilliseconds))
+			flash("RoomRuleVerification [FAILED]: #rules=" + str(len(temporaryRuleSet)) + " - opTimeMilliseconds:" + str(opTimeMilliseconds))
 
 
 			raise RuleValidationError(ruleCheckErrorList)

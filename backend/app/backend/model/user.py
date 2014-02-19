@@ -40,8 +40,6 @@ class User:
 
 	def getBuildings(self):		
 		
-		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ") : non yet tested"
-
 		buildingList = []
 		buildingNameList = []
 		for room in self.getRooms():
@@ -54,8 +52,6 @@ class User:
 
 	def getGroups(self):
 		
-		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ") : non yet tested"
-
 		groupList = []
 		groupIdList = []
 

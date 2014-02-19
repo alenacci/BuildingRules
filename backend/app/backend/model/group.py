@@ -21,7 +21,6 @@ class Group:
 
 
 	def getRooms(self):
-		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ") : non yet tested"
 		
 		from app.backend.model.room import Room
 

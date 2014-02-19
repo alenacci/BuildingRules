@@ -78,6 +78,8 @@ def start():
 			main()
 		except Exception as e:
 			import logging
+			logging.basicConfig(filename='logs/deamon.log')
+			logging.getLogger().addHandler(logging.StreamHandler())			
 			logging.exception("")
 			flash(e.message)
 
