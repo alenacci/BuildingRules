@@ -70,17 +70,7 @@ class Rule:
 			raise RuleInitFailedError("Some parameters are missing")
 
 	def setPriority(self, priority, roomName = None, buildingName = None):
-
-
-		print ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
-		print roomName
-
-		print self.groupId
-
-		if not roomName:
-			print "weeeeee"
-
-		
+	
 		from app.backend.model.rulePriority import RulePriority
 
 		if self.groupId and not roomName:

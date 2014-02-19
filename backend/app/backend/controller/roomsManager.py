@@ -16,6 +16,49 @@ class RoomsManager:
 		room.retrieve()
 		return room.getDict()
 
+	def getConflictingRules(self, roomName, buildingName, ruleBody):
+		checkData(locals())
+
+		from app.backend.controller.triggerManager import TriggerManager
+		from app.backend.controller.actionManager import ActionManager
+		triggerManager = TriggerManager()
+		actionManager = ActionManager()
+
+		room = Room(buildingName = buildingName, roomName = roomName)
+		room.retrieve()
+
+		ruleList = room.getRules( includeGroupsRules = True,  includeDisabled = False)
+
+
+
+		ruleAntecedent = ruleBody.split("then")[0].replace("if", "").strip()
+		ruleConsequent = ruleBody.split("then")[1].strip()
+		
+		newRuleTrigger, originalModel, parameterValues = triggerManager.getTriggerAndTemplateAndParameterValues(ruleAntecedent)
+		newRuleAction, originalModel, parameterValues = actionManager.getActionAndTemplateAndParameterValues(ruleConsequent)
+
+
+		conflictingRuleList = []
+		for rule in ruleList:
+
+			currentRuleAction, originalModel, parameterValues = actionManager.getActionAndTemplateAndParameterValues(rule.consequent)
+
+			# In the case of range based antecedent I cannot just check if it is equal but I have to see the trigger name
+			if "between" not in ruleAntecedent:
+
+				if (ruleAntecedent == rule.antecedent) and (newRuleAction.category == currentRuleAction.category):
+					conflictingRuleList.append({"ruleId" : rule.id, "ruleBody" : rule.getFullRepresentation()})
+			else:
+				currentRuleTrigger, originalModel, parameterValues = triggerManager.getTriggerAndTemplateAndParameterValues(rule.antecedent)
+
+
+
+				if (newRuleTrigger.triggerName == currentRuleTrigger.triggerName)  and (newRuleAction.category == currentRuleAction.category):
+					conflictingRuleList.append({"ruleId" : rule.id, "ruleBody" : rule.getFullRepresentation()})
+
+		return {"conflictingRules" : conflictingRuleList}
+
+
 	def getRules(self, roomName, buildingName, username = None, includeGroupsRules = False, orderByPriority = False,  includeDisabled = False, categoriesFilter = None):
 		checkData(locals(), ["categoriesFilter"])
 		if categoriesFilter: checkData(json.loads(categoriesFilter))
@@ -176,8 +219,8 @@ class RoomsManager:
 				if not rule.getRoom().roomName in list(r.roomName for r in group.getRooms()):
 					raise UserCredentialError("You cannot delete a rule belonging to room that does not belongs to a group you do not own.")
 
-			if editor.level < author.level:
-				raise UserCredentialError("You do not have enough power to delete this rule")			
+			if editor.level < rule.getPriority():
+				raise UserCredentialError("You cannot modify this rule since it has a too high priority for your user level")			
 
 
 		room.deleteRule(rule)
@@ -236,8 +279,8 @@ class RoomsManager:
 				if not rule.getRoom().roomName in list(r.roomName for r in group.getRooms()):
 					raise UserCredentialError("You cannot disable a rule belonging to room that does not belongs to a group you do not own.")
 
-			if editor.level < author.level:
-				raise UserCredentialError("You do not have enough power to disable this rule")	
+			if editor.level < rule.getPriority():
+				raise UserCredentialError("You cannot modify this rule since it has a too high priority for your user levele")	
 
 		room.disableRule(rule)
 
@@ -346,8 +389,8 @@ class RoomsManager:
 				if not oldRule.getRoom().roomName in list(r.roomName for r in group.getRooms()):
 					raise UserCredentialError("You cannot modify a rule belonging to room that does not belongs to a group you do not own.")
 
-			if editor.level < author.level:
-				raise UserCredentialError("You do not have enough power to modify this rule")			
+			if editor.level < oldRule.getPriority():
+				raise UserCredentialError("You cannot modify this rule since it has a too high priority for your user level")			
 
 		authorUuid = editorUuid	
 
@@ -409,8 +452,8 @@ class RoomsManager:
 
 			editor = rule.getAuthor()
 
-			if author.level > editor.level:
-				raise UserCredentialError("The rule you want to edit was created by an higher level user.")
+			if editor.level < rule.getPriority():
+				raise UserCredentialError("You cannot modify this rule since it has a too high priority for your user level")
 
 		room = Room(buildingName = buildingName, roomName = roomName)
 		room.retrieve()

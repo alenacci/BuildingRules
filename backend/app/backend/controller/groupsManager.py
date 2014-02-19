@@ -203,8 +203,8 @@ class GroupsManager:
 
 			editor = rule.getAuthor()
 
-			if author.level > editor.level:
-				raise UserCredentialError("The rule you want to edit was created by an higher level user.")
+			if editor.level < rule.getPriority():
+				raise UserCredentialError("You cannot modify this rule since it has a too high priority for your user level")
 
 		group = Group(buildingName = buildingName, id = groupId)
 		group.retrieve()

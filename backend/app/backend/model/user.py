@@ -19,13 +19,13 @@ class User:
 
 	def getMaxRoomPriority(self):
 		if self.level:
-			return int(10 * self.level)
+			return int(self.level)
 
 		raise ClassNotInitializedError("Missing input data")
 
 	def getMaxGroupPriority(self):
 		if self.level:
-			return int(20 * self.level)
+			return int(self.level)
 
 		raise ClassNotInitializedError("Missing input data")
 

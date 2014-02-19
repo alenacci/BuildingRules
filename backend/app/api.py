@@ -506,6 +506,27 @@ def roomRules(username = None, buildingName = None, roomName = None):
 
 
 
+@api.route('/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/conflictingRules', methods = ['POST'])
+def roomConflictingRules(username = None, buildingName = None, roomName = None):
+
+	if request.method == 'POST':
+
+		sessionKey = validateInput(request.form['sessionKey'])
+		userUuid = validateInput(request.form['userUuid'])		
+		ruleBody = validateInput(request.form['ruleBody'])		
+
+		try:
+			session = SessionManager()
+			session.checkSessionValidity(sessionKey, userUuid)
+			buildingsManager = BuildingsManager()
+			buildingsManager.checkUserBinding(buildingName, username)
+			roomsManager = RoomsManager()
+
+			return returnResult( roomsManager.getConflictingRules(roomName = roomName, buildingName = buildingName, ruleBody = ruleBody) )
+		except Exception as e:
+			return returnError(e)
+
+
 @api.route('/api/users/<username>/buildings/<buildingName>/groups/<groupId>/rules', methods = ['POST'])
 def groupRules(username = None, buildingName = None, groupId = None):
 	if request.method == 'POST':
