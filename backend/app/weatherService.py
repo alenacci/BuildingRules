@@ -29,7 +29,7 @@ def main():
 
 	restReadDone = False
 	try:
-		url = 'http://api.openweathermap.org/data/2.5/weather?q=los,angeles,us'
+		url = 'http://api.openweathermap.org/data/2.5/weather?q=LA,us'
 		response = urllib2.urlopen(url).read()
 		restReadDone = True
 	except Exception as e:
