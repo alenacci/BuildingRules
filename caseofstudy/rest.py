@@ -4,7 +4,11 @@ import logging
 import datetime
 import time
 
-API_SERVER_IP = "192.168.199.144"
+import socket
+server_ip = str(socket.gethostbyname(socket.gethostname()))
+if server_ip == "127.0.1.1" : server_ip = "192.168.199.144"
+
+API_SERVER_IP = server_ip
 API_SERVER_PORT = 5003
 
 def request(url, data):
