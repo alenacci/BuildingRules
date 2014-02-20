@@ -181,7 +181,6 @@ def rooms(buildingName = None):
 	
 	if not loggedIn():	return redirect(url_for('gui.login'))
 
-
 	##################################
 	# Retrieving the rules categories
 	##################################
@@ -190,6 +189,8 @@ def rooms(buildingName = None):
 		'sessionKey' : session["sessionKey"], 
 		'userUuid' : session["userUuid"]
 	})
+
+
 
 	if not successResponse(response):
 		return render_template('error.html', error = response['request-errorDescription'])
@@ -406,6 +407,10 @@ def groups(buildingName = None):
 
 	if not loggedIn():	return redirect(url_for('gui.login'))
 
+	if int(session["userLevel"]) < 100:
+		return render_template('error.html', error = "You cannot enter this page.")
+
+
 	response = rest.request("/api/users/<username>/buildings/<buildingName>/groups", {
 		'username' : session["username"], 
 		'buildingName' : buildingName, 
@@ -477,6 +482,11 @@ def groups(buildingName = None):
 def groupDetail(buildingName = None, groupId = None):
 
 	if not loggedIn():	return redirect(url_for('gui.login'))
+
+
+	if int(session["userLevel"]) < 100:
+		return render_template('error.html', error = "You cannot enter this page.")
+
 	
 	response = rest.request("/api/users/<username>/buildings/<buildingName>/groups/<groupId>", {'groupId' : groupId, 'username' : session["username"], 'buildingName' : buildingName, 'sessionKey' : session["sessionKey"], 'userUuid' : session["userUuid"]})
 	if not successResponse(response): return render_template('error.html', error = response['request-errorDescription'])
@@ -496,6 +506,11 @@ def addGroup(buildingName = None):
 
 
 	if not loggedIn():	return redirect(url_for('gui.login'))
+
+
+	if int(session["userLevel"]) < 100:
+		return render_template('error.html', error = "You cannot enter this page.")
+
 
 	##################################
 	# Retrieving the building roomList
@@ -599,7 +614,6 @@ def addRuleToRoom(buildingName = None, roomName = None):
 
 	if request.method == 'POST':
 
-
 		ruleBody = request.form['ruleBody']
 		priority = request.form['priority']
 
@@ -620,9 +634,40 @@ def addRuleToRoom(buildingName = None, roomName = None):
 			#return redirect(url_for('gui.rooms', buildingName = buildingName))
 			return redirect('/buildings/' + buildingName + '/rooms' + '#roomMenu_' + roomName)
 		else:
+			print response
+
+			if response["request-errorName"] == "RuleValidationError":
+				return redirect(url_for('gui.addRuleToRoom', buildingName = buildingName, roomName = roomName, ruleBody = ruleBody, priority = priority, conflictFound = True))
+
 			return render_template('error.html', error = response['request-errorDescription'], insertionForRoom = True)
 
 	else:
+
+		ruleBody = None
+		priority = None
+		conflictingRuleList = []
+		conflictFound = request.args['conflictFound'] if 'conflictFound' in request.args.keys() else False
+		
+		if bool(conflictFound):
+
+			ruleBody = request.args['ruleBody'] if 'ruleBody' in request.args.keys() else None
+			priority = request.args['priority'] if 'priority' in request.args.keys() else None
+
+			response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/conflictingRules", 
+				{
+				'username' : session["username"],
+				'buildingName' : buildingName, 
+				'roomName' : roomName,
+				'sessionKey' : session["sessionKey"],
+				'userUuid' : session["userUuid"],
+				'ruleBody' : ruleBody
+				})
+
+			if successResponse(response):
+				conflictingRuleList = response["conflictingRules"]
+			else:
+				return render_template('error.html', error = response['request-errorDescription'])
+
 
 		response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/triggers", 
 			{
@@ -668,7 +713,7 @@ def addRuleToRoom(buildingName = None, roomName = None):
 		availableActions = sorted(availableActions)
 
 
-		return render_template('ruleForm.html', insertionForRoom = True, availableTriggers = availableTriggers, availableActions = availableActions)	
+		return render_template('ruleForm.html', insertionForRoom = True, availableTriggers = availableTriggers, availableActions = availableActions, ruleBody = ruleBody, priority = priority, conflictingRuleList = conflictingRuleList)	
 
 
 @gui.route('/buildings/<buildingName>/groups/<groupId>/rules/add/', methods = ['GET', 'POST'])
@@ -676,6 +721,11 @@ def addRuleToRoom(buildingName = None, roomName = None):
 def addRuleToGroup(buildingName = None, groupId = None):
 
 	if not loggedIn():	return redirect(url_for('gui.login'))
+
+
+	if int(session["userLevel"]) < 100:
+		return render_template('error.html', error = "You cannot enter this page.")
+
 
 	if request.method == 'POST':
 
@@ -699,7 +749,7 @@ def addRuleToGroup(buildingName = None, groupId = None):
 			flash("The rule has been added correctly!")
 			return redirect(url_for('gui.groups', buildingName = buildingName))
 		else:
-			return render_template('ruleForm.html', error = response['request-errorDescription'], insertionForGroup = True,  availableTriggers = availableTriggers, availableActions = availableActions)
+			return render_template('ruleForm.html', error = response['request-errorDescription'])
 
 	else:
 
@@ -784,9 +834,38 @@ def editRoomRule(buildingName = None, roomName = None, ruleId = None, groupId = 
 			#return redirect(url_for('gui.rooms', buildingName = buildingName))
 			return redirect('/buildings/' + buildingName + '/rooms' + '#roomMenu_' + roomName)
 		else:
+
+			if response["request-errorName"] == "RuleValidationError":
+				return redirect(url_for('gui.editRoomRule', buildingName = buildingName, roomName = roomName, ruleId = ruleId, ruleBody = ruleBody, priority = priority, conflictFound = True))
+			
 			return render_template('ruleForm.html', error = response['request-errorDescription'], insertionForRoom = True)
 
 	else:
+
+
+		conflictingRuleList = []
+		conflictFound = request.args['conflictFound'] if 'conflictFound' in request.args.keys() else False
+		
+		if bool(conflictFound):
+
+			ruleBody = request.args['ruleBody'] if 'ruleBody' in request.args.keys() else None
+			priority = request.args['priority'] if 'priority' in request.args.keys() else None
+
+			response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/conflictingRules", 
+				{
+				'username' : session["username"],
+				'buildingName' : buildingName, 
+				'roomName' : roomName,
+				'sessionKey' : session["sessionKey"],
+				'userUuid' : session["userUuid"],
+				'ruleBody' : ruleBody
+				})
+
+			if successResponse(response):
+				conflictingRuleList = response["conflictingRules"]
+			else:
+				return render_template('error.html', error = response['request-errorDescription'])
+
 
 		response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/rules/<ruleId>", {
 					'username' : session["username"],
@@ -845,7 +924,7 @@ def editRoomRule(buildingName = None, roomName = None, ruleId = None, groupId = 
 		availableTriggers = sorted(availableTriggers)
 		availableActions = sorted(availableActions)
 
-		return render_template('ruleForm.html', rule = rule, insertionForRoom = True, availableTriggers = availableTriggers, availableActions = availableActions)
+		return render_template('ruleForm.html', rule = rule, insertionForRoom = True, availableTriggers = availableTriggers, availableActions = availableActions, conflictingRuleList = conflictingRuleList)
 
 
 
@@ -934,6 +1013,11 @@ def deleteRoomRule(buildingName = None, roomName = None, ruleId = None):
 def editGroupRule(buildingName = None, groupId = None, ruleId = None):
 
 	if not loggedIn():	return redirect(url_for('gui.login'))
+
+
+	if int(session["userLevel"]) < 100:
+		return render_template('error.html', error = "You cannot enter this page.")
+
 
 	if request.method == 'POST':
 
@@ -1032,6 +1116,10 @@ def deleteGroupRule(buildingName = None, groupId = None, ruleId = None):
 	if not loggedIn():	return redirect(url_for('gui.login'))
 
 
+	if int(session["userLevel"]) < 100:
+		return render_template('error.html', error = "You cannot enter this page.")
+
+
 	response = rest.request("/api/users/<username>/buildings/<buildingName>/groups/<groupId>/rules/<ruleId>/delete", {
 				'username' : session["username"],
 				'buildingName' : buildingName,
@@ -1057,6 +1145,11 @@ def deleteGroupRule(buildingName = None, groupId = None, ruleId = None):
 def deleteGroup(buildingName = None, groupId = None, ruleId = None):
 
 	if not loggedIn():	return redirect(url_for('gui.login'))
+
+
+	if int(session["userLevel"]) < 100:
+		return render_template('error.html', error = "You cannot enter this page.")
+
 
 	response = rest.request("/api/users/<username>/buildings/<buildingName>/groups/<groupId>/delete", {
 				'username' : session["username"],
@@ -1118,6 +1211,10 @@ def loggedIn():
 
 
 def successResponse(response):
+
+	if not response['request-success'] and response['request-errorName'] == 'SessionNotFoundError':
+		flash("Your session is expired. Make a logout and then login again.")
+
 	return response['request-success']	
 
 

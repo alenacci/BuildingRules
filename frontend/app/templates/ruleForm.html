@@ -33,10 +33,25 @@
     <div class="control-group">
       <label class="control-label" for="ruleBody">Your new rule</label>
       <div class="controls">
-        <textarea readonly rows="3" class="field span6" onclick="ruleBodyAlert();"  id="ruleBody" name="ruleBody" >{% if rule %} if {{rule.antecedent}} then {{rule.consequent}} {% endif %}</textarea>
+        <textarea readonly rows="3" class="field span6" onclick="ruleBodyAlert();"  id="ruleBody" name="ruleBody" >{% if rule %} if {{rule.antecedent}} then {{rule.consequent}} {% else %} {% if ruleBody %} {{ruleBody}} {% endif %} {% endif %}</textarea>
 
-        
-      
+
+              {% if conflictingRuleList %}
+                <br>
+                <br>
+                <div class="alert alert-block" style="width:700px;" >
+                  <strong> 
+                    <h4>Conflict detected!</h4>
+                    The rule you are trying to save is conflicting with one of these rules:
+                  </strong>
+                  <br>
+                  {% for conflictingRule in conflictingRuleList %}
+                    <br> -  {{conflictingRule.ruleBody}} 
+                  {% endfor %}
+                </div>
+                <br>
+              {% endif %}
+
 
               <hr>
               <h3 class="muted">Rule composer</h3>
@@ -411,12 +426,12 @@
 
       {% if insertionForGroup %}
         <bold class="muted">LOW</bold> <input type="range" min ="0" max="{{session.maxGroupPriority}}" name="priority" id="priority" value="{% if rule %}{{rule.priority}}{% endif %}" onchange="updatePriority(this.value);"> <bold class="muted">HIGH</bold>
-        <input type="text" name="priorityTextBox" id="priorityTextBox" readonly="" class="input-small" value="{% if rule %}{{rule.priority}}{% else %}{{session.maxGroupPriority // 2}}{% endif %}">
+        <input type="text" name="priorityTextBox" id="priorityTextBox" readonly="" class="input-small" value="{% if rule %}{{rule.priority}}{% else %}{% if priority %}{{priority}}{% else %}{{session.maxGroupPriority // 2}}{% endif %}{% endif %}">
       {% endif %}
 
       {% if insertionForRoom %}
         <bold class="muted">LOW</bold> <input type="range" min ="0" max="{{session.maxRoomPriority}}" name="priority" id="priority" value="{% if rule %}{{rule.priority}}{% endif %}" onchange="updatePriority(this.value);"> <bold class="muted">HIGH</bold>
-        <input type="text" name="priorityTextBox" id="priorityTextBox" readonly="" class="input-small" value="{% if rule %}{{rule.priority}}{% else %}{{session.maxRoomPriority // 2}}{% endif %}">
+        <input type="text" name="priorityTextBox" id="priorityTextBox" readonly="" class="input-small" value="{% if rule %}{{rule.priority}}{% else %}{% if priority %}{{priority}}{% else %}{{session.maxRoomPriority // 2}}{% endif %}{% endif %}">
       {% endif %}
       
       <br>
