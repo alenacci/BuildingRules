@@ -4,6 +4,7 @@ import sys
 import subprocess
 import random
 import string
+from app.backend.commons.errors import *
 
 from app.backend.model.rule import Rule
 from app.backend.controller.triggerManager import TriggerManager
@@ -109,16 +110,19 @@ class RulesetChecker:
 
 			execStr = self.__MAIN_PATH + "z3/bin/z3 -smt2 " + temporaryFilePath
 			print execStr
-			z3Output = subprocess.check_output(execStr, shell=True)
-			os.remove(temporaryFilePath)
-			#print z3Output
-
 			
-			if "unsat" in z3Output:
-				error =  "There is a conflict in the rules! " + assertion
-				print error
-				self.errorList.append(error)
-				return self.errorList
+			try:
+				z3Output = subprocess.check_output(execStr, shell=True)
+				os.remove(temporaryFilePath)
+								
+				if "unsat" in z3Output:
+					error =  "There is a conflict in the rules! " + assertion
+					print error
+					self.errorList.append(error)
+					return self.errorList
+			except Exception as e :
+				raise RuleValidationEngineError("The rule validation engine failed during rule checking.")
+
 
 		return []
 

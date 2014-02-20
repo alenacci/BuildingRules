@@ -19,6 +19,7 @@
 (declare-fun demandeResponse (Int) Bool)
 (declare-fun meetingEvent (Int) Bool)
 (declare-fun light (Int) Bool)
+(declare-fun sendComplain (Int) Bool)
 (declare-fun hvac (Int) Bool)
 (declare-fun openWindows (Int) Bool)
 (declare-fun openCurtains (Int) Bool)

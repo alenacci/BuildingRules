@@ -52,6 +52,9 @@ class NotWellFormedRuleError(Exception):
 class RuleValidationError(Exception):
 	pass
 
+class RuleValidationEngineError(Exception):
+	pass
+
 class DuplicatedRuleError(Exception):
 	pass
 
