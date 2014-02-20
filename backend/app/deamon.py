@@ -53,7 +53,7 @@ def checkRuleTrigger(rule):
 				flash(message + ") the antecedent portion '" + trigger.ruleAntecedent + "' is FALSE...", "red")
 				flash(message + ") NOT ACTUATED - the antecedent '" + rule.antecedent + "' is FALSE...", "red")
 				return False
-		except Exception e:
+		except Exception as e:
 			flash(message + ") error while reading the trigger! " + str(e), 'red')
 			return False
 
@@ -79,7 +79,7 @@ def executeRule(rule):
 	flash(message + ") actuated; consequent is '" + rule.consequent + "'...")
 	try:
 		driver.actuate()
-	except Exception e:
+	except Exception as e:
 		flash(message + ") Erro while actuating the consequent '" + rule.consequent + "'... " + str(e), 'red')
 
 	rules = Rules()
