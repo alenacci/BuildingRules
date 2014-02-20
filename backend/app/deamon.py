@@ -46,12 +46,15 @@ def checkRuleTrigger(rule):
 		if rule.groupId: message += ".g[" + str(rule.groupId) + "]"
 		if rule.roomName: message += ".r[" + str(rule.roomName) + "]"
 
-		if driver.eventTriggered():
-			flash(message + ") the antecedent portion '" + trigger.ruleAntecedent + "' is TRUE...", "green")
-		else:
-			flash(message + ") the antecedent portion '" + trigger.ruleAntecedent + "' is FALSE...", "red")
-			flash(message + ") NOT ACTUATED - the antecedent '" + rule.antecedent + "' is FALSE...", "red")
-			return False
+		try:
+			if driver.eventTriggered():
+				flash(message + ") the antecedent portion '" + trigger.ruleAntecedent + "' is TRUE...", "green")
+			else:
+				flash(message + ") the antecedent portion '" + trigger.ruleAntecedent + "' is FALSE...", "red")
+				flash(message + ") NOT ACTUATED - the antecedent '" + rule.antecedent + "' is FALSE...", "red")
+				return False
+		except Exception e:
+			flash(message + ") error while reading the trigger! " + str(e), 'red')
 
 	flash(message + ") ACTUATED the antecedent '" + rule.antecedent + "' is TRUE...", "green")
 	return True
@@ -73,7 +76,10 @@ def executeRule(rule):
 
 
 	flash(message + ") actuated; consequent is '" + rule.consequent + "'...")
-	driver.actuate()
+	try:
+		driver.actuate()
+	except Exception e:
+		flash(message + ") Erro while actuating the consequent '" + rule.consequent + "'... " + str(e), 'red')
 
 	rules = Rules()
 	rules.setActiveRule(buildingName = rule.buildingName, roomName = rule.roomName, ruleId = rule.id)

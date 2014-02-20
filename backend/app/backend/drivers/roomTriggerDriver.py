@@ -98,7 +98,7 @@ class RoomTriggerDriver(GenericTriggerDriver):
 	    try:
 	        uuid = sensors_list[0]["uuid"]
 	    except Exception as e: 
-	        raise BuildingDepotError('Could not extract uuid out of response! ' + str(e))
+	        raise BuildingDepotError('Could not extract uuid out of response! ' + str(e) + " " + str(sensors_list))
 	    
 	    #print "Sensor uuid is " + uuid
 	    
