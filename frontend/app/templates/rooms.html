@@ -85,13 +85,6 @@
 				<h3 align="center">Amazon Mechanical Turk</h3>
 				<h6 align="center">Experiment day: {{mTurkStatus.currentDay}}/7 - Current datetime: {{mTurkStatus.serverDatetime}}</h6>
 
-				{% if mTurkStatus.experimentCompleted %}
-					<div class="alert alert-success">
-						<h5 align="center">You completed the whole expriment!</h5> 
-						<h6 align="center">Now log into MTurk and copy and paste all the token you received in this week!</h6> 
-					</div>
-				{% endif %}
-
 				{% if mTurkStatus.taskCompleted %}
 					<div class="alert alert-success">
 						<h5 align="center">Today task completed</h5>
@@ -107,6 +100,15 @@
 						<h6 align="center">{{mTurkStatus.message}}</h6>
 					</div>
 				{% endif %}
+
+				{% if mTurkStatus.experimentCompleted %}
+					<div class="alert alert-success">
+						<h4 align="center">You completed the whole expriment!</h4> 
+						<h6 align="center">Now log into MTurk and copy and paste all the token you received in this week!</h6> 
+					</div>
+				{% endif %}
+			
+
 			 </div>
 
 			<a name="rulesPanel" id="rulesPanel"></a>
