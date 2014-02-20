@@ -195,7 +195,7 @@ class RoomsManager:
 			
 		if author.uuid != editor.uuid:
 
-			if not groupId and not rule.getRoom().roomName in list(r.roomName for r in editor.getRooms()):
+			if not rule.groupId and not rule.getRoom().roomName in list(r.roomName for r in editor.getRooms()):
 				raise UserCredentialError("You cannot modify a rule of a room you do not own.")				
 
 			#if rule.getRoom() not in editor.getRooms():
@@ -255,7 +255,7 @@ class RoomsManager:
 			
 		if author.uuid != editor.uuid:
 
-			if not groupId and not rule.getRoom().roomName in list(r.roomName for r in editor.getRooms()):
+			if not rule.groupId and not rule.getRoom().roomName in list(r.roomName for r in editor.getRooms()):
 				raise UserCredentialError("You cannot disable a rule of a room you do not own.")				
 
 			#if rule.getRoom() not in editor.getRooms():
