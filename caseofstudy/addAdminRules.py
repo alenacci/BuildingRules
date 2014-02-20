@@ -71,7 +71,7 @@ for room in roomList:
 						'username' : username,
 						'buildingName' : buildingName,
 						'roomName' : roomName,
-						'priority' : 0, 
+						'priority' : rule['priority'], 
 						'ruleBody' : rule['ruleBody'], 
 						'sessionKey' : sessionKey, 
 						'userUuid' : userUuid
