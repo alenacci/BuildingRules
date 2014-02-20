@@ -55,6 +55,7 @@ def checkRuleTrigger(rule):
 				return False
 		except Exception e:
 			flash(message + ") error while reading the trigger! " + str(e), 'red')
+			return False
 
 	flash(message + ") ACTUATED the antecedent '" + rule.antecedent + "' is TRUE...", "green")
 	return True
