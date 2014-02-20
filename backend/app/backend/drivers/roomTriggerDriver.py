@@ -63,7 +63,6 @@ class RoomTriggerDriver(GenericTriggerDriver):
 
 			temperature = float(temperature)
 
-
 			if temperature >= float(self.parameters['0'].upper().replace(currentScale, "").strip()) and temperature <= float(self.parameters['1'].upper().replace(currentScale, "").strip()):
 				return True
 			else:

@@ -650,7 +650,7 @@ def addRuleToRoom(buildingName = None, roomName = None):
 		
 		if bool(conflictFound):
 
-			ruleBody = request.args['ruleBody'] if 'ruleBody' in request.args.keys() else None
+			ruleBody = request.args['ruleBody'].strip() if 'ruleBody' in request.args.keys() else None
 			priority = request.args['priority'] if 'priority' in request.args.keys() else None
 
 			response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/conflictingRules", 
@@ -667,7 +667,6 @@ def addRuleToRoom(buildingName = None, roomName = None):
 				conflictingRuleList = response["conflictingRules"]
 			else:
 				return render_template('error.html', error = response['request-errorDescription'])
-
 
 		response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/triggers", 
 			{
@@ -713,7 +712,7 @@ def addRuleToRoom(buildingName = None, roomName = None):
 		availableActions = sorted(availableActions)
 
 
-		return render_template('ruleForm.html', insertionForRoom = True, availableTriggers = availableTriggers, availableActions = availableActions, ruleBody = ruleBody, priority = priority, conflictingRuleList = conflictingRuleList)	
+		return render_template('ruleForm.html', insertionForRoom = True, availableTriggers = availableTriggers, availableActions = availableActions, ruleBody = ruleBody, priority = priority, conflictingRuleList = conflictingRuleList, conflictFound = conflictFound, roomName = roomName, buildingName = buildingName)	
 
 
 @gui.route('/buildings/<buildingName>/groups/<groupId>/rules/add/', methods = ['GET', 'POST'])
@@ -924,7 +923,7 @@ def editRoomRule(buildingName = None, roomName = None, ruleId = None, groupId = 
 		availableTriggers = sorted(availableTriggers)
 		availableActions = sorted(availableActions)
 
-		return render_template('ruleForm.html', rule = rule, insertionForRoom = True, availableTriggers = availableTriggers, availableActions = availableActions, conflictingRuleList = conflictingRuleList)
+		return render_template('ruleForm.html', rule = rule, insertionForRoom = True, availableTriggers = availableTriggers, availableActions = availableActions, conflictingRuleList = conflictingRuleList, conflictFound = conflictFound, roomName = roomName, buildingName = buildingName)
 
 
 

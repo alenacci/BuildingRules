@@ -19,6 +19,8 @@ class RoomsManager:
 	def getConflictingRules(self, roomName, buildingName, ruleBody):
 		checkData(locals())
 
+		ruleBody = ruleBody.strip()
+
 		from app.backend.controller.triggerManager import TriggerManager
 		from app.backend.controller.actionManager import ActionManager
 		triggerManager = TriggerManager()
@@ -201,7 +203,7 @@ class RoomsManager:
 			#if rule.getRoom() not in editor.getRooms():
 			#	raise UserCredentialError("You cannot modify a rule of a room you do not own.")
 
-			if groupId:
+			if rule.groupId:
 
 				from app.backend.model.group import Group
 				group = Group(buildingName = buildingName, id = groupId)
@@ -261,7 +263,7 @@ class RoomsManager:
 			#if rule.getRoom() not in editor.getRooms():
 			#	raise UserCredentialError("You cannot modify a rule of a room you do not own.")
 
-			if groupId:
+			if rule.groupId:
 
 				from app.backend.model.group import Group
 				group = Group(buildingName = buildingName, id = groupId)

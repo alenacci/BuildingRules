@@ -36,7 +36,7 @@
         <textarea readonly rows="3" class="field span6" onclick="ruleBodyAlert();"  id="ruleBody" name="ruleBody" >{% if rule %} if {{rule.antecedent}} then {{rule.consequent}} {% else %} {% if ruleBody %} {{ruleBody}} {% endif %} {% endif %}</textarea>
 
 
-              {% if conflictingRuleList %}
+              {% if conflictFound %}
                 <br>
                 <br>
                 <div class="alert alert-block" style="width:700px;" >
@@ -45,9 +45,17 @@
                     The rule you are trying to save is conflicting with one of these rules:
                   </strong>
                   <br>
-                  {% for conflictingRule in conflictingRuleList %}
-                    <br> -  {{conflictingRule.ruleBody}} 
-                  {% endfor %}
+                  {% if conflictingRuleList %}
+                    {% for conflictingRule in conflictingRuleList %}
+                      <br> -  {{conflictingRule.ruleBody}} 
+                      [<a href="/buildings/{{buildingName}}/rooms/{{roomName}}/rules/{{conflictingRule.ruleId}}/edit">Edit</a>]
+                      [<a href="/buildings/{{buildingName}}/rooms/{{roomName}}/rules/{{conflictingRule.ruleId}}/delete">Delete</a>]
+                      [<a href="/buildings/{{buildingName}}/rooms/{{roomName}}/rules/{{conflictingRule.ruleId}}/disable">Disable</a>]
+                    {% endfor %}
+                  {% else %}
+                    <br> - I'm sorry, I cannot undestand which are the possible conflicting rules.
+                    <br> - Maybe, there is a problem in the rule you are trying to save.
+                  {% endif %}
                 </div>
                 <br>
               {% endif %}
