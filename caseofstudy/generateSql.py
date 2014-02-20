@@ -5,6 +5,14 @@ import random
 
 
 
+pwd = raw_input('Insert the security code to avoid db overwriting: ')
+
+if pwd != "1234":
+	print "wrong password."
+	print "the password is 1234."
+	sys.exit()
+
+
 def createQuery(template, params):
 	query = template
 	
