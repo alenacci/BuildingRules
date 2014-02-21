@@ -36,7 +36,7 @@ class RoomsManager:
 		ruleAntecedent = ruleBody.split("then")[0].replace("if", "").strip()
 		ruleConsequent = ruleBody.split("then")[1].strip()
 		
-		newRuleTrigger, originalModel, parameterValues = triggerManager.getTriggerAndTemplateAndParameterValues(ruleAntecedent)
+		newRuleTranslatedTriggers = triggerManager.translateTrigger(ruleAntecedent)
 		newRuleAction, originalModel, parameterValues = actionManager.getActionAndTemplateAndParameterValues(ruleConsequent)
 
 
@@ -44,19 +44,32 @@ class RoomsManager:
 		for rule in ruleList:
 
 			currentRuleAction, originalModel, parameterValues = actionManager.getActionAndTemplateAndParameterValues(rule.consequent)
+			savedRuleTranslatedTriggers = triggerManager.translateTrigger(rule.antecedent)			
 
-			# In the case of range based antecedent I cannot just check if it is equal but I have to see the trigger name
-			if "between" not in ruleAntecedent:
+			conflictingAntecedentFound = False
+			
+			for newRuleTrigger in newRuleTranslatedTriggers["triggers"]:
 
-				if (ruleAntecedent == rule.antecedent) and (newRuleAction.category == currentRuleAction.category):
-					conflictingRuleList.append({"ruleId" : rule.id, "ruleBody" : rule.getFullRepresentation()})
-			else:
-				currentRuleTrigger, originalModel, parameterValues = triggerManager.getTriggerAndTemplateAndParameterValues(rule.antecedent)
+				for savedRuleTrigger in savedRuleTranslatedTriggers["triggers"]:
+					
+					if "between" not in newRuleTrigger["antecedent"]:
+
+						if newRuleTrigger["antecedent"] == savedRuleTrigger["antecedent"] and (newRuleAction.category == currentRuleAction.category): 
+							conflictingAntecedentFound = True
+
+					else:
+
+						# In the case of range based antecedent I cannot just check if it is equal but I have to see the trigger name
+						if newRuleTrigger["trigger"].triggerName == savedRuleTrigger["trigger"].triggerName and (newRuleAction.category == currentRuleAction.category):
+							conflictingAntecedentFound = True
+
+					if conflictingAntecedentFound: break
+				if conflictingAntecedentFound: break
+
+			if conflictingAntecedentFound:
+				conflictingRuleList.append({"ruleId" : rule.id, "ruleBody" : rule.getFullRepresentation()})
 
 
-
-				if (newRuleTrigger.triggerName == currentRuleTrigger.triggerName)  and (newRuleAction.category == currentRuleAction.category):
-					conflictingRuleList.append({"ruleId" : rule.id, "ruleBody" : rule.getFullRepresentation()})
 
 		return {"conflictingRules" : conflictingRuleList}
 

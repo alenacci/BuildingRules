@@ -138,6 +138,7 @@ class TriggerManager:
 				translation = translation.replace("@val", value, 1)
 
 			currentTrigger = {}
+			currentTrigger["antecedent"] = currentAntecedent
 			currentTrigger["translation"] = translation
 			currentTrigger["trigger"] = trigger
 			currentTrigger["parameterValues"] = parameterValues
