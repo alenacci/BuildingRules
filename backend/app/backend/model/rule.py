@@ -147,17 +147,22 @@ class Rule:
 		if self.lastEditTimestamp == None:
 			self.lastEditTimestamp =  datetime.datetime.now() 
 
+		if self.creationTimestamp == None:
+			self.creationTimestamp = datetime.datetime.now() 
+
 
 		if int(queryResult[0][0]) > 0:
+			
+			self.lastEditTimestamp =  datetime.datetime.now() 
+
 			query = """UPDATE rules SET 
 					priority = '@@priority@@', category = '@@category@@', building_name = '@@building_name@@', group_id = '@@group_id@@', room_name = '@@room_name@@', 
 					author_uuid = '@@author_uuid@@', antecedent = '@@antecedent@@', consequent = '@@consequent@@', enabled = '@@enabled@@', 
 					deleted = '@@deleted@@', creation_timestamp = '@@creation_timestamp@@', last_edit_timestamp = '@@last_edit_timestamp@@'
 					WHERE id = '@@id@@';"""
 			updateQuery = True
+			
 		else:
-			if self.creationTimestamp == None:
-				self.creationTimestamp = datetime.datetime.now() 
 
 			query = """INSERT INTO rules (priority, category, building_name, group_id, room_name, author_uuid, antecedent, 
 					consequent, enabled, deleted, creation_timestamp, last_edit_timestamp) VALUES (
