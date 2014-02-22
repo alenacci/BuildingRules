@@ -2,8 +2,13 @@
 from app import app
 
 import socket
+import os
 server_ip = str(socket.gethostbyname(socket.gethostname()))
-if server_ip == "127.0.1.1" : server_ip = "192.168.199.144"
+if os.path.exists('config/_ip.inf'): 
+	in_file = open('config/_ip.inf',"r")
+	server_ip = in_file.read().replace("\n", "").strip()
+	in_file.close()
+
 
 # Load default config and override config from an environment variable
 app.config.update(dict(

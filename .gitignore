@@ -18,6 +18,10 @@
 ehthumbs.db
 Thumbs.db
 
+## Config files
+##########
+_ip.inf
+
 # Python Virtual Environment #
 #####################
 backend/venv/
