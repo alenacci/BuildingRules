@@ -72,7 +72,7 @@ def translateRule(rule):
 	elif splitted[0].strip() == "nobody is in the room" : antecedent = "nobody is in the room"
 	elif splitted[0].strip() == "temperature is between" : antecedent = "room temperature is between"
 	elif splitted[0].strip() == "it is between (time)" : antecedent = "time is between"
-	elif splitted[0].strip() == "it is between (day)" : antecedent = "day is between"
+	elif splitted[0].strip() == "it is between (day)" : antecedent = "the day is between"
 	elif splitted[0].strip() == "it is sunny" : antecedent = "it is sunny"
 	elif splitted[0].strip() == "it is rainy" : antecedent = "it is rainy"
 	else: return None
@@ -151,6 +151,27 @@ def deleteRule(ruleId):
 	if response['request-error']: logerror(response)
 
 
+def cleanRoom():
+
+	response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/rules", 
+			{
+			'username' : brules_username,
+			'buildingName' : brules_buildingName,
+			'roomName' : brules_roomName,
+			'sessionKey' : brules_sessionKey, 
+			'userUuid' : brules_userUuid,
+			'filterByAuthor' : False,
+			'includeGroupsRules' : True,
+			'orderByPriority' : False,
+			'categoriesFilter' : None
+			})
+
+	if response['request-error']: logerror(response)
+
+	for rule in response["rules"]:
+		deleteRule(rule["id"])
+
+
 def storeAndCheckRule(ruleBody, priority):
 
 	global brules_username
@@ -180,6 +201,9 @@ def storeAndCheckRule(ruleBody, priority):
 ##### MAIN STARTS HERE #########################################################
 
 backupResults()
+login()
+cleanRoom()
+
 
 inputFileName = sys.argv[1]
 
@@ -267,7 +291,6 @@ for setSize in range(0, maxElements):
 ruleCheckingResults = []
 roomName = -1
 
-login()
 
 logerror("test1")
 logerror("test2")
@@ -285,7 +308,7 @@ for room in roomList[::-1]:
 	for rule1 in roomRuleSet:
 		for rule2 in roomRuleSet:
 			if rule1 != rule2:
-				print str(roomName) +  "/" + str(len(roomList)) + "[" + str(len(room)) + "]" + " - " +  "Testing conflict between '" + rule1 + "' VS '" + rule2 + "'"
+				print str(roomName) +  "/" + str(len(roomList)) + "[u@" + str(len(room)) + "]" + "[r@" + str(len(roomRuleSet)) + "] - " +  "Testing conflict between '" + rule1 + "' VS '" + rule2 + "'"
 
 				response1 = storeAndCheckRule(rule1, 1)
 				response2 = storeAndCheckRule(rule2, 2)
@@ -293,7 +316,8 @@ for room in roomList[::-1]:
 				if response2['request-error']:
 					if response2['request-errorName'] == "RuleValidationError":
 						foundConflicts += 1
-						print str(roomName) +  "/" + str(len(roomList)) + "[" + str(len(room)) + "]" + " - " + "[foundConflicts] = " + str(foundConflicts)
+						print  str(roomName) +  "/" + str(len(roomList)) + "[u@" + str(len(room)) + "]" + "[r@" + str(len(roomRuleSet)) + "]" + " - " + "[foundConflicts] = " + str(foundConflicts)
+						logerror(str(roomName) +  "/" + str(len(roomList)) + "[u@" + str(len(room)) + "]" + "[r@" + str(len(roomRuleSet)) + "] - " +  "CONFLICTING RULES '" + rule1 + "' VS '" + rule2 + "'")
 
 				if "id" in response1.keys(): deleteRule(response1["id"])
 				if "id" in response2.keys(): deleteRule(response2["id"])
