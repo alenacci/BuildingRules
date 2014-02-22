@@ -210,6 +210,10 @@ class TriggerManager:
 			parameters.update({'operation' : 'TODAY'})
 			return  DatetimeTriggerDriver(parameters = parameters)
 
+		if trigger.triggerName == "DAY_RANGE":
+			parameters.update({'operation' : 'DAY_RANGE'})
+			return  DatetimeTriggerDriver(parameters = parameters)
+
 		if trigger.triggerName == "EXT_TEMPERATURE_RANGE":
 			parameters.update({'operation' : 'TEMPERATURE_IN_RANGE'})
 			return  WeatherTriggerDriver(parameters = parameters)

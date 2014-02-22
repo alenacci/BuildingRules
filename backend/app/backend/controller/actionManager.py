@@ -251,6 +251,35 @@ class ActionManager:
 			parameters.update({'operation' : 'SET_BLIND'})
 			return  RoomActionDriver(parameters = parameters)
 
+
+
+
+		if action.actionName == "HEATING_ON":
+			parameters.update({'operation' : 'HEATING_ON'})
+			return  RoomActionDriver(parameters = parameters)
+
+		if action.actionName == "HEATING_OFF":
+			parameters.update({'operation' : 'HEATING_OFF'})
+			return  RoomActionDriver(parameters = parameters)
+
+		if action.actionName == "AIR_CONDITIONING_ON":
+			parameters.update({'operation' : 'AIR_CONDITIONING_ON'})
+			return  RoomActionDriver(parameters = parameters)
+
+		if action.actionName == "AIR_CONDITIONING_OFF":
+			parameters.update({'operation' : 'AIR_CONDITIONING_OFF'})
+			return  RoomActionDriver(parameters = parameters)
+
+		if action.actionName == "APP_MICROWAVE_ON":
+			parameters.update({'operation' : 'APP_MICROWAVE_ON'})
+			return  RoomActionDriver(parameters = parameters)
+
+		if action.actionName == "APP_MICROWAVE_OFF":
+			parameters.update({'operation' : 'APP_MICROWAVE_OFF'})
+			return  RoomActionDriver(parameters = parameters)
+
+
+
 		
 		raise DriverNotFoundError("Impossibile to find any driver for the action " + str(action))
 

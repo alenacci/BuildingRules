@@ -111,6 +111,26 @@ class RoomActionDriver(GenericActionDriver):
 			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
 
 
+
+		elif self.parameters["operation"] == "HEATING_ON":		
+			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
+
+		elif self.parameters["operation"] == "HEATING_OFF":		
+			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
+
+		elif self.parameters["operation"] == "AIR_CONDITIONING_ON":		
+			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
+
+		elif self.parameters["operation"] == "AIR_CONDITIONING_OFF":		
+			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
+
+		elif self.parameters["operation"] == "APP_MICROWAVE_ON":		
+			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
+
+		elif self.parameters["operation"] == "APP_MICROWAVE_OFF":		
+			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
+
+
 		else:
 			raise UnsupportedDriverParameterError(self.parameters["operation"])
 

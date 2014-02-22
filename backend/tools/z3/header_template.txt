@@ -1,3 +1,6 @@
+(declare-fun heating (Int) Bool)
+(declare-fun airConditioning (Int) Bool)
+(declare-fun microwave (Int) Bool)
 (declare-fun inRoom (Int) Bool)
 (declare-fun noRule (Int) Bool)
 (declare-fun noNumber () Int)

@@ -1,0 +1,1234 @@
+0;2014-02-21 19:26:59 > test1
+
+1;2014-02-21 19:26:59 > test2
+
+2;2014-02-21 19:26:59 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+3;2014-02-21 19:26:59 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+4;2014-02-21 19:26:59 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+5;2014-02-21 19:26:59 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+6;2014-02-21 19:26:59 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+7;2014-02-21 19:26:59 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+8;2014-02-21 19:26:59 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+9;2014-02-21 19:26:59 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+10;2014-02-21 19:27:00 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+11;2014-02-21 19:27:00 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+12;2014-02-21 19:27:00 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+13;2014-02-21 19:27:00 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+14;2014-02-21 19:27:00 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+15;2014-02-21 19:27:00 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+16;2014-02-21 19:27:00 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+17;2014-02-21 19:27:00 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+18;2014-02-21 19:27:00 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+19;2014-02-21 19:27:00 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+20;2014-02-21 19:27:00 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+21;2014-02-21 19:27:00 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+22;2014-02-21 19:27:00 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+23;2014-02-21 19:27:01 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+24;2014-02-21 19:27:01 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+25;2014-02-21 19:27:01 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+26;2014-02-21 19:27:01 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+27;2014-02-21 19:27:01 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+28;2014-02-21 19:27:01 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+29;2014-02-21 19:27:01 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+30;2014-02-21 19:27:01 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+31;2014-02-21 19:27:01 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+32;2014-02-21 19:27:01 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+33;2014-02-21 19:27:01 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+34;2014-02-21 19:27:01 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+35;2014-02-21 19:27:01 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+36;2014-02-21 19:27:01 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+37;2014-02-21 19:27:01 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+38;2014-02-21 19:27:01 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+39;2014-02-21 19:27:01 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+40;2014-02-21 19:27:01 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+41;2014-02-21 19:27:01 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+42;2014-02-21 19:27:01 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+43;2014-02-21 19:27:01 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+44;2014-02-21 19:27:01 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+45;2014-02-21 19:27:01 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+46;2014-02-21 19:27:01 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+47;2014-02-21 19:27:01 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+48;2014-02-21 19:27:01 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+49;2014-02-21 19:27:01 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+50;2014-02-21 19:27:01 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+51;2014-02-21 19:27:01 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+52;2014-02-21 19:27:01 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+53;2014-02-21 19:27:01 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+54;2014-02-21 19:27:02 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+55;2014-02-21 19:27:02 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+56;2014-02-21 19:27:02 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+57;2014-02-21 19:27:02 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+58;2014-02-21 19:27:02 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+59;2014-02-21 19:27:02 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+60;2014-02-21 19:27:02 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+61;2014-02-21 19:27:02 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+62;2014-02-21 19:27:02 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+63;2014-02-21 19:27:02 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+64;2014-02-21 19:27:02 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+65;2014-02-21 19:27:02 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+66;2014-02-21 19:27:02 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+67;2014-02-21 19:27:02 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+68;2014-02-21 19:27:02 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+69;2014-02-21 19:27:03 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+70;2014-02-21 19:27:03 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+71;2014-02-21 19:27:03 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+72;2014-02-21 19:27:03 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+73;2014-02-21 19:27:03 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+74;2014-02-21 19:27:03 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+75;2014-02-21 19:27:03 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+76;2014-02-21 19:27:03 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+77;2014-02-21 19:27:03 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+78;2014-02-21 19:27:03 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+79;2014-02-21 19:27:03 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+80;2014-02-21 19:27:03 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+81;2014-02-21 19:27:03 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+82;2014-02-21 19:27:03 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+83;2014-02-21 19:27:03 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+84;2014-02-21 19:27:04 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+85;2014-02-21 19:27:04 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+86;2014-02-21 19:27:04 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+87;2014-02-21 19:27:04 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+88;2014-02-21 19:27:04 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+89;2014-02-21 19:27:04 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+90;2014-02-21 19:27:04 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+91;2014-02-21 19:27:04 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+92;2014-02-21 19:27:04 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+93;2014-02-21 19:27:04 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+94;2014-02-21 19:27:04 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+95;2014-02-21 19:27:04 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+96;2014-02-21 19:27:04 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+97;2014-02-21 19:27:04 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+98;2014-02-21 19:27:04 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+99;2014-02-21 19:27:05 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+100;2014-02-21 19:27:05 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+101;2014-02-21 19:27:05 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+102;2014-02-21 19:27:05 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+103;2014-02-21 19:27:05 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+104;2014-02-21 19:27:05 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+105;2014-02-21 19:27:05 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+106;2014-02-21 19:27:05 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+107;2014-02-21 19:27:05 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+108;2014-02-21 19:27:05 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+109;2014-02-21 19:27:05 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+110;2014-02-21 19:27:05 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+111;2014-02-21 19:27:05 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+112;2014-02-21 19:27:05 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+113;2014-02-21 19:27:05 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+114;2014-02-21 19:27:05 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+115;2014-02-21 19:27:05 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+116;2014-02-21 19:27:05 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+117;2014-02-21 19:27:05 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+118;2014-02-21 19:27:05 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+119;2014-02-21 19:27:05 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+120;2014-02-21 19:27:05 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+121;2014-02-21 19:27:05 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+122;2014-02-21 19:27:05 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+123;2014-02-21 19:27:05 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+124;2014-02-21 19:27:05 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+125;2014-02-21 19:27:05 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+126;2014-02-21 19:27:05 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+127;2014-02-21 19:27:05 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+128;2014-02-21 19:27:05 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+129;2014-02-21 19:27:06 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+130;2014-02-21 19:27:06 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+131;2014-02-21 19:27:06 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+132;2014-02-21 19:27:06 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+133;2014-02-21 19:27:06 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+134;2014-02-21 19:27:06 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+135;2014-02-21 19:27:06 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+136;2014-02-21 19:27:06 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+137;2014-02-21 19:27:06 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+138;2014-02-21 19:27:06 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+139;2014-02-21 19:27:06 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+140;2014-02-21 19:27:06 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+141;2014-02-21 19:27:06 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+142;2014-02-21 19:27:06 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+143;2014-02-21 19:27:06 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+144;2014-02-21 19:27:06 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+145;2014-02-21 19:27:06 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+146;2014-02-21 19:27:06 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+147;2014-02-21 19:27:07 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+148;2014-02-21 19:27:07 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+149;2014-02-21 19:27:07 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+150;2014-02-21 19:27:07 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+151;2014-02-21 19:27:07 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+152;2014-02-21 19:27:07 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+153;2014-02-21 19:27:07 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+154;2014-02-21 19:27:07 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+155;2014-02-21 19:27:07 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+156;2014-02-21 19:27:07 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+157;2014-02-21 19:27:07 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+158;2014-02-21 19:27:07 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+159;2014-02-21 19:27:07 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+160;2014-02-21 19:27:07 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+161;2014-02-21 19:27:07 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+162;2014-02-21 19:27:08 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+163;2014-02-21 19:27:08 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+164;2014-02-21 19:27:08 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+165;2014-02-21 19:27:08 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+166;2014-02-21 19:27:08 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+167;2014-02-21 19:27:08 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+168;2014-02-21 19:27:08 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+169;2014-02-21 19:27:08 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+170;2014-02-21 19:27:08 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+171;2014-02-21 19:27:08 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+172;2014-02-21 19:27:08 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+173;2014-02-21 19:27:08 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+174;2014-02-21 19:27:08 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+175;2014-02-21 19:27:08 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+176;2014-02-21 19:27:08 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+177;2014-02-21 19:27:09 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+178;2014-02-21 19:27:09 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+179;2014-02-21 19:27:09 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+180;2014-02-21 19:27:09 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+181;2014-02-21 19:27:09 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+182;2014-02-21 19:27:09 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+183;2014-02-21 19:27:09 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+184;2014-02-21 19:27:09 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+185;2014-02-21 19:27:09 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+186;2014-02-21 19:27:09 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+187;2014-02-21 19:27:09 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+188;2014-02-21 19:27:09 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+189;2014-02-21 19:27:09 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+190;2014-02-21 19:27:09 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+191;2014-02-21 19:27:09 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+192;2014-02-21 19:27:09 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+193;2014-02-21 19:27:09 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+194;2014-02-21 19:27:09 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+195;2014-02-21 19:27:09 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+196;2014-02-21 19:27:09 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+197;2014-02-21 19:27:09 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+198;2014-02-21 19:27:09 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+199;2014-02-21 19:27:09 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+200;2014-02-21 19:27:09 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+201;2014-02-21 19:27:09 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+202;2014-02-21 19:27:09 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+203;2014-02-21 19:27:09 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+204;2014-02-21 19:27:09 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+205;2014-02-21 19:27:10 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+206;2014-02-21 19:27:10 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+207;2014-02-21 19:27:10 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+208;2014-02-21 19:27:10 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+209;2014-02-21 19:27:10 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+210;2014-02-21 19:27:10 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+211;2014-02-21 19:27:11 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+212;2014-02-21 19:27:11 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+213;2014-02-21 19:27:12 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+214;2014-02-21 19:27:12 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+215;2014-02-21 19:27:12 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+216;2014-02-21 19:27:13 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+217;2014-02-21 19:27:13 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+218;2014-02-21 19:27:13 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+219;2014-02-21 19:27:14 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+220;2014-02-21 19:27:15 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+221;2014-02-21 19:27:17 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+222;2014-02-21 19:27:18 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+223;2014-02-21 19:27:18 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+224;2014-02-21 19:27:18 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+225;2014-02-21 19:27:19 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+226;2014-02-21 19:27:19 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+227;2014-02-21 19:27:19 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+228;2014-02-21 19:27:19 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+229;2014-02-21 19:27:19 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+230;2014-02-21 19:27:19 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+231;2014-02-21 19:27:19 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+232;2014-02-21 19:27:19 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+233;2014-02-21 19:27:19 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+234;2014-02-21 19:27:19 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+235;2014-02-21 19:27:19 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+236;2014-02-21 19:27:20 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+237;2014-02-21 19:27:21 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+238;2014-02-21 19:27:21 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+239;2014-02-21 19:27:22 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+240;2014-02-21 19:27:22 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+241;2014-02-21 19:27:22 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+242;2014-02-21 19:27:22 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+243;2014-02-21 19:27:22 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+244;2014-02-21 19:27:22 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+245;2014-02-21 19:27:23 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+246;2014-02-21 19:27:23 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+247;2014-02-21 19:27:23 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+248;2014-02-21 19:27:23 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+249;2014-02-21 19:27:23 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+250;2014-02-21 19:27:23 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+251;2014-02-21 19:27:23 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+252;2014-02-21 19:27:23 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+253;2014-02-21 19:27:23 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+254;2014-02-21 19:27:23 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+255;2014-02-21 19:27:24 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+256;2014-02-21 19:27:24 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+257;2014-02-21 19:27:24 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+258;2014-02-21 19:27:24 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+259;2014-02-21 19:27:24 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+260;2014-02-21 19:27:24 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+261;2014-02-21 19:27:24 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+262;2014-02-21 19:27:24 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+263;2014-02-21 19:27:24 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+264;2014-02-21 19:27:25 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+265;2014-02-21 19:27:25 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+266;2014-02-21 19:27:25 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+267;2014-02-21 19:27:25 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+268;2014-02-21 19:27:25 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+269;2014-02-21 19:27:25 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+270;2014-02-21 19:27:27 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+271;2014-02-21 19:27:28 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+272;2014-02-21 19:27:28 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+273;2014-02-21 19:27:28 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+274;2014-02-21 19:27:28 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+275;2014-02-21 19:27:28 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+276;2014-02-21 19:27:29 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+277;2014-02-21 19:27:30 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+278;2014-02-21 19:27:31 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+279;2014-02-21 19:27:33 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+280;2014-02-21 19:27:33 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+281;2014-02-21 19:27:33 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+282;2014-02-21 19:27:34 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+283;2014-02-21 19:27:35 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+284;2014-02-21 19:27:35 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+285;2014-02-21 19:27:35 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+286;2014-02-21 19:27:35 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+287;2014-02-21 19:27:36 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+288;2014-02-21 19:27:36 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+289;2014-02-21 19:27:36 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+290;2014-02-21 19:27:36 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+291;2014-02-21 19:27:36 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+292;2014-02-21 19:27:36 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+293;2014-02-21 19:27:37 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+294;2014-02-21 19:27:37 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+295;2014-02-21 19:27:37 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+296;2014-02-21 19:27:38 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+297;2014-02-21 19:27:38 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+298;2014-02-21 19:27:38 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+299;2014-02-21 19:27:38 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+300;2014-02-21 19:27:38 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+301;2014-02-21 19:27:38 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+302;2014-02-21 19:27:40 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+303;2014-02-21 19:27:42 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+304;2014-02-21 19:27:43 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+305;2014-02-21 19:27:43 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+306;2014-02-21 19:27:43 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+307;2014-02-21 19:27:44 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+308;2014-02-21 19:27:45 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+309;2014-02-21 19:27:45 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+310;2014-02-21 19:27:45 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+311;2014-02-21 19:27:45 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+312;2014-02-21 19:27:45 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+313;2014-02-21 19:27:45 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+314;2014-02-21 19:27:45 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+315;2014-02-21 19:27:45 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+316;2014-02-21 19:27:45 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+317;2014-02-21 19:27:45 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+318;2014-02-21 19:27:45 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+319;2014-02-21 19:27:45 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+320;2014-02-21 19:27:46 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+321;2014-02-21 19:27:46 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+322;2014-02-21 19:27:46 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+323;2014-02-21 19:27:46 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+324;2014-02-21 19:27:46 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+325;2014-02-21 19:27:46 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+326;2014-02-21 19:27:46 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+327;2014-02-21 19:27:46 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+328;2014-02-21 19:27:47 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+329;2014-02-21 19:27:47 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+330;2014-02-21 19:27:49 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+331;2014-02-21 19:27:50 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+332;2014-02-21 19:27:50 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+333;2014-02-21 19:27:51 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+334;2014-02-21 19:27:51 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+335;2014-02-21 19:27:51 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+336;2014-02-21 19:27:51 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+337;2014-02-21 19:27:51 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+338;2014-02-21 19:27:51 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+339;2014-02-21 19:27:52 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+340;2014-02-21 19:27:52 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+341;2014-02-21 19:27:52 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+342;2014-02-21 19:27:52 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+343;2014-02-21 19:27:52 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+344;2014-02-21 19:27:52 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+345;2014-02-21 19:27:52 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+346;2014-02-21 19:27:52 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+347;2014-02-21 19:27:52 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+348;2014-02-21 19:27:52 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+349;2014-02-21 19:27:52 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+350;2014-02-21 19:27:52 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+351;2014-02-21 19:27:52 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+352;2014-02-21 19:27:53 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+353;2014-02-21 19:27:53 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+354;2014-02-21 19:27:53 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+355;2014-02-21 19:27:53 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+356;2014-02-21 19:27:53 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+357;2014-02-21 19:27:53 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+358;2014-02-21 19:27:53 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+359;2014-02-21 19:27:53 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+360;2014-02-21 19:27:53 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+361;2014-02-21 19:27:53 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+362;2014-02-21 19:27:53 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+363;2014-02-21 19:27:53 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+364;2014-02-21 19:27:54 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+365;2014-02-21 19:27:55 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+366;2014-02-21 19:27:55 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+367;2014-02-21 19:27:55 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+368;2014-02-21 19:27:55 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+369;2014-02-21 19:27:55 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+370;2014-02-21 19:27:55 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+371;2014-02-21 19:27:55 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+372;2014-02-21 19:27:55 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+373;2014-02-21 19:27:55 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+374;2014-02-21 19:27:55 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+375;2014-02-21 19:27:55 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+376;2014-02-21 19:27:55 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+377;2014-02-21 19:27:56 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+378;2014-02-21 19:27:56 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+379;2014-02-21 19:27:56 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+380;2014-02-21 19:27:56 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+381;2014-02-21 19:27:56 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+382;2014-02-21 19:27:56 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+383;2014-02-21 19:27:56 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+384;2014-02-21 19:27:56 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+385;2014-02-21 19:27:56 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+386;2014-02-21 19:27:56 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+387;2014-02-21 19:27:56 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+388;2014-02-21 19:27:57 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+389;2014-02-21 19:27:57 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+390;2014-02-21 19:27:57 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+391;2014-02-21 19:27:57 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+392;2014-02-21 19:27:57 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+393;2014-02-21 19:27:57 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+394;2014-02-21 19:27:57 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+395;2014-02-21 19:27:57 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+396;2014-02-21 19:27:58 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+397;2014-02-21 19:27:58 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+398;2014-02-21 19:27:58 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+399;2014-02-21 19:27:58 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+400;2014-02-21 19:27:58 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+401;2014-02-21 19:27:58 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+402;2014-02-21 19:27:58 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+403;2014-02-21 19:27:58 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+404;2014-02-21 19:27:58 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+405;2014-02-21 19:27:58 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+406;2014-02-21 19:27:58 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+407;2014-02-21 19:27:58 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+408;2014-02-21 19:27:58 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+409;2014-02-21 19:27:58 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+410;2014-02-21 19:27:58 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+411;2014-02-21 19:27:58 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+412;2014-02-21 19:27:58 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+413;2014-02-21 19:28:00 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+414;2014-02-21 19:28:00 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+415;2014-02-21 19:28:00 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+416;2014-02-21 19:28:01 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+417;2014-02-21 19:28:02 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+418;2014-02-21 19:28:03 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+419;2014-02-21 19:28:03 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+420;2014-02-21 19:28:03 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+421;2014-02-21 19:28:04 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+422;2014-02-21 19:28:04 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+423;2014-02-21 19:28:04 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+424;2014-02-21 19:28:04 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+425;2014-02-21 19:28:04 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+426;2014-02-21 19:28:04 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+427;2014-02-21 19:28:04 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+428;2014-02-21 19:28:04 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+429;2014-02-21 19:28:04 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+430;2014-02-21 19:28:04 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+431;2014-02-21 19:28:04 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+432;2014-02-21 19:28:04 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+433;2014-02-21 19:28:04 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+434;2014-02-21 19:28:04 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+435;2014-02-21 19:28:04 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+436;2014-02-21 19:28:04 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+437;2014-02-21 19:28:04 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+438;2014-02-21 19:28:05 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+439;2014-02-21 19:28:06 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+440;2014-02-21 19:28:06 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+441;2014-02-21 19:28:06 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+442;2014-02-21 19:28:06 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+443;2014-02-21 19:28:06 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+444;2014-02-21 19:28:06 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+445;2014-02-21 19:28:07 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+446;2014-02-21 19:28:07 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+447;2014-02-21 19:28:07 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+448;2014-02-21 19:28:07 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+449;2014-02-21 19:28:07 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+450;2014-02-21 19:28:08 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+451;2014-02-21 19:28:08 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+452;2014-02-21 19:28:08 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+453;2014-02-21 19:28:08 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+454;2014-02-21 19:28:08 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+455;2014-02-21 19:28:08 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+456;2014-02-21 19:28:08 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+457;2014-02-21 19:28:08 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+458;2014-02-21 19:28:09 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+459;2014-02-21 19:28:10 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+460;2014-02-21 19:28:11 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+461;2014-02-21 19:28:12 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+462;2014-02-21 19:28:12 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+463;2014-02-21 19:28:12 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+464;2014-02-21 19:28:13 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+465;2014-02-21 19:28:13 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+466;2014-02-21 19:28:13 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+467;2014-02-21 19:28:13 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+468;2014-02-21 19:28:13 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+469;2014-02-21 19:28:13 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+470;2014-02-21 19:28:13 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+471;2014-02-21 19:28:13 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+472;2014-02-21 19:28:13 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+473;2014-02-21 19:28:13 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+474;2014-02-21 19:28:14 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+475;2014-02-21 19:28:14 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+476;2014-02-21 19:28:14 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+477;2014-02-21 19:28:14 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+478;2014-02-21 19:28:14 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+479;2014-02-21 19:28:14 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+480;2014-02-21 19:28:14 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+481;2014-02-21 19:28:14 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+482;2014-02-21 19:28:14 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+483;2014-02-21 19:28:14 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+484;2014-02-21 19:28:14 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+485;2014-02-21 19:28:14 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+486;2014-02-21 19:28:14 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+487;2014-02-21 19:28:14 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+488;2014-02-21 19:28:14 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+489;2014-02-21 19:28:14 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+490;2014-02-21 19:28:14 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+491;2014-02-21 19:28:14 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+492;2014-02-21 19:28:14 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+493;2014-02-21 19:28:14 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+494;2014-02-21 19:28:14 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+495;2014-02-21 19:28:14 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+496;2014-02-21 19:28:14 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+497;2014-02-21 19:28:14 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+498;2014-02-21 19:28:15 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+499;2014-02-21 19:28:15 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+500;2014-02-21 19:28:16 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+501;2014-02-21 19:28:17 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+502;2014-02-21 19:28:17 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+503;2014-02-21 19:28:18 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+504;2014-02-21 19:28:18 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+505;2014-02-21 19:28:18 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+506;2014-02-21 19:28:18 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+507;2014-02-21 19:28:19 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+508;2014-02-21 19:28:19 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+509;2014-02-21 19:28:19 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+510;2014-02-21 19:28:20 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+511;2014-02-21 19:28:20 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+512;2014-02-21 19:28:21 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+513;2014-02-21 19:28:21 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+514;2014-02-21 19:28:22 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+515;2014-02-21 19:28:23 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+516;2014-02-21 19:28:23 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+517;2014-02-21 19:28:23 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+518;2014-02-21 19:28:23 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+519;2014-02-21 19:28:23 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+520;2014-02-21 19:28:23 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+521;2014-02-21 19:28:23 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+522;2014-02-21 19:28:24 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+523;2014-02-21 19:28:24 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+524;2014-02-21 19:28:25 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+525;2014-02-21 19:28:25 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+526;2014-02-21 19:28:26 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+527;2014-02-21 19:28:27 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+528;2014-02-21 19:28:27 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+529;2014-02-21 19:28:27 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+530;2014-02-21 19:28:27 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+531;2014-02-21 19:28:27 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+532;2014-02-21 19:28:27 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+533;2014-02-21 19:28:27 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+534;2014-02-21 19:28:27 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+535;2014-02-21 19:28:28 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+536;2014-02-21 19:28:29 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+537;2014-02-21 19:28:29 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+538;2014-02-21 19:28:30 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+539;2014-02-21 19:28:31 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 1 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+540;2014-02-21 19:28:31 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+541;2014-02-21 19:28:31 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+542;2014-02-21 19:28:32 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+543;2014-02-21 19:28:40 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+544;2014-02-21 19:28:40 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+545;2014-02-21 19:28:41 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+0;2014-02-21 19:30:14 > test1
+
+1;2014-02-21 19:30:14 > test2
+
+2;2014-02-21 19:30:14 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+3;2014-02-21 19:30:14 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+4;2014-02-21 19:30:14 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+5;2014-02-21 19:30:15 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+6;2014-02-21 19:30:15 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+7;2014-02-21 19:30:15 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+8;2014-02-21 19:30:15 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+9;2014-02-21 19:30:15 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+10;2014-02-21 19:30:15 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+11;2014-02-21 19:30:15 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+12;2014-02-21 19:30:15 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+13;2014-02-21 19:30:15 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+14;2014-02-21 19:30:15 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+15;2014-02-21 19:30:15 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+16;2014-02-21 19:30:15 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+17;2014-02-21 19:30:15 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+18;2014-02-21 19:30:15 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+19;2014-02-21 19:30:15 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+20;2014-02-21 19:30:15 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'In room 100 the priority 2 has alredy been assigned to another rule with the same category!', u'request-errorName': u'AlredyAssignedPriorityError'}
+
+21;2014-02-21 19:30:15 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'The submitted rule is already been saved for the considered room.', u'request-errorName': u'DuplicatedRuleError'}
+
+22;2014-02-21 19:30:16 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'Impossible to find any trigger corresponding to the following rule consequent > day is between Saturday and Sunday', u'request-errorName': u'NotWellFormedRuleError'}
+
+23;2014-02-21 19:30:19 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'Impossible to find any trigger corresponding to the following rule consequent > day is between Sunday and Monday', u'request-errorName': u'NotWellFormedRuleError'}
+
+24;2014-02-21 19:30:37 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'Impossible to find any trigger corresponding to the following rule consequent > day is between Monday and Friday', u'request-errorName': u'NotWellFormedRuleError'}
+
+25;2014-02-21 19:30:44 > {u'request-success': False, u'request-error': True, u'request-errorDescription': [u'There is a conflict in the rules! (assert (inRoom 1))'], u'request-errorName': u'RuleValidationError'}
+
+26;2014-02-21 19:30:53 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'Impossible to find any trigger corresponding to the following rule consequent > day is between Saturday and Sunday', u'request-errorName': u'NotWellFormedRuleError'}
+
+27;2014-02-21 19:30:53 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'Impossible to find any trigger corresponding to the following rule consequent > day is between Saturday and Sunday', u'request-errorName': u'NotWellFormedRuleError'}
+
+28;2014-02-21 19:30:55 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'Impossible to find any trigger corresponding to the following rule consequent > day is between Saturday and Sunday', u'request-errorName': u'NotWellFormedRuleError'}
+
+29;2014-02-21 19:30:55 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'Impossible to find any trigger corresponding to the following rule consequent > day is between Saturday and Sunday', u'request-errorName': u'NotWellFormedRuleError'}
+
+30;2014-02-21 19:31:04 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'Impossible to find any trigger corresponding to the following rule consequent > day is between Monday and Friday', u'request-errorName': u'NotWellFormedRuleError'}
+
+31;2014-02-21 19:31:06 > {u'request-success': False, u'request-error': True, u'request-errorDescription': [u'There is a conflict in the rules! (assert (inRoom 1))'], u'request-errorName': u'RuleValidationError'}
+
+32;2014-02-21 19:31:10 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'Impossible to find any trigger corresponding to the following rule consequent > day is between Saturday and Sunday', u'request-errorName': u'NotWellFormedRuleError'}
+
+33;2014-02-21 19:31:11 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'Impossible to find any trigger corresponding to the following rule consequent > day is between Saturday and Sunday', u'request-errorName': u'NotWellFormedRuleError'}
+
+34;2014-02-21 19:31:21 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'Impossible to find any trigger corresponding to the following rule consequent > day is between Saturday and Sunday', u'request-errorName': u'NotWellFormedRuleError'}
+
+35;2014-02-21 19:31:24 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'Impossible to find any trigger corresponding to the following rule consequent > day is between Friday and Sunday', u'request-errorName': u'NotWellFormedRuleError'}
+
+36;2014-02-21 19:31:30 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'Impossible to find any trigger corresponding to the following rule consequent > day is between Saturday and Sunday', u'request-errorName': u'NotWellFormedRuleError'}
+
+37;2014-02-21 19:31:36 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'Impossible to find any trigger corresponding to the following rule consequent > day is between Sunday and Monday', u'request-errorName': u'NotWellFormedRuleError'}
+
+38;2014-02-21 19:32:10 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'Impossible to find any trigger corresponding to the following rule consequent > day is between Monday and Friday', u'request-errorName': u'NotWellFormedRuleError'}
+
+39;2014-02-21 19:32:16 > {u'request-success': False, u'request-error': True, u'request-errorDescription': [u'There is a conflict in the rules! (assert (and (>= (tempInRoom 1) 67) (<= (tempInRoom 1) 71) ))'], u'request-errorName': u'RuleValidationError'}
+
+40;2014-02-21 19:32:35 > {u'request-success': False, u'request-error': True, u'request-errorDescription': [u'There is a conflict in the rules! (assert (and (>= (tempInRoom 1) 67) (<= (tempInRoom 1) 71) ))'], u'request-errorName': u'RuleValidationError'}
+
+41;2014-02-21 19:32:41 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'Impossible to find any trigger corresponding to the following rule consequent > day is between Saturday and Sunday', u'request-errorName': u'NotWellFormedRuleError'}
+
+42;2014-02-21 19:32:41 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'Impossible to find any trigger corresponding to the following rule consequent > day is between Saturday and Sunday', u'request-errorName': u'NotWellFormedRuleError'}
+
+43;2014-02-21 19:32:43 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'Impossible to find any trigger corresponding to the following rule consequent > day is between Saturday and Sunday', u'request-errorName': u'NotWellFormedRuleError'}
+
+44;2014-02-21 19:32:44 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'Impossible to find any trigger corresponding to the following rule consequent > day is between Saturday and Sunday', u'request-errorName': u'NotWellFormedRuleError'}
+
+45;2014-02-21 19:33:00 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'Impossible to find any trigger corresponding to the following rule consequent > day is between Monday and Friday', u'request-errorName': u'NotWellFormedRuleError'}
+
+46;2014-02-21 19:33:13 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'Impossible to find any trigger corresponding to the following rule consequent > day is between Saturday and Sunday', u'request-errorName': u'NotWellFormedRuleError'}
+
+47;2014-02-21 19:33:14 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'Impossible to find any trigger corresponding to the following rule consequent > day is between Saturday and Sunday', u'request-errorName': u'NotWellFormedRuleError'}
+
+48;2014-02-21 19:33:28 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'Impossible to find any trigger corresponding to the following rule consequent > day is between Saturday and Sunday', u'request-errorName': u'NotWellFormedRuleError'}
+
+49;2014-02-21 19:33:34 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'Impossible to find any trigger corresponding to the following rule consequent > day is between Friday and Sunday', u'request-errorName': u'NotWellFormedRuleError'}
+
+50;2014-02-21 19:33:38 > {u'request-success': False, u'request-error': True, u'request-errorDescription': [u'There is a conflict in the rules! (assert (sunny 1))'], u'request-errorName': u'RuleValidationError'}
+
+51;2014-02-21 19:33:38 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'Impossible to find any trigger corresponding to the following rule consequent > day is between Saturday and Sunday', u'request-errorName': u'NotWellFormedRuleError'}
+
+52;2014-02-21 19:33:46 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'Impossible to find any trigger corresponding to the following rule consequent > day is between Sunday and Monday', u'request-errorName': u'NotWellFormedRuleError'}
+
+53;2014-02-21 19:34:02 > {u'request-success': False, u'request-error': True, u'request-errorDescription': [u'There is a conflict in the rules! (assert (sunny 1))'], u'request-errorName': u'RuleValidationError'}
+
+54;2014-02-21 19:34:04 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'Impossible to find any trigger corresponding to the following rule consequent > day is between Monday and Friday', u'request-errorName': u'NotWellFormedRuleError'}
+
+55;2014-02-21 19:34:05 > {u'request-success': False, u'request-error': True, u'request-errorDescription': [u'There is a conflict in the rules! (assert (sunny 1))'], u'request-errorName': u'RuleValidationError'}
+
+56;2014-02-21 19:34:06 > {u'request-success': False, u'request-error': True, u'request-errorDescription': [u'There is a conflict in the rules! (assert (sunny 1))'], u'request-errorName': u'RuleValidationError'}
+
+57;2014-02-21 19:34:16 > {u'request-success': False, u'request-error': True, u'request-errorDescription': [u'There is a conflict in the rules! (assert (sunny 1))'], u'request-errorName': u'RuleValidationError'}
+
+58;2014-02-21 19:34:19 > {u'request-success': False, u'request-error': True, u'request-errorDescription': [u'There is a conflict in the rules! (assert (sunny 1))'], u'request-errorName': u'RuleValidationError'}
+
+59;2014-02-21 19:34:21 > {u'request-success': False, u'request-error': True, u'request-errorDescription': [u'There is a conflict in the rules! (assert (sunny 1))'], u'request-errorName': u'RuleValidationError'}
+
+60;2014-02-21 19:34:22 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'Impossible to find any trigger corresponding to the following rule consequent > day is between Saturday and Sunday', u'request-errorName': u'NotWellFormedRuleError'}
+
+61;2014-02-21 19:34:22 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'Impossible to find any trigger corresponding to the following rule consequent > day is between Saturday and Sunday', u'request-errorName': u'NotWellFormedRuleError'}
+
+62;2014-02-21 19:34:24 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'Impossible to find any trigger corresponding to the following rule consequent > day is between Saturday and Sunday', u'request-errorName': u'NotWellFormedRuleError'}
+
+63;2014-02-21 19:34:24 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'Impossible to find any trigger corresponding to the following rule consequent > day is between Saturday and Sunday', u'request-errorName': u'NotWellFormedRuleError'}
+
+64;2014-02-21 19:34:30 > {u'request-success': False, u'request-error': True, u'request-errorDescription': [u'There is a conflict in the rules! (assert (sunny 1))'], u'request-errorName': u'RuleValidationError'}
+
+65;2014-02-21 19:34:34 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'Impossible to find any trigger corresponding to the following rule consequent > day is between Monday and Friday', u'request-errorName': u'NotWellFormedRuleError'}
+
+66;2014-02-21 19:34:42 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'Impossible to find any trigger corresponding to the following rule consequent > day is between Saturday and Sunday', u'request-errorName': u'NotWellFormedRuleError'}
+
+67;2014-02-21 19:34:44 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'Impossible to find any trigger corresponding to the following rule consequent > day is between Saturday and Sunday', u'request-errorName': u'NotWellFormedRuleError'}
+
+68;2014-02-21 19:34:50 > {u'request-success': False, u'request-error': True, u'request-errorDescription': [u'There is a conflict in the rules! (assert (sunny 1))'], u'request-errorName': u'RuleValidationError'}
+
+69;2014-02-21 19:34:52 > {u'request-success': False, u'request-error': True, u'request-errorDescription': [u'There is a conflict in the rules! (assert (sunny 1))'], u'request-errorName': u'RuleValidationError'}
+
+70;2014-02-21 19:34:55 > {u'request-success': False, u'request-error': True, u'request-errorDescription': u'Impossible to find any trigger corresponding to the following rule consequent > day is between Saturday and Sunday', u'request-errorName': u'NotWellFormedRuleError'}
+
