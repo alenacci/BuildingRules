@@ -17,8 +17,6 @@ brules_roomName =  "100"
 resultsLogLine = 0
 errorLogLine = 0
 
-allRules = []
-
 #######################################################
 
 antecedentCounter = {}
@@ -34,7 +32,6 @@ def backupResults():
 		os.rename("results.txt", destination)
 
 def logerror(message):
-
 
 	global errorLogLine
 
@@ -60,15 +57,6 @@ def saveResults(results):
 
 	resultsLogLine += 1
 
-def saveAllRules(ruleList):
-	
-	out_file = open("rules.txt","w")
-	
-	for rule in ruleList:
-		out_file.write(rule + "\n")
-	out_file.close()
-
-
 def translateDay(value):
 
 	if value.upper().startswith("MON"): return str(1)
@@ -83,7 +71,6 @@ def translateDay(value):
 
 def translateRule(rule):
 
-	global allRules
 	global antecedentCounter
 	global consequentCounter
 
@@ -130,8 +117,6 @@ def translateRule(rule):
 	consequentCounter[consequent] += 1
               
 	ruleBody = "if " + antecedent + " then " + consequent
-
-	allRules.append(ruleBody)
 
 	return ruleBody
 
@@ -216,7 +201,7 @@ def storeAndCheckRule(ruleBody, priority):
 			'userUuid' : brules_userUuid
 			})
 
-	if response['request-error']: logerror(str(response) + " on rule " + ruleBody)
+	if response['request-error']: logerror(response)
 
 	return response
 
@@ -293,10 +278,6 @@ for line in lines:
 
 print "DONE."
 
-print "Saving the rule list for further verification...",
-saveAllRules(sorted(allRules))
-print " DONE."
-
 statsResults = {}
 
 statsResults["totalValidRules"] = totalValidRules
@@ -310,10 +291,10 @@ print statsResults
 
 saveResults(str(json.dumps(statsResults, separators=(',',':'))))
 
-print "Conflict checking now.."
+print "Generating the room permutations..."
 
 #maxElements = totalValidRuleSet
-maxElements = 15		# maximum number of room occupants
+maxElements = 6		# maximum number of room occupants
 
 roomList = []
 roomListTokens = []
@@ -352,61 +333,59 @@ for room in roomList[::-1]:
 		for rule in rules[userUuid]["rules"]:
 			roomRuleSet.append(rule)
 
-	
-	usedCategories = set()
-
 	logicalConflicts = 0
 	runtimeConflicts = 0
-	duplicatedRules = 0
 
-	ruleCounter = 0
-	
+	progress = -1
+	progressTotal = math.factorial(len(roomRuleSet))
 
-	for rule in roomRuleSet:
+	for x in range(0, len(roomRuleSet)):
+		for y in range(0, len(roomRuleSet)):
 
-		statusText = str(roomName) +  "/" + str(len(roomList)) + "[u@" + str(len(room)) + "]" + "[%" + str(ruleCounter) + "/" + str(len(roomRuleSet))+ "]" + " - "
+			if x > y:
+				rule1 = roomRuleSet[x]
+				rule2 = roomRuleSet[y]
 
-		ruleCounter += 1
-		response = storeAndCheckRule(rule, ruleCounter)
+				progress += 1
 
-		print statusText + "Storing " + rule
+				if rule1 != rule2:
+					
+					statusText = str(roomName) +  "/" + str(len(roomList)) + "[u@" + str(len(room)) + "]" + "[r@" + str(len(roomRuleSet)) + "]" + "[%" + str(progress) + "/" + str(progressTotal) + "]" + " - "
 
-		if response['request-error']:
-			if response['request-errorName'] == "RuleValidationError":
-				logicalConflicts += 1
-				logerror(statusText + "[logicalConflicts] = " + str(logicalConflicts))
-				print statusText + "[logicalConflicts] = " + str(logicalConflicts)
+					print statusText + "Testing conflict between '" + rule1 + "' VS '" + rule2 + "'"
 
-			if response['request-errorName'] == "DuplicatedRuleError":
-				duplicatedRules += 1
-				logerror(statusText + "[duplicatedRules] = " + str(duplicatedRules))
-				print statusText + "[duplicatedRules] = " + str(duplicatedRules)
+					response1 = storeAndCheckRule(rule1, 1)
+					response2 = storeAndCheckRule(rule2, 2)
 
-		elif response['request-success']:
+					if response2['request-error']:
+						if response2['request-errorName'] == "RuleValidationError":
+							logicalConflicts += 1
+							print  statusText + "[logicalConflicts] = " + str(logicalConflicts)
+							logerror(statusText +  "LOGICALLY CONFLICTING RULES '" + rule1 + "' VS '" + rule2 + "'")
+							logerror("[logicalConflicts] = " + str(logicalConflicts))
 
-			if response['category'] in usedCategories:
-				runtimeConflicts += 1
-				logerror(statusText + "[runtimeConflicts] = " + str(runtimeConflicts))
-				print statusText + "[runtimeConflicts] = " + str(runtimeConflicts)
+					elif response2['request-success']:
+						if response1['category'] == response2['category']:
+							runtimeConflicts += 1
+							print statusText + "[runtimeConflicts] = " + str(runtimeConflicts)
+							logerror(statusText +  "RUNTIME CONFLICTING RULES '" + rule1 + "' VS '" + rule2 + "'")
+							logerror("[runtimeConflicts] = " + str(runtimeConflicts))
 
-			usedCategories.add(response['category'])
+					if "id" in response1.keys(): deleteRule(response1["id"])
+					if "id" in response2.keys(): deleteRule(response2["id"])
 
-	
+				
 
 	currentResults = {}
 	currentResults["roomName"] = roomName
 	currentResults["room"] = room
 	currentResults["occupants"] = len(room)
-	currentResults["roomRuleSet"] = roomRuleSet
 	currentResults["logicalConflicts"] = logicalConflicts
 	currentResults["runtimeConflicts"] = runtimeConflicts
-	currentResults["duplicatedRules"] = duplicatedRules
-	
 
 	ruleCheckingResults.append(currentResults)
-	saveResults(currentResults)
 
-	cleanRoom()
+	saveResults(currentResults)
 
 logout()
 
