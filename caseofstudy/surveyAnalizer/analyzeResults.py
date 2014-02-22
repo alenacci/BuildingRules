@@ -343,7 +343,7 @@ ruleCheckingResults = []
 roomName = -1
 
 
-for room in roomList[::-1]:
+for room in roomList:
 
 	roomName += 1
 	roomRuleSet = []
