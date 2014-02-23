@@ -1,9 +1,0 @@
-occupants;cardinality;max_logicalConflicts;min_logicalConflicts;avg_logicalConflicts;max_runtimeConflicts;min_runtimeConflicts;avg_runtimeConflicts;max_duplicatedRules;min_duplicatedRules;avg_duplicatedRules;
-1;1;0;0;0;38;38;38;0;0;0;
-2;1;69;69;0;1380;1380;1380;441;441;441;
-3;1;146;146;0;2137;2137;2137;919;919;919;
-4;1;280;280;0;2764;2764;2764;1359;1359;1359;
-5;1;402;402;1;3170;3170;3170;1737;1737;1737;
-6;1;530;530;1;3436;3436;3436;2062;2062;2062;
-7;1;617;617;2;3597;3597;3597;2413;2413;2413;
-8;1;378;378;2;2580;2580;2580;1660;1660;1660;
