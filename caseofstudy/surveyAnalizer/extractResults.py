@@ -19,6 +19,10 @@ if os.path.exists("aggregate.csv"): os.remove("aggregate.csv")
 if os.path.exists("detail.csv"): os.remove("detail.csv")
 
 
+maxOccupants = sys.maxint
+if len( sys.argv ) == 2:
+	maxOccupants = int(sys.argv[1])
+
 f = open("results.txt")
 lines = f.readlines()
 f.close()
@@ -29,6 +33,7 @@ sumValues = {}
 maxVal = {}
 minVal = {}
 
+roomCounter = 0
 nonZeroCounterAbs = 0
 zeroCounterAbs = 0
 zeroCounter = {}
@@ -58,6 +63,9 @@ for line in lines:
 	else:
 		
 		occupants = content["occupants"]
+
+		if occupants > maxOccupants:
+			continue;
 
 		if occupants not in sumValues.keys():
 			sumValues[occupants] = {}
@@ -99,13 +107,17 @@ for line in lines:
 		else:
 			nonZeroCounterAbs += 1
 
+		roomCounter += 1
+
+
+
 for k in keyFilter:
 	writeAggregate("Number of rooms without " + k, zeroCounter[k])
 
 writeAggregate("Number of rooms without any conflict", zeroCounterAbs)
 writeAggregate("Number of rooms with at least one conflict", nonZeroCounterAbs)
 
-writeAggregate("Total number of rooms", len(lines)-1)
+writeAggregate("Total number of rooms", roomCounter)
 
 writeDetail("occupants;cardinality;max_logicalConflicts;min_logicalConflicts;avg_logicalConflicts;max_runtimeConflicts;min_runtimeConflicts;avg_runtimeConflicts;max_duplicatedRules;min_duplicatedRules;avg_duplicatedRules;")
 for occupants in sumValues.keys():
