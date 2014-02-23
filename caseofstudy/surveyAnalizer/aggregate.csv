@@ -23,3 +23,9 @@ nobody is in the room;80
 it is rainy;13
 someone is in the room;61
 the day is between;13
+Number of rooms without logicalConflicts;1241
+Number of rooms without runtimeConflicts;27
+Number of rooms without duplicatedRules;154
+Number of rooms without any conflict;26
+Number of rooms with at least one conflict;2506
+Total number of rooms;2532

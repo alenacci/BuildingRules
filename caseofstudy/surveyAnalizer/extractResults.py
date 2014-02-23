@@ -29,6 +29,12 @@ sumValues = {}
 maxVal = {}
 minVal = {}
 
+nonZeroCounterAbs = 0
+zeroCounterAbs = 0
+zeroCounter = {}
+for k in keyFilter:
+	zeroCounter[k] = 0
+
 for line in lines:
 	splittedLine = line.split(";")
 
@@ -78,6 +84,28 @@ for line in lines:
 		for k in keyFilter:
 			if content[k] < minVal[occupants][k] : minVal[occupants][k] = content[k]
 			if content[k] > maxVal[occupants][k] : maxVal[occupants][k] = content[k]
+
+		for k in keyFilter:
+			if content[k] == 0: zeroCounter[k] += 1
+
+
+		zeroKeyFound = True
+		for k in keyFilter:
+			if k != 'duplicatedRules':
+				if content[k] != 0: zeroKeyFound = False
+		
+		if zeroKeyFound:
+			zeroCounterAbs += 1
+		else:
+			nonZeroCounterAbs += 1
+
+for k in keyFilter:
+	writeAggregate("Number of rooms without " + k, zeroCounter[k])
+
+writeAggregate("Number of rooms without any conflict", zeroCounterAbs)
+writeAggregate("Number of rooms with at least one conflict", nonZeroCounterAbs)
+
+writeAggregate("Total number of rooms", len(lines)-1)
 
 writeDetail("occupants;cardinality;max_logicalConflicts;min_logicalConflicts;avg_logicalConflicts;max_runtimeConflicts;min_runtimeConflicts;avg_runtimeConflicts;max_duplicatedRules;min_duplicatedRules;avg_duplicatedRules;")
 for occupants in sumValues.keys():
