@@ -31,6 +31,12 @@ frontend/venv/
 frontend/build/
 backend/tools/weather/
 backend/tools/dbDump/
+
+# Results files
+caseofstudy/surveyAnalizer/errors.txt
+caseofstudy/surveyAnalizer/results.txt
+caseofstudy/surveyAnalizer/rules.txt
+
 # Logging folders
 ###################
 backend/logs
