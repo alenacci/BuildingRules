@@ -312,8 +312,8 @@ saveResults(str(json.dumps(statsResults, separators=(',',':'))))
 
 print "Conflict checking now.."
 
-#maxElements = totalValidRuleSet
-maxElements = 30		# maximum number of room occupants
+maxElements = totalValidRuleSet
+#maxElements = 30		# maximum number of room occupants
 
 roomList = []
 roomListTokens = []
@@ -343,7 +343,10 @@ ruleCheckingResults = []
 roomName = -1
 
 
-for room in roomList:
+for room in roomList[::-1]:
+
+	if len(room) > 30:
+		continue
 
 	roomName += 1
 	roomRuleSet = []
