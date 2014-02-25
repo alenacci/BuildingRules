@@ -339,15 +339,104 @@ for setSize in range(0, maxElements):
 				roomListTokens.append(token)
 
 
+roomCardinality = {}
+
+for room in roomList:
+
+	if len(room) not in roomCardinality.keys(): roomCardinality[len(room)] = 0
+	roomCardinality[len(room)] += 1
+
+
+
+
+roomCardinalityLimit = {}
+roomCardinalityLimit[	1	] = 	72
+roomCardinalityLimit[	2	] = 	100
+roomCardinalityLimit[	3	] = 	100
+roomCardinalityLimit[	4	] = 	100
+roomCardinalityLimit[	5	] = 	100
+roomCardinalityLimit[	6	] = 	100
+roomCardinalityLimit[	7	] = 	100
+roomCardinalityLimit[	8	] = 	100
+roomCardinalityLimit[	9	] = 	100
+roomCardinalityLimit[	10	] = 	100
+roomCardinalityLimit[	11	] = 	100
+roomCardinalityLimit[	12	] = 	100
+roomCardinalityLimit[	13	] = 	100
+roomCardinalityLimit[	14	] = 	100
+roomCardinalityLimit[	15	] = 	100
+roomCardinalityLimit[	16	] = 	100
+roomCardinalityLimit[	17	] = 	100
+roomCardinalityLimit[	18	] = 	100
+roomCardinalityLimit[	19	] = 	100
+roomCardinalityLimit[	20	] = 	100
+roomCardinalityLimit[	21	] = 	100
+roomCardinalityLimit[	22	] = 	100
+roomCardinalityLimit[	23	] = 	100
+roomCardinalityLimit[	24	] = 	100
+roomCardinalityLimit[	25	] = 	100
+roomCardinalityLimit[	26	] = 	100
+roomCardinalityLimit[	27	] = 	100
+roomCardinalityLimit[	28	] = 	100
+roomCardinalityLimit[	29	] = 	100
+roomCardinalityLimit[	30	] = 	100
+
+
+roomCardinalityFilter = {}
+roomCardinalityFilter[	1	] = 	roomCardinality[	1	]  /	roomCardinalityLimit[	1	]
+roomCardinalityFilter[	2	] = 	roomCardinality[	2	]  /	roomCardinalityLimit[	2	]
+roomCardinalityFilter[	3	] = 	roomCardinality[	3	]  /	roomCardinalityLimit[	3	]
+roomCardinalityFilter[	4	] = 	roomCardinality[	4	]  /	roomCardinalityLimit[	4	]
+roomCardinalityFilter[	5	] = 	roomCardinality[	5	]  /	roomCardinalityLimit[	5	]
+roomCardinalityFilter[	6	] = 	roomCardinality[	6	]  /	roomCardinalityLimit[	6	]
+roomCardinalityFilter[	7	] = 	roomCardinality[	7	]  /	roomCardinalityLimit[	7	]
+roomCardinalityFilter[	8	] = 	roomCardinality[	8	]  /	roomCardinalityLimit[	8	]
+roomCardinalityFilter[	9	] = 	roomCardinality[	9	]  /	roomCardinalityLimit[	9	]
+roomCardinalityFilter[	10	] = 	roomCardinality[	10	]  /	roomCardinalityLimit[	10	]
+roomCardinalityFilter[	11	] = 	roomCardinality[	11	]  /	roomCardinalityLimit[	11	]
+roomCardinalityFilter[	12	] = 	roomCardinality[	12	]  /	roomCardinalityLimit[	12	]
+roomCardinalityFilter[	13	] = 	roomCardinality[	13	]  /	roomCardinalityLimit[	13	]
+roomCardinalityFilter[	14	] = 	roomCardinality[	14	]  /	roomCardinalityLimit[	14	]
+roomCardinalityFilter[	15	] = 	roomCardinality[	15	]  /	roomCardinalityLimit[	15	]
+roomCardinalityFilter[	16	] = 	roomCardinality[	16	]  /	roomCardinalityLimit[	16	]
+roomCardinalityFilter[	17	] = 	roomCardinality[	17	]  /	roomCardinalityLimit[	17	]
+roomCardinalityFilter[	18	] = 	roomCardinality[	18	]  /	roomCardinalityLimit[	18	]
+roomCardinalityFilter[	19	] = 	roomCardinality[	19	]  /	roomCardinalityLimit[	19	]
+roomCardinalityFilter[	20	] = 	roomCardinality[	20	]  /	roomCardinalityLimit[	20	]
+roomCardinalityFilter[	21	] = 	roomCardinality[	21	]  /	roomCardinalityLimit[	21	]
+roomCardinalityFilter[	22	] = 	roomCardinality[	22	]  /	roomCardinalityLimit[	22	]
+roomCardinalityFilter[	23	] = 	roomCardinality[	23	]  /	roomCardinalityLimit[	23	]
+roomCardinalityFilter[	24	] = 	roomCardinality[	24	]  /	roomCardinalityLimit[	24	]
+roomCardinalityFilter[	25	] = 	roomCardinality[	25	]  /	roomCardinalityLimit[	25	]
+roomCardinalityFilter[	26	] = 	roomCardinality[	26	]  /	roomCardinalityLimit[	26	]
+roomCardinalityFilter[	27	] = 	roomCardinality[	27	]  /	roomCardinalityLimit[	27	]
+roomCardinalityFilter[	28	] = 	roomCardinality[	28	]  /	roomCardinalityLimit[	28	]
+roomCardinalityFilter[	29	] = 	roomCardinality[	29	]  /	roomCardinalityLimit[	29	]
+roomCardinalityFilter[	30	] = 	roomCardinality[	30	]  /	roomCardinalityLimit[	30	]
+
+analyzedRoomRoundCounter = {}
+analyzedRoomCounter = {}
 
 ruleCheckingResults = []
 roomName = -1
 
 
-for room in roomList[::-1]:
+for room in roomList:
 
 	if len(room) > 30:
 		continue
+
+	if len(room) not in analyzedRoomRoundCounter.keys(): analyzedRoomRoundCounter[len(room)] = 0
+	analyzedRoomRoundCounter[len(room)] += 1
+
+	if analyzedRoomRoundCounter[len(room)] != roomCardinalityFilter[len(room)]:
+		continue
+	else:
+		analyzedRoomRoundCounter[len(room)] = 0
+
+	if len(room) not in analyzedRoomCounter.keys(): analyzedRoomCounter[len(room)] = 0
+	analyzedRoomCounter[len(room)] += 1
+
 
 	roomName += 1
 	roomRuleSet = []
@@ -368,7 +457,7 @@ for room in roomList[::-1]:
 
 	for rule in roomRuleSet:
 
-		statusText = str(roomName) +  "/" + str(len(roomList)) + "[u@" + str(len(room)) + "]" + "[%" + str(ruleCounter) + "/" + str(len(roomRuleSet))+ "]" + " - "
+		statusText = str(roomName) +  "[" + str(analyzedRoomCounter[len(room)]) + "/" + str(roomCardinalityLimit[len(room)]) + "][u@" + str(len(room)) + "]" + "[%" + str(ruleCounter) + "/" + str(len(roomRuleSet))+ "]" + " - "
 
 		ruleCounter += 1
 		response = storeAndCheckRule(rule, ruleCounter)
