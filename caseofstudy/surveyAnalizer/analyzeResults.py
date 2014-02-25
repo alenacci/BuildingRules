@@ -232,6 +232,7 @@ cleanRoom()
 
 inputFileName = sys.argv[1]
 
+
 f = open(inputFileName)
 lines = f.readlines()
 f.close()
