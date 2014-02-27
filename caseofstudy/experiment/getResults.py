@@ -7,6 +7,14 @@ from datetime import date
 from datetime import datetime
 from datetime import timedelta
 from database import Database
+import rest
+
+sessionKey = None
+userUuid = None
+username = "admin"
+password = "brulesAdmin2014"
+
+
 
 def execProcess(cmd):
 
@@ -16,6 +24,25 @@ def execProcess(cmd):
 
 	return output
 
+
+def getUserActionOnRule(action):
+	currentFile = "../../frontend/logs/api_requests.log"
+	cmd = "cat " + currentFile + " | grep rules | grep " + action + " | grep -c API_REQUEST"
+	output = execProcess(cmd).replace("\n","").strip()
+	return "Number of total " + action + " request: " + output
+
+
+def getUserActionOnRulePerDay(action):
+
+	result = []
+
+	for day in getExperimentDaysList():
+		currentFile = "../../frontend/logs/api_requests.log"
+		cmd = "cat " + currentFile + ' | grep rules | grep ' + action + ' | grep API_REQUEST | grep -c "> ' + day + '"'
+		output = execProcess(cmd).replace("\n","").strip()
+		result.append( "Number of total " + action + " request on " + day + ": " + output )
+
+	return result
 
 
 def getExperimentDaysList():
@@ -31,6 +58,56 @@ def getExperimentDaysList():
 		currentDay += timedelta(days=1)
 
 	return daysList
+
+
+def getRoomList():
+
+	query = "SELECT DISTINCT room_name FROM `rooms`"
+
+	database = Database()
+	database.open()
+	queryResult = database.executeReadQuery(query)
+	database.close()
+
+	roomList = []
+	
+	for record in queryResult:
+		roomList.append(record[0])
+
+	return roomList
+
+def getRuleList():
+
+	query = "SELECT * FROM `rules`"
+
+	database = Database()
+	database.open()
+	queryResult = database.executeReadQuery(query)
+	database.close()
+
+
+	ruleList = []
+	
+	for record in queryResult:
+		recDict = {}
+		recDict["id"] = record[0]
+		recDict["priority"] = record[1]
+		recDict["category"] = record[2]
+		recDict["buildingName"] = record[3]
+		recDict["groupId"] = record[4]
+		recDict["roomName"] = record[5]
+		recDict["authorUuid"] = record[6]
+		recDict["antecedent"] = record[7]
+		recDict["consequent"] = record[8]
+		recDict["enabled"] = record[9]
+		recDict["deleted"] = record[10]
+		recDict["creationTimestamp"] = record[11] 
+		recDict["lastEditTimestamp"] = record[12]
+
+		ruleList.append(recDict)
+
+	return ruleList
+
 
 def getTimeConflictData(recordFilter):
 
@@ -87,45 +164,88 @@ def getTimeConflictData(recordFilter):
 	return ruleVerificationStats_avg, ruleVerificationStats_max, ruleVerificationStats_min
 
 
+def getRuleAntecedentTriggerInfo(ruleAntecedent):
+	global sessionKey
+	global userUuid
+
+	response = rest.request("/api/tools/triggers/translate", {
+			'sessionKey' : sessionKey,
+			'userUuid' : userUuid,
+			'antecedent' : ruleAntecedent
+			})
+
+	return response["triggers"]
+
+
+def getRuleConsequentActionInfo(ruleConsequent):
+	global sessionKey
+	global userUuid
+
+	response = rest.request("/api/tools/actions/translate", {
+			'sessionKey' : sessionKey,
+			'userUuid' : userUuid,
+			'consequent' : ruleConsequent
+			})
+
+	return response["action"]
+
+
+def login():
+
+	global sessionKey
+	global userUuid
+	global username
+	global password
+
+	response = rest.request("/api/users/<username>/login", {'username' : username, 'password' : password})
+	sessionKey = response["sessionKey"]
+	userUuid = response["userUuid"]
+
+
 ###################################################################################################
 ###################################################################################################
 ###################################################################################################
 
-#GETTING DATA ABOUT THE CONFLICT DETECTION (BOTH SUCCESS AND FAIL)
+
+login()
+
+triggerCategoryCounter = {}
+triggerNameCounter = {}
+
+actionCategoryCounter = {}
+actionNameCounter = {}
+
+triggerActionCategoryCounter = {}
+triggerActionNameCounter = {}
+
+for rule in getRuleList():
 
 
-
-ruleVerificationStats_avg, ruleVerificationStats_max, ruleVerificationStats_min = getTimeConflictData("ALL")
-print ruleVerificationStats_avg
+	#print getRuleAntecedentTriggerInfo(rule["antecedent"])
+	print getRuleConsequentActionInfo(rule["consequent"])
+	raw_input()
 
 
 sys.exit()
 
-# Total add requests
-currentFile = "../../frontend/logs/api_requests.log"
-cmd = "cat " + currentFile + " | grep rules | grep add | grep -c API_REQUEST"
-output = execProcess(cmd).replace("\n","").strip()
-print "Number of total add request: " + output
+
+#GETTING DATA ABOUT THE CONFLICT DETECTION (BOTH SUCCESS AND FAIL)
+ruleVerificationStats_avg, ruleVerificationStats_max, ruleVerificationStats_min = getTimeConflictData("ALL")
+ruleVerificationStats_avg, ruleVerificationStats_max, ruleVerificationStats_min = getTimeConflictData("SUCCESS")
+ruleVerificationStats_avg, ruleVerificationStats_max, ruleVerificationStats_min = getTimeConflictData("FAILED")
 
 
-# Total edit requests
-currentFile = "../../frontend/logs/api_requests.log"
-cmd = "cat " + currentFile + " | grep rules | grep edit | grep -c API_REQUEST"
-output = execProcess(cmd).replace("\n","").strip()
-print "Number of total edit request: " + output
+#GETTING DATA ABOUT THE USERS REQUEST (ADD EDIT RULE)
+print getUserActionOnRule("add")
+print getUserActionOnRule("edit")
+print getUserActionOnRule("delete")
+print getUserActionOnRule("disable")
+print getUserActionOnRule("enable")
 
-# Total add request per day
-for day in getExperimentDaysList():
-	currentFile = "../../frontend/logs/api_requests.log"
-	cmd = "cat " + currentFile + ' | grep rules | grep add | grep API_REQUEST | grep -c "> ' + day + '"'
-	output = execProcess(cmd).replace("\n","").strip()
-	print "Number of total add request on " + day + ": " + output
 
-# Total edit request per day
-for day in getExperimentDaysList():
-	currentFile = "../../frontend/logs/api_requests.log"
-	cmd = "cat " + currentFile + ' | grep rules | grep edit | grep API_REQUEST | grep -c "> ' + day + '"'
-	output = execProcess(cmd).replace("\n","").strip()
-	print "Number of total edit request on " + day + ": " + output
-
+print getUserActionOnRulePerDay("add")
+print getUserActionOnRulePerDay("edit")
+print getUserActionOnRulePerDay("delete")
+print getUserActionOnRulePerDay("disable")
+print getUserActionOnRulePerDay("enable")
 

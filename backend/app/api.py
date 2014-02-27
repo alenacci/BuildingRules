@@ -11,6 +11,8 @@ from app.backend.controller.buildingsManager import BuildingsManager
 from app.backend.controller.roomsManager import RoomsManager
 from app.backend.controller.groupsManager import GroupsManager
 from app.backend.controller.feedbackManager import FeedbackManager
+from app.backend.controller.triggerManager import TriggerManager
+from app.backend.controller.actionManager import ActionManager
 from app.backend.controller.mTurkManager import MTurkManager
 
 api = Blueprint('api', __name__, template_folder='templates')
@@ -898,6 +900,42 @@ def deleteRuleInGroup(username = None, buildingName = None, groupId = None, rule
 			return returnResult( groupsManager.deleteRule(ruleId = ruleId, buildingName = buildingName, groupId = groupId) )
 		except Exception as e:
 			return returnError(e)
+
+
+@api.route('/api/tools/triggers/translate', methods = ['POST'])
+def translateTrigger():
+	if request.method == 'POST':
+
+		sessionKey = validateInput(request.form['sessionKey'])
+		userUuid = validateInput(request.form['userUuid'])	
+		antecedent = validateInput(request.form['antecedent'])	
+
+		try:
+			session = SessionManager()
+			session.checkSessionValidity(sessionKey, userUuid)
+			triggerManager = TriggerManager()
+
+			return returnResult( triggerManager.translateTrigger(ruleAntecedent = antecedent, getDict = True) )
+		except Exception as e:
+			return returnError(e)
+
+@api.route('/api/tools/actions/translate', methods = ['POST'])
+def translateAction():
+	if request.method == 'POST':
+
+		sessionKey = validateInput(request.form['sessionKey'])
+		userUuid = validateInput(request.form['userUuid'])	
+		consequent = validateInput(request.form['consequent'])	
+
+		try:
+			session = SessionManager()
+			session.checkSessionValidity(sessionKey, userUuid)
+			actionManager = ActionManager()
+
+			return returnResult(actionManager.translateAction(ruleConsequent = consequent, getDict = True))
+		except Exception as e:
+			return returnError(e)			
+
 
 def returnResult(result):
 

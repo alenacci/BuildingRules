@@ -112,7 +112,7 @@ class TriggerManager:
 		return value
 
 
-	def translateTrigger(self, ruleAntecedent):
+	def translateTrigger(self, ruleAntecedent, getDict = False):
 		checkData(locals())
 
 		translatedTriggers = []
@@ -140,7 +140,7 @@ class TriggerManager:
 			currentTrigger = {}
 			currentTrigger["antecedent"] = currentAntecedent
 			currentTrigger["translation"] = translation
-			currentTrigger["trigger"] = trigger
+			currentTrigger["trigger"] = trigger if not getDict else trigger.getDict()
 			currentTrigger["parameterValues"] = parameterValues
 			currentTrigger["translatedParams"] = translatedParams
 			

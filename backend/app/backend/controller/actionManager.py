@@ -83,7 +83,7 @@ class ActionManager:
 
 
 
-	def translateAction(self, ruleConsequent):
+	def translateAction(self, ruleConsequent, getDict = False):
 		checkData(locals())
 
 		actions = Actions()
@@ -103,8 +103,14 @@ class ActionManager:
 			value = translatedParams[str(i)]
 			translation = translation.replace("@val", value, 1)
 
-
-		return translation, action, translatedParams
+		if not getDict:
+			return translation, action, translatedParams
+		else:
+			result = {}
+			result["translation"] = translation
+			result["action"] = action.getDict()
+			result["translatedParams"] = translatedParams
+			return result
 
 
 
