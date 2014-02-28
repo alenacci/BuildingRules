@@ -202,6 +202,107 @@ def login():
 	userUuid = response["userUuid"]
 
 
+
+def getRuleUsageFrequency():
+	triggerCategoryCounter = {}
+	triggerNameCounter = {}
+
+	actionCategoryCounter = {}
+	actionNameCounter = {}
+
+	triggerActionCategoryCounter = {}
+	triggerActionNameCounter = {}
+
+	triggerCategories = set()
+	triggerNames = set()
+	actionCategories = set()
+	actionNames = set()
+
+
+
+	for rule in getRuleList():
+
+		triggersInfo = getRuleAntecedentTriggerInfo(rule["antecedent"])
+		actionInfo = getRuleConsequentActionInfo(rule["consequent"])
+
+		actionCategory = actionInfo["category"]
+		actionName = actionInfo["actionName"]
+
+		actionCategories.add(actionCategory)
+		actionNames.add(actionName)
+
+		if actionCategory not in actionCategoryCounter.keys(): actionCategoryCounter[actionCategory] = 0
+		if actionName not in actionNameCounter.keys(): actionNameCounter[actionName] = 0
+
+		actionCategoryCounter[actionCategory] += 1
+		actionNameCounter[actionName] += 1
+		
+		for triggerInfo in triggersInfo:
+
+			trigger = triggerInfo["trigger"]
+
+			triggerCategory = trigger["category"]
+			triggerName = trigger["triggerName"]
+
+			triggerCategories.add(triggerCategory)
+			triggerNames.add(triggerName)
+
+			if triggerCategory not in triggerCategoryCounter.keys(): triggerCategoryCounter[triggerCategory] = 0
+			if triggerName not in triggerNameCounter.keys(): triggerNameCounter[triggerName] = 0
+
+			triggerCategoryCounter[triggerCategory] += 1
+			triggerNameCounter[triggerName] += 1
+
+			if triggerCategory not in triggerActionCategoryCounter.keys(): triggerActionCategoryCounter[triggerCategory] = {}
+			if triggerName not in triggerActionNameCounter.keys(): triggerActionNameCounter[triggerName] = {}
+
+			if actionCategory not in triggerActionCategoryCounter[triggerCategory].keys() :  triggerActionCategoryCounter[triggerCategory][actionCategory] = 0
+			if actionName not in triggerActionNameCounter[triggerName].keys() :  triggerActionNameCounter[triggerName][actionName] = 0
+
+			triggerActionCategoryCounter[triggerCategory][actionCategory] += 1
+			triggerActionNameCounter[triggerName][actionName] += 1
+
+
+	_CSV_SEP = ";"
+	csvFileContent = ""
+
+	csvFileContent += _CSV_SEP
+	for action in sorted(list(actionNames)):
+		csvFileContent += action + _CSV_SEP
+
+	csvFileContent += "\n"
+	for trigger in sorted(list(triggerNames)):
+		csvFileContent += trigger + _CSV_SEP
+		for action in sorted(list(actionNames)):
+			try:
+				csvFileContent += str(triggerActionNameCounter[trigger][action]) + _CSV_SEP
+			except:
+				csvFileContent += "0" + _CSV_SEP
+		csvFileContent += "\n"
+
+	print csvFileContent 
+
+	############################################################################################
+
+	_CSV_SEP = ";"
+	csvFileContent = ""
+
+	csvFileContent += _CSV_SEP
+	for action in sorted(list(actionCategories)):
+		csvFileContent += action + _CSV_SEP
+
+	csvFileContent += "\n"
+	for trigger in sorted(list(triggerCategories)):
+		csvFileContent += trigger + _CSV_SEP
+		for action in sorted(list(actionCategories)):
+			try:
+				csvFileContent += str(triggerActionCategoryCounter[trigger][action]) + _CSV_SEP
+			except:
+				csvFileContent += "0" + _CSV_SEP
+		csvFileContent += "\n"
+
+	print csvFileContent 
+
 ###################################################################################################
 ###################################################################################################
 ###################################################################################################
@@ -209,30 +310,21 @@ def login():
 
 login()
 
-triggerCategoryCounter = {}
-triggerNameCounter = {}
-
-actionCategoryCounter = {}
-actionNameCounter = {}
-
-triggerActionCategoryCounter = {}
-triggerActionNameCounter = {}
-
-for rule in getRuleList():
-
-
-	#print getRuleAntecedentTriggerInfo(rule["antecedent"])
-	print getRuleConsequentActionInfo(rule["consequent"])
-	raw_input()
-
-
-sys.exit()
-
+#getRuleUsageFrequency()
 
 #GETTING DATA ABOUT THE CONFLICT DETECTION (BOTH SUCCESS AND FAIL)
 ruleVerificationStats_avg, ruleVerificationStats_max, ruleVerificationStats_min = getTimeConflictData("ALL")
+
+print ruleVerificationStats_avg
+
+
 ruleVerificationStats_avg, ruleVerificationStats_max, ruleVerificationStats_min = getTimeConflictData("SUCCESS")
 ruleVerificationStats_avg, ruleVerificationStats_max, ruleVerificationStats_min = getTimeConflictData("FAILED")
+
+
+
+
+
 
 
 #GETTING DATA ABOUT THE USERS REQUEST (ADD EDIT RULE)

@@ -38,7 +38,7 @@ def request(url, data):
 	ts = time.time()
 	st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
 	messageLogging = "> " + st + " > " + message 
-	print messageLogging
+	#print messageLogging
 
 
 	r = requests.post(url, data=data, headers=headers)
