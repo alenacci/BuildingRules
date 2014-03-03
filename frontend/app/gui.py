@@ -9,8 +9,6 @@ import rest
 
 gui = Blueprint('gui', __name__, template_folder='templates')
 
-@gui.route('/<source>/')
-@gui.route('/<source>')
 @gui.route('/')
 def index():
 
@@ -18,6 +16,40 @@ def index():
 		return redirect(url_for('gui.buildings'))
 
 	return render_template('home.html')
+
+@gui.route('/gantt')
+def gantt():
+
+	return render_template('gantt.html')
+
+@gui.route('/ganttJson')
+def ganttJson():
+	gantt = []
+
+	item = {}
+	item["name"] = "Sprint 0"
+	item["desc"] = "Analysis"
+	item["values"] = []
+	item["values"].append({	"from" : "/Date(1393779600000)/", "to" : "/Date(1393783200000)/", "label" : "Requirement Gathering", "customClass" : "ganttRed" })
+	gantt.append(item)
+
+	item = {}
+	item["name"] = " "
+	item["desc"] = "Warranty Period"
+	item["values"] = []
+	item["values"].append({	"from" : "/Date(1393783200000)/", "to" : "/Date(193826400000)/", "label" : "Warranty Period", "customClass" : "ganttOrange" })
+	gantt.append(item)
+
+	item = {}
+	item["name"] = " "
+	item["desc"] = "Warranty Period 222"
+	item["values"] = []
+	item["values"].append({	"from" : "/Date(1393783200000)/", "to" : "/Date(193826400000)/", "label" : "Warranty Period", "customClass" : "ganttOrange" })
+	gantt.append(item)
+
+
+	return json.dumps(gantt)
+	
 
 @gui.route('/partecipate/')
 @gui.route('/partecipate')
