@@ -37,7 +37,7 @@ class RoomSimulator:
 			return False
 
 
-	def startSimulation(self):
+	def start(self):
 
 		simulationBufferFolder = "tools/simulation/"
 		if not os.path.exists(simulationBufferFolder): os.makedirs(simulationBufferFolder)

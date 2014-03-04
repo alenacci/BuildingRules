@@ -4,6 +4,7 @@ from flask import request, session, g, redirect, url_for, abort, render_template
 import time
 import datetime
 
+
 from app import app
 import rest
 
@@ -16,40 +17,6 @@ def index():
 		return redirect(url_for('gui.buildings'))
 
 	return render_template('home.html')
-
-@gui.route('/gantt')
-def gantt():
-
-	return render_template('gantt.html')
-
-@gui.route('/ganttJson')
-def ganttJson():
-	gantt = []
-
-	item = {}
-	item["name"] = "Sprint 0"
-	item["desc"] = "Light"
-	item["values"] = []
-	item["values"].append({	"from" : "/Date(1393779600000)/", "to" : "/Date(1393783200000)/", "label" : "ON", "customClass" : "ganttRed" })
-	gantt.append(item)
-
-	item = {}
-	item["name"] = " "
-	item["desc"] = "HVAC"
-	item["values"] = []
-	item["values"].append({	"from" : "/Date(1393783200000)/", "to" : "/Date(193826400000)/", "label" : "76F", "customClass" : "ganttOrange" })
-	gantt.append(item)
-
-	item = {}
-	item["name"] = " "
-	item["desc"] = "Warranty Period 222"
-	item["values"] = []
-	item["values"].append({	"from" : "/Date(1393783200000)/", "to" : "/Date(193876400000)/", "label" : "Warranty Period", "customClass" : "ganttOrange" })
-	gantt.append(item)
-
-
-	return json.dumps(gantt)
-	
 
 @gui.route('/partecipate/')
 @gui.route('/partecipate')
@@ -202,6 +169,65 @@ def buildingDetail(buildingName = None):
 	else:
 		return render_template('error.html', error = response['request-errorDescription'])
 
+
+@gui.route('/buildings/<buildingName>/rooms/<roomName>/graphicalView/', methods = ['GET', 'POST'])
+@gui.route('/buildings/<buildingName>/rooms/<roomName>/graphicalView', methods = ['GET', 'POST'])
+def roomGraphicalView(buildingName = None, roomName = None):
+
+	if not loggedIn():	return redirect(url_for('gui.login'))
+
+
+	ganttView = []
+
+	if request.method == 'POST':
+
+		print request.form
+
+		occupancyTimeRangeFrom = request.form['occupancyTimeRangeFrom']
+		occupancyTimeRangeTo = request.form['occupancyTimeRangeTo']
+		roomTemperature = request.form['roomTemperature']
+		externalTemperature = request.form['externalTemperature']
+		weather = request.form['weather']
+
+		response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/simulation",
+				{
+					'username' : session["username"], 
+					'buildingName' : buildingName,
+					'sessionKey' : session["sessionKey"],
+					'userUuid' : session["userUuid"],
+					'roomName' : roomName,
+					'occupancyTimeRangeFrom' : occupancyTimeRangeFrom,
+					'occupancyTimeRangeTo' : occupancyTimeRangeTo,
+					'roomTemperature' : roomTemperature,
+					'externalTemperature' : externalTemperature,
+					'weather' : weather
+				})
+
+		if not successResponse(response):
+			return render_template('error.html', error = response['request-errorDescription'])
+
+		for target in response["simulation"].keys():
+
+			item = {}
+			item["name"] = target
+			item["desc"] = ""
+			item["values"] = []
+			for bar in response["simulation"][target]:
+				from datetime import datetime
+				datetimeFrom = datetime.strptime("03/03/2014 " + bar["from"].replace(":","."), '%d/%m/%Y %H.%M')
+				datetimeTo = datetime.strptime("03/03/2014 " + bar["to"].replace(":","."), '%d/%m/%Y %H.%M')
+				unixTsFrom = str(int(time.mktime(datetimeFrom.timetuple())))
+				unixTsTo = str(int(time.mktime(datetimeTo.timetuple())))
+				item["values"].append({	"from" : "/Date(" + unixTsFrom + ")/", "to" : "/Date(" + unixTsTo + ")/", "label" : bar["status"], "customClass" : "ganttRed" })
+
+			ganttView.append(item)
+
+
+
+	print json.dumps(ganttView, separators=(',',':'))
+	
+
+	return render_template('gantt.html', ganttView = json.dumps(ganttView, separators=(',',':')))			
 
 
 

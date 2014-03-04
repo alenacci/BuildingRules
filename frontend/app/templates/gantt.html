@@ -40,6 +40,14 @@
     </head>
     <body>
 
+    	<form method="POST" action="{{request.path}}">
+    		occupancyTimeRangeFrom <input type="text" name="occupancyTimeRangeFrom"> <br>
+    		occupancyTimeRangeTo <input type="text" name="occupancyTimeRangeTo"> <br>
+    		roomTemperature <input type="text" name="roomTemperature"> <br>
+    		externalTemperature <input type="text" name="externalTemperature"> <br>
+    		weather <input type="text" name="weather"> <br>
+    		<input type="submit">
+    	</form>
 		<div class="contain">			
 			<div class="gantt"></div>
 		</div>
@@ -55,7 +63,7 @@
 
 
 			$(".gantt").gantt({
-				source: "http://192.168.199.146:5004/ganttJson",
+				source: [{"values":[{"to":"/Date(1393916400)/","from":"/Date(1393833600)/","customClass":"ganttRed","label":"81%"}],"name":"BLIND","desc":""},{"values":[{"to":"/Date(1393869600)/","from":"/Date(1393833600)/","customClass":"ganttRed","label":"OFF"},{"to":"/Date(1393916400)/","from":"/Date(1393869600)/","customClass":"ganttRed","label":"ON"},{"to":"/Date(1393916400)/","from":"/Date(1393833600)/","customClass":"ganttRed","label":"OFF"}],"name":"PROJECTOR","desc":""},{"values":[{"to":"/Date(1393912800)/","from":"/Date(1393833600)/","customClass":"ganttRed","label":"OFF"}],"name":"HVAC","desc":""},{"values":[{"to":"/Date(1393916400)/","from":"/Date(1393833600)/","customClass":"ganttRed","label":"OPEN"}],"name":"WINDOWS","desc":""},{"values":[{"to":"/Date(1393916400)/","from":"/Date(1393833600)/","customClass":"ganttRed","label":"OFF"}],"name":"LIGHT","desc":""},{"values":[{"to":"/Date(1393916400)/","from":"/Date(1393833600)/","customClass":"ganttRed","label":"38%-46%"}],"name":"HUMIDITY","desc":""},{"values":[{"to":"/Date(1393869600)/","from":"/Date(1393833600)/","customClass":"ganttRed","label":"OFF"},{"to":"/Date(1393916400)/","from":"/Date(1393869600)/","customClass":"ganttRed","label":"ON"},{"to":"/Date(1393916400)/","from":"/Date(1393833600)/","customClass":"ganttRed","label":"OFF"}],"name":"AUDIO","desc":""},{"values":[{"to":"/Date(1393912800)/","from":"/Date(1393833600)/","customClass":"ganttRed","label":"69F-75F"}],"name":"TEMPERATURE","desc":""}],
 				dow : ["Today", "Tomorrow"],
 				navigate: "scroll",	
 				maxScale: "hours",
