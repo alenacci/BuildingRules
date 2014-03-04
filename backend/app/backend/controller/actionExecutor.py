@@ -15,8 +15,38 @@ from app.backend.model.rules import Rules
 
 class ActionExecutor:
 
-	def __init__(self):
-		pass
+	def __init__(self, simulationParameters = None, roomFilter = None):
+		
+		# simulationParameters is a dictionary; here an exaple
+		#		simulationParameters = {}
+		# 		simulationParameters['temperature'] = "75F"
+		# 		simulationParameters['occupancy'] = True
+		# 		simulationParameters['day'] = "Monday"
+		# 		simulationParameters['date'] = "25/04"
+		# 		simulationParameters['weather'] = "Sunny"
+		# 		simulationParameters['time'] = "16:00"	--> USE 24 HOURS!!! NOT AM/PM
+		# 		simulationParameters['resultsBufferFile'] = "logfile.txt"
+
+		# roomFilter is a list of dicionaries containes the list of rooms you want to consider; here an example
+		#
+		#		roomFilter = []
+		#		roomFilter[0] = {'buildingName' : 'CSE', 'roomName' : '300'} 	
+		#		roomFilter[1] = {'buildingName' : 'EEE', 'roomName' : '350'} 	
+		#		roomFilter[2] = {'buildingName' : 'CSE', 'roomName' : '220'} 	
+
+		self.simulationParameters = simulationParameters
+		self.roomFilter = roomFilter
+
+	def skipRuleOnRoomFilter(self, buildingName, roomName):
+
+		if not self.roomFilter:	return False
+
+		for room in self.roomFilter:
+			if (room["buildingName"] == buildingName) and (room["roomName"] == roomName):
+				return False
+
+		return True
+
 
 	def checkRuleTrigger(self, rule):
 
@@ -36,6 +66,7 @@ class ActionExecutor:
 			parameters.update({'buildingName' : rule.buildingName})
 			if rule.roomName: parameters.update({'roomName' : rule.roomName})
 			if rule.groupId: parameters.update({'groupId' : rule.groupId})
+			if self.simulationParameters: parameters.update({'simulationParameters' : self.simulationParameters})
 			
 			driver = triggerManager.getTriggerDriver(trigger, parameters)
 			
@@ -64,6 +95,7 @@ class ActionExecutor:
 		parameters.update({'buildingName' : rule.buildingName})
 		if rule.roomName: parameters.update({'roomName' : rule.roomName})
 		if rule.groupId: parameters.update({'groupId' : rule.groupId})
+		if self.simulationParameters: parameters.update({'simulationParameters' : self.simulationParameters})
 
 		driver = actionManager.getActionDriver(action, parameters)
 
@@ -85,7 +117,12 @@ class ActionExecutor:
 		pass
 
 
-	def executeActions(self):
+	
+
+
+
+
+	def start(self):
 
 		print
 		print
@@ -117,6 +154,8 @@ class ActionExecutor:
 
 					if rule.roomName and not rule.groupId:
 
+						if self.skipRuleOnRoomFilter(buildingName = building.buildingName, roomName = rule.roomName): continue
+
 						if self.checkRuleTrigger(rule):
 							# If the antecedent of the rule is triggered, let us store the rule as triggered!
 							triggeredRules.append(rule)
@@ -126,6 +165,8 @@ class ActionExecutor:
 
 						groupRoomList = groupsManager.getRooms(buildingName = building.buildingName, groupId = rule.groupId)["rooms"]
 						for room in groupRoomList:
+
+							if self.skipRuleOnRoomFilter(buildingName = building.buildingName, roomName = room.roomName): continue
 
 							roomName = room["roomName"]
 							newRule = copy.copy(rule)			# I need to copy the object to modify the room name

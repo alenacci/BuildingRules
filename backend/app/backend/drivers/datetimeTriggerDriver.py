@@ -25,7 +25,6 @@ class DatetimeTriggerDriver(GenericTriggerDriver):
 
 	def __init__(self, parameters):
 		self.parameters = parameters
-		
 
 	def __getIntFromDate(self, date):
 		day = date[:date.find("/")]
@@ -59,7 +58,71 @@ class DatetimeTriggerDriver(GenericTriggerDriver):
 		if day.upper().startswith("SUN"): return str(7)
 
 
-	def eventTriggered(self):
+	def __simulatedEventTriggered(self):
+
+
+		if self.parameters["operation"] == "DATE_IN_RANGE":
+
+			par0 = self.__getIntFromDate(self.parameters['0'])
+			par1 = self.__getIntFromDate(self.parameters['1'])
+			today = self.__getIntFromDate(self.parameters["simulationParameters"]["date"])
+
+			if today >= par0 and today <= par1:
+				return True
+			else:
+				return False
+			
+			return bool(random.getrandbits(1))
+
+		elif self.parameters["operation"] == "TIME_IN_RANGE":
+
+			par0 = self.__getIntFromTime(self.parameters['0'])
+			par1 = self.__getIntFromTime(self.parameters['1'])
+			now = self.__getIntFromTime(self.parameters["simulationParameters"]["time"][:2])
+
+			if now >= par0 and now <= par1:
+				return True
+			else:
+				return False
+
+			return bool(random.getrandbits(1))
+
+		elif self.parameters["operation"] == "TODAY":
+			par0 = int(self.__getIntFromDay(self.parameters['0']))
+			today = int(self.__getIntFromDay(self.parameters["simulationParameters"]["day"]))
+
+			if today == par0:
+				return True
+			else:
+				return False
+
+
+		elif self.parameters["operation"] == "DAY_RANGE":
+			par0 = int(self.__getIntFromDay(self.parameters['0']))
+			par1 = int(self.__getIntFromDay(self.parameters['1']))
+			
+			today = int(self.__getIntFromDay(self.parameters["simulationParameters"]["day"]))
+
+			if (today >= par0) and (today <= par1):
+				return True
+			else:
+				return False
+
+
+		else:
+			raise UnsupportedDriverParameterError(self.parameters["operation"])
+
+
+
+
+
+
+
+
+
+
+
+	def __actualEventTriggered(self):
 
 		if self.parameters["operation"] == "DATE_IN_RANGE":
 

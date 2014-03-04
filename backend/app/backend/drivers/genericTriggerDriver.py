@@ -11,8 +11,23 @@ class GenericTriggerDriver:
 	def __init__(self, parameters):
 		self.parameters = parameters
 
-	def eventTriggered(self):
+	def __simulatedEventTriggered(self):
+		raise SimulationModeNotSupportedError()
+
+	def __actualEventTriggered(self):
 		pass
+
+	def __simulatedEventTriggeredWrapper(self):
+		print "[SIM]", 
+		self.__simulatedEventTriggered
+
+	def eventTriggered(self):
+
+		if 'simulationParameters' in self.parameters:
+			return self.__simulatedEventTriggeredWrapper()
+
+		return self.__actualEventTriggered()
+
 
 	def __str__(self):
 		return "TimeTriggerDriver: "

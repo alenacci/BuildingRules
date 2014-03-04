@@ -28,23 +28,23 @@ def ganttJson():
 
 	item = {}
 	item["name"] = "Sprint 0"
-	item["desc"] = "Analysis"
+	item["desc"] = "Light"
 	item["values"] = []
-	item["values"].append({	"from" : "/Date(1393779600000)/", "to" : "/Date(1393783200000)/", "label" : "Requirement Gathering", "customClass" : "ganttRed" })
+	item["values"].append({	"from" : "/Date(1393779600000)/", "to" : "/Date(1393783200000)/", "label" : "ON", "customClass" : "ganttRed" })
 	gantt.append(item)
 
 	item = {}
 	item["name"] = " "
-	item["desc"] = "Warranty Period"
+	item["desc"] = "HVAC"
 	item["values"] = []
-	item["values"].append({	"from" : "/Date(1393783200000)/", "to" : "/Date(193826400000)/", "label" : "Warranty Period", "customClass" : "ganttOrange" })
+	item["values"].append({	"from" : "/Date(1393783200000)/", "to" : "/Date(193826400000)/", "label" : "76F", "customClass" : "ganttOrange" })
 	gantt.append(item)
 
 	item = {}
 	item["name"] = " "
 	item["desc"] = "Warranty Period 222"
 	item["values"] = []
-	item["values"].append({	"from" : "/Date(1393783200000)/", "to" : "/Date(193826400000)/", "label" : "Warranty Period", "customClass" : "ganttOrange" })
+	item["values"].append({	"from" : "/Date(1393783200000)/", "to" : "/Date(193876400000)/", "label" : "Warranty Period", "customClass" : "ganttOrange" })
 	gantt.append(item)
 
 

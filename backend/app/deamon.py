@@ -14,7 +14,7 @@ def start():
 
 	while(1):
 		try:
-			actionExecutor.executeActions()
+			actionExecutor.start()
 		except Exception as e:
 			import logging
 			logging.basicConfig(filename='logs/deamon.log')

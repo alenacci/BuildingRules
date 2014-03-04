@@ -132,157 +132,179 @@ class ActionManager:
 	def getActionDriver(self, action, parameters = None):
 		checkData(locals())
 
-		from app.backend.drivers.roomActionDriver import RoomActionDriver
+		from app.backend.drivers.roomHvacActionDriver import RoomHvacActionDriver
+		from app.backend.drivers.roomLightActionDriver import RoomLightActionDriver
+		from app.backend.drivers.roomApplianceActionDriver import RoomApplianceActionDriver
+		from app.backend.drivers.roomSpecialActionDriver import RoomSpecialActionDriver	
+		from app.backend.drivers.roomWindowActionDriver import RoomWindowActionDriver	
+		from app.backend.drivers.roomFanHoodsActionDriver import RoomFanHoodsActionDriver	
+
 
 		if not parameters:
 			parameters = {}
 
+
 		if action.actionName == "LIGHT_ON":
 			parameters.update({'operation' : 'LIGHT_ON'})
-			return  RoomActionDriver(parameters = parameters)
+			return  RoomLightActionDriver(parameters = parameters)
 
 		if action.actionName == "LIGHT_OFF":
 			parameters.update({'operation' : 'LIGHT_OFF'})
-			return  RoomActionDriver(parameters = parameters)
-
-		if action.actionName == "HVAC_ON":
-			parameters.update({'operation' : 'HVAC_OFF'})
-			return  RoomActionDriver(parameters = parameters)
-
-		if action.actionName == "HVAC_OFF":
-			parameters.update({'operation' : 'HVAC_OFF'})
-			return  RoomActionDriver(parameters = parameters)
-
-		if action.actionName == "SET_TEMPERATURE":
-			parameters.update({'operation' : 'SET_TEMPERATURE'})
-			return  RoomActionDriver(parameters = parameters)
-
-		if action.actionName == "SET_HUMIDITY":
-			parameters.update({'operation' : 'SET_HUMIDITY'})
-			return  RoomActionDriver(parameters = parameters)
-
-		if action.actionName == "COFFEE_ON":
-			parameters.update({'operation' : 'COFFEE_ON'})
-			return  RoomActionDriver(parameters = parameters)
-
-		if action.actionName == "COFFEE_OFF":
-			parameters.update({'operation' : 'COFFEE_OFF'})
-			return  RoomActionDriver(parameters = parameters)
-
-		if action.actionName == "PRINTER_ON":
-			parameters.update({'operation' : 'PRINTER_ON'})
-			return  RoomActionDriver(parameters = parameters)
-
-		if action.actionName == "PRINTER_OFF":
-			parameters.update({'operation' : 'PRINTER_OFF'})
-			return  RoomActionDriver(parameters = parameters)
-
-		if action.actionName == "COMPUTER_ON":
-			parameters.update({'operation' : 'COMPUTER_ON'})
-			return  RoomActionDriver(parameters = parameters)
-
-		if action.actionName == "COMPUTER_OFF":
-			parameters.update({'operation' : 'COMPUTER_OFF'})
-			return  RoomActionDriver(parameters = parameters)
+			return  RoomLightActionDriver(parameters = parameters)
 
 		if action.actionName == "DESKLIGHT_ON":
 			parameters.update({'operation' : 'DESKLIGHT_ON'})
-			return  RoomActionDriver(parameters = parameters)
+			return  RoomLightActionDriver(parameters = parameters)
 
 		if action.actionName == "DESKLIGHT_OFF":
 			parameters.update({'operation' : 'DESKLIGHT_OFF'})
-			return  RoomActionDriver(parameters = parameters)
-
-		if action.actionName == "DISPLAYMONITOR_ON":
-			parameters.update({'operation' : 'DISPLAYMONITOR_ON'})
-			return  RoomActionDriver(parameters = parameters)
-
-		if action.actionName == "DISPLAYMONITOR_OFF":
-			parameters.update({'operation' : 'DISPLAYMONITOR_OFF'})
-			return  RoomActionDriver(parameters = parameters)
-
-		if action.actionName == "SEND_COMPLAIN":
-			parameters.update({'operation' : 'DISPLAYMONITOR_OFF'})
-			return  RoomActionDriver(parameters = parameters)
-
-		if action.actionName == "WINDOWS_OPEN":
-			parameters.update({'operation' : 'WINDOWS_OPEN'})
-			return  RoomActionDriver(parameters = parameters)
-
-		if action.actionName == "WINDOWS_CLOSE":
-			parameters.update({'operation' : 'WINDOWS_CLOSE'})
-			return  RoomActionDriver(parameters = parameters)
-
-		if action.actionName == "CURTAINS_OPEN":
-			parameters.update({'operation' : 'CURTAINS_OPEN'})
-			return  RoomActionDriver(parameters = parameters)
-
-		if action.actionName == "CURTAINS_CLOSE":
-			parameters.update({'operation' : 'CURTAINS_CLOSE'})
-			return  RoomActionDriver(parameters = parameters)
-
-		if action.actionName == "PROJECTOR_ON":
-			parameters.update({'operation' : 'PROJECTOR_ON'})
-			return  RoomActionDriver(parameters = parameters)
-
-		if action.actionName == "PROJECTOR_OFF":
-			parameters.update({'operation' : 'PROJECTOR_OFF'})
-			return  RoomActionDriver(parameters = parameters)
-
-		if action.actionName == "AUDIO_ON":
-			parameters.update({'operation' : 'AUDIO_ON'})
-			return  RoomActionDriver(parameters = parameters)
-
-		if action.actionName == "AUDIO_OFF":
-			parameters.update({'operation' : 'AUDIO_OFF'})
-			return  RoomActionDriver(parameters = parameters)
-
-		if action.actionName == "EXHAUST_FAN_ON":
-			parameters.update({'operation' : 'EXHAUST_FAN_ON'})
-			return  RoomActionDriver(parameters = parameters)
-
-		if action.actionName == "EXHAUST_FAN_OFF":
-			parameters.update({'operation' : 'EXHAUST_FAN_OFF'})
-			return  RoomActionDriver(parameters = parameters)
-
-		if action.actionName == "FUME_HOODS_ON":
-			parameters.update({'operation' : 'FUME_HOODS_ON'})
-			return  RoomActionDriver(parameters = parameters)
-
-		if action.actionName == "FUME_HOODS_OFF":
-			parameters.update({'operation' : 'FUME_HOODS_OFF'})
-			return  RoomActionDriver(parameters = parameters)
-
-		if action.actionName == "SET_BLIND":
-			parameters.update({'operation' : 'SET_BLIND'})
-			return  RoomActionDriver(parameters = parameters)
+			return  RoomLightActionDriver(parameters = parameters)
 
 
 
+
+		if action.actionName == "HVAC_ON":
+			parameters.update({'operation' : 'HVAC_OFF'})
+			return  RoomHvacActionDriver(parameters = parameters)
+
+		if action.actionName == "HVAC_OFF":
+			parameters.update({'operation' : 'HVAC_OFF'})
+			return  RoomHvacActionDriver(parameters = parameters)
+
+		if action.actionName == "SET_TEMPERATURE":
+			parameters.update({'operation' : 'SET_TEMPERATURE'})
+			return  RoomHvacActionDriver(parameters = parameters)
+
+		if action.actionName == "SET_HUMIDITY":
+			parameters.update({'operation' : 'SET_HUMIDITY'})
+			return  RoomHvacActionDriver(parameters = parameters)
 
 		if action.actionName == "HEATING_ON":
 			parameters.update({'operation' : 'HEATING_ON'})
-			return  RoomActionDriver(parameters = parameters)
+			return  RoomHvacActionDriver(parameters = parameters)
 
 		if action.actionName == "HEATING_OFF":
 			parameters.update({'operation' : 'HEATING_OFF'})
-			return  RoomActionDriver(parameters = parameters)
+			return  RoomHvacActionDriver(parameters = parameters)
 
 		if action.actionName == "AIR_CONDITIONING_ON":
 			parameters.update({'operation' : 'AIR_CONDITIONING_ON'})
-			return  RoomActionDriver(parameters = parameters)
+			return  RoomHvacActionDriver(parameters = parameters)
 
 		if action.actionName == "AIR_CONDITIONING_OFF":
 			parameters.update({'operation' : 'AIR_CONDITIONING_OFF'})
-			return  RoomActionDriver(parameters = parameters)
+			return  RoomHvacActionDriver(parameters = parameters)
+
+
+
 
 		if action.actionName == "APP_MICROWAVE_ON":
 			parameters.update({'operation' : 'APP_MICROWAVE_ON'})
-			return  RoomActionDriver(parameters = parameters)
+			return  RoomApplianceActionDriver(parameters = parameters)
 
 		if action.actionName == "APP_MICROWAVE_OFF":
 			parameters.update({'operation' : 'APP_MICROWAVE_OFF'})
-			return  RoomActionDriver(parameters = parameters)
+			return  RoomApplianceActionDriver(parameters = parameters)
+
+		if action.actionName == "COFFEE_ON":
+			parameters.update({'operation' : 'COFFEE_ON'})
+			return  RoomApplianceActionDriver(parameters = parameters)
+
+		if action.actionName == "COFFEE_OFF":
+			parameters.update({'operation' : 'COFFEE_OFF'})
+			return  RoomApplianceActionDriver(parameters = parameters)
+
+		if action.actionName == "PRINTER_ON":
+			parameters.update({'operation' : 'PRINTER_ON'})
+			return  RoomApplianceActionDriver(parameters = parameters)
+
+		if action.actionName == "PRINTER_OFF":
+			parameters.update({'operation' : 'PRINTER_OFF'})
+			return  RoomApplianceActionDriver(parameters = parameters)
+
+		if action.actionName == "COMPUTER_ON":
+			parameters.update({'operation' : 'COMPUTER_ON'})
+			return  RoomApplianceActionDriver(parameters = parameters)
+
+		if action.actionName == "COMPUTER_OFF":
+			parameters.update({'operation' : 'COMPUTER_OFF'})
+			return  RoomApplianceActionDriver(parameters = parameters)
+
+		if action.actionName == "DISPLAYMONITOR_ON":
+			parameters.update({'operation' : 'DISPLAYMONITOR_ON'})
+			return  RoomApplianceActionDriver(parameters = parameters)
+
+		if action.actionName == "DISPLAYMONITOR_OFF":
+			parameters.update({'operation' : 'DISPLAYMONITOR_OFF'})
+			return  RoomApplianceActionDriver(parameters = parameters)
+
+		if action.actionName == "PROJECTOR_ON":
+			parameters.update({'operation' : 'PROJECTOR_ON'})
+			return  RoomApplianceActionDriver(parameters = parameters)
+
+		if action.actionName == "PROJECTOR_OFF":
+			parameters.update({'operation' : 'PROJECTOR_OFF'})
+			return  RoomApplianceActionDriver(parameters = parameters)
+
+		if action.actionName == "AUDIO_ON":
+			parameters.update({'operation' : 'AUDIO_ON'})
+			return  RoomApplianceActionDriver(parameters = parameters)
+
+		if action.actionName == "AUDIO_OFF":
+			parameters.update({'operation' : 'AUDIO_OFF'})
+			return  RoomApplianceActionDriver(parameters = parameters)
+
+
+
+
+
+		if action.actionName == "SEND_COMPLAIN":
+			parameters.update({'operation' : 'DISPLAYMONITOR_OFF'})
+			return  RoomSpecialActionDriver(parameters = parameters)
+
+
+
+		if action.actionName == "WINDOWS_OPEN":
+			parameters.update({'operation' : 'WINDOWS_OPEN'})
+			return  RoomWindowActionDriver(parameters = parameters)
+
+		if action.actionName == "WINDOWS_CLOSE":
+			parameters.update({'operation' : 'WINDOWS_CLOSE'})
+			return  RoomWindowActionDriver(parameters = parameters)
+
+		if action.actionName == "CURTAINS_OPEN":
+			parameters.update({'operation' : 'CURTAINS_OPEN'})
+			return  RoomWindowActionDriver(parameters = parameters)
+
+		if action.actionName == "CURTAINS_CLOSE":
+			parameters.update({'operation' : 'CURTAINS_CLOSE'})
+			return  RoomWindowActionDriver(parameters = parameters)
+
+		if action.actionName == "SET_BLIND":
+			parameters.update({'operation' : 'SET_BLIND'})
+			return  RoomWindowActionDriver(parameters = parameters)
+
+
+
+
+
+		if action.actionName == "EXHAUST_FAN_ON":
+			parameters.update({'operation' : 'EXHAUST_FAN_ON'})
+			return  RoomFanHoodsActionDriver(parameters = parameters)
+
+		if action.actionName == "EXHAUST_FAN_OFF":
+			parameters.update({'operation' : 'EXHAUST_FAN_OFF'})
+			return  RoomFanHoodsActionDriver(parameters = parameters)
+
+		if action.actionName == "FUME_HOODS_ON":
+			parameters.update({'operation' : 'FUME_HOODS_ON'})
+			return  RoomFanHoodsActionDriver(parameters = parameters)
+
+		if action.actionName == "FUME_HOODS_OFF":
+			parameters.update({'operation' : 'FUME_HOODS_OFF'})
+			return  RoomFanHoodsActionDriver(parameters = parameters)
+
+
 
 
 

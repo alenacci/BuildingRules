@@ -99,4 +99,7 @@ class AlredyAssignedPriorityError(Exception):
 
 class BadInputError(Exception):
 	pass
+
+class SimulationModeNotSupportedError(Exception):
+	pass
 	
