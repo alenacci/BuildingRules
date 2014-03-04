@@ -214,8 +214,10 @@ def roomGraphicalView(buildingName = None, roomName = None):
 			item["values"] = []
 			for bar in response["simulation"][target]:
 				from datetime import datetime
-				datetimeFrom = datetime.strptime("03/03/2014 " + bar["from"].replace(":","."), '%d/%m/%Y %H.%M')
-				datetimeTo = datetime.strptime("03/03/2014 " + bar["to"].replace(":","."), '%d/%m/%Y %H.%M')
+				datetimeFrom = datetime.strptime("02/03/2014 " + bar["from"].replace(".",":") + ":00", '%d/%m/%Y %H:%M:%S')
+				datetimeTo = datetime.strptime("03/03/2014 " + bar["to"].replace(".",":") + ":00", '%d/%m/%Y %H:%M:%S')
+				print datetimeFrom
+				print datetimeTo
 				unixTsFrom = str(int(time.mktime(datetimeFrom.timetuple())))
 				unixTsTo = str(int(time.mktime(datetimeTo.timetuple())))
 				item["values"].append({	"from" : "/Date(" + unixTsFrom + ")/", "to" : "/Date(" + unixTsTo + ")/", "label" : bar["status"], "customClass" : "ganttRed" })
