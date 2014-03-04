@@ -112,16 +112,6 @@ class DatetimeTriggerDriver(GenericTriggerDriver):
 		else:
 			raise UnsupportedDriverParameterError(self.parameters["operation"])
 
-
-
-
-
-
-
-
-
-
-
 	def __actualEventTriggered(self):
 
 		if self.parameters["operation"] == "DATE_IN_RANGE":
@@ -174,6 +164,16 @@ class DatetimeTriggerDriver(GenericTriggerDriver):
 
 		else:
 			raise UnsupportedDriverParameterError(self.parameters["operation"])
+
+	def __simulatedEventTriggeredWrapper(self):
+		print "[SIMULATION]" + "[" + self.parameters["simulationParameters"]["date"] + "]" + "[" + self.parameters["simulationParameters"]["time"] + "]", 
+		return self.__simulatedEventTriggered()
+
+
+	def eventTriggered(self):
+		if 'simulationParameters' in self.parameters:
+			return self.__simulatedEventTriggeredWrapper()
+		return self.__actualEventTriggered()
 
 
 	def __str__(self):

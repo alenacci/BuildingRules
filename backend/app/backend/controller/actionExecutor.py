@@ -19,11 +19,12 @@ class ActionExecutor:
 		
 		# simulationParameters is a dictionary; here an exaple
 		#		simulationParameters = {}
-		# 		simulationParameters['temperature'] = "75F"
+		# 		simulationParameters['roomTemperature'] = "75F"
 		# 		simulationParameters['occupancy'] = True
 		# 		simulationParameters['day'] = "Monday"
 		# 		simulationParameters['date'] = "25/04"
 		# 		simulationParameters['weather'] = "Sunny"
+		# 		simulationParameters['externalTemperature'] = "75F"		
 		# 		simulationParameters['time'] = "16:00"	--> USE 24 HOURS!!! NOT AM/PM
 		# 		simulationParameters['resultsBufferFile'] = "logfile.txt"
 

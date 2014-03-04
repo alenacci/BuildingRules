@@ -25,7 +25,7 @@ class FakeTriggerDriver(GenericTriggerDriver):
 	def __init__(self, parameters):
 		self.parameters = parameters
 
-	def eventTriggered(self):
+	def __simulatedEventTriggered(self):
 		import random
 
 		if self.parameters["operation"] == "NO_RULE":
@@ -33,6 +33,27 @@ class FakeTriggerDriver(GenericTriggerDriver):
 			return True
 		else:
 			raise UnsupportedDriverParameterError(self.parameters["operation"])
+
+
+	def __actualEventTriggered(self):
+		import random
+
+		if self.parameters["operation"] == "NO_RULE":
+			
+			return True
+		else:
+			raise UnsupportedDriverParameterError(self.parameters["operation"])
+
+
+	def __simulatedEventTriggeredWrapper(self):
+		print "[SIMULATION]" + "[" + self.parameters["simulationParameters"]["date"] + "]" + "[" + self.parameters["simulationParameters"]["time"] + "]", 
+		return self.__simulatedEventTriggered()
+
+
+	def eventTriggered(self):
+		if 'simulationParameters' in self.parameters:
+			return self.__simulatedEventTriggeredWrapper()
+		return self.__actualEventTriggered()
 
 
 	def __str__(self):

@@ -34,7 +34,7 @@ class RoomTriggerDriver(GenericTriggerDriver):
 		self.http = httplib2.Http()
 
 	
-	def eventTriggered(self):
+	def __actualEventTriggered(self):
 
 		import random
 
@@ -74,8 +74,29 @@ class RoomTriggerDriver(GenericTriggerDriver):
 			raise UnsupportedDriverParameterError(self.parameters["operation"])
 
 
-	def __str__(self):
-		return "RoomTriggerDriver: "
+	def __simulatedEventTriggered(self):
+
+		if self.parameters["operation"] == "CHECK_PRESENCE":
+			
+			return bool(self.parameters["simulationParameters"]["occupancy"])
+
+
+		elif self.parameters["operation"] == "CHECK_ABSENCE":
+			
+			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
+			return not bool(self.parameters["simulationParameters"]["occupancy"])
+
+		elif self.parameters["operation"] == "TEMPERATURE_IN_RANGE":
+		
+			currentScale = "F"
+
+			temperature = float(self.parameters["simulationParameters"]["roomTemperature"].replace(currentScale, "").strip())
+
+			if temperature >= float(self.parameters['0'].upper().replace(currentScale, "").strip()) and temperature <= float(self.parameters['1'].upper().replace(currentScale, "").strip()):
+				return True
+			else:
+				return False
+
 
 
 	def get_uuid_from_context(self, sensor_type, zone):
@@ -121,3 +142,18 @@ class RoomTriggerDriver(GenericTriggerDriver):
 	    	raise BuildingDepotError('Error, could not read present value! ' + str(e))
 
 	    return value		
+
+	def __simulatedEventTriggeredWrapper(self):
+		print "[SIMULATION]" + "[" + self.parameters["simulationParameters"]["date"] + "]" + "[" + self.parameters["simulationParameters"]["time"] + "]", 
+		return self.__simulatedEventTriggered()
+
+
+	def eventTriggered(self):
+		if 'simulationParameters' in self.parameters:
+			return self.__simulatedEventTriggeredWrapper()
+		return self.__actualEventTriggered()
+
+	def __str__(self):
+		return "RoomTriggerDriver: "
+
+	    

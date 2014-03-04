@@ -10,7 +10,7 @@ class Test:
 	def test4(self):
 		from app.backend.controller.roomSimulator import RoomSimulator		
 
-		roomSimulator = RoomSimulator(occupancyTimeRangeFrom = "4:00AM", occupancyTimeRangeTo = "6:00PM", buildingName = "CSE", roomName = "3208", temperature = "78F", weather = "Sunny")
+		roomSimulator = RoomSimulator(occupancyTimeRangeFrom = "4:00AM", occupancyTimeRangeTo = "6:00PM", buildingName = "CSE", roomName = "2109", roomTemperature = "78F", externalTemperature = "75F", weather = "Sunny")
 		roomSimulator.startSimulation()
 
 	def test3(self):

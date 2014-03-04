@@ -25,7 +25,7 @@ class ExternalAppTriggerDriver(GenericTriggerDriver):
 	def __init__(self, parameters):
 		self.parameters = parameters
 
-	def eventTriggered(self):
+	def __actualEventTriggered(self):
 		import random
 
 		if self.parameters["operation"] == "CALENDAR_MEETING":
@@ -39,6 +39,19 @@ class ExternalAppTriggerDriver(GenericTriggerDriver):
 		else:
 			raise UnsupportedDriverParameterError(self.parameters["operation"])
 
+
+	def __simulatedEventTriggered(self):
+		print "SimulationModeNotSupportedError"
+		raise SimulationModeNotSupportedError()
+
+	def __simulatedEventTriggeredWrapper(self):
+		print "[SIMULATION]" + "[" + self.parameters["simulationParameters"]["date"] + "]" + "[" + self.parameters["simulationParameters"]["time"] + "]", 
+		return self.__simulatedEventTriggered()
+
+	def eventTriggered(self):
+		if 'simulationParameters' in self.parameters:
+			return self.__simulatedEventTriggeredWrapper()
+		return self.__actualEventTriggered()
 
 	def __str__(self):
 		return "ExternalAppTriggerDriver: "

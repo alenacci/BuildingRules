@@ -12,14 +12,15 @@ class GenericTriggerDriver:
 		self.parameters = parameters
 
 	def __simulatedEventTriggered(self):
+		print "SimulationModeNotSupportedError"
 		raise SimulationModeNotSupportedError()
 
 	def __actualEventTriggered(self):
 		pass
 
 	def __simulatedEventTriggeredWrapper(self):
-		print "[SIM]", 
-		self.__simulatedEventTriggered
+		print "[SIMULATION]" + "[" + self.parameters["simulationParameters"]["date"] + "]" + "[" + self.parameters["simulationParameters"]["time"] + "]", 
+		return self.__simulatedEventTriggered()
 
 	def eventTriggered(self):
 

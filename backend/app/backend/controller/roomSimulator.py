@@ -8,13 +8,14 @@ from app.backend.controller.actionExecutor import ActionExecutor
 
 class RoomSimulator:
 
-	def __init__(self, buildingName = None, roomName = None, occupancyTimeRangeFrom = None, occupancyTimeRangeTo = None, temperature = None, weather = None):
+	def __init__(self, buildingName = None, roomName = None, occupancyTimeRangeFrom = None, occupancyTimeRangeTo = None, roomTemperature = None, externalTemperature = None, weather = None):
 		
 		self.buildingName = buildingName
 		self.roomName = roomName
 		self.occupancyTimeRangeFrom = occupancyTimeRangeFrom
 		self.occupancyTimeRangeTo = occupancyTimeRangeTo
-		self.temperature = temperature
+		self.roomTemperature = roomTemperature
+		self.externalTemperature = externalTemperature
 		self.weather = weather
 
 
@@ -46,11 +47,12 @@ class RoomSimulator:
 
 
 				simulationParameters = {}
-		 		simulationParameters['temperature'] = self.temperature
+		 		simulationParameters['roomTemperature'] = self.roomTemperature
 		 		simulationParameters['occupancy'] = self._getCurrentOccupancy(currentTimeMinutes)
 		 		simulationParameters['day'] = self._getCurrentDay()
 		 		simulationParameters['date'] = self._getCurrentDate()
 		 		simulationParameters['weather'] = self.weather
+		 		simulationParameters['externalTemperature'] = self.externalTemperature
 		 		simulationParameters['time'] = currentTime
 		 		simulationParameters['resultsBufferFile'] = "simul_tmp.txt"
 

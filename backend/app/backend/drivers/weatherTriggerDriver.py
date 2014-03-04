@@ -28,7 +28,7 @@ class WeatherTriggerDriver(GenericTriggerDriver):
 		self.parameters = parameters
 		self.__WEATHER_SERVICE_FILE_PATH = "tools/weather/"
 
-	def eventTriggered(self):
+	def __actualEventTriggered(self):
 	
 		text = ""
 		try:
@@ -83,6 +83,37 @@ class WeatherTriggerDriver(GenericTriggerDriver):
 		else:
 			raise UnsupportedDriverParameterError(self.parameters["operation"])
 
+
+	def __simulatedEventTriggered(self):
+
+		if self.parameters["operation"] == "TEMPERATURE_IN_RANGE":
+
+			currentScale = "F"
+			convTemp = float(self.parameters["simulationParameters"]["externalTemperature"].replace(currentScale, "").strip())
+
+			if convTemp >= float(self.parameters['0'].upper().replace(currentScale, "").strip()) and convTemp <= float(self.parameters['1'].upper().replace(currentScale, "").strip()):
+				return True
+			else:
+				return False
+
+		elif self.parameters["operation"] == "CHECK_SUNNY":
+			return True if self.parameters["simulationParameters"]["weather"].upper() == "SUNNY" else False
+
+		elif self.parameters["operation"] == "CHECK_RAINY":
+			return True if self.parameters["simulationParameters"]["weather"].upper() == "RAINY" else False
+
+		elif self.parameters["operation"] == "CHECK_CLOUDY":
+			return True if self.parameters["simulationParameters"]["weather"].upper() == "CLOUDY" else False
+
+	def __simulatedEventTriggeredWrapper(self):
+		print "[SIMULATION]" + "[" + self.parameters["simulationParameters"]["date"] + "]" + "[" + self.parameters["simulationParameters"]["time"] + "]", 
+		return self.__simulatedEventTriggered()
+	
+
+	def eventTriggered(self):
+		if 'simulationParameters' in self.parameters:
+			return self.__simulatedEventTriggeredWrapper()
+		return self.__actualEventTriggered()
 
 	def __str__(self):
 		return "WeatherTriggerDriver: "
