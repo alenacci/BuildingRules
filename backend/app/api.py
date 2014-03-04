@@ -9,6 +9,7 @@ from app.backend.controller.usersManager import UsersManager
 from app.backend.controller.sessionManager import SessionManager
 from app.backend.controller.buildingsManager import BuildingsManager
 from app.backend.controller.roomsManager import RoomsManager
+from app.backend.controller.roomSimulator import RoomSimulator
 from app.backend.controller.groupsManager import GroupsManager
 from app.backend.controller.feedbackManager import FeedbackManager
 from app.backend.controller.triggerManager import TriggerManager
@@ -366,6 +367,30 @@ def roomInfo(username = None, buildingName = None, roomName = None):
 			return returnResult( roomsManager.getInfo(roomName = roomName, buildingName = buildingName) )
 		except Exception as e:
 			return returnError(e)
+
+@api.route('/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/simulation', methods = ['POST'])
+def roomSimulation(username = None, buildingName = None, roomName = None):
+	if request.method == 'POST':
+
+		sessionKey = validateInput(request.form['sessionKey'])
+		userUuid = validateInput(request.form['userUuid'])		
+		occupancyTimeRangeFrom = validateInput(request.form['occupancyTimeRangeFrom'])	
+		occupancyTimeRangeTo = validateInput(request.form['occupancyTimeRangeTo'])	
+		roomTemperature = validateInput(request.form['roomTemperature'])	
+		externalTemperature = validateInput(request.form['externalTemperature'])	
+		weather = validateInput(request.form['weather'])	
+
+		try:
+			session = SessionManager()
+			session.checkSessionValidity(sessionKey, userUuid)
+			buildingsManager = BuildingsManager()
+			buildingsManager.checkUserBinding(buildingName, username)
+			roomSimulator = RoomSimulator(buildingName = buildingName, roomName = roomName, occupancyTimeRangeFrom = occupancyTimeRangeFrom, occupancyTimeRangeTo = occupancyTimeRangeTo, roomTemperature = roomTemperature, externalTemperature = externalTemperature, weather = weather)
+
+			return returnResult( roomSimulator.start() )
+		except Exception as e:
+			return returnError(e)
+
 
 @api.route('/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/activeRules', methods = ['POST'])
 def roomActiveRules(username = None, buildingName = None, roomName = None):

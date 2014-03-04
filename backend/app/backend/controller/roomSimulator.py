@@ -6,6 +6,7 @@ import os
 import string
 import random
 
+from app.backend.commons.inputDataChecker import checkData
 from app.backend.controller.buildingsManager import BuildingsManager
 from app.backend.controller.actionExecutor import ActionExecutor
 
@@ -13,6 +14,8 @@ class RoomSimulator:
 
 	def __init__(self, buildingName = None, roomName = None, occupancyTimeRangeFrom = None, occupancyTimeRangeTo = None, roomTemperature = None, externalTemperature = None, weather = None):
 		
+		checkData(locals())
+
 		self.buildingName = buildingName
 		self.roomName = roomName
 		self.occupancyTimeRangeFrom = occupancyTimeRangeFrom
@@ -50,10 +53,6 @@ class RoomSimulator:
 				currentTime = h + ":" + m
 				currentTimeMinutes = hour * 60 + minute
 
-				print currentTime,
-				print " " + str(currentTimeMinutes), 
-				print " " + str(self._getCurrentOccupancy(currentTimeMinutes))
-
 				simulationParameters = {}
 		 		simulationParameters['roomTemperature'] = self.roomTemperature
 		 		simulationParameters['occupancy'] = self._getCurrentOccupancy(currentTimeMinutes)
@@ -69,8 +68,59 @@ class RoomSimulator:
 				actionExecutor = ActionExecutor(simulationParameters = simulationParameters, roomFilter = roomFilter)
 				actionExecutor.start()
 
-	def getSimulationResults(self):
-		pass
+
+
+		f = open(simulationBufferFilePath)
+		lines = f.readlines()
+		f.close()
+
+		os.remove(simulationBufferFilePath) if os.path.exists(simulationBufferFilePath) else None
+
+		actionTargets = set()
+		actionTargetsRecordsNumber = {}
+		timeRecords = []
+
+		for line in lines:
+			
+			record = line.replace("\n","").split(";")	
+			timeRecords.append(record)
+			actionTargets.add(record[2])
+			if record[2] not in actionTargetsRecordsNumber.keys(): actionTargetsRecordsNumber[record[2]] = 0
+			actionTargetsRecordsNumber[record[2]] += 1
+
+		gantt = {}
+		for target in actionTargets:
+			gantt[target] = []
+
+
+
+
+		for target in actionTargets:
+
+			lastTargetStatus = None
+			lastTargetStatusStartTime = '00:00'
+			targetCounter = 0
+
+			for record in timeRecords:
+
+				if record[2] == target:		
+
+					if lastTargetStatus != record[3]:
+						
+						if lastTargetStatus != None:
+							gantt[target].append({"from": lastTargetStatusStartTime, "to" : record[1], "status" : lastTargetStatus})
+						
+						lastTargetStatus = record[3]
+						lastTargetStatusStartTime = record[1]
+
+					targetCounter += 1
+
+					if targetCounter == actionTargetsRecordsNumber[target]:
+						gantt[target].append({"from": "00.00", "to" : record[1], "status" : record[3]})					
+
+		print gantt
+					
+		return {"simulation" : gantt}
 
 	def _getCurrentDate(self):
 		return str(time.strftime("%d/%m"))
