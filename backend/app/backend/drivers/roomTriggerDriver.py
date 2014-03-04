@@ -153,6 +153,7 @@ class RoomTriggerDriver(GenericTriggerDriver):
 			return self.__simulatedEventTriggeredWrapper()
 		return self.__actualEventTriggered()
 
+
 	def __str__(self):
 		return "RoomTriggerDriver: "
 

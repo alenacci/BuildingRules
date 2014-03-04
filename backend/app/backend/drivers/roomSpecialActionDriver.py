@@ -5,6 +5,7 @@ import string
 import datetime
 
 from app.backend.commons.errors import *
+from app.backend.commons.simulation import writeSimulationLog
 from app.backend.drivers.genericActionDriver import GenericActionDriver
 
 class RoomSpecialActionDriver(GenericActionDriver):
@@ -18,7 +19,7 @@ class RoomSpecialActionDriver(GenericActionDriver):
 	def __init__(self, parameters):
 		self.parameters = parameters
 
-	def actuate(self):
+	def __actualActuation(self):
 
 
 		if self.parameters["operation"] == "SEND_COMPLAIN":		
@@ -26,6 +27,28 @@ class RoomSpecialActionDriver(GenericActionDriver):
 			
 		else:
 			raise UnsupportedDriverParameterError(self.parameters["operation"])
+
+
+	def __simulatedActuation(self):
+
+
+		if self.parameters["operation"] == "SEND_COMPLAIN":		
+			writeSimulationLog(simulationParameters = self.parameters["simulationParameters"], actionTargetName = "SEND_COMPLAIN", actionTargetStatus = "TRUE")
+			writeSimulationLog(simulationParameters = self.parameters["simulationParameters"], actionTargetName = "SEND_COMPLAIN", actionTargetStatus = "FALSE")
+			
+		else:
+			raise UnsupportedDriverParameterError(self.parameters["operation"])
+
+
+	def __simulatedActuationWrapper(self):
+		print "[SIMULATION]" + "[" + self.parameters["simulationParameters"]["date"] + "]" + "[" + self.parameters["simulationParameters"]["time"] + "]", 
+		self.__simulatedActuation()
+
+	def actuate(self):
+		if 'simulationParameters' in self.parameters:
+			return self.__simulatedActuationWrapper()
+
+		return self.__actualActuation()
 
 
 	def __str__(self):

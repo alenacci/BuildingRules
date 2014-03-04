@@ -2,6 +2,9 @@ import sys
 import time
 import datetime
 import copy
+import os
+import string
+import random
 
 from app.backend.controller.buildingsManager import BuildingsManager
 from app.backend.controller.actionExecutor import ActionExecutor
@@ -33,6 +36,12 @@ class RoomSimulator:
 
 	def startSimulation(self):
 
+		simulationBufferFolder = "tools/simulation/"
+		if not os.path.exists(simulationBufferFolder): os.makedirs(simulationBufferFolder)
+		simulationBufferFileName = self.__addPrefixToFileName(self.buildingName + "_" + self.roomName + ".sim")
+		simulationBufferFilePath = (simulationBufferFolder + "/" + simulationBufferFileName).replace("//", "/")
+		os.remove(simulationBufferFilePath) if os.path.exists(simulationBufferFilePath) else None
+
 		for hour in range(0,24):
 			for minute in range(0,60,60):
 
@@ -45,7 +54,6 @@ class RoomSimulator:
 				print " " + str(currentTimeMinutes), 
 				print " " + str(self._getCurrentOccupancy(currentTimeMinutes))
 
-
 				simulationParameters = {}
 		 		simulationParameters['roomTemperature'] = self.roomTemperature
 		 		simulationParameters['occupancy'] = self._getCurrentOccupancy(currentTimeMinutes)
@@ -54,7 +62,7 @@ class RoomSimulator:
 		 		simulationParameters['weather'] = self.weather
 		 		simulationParameters['externalTemperature'] = self.externalTemperature
 		 		simulationParameters['time'] = currentTime
-		 		simulationParameters['resultsBufferFile'] = "simul_tmp.txt"
+		 		simulationParameters['resultsBufferFile'] = simulationBufferFilePath
 
 				roomFilter = [ {'buildingName' : self.buildingName, 'roomName' : self.roomName} ]
 
@@ -92,6 +100,16 @@ class RoomSimulator:
 
 		return hour * 60 + minute
 
+
+	def __id_generator(self, size=6, chars=string.ascii_uppercase + string.digits):
+		return ''.join(random.choice(chars) for x in range(size))
+
+	def __addPrefixToFileName(self, filename):
+
+		from hashlib import md5
+		from time import localtime
+
+		return "%s_%s_%s" % (self.__id_generator(), md5(str(localtime())).hexdigest(), filename)
 
 	def __str__(self):
 		return "RoomSimulator: "		
