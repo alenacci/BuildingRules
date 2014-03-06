@@ -1,3 +1,15 @@
+############################################################
+#
+# BuildingRules Project 
+# Politecnico di Milano
+# Author: Alessandro A. Nacci
+#
+# This code is confidential
+# Milan, March 2014
+#
+############################################################
+
+
 import json
 import time
 from flask import request, session, g, redirect, url_for, abort, render_template, flash, jsonify, Blueprint
