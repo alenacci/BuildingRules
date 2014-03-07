@@ -32,6 +32,7 @@ frontend/venv/
 frontend/build/
 backend/tools/weather/
 backend/tools/dbDump/
+frontend/tmp/
 
 # Results files
 ##################################
