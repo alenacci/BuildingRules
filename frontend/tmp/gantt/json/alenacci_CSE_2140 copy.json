@@ -1,0 +1,15 @@
+[
+  {
+	"name"  : "Task#1"
+  , "desc"  : " Task Desc"
+  , "values": [
+      {  
+        "from"       : "/Date(1296547200000)/"
+       , "to"         : "/Date(1296554400000)/"
+       , "desc"       : "<b>Task #1<br>"
+       , "customClass": "ganttRed"
+       , "label"      : "Task #1"
+      }
+  ]
+ }
+ ]

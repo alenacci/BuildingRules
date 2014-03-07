@@ -122,23 +122,15 @@ class ActionExecutor:
 		except Exception as e:
 			flash(message + ") Erro while actuating the consequent '" + rule.consequent + "'... " + str(e), 'red')
 
-		rules = Rules()
-		rules.setActiveRule(buildingName = rule.buildingName, roomName = rule.roomName, ruleId = rule.id)
+		if not self.simulationParameters:
+			rules = Rules()
+			rules.setActiveRule(buildingName = rule.buildingName, roomName = rule.roomName, ruleId = rule.id)
 
 	def notifyIgnoredRule(self, rule):
 		pass
 
-
-	
-
-
-
-
 	def start(self):
 
-		print
-		print
-		print
 		flash("Starting the actuation process...", "yellow")
 
 		buildings = Buildings()

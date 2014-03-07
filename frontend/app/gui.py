@@ -181,6 +181,20 @@ def buildingDetail(buildingName = None):
 		return render_template('error.html', error = response['request-errorDescription'])
 
 
+@gui.route('/buildings/<buildingName>/rooms/<roomName>/graphicalView/json/', methods = ['GET', 'POST'])
+@gui.route('/buildings/<buildingName>/rooms/<roomName>/graphicalView/json', methods = ['GET', 'POST'])
+def getGraphicalViewJson(buildingName = None, roomName = None):
+
+	if not loggedIn():	return redirect(url_for('gui.login'))
+
+	username = session["username"]
+
+	in_file = open("tmp/gantt/json/" + username + "_" + buildingName + "_" + roomName + ".json","r")
+	text = in_file.read()
+	in_file.close()	
+
+	return text
+
 @gui.route('/buildings/<buildingName>/rooms/<roomName>/graphicalView/', methods = ['GET', 'POST'])
 @gui.route('/buildings/<buildingName>/rooms/<roomName>/graphicalView', methods = ['GET', 'POST'])
 def roomGraphicalView(buildingName = None, roomName = None):
@@ -224,26 +238,40 @@ def roomGraphicalView(buildingName = None, roomName = None):
 			item["desc"] = ""
 			item["values"] = []
 			for bar in response["simulation"][target]:
-				from datetime import datetime
-				datetimeFrom = datetime.strptime("02/03/2014 " + bar["from"].replace(".",":") + ":00", '%d/%m/%Y %H:%M:%S')
-				datetimeTo = datetime.strptime("03/03/2014 " + bar["to"].replace(".",":") + ":00", '%d/%m/%Y %H:%M:%S')
-				print datetimeFrom
-				print datetimeTo
-				unixTsFrom = str(int(time.mktime(datetimeFrom.timetuple())))
-				unixTsTo = str(int(time.mktime(datetimeTo.timetuple())))
+
+				timeFrom = bar["from"].replace(".",":")
+				timeTo = bar["to"].replace(".",":")
+
+				print 
+
+				hourFrom = int(timeFrom[:2])
+				hourTo = int(timeTo[:2])
+				minuteFrom = int(timeFrom[3:])
+				minuteTo = int(timeTo[3:])
+
+				unixTsFrom = (hourFrom * 3600 + minuteFrom * 60) * 1000 - (9 * 3600 * 1000)
+				unixTsTo = 	(hourTo * 3600 + minuteTo * 60) * 1000 - (9 * 3600 * 1000)
+
+
+
+				unixTsFrom = str(unixTsFrom)
+				unixTsTo = str(unixTsTo)
+
+				print timeFrom + " " + timeTo
+
 				item["values"].append({	"from" : "/Date(" + unixTsFrom + ")/", "to" : "/Date(" + unixTsTo + ")/", "label" : bar["status"], "customClass" : "ganttRed" })
 
 			ganttView.append(item)
 
 
+	username = session["username"]
+	out_file = open("tmp/gantt/json/" + username + "_" + buildingName + "_" + roomName + ".json","w")
+	out_file.write(json.dumps(ganttView, separators=(',',':')))
+	out_file.close()
 
-	print json.dumps(ganttView, separators=(',',':'))
-	
+	ganttJsonLink = "http://192.168.199.146:5004/buildings/" + buildingName + "/rooms/" + roomName +"/graphicalView/json"
 
-	return render_template('gantt.html', ganttView = json.dumps(ganttView, separators=(',',':')))			
-
-
-
+	return render_template('gantt.html', ganttJsonLink = ganttJsonLink)			
 
 
 @gui.route('/buildings/<buildingName>/rooms/', methods = ['GET', 'POST'])

@@ -63,9 +63,8 @@
 
 
 			$(".gantt").gantt({
-				{% autoescape false %}
-				source: {{ganttView}},
-				{% endautoescape %}
+				
+				source: "{{ganttJsonLink}}",				
 				dow : ["Today", "Tomorrow"],
 				navigate: "scroll",	
 				maxScale: "hours",
