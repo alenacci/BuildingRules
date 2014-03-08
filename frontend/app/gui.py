@@ -231,6 +231,9 @@ def roomGraphicalView(buildingName = None, roomName = None):
 		if not successResponse(response):
 			return render_template('error.html', error = response['request-errorDescription'])
 
+		ganttBarColors = ['ganttRed', 'ganttGreen', 'ganttBlue', 'ganttOrange']
+		currentBarColor = 0
+
 		for target in response["simulation"].keys():
 
 			item = {}
@@ -249,17 +252,21 @@ def roomGraphicalView(buildingName = None, roomName = None):
 				minuteFrom = int(timeFrom[3:])
 				minuteTo = int(timeTo[3:])
 
-				unixTsFrom = (hourFrom * 3600 + minuteFrom * 60) * 1000 - (9 * 3600 * 1000)
-				unixTsTo = 	(hourTo * 3600 + minuteTo * 60) * 1000 - (9 * 3600 * 1000)
+				unixTsFrom = (hourFrom * 3600 + minuteFrom * 60) * 1000 + (13 * 3600 * 1000) + (48 * 3600 * 1000)
+				unixTsTo = 	(hourTo * 3600 + minuteTo * 60) * 1000 + (13 * 3600 * 1000) + (48 * 3600 * 1000)
 
 
 
 				unixTsFrom = str(unixTsFrom)
 				unixTsTo = str(unixTsTo)
 
-				print timeFrom + " " + timeTo
+				print unixTsFrom + " " + unixTsTo
 
-				item["values"].append({	"from" : "/Date(" + unixTsFrom + ")/", "to" : "/Date(" + unixTsTo + ")/", "label" : bar["status"], "customClass" : "ganttRed" })
+
+
+				item["values"].append({	"from" : "/Date(" + unixTsFrom + ")/", "to" : "/Date(" + unixTsTo + ")/", "label" : bar["status"], "customClass" : ganttBarColors[currentBarColor] })
+				currentBarColor += 1
+				if currentBarColor == len(ganttBarColors): currentBarColor = 0
 
 			ganttView.append(item)
 

@@ -126,7 +126,7 @@ class RoomSimulator:
 
 					targetCounter += 1
 
-					if targetCounter == actionTargetsRecordsNumber[target]:
+					if targetCounter == actionTargetsRecordsNumber[target] and len(gantt[target]) == 0:
 						gantt[target].append({"from": "00.00", "to" : record[1], "status" : record[3]})					
 
 		print gantt
