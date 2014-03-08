@@ -171,57 +171,93 @@
 
 				  <div class="span8">
 				    <h3>Room {{room.roomName}} - {{room.description}}</h3>
-					<div class="btn-toolbar">
-					  <a href="javascript:filterByRuleCategory('{{room.roomName}}','SHOWALL')"><button class="btn active" id="btn_{{room.roomName}}_SHOWALL" style="font-size: x-small" >SHOW ALL</button></a>
-					  {% for category in categories %}
-					  	<a href="javascript:filterByRuleCategory('{{room.roomName}}','{{category}}')"><button class="btn" id="btn_{{room.roomName}}_{{category}}" style="font-size: x-small">{{category}}</button></a>
-					  	{{loop.counter }}
-					  {% endfor %}
-					</div>				    
-				    <hr>
-				    {% for rule in roomRules[room.roomName] %}
-				    	<blockquote {% if rule.id in activeRoomRules[room.roomName] %} style="color:#77AE3B;" {% endif %} class="rule_{{room.roomName}}_{{rule.category}}">
-				    		<p {% if rule.enabled %} {% else %} class="muted" {% endif %}>
-				    			{% if rule.enabled %} {% else %} <strike> {% endif %}
-				    				<b>if</b> {{rule.antecedent}} <b>then</b> {{rule.consequent}} 
-				    			{% if rule.enabled %} {% else %} </strike> {% endif %}
-								<small class="muted">
-								<span class="badge">{{rule["priority"]}}</span>
-									By:
-									{% if session.userUuid == rule.authorUuid%}
-										You
-									{% else %}
-										{{authorList[rule.authorUuid].personName}} - <i>{{authorList[rule.authorUuid].email}}</i>
-									{% endif %}
 
-									{% if rule.groupId %} 
-										(Group {{rule.groupId }}-{{groupList[rule.groupId].description}}
-										{% if rule.roomName %} 
-											{% if rule.roomName == room.roomName %} {% else %} / Room {{rule.roomName}} {% endif %} 
-										{% endif %}
-										)
-									{% endif %}
 
-									{% if rule.groupId and rule.roomName %}
-									- [<a href="{{request.path}}/../groups/{{rule.groupId}}/rooms/{{rule.roomName}}/rules/{{rule.id}}/edit">Edit</a>]
-									  [<a href="{{request.path}}/{{rule.roomName}}/rules/{{rule.id}}/delete">Delete</a>]
-									  
-									{% else %}
-										{% if rule.roomName %}
-											- [<a href="{{request.path}}/{{rule.roomName}}/rules/{{rule.id}}/edit">Edit</a>] [<a href="{{request.path}}/{{rule.roomName}}/rules/{{rule.id}}/delete">Delete</a>]
-											{% if rule.enabled %}
-												[<a href="{{request.path}}/{{rule.roomName}}/rules/{{rule.id}}/disable">Disable</a>]
-											{% else %}
-												[<a href="{{request.path}}/{{rule.roomName}}/rules/{{rule.id}}/enable">Enable</a>]
-											{% endif %}
-										{% endif %}
-									{% endif %}
-								</small>
-				    		</p>
-				    	</blockquote> 
-				    {% endfor %}
-					<br>
-			      	<a href="{{request.path}}/{{room.roomName}}/rules/add"><button type="button" class="btn  btn-primary ">Add a new rule</button></a>
+
+					<div class="bs-docs-example">
+			            <ul id="myTab" class="nav nav-tabs">
+			              <li class="active"><a href="#rulePanel_{{room.roomName}}" data-toggle="tab">Rules Editor</a></li>
+			              <li><a href="#roomBehavior_{{room.roomName}}" data-toggle="tab">Room Behavior</a></li>
+			            </ul>
+			            <div id="myTabContent" class="tab-content">
+			              <div class="tab-pane fade in active" id="rulePanel_{{room.roomName}}">
+
+
+								<div class="btn-toolbar">
+								  <a href="javascript:filterByRuleCategory('{{room.roomName}}','SHOWALL')"><button class="btn active" id="btn_{{room.roomName}}_SHOWALL" style="font-size: x-small" >SHOW ALL</button></a>
+								  {% for category in categories %}
+								  	<a href="javascript:filterByRuleCategory('{{room.roomName}}','{{category}}')"><button class="btn" id="btn_{{room.roomName}}_{{category}}" style="font-size: x-small">{{category}}</button></a>
+								  	{{loop.counter }}
+								  {% endfor %}
+								</div>				    
+							    <hr>
+							    {% for rule in roomRules[room.roomName] %}
+							    	<blockquote {% if rule.id in activeRoomRules[room.roomName] %} style="color:#77AE3B;" {% endif %} class="rule_{{room.roomName}}_{{rule.category}}">
+							    		<p {% if rule.enabled %} {% else %} class="muted" {% endif %}>
+							    			{% if rule.enabled %} {% else %} <strike> {% endif %}
+							    				<b>if</b> {{rule.antecedent}} <b>then</b> {{rule.consequent}} 
+							    			{% if rule.enabled %} {% else %} </strike> {% endif %}
+											<small class="muted">
+											<span class="badge">{{rule["priority"]}}</span>
+												By:
+												{% if session.userUuid == rule.authorUuid%}
+													You
+												{% else %}
+													{{authorList[rule.authorUuid].personName}} - <i>{{authorList[rule.authorUuid].email}}</i>
+												{% endif %}
+
+												{% if rule.groupId %} 
+													(Group {{rule.groupId }}-{{groupList[rule.groupId].description}}
+													{% if rule.roomName %} 
+														{% if rule.roomName == room.roomName %} {% else %} / Room {{rule.roomName}} {% endif %} 
+													{% endif %}
+													)
+												{% endif %}
+
+												{% if rule.groupId and rule.roomName %}
+												- [<a href="{{request.path}}/../groups/{{rule.groupId}}/rooms/{{rule.roomName}}/rules/{{rule.id}}/edit">Edit</a>]
+												  [<a href="{{request.path}}/{{rule.roomName}}/rules/{{rule.id}}/delete">Delete</a>]
+												  
+												{% else %}
+													{% if rule.roomName %}
+														- [<a href="{{request.path}}/{{rule.roomName}}/rules/{{rule.id}}/edit">Edit</a>] [<a href="{{request.path}}/{{rule.roomName}}/rules/{{rule.id}}/delete">Delete</a>]
+														{% if rule.enabled %}
+															[<a href="{{request.path}}/{{rule.roomName}}/rules/{{rule.id}}/disable">Disable</a>]
+														{% else %}
+															[<a href="{{request.path}}/{{rule.roomName}}/rules/{{rule.id}}/enable">Enable</a>]
+														{% endif %}
+													{% endif %}
+												{% endif %}
+											</small>
+							    		</p>
+							    	</blockquote> 
+							    {% endfor %}
+								<br>
+						      	<a href="{{request.path}}/{{room.roomName}}/rules/add"><button type="button" class="btn  btn-primary ">Add a new rule</button></a>
+
+
+
+			              </div>
+			              <div class="tab-pane fade" id="roomBehavior_{{room.roomName}}">
+			              	<div class="container">
+			              	<iframe src="{{request.path}}/{{room.roomName}}/graphicalView" width="750px" height="350px" frameBorder="0"></iframe>
+			              	</div>
+			              </div>
+			            </div>
+			          </div>  
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 				    
