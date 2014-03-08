@@ -203,6 +203,7 @@ def roomGraphicalView(buildingName = None, roomName = None):
 
 
 	ganttView = []
+	ganttJsonLink = None
 
 	if request.method == 'POST':
 
@@ -276,7 +277,7 @@ def roomGraphicalView(buildingName = None, roomName = None):
 	out_file.write(json.dumps(ganttView, separators=(',',':')))
 	out_file.close()
 
-	ganttJsonLink = "http://192.168.199.146:5004/buildings/" + buildingName + "/rooms/" + roomName +"/graphicalView/json"
+	ganttJsonLink = url_for("gui.getGraphicalViewJson", buildingName = buildingName, roomName = roomName)
 
 	return render_template('gantt.html', ganttJsonLink = ganttJsonLink)			
 

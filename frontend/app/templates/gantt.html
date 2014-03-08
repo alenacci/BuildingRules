@@ -40,8 +40,10 @@
     </head>
     <body>
 
-		<div class="contain">			
-			<div class="gantt"></div>
+		<div class="contain">
+			{% if ganttJsonLink %}			
+				<div class="gantt" style="width: 750px"></div>
+			{% endif %}
 		</div>
 
     	<div class="contain">
