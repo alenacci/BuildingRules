@@ -40,17 +40,34 @@
     </head>
     <body>
 
-    	<form method="POST" action="{{request.path}}">
-    		occupancyTimeRangeFrom <input type="text" name="occupancyTimeRangeFrom"> <br>
-    		occupancyTimeRangeTo <input type="text" name="occupancyTimeRangeTo"> <br>
-    		roomTemperature <input type="text" name="roomTemperature"> <br>
-    		externalTemperature <input type="text" name="externalTemperature"> <br>
-    		weather <input type="text" name="weather"> <br>
-    		<input type="submit">
-    	</form>
 		<div class="contain">			
 			<div class="gantt"></div>
 		</div>
+
+    	<div class="contain">
+    		<h3>Simulate the room behavior</h3>
+	    	<form method="POST" action="{{request.path}}">
+	    		There is someone in the room from  
+				<select name="occupancyTimeRangeFrom"><option>00:00 AM</option> <option>01:00 AM</option> <option>02:00 AM</option> <option>03:00 AM</option> <option>04:00 AM</option> <option>05:00 AM</option> <option>06:00 AM</option> <option>07:00 AM</option> <option>08:00 AM</option> <option>09:00 AM</option> <option>10:00 AM</option> <option>11:00 AM</option> <option>12:00 PM</option> <option>01:00 PM</option> <option>02:00 PM</option> <option>03:00 PM</option> <option>04:00 PM</option> <option>05:00 PM</option> <option>06:00 PM</option> <option>07:00 PM</option> <option>08:00 PM</option> <option>09:00 PM</option> <option>10:00 PM</option> <option>11:00 PM</option></select>
+				to
+				<select name="occupancyTimeRangeTo"><option>00:00 AM</option> <option>01:00 AM</option> <option>02:00 AM</option> <option>03:00 AM</option> <option>04:00 AM</option> <option>05:00 AM</option> <option>06:00 AM</option> <option>07:00 AM</option> <option>08:00 AM</option> <option>09:00 AM</option> <option>10:00 AM</option> <option>11:00 AM</option> <option>12:00 PM</option> <option>01:00 PM</option> <option>02:00 PM</option> <option>03:00 PM</option> <option>04:00 PM</option> <option>05:00 PM</option> <option>06:00 PM</option> <option>07:00 PM</option> <option>08:00 PM</option> <option>09:00 PM</option> <option>10:00 PM</option> <option>11:00 PM</option></select>
+	    		 <br>
+	    		The room temperature is  
+				<select name="roomTemperature"><option>60F</option><option>61F</option><option>62F</option><option>63F</option><option>64F</option><option>65F</option><option>66F</option><option>67F</option><option>68F</option><option>69F</option><option>70F</option><option>71F</option><option>72F</option><option>73F</option><option>74F</option><option>75F</option><option>76F</option><option>77F</option><option>78F</option><option>79F</option><option>80F</option><option>81F</option><option>82F</option><option>83F</option><option>84F</option><option>85F</option><option>86F</option><option>87F</option><option>88F</option><option>89F</option><option>80F</option><option>81F</option><option>82F</option><option>83F</option><option>84F</option><option>85F</option><option>86F</option><option>87F</option><option>88F</option><option>89F</option></select>
+	    		 <br>
+	    		The external temperature is 
+	    		<select name="externalTemperature"><option>60F</option><option>61F</option><option>62F</option><option>63F</option><option>64F</option><option>65F</option><option>66F</option><option>67F</option><option>68F</option><option>69F</option><option>70F</option><option>71F</option><option>72F</option><option>73F</option><option>74F</option><option>75F</option><option>76F</option><option>77F</option><option>78F</option><option>79F</option><option>80F</option><option>81F</option><option>82F</option><option>83F</option><option>84F</option><option>85F</option><option>86F</option><option>87F</option><option>88F</option><option>89F</option><option>80F</option><option>81F</option><option>82F</option><option>83F</option><option>84F</option><option>85F</option><option>86F</option><option>87F</option><option>88F</option><option>89F</option></select>
+	    		<br>
+	    		and the weather is  
+	    		<select name="weather"><option>Sunny</option><option>Rainy</option><option>Cloudy</option></select>
+	    		<br>
+	    		<input type="submit" value="Show me the room status!">
+	    	</form>
+    	</div>
+
+
+
+
 
 	<script src="{{url_for('static', filename='gantt/js/jquery.min.js')}}"></script>
 	<script src="{{url_for('static', filename='gantt/js/jquery.fn.gantt.js')}}"></script>
