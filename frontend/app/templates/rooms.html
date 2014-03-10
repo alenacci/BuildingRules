@@ -3,6 +3,20 @@
 
   {% if session.logged_in %}
 
+	<style>
+	    .wrap { width: 750px; height: 390px; padding: 0; overflow: hidden; }
+	    .frame { width: 1000px; height: 520px; border: 0px solid black; }
+	    .frame {
+	        -ms-zoom: 0.95;
+	        -moz-transform: scale(0.95);
+	        -moz-transform-origin: 0 0;
+	        -o-transform: scale(0.95);
+	        -o-transform-origin: 0 0;
+	        -webkit-transform: scale(0.95);
+	        -webkit-transform-origin: 0 0;
+	    }
+	</style>
+
 	<script type="text/javascript" src="{{ url_for('static', filename='js/rooms.js') }}"></script>
 	<script>
 	window.onload = function(){
@@ -15,8 +29,7 @@
 	{% for category in categories %}
 		ruleCategories.push("{{category}}");
 	{% endfor %}
-
-
+	
 	{% if mTurkStatus.experimentCompleted %}
 		// THIS IS NEED TO SHOW THE END OF EXPERIMENT MESSAGE
 		alert("You finished your experiment!")
@@ -240,7 +253,7 @@
 			              </div>
 			              <div class="tab-pane fade" id="roomBehavior_{{room.roomName}}">
 			              	<div class="container">
-			              	<iframe src="{{request.path}}/{{room.roomName}}/graphicalView" width="750px" height="350px" frameBorder="0"></iframe>
+			              	<iframe src="{{request.path}}/{{room.roomName}}/graphicalView" class="frame"></iframe>
 			              	</div>
 			              </div>
 			            </div>

@@ -75,10 +75,13 @@ class ActionExecutor:
 			parameters = triggerInfo["parameterValues"]
 
 		
-			parameters.update({'buildingName' : rule.buildingName})
+			parameters.update({'buildingName' : rule.buildingName})			
 			if rule.roomName: parameters.update({'roomName' : rule.roomName})
 			if rule.groupId: parameters.update({'groupId' : rule.groupId})
-			if self.simulationParameters: parameters.update({'simulationParameters' : self.simulationParameters})
+			if self.simulationParameters: 
+				localSimulationParameters = self.simulationParameters.copy()
+				localSimulationParameters.update({'ruleId' : rule.id, 'ruleText' : rule.getFullRepresentation()})
+				parameters.update({'simulationParameters' : localSimulationParameters})
 			
 			driver = triggerManager.getTriggerDriver(trigger, parameters)
 			
@@ -107,7 +110,10 @@ class ActionExecutor:
 		parameters.update({'buildingName' : rule.buildingName})
 		if rule.roomName: parameters.update({'roomName' : rule.roomName})
 		if rule.groupId: parameters.update({'groupId' : rule.groupId})
-		if self.simulationParameters: parameters.update({'simulationParameters' : self.simulationParameters})
+		if self.simulationParameters: 
+			localSimulationParameters = self.simulationParameters.copy()
+			localSimulationParameters.update({'ruleId' : rule.id, 'ruleText' : rule.getFullRepresentation()})
+			parameters.update({'simulationParameters' : localSimulationParameters})
 
 		driver = actionManager.getActionDriver(action, parameters)
 

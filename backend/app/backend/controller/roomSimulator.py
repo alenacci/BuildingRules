@@ -85,6 +85,8 @@ class RoomSimulator:
 		lines = f.readlines()
 		f.close()
 
+		print lines
+
 		os.remove(simulationBufferFilePath) if os.path.exists(simulationBufferFilePath) else None
 
 		actionTargets = set()
@@ -119,7 +121,7 @@ class RoomSimulator:
 					if lastTargetStatus != record[3]:
 						
 						if lastTargetStatus != None:
-							gantt[target].append({"from": lastTargetStatusStartTime, "to" : record[1], "status" : lastTargetStatus})
+							gantt[target].append({"from": lastTargetStatusStartTime, "to" : record[1], "status" : lastTargetStatus, "ruleId" : record[4], "ruleText" : record[5]})
 						
 						lastTargetStatus = record[3]
 						lastTargetStatusStartTime = record[1]
@@ -127,7 +129,7 @@ class RoomSimulator:
 					targetCounter += 1
 
 					if targetCounter == actionTargetsRecordsNumber[target] and len(gantt[target]) == 0:
-						gantt[target].append({"from": "00.00", "to" : record[1], "status" : record[3]})					
+						gantt[target].append({"from": "00.00", "to" : record[1], "status" : record[3], "ruleId" : record[4], "ruleText" : record[5]})					
 
 		print gantt
 					

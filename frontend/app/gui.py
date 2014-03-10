@@ -14,6 +14,7 @@ import time
 from flask import request, session, g, redirect, url_for, abort, render_template, flash, jsonify, Blueprint
 import time
 import datetime
+import os
 
 
 from app import app
@@ -189,7 +190,10 @@ def getGraphicalViewJson(buildingName = None, roomName = None):
 
 	username = session["username"]
 
-	in_file = open("tmp/gantt/json/" + username + "_" + buildingName + "_" + roomName + ".json","r")
+	filePath = "tmp/gantt/json/" + username + "_" + buildingName + "_" + roomName + ".json"
+	if not os.path.exists(filePath): return "[]"
+	
+	in_file = open(filePath,"r")
 	text = in_file.read()
 	in_file.close()	
 
@@ -201,9 +205,14 @@ def roomGraphicalView(buildingName = None, roomName = None):
 
 	if not loggedIn():	return redirect(url_for('gui.login'))
 
+	preloadGantt = False
+
+	if getGraphicalViewJson(buildingName = buildingName, roomName = roomName) == "[]":
+		preloadGantt = True
+
+	ganttJsonLink = url_for("gui.getGraphicalViewJson", buildingName = buildingName, roomName = roomName)
 
 	ganttView = []
-	ganttJsonLink = None
 
 	if request.method == 'POST':
 
@@ -246,40 +255,26 @@ def roomGraphicalView(buildingName = None, roomName = None):
 				timeFrom = bar["from"].replace(".",":")
 				timeTo = bar["to"].replace(".",":")
 
-				print 
+				today = datetime.date.today().strftime("%b %d %Y")
+				unixTsFrom = EPOCH(today + " " + timeFrom)
+				unixTsTo = EPOCH(today + " " + timeTo)
 
-				hourFrom = int(timeFrom[:2])
-				hourTo = int(timeTo[:2])
-				minuteFrom = int(timeFrom[3:])
-				minuteTo = int(timeTo[3:])
+				unixTsFrom = str(int(unixTsFrom))
+				unixTsTo = str(int(unixTsTo))
 
-				unixTsFrom = (hourFrom * 3600 + minuteFrom * 60) * 1000 + (13 * 3600 * 1000) + (48 * 3600 * 1000)
-				unixTsTo = 	(hourTo * 3600 + minuteTo * 60) * 1000 + (13 * 3600 * 1000) + (48 * 3600 * 1000)
-
-
-
-				unixTsFrom = str(unixTsFrom)
-				unixTsTo = str(unixTsTo)
-
-				print unixTsFrom + " " + unixTsTo
-
-
-
-				item["values"].append({	"from" : "/Date(" + unixTsFrom + ")/", "to" : "/Date(" + unixTsTo + ")/", "label" : bar["status"], "customClass" : ganttBarColors[currentBarColor] })
+				item["values"].append({ "desc": bar["ruleText"],	"from" : "/Date(" + unixTsFrom + ")/", "to" : "/Date(" + unixTsTo + ")/", "label" : bar["status"], "customClass" : ganttBarColors[currentBarColor] })
 				currentBarColor += 1
 				if currentBarColor == len(ganttBarColors): currentBarColor = 0
 
 			ganttView.append(item)
 
 
-	username = session["username"]
-	out_file = open("tmp/gantt/json/" + username + "_" + buildingName + "_" + roomName + ".json","w")
-	out_file.write(json.dumps(ganttView, separators=(',',':')))
-	out_file.close()
+		username = session["username"]
+		out_file = open("tmp/gantt/json/" + username + "_" + buildingName + "_" + roomName + ".json","w")
+		out_file.write(json.dumps(ganttView, separators=(',',':')))
+		out_file.close()
 
-	ganttJsonLink = url_for("gui.getGraphicalViewJson", buildingName = buildingName, roomName = roomName)
-
-	return render_template('gantt.html', ganttJsonLink = ganttJsonLink)			
+	return render_template('gantt.html', ganttJsonLink = ganttJsonLink, preloadGantt = preloadGantt)			
 
 
 @gui.route('/buildings/<buildingName>/rooms/', methods = ['GET', 'POST'])
@@ -1324,6 +1319,21 @@ def successResponse(response):
 	return response['request-success']	
 
 
+def EPOCH(utcDatetimeString):
 
+	#Example: 'Jun 1 2005  1:33PM'
+
+	
+	from pytz import timezone
+	import pytz
+	from datetime import datetime
+
+	utc_datetime = datetime.strptime(utcDatetimeString, '%b %d %Y %H:%M').replace(tzinfo=timezone('US/Pacific'))
+
+	UNIX_EPOCH = datetime(1970, 1, 1, 0, 0, tzinfo = pytz.utc)
+	delta = utc_datetime - UNIX_EPOCH
+	seconds = delta.total_seconds()
+	ms = seconds * 1000
+	return ms
 
 
