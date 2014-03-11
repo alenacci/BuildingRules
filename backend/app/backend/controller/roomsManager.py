@@ -113,7 +113,11 @@ class RoomsManager:
 			if includeTriggerCategory:
 				from app.backend.controller.triggerManager import TriggerManager
 				triggerManager = TriggerManager()
-				ruleDict.update({'triggerCategory' : triggerManager.getTrigger(rule.antecedent).category})
+				triggers = triggerManager.translateTrigger(rule.antecedent)["triggers"]
+				triggersCategory = []
+				for trigger in triggers:
+					if trigger["trigger"].category not in triggersCategory: triggersCategory.append(trigger["trigger"].category)
+				ruleDict.update({'triggersCategory' : triggersCategory})
 
 			response.append(ruleDict)
 

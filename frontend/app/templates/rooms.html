@@ -279,17 +279,18 @@
 					              		<tr>
 					              			<td style="background-color:#72AC44; color:white;">{{category}}</td>
 					              			{% for rule in roomRules[room.roomName] %}
-					              				{% if rule.category == category %}
-					              					<td class="ruleNav_{{rule.triggerCategory}}">
+					              				{% if category == rule.category %}
+					              					<td class="ruleNav_{{rule.triggersCategory[0]}}">
 					              						Priority: {{rule.priority}} 
 					              						<br>
 					              						{% if rule.enabled %} {% else %} <strike> {% endif %}
-					              							<b>{{rule.triggerCategory}}</b>
+					              							{% for triggerCategory in rule.triggersCategory %}
+					              								<b>{{triggerCategory}}</b> <br>
+					              							{% endfor %}
 					              						{% if rule.enabled %} {% else %} </strike> <b>(disabled)</b>{% endif %}
 					              						<br>
 					              						[<a href="javascript:alert('if {{rule.antecedent}} then {{rule.consequent}} ')">Info</a>]
 					              						[<a href="{{request.path}}/{{rule.roomName}}/rules/{{rule.id}}/edit">Edit</a>]
-					              						<br>
 					              						[<a href="{{request.path}}/{{rule.roomName}}/rules/{{rule.id}}/delete">Delete</a>]
 														{% if rule.enabled %}
 															[<a href="{{request.path}}/{{rule.roomName}}/rules/{{rule.id}}/disable">Disable</a>]
