@@ -31,6 +31,9 @@ password = "brulesAdmin2014"
 def dictToCsv(dictionary, fileName, description):
 
 	if not fileName.endswith(".csv"): fileName += ".csv"
+	if not fileName.startswith("results/"): fileName = "results/" + fileName
+
+	if not os.path.exists("results/"): os.makedirs("results/")
 
 	out_file = open(fileName,"w")
 	

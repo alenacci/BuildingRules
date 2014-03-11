@@ -41,7 +41,7 @@ caseofstudy/surveyAnalizer/results.txt
 caseofstudy/surveyAnalizer/rules.txt
 caseofstudy/surveyAnalizer/aggregate.csv
 caseofstudy/surveyAnalizer/detail.csv
-caseofstudy/experiment/*.csv
+caseofstudy/experiment/results/
 
 # Logging folders
 ###################
