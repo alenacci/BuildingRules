@@ -27,6 +27,24 @@ password = "brulesAdmin2014"
 
 
 
+
+def dictToCsv(dictionary, fileName, description):
+
+	if not fileName.endswith(".csv"): fileName += ".csv"
+
+	out_file = open(fileName,"w")
+	
+	for k,v in dictionary.iteritems():
+		out_file.write(str(k) + ";" + str(v) + ";" + "\n")	
+
+	
+	out_file.write("\n\n\n")
+	out_file.write(description)
+
+	out_file.close()
+
+
+
 def execProcess(cmd):
 
 	p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
@@ -40,18 +58,18 @@ def getUserActionOnRule(action):
 	currentFile = "../../frontend/logs/api_requests.log"
 	cmd = "cat " + currentFile + " | grep rules | grep " + action + " | grep -c API_REQUEST"
 	output = execProcess(cmd).replace("\n","").strip()
-	return "Number of total " + action + " request: " + output
+	return {action : output}
 
 
 def getUserActionOnRulePerDay(action):
 
-	result = []
+	result = {}
 
 	for day in getExperimentDaysList():
 		currentFile = "../../frontend/logs/api_requests.log"
 		cmd = "cat " + currentFile + ' | grep rules | grep ' + action + ' | grep API_REQUEST | grep -c "> ' + day + '"'
 		output = execProcess(cmd).replace("\n","").strip()
-		result.append( "Number of total " + action + " request on " + day + ": " + output )
+		result.update({ day : output })
 
 	return result
 
@@ -230,7 +248,6 @@ def getRuleUsageFrequency():
 	actionNames = set()
 
 
-
 	for rule in getRuleList():
 
 		triggersInfo = getRuleAntecedentTriggerInfo(rule["antecedent"])
@@ -326,29 +343,40 @@ login()
 #GETTING DATA ABOUT THE CONFLICT DETECTION (BOTH SUCCESS AND FAIL)
 ruleVerificationStats_avg, ruleVerificationStats_max, ruleVerificationStats_min = getTimeConflictData("ALL")
 
-print ruleVerificationStats_avg
+dictToCsv(ruleVerificationStats_avg, "ruleVerificationStats_ALL_avg", "Average conflict detection time (ms)")
+dictToCsv(ruleVerificationStats_max, "ruleVerificationStats_ALL_max", "Maximum conflict detection time (ms)")
+dictToCsv(ruleVerificationStats_min, "ruleVerificationStats_ALL_min", "Minimum conflict detection time (ms)")
 
 
 ruleVerificationStats_avg, ruleVerificationStats_max, ruleVerificationStats_min = getTimeConflictData("SUCCESS")
+
+dictToCsv(ruleVerificationStats_avg, "ruleVerificationStats_SUCCESS_avg", "Average conflict detection time (ms) - Filtering only SUCCESS verifications")
+dictToCsv(ruleVerificationStats_max, "ruleVerificationStats_SUCCESS_max", "Maximum conflict detection time (ms) - Filtering only SUCCESS verifications")
+dictToCsv(ruleVerificationStats_min, "ruleVerificationStats_SUCCESS_min", "Minimum conflict detection time (ms) - Filtering only SUCCESS verifications")
+
+
 ruleVerificationStats_avg, ruleVerificationStats_max, ruleVerificationStats_min = getTimeConflictData("FAILED")
 
-
-
+dictToCsv(ruleVerificationStats_avg, "ruleVerificationStats_FAILED_avg", "Average conflict detection time (ms) - Filtering only FAILED verifications")
+dictToCsv(ruleVerificationStats_max, "ruleVerificationStats_FAILED_max", "Maximum conflict detection time (ms) - Filtering only FAILED verifications")
+dictToCsv(ruleVerificationStats_min, "ruleVerificationStats_FAILED_min", "Minimum conflict detection time (ms) - Filtering only FAILED verifications")
 
 
 
 
 #GETTING DATA ABOUT THE USERS REQUEST (ADD EDIT RULE)
-print getUserActionOnRule("add")
-print getUserActionOnRule("edit")
-print getUserActionOnRule("delete")
-print getUserActionOnRule("disable")
-print getUserActionOnRule("enable")
+userActionRequests = {}
+userActionRequests.update( getUserActionOnRule("add") )
+userActionRequests.update( getUserActionOnRule("edit") )
+userActionRequests.update( getUserActionOnRule("delete") )
+userActionRequests.update( getUserActionOnRule("disable") )
+userActionRequests.update( getUserActionOnRule("enable") )
 
+dictToCsv(userActionRequests, "userActionRequests", "Number of requests on rules by the users")
 
-print getUserActionOnRulePerDay("add")
-print getUserActionOnRulePerDay("edit")
-print getUserActionOnRulePerDay("delete")
-print getUserActionOnRulePerDay("disable")
-print getUserActionOnRulePerDay("enable")
+dictToCsv( getUserActionOnRulePerDay("add"), "userActionRequests_perDay_ADD", "Number of ADD requests by the users per day")
+dictToCsv( getUserActionOnRulePerDay("edit"), "userActionRequests_perDay_EDIT", "Number of EDIT requests by the users per day")
+dictToCsv( getUserActionOnRulePerDay("delete"), "userActionRequests_perDay_DELETE", "Number of DELETE requests by the users per day")
+dictToCsv( getUserActionOnRulePerDay("disable"), "userActionRequests_perDay_DISABLE", "Number of DISABLE requests by the users per day")
+dictToCsv( getUserActionOnRulePerDay("enable"), "userActionRequests_perDay_ENABLE", "Number of ENABLE requests by the users per day")
 

@@ -7,8 +7,8 @@ import time
 import socket
 import os
 server_ip = str(socket.gethostbyname(socket.gethostname()))
-if os.path.exists('config/_ip.inf'): 
-	in_file = open('config/_ip.inf',"r")
+if os.path.exists('../../backend/config/_ip.inf'): 
+	in_file = open('../../backend/config/_ip.inf',"r")
 	server_ip = in_file.read().replace("\n", "").strip()
 	in_file.close()
 
