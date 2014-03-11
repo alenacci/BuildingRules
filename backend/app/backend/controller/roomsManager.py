@@ -85,7 +85,7 @@ class RoomsManager:
 		return {"conflictingRules" : conflictingRuleList}
 
 
-	def getRules(self, roomName, buildingName, username = None, includeGroupsRules = False, orderByPriority = False,  includeDisabled = False, categoriesFilter = None):
+	def getRules(self, roomName, buildingName, username = None, includeGroupsRules = False, orderByPriority = False,  includeDisabled = False, categoriesFilter = None, includeTriggerCategory = False):
 		checkData(locals(), ["categoriesFilter"])
 		if categoriesFilter: checkData(json.loads(categoriesFilter))
 
@@ -107,8 +107,17 @@ class RoomsManager:
 
 		response = []
 		for rule in ruleList:
-			response.append(rule.getDict(buildingName = buildingName, roomName = roomName))
-			
+
+			ruleDict = rule.getDict(buildingName = buildingName, roomName = roomName)
+
+			if includeTriggerCategory:
+				from app.backend.controller.triggerManager import TriggerManager
+				triggerManager = TriggerManager()
+				ruleDict.update({'triggerCategory' : triggerManager.getTrigger(rule.antecedent).category})
+
+			response.append(ruleDict)
+
+				
 
 		return {"rules" : response}
 

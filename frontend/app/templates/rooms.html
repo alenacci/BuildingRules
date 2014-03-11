@@ -5,7 +5,7 @@
 
 	<style>
 	    .wrap { width: 750px; height: 390px; padding: 0; overflow: hidden; }
-	    .frame { width: 1000px; height: 520px; border: 0px solid black; }
+	    .frame { width: 1000px; height: 700px; border: 0px solid black; }
 	    .frame {
 	        -ms-zoom: 0.95;
 	        -moz-transform: scale(0.95);
@@ -15,6 +15,18 @@
 	        -webkit-transform: scale(0.95);
 	        -webkit-transform-origin: 0 0;
 	    }
+	</style>
+
+	<style>	
+		.ruleNav_OCCUPANCY 				{background-color:#F78181;}
+		.ruleNav_EXT_TEMPERATURE 		{background-color:#F7BE81;}
+		.ruleNav_TIME 					{background-color:#F5DA81;}
+		.ruleNav_DATE 					{background-color:#F3F781;}
+		.ruleNav_WEATHER 				{background-color:#D8F781;}
+		.ruleNav_ROOM_TEMPERATURE 		{background-color:#BEF781;}
+		.ruleNav_DEFAULT_STATUS 		{background-color:#9FF781;}
+		.ruleNav_DAY 					{background-color:#A9E2F3;}
+		.ruleNav_EXTERNAL_APP 			{background-color:#D0A9F5;}
 	</style>
 
 	<script type="text/javascript" src="{{ url_for('static', filename='js/rooms.js') }}"></script>
@@ -191,17 +203,19 @@
 			            <ul id="myTab" class="nav nav-tabs">
 			              <li class="active"><a href="#rulePanel_{{room.roomName}}" data-toggle="tab">Rules Editor</a></li>
 			              <li><a href="#roomBehavior_{{room.roomName}}" data-toggle="tab">Room Behavior</a></li>
+			              <li><a href="#ruleNavigator_{{room.roomName}}" data-toggle="tab">Rules Navigator</a></li>
 			            </ul>
 			            <div id="myTabContent" class="tab-content">
 			              <div class="tab-pane fade in active" id="rulePanel_{{room.roomName}}">
 
-
-								<div class="btn-toolbar">
-								  <a href="javascript:filterByRuleCategory('{{room.roomName}}','SHOWALL')"><button class="btn active" id="btn_{{room.roomName}}_SHOWALL" style="font-size: x-small" >SHOW ALL</button></a>
-								  {% for category in categories %}
-								  	<a href="javascript:filterByRuleCategory('{{room.roomName}}','{{category}}')"><button class="btn" id="btn_{{room.roomName}}_{{category}}" style="font-size: x-small">{{category}}</button></a>
-								  	{{loop.counter }}
-								  {% endfor %}
+			              		
+								<div class="btn-toolbar" style="background-color:#F5F5F5; padding:10px;">
+									  <h5>Filter by category</h5>
+									  <a href="javascript:filterByRuleCategory('{{room.roomName}}','SHOWALL')"><button class="btn active" id="btn_{{room.roomName}}_SHOWALL" style="font-size: x-small" >SHOW ALL</button></a>
+									  {% for category in categories %}
+									  	<a href="javascript:filterByRuleCategory('{{room.roomName}}','{{category}}')"><button class="btn" id="btn_{{room.roomName}}_{{category}}" style="font-size: x-small">{{category}}</button></a>
+									  	{{loop.counter }}
+									  {% endfor %}
 								</div>				    
 							    <hr>
 							    {% for rule in roomRules[room.roomName] %}
@@ -256,6 +270,42 @@
 			              	<iframe src="{{request.path}}/{{room.roomName}}/graphicalView" class="frame"></iframe>
 			              	</div>
 			              </div>
+			              <div class="tab-pane fade" id="ruleNavigator_{{room.roomName}}">
+			              	<div class="container">
+			              	
+			              		<table border="1" style="font-size:x-small;"> 
+								
+				              		{% for category in categories %}
+					              		<tr>
+					              			<td style="background-color:#72AC44; color:white;">{{category}}</td>
+					              			{% for rule in roomRules[room.roomName] %}
+					              				{% if rule.category == category %}
+					              					<td class="ruleNav_{{rule.triggerCategory}}">
+					              						Priority: {{rule.priority}} 
+					              						<br>
+					              						{% if rule.enabled %} {% else %} <strike> {% endif %}
+					              							<b>{{rule.triggerCategory}}</b>
+					              						{% if rule.enabled %} {% else %} </strike> <b>(disabled)</b>{% endif %}
+					              						<br>
+					              						[<a href="javascript:alert('if {{rule.antecedent}} then {{rule.consequent}} ')">Info</a>]
+					              						[<a href="{{request.path}}/{{rule.roomName}}/rules/{{rule.id}}/edit">Edit</a>]
+					              						<br>
+					              						[<a href="{{request.path}}/{{rule.roomName}}/rules/{{rule.id}}/delete">Delete</a>]
+														{% if rule.enabled %}
+															[<a href="{{request.path}}/{{rule.roomName}}/rules/{{rule.id}}/disable">Disable</a>]
+														{% else %}
+															[<a href="{{request.path}}/{{rule.roomName}}/rules/{{rule.id}}/enable">Enable</a>]
+														{% endif %}
+
+					              					</td>
+					              				{% endif %}
+					              			{% endfor %}
+					              		</tr>
+				              		{% endfor %}
+			              		</table>
+
+			              	</div>
+			              </div>
 			            </div>
 			          </div>  
 
@@ -278,6 +328,8 @@
 				  </div>
 				  <div class="span4">
 				    <div class="well">
+			    
+				    
 				      <h4>Sensors</h4>
 				      <p>
 				      	{% for trigger in triggerList[room.roomName] %}

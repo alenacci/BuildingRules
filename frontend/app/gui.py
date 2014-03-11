@@ -378,7 +378,8 @@ def rooms(buildingName = None):
 			'filterByAuthor' : False,
 			'includeGroupsRules' : True,
 			'orderByPriority' : True,
-			'categoriesFilter' : categoriesFilter
+			'categoriesFilter' : categoriesFilter,
+			'includeTriggerCategory' : True
 			})
 
 		if successResponse(response):

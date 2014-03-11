@@ -524,6 +524,7 @@ def roomRules(username = None, buildingName = None, roomName = None):
 		filterByAuthor = getBoolFromString(validateInput(request.form['filterByAuthor'])) if 'filterByAuthor' in request.form.keys() else False
 		includeGroupsRules = getBoolFromString(validateInput(request.form['includeGroupsRules'])) if 'includeGroupsRules' in request.form.keys() else False
 		orderByPriority = getBoolFromString(validateInput(request.form['orderByPriority'])) if 'orderByPriority' in request.form.keys() else False
+		includeTriggerCategory = getBoolFromString(validateInput(request.form['includeTriggerCategory'])) if 'includeTriggerCategory' in request.form.keys() else False
 		
 		try:
 			categoriesFilter = request.form['categoriesFilter'] if 'categoriesFilter' in request.form.keys() else None
@@ -540,7 +541,7 @@ def roomRules(username = None, buildingName = None, roomName = None):
 			buildingsManager.checkUserBinding(buildingName, username)
 			roomsManager = RoomsManager()
 
-			return returnResult( roomsManager.getRules(roomName = roomName, buildingName = buildingName, username = usernameFilter, includeGroupsRules = includeGroupsRules, orderByPriority = orderByPriority, includeDisabled = True, categoriesFilter = categoriesFilter) )
+			return returnResult( roomsManager.getRules(roomName = roomName, buildingName = buildingName, username = usernameFilter, includeGroupsRules = includeGroupsRules, orderByPriority = orderByPriority, includeDisabled = True, categoriesFilter = categoriesFilter, includeTriggerCategory = includeTriggerCategory) )
 		except Exception as e:
 			return returnError(e)
 
