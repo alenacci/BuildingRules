@@ -140,6 +140,8 @@ class ActionExecutor:
 		import time,datetime
 		startTimeMilliseconds = long((time.time() + 0.5) * 1000)
 
+		analyzedRoomCounter = 0
+
 		flash("Starting the actuation process...", "yellow")
 
 		buildings = Buildings()
@@ -168,6 +170,7 @@ class ActionExecutor:
 					if rule.roomName and not rule.groupId:
 
 						if self.skipRuleOnRoomFilter(buildingName = building.buildingName, roomName = rule.roomName): continue
+						analyzedRoomCounter += 1
 
 						if self.checkRuleTrigger(rule):
 							# If the antecedent of the rule is triggered, let us store the rule as triggered!
@@ -303,7 +306,7 @@ class ActionExecutor:
 		flash("The actuation process is ended.", "yellow")		
 		endTimeMilliseconds = long((time.time() + 0.5) * 1000)
 		opTimeMilliseconds = endTimeMilliseconds - startTimeMilliseconds
-		flash("RunTimeRuleActuation:::Time=" + str(opTimeMilliseconds) + "::NumberOfRules:" + str(len(buildingRules)) + "::TriggeredRules:" + str(len(triggeredRules)) + "::ActuatedRules:" + str(actuatedRulesCounter))
+		flash("RunTimeRuleActuation:::Time=" + str(opTimeMilliseconds) + "::NumberOfRules:" + str(analyzedRoomCounter) + "::TriggeredRules:" + str(len(triggeredRules)) + "::ActuatedRules:" + str(actuatedRulesCounter))
 
 	def __str__(self):
 		return "ActionExecutor: "		
