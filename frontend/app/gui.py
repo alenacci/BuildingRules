@@ -270,6 +270,7 @@ def roomGraphicalView(buildingName = None, roomName = None):
 
 
 		username = session["username"]
+		if not os.path.exists("tmp/gantt/json/"): os.makedirs("tmp/gantt/json/")
 		out_file = open("tmp/gantt/json/" + username + "_" + buildingName + "_" + roomName + ".json","w")
 		out_file.write(json.dumps(ganttView, separators=(',',':')))
 		out_file.close()
