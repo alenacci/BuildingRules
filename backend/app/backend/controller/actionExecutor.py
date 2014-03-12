@@ -137,6 +137,9 @@ class ActionExecutor:
 
 	def start(self):
 
+		import time,datetime
+		startTimeMilliseconds = long((time.time() + 0.5) * 1000)
+
 		flash("Starting the actuation process...", "yellow")
 
 		buildings = Buildings()
@@ -258,6 +261,8 @@ class ActionExecutor:
 				flash(building.buildingName + " - Number of rooms: " + str(len(roomScheduledRules.keys())), "gray")
 				flash(building.buildingName + " - Number of CRV Groups: " + str(len(crvgScheduledRules.keys())), "gray")
 
+				actuatedRulesCounter = 0
+
 				flash("Executing actions for rooms...", "yellow")
 				# Executing the rules per each room
 				# In the case I have the same action category, I'll take the action with higher priority
@@ -273,6 +278,7 @@ class ActionExecutor:
 						if rule.category not in alreadyAppliedCategories:
 							alreadyAppliedCategories.append(rule.category)
 							self.executeRule(rule)
+							actuatedRulesCounter += 1
 						else:
 							flash(building.buildingName + " - Room " + roomName + ", ruleId " + str(rule.id) + " ignored.")
 
@@ -289,11 +295,15 @@ class ActionExecutor:
 						if rule.category not in alreadyAppliedCategories:
 							alreadyAppliedCategories.append(rule.category)
 							self.executeRule(rule)
+							actuatedRulesCounter += 1
 						else:
 							flash(building.buildingName + " - CRVGroup " + str(crvgId) + ", ruleId " + str(rule.id) + " ignored.")
 							self.notifyIgnoredRule(rule)
 
 		flash("The actuation process is ended.", "yellow")		
+		endTimeMilliseconds = long((time.time() + 0.5) * 1000)
+		opTimeMilliseconds = endTimeMilliseconds - startTimeMilliseconds
+		flash("RunTimeRuleActuation:::Time=" + str(opTimeMilliseconds) + "::NumberOfRules:" + str(len(buildingRules)) + "::TriggeredRules:" + str(triggeredRules) + "::ActuatedRules:" + str(actuatedRulesCounter))
 
 	def __str__(self):
 		return "ActionExecutor: "		
