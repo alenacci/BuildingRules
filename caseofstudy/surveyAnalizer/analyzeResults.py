@@ -423,7 +423,7 @@ roomName = -1
 
 for room in roomList:
 
-	if len(room) > 30:
+	if len(room) > 50:
 		continue
 
 	if len(room) not in analyzedRoomRoundCounter.keys(): analyzedRoomRoundCounter[len(room)] = 0
