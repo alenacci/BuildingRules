@@ -17,13 +17,14 @@ import os
 import string
 import random
 
+
 from app.backend.commons.inputDataChecker import checkData
 from app.backend.controller.buildingsManager import BuildingsManager
 from app.backend.controller.actionExecutor import ActionExecutor
 
 class RoomSimulator:
 
-	def __init__(self, buildingName = None, roomName = None, occupancyTimeRangeFrom = None, occupancyTimeRangeTo = None, roomTemperature = None, externalTemperature = None, weather = None):
+	def __init__(self, buildingName = None, roomName = None, occupancyTimeRangeFrom = None, occupancyTimeRangeTo = None, roomTemperature = None, externalTemperature = None, weather = None, currentDate = None):
 		
 		checkData(locals())
 
@@ -34,9 +35,14 @@ class RoomSimulator:
 		self.roomTemperature = roomTemperature
 		self.externalTemperature = externalTemperature
 		self.weather = weather
+		self.currentDate = currentDate
+
 
 
 	def _getCurrentOccupancy(self, currentTimeMinutes):
+
+		if not self.occupancyTimeRangeFrom: return None
+		if not self.occupancyTimeRangeTo: return None
 
 		occupancyTimeRangeMinuteFrom = self._getTimeInMinutes(self.occupancyTimeRangeFrom)
 		occupancyTimeRangeMinuteTo = self._getTimeInMinutes(self.occupancyTimeRangeTo)
@@ -50,7 +56,7 @@ class RoomSimulator:
 
 	def start(self):
 
-		simulationBufferFolder = "tools/simulation/"
+		simulationBufferFolder = "tools/simulation/tmp/"
 		if not os.path.exists(simulationBufferFolder): os.makedirs(simulationBufferFolder)
 		simulationBufferFileName = self.__addPrefixToFileName(self.buildingName + "_" + self.roomName + ".sim")
 		simulationBufferFilePath = (simulationBufferFolder + "/" + simulationBufferFileName).replace("//", "/")
@@ -84,8 +90,6 @@ class RoomSimulator:
 		f = open(simulationBufferFilePath)
 		lines = f.readlines()
 		f.close()
-
-		print lines
 
 		os.remove(simulationBufferFilePath) if os.path.exists(simulationBufferFilePath) else None
 
@@ -131,16 +135,23 @@ class RoomSimulator:
 					if targetCounter == actionTargetsRecordsNumber[target] and len(gantt[target]) == 0:
 						gantt[target].append({"from": "00.00", "to" : record[1], "status" : record[3], "ruleId" : record[4], "ruleText" : record[5]})					
 
-		print gantt
 					
 		return {"simulation" : gantt}
 
 	def _getCurrentDate(self):
-		return str(time.strftime("%d/%m"))
+		if not self.currentDate:
+			return str(time.strftime("%d/%m"))
+		
+		from datetime import datetime
+		return datetime.strptime(self.currentDate, '%Y-%m-%d').strftime("%d/%m")
 
 	def _getCurrentDay(self):
 
-		currentDayInt = datetime.datetime.today().weekday()	
+		if self.currentDate:
+			from datetime import datetime
+			currentDayInt = datetime.strptime(self.currentDate, '%Y-%m-%d').weekday()
+		else:
+			currentDayInt = datetime.datetime.today().weekday()	
 
 		if currentDayInt == 0: return "Monday"
 		if currentDayInt == 1: return "Tuesday"

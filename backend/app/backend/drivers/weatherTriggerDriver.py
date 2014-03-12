@@ -17,6 +17,7 @@ import datetime
 import urllib2
 
 from app.backend.commons.errors import *
+from app.backend.commons.simulation import getSimulationValue
 from app.backend.drivers.genericTriggerDriver import GenericTriggerDriver
 
 
@@ -100,7 +101,11 @@ class WeatherTriggerDriver(GenericTriggerDriver):
 		if self.parameters["operation"] == "TEMPERATURE_IN_RANGE":
 
 			currentScale = "F"
-			convTemp = float(self.parameters["simulationParameters"]["externalTemperature"].replace(currentScale, "").strip())
+
+			if self.parameters["simulationParameters"]["externalTemperature"]:
+				convTemp = float(self.parameters["simulationParameters"]["externalTemperature"].replace(currentScale, "").strip())
+			else:
+				convTemp = getSimulationValue("externalTemperature", self.parameters["simulationParameters"]["time"], None)
 
 			if convTemp >= float(self.parameters['0'].upper().replace(currentScale, "").strip()) and convTemp <= float(self.parameters['1'].upper().replace(currentScale, "").strip()):
 				return True
@@ -108,13 +113,26 @@ class WeatherTriggerDriver(GenericTriggerDriver):
 				return False
 
 		elif self.parameters["operation"] == "CHECK_SUNNY":
-			return True if self.parameters["simulationParameters"]["weather"].upper() == "SUNNY" else False
+
+			if self.parameters["simulationParameters"]["weather"]:
+				return True if self.parameters["simulationParameters"]["weather"].upper() == "SUNNY" else False
+			else:
+				return True if getSimulationValue("weather", self.parameters["simulationParameters"]["time"], None) == "SUNNY" else False
+
 
 		elif self.parameters["operation"] == "CHECK_RAINY":
-			return True if self.parameters["simulationParameters"]["weather"].upper() == "RAINY" else False
+			if self.parameters["simulationParameters"]["weather"]:
+				return True if self.parameters["simulationParameters"]["weather"].upper() == "RAINY" else False
+			else:
+				return True if getSimulationValue("weather", self.parameters["simulationParameters"]["time"], None) == "RAINY" else False
 
 		elif self.parameters["operation"] == "CHECK_CLOUDY":
-			return True if self.parameters["simulationParameters"]["weather"].upper() == "CLOUDY" else False
+			if self.parameters["simulationParameters"]["weather"]:
+				return True if self.parameters["simulationParameters"]["weather"].upper() == "CLOUDY" else False
+			else:
+				return True if getSimulationValue("weather", self.parameters["simulationParameters"]["time"], None) == "CLOUDY" else False
+
+
 
 	def __simulatedEventTriggeredWrapper(self):
 		print "[SIMULATION]" + "[" + self.parameters["simulationParameters"]["date"] + "]" + "[" + self.parameters["simulationParameters"]["time"] + "]", 

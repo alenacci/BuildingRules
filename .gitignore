@@ -27,7 +27,8 @@ _ip.inf
 backend/venv/
 backend/build/
 backend/tools/z3/z3/
-backend/tools/simulation/
+backend/tools/simulation/tmp/
+backend/tools/simulation/results/
 frontend/venv/
 frontend/build/
 backend/tools/weather/

@@ -28,7 +28,9 @@ import os
 #auth_token: 1
 
 from app.backend.commons.errors import *
+from app.backend.commons.simulation import getSimulationValue
 from app.backend.drivers.genericTriggerDriver import GenericTriggerDriver
+
 
 class RoomTriggerDriver(GenericTriggerDriver):
 
@@ -89,19 +91,29 @@ class RoomTriggerDriver(GenericTriggerDriver):
 
 		if self.parameters["operation"] == "CHECK_PRESENCE":
 			
-			return bool(self.parameters["simulationParameters"]["occupancy"])
+			if self.parameters["simulationParameters"]["occupancy"]:
+				return bool(self.parameters["simulationParameters"]["occupancy"])
+			else:
+				return getSimulationValue("occupancy", self.parameters["simulationParameters"]["time"], None)
 
 
 		elif self.parameters["operation"] == "CHECK_ABSENCE":
 			
-			print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ")  to be implemented"
-			return not bool(self.parameters["simulationParameters"]["occupancy"])
+			
+			if self.parameters["simulationParameters"]["occupancy"]:
+				return not bool(self.parameters["simulationParameters"]["occupancy"])
+			else:
+				return not getSimulationValue("occupancy", self.parameters["simulationParameters"]["time"], None)
+			
 
 		elif self.parameters["operation"] == "TEMPERATURE_IN_RANGE":
 		
 			currentScale = "F"
 
-			temperature = float(self.parameters["simulationParameters"]["roomTemperature"].replace(currentScale, "").strip())
+			if self.parameters["simulationParameters"]["roomTemperature"]:
+				temperature = float(self.parameters["simulationParameters"]["roomTemperature"].replace(currentScale, "").strip())
+			else:
+				temperature = getSimulationValue("roomTemperature", self.parameters["simulationParameters"]["time"], None)
 
 			if temperature >= float(self.parameters['0'].upper().replace(currentScale, "").strip()) and temperature <= float(self.parameters['1'].upper().replace(currentScale, "").strip()):
 				return True
