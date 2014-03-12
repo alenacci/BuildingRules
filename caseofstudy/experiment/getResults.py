@@ -337,7 +337,7 @@ def getRuleUsageFrequency():
 				csvFileContent += "0" + _CSV_SEP
 		csvFileContent += "\n"
 
-	print csvFileContent 
+	#print csvFileContent 
 
 	out_file = open("triggerActionCategoryCounter.csv","w")
 	out_file.write(csvFileContent)
@@ -353,43 +353,43 @@ login()
 
 getRuleUsageFrequency()
 
-#GETTING DATA ABOUT THE CONFLICT DETECTION (BOTH SUCCESS AND FAIL)
-#ruleVerificationStats_avg, ruleVerificationStats_max, ruleVerificationStats_min = getTimeConflictData("ALL")
-#
-#dictToCsv(ruleVerificationStats_avg, "ruleVerificationStats_ALL_avg", "Average conflict detection time (ms)")
-#dictToCsv(ruleVerificationStats_max, "ruleVerificationStats_ALL_max", "Maximum conflict detection time (ms)")
-#dictToCsv(ruleVerificationStats_min, "ruleVerificationStats_ALL_min", "Minimum conflict detection time (ms)")
-#
-#
-#ruleVerificationStats_avg, ruleVerificationStats_max, ruleVerificationStats_min = getTimeConflictData("SUCCESS")
-#
-#dictToCsv(ruleVerificationStats_avg, "ruleVerificationStats_SUCCESS_avg", "Average conflict detection time (ms) - Filtering only SUCCESS verifications")
-#dictToCsv(ruleVerificationStats_max, "ruleVerificationStats_SUCCESS_max", "Maximum conflict detection time (ms) - Filtering only SUCCESS verifications")
-#dictToCsv(ruleVerificationStats_min, "ruleVerificationStats_SUCCESS_min", "Minimum conflict detection time (ms) - Filtering only SUCCESS verifications")
-#
-#
-#ruleVerificationStats_avg, ruleVerificationStats_max, ruleVerificationStats_min = getTimeConflictData("FAILED")
-#
-#dictToCsv(ruleVerificationStats_avg, "ruleVerificationStats_FAILED_avg", "Average conflict detection time (ms) - Filtering only FAILED verifications")
-#dictToCsv(ruleVerificationStats_max, "ruleVerificationStats_FAILED_max", "Maximum conflict detection time (ms) - Filtering only FAILED verifications")
-#dictToCsv(ruleVerificationStats_min, "ruleVerificationStats_FAILED_min", "Minimum conflict detection time (ms) - Filtering only FAILED verifications")
-#
-#
-#
-#
-##GETTING DATA ABOUT THE USERS REQUEST (ADD EDIT RULE)
-#userActionRequests = {}
-#userActionRequests.update( getUserActionOnRule("add") )
-#userActionRequests.update( getUserActionOnRule("edit") )
-#userActionRequests.update( getUserActionOnRule("delete") )
-#userActionRequests.update( getUserActionOnRule("disable") )
-#userActionRequests.update( getUserActionOnRule("enable") )
-#
-#dictToCsv(userActionRequests, "userActionRequests", "Number of requests on rules by the users")
-#
-#dictToCsv( getUserActionOnRulePerDay("add"), "userActionRequests_perDay_ADD", "Number of ADD requests by the users per day")
-#dictToCsv( getUserActionOnRulePerDay("edit"), "userActionRequests_perDay_EDIT", "Number of EDIT requests by the users per day")
-#dictToCsv( getUserActionOnRulePerDay("delete"), "userActionRequests_perDay_DELETE", "Number of DELETE requests by the users per day")
-#dictToCsv( getUserActionOnRulePerDay("disable"), "userActionRequests_perDay_DISABLE", "Number of DISABLE requests by the users per day")
-#dictToCsv( getUserActionOnRulePerDay("enable"), "userActionRequests_perDay_ENABLE", "Number of ENABLE requests by the users per day")
+GETTING DATA ABOUT THE CONFLICT DETECTION (BOTH SUCCESS AND FAIL)
+ruleVerificationStats_avg, ruleVerificationStats_max, ruleVerificationStats_min = getTimeConflictData("ALL")
+
+dictToCsv(ruleVerificationStats_avg, "ruleVerificationStats_ALL_avg", "Average conflict detection time (ms)")
+dictToCsv(ruleVerificationStats_max, "ruleVerificationStats_ALL_max", "Maximum conflict detection time (ms)")
+dictToCsv(ruleVerificationStats_min, "ruleVerificationStats_ALL_min", "Minimum conflict detection time (ms)")
+
+
+ruleVerificationStats_avg, ruleVerificationStats_max, ruleVerificationStats_min = getTimeConflictData("SUCCESS")
+
+dictToCsv(ruleVerificationStats_avg, "ruleVerificationStats_SUCCESS_avg", "Average conflict detection time (ms) - Filtering only SUCCESS verifications")
+dictToCsv(ruleVerificationStats_max, "ruleVerificationStats_SUCCESS_max", "Maximum conflict detection time (ms) - Filtering only SUCCESS verifications")
+dictToCsv(ruleVerificationStats_min, "ruleVerificationStats_SUCCESS_min", "Minimum conflict detection time (ms) - Filtering only SUCCESS verifications")
+
+
+ruleVerificationStats_avg, ruleVerificationStats_max, ruleVerificationStats_min = getTimeConflictData("FAILED")
+
+dictToCsv(ruleVerificationStats_avg, "ruleVerificationStats_FAILED_avg", "Average conflict detection time (ms) - Filtering only FAILED verifications")
+dictToCsv(ruleVerificationStats_max, "ruleVerificationStats_FAILED_max", "Maximum conflict detection time (ms) - Filtering only FAILED verifications")
+dictToCsv(ruleVerificationStats_min, "ruleVerificationStats_FAILED_min", "Minimum conflict detection time (ms) - Filtering only FAILED verifications")
+
+
+
+
+#GETTING DATA ABOUT THE USERS REQUEST (ADD EDIT RULE)
+userActionRequests = {}
+userActionRequests.update( getUserActionOnRule("add") )
+userActionRequests.update( getUserActionOnRule("edit") )
+userActionRequests.update( getUserActionOnRule("delete") )
+userActionRequests.update( getUserActionOnRule("disable") )
+userActionRequests.update( getUserActionOnRule("enable") )
+
+dictToCsv(userActionRequests, "userActionRequests", "Number of requests on rules by the users")
+
+dictToCsv( getUserActionOnRulePerDay("add"), "userActionRequests_perDay_ADD", "Number of ADD requests by the users per day")
+dictToCsv( getUserActionOnRulePerDay("edit"), "userActionRequests_perDay_EDIT", "Number of EDIT requests by the users per day")
+dictToCsv( getUserActionOnRulePerDay("delete"), "userActionRequests_perDay_DELETE", "Number of DELETE requests by the users per day")
+dictToCsv( getUserActionOnRulePerDay("disable"), "userActionRequests_perDay_DISABLE", "Number of DISABLE requests by the users per day")
+dictToCsv( getUserActionOnRulePerDay("enable"), "userActionRequests_perDay_ENABLE", "Number of ENABLE requests by the users per day")
 
