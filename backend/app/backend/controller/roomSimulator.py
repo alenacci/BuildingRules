@@ -147,11 +147,12 @@ class RoomSimulator:
 
 	def _getCurrentDay(self):
 
+		from datetime import datetime
 		if self.currentDate:
-			from datetime import datetime
+			
 			currentDayInt = datetime.strptime(self.currentDate, '%Y-%m-%d').weekday()
 		else:
-			currentDayInt = datetime.datetime.today().weekday()	
+			currentDayInt = datetime.today().weekday()	
 
 		if currentDayInt == 0: return "Monday"
 		if currentDayInt == 1: return "Tuesday"

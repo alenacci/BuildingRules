@@ -21,7 +21,7 @@ class Test:
 	def test5(self):
 		from app.backend.controller.buildingSimulator import BuildingSimulator		
 
-		buildingSimulator = BuildingSimulator(buildingName = "CSE", startDate = "2014-02-15", numberOfDays = 7, roomFilter = ["2107"])
+		buildingSimulator = BuildingSimulator(buildingName = "CSE", startDate = "2014-02-15", numberOfDays = 7, roomFilter = None)
 		buildingSimulator.start()
 
 	def test4(self):
