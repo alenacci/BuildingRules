@@ -351,35 +351,35 @@ for room in roomList:
 
 roomCardinalityLimit = {}
 roomCardinalityLimit[	1	] = 	72
-roomCardinalityLimit[	2	] = 	100
-roomCardinalityLimit[	3	] = 	100
-roomCardinalityLimit[	4	] = 	100
-roomCardinalityLimit[	5	] = 	100
-roomCardinalityLimit[	6	] = 	100
-roomCardinalityLimit[	7	] = 	100
-roomCardinalityLimit[	8	] = 	100
-roomCardinalityLimit[	9	] = 	100
-roomCardinalityLimit[	10	] = 	100
-roomCardinalityLimit[	11	] = 	100
-roomCardinalityLimit[	12	] = 	100
-roomCardinalityLimit[	13	] = 	100
-roomCardinalityLimit[	14	] = 	100
-roomCardinalityLimit[	15	] = 	100
-roomCardinalityLimit[	16	] = 	100
-roomCardinalityLimit[	17	] = 	100
-roomCardinalityLimit[	18	] = 	100
-roomCardinalityLimit[	19	] = 	100
-roomCardinalityLimit[	20	] = 	100
-roomCardinalityLimit[	21	] = 	100
-roomCardinalityLimit[	22	] = 	100
-roomCardinalityLimit[	23	] = 	100
-roomCardinalityLimit[	24	] = 	100
-roomCardinalityLimit[	25	] = 	100
-roomCardinalityLimit[	26	] = 	100
-roomCardinalityLimit[	27	] = 	100
-roomCardinalityLimit[	28	] = 	100
-roomCardinalityLimit[	29	] = 	100
-roomCardinalityLimit[	30	] = 	100
+roomCardinalityLimit[	2	] = 	200
+roomCardinalityLimit[	3	] = 	200
+roomCardinalityLimit[	4	] = 	200
+roomCardinalityLimit[	5	] = 	200
+roomCardinalityLimit[	6	] = 	200
+roomCardinalityLimit[	7	] = 	200
+roomCardinalityLimit[	8	] = 	200
+roomCardinalityLimit[	9	] = 	200
+roomCardinalityLimit[	10	] = 	200
+roomCardinalityLimit[	11	] = 	200
+roomCardinalityLimit[	12	] = 	200
+roomCardinalityLimit[	13	] = 	200
+roomCardinalityLimit[	14	] = 	200
+roomCardinalityLimit[	15	] = 	200
+roomCardinalityLimit[	16	] = 	200
+roomCardinalityLimit[	17	] = 	200
+roomCardinalityLimit[	18	] = 	200
+roomCardinalityLimit[	19	] = 	200
+roomCardinalityLimit[	20	] = 	200
+roomCardinalityLimit[	21	] = 	200
+roomCardinalityLimit[	22	] = 	200
+roomCardinalityLimit[	23	] = 	200
+roomCardinalityLimit[	24	] = 	200
+roomCardinalityLimit[	25	] = 	200
+roomCardinalityLimit[	26	] = 	200
+roomCardinalityLimit[	27	] = 	200
+roomCardinalityLimit[	28	] = 	200
+roomCardinalityLimit[	29	] = 	200
+roomCardinalityLimit[	30	] = 	200
 
 
 roomCardinalityFilter = {}
@@ -423,7 +423,7 @@ roomName = -1
 
 for room in roomList:
 
-	if len(room) > 50:
+	if len(room) > 30:
 		continue
 
 	if len(room) not in analyzedRoomRoundCounter.keys(): analyzedRoomRoundCounter[len(room)] = 0
