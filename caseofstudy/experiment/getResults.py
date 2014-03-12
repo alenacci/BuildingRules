@@ -353,7 +353,7 @@ login()
 
 getRuleUsageFrequency()
 
-GETTING DATA ABOUT THE CONFLICT DETECTION (BOTH SUCCESS AND FAIL)
+#GETTING DATA ABOUT THE CONFLICT DETECTION (BOTH SUCCESS AND FAIL)
 ruleVerificationStats_avg, ruleVerificationStats_max, ruleVerificationStats_min = getTimeConflictData("ALL")
 
 dictToCsv(ruleVerificationStats_avg, "ruleVerificationStats_ALL_avg", "Average conflict detection time (ms)")
