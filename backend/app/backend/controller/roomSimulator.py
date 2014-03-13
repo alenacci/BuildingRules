@@ -91,9 +91,6 @@ class RoomSimulator:
 		lines = f.readlines()
 		f.close()
 
-		print lines
-		raw_input()
-
 		os.remove(simulationBufferFilePath) if os.path.exists(simulationBufferFilePath) else None
 
 		actionTargets = set()
