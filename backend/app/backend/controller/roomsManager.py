@@ -514,7 +514,32 @@ class RoomsManager:
 		temporaryRuleSet.extend(roomRules)
 		temporaryRuleSet.append(rule)
 
-		#print temporaryRuleSet
+		#### OPTMIZATION ########################################################################################
+		# Removing rules with a trigger that is different form the one of the rule I'm trying to insert or modify
+		from app.backend.controller.triggerManager import TriggerManager
+		triggerManager = TriggerManager()
+		
+		newRuleTriggers = triggerManager.translateTrigger(rule.antecedent)["triggers"]
+
+		for i in range(0, len(temporaryRuleSet)):
+
+			otherRuleTriggers = triggerManager.translateTrigger(temporaryRuleSet[i].antecedent)["triggers"]
+
+			deleteRule = False
+
+			if rule.category == temporaryRuleSet[i].category:
+				for t1 in newRuleTriggers:
+					for t2 in otherRuleTriggers:
+						if t1 == t2:
+							deleteRule = True
+							break;
+					if deleteRule: break;
+
+			if deleteRule:
+				del temporaryRuleSet[i]
+
+		#### OPTMIZATION ########################################################################################
+
 
 		for i in range(0, len(temporaryRuleSet)):
 			temporaryRuleSet[i].groupId = None
