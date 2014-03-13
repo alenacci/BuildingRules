@@ -278,6 +278,80 @@ def roomGraphicalView(buildingName = None, roomName = None):
 	return render_template('gantt.html', ganttJsonLink = ganttJsonLink, preloadGantt = preloadGantt)			
 
 
+@gui.route('/removeMe2/<currentDay>/', methods = ['GET', 'POST'])
+@gui.route('/removeMe2/<currentDay>', methods = ['GET', 'POST'])
+def removeMe2(currentDay = None):
+	if not loggedIn():	return redirect(url_for('gui.login'))
+
+	username = session["username"]
+
+	filePath = "tmp/gantt/json/experiment_" + currentDay + ".json"
+	if not os.path.exists(filePath): return "[]"
+	
+	in_file = open(filePath,"r")
+	text = in_file.read()
+	in_file.close()	
+
+	return text
+
+
+
+@gui.route('/removeMe/<currentDay>/', methods = ['GET', 'POST'])
+@gui.route('/removeMe/<currentDay>', methods = ['GET', 'POST'])
+def removeMe(currentDay = None):
+
+	if not loggedIn():	return redirect(url_for('gui.login'))
+
+	in_file = open("../backend/tools/simulation/results/3208.json","r")
+	text = in_file.read()
+	in_file.close()
+
+	response = json.loads(text)
+
+	for day in response.keys():
+		print day
+
+	ganttView = []
+	ganttBarColors = ['ganttRed', 'ganttGreen', 'ganttBlue', 'ganttOrange']
+	currentBarColor = 0
+
+	print response[currentDay]
+
+	for target in response[currentDay]["simulation"].keys():
+
+		item = {}
+		item["name"] = target
+		item["desc"] = ""
+		item["values"] = []
+		for bar in response[currentDay]["simulation"][target]:
+
+			timeFrom = bar["from"].replace(".",":")
+			timeTo = bar["to"].replace(".",":")
+
+			today = datetime.date.today().strftime("%b %d %Y")
+			unixTsFrom = EPOCH(today + " " + timeFrom)
+			unixTsTo = EPOCH(today + " " + timeTo)
+
+			unixTsFrom = str(int(unixTsFrom))
+			unixTsTo = str(int(unixTsTo))
+
+			item["values"].append({ "desc": bar["ruleText"],	"from" : "/Date(" + unixTsFrom + ")/", "to" : "/Date(" + unixTsTo + ")/", "label" : bar["status"], "customClass" : ganttBarColors[currentBarColor] })
+			currentBarColor += 1
+			if currentBarColor == len(ganttBarColors): currentBarColor = 0
+
+		ganttView.append(item)
+
+
+	ganttJsonLink = url_for("gui.removeMe2", currentDay = currentDay)
+	username = session["username"]
+	if not os.path.exists("tmp/gantt/json/"): os.makedirs("tmp/gantt/json/")
+	out_file = open("tmp/gantt/json/experiment_" + currentDay + ".json","w")
+	out_file.write(json.dumps(ganttView, separators=(',',':')))
+	out_file.close()
+
+	return render_template('gantt2.html', ganttJsonLink = ganttJsonLink, preloadGantt = False)			
+
+
 @gui.route('/buildings/<buildingName>/rooms/', methods = ['GET', 'POST'])
 @gui.route('/buildings/<buildingName>/rooms', methods = ['GET', 'POST'])
 def rooms(buildingName = None):
