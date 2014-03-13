@@ -50,12 +50,17 @@ class BuildingSimulator:
 
 			roomName = room["roomName"]
 
+			if roomName != "3208": continue
+
 			if self.roomFilter:
 				if not roomName in self.roomFilter:
 					continue
 
 			simulationResult = {}
 			for day in days:
+
+				if day != "2014-02-18": continue
+
 				roomSimulator = RoomSimulator(buildingName = self.buildingName, roomName = roomName, currentDate = day)
 				simulationResult[day] = roomSimulator.start()
 
