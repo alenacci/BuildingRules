@@ -306,7 +306,7 @@ class ActionExecutor:
 		flash("The actuation process is ended.", "yellow")		
 		endTimeMilliseconds = long((time.time() + 0.5) * 1000)
 		opTimeMilliseconds = endTimeMilliseconds - startTimeMilliseconds
-		flash("RunTimeRuleActuation:::RoomFilter=" + str(roomFilter) + "::Time=" + str(opTimeMilliseconds) + "::NumberOfRules:" + str(analyzedRoomCounter) + "::TriggeredRules:" + str(len(triggeredRules)) + "::ActuatedRules:" + str(actuatedRulesCounter) + "::IgnoredRules:" + str(len(triggeredRules)-actuatedRulesCounter))
+		flash("RunTimeRuleActuation:::RoomFilter=" + str(self.roomFilter) + "::Time=" + str(opTimeMilliseconds) + "::NumberOfRules:" + str(analyzedRoomCounter) + "::TriggeredRules:" + str(len(triggeredRules)) + "::ActuatedRules:" + str(actuatedRulesCounter) + "::IgnoredRules:" + str(len(triggeredRules)-actuatedRulesCounter))
 
 	def __str__(self):
 		return "ActionExecutor: "		
