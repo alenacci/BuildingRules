@@ -1402,11 +1402,13 @@ def EPOCH(utcDatetimeString):
 	
 	from pytz import timezone
 	import pytz
-	from datetime import datetime
+	import datetime
 
-	utc_datetime = datetime.strptime(utcDatetimeString, '%b %d %Y %H:%M').replace(tzinfo=timezone('US/Pacific'))
+	timezoneCorretionDelta = datetime.timedelta(hours=1)
+	utc_datetime = datetime.datetime.strptime(utcDatetimeString, '%b %d %Y %H:%M').replace(tzinfo=timezone('US/Pacific'))
+	utc_datetime -= timezoneCorretionDelta
 
-	UNIX_EPOCH = datetime(1970, 1, 1, 0, 0, tzinfo = pytz.utc)
+	UNIX_EPOCH = datetime.datetime(1970, 1, 1, 0, 0, tzinfo = pytz.utc)
 	delta = utc_datetime - UNIX_EPOCH
 	seconds = delta.total_seconds()
 	ms = seconds * 1000
