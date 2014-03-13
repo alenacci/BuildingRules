@@ -277,8 +277,15 @@ class ActionExecutor:
 
 					alreadyAppliedCategories = []
 					for rule in ruleList:
+
+						if rule.getPriority() == 0:
+							raw_input(str(rule))
 						
 						if rule.category not in alreadyAppliedCategories:
+
+							if rule.getPriority() == 0:
+								raw_input(str(rule))
+
 							alreadyAppliedCategories.append(rule.category)
 							self.executeRule(rule)
 							actuatedRulesCounter += 1
