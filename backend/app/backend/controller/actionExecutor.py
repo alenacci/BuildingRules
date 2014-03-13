@@ -278,6 +278,9 @@ class ActionExecutor:
 					alreadyAppliedCategories = []
 					for rule in ruleList:
 
+						print "=============================="
+						print ruleList
+						print "=============================="
 						if rule.getPriority() == 0:
 							raw_input("VEDIAMO UN PO CHE SUCCEDE .... " + str(rule))
 						
