@@ -279,12 +279,12 @@ class ActionExecutor:
 					for rule in ruleList:
 
 						if rule.getPriority() == 0:
-							raw_input(str(rule))
+							raw_input("VEDIAMO UN PO CHE SUCCEDE .... " + str(rule))
 						
 						if rule.category not in alreadyAppliedCategories:
 
 							if rule.getPriority() == 0:
-								raw_input(str(rule))
+								raw_input("OK AGGIUNGA .... " + str(rule))
 
 							alreadyAppliedCategories.append(rule.category)
 							self.executeRule(rule)
