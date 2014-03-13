@@ -119,16 +119,15 @@ class RoomSimulator:
 
 		for target in actionTargets:
 
-			lastTargetStatusStartTime = '00:00'
+			
 			recordCounter = 0
 
 			for currentRecord in timeRecords:
 				if currentRecord[2] == target:		
 
 					if lastRecord and lastRecord[3] != currentRecord[3]:
-						gantt[target].append({"from": lastTargetStatusStartTime, "to" : lastRecord[1], "status" : lastRecord[2], "ruleId" : lastRecord[4], "ruleText" : lastRecord[5]})
-						
-						lastTargetStatusStartTime = currentRecord[1]
+						gantt[target].append({"from": lastRecord[1], "to" : currentRecord[1], "status" : lastRecord[2], "ruleId" : lastRecord[4], "ruleText" : lastRecord[5]})
+					
 
 					lastRecord = currentRecord
 					
