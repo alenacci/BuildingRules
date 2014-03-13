@@ -112,29 +112,42 @@ class RoomSimulator:
 		for target in actionTargets:
 			gantt[target] = []
 
-
-
-		lastRecord = None
+		I_DATE = 0
+		I_TIME = 1
+		I_TARGET = 2
+		I_STATUS = 3
+		I_RULE_ID = 4
+		I_RULE_TEXT = 5
 
 
 		for target in actionTargets:
+			counter = 0
+			interval = {}
 
-			
-			recordCounter = 0
+			for record in timeRecords:
+				if record[2] == target:		
 
-			for currentRecord in timeRecords:
-				if currentRecord[2] == target:		
+					if counter == 0:
+						interval["start"] = "00:00"		
+						interval["target"] = record[I_TARGET]
+						interval["status"] = record[I_STATUS]
+						interval["ruleId"] = record[I_RULE_ID]
+						interval["ruleText"] = record[I_RULE_TEXT]
 
-					if lastRecord and lastRecord[3] != currentRecord[3]:
-						gantt[target].append({"from": lastRecord[1], "to" : currentRecord[1], "status" : lastRecord[2], "ruleId" : lastRecord[4], "ruleText" : lastRecord[5]})
-					
+					if record[I_STATUS] != interval["status"] or counter == (actionTargetsRecordsNumber[target] - 1):
 
-					lastRecord = currentRecord
-					
-					recordCounter += 1
+						interval["end"] = record[I_TIME]
+						gantt[target].append({"from": interval["start"], "to" : interval["end"], "status" : interval["status"], "ruleId" : interval["ruleId"], "ruleText" : interval["ruleText"]})
 
-					if recordCounter == actionTargetsRecordsNumber[target] and len(gantt[target]) == 0:
-						gantt[target].append({"from": "00.00", "to" : currentRecord[1], "status" : currentRecord[3], "ruleId" : currentRecord[4], "ruleText" : currentRecord[5]})					
+						interval["start"] = record[I_TIME]
+						interval["target"] = record[I_TARGET]
+						interval["status"] = record[I_STATUS]
+						interval["ruleId"] = record[I_RULE_ID]
+						interval["ruleText"] = record[I_RULE_TEXT]
+						interval["end"] = None
+
+					counter += 1
+
 
 					
 		return {"simulation" : gantt}
