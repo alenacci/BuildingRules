@@ -277,22 +277,8 @@ class ActionExecutor:
 
 					alreadyAppliedCategories = []
 					for rule in ruleList:
-
-						if self.roomFilter[0]["roomName"] == "3208":
-							print "=============================="
-							for r in ruleList:
-								print str(r.getPriority()) + " " + r.category 
-							print "=============================="
-
-
-							if rule.getPriority() == 0:
-								raw_input("VEDIAMO UN PO CHE SUCCEDE .... " + str(rule))
 							
 						if rule.category not in alreadyAppliedCategories:
-
-							if self.roomFilter[0]["roomName"] == "3208":
-								if rule.getPriority() == 0:
-									raw_input("OK AGGIUNGA .... " + str(rule))
 
 							alreadyAppliedCategories.append(rule.category)
 							self.executeRule(rule)
