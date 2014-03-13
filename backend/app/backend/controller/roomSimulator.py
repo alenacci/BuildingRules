@@ -131,7 +131,7 @@ class RoomSimulator:
 						
 						lastTargetStatusStartTime = currentRecord[1]
 
-						lastRecord = currentRecord
+					lastRecord = currentRecord
 					
 					recordCounter += 1
 
