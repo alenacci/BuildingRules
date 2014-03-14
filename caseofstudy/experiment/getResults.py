@@ -114,6 +114,8 @@ def getRuleList(roomName = None):
 	query = "SELECT * FROM `rules`"
 	if roomName: query += " WHERE room_name = '" + roomName +"'"
 
+	print query
+
 	database = Database()
 	database.open()
 	queryResult = database.executeReadQuery(query)
@@ -365,6 +367,7 @@ login()
 getRuleUsageFrequency()
 
 for roomName in getRoomList():
+	print "Reading for " + roomName + "..."
 	getRuleUsageFrequency(roomName)
 
 #GETTING DATA ABOUT THE CONFLICT DETECTION (BOTH SUCCESS AND FAIL)
