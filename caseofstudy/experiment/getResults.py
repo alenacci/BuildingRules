@@ -325,8 +325,8 @@ def getRuleUsageFrequency(roomName = None):
 
 	#print csvFileContent 
 
-	fileName = "triggerActionNameCounter_ruleNumber" + str(len(ruleList))
-	if roomName: fileName = "triggerActionNameCounter_" + roomName + "_ruleNumber" + str(len(ruleList))
+	fileName = "results/triggerActionNameCounter_ruleNumber" + str(len(ruleList))
+	if roomName: fileName = "results/triggerActionNameCounter_" + roomName + "_ruleNumber" + str(len(ruleList))
 
 	fileName += ".csv"
 
@@ -356,8 +356,8 @@ def getRuleUsageFrequency(roomName = None):
 
 	#print csvFileContent 
 
-	fileName = "triggerActionCategoryCounter" + str(len(ruleList))
-	fileName = "triggerActionCategoryCounter_" + roomName + "_ruleNumber" + str(len(ruleList))
+	fileName = "results/triggerActionCategoryCounter" + str(len(ruleList))
+	fileName = "results/triggerActionCategoryCounter_" + roomName + "_ruleNumber" + str(len(ruleList))
 	fileName += ".csv"
 	out_file = open(fileName,"w")
 	out_file.write(csvFileContent)
