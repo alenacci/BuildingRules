@@ -112,7 +112,8 @@ def getRoomList():
 def getRuleList(roomName = None):
 
 	query = "SELECT * FROM `rules`"
-	if roomName: query += " WHERE room_name = '" + roomName +"'"
+	if roomName: 
+		query = "SELECT * FROM `rules` WHERE room_name = '" + roomName +"'"
 
 	print query
 
