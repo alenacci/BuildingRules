@@ -262,7 +262,7 @@ def getRuleUsageFrequency(roomName = None):
 	actionNames = set()
 
 
-	for rule in getRuleList(roomName = None):
+	for rule in getRuleList(roomName= roomName):
 
 		triggersInfo = getRuleAntecedentTriggerInfo(rule["antecedent"])
 		actionInfo = getRuleConsequentActionInfo(rule["consequent"])
