@@ -43,7 +43,7 @@ class Test:
 
 					#Creating the temporary ruleset
 					for i in range(0, ruleNumber):
-						selectedRule = random.randint(0,len(buildingRules))
+						selectedRule = random.randint(0,len(buildingRules)-1)
 						tmpRuleSet.append(buildingRules[selectedRule])
 
 					rulesetChecker = RulesetChecker(tmpRuleSet)
