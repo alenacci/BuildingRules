@@ -120,7 +120,7 @@ class RulesetChecker:
 			theOutFile.close()	
 
 			execStr = self.__MAIN_PATH + "z3/bin/z3 -smt2 " + temporaryFilePath
-			print execStr
+			#print execStr
 			
 			try:
 				z3Output = subprocess.check_output(execStr, shell=True)
