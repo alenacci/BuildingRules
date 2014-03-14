@@ -18,6 +18,48 @@ class Test:
 	def __init__(self):
 		pass
 
+
+	def test6():
+
+		from app.backend.model.buildings import Buildings		
+		from app.backend.controller.rulesetChecker import RulesetChecker	
+		import random	
+		import time,datetime
+		from app.backend.commons.console import flash
+
+		buildings = Buildings()
+		
+		for building in buildings.getAllBuildings():
+			buildingRules = building.getRules()
+
+
+			for ruleNumber in range(0,80):		
+				print "Testing with ruleNumber " + str(ruleNumber)
+				for testNumber in range(0, 100):
+					print "Testing with ruleNumber " + str(ruleNumber) + " #iteration: " + str(testNumber)
+					tmpRuleSet = []
+
+					#Creating the temporary ruleset
+					for i in range(0, ruleNumber):
+						selectedRule = random.randint(0,len(buildingRules))
+						tmpRuleSet.append(buildingRules[selectedRule])
+
+					rulesetChecker = RulesetChecker(tmpRuleSet)
+		
+					startTimeMilliseconds = long((time.time() + 0.5) * 1000)
+					ruleCheckErrorList = rulesetChecker.check()
+					endTimeMilliseconds = long((time.time() + 0.5) * 1000)
+					
+					opTimeMilliseconds = endTimeMilliseconds - startTimeMilliseconds
+
+					if len(ruleCheckErrorList) == 0:
+						flash("EXPERIMENT-TestRoomRuleVerification [SUCCESS]:" + "#rules=" + str(ruleNumber) + " - opTimeMilliseconds:" + str(opTimeMilliseconds))
+					else:
+						flash("EXPERIMENT-TestRoomRuleVerification [FAILED]:" + "#rules=" + str(ruleNumber) + " - opTimeMilliseconds:" + str(opTimeMilliseconds))
+
+			print "DONE."
+						
+
 	def test5(self):
 		from app.backend.controller.buildingSimulator import BuildingSimulator		
 
