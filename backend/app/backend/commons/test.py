@@ -19,7 +19,7 @@ class Test:
 		pass
 
 
-	def test6():
+	def test6(self):
 
 		print "hi i'm here!!"
 
