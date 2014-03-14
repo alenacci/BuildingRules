@@ -34,7 +34,7 @@ def start():
 	global username
 	global password
 
-	response = rest.request("/api/test")
+	response = rest.request("/api/test", {'username' : username, 'password' : password})
 	sessionKey = response["sessionKey"]
 	userUuid = response["userUuid"]
 
