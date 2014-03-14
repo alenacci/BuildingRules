@@ -109,9 +109,10 @@ def getRoomList():
 
 	return roomList
 
-def getRuleList():
+def getRuleList(roomName = None):
 
 	query = "SELECT * FROM `rules`"
+	if roomName: query += " WHERE room_name = '" + roomName +"'"
 
 	database = Database()
 	database.open()
@@ -242,7 +243,7 @@ def login():
 
 
 
-def getRuleUsageFrequency():
+def getRuleUsageFrequency(roomName = None):
 	triggerCategoryCounter = {}
 	triggerNameCounter = {}
 
@@ -258,7 +259,7 @@ def getRuleUsageFrequency():
 	actionNames = set()
 
 
-	for rule in getRuleList():
+	for rule in getRuleList(roomName = None):
 
 		triggersInfo = getRuleAntecedentTriggerInfo(rule["antecedent"])
 		actionInfo = getRuleConsequentActionInfo(rule["consequent"])
@@ -320,7 +321,10 @@ def getRuleUsageFrequency():
 
 	#print csvFileContent 
 
-	out_file = open("triggerActionNameCounter.csv","w")
+	fileName = "triggerActionNameCounter.csv"
+	if roomName: fileName = "triggerActionNameCounter_" + roomName ".csv"
+
+	out_file = open(,"w")
 	out_file.write(csvFileContent)
 	out_file.close()
 
@@ -359,6 +363,9 @@ def getRuleUsageFrequency():
 login()
 
 getRuleUsageFrequency()
+
+for roomName in getRoomList():
+	getRuleUsageFrequency(roomName)
 
 #GETTING DATA ABOUT THE CONFLICT DETECTION (BOTH SUCCESS AND FAIL)
 ruleVerificationStats_avg, ruleVerificationStats_max, ruleVerificationStats_min, ruleVerificationStats_stdev = getTimeConflictData("ALL")
