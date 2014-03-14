@@ -306,6 +306,8 @@ def getRuleUsageFrequency(roomName = None):
 			triggerActionNameCounter[triggerName][actionName] += 1
 
 
+	if not os.path.exists("results/"): os.makedirs("results/")
+
 	_CSV_SEP = ";"
 	csvFileContent = ""
 
@@ -357,7 +359,7 @@ def getRuleUsageFrequency(roomName = None):
 	#print csvFileContent 
 
 	fileName = "results/triggerActionCategoryCounter" + str(len(ruleList))
-	fileName = "results/triggerActionCategoryCounter_" + roomName + "_ruleNumber" + str(len(ruleList))
+	if roomName: fileName = "results/triggerActionCategoryCounter_" + roomName + "_ruleNumber" + str(len(ruleList))
 	fileName += ".csv"
 	out_file = open(fileName,"w")
 	out_file.write(csvFileContent)
