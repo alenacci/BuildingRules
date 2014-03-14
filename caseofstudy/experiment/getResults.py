@@ -324,7 +324,7 @@ def getRuleUsageFrequency(roomName = None):
 	fileName = "triggerActionNameCounter.csv"
 	if roomName: fileName = "triggerActionNameCounter_" + roomName +  ".csv"
 
-	out_file = open(,"w")
+	out_file = open(fileName,"w")
 	out_file.write(csvFileContent)
 	out_file.close()
 
