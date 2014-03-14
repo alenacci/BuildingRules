@@ -21,6 +21,8 @@ class Test:
 
 	def test6():
 
+		print "hi i'm here!!"
+
 		from app.backend.model.buildings import Buildings		
 		from app.backend.controller.rulesetChecker import RulesetChecker	
 		import random	
