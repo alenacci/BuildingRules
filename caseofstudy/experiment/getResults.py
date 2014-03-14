@@ -161,7 +161,9 @@ def getTimeConflictData(recordFilter):
 
 	ruleVerificationStats_cardinality = {}
 	ruleVerificationStats_avg = {}
+	ruleVerificationStats_stdev = {}
 	ruleVerificationStats_sum = {}
+	ruleVerificationStats_squareSum = {}
 	ruleVerificationStats_max = {}
 	ruleVerificationStats_min = {}
 
@@ -180,7 +182,9 @@ def getTimeConflictData(recordFilter):
 		ruleVerificationStats_cardinality[numberOfRules] += 1
 
 		if numberOfRules not in ruleVerificationStats_sum.keys(): ruleVerificationStats_sum[numberOfRules] = 0
+		if numberOfRules not in ruleVerificationStats_squareSum.keys(): ruleVerificationStats_squareSum[numberOfRules] = 0
 		ruleVerificationStats_sum[numberOfRules] += milliseconds
+		ruleVerificationStats_squareSum[numberOfRules] += (milliseconds * milliseconds)
 
 		if numberOfRules not in ruleVerificationStats_max.keys(): ruleVerificationStats_max[numberOfRules] = 0
 		if milliseconds > ruleVerificationStats_max[numberOfRules]: ruleVerificationStats_max[numberOfRules] = milliseconds
@@ -192,8 +196,10 @@ def getTimeConflictData(recordFilter):
 	# Computing average
 	for numberOfRules in ruleVerificationStats_cardinality.keys():
 		ruleVerificationStats_avg[numberOfRules] = ruleVerificationStats_sum[numberOfRules] / ruleVerificationStats_cardinality[numberOfRules]
+		mean = ruleVerificationStats_avg[numberOfRules]
+		ruleVerificationStats_stdev[numberOfRules] = math.sqrt((ruleVerificationStats_sum[numberOfRules] / ruleVerificationStats_cardinality[numberOfRules]) - (mean * mean)) 
 
-	return ruleVerificationStats_avg, ruleVerificationStats_max, ruleVerificationStats_min
+	return ruleVerificationStats_avg, ruleVerificationStats_max, ruleVerificationStats_min, ruleVerificationStats_stdev
 
 
 def getRuleAntecedentTriggerInfo(ruleAntecedent):
@@ -354,26 +360,30 @@ login()
 getRuleUsageFrequency()
 
 #GETTING DATA ABOUT THE CONFLICT DETECTION (BOTH SUCCESS AND FAIL)
-ruleVerificationStats_avg, ruleVerificationStats_max, ruleVerificationStats_min = getTimeConflictData("ALL")
+ruleVerificationStats_avg, ruleVerificationStats_max, ruleVerificationStats_min, ruleVerificationStats_stdev = getTimeConflictData("ALL")
 
 dictToCsv(ruleVerificationStats_avg, "ruleVerificationStats_ALL_avg", "Average conflict detection time (ms)")
 dictToCsv(ruleVerificationStats_max, "ruleVerificationStats_ALL_max", "Maximum conflict detection time (ms)")
 dictToCsv(ruleVerificationStats_min, "ruleVerificationStats_ALL_min", "Minimum conflict detection time (ms)")
+dictToCsv(ruleVerificationStats_stdev, "ruleVerificationStats_ALL_stdev", "Standard deviation conflict detection time")
 
 
-ruleVerificationStats_avg, ruleVerificationStats_max, ruleVerificationStats_min = getTimeConflictData("SUCCESS")
+
+ruleVerificationStats_avg, ruleVerificationStats_max, ruleVerificationStats_min, ruleVerificationStats_stdev = getTimeConflictData("SUCCESS")
 
 dictToCsv(ruleVerificationStats_avg, "ruleVerificationStats_SUCCESS_avg", "Average conflict detection time (ms) - Filtering only SUCCESS verifications")
 dictToCsv(ruleVerificationStats_max, "ruleVerificationStats_SUCCESS_max", "Maximum conflict detection time (ms) - Filtering only SUCCESS verifications")
 dictToCsv(ruleVerificationStats_min, "ruleVerificationStats_SUCCESS_min", "Minimum conflict detection time (ms) - Filtering only SUCCESS verifications")
+dictToCsv(ruleVerificationStats_stdev, "ruleVerificationStats_SUCCESS_stdev", "Standard deviation conflict detection time - Filtering only SUCCESS verifications")
 
 
-ruleVerificationStats_avg, ruleVerificationStats_max, ruleVerificationStats_min = getTimeConflictData("FAILED")
+
+ruleVerificationStats_avg, ruleVerificationStats_max, ruleVerificationStats_min, ruleVerificationStats_stdev = getTimeConflictData("FAILED")
 
 dictToCsv(ruleVerificationStats_avg, "ruleVerificationStats_FAILED_avg", "Average conflict detection time (ms) - Filtering only FAILED verifications")
 dictToCsv(ruleVerificationStats_max, "ruleVerificationStats_FAILED_max", "Maximum conflict detection time (ms) - Filtering only FAILED verifications")
 dictToCsv(ruleVerificationStats_min, "ruleVerificationStats_FAILED_min", "Minimum conflict detection time (ms) - Filtering only FAILED verifications")
-
+dictToCsv(ruleVerificationStats_stdev, "ruleVerificationStats_FAILED_stdev", "Standard deviation conflict detection time - Filtering only FAILED verifications")
 
 
 
