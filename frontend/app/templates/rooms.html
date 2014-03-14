@@ -42,6 +42,7 @@
 		ruleCategories.push("{{category}}");
 	{% endfor %}
 	
+	{#
 	{% if mTurkStatus.experimentCompleted %}
 		// THIS IS NEED TO SHOW THE END OF EXPERIMENT MESSAGE
 		alert("You finished your experiment!")
@@ -52,6 +53,7 @@
 			window.location.hash="mTurkPanel";
 		{% endif %}
 	{% endif %}
+	#}
 
 	</script>
 
@@ -88,12 +90,14 @@
 	  </div>
 	</div>
 
+	{#
   	<div class="alert alert-block" align="center">
 		<h1>New action policy!</h1><strong>From today, the rule editing will count as an action!</strong>
 		<br>Please, do NOT insert random rules! If you disagree with some policies, change existing rules!
 	</div>
+	#}
 
-
+	{#
 	<div class="form-actions"> 
 		<a name="mTurkPanel" id="mTurkPanel"></a>
 		<a class="btn btn-lg btn-success" href="javascript:hideMTurk()" id="btnHideMTurk">Hide this panel</a>
@@ -140,6 +144,7 @@
 			</div>
 		</div>
 	</div>
+	#}
 
 	<br>
 	
