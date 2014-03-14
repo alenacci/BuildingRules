@@ -261,8 +261,9 @@ def getRuleUsageFrequency(roomName = None):
 	actionCategories = set()
 	actionNames = set()
 
+	ruleList = getRuleList(roomName= roomName)
 
-	for rule in getRuleList(roomName= roomName):
+	for rule in ruleList:
 
 		triggersInfo = getRuleAntecedentTriggerInfo(rule["antecedent"])
 		actionInfo = getRuleConsequentActionInfo(rule["consequent"])
@@ -324,8 +325,10 @@ def getRuleUsageFrequency(roomName = None):
 
 	#print csvFileContent 
 
-	fileName = "triggerActionNameCounter.csv"
-	if roomName: fileName = "triggerActionNameCounter_" + roomName +  ".csv"
+	fileName = "triggerActionNameCounter_ruleNumber" + str(len(ruleList))
+	if roomName: fileName = "triggerActionNameCounter_" + roomName + "_ruleNumber" + str(len(ruleList))
+
+	fileName += ".csv"
 
 	out_file = open(fileName,"w")
 	out_file.write(csvFileContent)
