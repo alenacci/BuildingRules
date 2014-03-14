@@ -39,3 +39,5 @@ def start():
 	userUuid = response["userUuid"]
 
 
+
+start()
