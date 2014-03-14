@@ -198,7 +198,7 @@ def getTimeConflictData(recordFilter):
 	for numberOfRules in ruleVerificationStats_cardinality.keys():
 		ruleVerificationStats_avg[numberOfRules] = ruleVerificationStats_sum[numberOfRules] / ruleVerificationStats_cardinality[numberOfRules]
 		mean = ruleVerificationStats_avg[numberOfRules]
-		ruleVerificationStats_stdev[numberOfRules] = math.sqrt((ruleVerificationStats_sum[numberOfRules] / ruleVerificationStats_cardinality[numberOfRules]) - (mean * mean)) 
+		ruleVerificationStats_stdev[numberOfRules] = math.sqrt((ruleVerificationStats_squareSum[numberOfRules] / ruleVerificationStats_cardinality[numberOfRules]) - (mean * mean)) 
 
 	return ruleVerificationStats_avg, ruleVerificationStats_max, ruleVerificationStats_min, ruleVerificationStats_stdev
 
