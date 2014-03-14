@@ -4,10 +4,12 @@
 
   <br>
 
+  {#
   <div class="alert alert-block">
     <h4>Our current time is {{currentDatetime}}</h4>
     <h4>If you login now, you have to accomplish the first task before OUR midnight.</h4>
   </div>
+  #}
 
   <form action="{{ url_for('gui.login') }}" method=post>
     <dl>
