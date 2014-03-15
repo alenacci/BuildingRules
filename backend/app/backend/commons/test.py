@@ -35,16 +35,19 @@ class Test:
 			buildingRules = building.getRules()
 
 
-			for ruleNumber in range(0,80):		
+			for ruleNumber in range(0,81):		
 				print "Testing with ruleNumber " + str(ruleNumber)
-				for testNumber in range(0, 100):
+				for testNumber in range(0, 250):
 					print "Testing with ruleNumber " + str(ruleNumber) + " #iteration: " + str(testNumber)
 					tmpRuleSet = []
+					tmpRuleIndex = []
 
 					#Creating the temporary ruleset
 					for i in range(0, ruleNumber):
 						selectedRule = random.randint(0,len(buildingRules)-1)
-						tmpRuleSet.append(buildingRules[selectedRule])
+						if selectedRule not in tmpRuleIndex:
+							tmpRuleIndex.append(selectedRule)
+							tmpRuleSet.append(buildingRules[selectedRule])
 
 					rulesetChecker = RulesetChecker(tmpRuleSet)
 		
