@@ -2,6 +2,7 @@ import sys
 import time
 import datetime
 import copy
+from multiprocessing.connection import Listener
 
 from app.backend.commons.console import flash
 from app.backend.controller.actionExecutor import ActionExecutor
@@ -16,11 +17,28 @@ class RealTimeExecutor:
 
 	@staticmethod
 	def start():
+
 		actionExecutor = ActionExecutor()
 
+
+		address = ('localhost', 6000)     # family is deduced to be 'AF_INET'
+		listener = Listener(address)
+
+
 		while(1):
+			conn = listener.accept()
+			print 'connection accepted from', listener.last_accepted
+			msg = conn.recv()
+			print 'RECEIVED ' +  msg
+			if msg == 'update':
+				print 'DENTRO IF'
+				RealTimeExecutor.requestUpdate = True
+				conn.close()
+
+
+
 			if RealTimeExecutor.requestUpdate:
-				requestUpdate = False
+				RealTimeExecutor.requestUpdate = False
 
 				try:
 					actionExecutor.start(skipRealTime=False)
@@ -32,6 +50,8 @@ class RealTimeExecutor:
 					flash(e.message)
 			else:
 				flash("no realtime update requested", "blue")
-			time.sleep(10)
+
+
+		listener.close()
 
 

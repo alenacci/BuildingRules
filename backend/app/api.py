@@ -13,6 +13,7 @@
 import json
 import time
 from flask import request, session, g, redirect, url_for, abort, render_template, flash, jsonify, Blueprint
+from multiprocessing.connection import Client
 
 from app import app
 from app.backend.commons.test import Test
@@ -976,6 +977,15 @@ def translateAction():
 			return returnResult(actionManager.translateAction(ruleConsequent = consequent, getDict = True))
 		except Exception as e:
 			return returnError(e)			
+
+##REAL  TIME UPDATE
+@api.route('/api/realtime/request_update', methods = ['GET'])
+def requestRealTimeUpdate():
+	address = ('localhost', 6000)
+	conn = Client(address)
+	conn.send('update')
+	conn.close()
+	return "Update requested"
 
 
 def returnResult(result):
