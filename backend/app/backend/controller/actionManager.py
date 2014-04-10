@@ -148,7 +148,8 @@ class ActionManager:
 		from app.backend.drivers.roomApplianceActionDriver import RoomApplianceActionDriver
 		from app.backend.drivers.roomSpecialActionDriver import RoomSpecialActionDriver	
 		from app.backend.drivers.roomWindowActionDriver import RoomWindowActionDriver	
-		from app.backend.drivers.roomFanHoodsActionDriver import RoomFanHoodsActionDriver	
+		from app.backend.drivers.roomFanHoodsActionDriver import RoomFanHoodsActionDriver
+		from app.backend.drivers.alarmActionDriver import AlarmActionDriver
 
 
 		if not parameters:
@@ -315,6 +316,9 @@ class ActionManager:
 			parameters.update({'operation' : 'FUME_HOODS_OFF'})
 			return  RoomFanHoodsActionDriver(parameters = parameters)
 
+		if action.actionName == "ALARM":
+			parameters.update({'operation' : 'ALARM'})
+			return  AlarmActionDriver(parameters = parameters)
 
 
 
