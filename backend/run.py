@@ -14,6 +14,9 @@ def startWebServer():
 def startDeamon():
 	os.system("python runDeamon.py")
 
+def startRealTimeExecutor():
+	os.system("python runRealTimeExecutor.py")
+
 def startWeatherService():
 	os.system("python runWeatherService.py")
 
@@ -40,6 +43,9 @@ databaseDumperThread.start()
 
 deamonThread = Thread(target = startDeamon)
 deamonThread.start()
+
+realTimeThread = Thread(target = startRealTimeExecutor())
+realTimeThread.start()
 
 webServerThread.join()
 deamonThread.join()
