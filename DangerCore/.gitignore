@@ -1,2 +1,8 @@
 venv
 .idea
+.DS_Store
+._.DS_Store
+._DangerCore
+.idea/
+DangerCore/.DS_Store
+DangerCore/._.DS_Store
