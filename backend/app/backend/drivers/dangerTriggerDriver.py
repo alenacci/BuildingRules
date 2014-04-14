@@ -17,8 +17,10 @@ import datetime
 
 from app.backend.commons.errors import *
 from app.backend.drivers.genericTriggerDriver import GenericTriggerDriver
+import imp
+trigger = imp.load_source('bulletin', '/home/danger/Danger/dangerProject/DangerCore/tools/bulletin.py')
 
-class GorillaAttackDriver(GenericTriggerDriver):
+class DangerTriggerDriver(GenericTriggerDriver):
 
 
 	# parameters = {}
@@ -49,10 +51,13 @@ class GorillaAttackDriver(GenericTriggerDriver):
 	def __actualEventTriggered(self):
 		import random
 
-		if self.parameters["operation"] == "GORILLA_ATTACK":
-			return True
-		else:
-			raise UnsupportedDriverParameterError(self.parameters["operation"])
+		trigger_name = self.parameters["operation"]
+		room_name = self.parameters["roomName"]
+		building_name = self.parameters["buildingName"]
+
+		status = trigger.check_trigger_status(trigger_name,building_name,room_name)
+
+		return status
 
 
 	def __simulatedEventTriggeredWrapper(self):

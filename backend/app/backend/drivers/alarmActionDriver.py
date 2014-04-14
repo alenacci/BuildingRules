@@ -30,7 +30,7 @@ class AlarmActionDriver:
 
 	def __actualActuation(self):
 		print "ALARM!!!"
-		bulletin.send_bulletin(building="school",room="127",danger_type="FIRE")
+		bulletin.send_bulletin(building=self.parameters['buildingName'], room=self.parameters['roomName'], danger_type="FIRE")
 
 	def __simulatedActuation(self):
 		pass
