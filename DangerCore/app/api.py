@@ -1,21 +1,39 @@
 from app import app
 from flask import request
-
 from app.commons.bulletin import *
+from app.core.dangerCore import DangerCore
 
 @app.route('/api/send_bulletin', methods = ['POST'])
 def decodeBulletin():
 	content = request.json
 	print "Ricevuto: " + str(content)
 
-	print "Building: " + content['building']
-	print "Room: " + content['room']
-	print "Danger Type: " + content['danger_type']
+	danger_type = content['danger_type']
+	building = content['building']
+	room = content['room']
 
-	bulletin = Bulletin()
-	bulletin.danger_type = "bau"
+	print "Danger Type: " + danger_type
+	print "Building: " + building
+	print "Room: " + room
+
+	bulletin = Bulletin(danger_type, building, room)
 
 	app.danger_core.handle_new_bulletin(bulletin)
 
 
-	return "Update requested"
+	return "Bullettin Sent"
+
+
+@app.route('/api/check_trigger_status', methods = ['POST'])
+def checkTriggerStatus():
+	content = request.json
+
+	trigger = content['trigger_name']
+	building = content['building']
+	room = content['room']
+
+	bulletin = Bulletin(trigger, building, room)
+
+	print app.danger_core.is_active(bulletin)
+
+	return ""
