@@ -1,5 +1,5 @@
 from app import app
-from flask import request
+from flask import request, jsonify
 from app.commons.bulletin import *
 from app.core.dangerCore import DangerCore
 
@@ -34,6 +34,8 @@ def checkTriggerStatus():
 
 	bulletin = Bulletin(trigger, building, room)
 
-	print app.danger_core.is_active(bulletin)
+	response = app.danger_core.is_active(bulletin)
 
-	return ""
+	print "Trigger_status = " + str(response)
+
+	return jsonify(trigger_status = str(response))

@@ -1,7 +1,7 @@
 import urllib2,json
 
 # prepare and send a bulletin via Danger's API with the information provided
-def send_bulletin(building,room,danger_type):
+def send_bulletin(danger_type,building,room):
 	data = {
             'danger_type' : danger_type,
 			'building': building,

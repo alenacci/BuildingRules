@@ -6,3 +6,4 @@ venv
 .idea/
 DangerCore/.DS_Store
 DangerCore/._.DS_Store
+*.pyc
