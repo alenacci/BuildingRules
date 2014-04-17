@@ -14,6 +14,6 @@ def check_trigger_status(trigger_name,building,room):
 	response = urllib2.urlopen(req, json.dumps(data))
 
 
-	status = json.load((response)['trigger_status'])
+	status = json.load(response)['trigger_status'] == 'True'
 
 	return status
