@@ -13,7 +13,6 @@ class DangerCore:
 			print("Ignored")
 
 	def is_active(self, bulletin):
-<<<<<<< HEAD
 		if bulletin.danger_type == "GENERIC_DANGER":
 			for b in self.bulletin_list:
 				if b.building == bulletin.building:
@@ -24,9 +23,3 @@ class DangerCore:
 				if b.__eq__(bulletin):
 					return True
 			return False
-=======
-		for b in self.bulletin_list:
-			if b.__eq__(bulletin):
-				return True
-		return False
->>>>>>> f514ab872f1fcd9c2c62aab98c74f62c6bdea1d7
