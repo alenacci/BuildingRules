@@ -29,7 +29,7 @@ class DangerActionDriver:
 
 
 	def __actualActuation(self):
-		operation = parameters['operation']
+		operation = self.parameters['operation']
 		print "send bulletin!!!"
 		bulletin.send_bulletin( danger_type=operation, building=self.parameters['buildingName'], room=self.parameters['roomName'])
 

@@ -261,8 +261,9 @@ class TriggerManager:
 			parameters.update({'operation' : 'GORILLA_ATTACK'})
 			return  GorillaAttackDriver(parameters = parameters)
 
-		if trigger.triggerName.startswith("DANGER_TRIGGER_"):
-			parameters.update({'operation' : trigger.triggerName.split("DANGER_TRIGGER_",1)[1]})
+
+		if trigger.triggerName.startswith("DT_"):
+			parameters.update({'operation' : trigger.triggerName.split("DT_",1)[1]})
 			return  DangerTriggerDriver(parameters = parameters)
 
 

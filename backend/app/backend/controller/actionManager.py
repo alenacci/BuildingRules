@@ -150,7 +150,7 @@ class ActionManager:
 		from app.backend.drivers.roomWindowActionDriver import RoomWindowActionDriver	
 		from app.backend.drivers.roomFanHoodsActionDriver import RoomFanHoodsActionDriver
 		from app.backend.drivers.alarmActionDriver import AlarmActionDriver
-
+		from app.backend.drivers.dangerActionDriver import DangerActionDriver
 
 		if not parameters:
 			parameters = {}

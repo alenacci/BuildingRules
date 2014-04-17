@@ -19,7 +19,7 @@ from app.backend.commons.errors import *
 from app.backend.commons.simulation import writeSimulationLog
 
 import imp
-bulletin = imp.load_source('bulletin', '/home/danger/Danger/dangerProject/DangerCore/tools/bulletin.py')
+
 
 
 class AlarmActionDriver:
@@ -30,10 +30,10 @@ class AlarmActionDriver:
 
 	def __actualActuation(self):
 		print "ALARM!!!"
-		bulletin.send_bulletin(building=self.parameters['buildingName'], room=self.parameters['roomName'], danger_type="FIRE")
+
 
 	def __simulatedActuation(self):
-		pass
+		print "ALARM!!!"
 
 	def __simulatedActuationWrapper(self):
 		print "[SIMULATION]" + "[" + self.parameters["simulationParameters"]["date"] + "]" + "[" + self.parameters["simulationParameters"]["time"] + "]", 
