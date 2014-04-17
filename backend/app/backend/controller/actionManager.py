@@ -320,6 +320,9 @@ class ActionManager:
 			parameters.update({'operation' : 'ALARM'})
 			return  AlarmActionDriver(parameters = parameters)
 
+		if action.actionName.startswith("DANGER_BULLETIN_"):
+			parameters.update({'operation' : action.actionName.split("DANGER_BULLETIN_",1)[1]})
+			return  DangerActionDriver(parameters = parameters)
 
 
 

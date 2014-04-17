@@ -263,7 +263,7 @@ class TriggerManager:
 
 		if trigger.triggerName.startswith("DANGER_TRIGGER_"):
 			parameters.update({'operation' : trigger.triggerName.split("DANGER_TRIGGER_",1)[1]})
-			return  DangerTriggerName(parameters = parameters)
+			return  DangerTriggerDriver(parameters = parameters)
 
 
 		raise DriverNotFoundError("Impossibile to find any driver for the trigger " + str(trigger))
