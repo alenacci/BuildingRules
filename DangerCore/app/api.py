@@ -38,5 +38,5 @@ def checkTriggerStatus():
 	response = app.danger_core.is_active(bulletin)
 
 	print "Trigger_status = " + str(response)
-    
+
 	return jsonify(trigger_status = str(response))

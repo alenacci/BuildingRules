@@ -13,10 +13,7 @@ def check_trigger_status(trigger_name,building,room):
 
 	response = urllib2.urlopen(req, json.dumps(data))
 
-<<<<<<< HEAD
-	return #TODO LEGGERE IL JSON
-=======
+
 	status = json.load((response)['trigger_status'])
 
 	return status
->>>>>>> f514ab872f1fcd9c2c62aab98c74f62c6bdea1d7
