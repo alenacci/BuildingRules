@@ -24,7 +24,8 @@ def decodeBulletin():
 	return "Bullettin Sent"
 
 
-@app.route('/api/check_specific_trigger_status', methods = ['POST'])
+
+@app.route('/api/check_trigger_status', methods = ['POST'])
 def checkTriggerStatus():
 	content = request.json
 
@@ -37,5 +38,5 @@ def checkTriggerStatus():
 	response = app.danger_core.is_active(bulletin)
 
 	print "Trigger_status = " + str(response)
-
+    
 	return jsonify(trigger_status = str(response))

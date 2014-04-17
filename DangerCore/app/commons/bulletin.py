@@ -15,4 +15,8 @@ class Bulletin:
 		return isinstance(obj, Bulletin) \
 			and obj.danger_type == self.danger_type \
 			and obj.room == self.room \
+<<<<<<< HEAD
 			and obj.building == self.building
+=======
+			and obj.building == self.building
+>>>>>>> f514ab872f1fcd9c2c62aab98c74f62c6bdea1d7
