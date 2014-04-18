@@ -4,6 +4,7 @@ class DangerCore:
 
 	def __init__(self):
 		self.bulletin_list = []
+		self.TEST_confirmed_from_building_manager = False
 
 	def handle_new_bulletin(self, bulletin):
 		if self.is_active(bulletin) == False:

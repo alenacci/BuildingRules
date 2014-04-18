@@ -17,3 +17,7 @@ def check_trigger_status(trigger_name,building,room):
 	status = json.load(response)['trigger_status'] == 'True'
 
 	return status
+
+#Request Rules to update the real time rules
+def request_rules_real_time_update():
+	urllib2.urlopen("http://192.168.1.130:5003/api/realtime/request_update").read()
