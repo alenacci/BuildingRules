@@ -70,7 +70,8 @@ def getCurrentStatus():
 
 	return jsonify(message)
 
-
+#This method is used by the building manager client in order
+#to confirm or dismiss a pending danger
 @app.route('/api/building_manager/confirm_danger', methods = ['POST'])
 def confirmDanger():
 	content = request.json
@@ -83,3 +84,26 @@ def confirmDanger():
 		request_rules_real_time_update()
 
 	return jsonify(received = 'true')
+
+
+#This method is used by the user client in order
+#to retrieve the pending notifications
+#The POST json contains the timestamp of the last
+#notification received.
+#The response is a json with all the notification since then
+app.route('/api/user/get_notifications', methods = ['POST'])
+def confirmDanger():
+	content = request.json
+	timestamp = content['timestamp']
+
+	response = {}
+
+	if app.danger_core.TEST_confirmed_from_building_manager == True:
+		response['new_notifications'] = 'True'
+		#TODO FILL THE NOTIFICATIONS!!
+	else:
+		response['new_notifications'] = 'False'
+
+	return jsonify(response)
+
+
