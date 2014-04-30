@@ -40,7 +40,7 @@ class VirtualSensorCore:
 				if b.room == b2.room and b.building == b2.building and b.user != b2.user:
 					count += 1
 
-#			if count >= self.THRESHOLD:
+			if count >= self.THRESHOLD:
 #				data = {
 #				'danger_type' : "escape",
 #				'building': b.building,
@@ -52,12 +52,12 @@ class VirtualSensorCore:
 
 #				response = urllib2.urlopen(req, json.dumps(data))
 
-            request_rules_real_time_update_async()
+				request_rules_real_time_update_async()
 
-        #Request Rules to update the real time rules
-    def request_rules_real_time_update_async():
-        threading.Thread(target=request_rules_real_time_update).start()
+		#Request Rules to update the real time rules
+	def request_rules_real_time_update_async():
+		threading.Thread(target=request_rules_real_time_update).start()
 
-    #Request Rules to update the real time rules
-    def request_rules_real_time_update():
-        urllib2.urlopen("http://localhost:5003/api/realtime/request_update").read()
+	#Request Rules to update the real time rules
+	def request_rules_real_time_update():
+		urllib2.urlopen("http://localhost:5003/api/realtime/request_update").read()
