@@ -81,7 +81,7 @@ def confirmDanger():
 		print "Danger Confirmed"
 		#TODO come indichiamo che il pericolo e' confermato?
 		app.danger_core.TEST_confirmed_from_building_manager = True
-		request_rules_real_time_update()
+		request_rules_real_time_update_async()
 
 	return jsonify(received = 'true')
 
@@ -91,8 +91,8 @@ def confirmDanger():
 #The POST json contains the timestamp of the last
 #notification received.
 #The response is a json with all the notification since then
-app.route('/api/user/get_notifications', methods = ['POST'])
-def confirmDanger():
+@app.route('/api/user/get_notifications', methods = ['POST'])
+def getNotification():
 	content = request.json
 	timestamp = content['timestamp']
 
