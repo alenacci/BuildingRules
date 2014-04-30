@@ -1,4 +1,4 @@
-import urllib2,json
+import urllib2,json,threading
 
 # prepare and send a bulletin via Danger's API with the information provided
 def check_trigger_status(trigger_name,building,room):
@@ -17,3 +17,11 @@ def check_trigger_status(trigger_name,building,room):
 	status = json.load(response)['trigger_status'] == 'True'
 
 	return status
+
+#Request Rules to update the real time rules
+def request_rules_real_time_update_async():
+	threading.Thread(target=request_rules_real_time_update).start()
+
+#Request Rules to update the real time rules
+def request_rules_real_time_update():
+	urllib2.urlopen("http://localhost:5003/api/realtime/request_update").read()
