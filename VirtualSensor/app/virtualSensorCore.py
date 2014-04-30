@@ -3,6 +3,14 @@ from app import app
 from app.bulletin import Bulletin
 
 
+#Request Rules to update the real time rules
+def request_rules_real_time_update_async():
+		threading.Thread(target=request_rules_real_time_update).start()
+
+#Request Rules to update the real time rules
+def request_rules_real_time_update():
+		urllib2.urlopen("http://localhost:5003/api/realtime/request_update").read()
+
 class VirtualSensorCore:
 
 	THRESHOLD = 1
@@ -54,10 +62,3 @@ class VirtualSensorCore:
 
 				request_rules_real_time_update_async()
 
-		#Request Rules to update the real time rules
-	def request_rules_real_time_update_async():
-		threading.Thread(target=request_rules_real_time_update).start()
-
-	#Request Rules to update the real time rules
-	def request_rules_real_time_update():
-		urllib2.urlopen("http://localhost:5003/api/realtime/request_update").read()
