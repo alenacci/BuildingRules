@@ -16,14 +16,20 @@ import time
 import datetime
 import os
 
-
 from app import app
 import rest
+
+from app.backend.controller.setupManager import SetupManager
+
 
 gui = Blueprint('gui', __name__, template_folder='templates')
 
 @gui.route('/')
 def index():
+
+	setupManager = SetupManager()
+	setupManager.initializeNetwork("single_men")
+
 	return render_template('index.html')
 
 def successResponse(response):
