@@ -28,7 +28,7 @@ class SetupManager:
 
 	def getTimeslotsGanttByFamilyProfile(self, familyProfile, applianceName):
 		path = "tools/default_timeslots/" + familyProfile + ".json"
-		
+
 		try:
 			in_file = open(path,"r")
 			jsonStr = in_file.read()
@@ -42,6 +42,22 @@ class SetupManager:
 		return gantts[applianceName]
 
 
+	def getAppliancesList(self):
+		settings =  Settings()
+		applianceListStr = settings.get("appliancesList")
+		applianceNameList = applianceListStr.replace(" ", "").split(",")
+
+		appliancesList = []
+		for applianceName in applianceNameList:
+			item = {}
+			item["name"] = applianceName
+			item["label"] = applianceName.replace("_", " ").title()
+			appliancesList.append(item)
+
+
+		return appliancesList
+
+
 	def initializeNetwork(self, familyProfile):
 
 		validValues = ["single_men", "single_women", "friends_group", "couple", "couple_child"]
@@ -52,17 +68,14 @@ class SetupManager:
 		settings =  Settings()
 		settings.set("familyProfile", familyProfile)
 
-		applianceListStr = settings.get("applianceList")
-		applianceList = applianceListStr.replace(" ", "").split(",")
+		for currentAppliance in self.getAppliancesList():
 
-		for applianceName in applianceList:
+			applianceName = currentAppliance["name"]
+			applianceLabel = currentAppliance["label"]
 			
-			label = applianceName.replace("_", " ")
-			#label[0] = label[0].upper()
-
 			appliance = Appliance(
 					name = applianceName,
-					label = label,
+					label = applianceLabel,
 					timeslots = self.getTimeslotsGanttByFamilyProfile(familyProfile, applianceName)
 			)
 

@@ -283,6 +283,24 @@ footer {
 </div>
 
 <div class="featurette" id="sec2">
+
+    <script type="text/javascript">
+        window.onload = function() {
+          {% for appliance in appliancesList %}
+            initAppliance('{{appliance.name}}');
+          {% endfor %}
+        };
+
+        function loadApplianceMenu(applianceName)
+        {
+          {% for appliance in appliancesList %}
+            initAppliance('{{appliance.name}}');
+          {% endfor %}          
+          showApplianceMenu(applianceName);
+        }
+
+    </script>
+
   <div class="container">
     <div class="row">
       <div class="col-md-12 text-center">
@@ -291,174 +309,137 @@ footer {
     </div>
     <div class="row"><br></div>
     <div class="row">
+        {% for appliance in appliancesList %}
         <div class="col-sm-3">
           <div class="list-group">
-            <a href="javascript:showApplianceMenu('dishwasher')" class="list-group-item">
-              <span class="text-success"></span>Disk washer</a>
+            <a href="javascript:loadApplianceMenu('{{appliance.name}}')" class="list-group-item">
+              <span class="text-success"></span>{{appliance.label}}</a>
           </div>
         </div>
-        <div class="col-sm-3">
-          <div class="list-group">
-            <a href="#" class="list-group-item">
-              <span class="text-success"></span>Washing Machine</a>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="list-group">
-            <a href="#" class="list-group-item">
-              <span class="text-success"></span>Air Conditioner</a>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="list-group">
-            <a href="#" class="list-group-item">
-              <span class="text-success"></span>Dryer</a>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="list-group">
-            <a href="#" class="list-group-item">
-              <span class="text-success"></span>Electric Oven</a>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="list-group">
-            <a href="#" class="list-group-item">
-              <span class="text-success"></span>Television</a>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="list-group">
-            <a href="#" class="list-group-item">
-              <span class="text-success"></span>Lights</a>
-          </div>
-        </div>
+        {% endfor %}
     </div>
-
-    <script type="text/javascript">
-        window.onload = function() {
-          initAppliance('dishwasher');
-        };
-    </script>
 
     <div class="row">
 
-        <div class="well" style="max-width: 450px; margin: 0 auto 10px; color: gray;" id="menu_dishwasher">
+      {% for appliance in appliancesList %}
 
-         <div id="timeslots_dishwasher">
+                    <div class="well" style="max-width: 450px; margin: 0 auto 10px; color: gray;" id="menu_{{appliance.name}}">
 
-            <h3 align="center">Dish washer timeslots</h3>
-            <br>
+                     <div id="timeslots_{{appliance.name}}">
 
-
-            <form class="form-inline" role="form" id="ts_dishwasher_timeslot_0">
-              <div class="form-group">
-                <input type="text" class="form-control" id="ts_dishwasher_timeslot_from_0" placeholder="From">
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control" id="ts_dishwasher_timeslot_to_0" placeholder="To">
-              </div>
-            </form>
-
-            <form class="form-inline" role="form" id="ts_dishwasher_timeslot_1">
-              <div class="form-group">
-                <input type="text" class="form-control" id="ts_dishwasher_timeslot_from_1" placeholder="From">
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control" id="ts_dishwasher_timeslot_to_1" placeholder="To">
-              </div>
-            </form>
-
-            <form class="form-inline" role="form" id="ts_dishwasher_timeslot_2">
-              <div class="form-group">
-                <input type="text" class="form-control" id="ts_dishwasher_timeslot_from_2" placeholder="From">
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control" id="ts_dishwasher_timeslot_to_2" placeholder="To">
-              </div>
-            </form>
-
-            <form class="form-inline" role="form" id="ts_dishwasher_timeslot_3">
-              <div class="form-group">
-                <input type="text" class="form-control" id="ts_dishwasher_timeslot_from_3" placeholder="From">
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control" id="ts_dishwasher_timeslot_to_3" placeholder="To">
-              </div>
-            </form>
-
-            <div align="center">
-              <br>
-              <button type="button" class="btn btn-default" onclick="removeSlot('dishwasher');">-</button>
-              <button type="button" class="btn btn-default" onclick="sendValues('dishwasher');">Confirm</button>
-              <button type="button" class="btn btn-default" onclick="addSlot('dishwasher');">+</button>
-            </div>
-
-            <div align="center"><br><a href="javascript:showApplianceSettings('dishwasher');">Open appliance settings</a></div>
+                        <h3 align="center">{{appliance.label}} timeslots</h3>
+                        <br>
 
 
-          </div>
+                        <form class="form-inline" role="form" id="ts_{{appliance.name}}_timeslot_0">
+                          <div class="form-group">
+                            <input type="text" class="form-control" id="ts_{{appliance.name}}_timeslot_from_0" placeholder="From">
+                          </div>
+                          <div class="form-group">
+                            <input type="text" class="form-control" id="ts_{{appliance.name}}_timeslot_to_0" placeholder="To">
+                          </div>
+                        </form>
 
-          <form class="form-horizontal" role="form" id="settings_dishwasher">
+                        <form class="form-inline" role="form" id="ts_{{appliance.name}}_timeslot_1">
+                          <div class="form-group">
+                            <input type="text" class="form-control" id="ts_{{appliance.name}}_timeslot_from_1" placeholder="From">
+                          </div>
+                          <div class="form-group">
+                            <input type="text" class="form-control" id="ts_{{appliance.name}}_timeslot_to_1" placeholder="To">
+                          </div>
+                        </form>
 
-            <h3 align="center">Dish washer settings</h3>
-            <br>
+                        <form class="form-inline" role="form" id="ts_{{appliance.name}}_timeslot_2">
+                          <div class="form-group">
+                            <input type="text" class="form-control" id="ts_{{appliance.name}}_timeslot_from_2" placeholder="From">
+                          </div>
+                          <div class="form-group">
+                            <input type="text" class="form-control" id="ts_{{appliance.name}}_timeslot_to_2" placeholder="To">
+                          </div>
+                        </form>
 
+                        <form class="form-inline" role="form" id="ts_{{appliance.name}}_timeslot_3">
+                          <div class="form-group">
+                            <input type="text" class="form-control" id="ts_{{appliance.name}}_timeslot_from_3" placeholder="From">
+                          </div>
+                          <div class="form-group">
+                            <input type="text" class="form-control" id="ts_{{appliance.name}}_timeslot_to_3" placeholder="To">
+                          </div>
+                        </form>
 
-            <div class="form-group">
-              <label for="settings_dishwasher_brand" class="col-sm-2 control-label">Brand</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" id="settings_dishwasher_brand" placeholder="Samsung">
-              </div>
-            </div>
+                        <div align="center">
+                          <br>
+                          <button type="button" class="btn btn-default" onclick="removeSlot('{{appliance.name}}');">-</button>
+                          <button type="button" class="btn btn-default" onclick="sendValues('{{appliance.name}}');">Confirm</button>
+                          <button type="button" class="btn btn-default" onclick="addSlot('{{appliance.name}}');">+</button>
+                        </div>
 
-
-            <div class="form-group">
-              <label for="settings_dishwasher_model" class="col-sm-2 control-label">Model</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" id="settings_dishwasher_model" placeholder="DS800">
-              </div>
-            </div>
-
-
-            <div class="form-group">
-              <label for="settings_dishwasher_appID" class="col-sm-2 control-label">AppID</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" id="settings_dishwasher_appID" placeholder="A unique indentifier">
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="settings_dishwasher_address" class="col-sm-2 control-label">Address</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" id="settings_dishwasher_address" placeholder="http://192.168.1.7/api/currentValue">
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="settings_dishwasher_type" class="col-sm-2 control-label">Type</label>
-              <div class="col-sm-10">
-              <select class="form-control" id="settings_dishwasher_type">
-                <option value="volvo">Smart appliance</option>
-                <option value="saab">Standard appliance with smart plug</option>
-              </select>              
-              </div>
-            </div>
+                        <div align="center"><br><a href="javascript:showApplianceSettings('{{appliance.name}}');">Open appliance settings</a></div>
 
 
-            <div class="form-group">
-              <div class="col-sm-offset-2 col-sm-10">
-                <button type="button" class="btn btn-default">Save settings</button>
-              </div>
-            </div>
+                      </div>
 
-            <div align="center"><br><a href="javascript:showApplianceTimeslots('dishwasher');">Open appliance timeslots</a></div>
+                      <form class="form-horizontal" role="form" id="settings_{{appliance.name}}">
 
-          </form>
+                        <h3 align="center">{{appliance.label}} settings</h3>
+                        <br>
 
-        </div>
 
-    </div>
+                        <div class="form-group">
+                          <label for="settings_{{appliance.name}}_brand" class="col-sm-2 control-label">Brand</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" id="settings_{{appliance.name}}_brand" placeholder="Samsung">
+                          </div>
+                        </div>
+
+
+                        <div class="form-group">
+                          <label for="settings_{{appliance.name}}_model" class="col-sm-2 control-label">Model</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" id="settings_{{appliance.name}}_model" placeholder="DS800">
+                          </div>
+                        </div>
+
+
+                        <div class="form-group">
+                          <label for="settings_{{appliance.name}}_appID" class="col-sm-2 control-label">AppID</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" id="settings_{{appliance.name}}_appID" placeholder="A unique indentifier">
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label for="settings_{{appliance.name}}_address" class="col-sm-2 control-label">Address</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" id="settings_{{appliance.name}}_address" placeholder="http://192.168.1.7/api/currentValue">
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label for="settings_{{appliance.name}}_type" class="col-sm-2 control-label">Type</label>
+                          <div class="col-sm-10">
+                          <select class="form-control" id="settings_{{appliance.name}}_type">
+                            <option value="volvo">Smart appliance</option>
+                            <option value="saab">Standard appliance with smart plug</option>
+                          </select>              
+                          </div>
+                        </div>
+
+
+                        <div class="form-group">
+                          <div class="col-sm-offset-2 col-sm-10">
+                            <button type="button" class="btn btn-default">Save settings</button>
+                          </div>
+                        </div>
+
+                        <div align="center"><br><a href="javascript:showApplianceTimeslots('{{appliance.name}}');">Open appliance timeslots</a></div>
+
+                      </form>
+
+                    </div>
+
+                </div>
+    {% endfor %}
 
   </div>
 </div>

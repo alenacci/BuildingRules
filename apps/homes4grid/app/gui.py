@@ -29,8 +29,9 @@ def index():
 
 	setupManager = SetupManager()
 	setupManager.initializeNetwork("single_men")
+	appliancesList = setupManager.getAppliancesList()
 
-	return render_template('index.html')
+	return render_template('index.html', appliancesList = appliancesList)
 
 def successResponse(response):
 

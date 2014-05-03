@@ -22,7 +22,7 @@ class Appliance:
 		self.label = label
 		self.brand = brand 							if brand else ""
 		self.model = model							if model else ""
-		self.smartAppliance = smartAppliance
+		self.smartAppliance = smartAppliance 		if smartAppliance else 0
 		self.protocol = protocol					if protocol else ""
 		self.address = address						if address else ""
 		self.timeslots = timeslots 					if timeslots else {}
