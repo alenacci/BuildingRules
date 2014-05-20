@@ -59,13 +59,6 @@ class ActionExecutor:
 
 		return True
 
-	def isRealTimeRule(self, newRule):
-		if newRule.category == "DANGER":
-			flash("skipped rule " + str(newRule.id),"blue")
-			return True
-		return False
-
-
 
 	def checkRuleTrigger(self, rule):
 
@@ -142,7 +135,7 @@ class ActionExecutor:
 	def notifyIgnoredRule(self, rule):
 		pass
 
-	def start(self, skipRealTime=True):
+	def start(self, only_real_time_triggers=False):
 
 		import time,datetime
 		startTimeMilliseconds = long((time.time() + 0.5) * 1000)
@@ -175,10 +168,11 @@ class ActionExecutor:
 				for rule in buildingRules:
 
 					### REAL TIME FILTERING ###
-					if skipRealTime:
-						if self.isRealTimeRule(rule): continue
-					else:
-						if not self.isRealTimeRule(rule): continue
+					if only_real_time_triggers:
+						if not rule.hasRealTimeAntecedent():
+							continue
+						else:
+							flash("rule with realtime antecedent " + str(rule.id),"blue")
 					###
 
 					if rule.roomName and not rule.groupId:

@@ -15,13 +15,15 @@ from app.backend.commons.errors import *
 from app.backend.commons.database import Database
 
 class Trigger:
-	def __init__(self, id = None, category = None, triggerName = None, ruleAntecedent = None, description = None):
+	def __init__(self, id = None, category = None, triggerName = None, ruleAntecedent = None, description = None, isRealtime = None):
 
 			self.id = id
 			self.category = category
 			self.triggerName = triggerName
 			self.ruleAntecedent = ruleAntecedent
 			self.description = description
+			self.isRealtime = isRealtime
+
 
 	def __replaceSqlQueryToken(self, queryTemplate):
 		if self.id 				!= None	: 	queryTemplate = queryTemplate.replace("@@id@@", str(self.id))
@@ -29,6 +31,7 @@ class Trigger:
 		if self.triggerName 	!= None	: 	queryTemplate = queryTemplate.replace("@@trigger_name@@", self.triggerName)
 		if self.ruleAntecedent	!= None	: 	queryTemplate = queryTemplate.replace("@@rule_antecedent@@", self.ruleAntecedent)
 		if self.description		!= None	: 	queryTemplate = queryTemplate.replace("@@description@@", self.description)
+		if self.isRealtime		!= None	: 	queryTemplate = queryTemplate.replace("@@is_realtime@@", self.isRealtime)
 
 		return queryTemplate
 
@@ -42,9 +45,9 @@ class Trigger:
 		queryResult = database.executeReadQuery(query)
 
 		if int(queryResult[0][0]) > 0:
-			query = "UPDATE triggers SET category = '@@category@@', trigger_name = '@@trigger_name@@', rule_consequent = '@@rule_consequent@@', description = '@@description@@' WHERE id = '@@id@@';"
+			query = "UPDATE triggers SET category = '@@category@@', trigger_name = '@@trigger_name@@', rule_consequent = '@@rule_consequent@@', description = '@@description@@', is_realtime = '@@is_realtime@@' WHERE id = '@@id@@';"
 		else:
-			query = "INSERT INTO triggers (category, trigger_name, rule_consequent, description) VALUES ('@@category@@', '@@trigger_name@@', '@@rule_consequent@@', '@@description@@');"	
+			query = "INSERT INTO triggers (category, trigger_name, rule_consequent, description) VALUES ('@@category@@', '@@trigger_name@@', '@@rule_consequent@@', '@@description@@', is_realtime = '@@is_realtime@@');"
 	
 		query = self.__replaceSqlQueryToken(query)
 		database.executeWriteQuery(query)

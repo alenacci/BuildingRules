@@ -41,7 +41,7 @@ class RealTimeExecutor:
 				RealTimeExecutor.requestUpdate = False
 
 				try:
-					actionExecutor.start(skipRealTime=False)
+					actionExecutor.start(only_real_time_triggers=True)
 				except Exception as e:
 					import logging
 					logging.basicConfig(filename='logs/deamon.log')

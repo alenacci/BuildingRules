@@ -14,6 +14,7 @@ import json
 import datetime
 from app.backend.commons.errors import *
 from app.backend.commons.database import Database
+from app.backend.controller.triggerManager import TriggerManager
 
 class Rule:
 	def __init__(self, id = None, priority = None, category = None, buildingName = None, groupId = None, roomName = None, 
@@ -286,6 +287,21 @@ class Rule:
 
 		return response	
 
+	#A rule has a real time antecedent if all the triggers
+	#involved in the antecedent are real time.
+	def hasRealTimeAntecedent(self):
+		triggerManager = TriggerManager()
+		#trigger, originalModel, parameters = triggerManager.getTriggerAndTemplateAndParameterValues(rule.antecedent)
+		translatedTriggers = triggerManager.translateTrigger(self.antecedent)
+
+		for triggerInfo in translatedTriggers["triggers"]:
+
+			trigger = triggerInfo["trigger"]
+
+			if trigger.isRealtime == 0:
+				return False
+
+		return True
 
 	def __str__(self):
 
