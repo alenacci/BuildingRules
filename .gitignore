@@ -49,3 +49,6 @@ caseofstudy/experiment/*.csv
 ###################
 backend/logs
 frontend/logs
+
+# DANGER
+dangerProject/DangerCorer/venv
