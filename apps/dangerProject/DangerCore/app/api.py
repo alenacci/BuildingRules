@@ -99,12 +99,17 @@ def getNotification():
 	timestamp = content['timestamp']
 
 
+	#user_id = content['user_id']
+	user_id = "Andre"
+
+	connectionAnalyzer = app.danger_core.connection_analyzer
+	connectionAnalyzer.lock.acquire()
+	connectionAnalyzer.update_user_in_list(user_id)
+	connectionAnalyzer.lock.release()
+
 	###FOR TESTING
 	log_event(None)
 
-	#user_id = content.user_
-	#TODO passare name
-	#ConnectionAnalyzer.update_user_in_list(user_id)
 
 
 	response = {}
