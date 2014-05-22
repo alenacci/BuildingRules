@@ -2,7 +2,7 @@ class User:
 
 
 	def __init__ (self, user_id, telephone=None, status=None, last_access=None):
-		self.name = user_id
+		self.user_id = user_id
 		self.telephone = telephone
 		self.status = status
 		self.last_access = last_access
