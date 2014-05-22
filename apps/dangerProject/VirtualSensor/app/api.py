@@ -19,7 +19,7 @@ def notify_run():
 
 	bulletin = Bulletin(user, state, building, room)
 
-	app.virtual_sensor_core.handle_new_bulletin(bulletin)
+#	app.virtual_sensor_core.handle_new_bulletin(bulletin)
 
 	return "WARNING Sent"
 
