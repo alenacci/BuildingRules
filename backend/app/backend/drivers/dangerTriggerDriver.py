@@ -18,7 +18,7 @@ import datetime
 from app.backend.commons.errors import *
 from app.backend.drivers.genericTriggerDriver import GenericTriggerDriver
 import imp
-trigger = imp.load_source('bulletin', '/home/danger/Danger/dangerProject/DangerCore/tools/triggerRequestHelper.py')
+trigger = imp.load_source('bulletin', '/home/danger/Danger/BuildingRules/apps/dangerProject/DangerCore/tools/triggerRequestHelper.py')
 
 class DangerTriggerDriver(GenericTriggerDriver):
 

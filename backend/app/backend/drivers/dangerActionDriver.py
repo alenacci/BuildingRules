@@ -19,7 +19,7 @@ from app.backend.commons.errors import *
 from app.backend.commons.simulation import writeSimulationLog
 
 import imp
-bulletin = imp.load_source('bulletin', '/home/danger/Danger/dangerProject/DangerCore/tools/bulletin.py')
+bulletin = imp.load_source('bulletin', '/home/danger/Danger/BuildingRules/apps/dangerProject/DangerCore/tools/bulletin.py')
 
 
 class DangerActionDriver:

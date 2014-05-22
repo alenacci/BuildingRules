@@ -1,6 +1,7 @@
 from app import app
 from flask import request, jsonify
 from app.commons.bulletin import *
+from app.core import connectionAnalyzer
 from tools.triggerRequestHelper import *
 from app.core.dangerCore import DangerCore
 from tools.log import *
@@ -97,8 +98,14 @@ def getNotification():
 	content = request.json
 	timestamp = content['timestamp']
 
+
 	###FOR TESTING
 	log_event(None)
+
+	#user_id = content.user_
+	#TODO passare name
+	#ConnectionAnalyzer.update_user_in_list(user_id)
+
 
 	response = {}
 
