@@ -97,10 +97,9 @@ def getNotification():
 	content = request.json
 	timestamp = content['timestamp']
 
-    user_id = content.user_id
+	user_id = content['user_id']
 
-    #TODO passare name
-    ConnectionAnalyzer.update_user_in_list(user_id)
+	connectionAnalyzer.update_user_in_list(user_id)
 
 	response = {}
 
