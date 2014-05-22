@@ -4,6 +4,7 @@ from app.commons.bulletin import *
 from app.core import connectionAnalyzer
 from tools.triggerRequestHelper import *
 from app.core.dangerCore import DangerCore
+from tools.log import *
 
 
 
@@ -97,9 +98,16 @@ def getNotification():
 	content = request.json
 	timestamp = content['timestamp']
 
+
 	user_id = content['user_id']
 
-	connectionAnalyzer.update_user_in_list(user_id)
+
+	#connectionAnalyzer.update_user_in_list(user_id)
+
+	###FOR TESTING
+	log_event(None)
+
+
 
 	response = {}
 
