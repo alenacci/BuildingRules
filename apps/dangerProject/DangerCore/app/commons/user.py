@@ -7,6 +7,6 @@ class User:
 		self.status = status
 		self.last_access = last_access
 
-    def __eq__(self, obj):
+	def __eq__(self, obj):
 		return isinstance(obj, User) \
 			and obj.name == self.name

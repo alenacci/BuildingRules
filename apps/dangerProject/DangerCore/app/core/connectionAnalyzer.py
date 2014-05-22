@@ -1,11 +1,11 @@
-from app.common import User
+from app.commons.user import User
 import time
 
 class ConnectionAnalyzer:
 
     POLLING_TIME = 1
 
-	def __init__(self):
+    def __init__(self):
 		self.user_list = []
 
     # This method set all users status to disconnected if they all haven't made a request for more than POLLING_TIME
