@@ -3,6 +3,7 @@ from flask import request, jsonify
 from app.commons.bulletin import *
 from tools.triggerRequestHelper import *
 from app.core.dangerCore import DangerCore
+from tools.log import *
 
 
 
@@ -95,6 +96,9 @@ def confirmDanger():
 def getNotification():
 	content = request.json
 	timestamp = content['timestamp']
+
+	###FOR TESTING
+	log_event(None)
 
 	response = {}
 
