@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/BuildingRules.iml" filepath="$PROJECT_DIR$/.idea/BuildingRules.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/BuildingRules.iml" filepath="$PROJECT_DIR$/.idea/BuildingRules.iml" />
       <module fileurl="file://$PROJECT_DIR$/../DangerCore/.idea/DangerCore.iml" filepath="$PROJECT_DIR$/../DangerCore/.idea/DangerCore.iml" />
     </modules>
   </component>
