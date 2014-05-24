@@ -4,7 +4,6 @@ import sys
 from app.core.dangerCore import *
 
 
-
 app.danger_core = DangerCore()
 app.danger_core.startConnectionAnalyzer()
 

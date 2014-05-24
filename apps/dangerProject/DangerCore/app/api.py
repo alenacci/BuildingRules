@@ -1,10 +1,13 @@
 from app import app
 from flask import request, jsonify
-from app.commons.bulletin import *
+from app.commons import *
+from app.commons.notification import Notification
+from app.commons.bulletin import Bulletin
 from app.core import connectionAnalyzer
 from tools.triggerRequestHelper import *
 from app.core.dangerCore import DangerCore
 from tools.log import *
+import os
 
 
 
@@ -83,6 +86,11 @@ def confirmDanger():
 		print "Danger Confirmed"
 		#TODO come indichiamo che il pericolo e' confermato?
 		app.danger_core.TEST_confirmed_from_building_manager = True
+
+		nMgr = app.danger_core.notificationsManager
+		notification = Notification("danger")
+		nMgr.addNotification(notification)
+
 		request_rules_real_time_update_async()
 
 	return jsonify(received = 'true')
@@ -96,7 +104,7 @@ def confirmDanger():
 @app.route('/api/user/get_notifications', methods = ['POST'])
 def getNotification():
 	content = request.json
-	timestamp = content['timestamp']
+	timestamp = int(content['timestamp'])
 
 
 	#user_id = content['user_id']
@@ -110,16 +118,67 @@ def getNotification():
 	###FOR TESTING
 	log_event(None)
 
-
-
 	response = {}
 
-	if app.danger_core.TEST_confirmed_from_building_manager == True:
+	nMgr = app.danger_core.notificationsManager
+	notifications = nMgr.getNotificationsFromTime(timestamp)
+
+	#if timestamp is 0, we make a "empty" notification
+	#just to let the application set to the current timestamp
+	if(timestamp == 0):
 		response['new_notifications'] = 'True'
-		#TODO FILL THE NOTIFICATIONS!!
+		n = Notification("empty")
+		n.timestamp = nMgr.timeCount
+		response['notifications'] = [n.__dict__]
+	elif( len(notifications) > 0):
+		n_list = []
+		for n in notifications:
+			n_list.append(n.__dict__)
+			print(n.__dict__)
+		response['new_notifications'] = 'True'
+		response['notifications'] = n_list
 	else:
 		response['new_notifications'] = 'False'
+
+
+
+	#if app.danger_core.TEST_confirmed_from_building_manager == True:
+	#	response['new_notifications'] = 'True'
+		#TODO FILL THE NOTIFICATIONS!!
+	#else:
+	#	response['new_notifications'] = 'False'
 
 	return jsonify(response)
 
 
+#This method request ALL the devices to record and send
+#an audio sample. To be modified
+@app.route('/api/request_audio_sensing', methods = ['GET'])
+def requestAudioSensing():
+	#TODO specify which device has to receive this notification
+	nMgr = app.danger_core.notificationsManager
+	notification = Notification("action-record_audio")
+	nMgr.addNotification(notification)
+
+	response = {}
+	response['status'] = 'OK'
+
+	return jsonify(response)
+
+#This method is used for upload an audio file
+#of the environment
+@app.route('/api/user/upload_audio', methods = ['POST'])
+def uploadAudio():
+	audioMgr = app.danger_core.audioRecordsManager
+
+	#print(str(len(request.files)))
+	file = request.files['file']
+	print(file)
+	if file: #and allowed_file(file.filename):
+		filename = audioMgr.get_new_filename(file.filename)
+		file.save(os.path.join(audioMgr.AUDIO_DIR, filename))
+
+	message = {}
+	message['status'] = 'OK'
+
+	return jsonify(message)

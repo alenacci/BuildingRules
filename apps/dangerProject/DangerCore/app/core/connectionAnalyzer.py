@@ -8,7 +8,7 @@ class ConnectionAnalyzer:
 	DESIRED_ACCURACY = 0.97
 	DOWN_TIME = 2*POLLING_TIME
 
-    def __init__(self):
+	def __init__(self):
 		self.user_list = []
 		self.lock = Lock()
 
@@ -44,9 +44,9 @@ class ConnectionAnalyzer:
 			for u in self.user_list:
 				if time.time() - u.last_access > self.DOWN_TIME:
 					u.status = "disconnected"
-		for u in self.user_list:
-			print u.user_id + " " + u.status + " " + str(u.last_access)
-		print("__________________________________")
+		#for u in self.user_list:
+		#	print u.user_id + " " + u.status + " " + str(u.last_access)
+		#print("__________________________________")
 
 
 	def set_all_disconnected(self):
@@ -62,7 +62,7 @@ class ConnectionAnalyzer:
 
 	def accuracy(self, t):
 		if(t < self.POLLING_TIME):
-			print "ACCURACY = " + str(1 - pow((float(self.POLLING_TIME - t)/self.POLLING_TIME),len(self.user_list)))
+			#print "ACCURACY = " + str(1 - pow((float(self.POLLING_TIME - t)/self.POLLING_TIME),len(self.user_list)))
 			return 1 - pow((float(self.POLLING_TIME - t)/self.POLLING_TIME),len(self.user_list))
 		return 1
 

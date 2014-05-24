@@ -1,6 +1,8 @@
 from app.commons.bulletin import Bulletin
 from connectionAnalyzerRunner import ConnectionAnalyzerRunner
 from connectionAnalyzer import ConnectionAnalyzer
+from audioRecordsManager import AudioRecordsManager
+from notificationsManager import NotificationsManager
 
 class DangerCore:
 
@@ -8,7 +10,8 @@ class DangerCore:
 	def __init__(self):
 		self.bulletin_list = []
 		self.TEST_confirmed_from_building_manager = False
-
+		self.audioRecordsManager = AudioRecordsManager()
+		self.notificationsManager = NotificationsManager()
 
 	def startConnectionAnalyzer(self):
 		self.connection_analyzer = ConnectionAnalyzer()
