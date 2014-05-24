@@ -14,11 +14,13 @@ import json
 import random
 import string
 import datetime
+import os
+import imp
 
 from app.backend.commons.errors import *
 from app.backend.drivers.genericTriggerDriver import GenericTriggerDriver
-import imp
-trigger = imp.load_source('bulletin', '/home/danger/Danger/BuildingRules/apps/dangerProject/DangerCore/tools/triggerRequestHelper.py')
+
+trigger = imp.load_source('bulletin', os.path.join(os.path.dirname(__file__), '../../../../apps/dangerProject/DangerCore/tools/triggerRequestHelper.py'))
 
 class DangerTriggerDriver(GenericTriggerDriver):
 

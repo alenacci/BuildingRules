@@ -14,13 +14,13 @@ import json
 import random
 import string
 import datetime
+import os
 
 from app.backend.commons.errors import *
 from app.backend.commons.simulation import writeSimulationLog
 
 import imp
-bulletin = imp.load_source('bulletin', '/home/danger/Danger/BuildingRules/apps/dangerProject/DangerCore/tools/bulletin.py')
-
+bulletin = imp.load_source('bulletin', os.path.join(os.path.dirname(__file__), '../../../../apps/dangerProject/DangerCore/tools/bulletin.py'))
 
 class DangerActionDriver:
 
