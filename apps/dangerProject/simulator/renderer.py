@@ -1,8 +1,7 @@
 import sys
-#import and init pygame
 import pygame
 import building
-import utils.astar
+from behavior.path import *
 import time
 
 
@@ -40,8 +39,10 @@ class Renderer:
 
 
 		print str(time.time())
-		astar = utils.astar.AStar(building.grid,3,3,45,5)
+		astar =  AStar(building.grid,3,3,45,5)
 		p = astar.computePath()
+		post = Postprocessor(building.grid.tiles,p)
+		p = post.simplify()
 		print str(time.time())
 
 		if p:
