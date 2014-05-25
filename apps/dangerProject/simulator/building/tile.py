@@ -10,3 +10,9 @@ class Tile:
 		self.walkable = True
 
 
+	def __eq__(self, other):
+		return self.x == other.x and self.y == other.y
+
+	def __str__(self):
+		w = " - walkable" if self.walkable else " - not walkwable"
+		return "tile (" + str(self.x) + ", " + str(self.y) + ") " + w
