@@ -32,5 +32,5 @@ class Path:
 
 		dist = percentage * self.length
 
-		for i, p in enumerate(self.points):
-			if p.g < dist and
+#		for i, p in enumerate(self.points):
+#			if p.g < dist and
