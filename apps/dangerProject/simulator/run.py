@@ -2,17 +2,26 @@ import renderer
 import utils
 import building
 import time
+import pygame
+import sys
+import simulator
 
+sim = simulator.init()
 r = renderer.Renderer()
-r.drawBuilding()
+
+sim.setupEnvironment()
+
+while True:
+
+	r.draw()
+	sim.update()
+
+	for event in pygame.event.get():
+		if event.type == pygame.QUIT:
+			sys.exit(0)
+		else:
+			pass
+			#print event
 
 
-def computePath():
-	astar = utils.astar.AStar(building.grid,3,3,45,5)
 
-	print str(time.time())
-	p = astar.computePath()
-	print str(time.time())
-
-import cProfile
-cProfile.run('computePath()')
