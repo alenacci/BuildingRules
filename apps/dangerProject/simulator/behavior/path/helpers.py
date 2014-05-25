@@ -1,3 +1,5 @@
+import math
+
 #return whether is possible to go from a point
 #to another via a straight line
 ##TODO this is a really shitty implemenatation
@@ -12,3 +14,5 @@ def checkStraightPath(tiles, sx,sy,ex,ey):
 				return False
 	return True
 
+def distance(sx,sy,ex,ey):
+	return math.sqrt( (ex-sx)**2 + (ey-sy)**2 )

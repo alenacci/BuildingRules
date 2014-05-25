@@ -53,7 +53,7 @@ class AStar:
 		lowf = self._getLowerF()
 		lowf = heapq.heappop(self.open_list)
 
-		while lowf != sel!f.endTile:
+		while lowf != self.endTile:
 			self.closed_list.append(lowf)
 			lowf._in_closed = True
 
