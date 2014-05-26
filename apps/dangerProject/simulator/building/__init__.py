@@ -4,3 +4,4 @@ import building
 
 building.grid = Grid("./res/map_grid.png")
 building.roomGenerator = RoomGenerator("./res/map_rooms.png")
+

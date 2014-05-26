@@ -24,7 +24,6 @@ class RoomGenerator:
 			if self.img[j][self.GRID_WIDTH-1][0] == self.WHITE[0] and \
 				self.img[j][self.GRID_WIDTH-1][1] == self.WHITE[1] and \
 				self.img[j][self.GRID_WIDTH-1][2] == self.WHITE[2]:
-				print "dentro"
 				break
 			self.assign_room(j)
 

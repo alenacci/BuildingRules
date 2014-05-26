@@ -6,10 +6,10 @@ import helpers
 
 class Postprocessor:
 	#the path is just an array of tiles
-	def __init__(self, tiles, path):
-		if len(path) == 0:
+	def __init__(self, tiles, path_tiles):
+		if len(path_tiles) == 0:
 			raise Exception("Empty path")
-		self.path = path
+		self.path = path_tiles
 		self.tiles = tiles
 
 	def simplify(self):

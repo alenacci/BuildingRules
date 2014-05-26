@@ -1,17 +1,21 @@
 import sys
 import pygame
 import building
-from behavior.path import *
 from building.room_generator import RoomGenerator
+from behaviors.path import *
 import time
-
+import agents
+from behaviors.actions import *
+from commons.point import Point
+import simulator
 
 pygame.init()
 
 class Renderer:
 
 	WHITE = [0,0,0]
-	AZZURRO = [0,255,255]
+	AGENT_COLOR = [255,0,0]
+	WALL_COLOR = [0,255,255]
 	SIZE_X = 6
 	SIZE_Y = 6
 
@@ -22,54 +26,37 @@ class Renderer:
 		pygame.display.set_caption('Simulator')
 
 
+
+	def draw(self):
+		#clear
+		self.window.fill([255,255,255])
+
+		self.drawBuilding()
+		self.drawAgents()
+
+		#draw it to the screen
+		pygame.display.flip()
+
 	def drawTile(self, tile):
 		if(tile.walkable == True):
 			#color = Renderer.WHITE
 			if tile.room != None:
 				color = RoomGenerator.colors[tile.room]
 			else:
-				color = WHITE
+				color = Renderer.WHITE
 		else:
-			color = Renderer.AZZURRO
-
-
+			color = Renderer.WALL_COLOR
 		pygame.draw.rect(self.window, color, [tile.x*Renderer.SIZE_X, tile.y*Renderer.SIZE_Y,
 											  Renderer.SIZE_X, Renderer.SIZE_Y])
 
+	def drawAgents(self):
+		for a in simulator.sim.agents:
+			pygame.draw.rect(self.window, Renderer.AGENT_COLOR, [a.x*Renderer.SIZE_X, a.y*Renderer.SIZE_Y,
+											  Renderer.SIZE_X, Renderer.SIZE_Y])
 
 	def drawBuilding(self):
-		for row in building.grid.tiles:
+		for row in simulator.sim.grid.tiles:
 			for tile in row:
 				self.drawTile(tile)
 
-
-
-
-		print str(time.time())
-		astar =  AStar(building.grid,3,3,45,5)
-		p = astar.computePath()
-		post = Postprocessor(building.grid.tiles,p)
-		p = post.simplify()
-		print str(time.time())
-
-		if p:
-			for t in p:
-				#print t
-				color = [255,0,0]
-				pygame.draw.rect(self.window, color, [t.x*Renderer.SIZE_X, t.y*Renderer.SIZE_Y,
-											  Renderer.SIZE_X, Renderer.SIZE_Y])
-		else:
-			print "NOT FOUND"
-
-		#draw it to the screen
-		pygame.display.flip()
-
-		#input handling (somewhat boilerplate code):
-		while True:
-		   for event in pygame.event.get():
-			  if event.type == pygame.QUIT:
-				  sys.exit(0)
-			  else:
-				  pass
-				  #print event
 
