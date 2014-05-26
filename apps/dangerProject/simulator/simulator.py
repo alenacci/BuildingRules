@@ -3,6 +3,7 @@ from agents import *
 from behaviors.actions.moveAction import *
 from commons.point import *
 from behaviors.behavior import *
+import random
 
 
 #simulator
@@ -21,14 +22,26 @@ class Simulator:
 
 
 	def setupEnvironment(self):
+		##fill up the environment with agents
+
 		self.agents = []
-		age1 = Agent()
-		self.agents.append(age1)
 
-		beh = Behavior()
-		age1.behavior = beh
 
-		beh.newAction()
+		for i in range(0,5):
+			agent = Agent()
+
+			#random position
+			w = simulator.sim.grid.GRID_WIDTH
+			h = simulator.sim.grid.GRID_HEIGHT
+			randw = random.randint(0,w-1)
+			randh = random.randint(0,h-1)
+			agent.setPosition(Point(randw,randh))
+
+			self.agents.append(agent)
+			beh = Behavior()
+			agent.behavior = beh
+
+			beh.newAction()
 
 	def update(self):
 		for a in self.agents:

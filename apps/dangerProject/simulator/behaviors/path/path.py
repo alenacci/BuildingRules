@@ -67,3 +67,18 @@ class Path:
 
 	def __str__(self):
 		return "path of length=" + str(self.length) + " and points=" + str(len(self.points))
+
+	#has to be called after every change in the position
+	#of the nodes
+	def recomputeDistances(self):
+		prev = self.points[0]
+		prev.g = 0
+
+		for point in self.points:
+			#set distance
+			point.g = prev.g + point.dist(prev)
+			prev = point
+
+		self.start = self.points[0]
+		self.end = self.points[-1]
+		self.length = self.end.g
