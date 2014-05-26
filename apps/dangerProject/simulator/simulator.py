@@ -1,7 +1,8 @@
 from building.grid import Grid
 from agents import *
-from behavior.actions.moveAction import *
+from behaviors.actions.moveAction import *
 from commons.point import *
+from behaviors.behavior import *
 
 #simulator
 sim = None
@@ -14,7 +15,7 @@ def init():
 class Simulator:
 
 	def __init__(self):
-		self.grid = Grid("./res/map_grid.png")
+		self.grid = Grid("./res/map_grid2.png")
 
 
 
@@ -23,10 +24,10 @@ class Simulator:
 		age1 = Agent()
 		self.agents.append(age1)
 
-		action = MoveAction(age1,Point(3,3),Point(45,5))
-		age1.setCurrentAction(action)
+		beh = Behavior()
+		age1.behavior = beh
 
-		action.start()
+		beh.newAction()
 
 	def update(self):
 		for a in self.agents:

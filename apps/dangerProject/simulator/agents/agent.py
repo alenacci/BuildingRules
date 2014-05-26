@@ -4,7 +4,8 @@ class Agent(object):
 
 	def __init__(self):
 		self.p = Point(0,0)
-		self.current_action = None
+		self._current_action = None
+		self._behavior = None
 
 	def setPosition(self,p):
 		self.p = p.dup()
@@ -14,20 +15,35 @@ class Agent(object):
 		return self.p.x
 
 	@x.setter
-	def x(self,v):
-		self.p.x = v
+	def x(self, x):
+		self.p.x = x
 
 	@property
 	def y(self):
 		return self.p.y
 
 	@y.setter
-	def y(self,v):
-		self.p.y = v
+	def y(self, y):
+		self.p.y = y
 
-	def setCurrentAction(self,action):
+	@property
+	def current_action(self):
+		return self._current_action
+
+	@current_action.setter
+	def current_action(self, action):
 		action.agent = self
-		self.current_action = action
+		self._current_action = action
+
+	@property
+	def behavior(self):
+		return self._behavior
+
+	#Assign a behavior to our agent
+	@behavior.setter
+	def behavior(self, behavior):
+		self._behavior = behavior
+		self.behavior.setAgent(self)
 
 	def update(self):
 		if self.current_action:

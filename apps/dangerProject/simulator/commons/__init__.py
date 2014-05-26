@@ -1,1 +1,1 @@
-__author__ = 'fra'
+from point import Point

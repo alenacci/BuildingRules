@@ -22,6 +22,21 @@ class Path:
 		self.end = self.points[-1]
 		self.length = self.end.g
 
+	@property
+	def start(self):
+		return self.points[0]
+
+	@start.setter
+	def start(self, p):
+		self.points[0] = p
+
+	@property
+	def end(self):
+		return self.points[-1]
+
+	@start.setter
+	def end(self, p):
+		self.points[-1] = p
 
 	#return the position corresponding to the
 	#given percentage along the path

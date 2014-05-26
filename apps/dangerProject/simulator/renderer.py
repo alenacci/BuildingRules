@@ -1,10 +1,10 @@
 import sys
 import pygame
 import building
-from behavior.path import *
+from behaviors.path import *
 import time
 import agents
-from behavior.actions import *
+from behaviors.actions import *
 from commons.point import Point
 import simulator
 
