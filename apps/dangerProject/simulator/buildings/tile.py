@@ -1,5 +1,5 @@
 #Is the most little block of
-#our building.
+#our buildings.
 class Tile:
 
 	def __init__(self, x, y, room = None, walkable = True):

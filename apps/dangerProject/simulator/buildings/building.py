@@ -1,0 +1,2 @@
+from building
+class Building:
