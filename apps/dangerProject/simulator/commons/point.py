@@ -76,4 +76,3 @@ class Point(object):
 	def distance(self, sx,sy,ex,ey):
 		return math.sqrt( (ex-sx)**2 + (ey-sy)**2 )
 
-

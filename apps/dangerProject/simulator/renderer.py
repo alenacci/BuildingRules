@@ -1,11 +1,6 @@
 import sys
 import pygame
-import buildings
-from buildings.room_generator import RoomGenerator
-from behaviors.path import *
-import time
-import agents
-from behaviors.actions import *
+import buildings.room_generator
 from commons.point import Point
 import simulator
 
@@ -52,7 +47,7 @@ class Renderer:
 		if(tile.walkable == True):
 			#color = Renderer.WHITE
 			if tile.room != None:
-				color = RoomGenerator.colors[tile.room]
+				color = buildings.room_generator.RoomGenerator.colors[tile.room]
 			else:
 				color = Renderer.WHITE
 		else:

@@ -1,8 +1,7 @@
-from buildings.building import Building
-from agents import *
-from behaviors.actions.moveAction import *
+import buildings.building
+import agents
 from commons.point import *
-from behaviors.behavior import *
+import behaviors.behavior as behavior
 import random
 
 
@@ -26,7 +25,7 @@ class Simulator:
 		self.setupEnvironment()
 
 	def setupBuilding(self):
-		self.building = Building()
+		self.building = buildings.building.Building()
 		self.building.load_rooms()
 
 	def setupEnvironment(self):
@@ -36,20 +35,20 @@ class Simulator:
 
 
 		for i in range(0,5):
-			agent = Agent()
+			agent = agents.Agent()
 
 			#random position
-			w = simulator.sim.building.grid.GRID_WIDTH
-			h = simulator.sim.building.grid.GRID_HEIGHT
+			w = self.building.grid.GRID_WIDTH
+			h = self.building.grid.GRID_HEIGHT
 			randw = random.randint(0,w-1)
 			randh = random.randint(0,h-1)
 			agent.setPosition(Point(randw,randh))
 
 			self.agents.append(agent)
-			beh = Behavior()
+			beh = behavior.Behavior()
 			agent.behavior = beh
 
-			beh.newAction()
+			beh.start()
 
 	def update(self):
 		for a in self.agents:
