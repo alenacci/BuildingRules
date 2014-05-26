@@ -28,6 +28,15 @@ class Simulator:
 	def setupBuilding(self):
 		self.building = Building()
 		self.building.load_rooms()
+		print str(self.building.random_room())
+		print str(self.building.random_room())
+		print str(self.building.random_room())
+		print str(self.building.random_room())
+		print str(self.building.random_room())
+		print str(self.building.random_room())
+		print str(self.building.random_room())
+		print str(self.building.random_room())
+		print str(self.building.random_room())
 
 	def setupEnvironment(self):
 		##fill up the environment with agents
