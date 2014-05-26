@@ -2,6 +2,7 @@ import sys
 import pygame
 import building
 from behavior.path import *
+from building.room_generator import RoomGenerator
 import time
 
 
@@ -23,9 +24,15 @@ class Renderer:
 
 	def drawTile(self, tile):
 		if(tile.walkable == True):
-			color = Renderer.WHITE
+			#color = Renderer.WHITE
+			if tile.room != None:
+				color = RoomGenerator.colors[tile.room]
+			else:
+				color = WHITE
 		else:
 			color = Renderer.AZZURRO
+
+
 		pygame.draw.rect(self.window, color, [tile.x*Renderer.SIZE_X, tile.y*Renderer.SIZE_Y,
 											  Renderer.SIZE_X, Renderer.SIZE_Y])
 

@@ -2,12 +2,13 @@
 #our building.
 class Tile:
 
-	def __init__(self, x, y, walkable = True):
+	def __init__(self, x, y, room = None, walkable = True):
 		#x and y are the position
 		#in the grid
 		self.x = x
 		self.y = y
 		self.walkable = True
+		self.room = room
 
 
 	def __eq__(self, other):

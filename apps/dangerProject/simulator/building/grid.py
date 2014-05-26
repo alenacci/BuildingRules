@@ -4,7 +4,7 @@ from tile import Tile
 #Represent an array of tiles
 class Grid:
 
-	# initialize an empy grid
+	# initialize an empty grid
 	def __init__(self, width, height):
 		self.GRID_WIDTH = width
 		self.GRID_HEIGHT = height
