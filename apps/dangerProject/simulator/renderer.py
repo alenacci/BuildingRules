@@ -1,7 +1,7 @@
 import sys
 import pygame
-import building
-from building.room_generator import RoomGenerator
+import buildings
+from buildings.room_generator import RoomGenerator
 from behaviors.path import *
 import time
 import agents
@@ -28,10 +28,10 @@ class Renderer:
 
 
 		#size of the map in pixels
-		self.map_width_px = simulator.sim.grid.GRID_WIDTH * Renderer.SIZE_X
-		self.map_height_px = simulator.sim.grid.GRID_HEIGHT * Renderer.SIZE_Y
+		self.map_width_px = simulator.sim.building.grid.GRID_WIDTH * Renderer.SIZE_X
+		self.map_height_px = simulator.sim.building.grid.GRID_HEIGHT * Renderer.SIZE_Y
 
-		#high resolution image of the building map
+		#high resolution image of the buildings map
 		self.map_image = pygame.image.load("./res/map.png")
 		self.map_image = pygame.transform.scale(self.map_image, (self.map_width_px, self.map_height_px))
 
@@ -79,7 +79,7 @@ class Renderer:
 		self.window.blit(self.map_image, (0,0))
 
 		#Draw the grid tile by tile
-		'''for row in simulator.sim.grid.tiles:
+		'''for row in simulator.sim.building.grid.tiles:
 			for tile in row:
 				self.drawTile(tile)'''
 

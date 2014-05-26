@@ -1,5 +1,4 @@
 import scipy.misc
-import building
 from tile import Tile
 import numpy as np
 
@@ -16,7 +15,8 @@ class RoomGenerator:
 		for j in range (0, self.GRID_HEIGHT):
 			RoomGenerator.colors.insert(j, self.img[j][self.GRID_WIDTH-1])
 
-		self.tiles = building.grid.tiles
+		import simulator
+		self.tiles = simulator.sim.building.grid.tiles
 
 
 		for j in range(0, self.GRID_HEIGHT):

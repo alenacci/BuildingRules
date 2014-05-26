@@ -153,12 +153,12 @@ class ActionExecutor:
 		
 		for building in buildings.getAllBuildings():
 
-			flash("Working on building '" + building.buildingName + "'...", "blue")
+			flash("Working on buildings '" + building.buildingName + "'...", "blue")
 
 			triggeredRules = []
 			triggeredRulesId = []
 			
-			# Getting all the triggered rules for the considered building	
+			# Getting all the triggered rules for the considered buildings
 			buildingRules = building.getRules()
 
 			if len(buildingRules) == 0:

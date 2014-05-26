@@ -373,7 +373,7 @@ class Room:
 
 	def isClassInitialized(self):
 		if not(self.roomName and self.buildingName):
-			raise Exception("Room name and building name not specified")			
+			raise Exception("Room name and buildings name not specified")
 
 	def getDict(self):
 		

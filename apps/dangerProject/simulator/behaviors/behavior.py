@@ -21,8 +21,8 @@ class Behavior:
 
 	#XXX TEMP
 	def newTarget(self):
-		w = simulator.sim.grid.GRID_WIDTH
-		h = simulator.sim.grid.GRID_HEIGHT
+		w = simulator.sim.building.grid.GRID_WIDTH
+		h = simulator.sim.building.grid.GRID_HEIGHT
 		randw = random.randint(0,w-1)
 		randh = random.randint(0,h-1)
 		action = actions.MoveAction(self.agent,self.agent.p,commons.Point(randw, randh))

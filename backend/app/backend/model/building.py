@@ -208,7 +208,7 @@ class Building:
 		database.close()
 
 		if len(queryResult) == 0:
-			raise UserBuildingBindingError("The user is not associated with the requested building")
+			raise UserBuildingBindingError("The user is not associated with the requested buildings")
 
 
 	def __replaceSqlQueryToken(self, queryTemplate):
@@ -251,7 +251,7 @@ class Building:
 			self.description = queryResult[0][2]
 		else:
 			database.close()
-			raise BuildingNotFoundError("Impossibile to find any building with the provided values")
+			raise BuildingNotFoundError("Impossibile to find any buildings with the provided values")
 
 		database.close()
 

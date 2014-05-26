@@ -22,7 +22,7 @@ class MoveAction(Action):
 		e_x = int(self.e_point.x)
 		e_y = int(self.e_point.y)
 
-		self.path = findPath(simulator.sim.grid,s_x,s_y,e_x,e_y)
+		self.path = findPath(simulator.sim.building.grid,s_x,s_y,e_x,e_y)
 
 		if not self.path:
 			raise NoPathToTargetDestination()

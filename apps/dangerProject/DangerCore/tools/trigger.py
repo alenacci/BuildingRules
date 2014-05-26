@@ -4,7 +4,7 @@ import urllib2,json
 def check_trigger(danger_type,building,room):
 	data = {
 			'trigger_name' : danger_type,
-			'building': building,
+			'buildings': building,
 			'room' : room
 	}
 

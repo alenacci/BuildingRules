@@ -17,7 +17,7 @@ def decodeBulletin():
 	print "Ricevuto: " + str(content)
 
 	danger_type = content['danger_type']
-	building = content['building']
+	building = content['buildings']
 	room = content['room']
 
 	print "Danger Type: " + danger_type
@@ -38,7 +38,7 @@ def checkTriggerStatus():
 	content = request.json
 
 	trigger = content['trigger_name']
-	building = content['building']
+	building = content['buildings']
 	room = content['room']
 
 	bulletin = Bulletin(trigger, building, room)
@@ -52,7 +52,7 @@ def checkTriggerStatus():
 
 #This method returns a json containing all the information about the current
 #situation of danger.
-#It is used by the building manager to check whether there are pending
+#It is used by the buildings manager to check whether there are pending
 #situations of danger
 @app.route('/api/get_current_status', methods = ['GET'])
 def getCurrentStatus():
@@ -66,7 +66,7 @@ def getCurrentStatus():
 	#TODO This is just a dummy implementation
 	if len(app.danger_core.bulletin_list) > 0:
 		b = app.danger_core.bulletin_list[0]
-		message['building'] = b.building
+		message['buildings'] = b.building
 		message['room'] = b.room
 		message['description'] = 'Unusual movements, smoke detected'
 		message['status'] = 'ALERT'
@@ -75,7 +75,7 @@ def getCurrentStatus():
 
 	return jsonify(message)
 
-#This method is used by the building manager client in order
+#This method is used by the buildings manager client in order
 #to confirm or dismiss a pending danger
 @app.route('/api/building_manager/confirm_danger', methods = ['POST'])
 def confirmDanger():

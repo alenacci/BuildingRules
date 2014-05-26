@@ -228,9 +228,9 @@ class RoomsManager:
 		if not rule.roomName:
 			raise UserCredentialError("You cannot modify this group related rule.")
 
-		# If this rule is not about this building
+		# If this rule is not about this buildings
 		if rule.buildingName != buildingName:
-			raise UserCredentialError("You cannot modify the rule of another building.")			
+			raise UserCredentialError("You cannot modify the rule of another buildings.")
 			
 		if author.uuid != editor.uuid:
 
@@ -288,9 +288,9 @@ class RoomsManager:
 		if not rule.roomName:
 			raise UserCredentialError("You cannot disable this group related rule.")
 
-		# If this rule is not about this building
+		# If this rule is not about this buildings
 		if rule.buildingName != buildingName:
-			raise UserCredentialError("You cannot disable the rule of another building.")			
+			raise UserCredentialError("You cannot disable the rule of another buildings.")
 			
 		if author.uuid != editor.uuid:
 
@@ -398,9 +398,9 @@ class RoomsManager:
 		if not oldRule.roomName:
 			raise UserCredentialError("You cannot modify this group related rule.")
 
-		# If this rule is not about this building
+		# If this rule is not about this buildings
 		if oldRule.buildingName != buildingName:
-			raise UserCredentialError("You cannot modify the rule of another building.")			
+			raise UserCredentialError("You cannot modify the rule of another buildings.")
 			
 		if author.uuid != editor.uuid:
 
@@ -437,7 +437,7 @@ class RoomsManager:
 
 		from app.backend.controller.notificationsManager import NotificationsManager
 		notifications = NotificationsManager()
-		messageSubject = "Rule modified in building " + str(buildingName) + " room " + str(roomName)
+		messageSubject = "Rule modified in buildings " + str(buildingName) + " room " + str(roomName)
 		messageText = "The user " + str(editor.username) + " edited (or tried to edit) the rule <<" + str(oldRule.getFullRepresentation()) + ">>. The new rule is <<" + str(ruleBody) + ">>"
 		notifications.sendNotification(buildingName = buildingName, roomName = roomName, messageSubject = messageSubject, messageText = messageText) 
 

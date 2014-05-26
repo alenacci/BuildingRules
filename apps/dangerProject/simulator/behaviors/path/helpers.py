@@ -13,6 +13,3 @@ def checkStraightPath(tiles, sx,sy,ex,ey):
 			if not tiles[i][j].walkable:
 				return False
 	return True
-
-def distance(sx,sy,ex,ey):
-	return math.sqrt( (ex-sx)**2 + (ey-sy)**2 )

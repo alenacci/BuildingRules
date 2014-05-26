@@ -117,7 +117,7 @@ class GroupsManager:
 
 		from app.backend.controller.notificationsManager import NotificationsManager
 		notifications = NotificationsManager()
-		messageSubject = "Rule modified in building " + str(buildingName) + " group " + str(groupId)
+		messageSubject = "Rule modified in buildings " + str(buildingName) + " group " + str(groupId)
 		messageText = "The user " + str(author.username) + " edited (or tried to edit) the rule <<" + str(oldRule.getFullRepresentation()) + ">>. The new rule is <<" + str(ruleBody) + ">>"
 		notifications.sendNotification(buildingName = buildingName, groupId = groupId, messageSubject = messageSubject, messageText = messageText) 
 

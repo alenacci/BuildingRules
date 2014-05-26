@@ -10,7 +10,7 @@ def notify_run():
 
 	user = content['user']
 	state = content['state']
-	building = content['building']
+	building = content['buildings']
 	room = content['room']
 
 	print "User: " + user + " is " + state + " !"

@@ -1,4 +1,4 @@
-from building.grid import Grid
+from buildings.building import Building
 from agents import *
 from behaviors.actions.moveAction import *
 from commons.point import *
@@ -17,9 +17,17 @@ def init():
 class Simulator:
 
 	def __init__(self):
-		self.grid = Grid("./res/map_grid.png")
+		self.building = None
+		pass
 
 
+	def setup(self):
+		self.setupBuilding()
+		self.setupEnvironment()
+
+	def setupBuilding(self):
+		self.building = Building()
+		self.building.load_rooms()
 
 	def setupEnvironment(self):
 		##fill up the environment with agents
@@ -31,8 +39,8 @@ class Simulator:
 			agent = Agent()
 
 			#random position
-			w = simulator.sim.grid.GRID_WIDTH
-			h = simulator.sim.grid.GRID_HEIGHT
+			w = simulator.sim.building.grid.GRID_WIDTH
+			h = simulator.sim.building.grid.GRID_HEIGHT
 			randw = random.randint(0,w-1)
 			randh = random.randint(0,h-1)
 			agent.setPosition(Point(randw,randh))

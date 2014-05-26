@@ -39,7 +39,7 @@ class NotificationsManager:
 			raise NewNotificationMissingInputError("You have to specify at least one recipient to send a new notification")
 
 		if buildingName and not roomName and not groupId:
-			raise NewNotificationMissingInputError("You cannot send a notification to an entire building. You have to specify at least a room or a group.")			
+			raise NewNotificationMissingInputError("You cannot send a notification to an entire buildings. You have to specify at least a room or a group.")
 
 		if not buildingName and not roomName and not groupId:
 			raise NewNotificationMissingInputError("You have to specify at least one recipient to send a new notification.")			

@@ -1,6 +1,6 @@
 import renderer
 import utils
-import building
+import buildings
 import time
 import pygame
 import sys
@@ -10,9 +10,10 @@ import random
 random.seed(10)
 
 sim = simulator.init()
+sim.setup()
 r = renderer.Renderer()
 
-sim.setupEnvironment()
+
 
 
 while True:

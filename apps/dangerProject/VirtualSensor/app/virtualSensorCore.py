@@ -51,7 +51,7 @@ class VirtualSensorCore:
 			if count >= self.THRESHOLD:
 #				data = {
 #				'danger_type' : "escape",
-#				'building': b.building,
+#				'buildings': b.buildings,
 #				'room' : b.room
 #				}
 

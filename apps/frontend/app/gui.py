@@ -691,7 +691,7 @@ def addGroup(buildingName = None):
 
 
 	##################################
-	# Retrieving the building roomList
+	# Retrieving the buildings roomList
 	##################################
 	response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms", {
 		'username' : session["username"], 

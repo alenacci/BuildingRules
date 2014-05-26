@@ -3,7 +3,7 @@ import urllib2,json
 data = {
 			'user' : "andrea",
 			'state' : "running",
-			'building': "DEI",
+			'buildings': "DEI",
 			'room' : "28"
 }
 

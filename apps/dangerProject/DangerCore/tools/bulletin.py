@@ -4,7 +4,7 @@ import urllib2,json
 def send_bulletin(danger_type,building,room):
 	data = {
             'danger_type' : danger_type,
-			'building': building,
+			'buildings': building,
 			'room' : room
 	}
 

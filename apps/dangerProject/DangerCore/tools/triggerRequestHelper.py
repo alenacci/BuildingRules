@@ -4,7 +4,7 @@ import urllib2,json,threading
 def check_trigger_status(trigger_name,building,room):
 	data = {
 			'trigger_name' : trigger_name,
-			'building': building,
+			'buildings': building,
 			'room' : room
 	}
 

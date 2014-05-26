@@ -1,4 +1,3 @@
-import behaviors.path.helpers
 import math
 
 class Point(object):
@@ -72,6 +71,9 @@ class Point(object):
 		return Point(-self.y, self.x)
 
 	def dist(self,p):
-		return behaviors.path.helpers.distance(self.x,self.y,p.x,p.y)
+		return self.distance(self.x,self.y,p.x,p.y)
+
+	def distance(self, sx,sy,ex,ey):
+		return math.sqrt( (ex-sx)**2 + (ey-sy)**2 )
 
 
