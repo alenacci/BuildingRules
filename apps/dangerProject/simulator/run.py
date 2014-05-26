@@ -1,7 +1,5 @@
 import renderer
-import utils
-import buildings
-import time
+
 import pygame
 import sys
 import simulator

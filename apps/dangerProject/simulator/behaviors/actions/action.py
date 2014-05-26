@@ -4,7 +4,7 @@ from utils.decorator import *
 #from the agents
 class Action:
 
-	def __init__(self,agent):
+	def __init__(self, agent):
 		self.agent = agent
 		self.active = False
 		#self.end_signal = Signal()

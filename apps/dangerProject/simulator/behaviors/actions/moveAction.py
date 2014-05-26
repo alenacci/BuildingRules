@@ -49,3 +49,6 @@ class MoveAction(Action):
 		cur_position = self.path.getPositionAtPercentage(progress)
 
 		self.agent.setPosition(cur_position)
+
+	def __str__(self):
+		return "moveAction"
