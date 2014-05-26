@@ -126,7 +126,6 @@ class AStar:
 		c = self.endTile
 		path = [c]
 
-
 		while c != self.startTile:
 			path.insert(0,c.p)
 			c = c.p

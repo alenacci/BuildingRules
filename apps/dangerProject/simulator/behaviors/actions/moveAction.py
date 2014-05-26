@@ -13,10 +13,10 @@ class MoveAction(Action):
 		Action.__init__(self,agent)
 		self.s_point = sPoint
 		self.e_point = ePoint
-		self.duration = 1
+		self.duration = None
 
 	def start(self):
-		#get the tile where the start and end are
+		#get the tile where the start and end are placed
 		s_x = int(self.s_point.x)
 		s_y = int(self.s_point.y)
 		e_x = int(self.e_point.x)
@@ -27,10 +27,12 @@ class MoveAction(Action):
 		if not self.path:
 			raise NoPathToTargetDestination()
 
+		self.duration = self.path.length / 10
+
 		#then, substitute the start and the end point
 		self.path.start = self.s_point
 		self.path.end = self.e_point
-
+		self.path.recomputeDistances()
 
 		Action.start(self)
 

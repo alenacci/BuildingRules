@@ -5,11 +5,15 @@ import time
 import pygame
 import sys
 import simulator
+import random
+
+random.seed(10)
 
 sim = simulator.init()
 r = renderer.Renderer()
 
 sim.setupEnvironment()
+
 
 while True:
 

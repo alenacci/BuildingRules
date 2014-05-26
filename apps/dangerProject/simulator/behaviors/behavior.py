@@ -14,7 +14,7 @@ class Behavior:
 
 	#XXX TEMP
 	def newAction(self):
-		action = actions.MoveAction(self.agent,commons.Point(10, 10),commons.Point(10, 12))
+		action = actions.MoveAction(self.agent,self.agent.p,commons.Point(10, 12))
 		self.agent.current_action = action
 		action.end.connect(self.onActionEnded, identifyObserved=True)
 		action.start()
@@ -35,4 +35,5 @@ class Behavior:
 
 
 	def onActionEnded(self,action):
+		print str(action)
 		self.newTarget()
