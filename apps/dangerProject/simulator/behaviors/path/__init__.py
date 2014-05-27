@@ -16,34 +16,12 @@ def findPath(grid, sx, sy, ex, ey):
 	if p:
 		post = Postprocessor(grid.tiles, p)
 		p = post.simplify()
+
 		ret_value = Path(p)
 	else:
 		ret_value = None
 
 	dt = time.time() - t
-	print "a-start: " + str(dt) + " secs"
-
-	return ret_value
-
-def findPath_slow(grid, sx, sy, ex, ey):
-
-	t = time.time()
-	ret_value = None
-
-	astar =  AStar(grid, sx, sy, ex, ey)
-	p = astar.computePath()
-
-	if p:
-		post = Postprocessor(grid.tiles, p)
-		p = post.simplify()
-		ret_value = Path(p)
-	else:
-		ret_value = None
-
-	dt = time.time() - t
-
-	time.sleep(5)
-
 	print "a-start: " + str(dt) + " secs"
 
 	return ret_value

@@ -21,13 +21,13 @@ class Postprocessor:
 		for i, t in enumerate(self.path[1:]):
 			if not helpers.checkStraightPath(self.tiles, \
 						last_corner.x, last_corner.y, t.x, t.y):
-				previous = self.path[i] #is not i-1 because the enumerations strat from 1:
+
+				previous = self.path[i] #is not i-1 because the enumerations starts from 1:
 				pivots.append(previous)
 				last_corner = previous
 
 		#add the last
 		pivots.append(self.path[-1])
-
 		return pivots
 
 

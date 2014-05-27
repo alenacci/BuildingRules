@@ -24,8 +24,8 @@ class Behavior:
 
 	def newAction(self):
 		decision = random.random()
-
-		if decision>10:
+		###TODO messo a 1 per non far crashare
+		if decision>1:
 			self.toilet()
 		elif decision>0.7:
 			self.newTarget()
@@ -46,7 +46,7 @@ class Behavior:
 		pos = room.random_position()
 
 		import actions
-		action = actions.MoveAction(self.agent, self.agent.p, pos)
+		action = actions.MoveAction(self.agent, self.agent.p, pos )
 		self.agent.current_action = action
 		action.end.connect(self.onActionEnded, True)
 		try:

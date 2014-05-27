@@ -15,6 +15,8 @@ class MoveAction(Action):
 		self.e_point = ePoint
 		self.duration = None
 		self.speed = 2 + random.random()*5
+		self.path = None
+
 
 	def start(self):
 		#get the tile where the start and end are placed
@@ -24,31 +26,28 @@ class MoveAction(Action):
 		e_y = int(self.e_point.y)
 
 		#launch the a-star computation on another thread
-		path_future = simulator.sim.background_executor.submit(findPath, simulator.sim.building.grid, s_x, s_y, e_x, e_y)
-		path_future.add_done_callback(self._on_path_computation_ended)
+		self.path_future = simulator.sim.background_executor.submit(findPath, simulator.sim.building.grid, s_x, s_y, e_x, e_y)
+		self.path_future.add_done_callback(self._on_path_computation_ended)
 		self.wait = True
 
+
 	def _on_path_computation_ended(self, path_future):
-		wait = False
-
+		self.wait = False
 		self.path = path_future.result()
-
 		if not self.path or self.path.length == 0:
 			#raise NoPathToTargetDestination()
-			#TODO right?
+			#TODO right? maybe length = 0 should be dealt in different way
 			self.end()
-
-		self.duration = self.path.length / self.speed
 
 		#then, substitute the start and the end point
 		self.path.start = self.s_point
 		self.path.end = self.e_point
 		self.path.recomputeDistances()
-
+		self.duration = self.path.length / self.speed
 		Action.start(self)
 
-
 	def update(self):
+
 		if not self.active:
 			return
 

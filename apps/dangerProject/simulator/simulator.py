@@ -44,7 +44,7 @@ class Simulator:
 
 		self.agents = []
 
-		for i in range(0,400):
+		for i in range(0,200):
 			agent = agents.Agent()
 
 			#random position
