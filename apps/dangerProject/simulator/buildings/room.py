@@ -3,9 +3,19 @@ from commons.point import Point
 
 class Room:
 
-	def __init__(self, id):
+	def __init__(self, id, weight=1.0):
+		"""weight: a value computed together with the size of the
+		room to choose how probable is this room
+		in being selected. For instance, a corridor should
+		have a low weight"""
+
 		self.id = id
 		self.tiles = []
+		###TODO spostarli
+		if id == 0 or id == 15 or id==10:
+			weight = 0.1
+
+		self.weight = weight
 
 	def __str__(self):
 		return "Room " + str(self.id)

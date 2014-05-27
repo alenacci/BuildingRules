@@ -22,6 +22,6 @@ def findPath(grid, sx, sy, ex, ey):
 		ret_value = None
 
 	dt = time.time() - t
-	print "a-start: " + str(dt) + " secs"
+	#print "a-start: " + str(dt) + " secs"
 
 	return ret_value

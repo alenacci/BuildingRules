@@ -12,18 +12,27 @@ class Building:
 		self.room_generator = RoomGenerator("./res/map_rooms2.png")
 		self.update_size()
 
-	#pick a random room with a probability weighted on the size of the room
 	def random_room(self):
-		rand = random.randint(0, self.size)
+		"""pick a random room with a probability weighted on the size of the room
+		and the weight of the room"""
+
+
+		tot_weight = 0.0
+
+		for r in self.rooms:
+			tot_weight += int(r.weight * r.size)
+
+		rand = random.randint(0, tot_weight)
 		_sum = 0
 
 		for r in self.rooms:
-			_sum += r.size
+			_sum += r.size * r.weight
 			if _sum >= rand:
 				return r
 
-	#update size of the building as sum of the sizes of the rooms
 	def update_size(self):
+		"""update size of the building as sum of the sizes of the rooms"""
+
 		self.size = 0
 		for r in self.rooms:
 			self.size += r.size
@@ -35,7 +44,7 @@ class Building:
 
 		tile = self.grid.tiles[int(p.x)][int(p.y)]
 
-		if tile.room != None:
+		if tile.room is not None:
 			return self.rooms[tile.room]
 		else:
 			return None

@@ -68,5 +68,5 @@ class Behavior:
 
 
 	def onActionEnded(self,action):
-		print str(action)
+		#print str(action)
 		self.newAction()

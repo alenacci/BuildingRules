@@ -15,7 +15,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.4 r9939"
-   sodipodi:docname="New document 1">
+   sodipodi:docname="building.svg">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -25,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="22.4"
-     inkscape:cx="420.29069"
-     inkscape:cy="638.69123"
+     inkscape:zoom="2.8"
+     inkscape:cx="294.2976"
+     inkscape:cy="394.08725"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -35,7 +35,8 @@
      inkscape:window-height="744"
      inkscape:window-x="0"
      inkscape:window-y="24"
-     inkscape:window-maximized="1">
+     inkscape:window-maximized="1"
+     inkscape:snap-global="false">
     <inkscape:grid
        type="xygrid"
        id="grid3853" />
@@ -48,7 +49,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -57,221 +58,30 @@
      inkscape:groupmode="layer"
      id="layer1">
     <image
-       y="352.31369"
-       x="290.44812"
+       y="576.66907"
+       x="190.55325"
        id="image3047"
-       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEEAAABBCAYAAACO98lFAAAABHNCSVQICAgIfAhkiAAAAYhJREFU
-eJztm8GOgzAMRJ9X/P8vew8rKrZyAwYHSJk5VU1LzFNsT4Iwd3cCmVn0dXd9CKerptbgnoDMbPeN
-XAX+55JZbyZBQBAAQQAEARAEQBCAFZ8wqjJ+w92/EwJsM3ozLKUDggAIAiAIgCAAggAUQjCzV8u5
-6lxgr8p8whUnQlUqXQnR5xE0weegj9zMGSBac7TG3P3f+LQcqAxo7/lkVtl55jmWINQdEATggRCi
-9HkchKjuPA5CpDIIy2U2mnGSWULpAAgC8AWnzRWpNzyEvbZ5qak1eEQjFcfhN1AVUmFEEABBAAQB
-0N4B0N4BuKFZigDOK6sX3NtBaKXS+1gVFBVGBAEQBCCxgXp/arOmszrEp3ky8aY2UFv7/1k+YW2e
-rXEoHeiYDtH/tlwjs4oyD11bKkuH6GWP6OaXxqei72d8RRQzdE6HIwGeqVLH2LK8W357lUohZJd3
-LxuclboDqgmAagKgmgCoJgCqCQCYu/ud8jNSz+M1d/+DUH7lwaSagCAAggDALwyBtKu/AD1XAAAA
-AElFTkSuQmCC
-"
-       height="65"
-       width="65"
-       style="opacity:0.17283953" />
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEEAAABBCAYAAACO98lFAAAABHNCSVQICAgIfAhkiAAAAYhJREFU eJztm8GOgzAMRJ9X/P8vew8rKrZyAwYHSJk5VU1LzFNsT4Iwd3cCmVn0dXd9CKerptbgnoDMbPeN XAX+55JZbyZBQBAAQQAEARAEQBCAFZ8wqjJ+w92/EwJsM3ozLKUDggAIAiAIgCAAggAUQjCzV8u5 6lxgr8p8whUnQlUqXQnR5xE0weegj9zMGSBac7TG3P3f+LQcqAxo7/lkVtl55jmWINQdEATggRCi 9HkchKjuPA5CpDIIy2U2mnGSWULpAAgC8AWnzRWpNzyEvbZ5qak1eEQjFcfhN1AVUmFEEABBAAQB 0N4B0N4BuKFZigDOK6sX3NtBaKXS+1gVFBVGBAEQBCCxgXp/arOmszrEp3ky8aY2UFv7/1k+YW2e rXEoHeiYDtH/tlwjs4oyD11bKkuH6GWP6OaXxqei72d8RRQzdE6HIwGeqVLH2LK8W357lUohZJd3 LxuclboDqgmAagKgmgCoJgCqCQCYu/ud8jNSz+M1d/+DUH7lwaSagCAAggDALwyBtKu/AD1XAAAA AElFTkSuQmCC "
+       height="375.35324"
+       width="375.35324"
+       style="opacity:1" />
     <g
-       id="g3905"
-       inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
-       inkscape:export-xdpi="1106"
-       inkscape:export-ydpi="1106">
-      <path
-         inkscape:export-ydpi="1106.1312"
-         inkscape:export-xdpi="1106.1312"
+       inkscape:groupmode="layer"
+       id="layer2"
+       inkscape:label="background">
+      <g
+         id="g3905"
          inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
-         inkscape:connector-curvature="0"
-         id="path3855"
-         d="m 412.04632,381.86726 0,1 14,0 0,-20 -15,0 0,17 1,0 -3,0"
-         style="fill:none;stroke:#000000;stroke-width:0.20100001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-      <path
-         inkscape:export-ydpi="1106.1312"
-         inkscape:export-xdpi="1106.1312"
-         inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
-         inkscape:connector-curvature="0"
-         id="path3857"
-         d="m 411.04632,362.86726 -14,0 0,20 12,0 0,-1 0,7"
-         style="fill:none;stroke:#000000;stroke-width:0.20100001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-      <path
-         inkscape:export-ydpi="1106.1312"
-         inkscape:export-xdpi="1106.1312"
-         inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
-         inkscape:connector-curvature="0"
-         id="path3859"
-         d="m 412.04632,382.86726 0,6"
-         style="fill:none;stroke:#000000;stroke-width:0.20100001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-      <path
-         inkscape:export-ydpi="1106.1312"
-         inkscape:export-xdpi="1106.1312"
-         inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
-         inkscape:connector-curvature="0"
-         id="path3861"
-         d="m 412.04632,390.86726 0,10 0,-5 14,0 0,-13"
-         style="fill:none;stroke:#000000;stroke-width:0.20100001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-      <path
-         inkscape:export-ydpi="1106.1312"
-         inkscape:export-xdpi="1106.1312"
-         inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
-         inkscape:connector-curvature="0"
-         id="path3863"
-         d="m 426.04632,395.86726 0,8 5,0 -5,0 0,5 -14,0 0,-6"
-         style="fill:none;stroke:#000000;stroke-width:0.20100001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-      <path
-         inkscape:export-ydpi="1106.1312"
-         inkscape:export-xdpi="1106.1312"
-         inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
-         inkscape:connector-curvature="0"
-         id="path3865"
-         d="m 409.04632,390.86726 0,10 0,-5 -17,0 0,-13 5,0"
-         style="fill:none;stroke:#000000;stroke-width:0.20100001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-      <path
-         inkscape:export-ydpi="1106.1312"
-         inkscape:export-xdpi="1106.1312"
-         inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
-         inkscape:connector-curvature="0"
-         id="path3867"
-         d="m 392.04632,395.86726 0,13 8,0"
-         style="fill:none;stroke:#000000;stroke-width:0.20100001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-      <path
-         inkscape:export-ydpi="1106.1312"
-         inkscape:export-xdpi="1106.1312"
-         inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
-         inkscape:connector-curvature="0"
-         id="path3869"
-         d="m 402.04632,408.86726 7,0 0,-6"
-         style="fill:none;stroke:#000000;stroke-width:0.20100001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-      <path
-         inkscape:export-ydpi="1106.1312"
-         inkscape:export-xdpi="1106.1312"
-         inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
-         inkscape:connector-curvature="0"
-         id="path3871"
-         d="m 392.04632,408.86726 0,3 8,0"
-         style="fill:none;stroke:#000000;stroke-width:0.20100001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-      <path
-         inkscape:export-ydpi="1106.1312"
-         inkscape:export-xdpi="1106.1312"
-         inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
-         inkscape:connector-curvature="0"
-         id="path3873"
-         d="m 392.04632,411.86726 0,11 39,0"
-         style="fill:none;stroke:#000000;stroke-width:0.20100001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-      <path
-         inkscape:export-ydpi="1106.1312"
-         inkscape:export-xdpi="1106.1312"
-         inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
-         inkscape:connector-curvature="0"
-         id="path3875"
-         d="m 402.04632,411.86726 12,0 0,1"
-         style="fill:none;stroke:#000000;stroke-width:0.20100001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-      <path
-         inkscape:export-ydpi="1106.1312"
-         inkscape:export-xdpi="1106.1312"
-         inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
-         inkscape:connector-curvature="0"
-         id="path3877"
-         d="m 409.04632,411.86726 0,11 0,-4 5,0 0,2"
-         style="fill:none;stroke:#000000;stroke-width:0.20100001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-      <path
-         inkscape:export-ydpi="1106.1312"
-         inkscape:export-xdpi="1106.1312"
-         inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
-         inkscape:connector-curvature="0"
-         id="path3879"
-         d="m 409.04632,414.86726 5,0 0,2"
-         style="fill:none;stroke:#000000;stroke-width:0.20100001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-      <path
-         inkscape:export-ydpi="1106.1312"
-         inkscape:export-xdpi="1106.1312"
-         inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
-         inkscape:connector-curvature="0"
-         id="path3881"
-         d="m 416.04632,411.86726 1,0 0,11"
-         style="fill:none;stroke:#000000;stroke-width:0.20100001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-      <path
-         inkscape:export-ydpi="1106.1312"
-         inkscape:export-xdpi="1106.1312"
-         inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
-         inkscape:connector-curvature="0"
-         id="path3883"
-         d="m 419.04632,411.86726 7,0 0,11 0,-4 -5,0 0,2"
-         style="fill:none;stroke:#000000;stroke-width:0.20100001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-      <path
-         inkscape:export-ydpi="1106.1312"
-         inkscape:export-xdpi="1106.1312"
-         inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
-         inkscape:connector-curvature="0"
-         id="path3887"
-         d="m 421.04632,416.86726 0,-2 5,0"
-         style="fill:none;stroke:#000000;stroke-width:0.20100001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-      <path
-         inkscape:export-ydpi="1106.1312"
-         inkscape:export-xdpi="1106.1312"
-         inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
-         inkscape:connector-curvature="0"
-         id="path3889"
-         d="m 421.04632,412.86726 0,-1"
-         style="fill:none;stroke:#000000;stroke-width:0.20100001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-      <path
-         inkscape:export-ydpi="1106.1312"
-         inkscape:export-xdpi="1106.1312"
-         inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
-         inkscape:connector-curvature="0"
-         id="path3891"
-         d="m 434.04632,422.86726 20,0 0,-51 -10,0 0,11 7,0 0,3"
-         style="fill:none;stroke:#000000;stroke-width:0.20100001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-      <path
-         inkscape:export-ydpi="1106.1312"
-         inkscape:export-xdpi="1106.1312"
-         inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
-         inkscape:connector-curvature="0"
-         id="path3893"
-         d="m 453.04632,382.86726 1,0"
-         style="fill:none;stroke:#000000;stroke-width:0.20100001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-      <path
-         inkscape:export-ydpi="1106.1312"
-         inkscape:export-xdpi="1106.1312"
-         inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
-         inkscape:connector-curvature="0"
-         id="path3895"
-         d="m 451.04632,387.86726 0,21 -5,0"
-         style="fill:none;stroke:#000000;stroke-width:0.20100001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-      <path
-         inkscape:export-ydpi="1106.1312"
-         inkscape:export-xdpi="1106.1312"
-         inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
-         inkscape:connector-curvature="0"
-         id="path3897"
-         d="m 444.04632,408.86726 -6,0 0,-5 -4,0 4,0 0,-10 13,0 -13,0 0,-11 6,0"
-         style="fill:none;stroke:#000000;stroke-width:0.20100001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-      <path
-         inkscape:export-ydpi="1106.1312"
-         inkscape:export-xdpi="1106.1312"
-         inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
-         inkscape:connector-curvature="0"
-         id="path3899"
-         d="m 438.04632,422.86726 0,-11 6,0"
-         style="fill:none;stroke:#000000;stroke-width:0.20100001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-      <path
-         inkscape:export-ydpi="1106.1312"
-         inkscape:export-xdpi="1106.1312"
-         inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
-         inkscape:connector-curvature="0"
-         id="path3901"
-         d="m 446.04632,411.86726 8,0"
-         style="fill:none;stroke:#000000;stroke-width:0.20100001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-      <rect
-         inkscape:export-ydpi="1106.1312"
-         inkscape:export-xdpi="1106.1312"
-         inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
-         y="362.23859"
-         x="390.36084"
-         height="65.091705"
-         width="65.091705"
-         id="rect3903"
-         style="opacity:0.17283953;fill:#005982;fill-opacity:0.60273976;stroke:none" />
+         inkscape:export-xdpi="1106"
+         inkscape:export-ydpi="1106"
+         transform="matrix(5.8006667,0,0,5.8006667,-2008.6182,-1937.1175)"
+         style="fill:#e4edf1;fill-opacity:1">
+        <path
+           style="fill:#e4edf1;fill-opacity:1;stroke:none"
+           d="m 380.38045,493.76763 0,-39.96416 5.05076,-0.12627 0,-20.01365 29.04189,0 0,41.17621 11.90584,0 0,-21.16071 5.9375,0 0,-11.02679 10.04465,0 0,51.20536 z"
+           id="path3122"
+           inkscape:connector-curvature="0" />
+      </g>
     </g>
     <path
        sodipodi:type="arc"
@@ -283,5 +93,350 @@ AElFTkSuQmCC
        sodipodi:ry="1.4520943"
        d="m 375.39793,377.39087 a 1.4520943,1.4520943 0 1 1 -2.90419,0 1.4520943,1.4520943 0 1 1 2.90419,0 z"
        transform="translate(18.197027,0.06059709)" />
+    <path
+       inkscape:export-ydpi="1106.1312"
+       inkscape:export-xdpi="1106.1312"
+       inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
+       inkscape:connector-curvature="0"
+       id="path3855"
+       d="m 314.26378,689.04792 0,5.80067 81.20933,0 0,-116.01333 -87.01,0 0,98.61133 5.80067,0 -17.402,0"
+       style="fill:none;stroke:#000000;stroke-width:1.16593409;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       inkscape:export-ydpi="1106.1312"
+       inkscape:export-xdpi="1106.1312"
+       inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
+       inkscape:connector-curvature="0"
+       id="path3857"
+       d="m 308.46311,578.83526 -81.20932,0 0,116.01333 69.60799,0 0,-5.80067 0,40.60467"
+       style="fill:none;stroke:#000000;stroke-width:1.16593409;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       inkscape:export-ydpi="1106.1312"
+       inkscape:export-xdpi="1106.1312"
+       inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
+       inkscape:connector-curvature="0"
+       id="path3859"
+       d="m 314.26378,694.84859 0,34.804"
+       style="fill:none;stroke:#000000;stroke-width:1.16593409;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       inkscape:export-ydpi="1106.1312"
+       inkscape:export-xdpi="1106.1312"
+       inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
+       inkscape:connector-curvature="0"
+       id="path3861"
+       d="m 314.26378,741.25392 0,58.00666 0,-29.00332 81.20933,0 0,-75.40867"
+       style="fill:none;stroke:#000000;stroke-width:1.16593409;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       inkscape:export-ydpi="1106.1312"
+       inkscape:export-xdpi="1106.1312"
+       inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
+       inkscape:connector-curvature="0"
+       id="path3863"
+       d="m 395.47311,770.25726 0,46.40533 29.00333,0 -29.00333,0 0,29.00333 -81.20933,0 0,-34.80399"
+       style="fill:none;stroke:#000000;stroke-width:1.16593409;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       inkscape:export-ydpi="1106.1312"
+       inkscape:export-xdpi="1106.1312"
+       inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
+       inkscape:connector-curvature="0"
+       id="path3865"
+       d="m 296.86178,741.25392 0,58.00666 0,-29.00332 -98.61133,0 0,-75.40867 29.00334,0"
+       style="fill:none;stroke:#000000;stroke-width:1.16593409;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       inkscape:export-ydpi="1106.1312"
+       inkscape:export-xdpi="1106.1312"
+       inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
+       inkscape:connector-curvature="0"
+       id="path3867"
+       d="m 198.25045,770.25726 0,75.40866 46.40533,0"
+       style="fill:none;stroke:#000000;stroke-width:1.16593409;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       inkscape:export-ydpi="1106.1312"
+       inkscape:export-xdpi="1106.1312"
+       inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
+       inkscape:connector-curvature="0"
+       id="path3869"
+       d="m 256.25711,845.66592 40.60467,0 0,-34.80399"
+       style="fill:none;stroke:#000000;stroke-width:1.16593409;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       inkscape:export-ydpi="1106.1312"
+       inkscape:export-xdpi="1106.1312"
+       inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
+       inkscape:connector-curvature="0"
+       id="path3871"
+       d="m 198.25045,845.66592 0,17.40201 46.40533,0"
+       style="fill:none;stroke:#000000;stroke-width:1.16593409;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       inkscape:export-ydpi="1106.1312"
+       inkscape:export-xdpi="1106.1312"
+       inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
+       inkscape:connector-curvature="0"
+       id="path3873"
+       d="m 198.25045,863.06793 0,63.80733 226.22599,0"
+       style="fill:none;stroke:#000000;stroke-width:1.16593409;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       inkscape:export-ydpi="1106.1312"
+       inkscape:export-xdpi="1106.1312"
+       inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
+       inkscape:connector-curvature="0"
+       id="path3875"
+       d="m 256.25711,863.06793 69.60801,0 0,5.80066"
+       style="fill:none;stroke:#000000;stroke-width:1.16593409;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       inkscape:export-ydpi="1106.1312"
+       inkscape:export-xdpi="1106.1312"
+       inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
+       inkscape:connector-curvature="0"
+       id="path3877"
+       d="m 296.86178,863.06793 0,63.80733 0,-23.20268 29.00334,0 0,11.60135"
+       style="fill:none;stroke:#000000;stroke-width:1.16593409;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       inkscape:export-ydpi="1106.1312"
+       inkscape:export-xdpi="1106.1312"
+       inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
+       inkscape:connector-curvature="0"
+       id="path3879"
+       d="m 296.86178,880.46992 29.00334,0 0,11.60133"
+       style="fill:none;stroke:#000000;stroke-width:1.16593409;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       inkscape:export-ydpi="1106.1312"
+       inkscape:export-xdpi="1106.1312"
+       inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
+       inkscape:connector-curvature="0"
+       id="path3881"
+       d="m 337.46645,863.06793 5.80067,0 0,63.80733"
+       style="fill:none;stroke:#000000;stroke-width:1.16593409;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       inkscape:export-ydpi="1106.1312"
+       inkscape:export-xdpi="1106.1312"
+       inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
+       inkscape:connector-curvature="0"
+       id="path3883"
+       d="m 354.86845,863.06793 40.60466,0 0,63.80733 0,-23.20268 -29.00333,0 0,11.60135"
+       style="fill:none;stroke:#000000;stroke-width:1.16593409;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       inkscape:export-ydpi="1106.1312"
+       inkscape:export-xdpi="1106.1312"
+       inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
+       inkscape:connector-curvature="0"
+       id="path3887"
+       d="m 366.46978,892.07125 0,-11.60133 29.00333,0"
+       style="fill:none;stroke:#000000;stroke-width:1.16593409;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       inkscape:export-ydpi="1106.1312"
+       inkscape:export-xdpi="1106.1312"
+       inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
+       inkscape:connector-curvature="0"
+       id="path3889"
+       d="m 366.46978,868.86859 0,-5.80066"
+       style="fill:none;stroke:#000000;stroke-width:1.16593409;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       inkscape:export-ydpi="1106.1312"
+       inkscape:export-xdpi="1106.1312"
+       inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
+       inkscape:connector-curvature="0"
+       id="path3891"
+       d="m 441.87845,926.87526 116.01333,0 0,-295.834 -58.00667,0 0,63.80733 40.60467,0 0,17.40201"
+       style="fill:none;stroke:#000000;stroke-width:1.16593409;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       inkscape:export-ydpi="1106.1312"
+       inkscape:export-xdpi="1106.1312"
+       inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
+       inkscape:connector-curvature="0"
+       id="path3893"
+       d="m 552.09111,694.84859 5.80067,0"
+       style="fill:none;stroke:#000000;stroke-width:1.16593409;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       inkscape:export-ydpi="1106.1312"
+       inkscape:export-xdpi="1106.1312"
+       inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
+       inkscape:connector-curvature="0"
+       id="path3895"
+       d="m 540.48978,723.85193 0,121.81399 -29.00334,0"
+       style="fill:none;stroke:#000000;stroke-width:1.16593409;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       inkscape:export-ydpi="1106.1312"
+       inkscape:export-xdpi="1106.1312"
+       inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
+       inkscape:connector-curvature="0"
+       id="path3897"
+       d="m 499.88511,845.66592 -34.804,0 0,-29.00333 -23.20266,0 23.20266,0 0,-58.00666 75.40867,0 -75.40867,0 0,-63.80734 34.804,0"
+       style="fill:none;stroke:#000000;stroke-width:1.16593409;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       inkscape:export-ydpi="1106.1312"
+       inkscape:export-xdpi="1106.1312"
+       inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
+       inkscape:connector-curvature="0"
+       id="path3899"
+       d="m 465.08111,926.87526 0,-63.80733 34.804,0"
+       style="fill:none;stroke:#000000;stroke-width:1.16593409;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       inkscape:export-ydpi="1106.1312"
+       inkscape:export-xdpi="1106.1312"
+       inkscape:export-filename="/home/fra/UNI/https/BuildingRules/apps/dangerProject/simulator/res/map.png"
+       inkscape:connector-curvature="0"
+       id="path3901"
+       d="m 511.48644,863.06793 46.40534,0"
+       style="fill:none;stroke:#000000;stroke-width:1.16593409;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <text
+       xml:space="preserve"
+       style="font-size:17.60407257px;font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Helvetica Neue LT Pro;-inkscape-font-specification:Helvetica Neue LT Pro Light"
+       x="262.56558"
+       y="644.13208"
+       id="text4117"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4119"
+         x="262.56558"
+         y="644.13208">1</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text4121"
+       y="644.13208"
+       x="347.23285"
+       style="font-size:17.60407257px;font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Helvetica Neue LT Pro;-inkscape-font-specification:Helvetica Neue LT Pro Light"
+       xml:space="preserve"><tspan
+         y="644.13208"
+         x="347.23285"
+         id="tspan4123"
+         sodipodi:role="line">2</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:17.60407257px;font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Helvetica Neue LT Pro;-inkscape-font-specification:Helvetica Neue LT Pro Light"
+       x="347.23285"
+       y="736.13208"
+       id="text4125"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="347.23285"
+         y="736.13208"
+         id="tspan4129">3</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text4133"
+       y="736.13208"
+       x="263.23285"
+       style="font-size:17.60407257px;font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Helvetica Neue LT Pro;-inkscape-font-specification:Helvetica Neue LT Pro Light"
+       xml:space="preserve"><tspan
+         id="tspan4135"
+         y="736.13208"
+         x="263.23285"
+         sodipodi:role="line">4</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:17.60407257px;font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Helvetica Neue LT Pro;-inkscape-font-specification:Helvetica Neue LT Pro Light"
+       x="263.23285"
+       y="812.13208"
+       id="text4137"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="263.23285"
+         y="812.13208"
+         id="tspan4139">5</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text4141"
+       y="812.13208"
+       x="349.23285"
+       style="font-size:17.60407257px;font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Helvetica Neue LT Pro;-inkscape-font-specification:Helvetica Neue LT Pro Light"
+       xml:space="preserve"><tspan
+         id="tspan4143"
+         y="812.13208"
+         x="349.23285"
+         sodipodi:role="line">6</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text4145"
+       y="900.13208"
+       x="263.23285"
+       style="font-size:17.60407257px;font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Helvetica Neue LT Pro;-inkscape-font-specification:Helvetica Neue LT Pro Light"
+       xml:space="preserve"><tspan
+         id="tspan4147"
+         y="900.13208"
+         x="263.23285"
+         sodipodi:role="line">7</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:17.60407257px;font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Helvetica Neue LT Pro;-inkscape-font-specification:Helvetica Neue LT Pro Light"
+       x="309.23285"
+       y="900.13208"
+       id="text4149"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="309.23285"
+         y="900.13208"
+         id="tspan4151">8</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text4153"
+       y="900.13208"
+       x="349.23285"
+       style="font-size:17.60407257px;font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Helvetica Neue LT Pro;-inkscape-font-specification:Helvetica Neue LT Pro Light"
+       xml:space="preserve"><tspan
+         id="tspan4155"
+         y="900.13208"
+         x="349.23285"
+         sodipodi:role="line">9</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:17.60407257px;font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Helvetica Neue LT Pro;-inkscape-font-specification:Helvetica Neue LT Pro Light"
+       x="509.23285"
+       y="668.13208"
+       id="text4157"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4159"
+         x="509.23285"
+         y="668.13208">11</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text4161"
+       y="732.13208"
+       x="509.23285"
+       style="font-size:17.60407257px;font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Helvetica Neue LT Pro;-inkscape-font-specification:Helvetica Neue LT Pro Light"
+       xml:space="preserve"><tspan
+         y="732.13208"
+         x="509.23285"
+         id="tspan4163"
+         sodipodi:role="line">12</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:17.60407257px;font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Helvetica Neue LT Pro;-inkscape-font-specification:Helvetica Neue LT Pro Light"
+       x="509.23285"
+       y="806.13208"
+       id="text4165"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4167"
+         x="509.23285"
+         y="806.13208">13</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text4169"
+       y="900.13208"
+       x="509.23285"
+       style="font-size:17.60407257px;font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Helvetica Neue LT Pro;-inkscape-font-specification:Helvetica Neue LT Pro Light"
+       xml:space="preserve"><tspan
+         y="900.13208"
+         x="509.23285"
+         id="tspan4171"
+         sodipodi:role="line">14</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:17.60407257px;font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Helvetica Neue LT Pro;-inkscape-font-specification:Helvetica Neue LT Pro Light"
+       x="419.23285"
+       y="898.13208"
+       id="text4173"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4175"
+         x="419.23285"
+         y="898.13208">15</tspan></text>
+    <rect
+       style="fill:#e4edf1;fill-opacity:1;stroke:none"
+       id="rect4177"
+       width="375.53571"
+       height="375.53571"
+       x="190.53572"
+       y="576.4693" />
   </g>
 </svg>
