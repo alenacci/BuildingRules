@@ -2,7 +2,7 @@ from action import Action
 import simulator
 from behaviors.path import *
 from utils import *
-
+import random
 
 class NoPathToTargetDestination(Exception):
 	pass
@@ -14,6 +14,7 @@ class MoveAction(Action):
 		self.s_point = sPoint
 		self.e_point = ePoint
 		self.duration = None
+		self.speed = 2 + random.random()*5
 
 	def start(self):
 		#get the tile where the start and end are placed
@@ -22,12 +23,22 @@ class MoveAction(Action):
 		e_x = int(self.e_point.x)
 		e_y = int(self.e_point.y)
 
-		self.path = findPath(simulator.sim.building.grid,s_x,s_y,e_x,e_y)
+		#launch the a-star computation on another thread
+		path_future = simulator.sim.background_executor.submit(findPath, simulator.sim.building.grid, s_x, s_y, e_x, e_y)
+		path_future.add_done_callback(self._on_path_computation_ended)
+		self.wait = True
 
-		if not self.path:
-			raise NoPathToTargetDestination()
+	def _on_path_computation_ended(self, path_future):
+		wait = False
 
-		self.duration = self.path.length / 10
+		self.path = path_future.result()
+
+		if not self.path or self.path.length == 0:
+			#raise NoPathToTargetDestination()
+			#TODO right?
+			self.end()
+
+		self.duration = self.path.length / self.speed
 
 		#then, substitute the start and the end point
 		self.path.start = self.s_point
@@ -35,6 +46,7 @@ class MoveAction(Action):
 		self.path.recomputeDistances()
 
 		Action.start(self)
+
 
 	def update(self):
 		if not self.active:

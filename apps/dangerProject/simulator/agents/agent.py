@@ -1,11 +1,18 @@
 from commons.point import Point
 
+
 class Agent(object):
+
+	agents_count = 0
 
 	def __init__(self):
 		self.p = Point(0,0)
 		self._current_action = None
 		self._behavior = None
+
+		#set an id based on the agents count
+		self.id = Agent.agents_count
+		Agent.agents_count += 1
 
 	def setPosition(self,p):
 		self.p = p.dup()

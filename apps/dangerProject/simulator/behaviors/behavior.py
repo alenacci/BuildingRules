@@ -15,16 +15,17 @@ class Behavior:
 
 	#XXX TEMP
 	def start(self):
+		self.newAction()
 		import actions
-		action = actions.MoveAction(self.agent,self.agent.p,commons.Point(10, 12))
-		self.agent.current_action = action
-		action.end.connect(self.onActionEnded, identifyObserved=True)
-		action.start()
+		#action = actions.MoveAction(self.agent, self.agent.p, commons.Point(10, 12))
+		#self.agent.current_action = action
+		#action.end.connect(self.onActionEnded, identifyObserved=True)
+		#action.start()
 
 	def newAction(self):
 		decision = random.random()
 
-		if decision>0:
+		if decision>10:
 			self.toilet()
 		elif decision>0.7:
 			self.newTarget()
@@ -33,12 +34,19 @@ class Behavior:
 
 	#XXX TEMP
 	def newTarget(self):
-		w = simulator.sim.building.grid.GRID_WIDTH
-		h = simulator.sim.building.grid.GRID_HEIGHT
-		randw = random.randint(0,w-1)
-		randh = random.randint(0,h-1)
+		pos = None
+		decision = random.random()
+		room = None
+		#is more likely to move in the same room
+		if decision > 0.3:
+			room = simulator.sim.building.room_at_position(self.agent.p)
+		else:
+			room = simulator.sim.building.random_room()
+
+		pos = room.random_position()
+
 		import actions
-		action = actions.MoveAction(self.agent,self.agent.p,commons.Point(randw, randh))
+		action = actions.MoveAction(self.agent, self.agent.p, pos)
 		self.agent.current_action = action
 		action.end.connect(self.onActionEnded, True)
 		try:

@@ -3,7 +3,7 @@ import agents
 from commons.point import *
 import behaviors.behavior as behavior
 import random
-
+import concurrent.futures
 
 #simulator
 sim = None
@@ -17,6 +17,8 @@ class Simulator:
 
 	def __init__(self):
 		self.building = None
+		#to be used for background, async computations
+		self.background_executor = concurrent.futures.ProcessPoolExecutor()
 		pass
 
 
@@ -42,22 +44,19 @@ class Simulator:
 
 		self.agents = []
 
-
-		for i in range(0,5):
+		for i in range(0,400):
 			agent = agents.Agent()
 
 			#random position
-			w = self.building.grid.GRID_WIDTH
-			h = self.building.grid.GRID_HEIGHT
-			randw = random.randint(0,w-1)
-			randh = random.randint(0,h-1)
-			agent.setPosition(Point(randw,randh))
+			pos = self.building.random_room().random_position()
+			agent.setPosition(pos)
 
 			self.agents.append(agent)
 			beh = behavior.Behavior()
 			agent.behavior = beh
 
 			beh.start()
+
 
 	def update(self):
 		for a in self.agents:

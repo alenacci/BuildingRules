@@ -28,3 +28,16 @@ class Building:
 		for r in self.rooms:
 			self.size += r.size
 
+	def room_at_position(self, p):
+
+		if p.x >= self.grid.GRID_WIDTH or p.y >= self.grid.GRID_HEIGHT:
+			return None
+
+		tile = self.grid.tiles[int(p.x)][int(p.y)]
+
+		if tile.room != None:
+			return self.rooms[tile.room]
+		else:
+			return None
+
+

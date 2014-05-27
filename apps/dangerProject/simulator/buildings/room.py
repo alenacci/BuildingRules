@@ -1,3 +1,6 @@
+import random
+from commons.point import Point
+
 class Room:
 
 	def __init__(self, id):
@@ -14,3 +17,10 @@ class Room:
 	@property
 	def size(self):
 		return len(self.tiles)
+
+	def random_tile(self):
+		return random.choice(self.tiles)
+
+	def random_position(self):
+		tile = self.random_tile()
+		return Point(tile.x, tile.y)

@@ -51,17 +51,16 @@ class Path:
 		previousPoint = None
 		nextPoint = None
 
-
 		for i in range(1,len(self.points)-1):
 			p = self.points[i]
 			next = self.points[i+1]
+
 			if p.g < dist and next.g > dist:
 				previousPoint = p
 				nextPoint = next
 				break
 
 		remaining = dist - previousPoint.g
-		rem_perc = remaining / self.length
 		delta = (nextPoint - previousPoint).normalize() * remaining
 		return (previousPoint + delta)
 
