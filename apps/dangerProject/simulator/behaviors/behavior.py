@@ -16,7 +16,7 @@ class Behavior:
 	#XXX TEMP
 	def start(self):
 		import actions
-		action = actions.MoveAction(self.agent,self.agent.p,commons.Point(10, 12))
+		action = actions.MoveAction(self.agent,commons.Point(10, 12))
 		self.agent.current_action = action
 		action.end.connect(self.onActionEnded, identifyObserved=True)
 		action.start()
@@ -24,9 +24,9 @@ class Behavior:
 	def newAction(self):
 		decision = random.random()
 
-		if decision>0:
+		if decision>0.9:
 			self.toilet()
-		elif decision>0.7:
+		elif decision>0:
 			self.newTarget()
 		else:
 			self.wait()
@@ -38,7 +38,7 @@ class Behavior:
 		randw = random.randint(0,w-1)
 		randh = random.randint(0,h-1)
 		import actions
-		action = actions.MoveAction(self.agent,self.agent.p,commons.Point(randw, randh))
+		action = actions.MoveAction(self.agent,commons.Point(randw, randh))
 		self.agent.current_action = action
 		action.end.connect(self.onActionEnded, True)
 		try:
@@ -55,6 +55,7 @@ class Behavior:
 
 	def toilet(self):
 		self.task = tasks.toiletTask.ToiletTask(self.agent)
+		self.task.end.connect(self.onActionEnded, True)
 		print str(self.task)
 		self.task.start()
 
