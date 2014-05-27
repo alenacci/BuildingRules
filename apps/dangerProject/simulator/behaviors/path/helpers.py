@@ -2,8 +2,8 @@ import math
 
 #return whether is possible to go from a point
 #to another via a straight line
-##TODO this is a really shitty implemenatation
-def checkStraightPath(tiles, sx,sy,ex,ey):
+##TODO this is a really shitty implementation
+def checkStraightPath(tiles, sx, sy, ex, ey):
 
 	dx = 1 if sx <= ex else -1
 	dy = 1 if sy <= ey else -1

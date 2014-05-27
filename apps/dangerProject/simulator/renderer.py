@@ -27,7 +27,7 @@ class Renderer:
 		self.map_height_px = simulator.sim.building.grid.GRID_HEIGHT * Renderer.SIZE_Y
 
 		#high resolution image of the buildings map
-		self.map_image = pygame.image.load("./res/map.png")
+		self.map_image = pygame.image.load("./res/map2.png")
 		self.map_image = pygame.transform.scale(self.map_image, (self.map_width_px, self.map_height_px))
 
 		self.agent_image = pygame.image.load("./res/agent.png")
@@ -62,8 +62,8 @@ class Renderer:
 		for a in simulator.sim.agents:
 			#need to translate and resize the position to center the image
 			#in respect of the position
-			dest_x = a.x * Renderer.SIZE_X + Renderer.AGENT_SIZE/2
-			dest_y = a.y * Renderer.SIZE_Y + Renderer.AGENT_SIZE/2
+			dest_x = a.x * Renderer.SIZE_X #+ Renderer.AGENT_SIZE/2
+			dest_y = a.y * Renderer.SIZE_Y #+ Renderer.AGENT_SIZE/2
 
 			self.window.blit(self.agent_image, (dest_x, dest_y) )
 			#pygame.draw.aacircle(self.window, Renderer.AGENT_COLOR, [int(a.x*Renderer.SIZE_X), int(a.y*Renderer.SIZE_Y)],\

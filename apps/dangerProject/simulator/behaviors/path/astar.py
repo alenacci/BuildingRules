@@ -122,7 +122,6 @@ class AStar:
 
 
 	def _buildPath(self):
-
 		c = self.endTile
 		path = [c]
 

@@ -7,6 +7,11 @@ class Action:
 	def __init__(self, agent):
 		self.agent = agent
 		self.active = False
+
+		# if the action is not active but is waiting
+		# for something else, for instance for some
+		# computation to be completed
+		self.wait = False
 		#self.end_signal = Signal()
 
 	def start(self):
