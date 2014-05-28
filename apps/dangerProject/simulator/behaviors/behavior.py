@@ -20,6 +20,14 @@ class Behavior:
 	def start(self):
 		self.newAction()
 		import actions
+		action = actions.MoveAction(self.agent,commons.Point(10, 12))
+		self.agent.current_action = action
+		action.end.connect(self.onActionEnded, identifyObserved=True)
+		action.start()
+
+	def newAction(self):
+		decision = random.random()
+
 		#action = actions.MoveAction(self.agent, self.agent.p, commons.Point(10, 12))
 		#self.agent.current_action = action
 		#action.end.connect(self.onActionEnded, identifyObserved=True)
@@ -28,9 +36,9 @@ class Behavior:
 	def newAction(self):
 		decision = random.random()
 		###TODO messo a 1 per non far crashare
-		if decision>1:
+		if decision > 0.9:
 			self.toilet()
-		elif decision>0.7:
+		elif decision > 0.7:
 			self.newTarget()
 		else:
 			self.wait()
@@ -49,7 +57,8 @@ class Behavior:
 		pos = room.random_position()
 
 		import actions
-		action = actions.MoveAction(self.agent, self.agent.p, pos )
+
+		action = actions.MoveAction(self.agent, pos )
 		self.agent.current_action = action
 		action.end.connect(self.onActionEnded, True)
 		try:
@@ -66,6 +75,7 @@ class Behavior:
 
 	def toilet(self):
 		self.task = tasks.toiletTask.ToiletTask(self.agent)
+		self.task.end.connect(self.onActionEnded, True)
 		print str(self.task)
 		self.task.start()
 

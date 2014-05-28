@@ -29,8 +29,14 @@ class Task:
 		action.start()
 
 	def on_action_ended(self, action):
-		self.current_action += 1
-		self.launch_action(self.actions[self.current_action])
+		if self.current_action < len(self.actions) - 1:
+			self.next_action()
+		else:
+			self.end()
+
+	def next_action(self):
+			self.current_action += 1
+			self.launch_action(self.actions[self.current_action])
 
 	def __str__(self):
 		return "base task"

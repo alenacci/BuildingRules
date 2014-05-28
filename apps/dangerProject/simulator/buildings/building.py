@@ -1,5 +1,6 @@
 from buildings import *
 import random
+from toilet import Toilet
 
 class Building:
 
@@ -7,6 +8,7 @@ class Building:
 		self.grid = Grid("./res/map_grid2.png")
 		self.rooms = []
 		self.size = 0
+		self.toilets = []
 
 	def load_rooms(self):
 		self.room_generator = RoomGenerator("./res/map_rooms2.png")
@@ -48,5 +50,11 @@ class Building:
 			return self.rooms[tile.room]
 		else:
 			return None
+
+
+	def create_toilets(self):
+		self.toilets.append(Toilet(20,54))
+		self.toilets.append(Toilet(20,58))
+		self.toilets.append(Toilet(20,51))
 
 

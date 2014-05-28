@@ -10,9 +10,9 @@ class NoPathToTargetDestination(Exception):
 
 
 class MoveAction(Action):
-	def __init__(self,agent,sPoint,ePoint):
+	def __init__(self,agent,ePoint):
 		Action.__init__(self,agent)
-		self.s_point = sPoint
+		self.s_point = None
 		self.e_point = ePoint
 		self.duration = None
 		self.speed = 1 + random.random()*3
@@ -21,6 +21,7 @@ class MoveAction(Action):
 
 	def start(self):
 		#get the tile where the start and end are placed
+		self.s_point = self.agent.p
 		s_x = int(self.s_point.x)
 		s_y = int(self.s_point.y)
 		e_x = int(self.e_point.x)
