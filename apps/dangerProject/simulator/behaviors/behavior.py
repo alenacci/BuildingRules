@@ -2,6 +2,7 @@ import tasks.toiletTask
 import commons
 import random
 import simulator
+import utils
 
 ''' abstract base class for all behaviors'''
 class Behavior:
@@ -9,6 +10,8 @@ class Behavior:
 	def __init__(self):
 		self.agent = None
 		self.task = None
+
+		self._next_noise_time = None
 
 	def setAgent(self, agent):
 		self.agent = agent
@@ -70,3 +73,24 @@ class Behavior:
 	def onActionEnded(self,action):
 		#print str(action)
 		self.newAction()
+
+	def _update_noise(self):
+
+		now = utils.worldTime()
+
+		def new_noise_time():
+			return now + random.expovariate(0.01)
+
+		if self._next_noise_time is None:
+			self._next_noise_time = new_noise_time()
+
+		if self._next_noise_time < now:
+			self._next_noise_time = new_noise_time()
+			self.agent.generate_loud_noise(1 + random.random() * 3)
+
+
+
+	def update(self):
+		"""Necessary for impose, in arbitrary moments, to make
+				the agent emit noise"""
+		self._update_noise()

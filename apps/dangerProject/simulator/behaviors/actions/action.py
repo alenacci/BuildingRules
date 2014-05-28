@@ -7,7 +7,7 @@ class Action:
 	def __init__(self, agent):
 		self.agent = agent
 		self.active = False
-
+		self.start_time = None
 		# if the action is not active but is waiting
 		# for something else, for instance for some
 		# computation to be completed
@@ -15,8 +15,9 @@ class Action:
 		#self.end_signal = Signal()
 
 	def start(self):
-		self.active = True
 		self.start_time = worldTime()
+		self.active = True
+
 
 	#called when the action ends
 

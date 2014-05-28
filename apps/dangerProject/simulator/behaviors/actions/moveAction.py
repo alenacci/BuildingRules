@@ -4,6 +4,7 @@ from behaviors.path import *
 from utils import *
 import random
 
+
 class NoPathToTargetDestination(Exception):
 	pass
 
@@ -14,7 +15,7 @@ class MoveAction(Action):
 		self.s_point = sPoint
 		self.e_point = ePoint
 		self.duration = None
-		self.speed = 2 + random.random()*5
+		self.speed = 1 + random.random()*3
 		self.path = None
 
 

@@ -1,7 +1,10 @@
 from commons.point import Point
-
+import utils
+from behaviors.actions.moveAction import MoveAction
 
 class Agent(object):
+
+	RUNNING_THRESHOLD = 3.5
 
 	agents_count = 0
 
@@ -9,6 +12,12 @@ class Agent(object):
 		self.p = Point(0,0)
 		self._current_action = None
 		self._behavior = None
+
+		self.loud_noise_start_time = None
+		self.loud_noise_duration = None
+		self.is_generating_noise = False
+
+		self.is_running = False
 
 		#set an id based on the agents count
 		self.id = Agent.agents_count
@@ -52,6 +61,24 @@ class Agent(object):
 		self._behavior = behavior
 		self.behavior.setAgent(self)
 
+
+	def generate_loud_noise(self, duration):
+		self.loud_noise_duration = duration
+		self.is_generating_noise = True
+		self.loud_noise_start_time = utils.worldTime()
+
 	def update(self):
 		if self.current_action:
 			self.current_action.update()
+
+		if self.behavior:
+			self.behavior.update()
+
+		if self.is_generating_noise and \
+						self.loud_noise_start_time + self.loud_noise_duration < utils.worldTime():
+			self.is_generating_noise = False
+
+		if isinstance(self.current_action, MoveAction) and self.current_action.speed >= Agent.RUNNING_THRESHOLD:
+			self.is_running = True
+		else:
+			self.is_running = False
