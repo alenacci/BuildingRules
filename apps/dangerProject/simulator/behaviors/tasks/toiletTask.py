@@ -16,8 +16,8 @@ class ToiletTask(Task):
 		self.actions.append(self.go_to_toilet)
 
 		# PISS
-		piss = actions.WaitAction(agent, random.randint(1,3))
-		self.actions.append(piss)
+		self.piss = actions.WaitAction(agent, random.randint(1,3))
+		self.actions.append(self.piss)
 
 		# RETURN TO WORK
 		return_to_work = actions.MoveAction(agent, self.sPoint)
@@ -29,15 +29,18 @@ class ToiletTask(Task):
 	def on_action_ended(self, action):
 		if action == self.go_to_toilet or action == self.wait_for_free_toilet:
 			self.toiletChoice()
+		elif action == self.piss:
+			self.chosen_toilet.free = True
+
 		Task.on_action_ended(self,action)
 
 	def toiletChoice(self):
-		toiletX = 20
-		toiletsY = [54,58,51]
-		for toiletY in toiletsY:
+		for toilet in simulator.sim.building.toilets:
 			# if simulator.sim.building.grid.tiles[toiletY][toiletX].free():
-			if random.randint(0,1) > 0:
-				self.e_point = commons.Point(toiletX, toiletY)
+			if toilet.free:
+				toilet.free = False
+				self.chosen_toilet = toilet
+				self.e_point = commons.Point(toilet.X, toilet.Y)
 				go_to_free_toilet = actions.MoveAction(self.agent,self.e_point)
 				self.actions.insert(self.current_action+1, go_to_free_toilet)
 				break

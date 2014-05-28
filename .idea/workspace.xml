@@ -2,27 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="714e861b-58bd-4999-aeaa-700c805f0bf9" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/apps/dangerProject/simulator/res/map2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/apps/dangerProject/simulator/res/svg/ICONS.svg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/dangerProject/simulator/res/map_rooms2.png" afterPath="$PROJECT_DIR$/apps/dangerProject/simulator/res/map_rooms2.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/path/__init__.py" afterPath="$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/path/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/actions/action.py" afterPath="$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/actions/action.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/dangerProject/simulator/agents/agent.py" afterPath="$PROJECT_DIR$/apps/dangerProject/simulator/agents/agent.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/path/astar.py" afterPath="$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/path/astar.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/behavior.py" afterPath="$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/behavior.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/apps/dangerProject/simulator/buildings/toilet.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/dangerProject/simulator/buildings/building.py" afterPath="$PROJECT_DIR$/apps/dangerProject/simulator/buildings/building.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/dangerProject/simulator/res/svg/building.svg" afterPath="$PROJECT_DIR$/apps/dangerProject/simulator/res/svg/building.svg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/path/helpers.py" afterPath="$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/path/helpers.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/actions/moveAction.py" afterPath="$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/actions/moveAction.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/path/path.py" afterPath="$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/path/path.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/path/postprocessor.py" afterPath="$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/path/postprocessor.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/dangerProject/simulator/renderer.py" afterPath="$PROJECT_DIR$/apps/dangerProject/simulator/renderer.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/dangerProject/simulator/buildings/room.py" afterPath="$PROJECT_DIR$/apps/dangerProject/simulator/buildings/room.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/dangerProject/simulator/buildings/room_generator.py" afterPath="$PROJECT_DIR$/apps/dangerProject/simulator/buildings/room_generator.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/dangerProject/simulator/run.py" afterPath="$PROJECT_DIR$/apps/dangerProject/simulator/run.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/dangerProject/simulator/simulator.py" afterPath="$PROJECT_DIR$/apps/dangerProject/simulator/simulator.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/tasks/toiletTask.py" afterPath="$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/tasks/toiletTask.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/dangerProject/simulator/.idea/workspace.xml" afterPath="$PROJECT_DIR$/apps/dangerProject/simulator/.idea/workspace.xml" />
     </list>
     <ignored path="BuildingRules.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -45,20 +29,44 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="behavior.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="behavior.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/behavior.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="22" selection-start="854" selection-end="854" vertical-scroll-proportion="0.79866886" vertical-offset="0" max-vertical-offset="1275">
+            <state line="15" column="13" selection-start="254" selection-end="254" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1320">
+              <folding>
+                <element signature="e#0#23#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="toiletTask.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/tasks/toiletTask.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="19" column="33" selection-start="518" selection-end="518" vertical-scroll-proportion="0.33167082" vertical-offset="152" max-vertical-offset="855">
+              <folding>
+                <element signature="e#0#14#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="room.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/dangerProject/simulator/buildings/room.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="4" column="0" selection-start="59" selection-end="59" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="615">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="toiletTask.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/tasks/toiletTask.py">
+      <file leaf-file-name="building.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/dangerProject/simulator/buildings/building.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="45" column="80" selection-start="1385" selection-end="1385" vertical-scroll-proportion="0.0" vertical-offset="71" max-vertical-offset="810">
-              <folding />
+            <state line="2" column="25" selection-start="63" selection-end="63" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="990">
+              <folding>
+                <element signature="e#0#23#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -90,31 +98,31 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="simulator.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/dangerProject/simulator/simulator.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="40" column="38" selection-start="988" selection-end="988" vertical-scroll-proportion="0.0" vertical-offset="157" max-vertical-offset="1035">
+              <folding>
+                <element signature="e#0#25#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="toilet.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/dangerProject/simulator/buildings/toilet.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="3" column="24" selection-start="60" selection-end="60" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="165">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="moveAction.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/actions/moveAction.py">
           <provider selected="true" editor-type-id="text-editor">
             <state line="16" column="0" selection-start="318" selection-end="318" vertical-scroll-proportion="0.0" vertical-offset="240" max-vertical-offset="1065">
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="renderer.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/dangerProject/simulator/renderer.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="55" selection-start="439" selection-end="466" vertical-scroll-proportion="0.0" vertical-offset="375" max-vertical-offset="1305">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="simulator.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/dangerProject/simulator/simulator.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="23" selection-start="264" selection-end="264" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1020">
-              <folding>
-                <element signature="e#0#25#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -132,8 +140,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/backend/app/backend/controller/actionExecutor.py" />
-        <option value="$PROJECT_DIR$/backend/app/RealTimeExecutor.py" />
         <option value="$PROJECT_DIR$/backend/run.py" />
         <option value="$PROJECT_DIR$/backend/runRealTimeExecutor.py" />
         <option value="$PROJECT_DIR$/backend/app/api.py" />
@@ -168,21 +174,23 @@
         <option value="$PROJECT_DIR$/apps/dangerProject/simulator/buildings/__init__.py" />
         <option value="$PROJECT_DIR$/apps/dangerProject/simulator/buildings/room_generator.py" />
         <option value="$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/path/helpers.py" />
-        <option value="$PROJECT_DIR$/apps/dangerProject/simulator/buildings/building.py" />
         <option value="$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/actions/waitAction.py" />
         <option value="$PROJECT_DIR$/apps/dangerProject/simulator/run.py" />
         <option value="$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/tasks/__init__.py" />
         <option value="$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/actions/__init__.py" />
         <option value="$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/__init__.py" />
         <option value="$PROJECT_DIR$/apps/dangerProject/simulator/renderer.py" />
-        <option value="$PROJECT_DIR$/apps/dangerProject/simulator/simulator.py" />
         <option value="$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/actions/action.py" />
         <option value="$PROJECT_DIR$/apps/dangerProject/simulator/commons/point.py" />
         <option value="$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/actions/moveAction.py" />
         <option value="$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/tasks/task.py" />
         <option value="$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/actions/chooseFreeToiletAction.py" />
-        <option value="$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/tasks/toiletTask.py" />
         <option value="$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/behavior.py" />
+        <option value="$PROJECT_DIR$/apps/dangerProject/simulator/buildings/Toilet.py" />
+        <option value="$PROJECT_DIR$/apps/dangerProject/simulator/simulator.py" />
+        <option value="$PROJECT_DIR$/apps/dangerProject/simulator/buildings/toilet.py" />
+        <option value="$PROJECT_DIR$/apps/dangerProject/simulator/buildings/building.py" />
+        <option value="$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/tasks/toiletTask.py" />
       </list>
     </option>
   </component>
@@ -632,11 +640,11 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28139904" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28139904" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -681,19 +689,16 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="5" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/apps/dangerProject/simulator/buildings/building.py</url>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="6" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/apps/dangerProject/simulator/simulator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="0" selection-start="1229" selection-end="1229" vertical-scroll-proportion="0.0" vertical-offset="810" max-vertical-offset="1020">
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/app/backend/controller/triggerManager.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="258" column="0" selection-start="8105" selection-end="8105" vertical-scroll-proportion="0.0" vertical-offset="3405" max-vertical-offset="4035" />
@@ -844,16 +849,6 @@
         <state line="14" column="15" selection-start="363" selection-end="363" vertical-scroll-proportion="-8.4" vertical-offset="0" max-vertical-offset="300" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/dangerProject/simulator/buildings/room.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="0" selection-start="62" selection-end="62" vertical-scroll-proportion="-2.4" vertical-offset="0" max-vertical-offset="195" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/dangerProject/simulator/buildings/building.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="61" selection-start="184" selection-end="184" vertical-scroll-proportion="-4.8" vertical-offset="0" max-vertical-offset="210" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/tasks/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="90" />
@@ -920,23 +915,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/tasks/task.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="20" selection-start="171" selection-end="171" vertical-scroll-proportion="0.0" vertical-offset="165" max-vertical-offset="705">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/actions/moveAction.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="16" column="0" selection-start="318" selection-end="318" vertical-scroll-proportion="0.0" vertical-offset="240" max-vertical-offset="1065">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/tasks/toiletTask.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="80" selection-start="1385" selection-end="1385" vertical-scroll-proportion="0.0" vertical-offset="71" max-vertical-offset="810">
           <folding />
         </state>
       </provider>
@@ -948,19 +929,60 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/behavior.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="13" selection-start="254" selection-end="254" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1320">
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/tasks/task.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="20" selection-start="171" selection-end="171" vertical-scroll-proportion="0.0" vertical-offset="165" max-vertical-offset="705">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/dangerProject/simulator/buildings/room.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="0" selection-start="59" selection-end="59" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="615">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/apps/dangerProject/simulator/simulator.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="23" selection-start="264" selection-end="264" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1020">
+        <state line="40" column="38" selection-start="988" selection-end="988" vertical-scroll-proportion="0.0" vertical-offset="157" max-vertical-offset="1035">
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/behavior.py">
+    <entry file="file://$PROJECT_DIR$/apps/dangerProject/simulator/buildings/toilet.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="22" selection-start="854" selection-end="854" vertical-scroll-proportion="0.79866886" vertical-offset="0" max-vertical-offset="1275">
+        <state line="3" column="24" selection-start="60" selection-end="60" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="165">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/dangerProject/simulator/buildings/building.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="25" selection-start="63" selection-end="63" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="990">
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/tasks/toiletTask.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="33" selection-start="518" selection-end="518" vertical-scroll-proportion="0.33167082" vertical-offset="152" max-vertical-offset="855">
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

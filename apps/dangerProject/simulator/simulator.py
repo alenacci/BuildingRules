@@ -38,6 +38,7 @@ class Simulator:
 		print str(self.building.random_room())
 		print str(self.building.random_room())
 		print str(self.building.random_room())
+		self.building.create_toilets()
 
 	def setupEnvironment(self):
 		##fill up the environment with agents
