@@ -15,6 +15,10 @@ class Room:
 		if id == 0 or id == 15 or id==10:
 			weight = 0.1
 
+		###TODO bagno
+		if id == 8:
+			weight = 0
+
 		self.weight = weight
 
 	def __str__(self):

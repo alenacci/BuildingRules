@@ -20,18 +20,11 @@ class Behavior:
 	def start(self):
 		self.newAction()
 		import actions
-		action = actions.MoveAction(self.agent,commons.Point(10, 12))
-		self.agent.current_action = action
-		action.end.connect(self.onActionEnded, identifyObserved=True)
-		action.start()
-
-	def newAction(self):
-		decision = random.random()
-
-		#action = actions.MoveAction(self.agent, self.agent.p, commons.Point(10, 12))
+		#action = actions.MoveAction(self.agent,commons.Point(10, 12))
 		#self.agent.current_action = action
 		#action.end.connect(self.onActionEnded, identifyObserved=True)
 		#action.start()
+
 
 	def newAction(self):
 		decision = random.random()
