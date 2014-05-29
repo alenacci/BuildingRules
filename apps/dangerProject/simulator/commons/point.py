@@ -48,6 +48,14 @@ class Point(object):
 	def __str__ (self):
 		return "(%.2f, %.2f)" % (self.x, self.y)
 
+	def __getitem__(self,key):
+		if key == 0:
+			return self.x
+		elif key == 1:
+			return self.y
+		else:
+			raise Exception("invalid index")
+
 	def to_a (self):
 		return [self.x, self.y]
 

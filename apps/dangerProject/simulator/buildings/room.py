@@ -19,6 +19,9 @@ class Room:
 		if id == 8:
 			weight = 0
 
+		#list of agents in this room
+		self.agents = []
+
 		self.weight = weight
 
 	def __str__(self):

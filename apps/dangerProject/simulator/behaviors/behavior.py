@@ -69,7 +69,7 @@ class Behavior:
 	def toilet(self):
 		self.task = tasks.toiletTask.ToiletTask(self.agent)
 		self.task.end.connect(self.onActionEnded, True)
-		print str(self.task)
+		#print str(self.task)
 		self.task.start()
 
 
@@ -77,23 +77,10 @@ class Behavior:
 		#print str(action)
 		self.newAction()
 
-	def _update_noise(self):
 
-		now = utils.worldTime()
-
-		def new_noise_time():
-			return now + random.expovariate(0.01)
-
-		if self._next_noise_time is None:
-			self._next_noise_time = new_noise_time()
-
-		if self._next_noise_time < now:
-			self._next_noise_time = new_noise_time()
-			self.agent.generate_loud_noise(1 + random.random() * 3)
 
 
 
 	def update(self):
-		"""Necessary for impose, in arbitrary moments, to make
-				the agent emit noise"""
-		self._update_noise()
+		"""Now is quite useless"""
+		pass
