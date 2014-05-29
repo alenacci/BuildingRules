@@ -41,8 +41,9 @@ class Simulator:
 		for m in self.modules:
 			m.after_populate(self.agents)
 
-	def setup(self):
-		self.load_modules()
+	def setup(self, load_modules=True):
+		if load_modules:
+			self.load_modules()
 		self.setupBuilding()
 		self.setupEnvironment()
 		self.after_populate()

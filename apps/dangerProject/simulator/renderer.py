@@ -97,6 +97,13 @@ class Renderer:
 			for tile in row:
 				self.drawTile(tile)'''
 
+		#Render function of the modules
+		for mod in simulator.sim.modules:
+			try:
+				mod.render_building(self.window)
+			except Exception:
+				mod.handle_exception()
+
 	def drawBackground(self):
 		self.window.fill([255,255,255])
 		#Render function of the modules
