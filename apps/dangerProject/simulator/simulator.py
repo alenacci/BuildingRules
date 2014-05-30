@@ -4,6 +4,8 @@ from commons.point import *
 import behaviors.behavior as behavior
 import random
 import concurrent.futures
+import utils
+import dangers
 
 #simulator
 sim = None
@@ -16,6 +18,7 @@ def init():
 class Simulator:
 
 	def __init__(self):
+		self.start_time = utils.worldTime()
 		self.building = None
 		#to be used for background, async computations
 		self.background_executor = concurrent.futures.ProcessPoolExecutor()
@@ -45,7 +48,7 @@ class Simulator:
 
 		self.agents = []
 
-		for i in range(0,80):
+		for i in range(0,50):
 			agent = agents.Agent()
 
 			#random position
@@ -61,4 +64,7 @@ class Simulator:
 
 	def update(self):
 		for a in self.agents:
+			#if utils.worldTime() - self.start_time > 10 or self.building.room_at_position(a.p) == "Room 3":
+			#	print self.building.room_at_position(a.p) == "Room 3"
+			#	a.alert = dangers.FireDanger(3)
 			a.update()

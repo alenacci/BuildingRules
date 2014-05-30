@@ -28,7 +28,6 @@ class Behavior:
 
 	def newAction(self):
 		decision = random.random()
-		###TODO messo a 1 per non far crashare
 		if decision > 0.9:
 			self.toilet()
 		elif decision > 0.7:
@@ -55,23 +54,27 @@ class Behavior:
 		self.agent.current_action = action
 		action.end.connect(self.onActionEnded, True)
 		try:
+			print str(action)
 			action.start()
 		except actions.NoPathToTargetDestination:
 			action.end()
 
-	def wait(self):
+	def wait(self, wait_time = None):
+		if wait_time == None:
+			wait_time = random.randint(1,10)
 		import actions
-		action = actions.WaitAction(self.agent, random.randint(1,10))
+		action = actions.WaitAction(self.agent, wait_time)
 		self.agent.current_action = action
 		action.end.connect(self.onActionEnded, True)
+		print str(action) + str(wait_time)
 		action.start()
+
 
 	def toilet(self):
 		self.task = tasks.toiletTask.ToiletTask(self.agent)
 		self.task.end.connect(self.onActionEnded, True)
 		print str(self.task)
 		self.task.start()
-
 
 	def onActionEnded(self,action):
 		#print str(action)
@@ -91,9 +94,18 @@ class Behavior:
 			self._next_noise_time = new_noise_time()
 			self.agent.generate_loud_noise(1 + random.random() * 3)
 
+	def alert(self):
+		print " ___________"
+		print "| ALERT!!!! |"
+		print "'''''''''''''"
+		self.wait(100)
 
 
-	def update(self):
+
+	def update(self, alert = None):
 		"""Necessary for impose, in arbitrary moments, to make
 				the agent emit noise"""
 		self._update_noise()
+
+		if alert:
+			self.alert()

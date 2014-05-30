@@ -1,1 +1,1 @@
-__author__ = 'andreuke'
+from fireDanger import FireDanger

@@ -23,6 +23,8 @@ class Agent(object):
 		self.id = Agent.agents_count
 		Agent.agents_count += 1
 
+		self.alert = None
+
 	def setPosition(self,p):
 		self.p = p.dup()
 
@@ -72,7 +74,7 @@ class Agent(object):
 			self.current_action.update()
 
 		if self.behavior:
-			self.behavior.update()
+			self.behavior.update(alert = self.alert)
 
 		if self.is_generating_noise and \
 						self.loud_noise_start_time + self.loud_noise_duration < utils.worldTime():
