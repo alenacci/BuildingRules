@@ -46,10 +46,7 @@ class Building:
 
 		tile = self.grid.tiles[int(p.x)][int(p.y)]
 
-		if tile.room is not None:
-			return self.rooms[tile.room]
-		else:
-			return None
+		return tile.room
 
 
 	def create_toilets(self):

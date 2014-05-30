@@ -5,14 +5,22 @@ import sys
 import simulator
 import random
 import threading
+import console.trigger_command
 
 random.seed(10)
 
+load_modules = True
+
+if len(sys.argv) > 1 and sys.argv[1] == "no-modules":
+	load_modules = False
+
 sim = simulator.init()
-sim.setup()
+sim.setup(load_modules=load_modules)
 r = renderer.Renderer()
 
 terminate = False
+
+
 
 def simulate():
 	while not terminate:
@@ -26,6 +34,8 @@ def render():
 			if event.type == pygame.QUIT:
 				global terminate
 				terminate = True
+				simulation_thread.terminate = True
+
 				sys.exit(0)
 			else:
 				pass
@@ -37,6 +47,8 @@ simulation_thread = threading.Thread(target=simulate)
 
 simulation_thread.start()
 #render_thread.run()
+
+console.trigger_command.start_console()
 
 render()
 

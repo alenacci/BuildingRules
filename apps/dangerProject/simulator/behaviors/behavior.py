@@ -54,7 +54,7 @@ class Behavior:
 		self.agent.current_action = action
 		action.end.connect(self.onActionEnded, True)
 		try:
-			print str(action)
+			#print str(action)
 			action.start()
 		except actions.NoPathToTargetDestination:
 			action.end()
@@ -66,33 +66,21 @@ class Behavior:
 		action = actions.WaitAction(self.agent, wait_time)
 		self.agent.current_action = action
 		action.end.connect(self.onActionEnded, True)
-		print str(action) + str(wait_time)
+		#print str(action) + str(wait_time)
 		action.start()
 
 
 	def toilet(self):
 		self.task = tasks.toiletTask.ToiletTask(self.agent)
 		self.task.end.connect(self.onActionEnded, True)
-		print str(self.task)
+		#print str(self.task)
 		self.task.start()
 
 	def onActionEnded(self,action):
 		#print str(action)
 		self.newAction()
 
-	def _update_noise(self):
 
-		now = utils.worldTime()
-
-		def new_noise_time():
-			return now + random.expovariate(0.01)
-
-		if self._next_noise_time is None:
-			self._next_noise_time = new_noise_time()
-
-		if self._next_noise_time < now:
-			self._next_noise_time = new_noise_time()
-			self.agent.generate_loud_noise(1 + random.random() * 3)
 
 	def alert(self):
 		print " ___________"
@@ -103,9 +91,5 @@ class Behavior:
 
 
 	def update(self, alert = None):
-		"""Necessary for impose, in arbitrary moments, to make
-				the agent emit noise"""
-		self._update_noise()
-
-		if alert:
-			self.alert()
+		"""Now is quite useless"""
+		pass

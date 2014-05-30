@@ -39,5 +39,5 @@ class RoomGenerator:
 				if self.img[j][i][0] == RoomGenerator.colors[room_num][0] and \
 					self.img[j][i][1] == RoomGenerator.colors[room_num][1] and \
 					self.img[j][i][2] == RoomGenerator.colors[room_num][2]:
-						self.tiles[i][j].room = room_num
+						self.tiles[i][j].room = room
 						room.tiles.append(self.tiles[i][j])

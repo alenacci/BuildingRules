@@ -1,10 +1,11 @@
 from commons.point import Point
 import utils
 from behaviors.actions.moveAction import MoveAction
+from utils import event
+import simulator
+
 
 class Agent(object):
-
-	RUNNING_THRESHOLD = 3.5
 
 	agents_count = 0
 
@@ -12,21 +13,19 @@ class Agent(object):
 		self.p = Point(0,0)
 		self._current_action = None
 		self._behavior = None
-
-		self.loud_noise_start_time = None
-		self.loud_noise_duration = None
-		self.is_generating_noise = False
-
-		self.is_running = False
-
+		self.current_tile = None
 		#set an id based on the agents count
 		self.id = Agent.agents_count
 		Agent.agents_count += 1
 
+
 		self.alert = None
+		self._update_current_tile()
+
 
 	def setPosition(self,p):
 		self.p = p.dup()
+		self._update_current_tile()
 
 	@property
 	def x(self):
@@ -35,6 +34,7 @@ class Agent(object):
 	@x.setter
 	def x(self, x):
 		self.p.x = x
+		self._update_current_tile()
 
 	@property
 	def y(self):
@@ -43,6 +43,7 @@ class Agent(object):
 	@y.setter
 	def y(self, y):
 		self.p.y = y
+		self._update_current_tile()
 
 	@property
 	def current_action(self):
@@ -52,6 +53,7 @@ class Agent(object):
 	def current_action(self, action):
 		action.agent = self
 		self._current_action = action
+		self.on_action_changed(action)
 
 	@property
 	def behavior(self):
@@ -62,12 +64,39 @@ class Agent(object):
 	def behavior(self, behavior):
 		self._behavior = behavior
 		self.behavior.setAgent(self)
+		self.on_behavior_changed(behavior)
+
+	@property
+	def current_room(self):
+		if self.current_tile:
+			return self.current_tile.room
+
+	#update the tile where the agent is placed
+	#and the corresponding room
+	def _update_current_tile(self):
+		grid = simulator.sim.building.grid
+		tile = grid.tiles[int(self.x)][int(self.y)]
+		room = tile.room
+
+		if self.current_room != room:
+			if self.current_room:
+				self.current_room.agents.remove(self)
+			if room:
+				room.agents.append(self)
+		self.current_tile = tile
 
 
-	def generate_loud_noise(self, duration):
-		self.loud_noise_duration = duration
-		self.is_generating_noise = True
-		self.loud_noise_start_time = utils.worldTime()
+	""" events """
+	@event
+	def on_action_changed(self, action):
+		pass
+
+	@event
+	def on_behavior_changed(self, behavior):
+		pass
+
+
+	""" update functions """
 
 	def update(self):
 		if self.current_action:
@@ -75,12 +104,3 @@ class Agent(object):
 
 		if self.behavior:
 			self.behavior.update(alert = self.alert)
-
-		if self.is_generating_noise and \
-						self.loud_noise_start_time + self.loud_noise_duration < utils.worldTime():
-			self.is_generating_noise = False
-
-		if isinstance(self.current_action, MoveAction) and self.current_action.speed >= Agent.RUNNING_THRESHOLD:
-			self.is_running = True
-		else:
-			self.is_running = False
