@@ -2,7 +2,9 @@ from module import Module
 from behaviors.actions.moveAction import MoveAction
 from renderer import Renderer
 import pygame
-
+import urllib2
+import json
+import concurrent
 
 class RunModule(Module):
 
@@ -13,6 +15,7 @@ class RunModule(Module):
 		Module.__init__(self,simulator)
 		self.agent_move_image = pygame.image.load("./res/mov.png")
 		self.agent_move_image = pygame.transform.scale(self.agent_move_image, (RunModule.MOV_ICON_SIZE, RunModule.MOV_ICON_SIZE))
+		self.background_executor = concurrent.futures.ThreadPoolExecutor(5)
 
 	def after_populate(self, agents):
 		for a in agents:
@@ -20,8 +23,9 @@ class RunModule(Module):
 			a.is_running = False
 
 	def _on_action_changed(self, agent, action):
-		if isinstance(action, MoveAction) and action.speed >= RunModule.RUNNING_THRESHOLD:
+		if isinstance(action, MoveAction) and action.speed >= RunModule.RUNNING_THRESHOLD and not agent.is_running:
 			agent.is_running = True
+			self.background_executor.submit(self._send_bulletin, agent)
 		else:
 			agent.is_running = False
 
@@ -33,3 +37,21 @@ class RunModule(Module):
 			dest_x = agent.x * Renderer.SIZE_X - tr + Renderer.OFFSET_X
 			dest_y = agent.y * Renderer.SIZE_Y - tr + Renderer.OFFSET_Y
 			window.blit(self.agent_move_image, (dest_x, dest_y) )
+
+
+	def _send_bulletin(self, agent):
+		"""send a bulletin to the virtual sensor"""
+		message = {
+        	'user': agent.danger_name,
+			'state' : 'running',
+			'buildings' : 'simulator',
+			'room'	: str(agent.current_room.id)
+		}
+
+		req = urllib2.Request('http://localhost:2560/api/notify_run')
+		req.add_header('Content-Type', 'application/json')
+
+		try:
+			response = urllib2.urlopen(req, json.dumps(message))
+		except Exception:
+			print "unable to connect to virtual sensor"

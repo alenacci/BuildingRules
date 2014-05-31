@@ -52,6 +52,7 @@ class Renderer:
 		self.drawBackground()
 		self.drawBuilding()
 		self.drawAgents()
+		self.drawForeground()
 
 		#draw it to the screen
 		pygame.display.flip()
@@ -110,5 +111,13 @@ class Renderer:
 		for mod in simulator.sim.modules:
 			try:
 				mod.render_background(self.window)
+			except Exception:
+				mod.handle_exception()
+
+	def drawForeground(self):
+		#Render function of the modules
+		for mod in simulator.sim.modules:
+			try:
+				mod.render_foreground(self.window)
 			except Exception:
 				mod.handle_exception()

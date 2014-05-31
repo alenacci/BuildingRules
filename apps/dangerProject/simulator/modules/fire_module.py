@@ -13,7 +13,9 @@ class FireModule(Module):
 	def __init__(self,simulator):
 		Module.__init__(self,simulator)
 		self.fire_image = pygame.image.load("./res/fire/fire.png")
-		self.simulator.trigger_manager.subscribe("fire", self._on_fire_trigger )
+
+		#SUBSCRIBE to all the triggers named "fire"
+		self.simulator.trigger_manager.subscribe("fire", self._on_fire_trigger)
 		self.fires = []
 
 	def render_building(self, window):

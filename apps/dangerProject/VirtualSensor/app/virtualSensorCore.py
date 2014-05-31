@@ -17,6 +17,7 @@ class VirtualSensorCore:
 
 	def __init__(self):
 		self.bulletin_list = []
+		self.trigger_run = None
 
 	def handle_new_bulletin(self, bulletin):
 		if bulletin.state=="running":
@@ -41,6 +42,9 @@ class VirtualSensorCore:
 			return False
 
 	def checkTreshold(self):
+
+		over_threshold = False
+
 		#TODO rendere efficiente evitando scansioni ripetute
 		for b in self.bulletin_list:
 			count = 1
@@ -59,6 +63,10 @@ class VirtualSensorCore:
 #				req.add_header('Content-Type', 'application/json')
 
 #				response = urllib2.urlopen(req, json.dumps(data))
+				over_threshold = True
+				self.trigger_run = {'room':b.room, 'building':b.building}
 
-				request_rules_real_time_update_async()
+
+		if over_threshold:
+			request_rules_real_time_update_async()
 
