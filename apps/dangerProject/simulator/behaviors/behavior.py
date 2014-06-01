@@ -1,4 +1,5 @@
 import tasks.toiletTask
+import tasks.fireTask
 import commons
 import random
 import simulator
@@ -81,15 +82,17 @@ class Behavior:
 		self.newAction()
 
 
-
-	def alert(self):
-		print " ___________"
-		print "| ALERT!!!! |"
-		print "'''''''''''''"
-		self.wait(100)
-
-
+	###TODO MOVE AWAY ACCORDING TO MODULARITY
+	def fireReaction(self, fire):
+		#print " ___________"
+		#print "| ALERT!!!! |"
+		#print "'''''''''''''"
+		#self.task = tasks.fireTask.FireTask(self.agent, fire)
+		self.task = tasks.toiletTask.ToiletTask(self.agent)
+		#print str(self.task)
+		self.task.start()
 
 	def update(self, alert = None):
-		"""Now is quite useless"""
+		if str(alert) == "fire":
+			self.fireReaction(alert)
 		pass
