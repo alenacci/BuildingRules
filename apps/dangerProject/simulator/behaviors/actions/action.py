@@ -8,6 +8,7 @@ class Action:
 		self.agent = agent
 		self.active = False
 		self.start_time = None
+		self.stopped = False
 		# if the action is not active but is waiting
 		# for something else, for instance for some
 		# computation to be completed
@@ -19,8 +20,13 @@ class Action:
 		self.active = True
 
 
-	#called when the action ends
+	def stop(self):
+		"""stop() differs from end() because if an action is stopped it means
+			it hasn't completed"""
+		self.active = False
+		self.stopped = True
 
+	#called when the action ends
 	@event
 	def end(self):
 		self.active = False

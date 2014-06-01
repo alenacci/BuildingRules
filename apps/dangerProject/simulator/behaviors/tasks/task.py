@@ -34,6 +34,10 @@ class Task:
 		else:
 			self.end()
 
+	def stop(self):
+		if self.actions[self.current_action] is not None:
+			self.actions[self.current_action].stop()
+
 	def next_action(self):
 			self.current_action += 1
 			self.launch_action(self.actions[self.current_action])

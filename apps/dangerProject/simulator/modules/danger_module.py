@@ -8,10 +8,13 @@ import concurrent
 import json
 from pygame import Surface
 import math
+from triggers.trigger import Trigger
+from behaviors.escape_behavior import EscapeBehavior
+import random
 
 class DangerModule(Module):
 
-	ALARM_EFFECT_FREQUENCY = 2
+	ALARM_EFFECT_FREQUENCY = 2.3
 
 	def __init__(self, simulator):
 
@@ -39,6 +42,8 @@ class DangerModule(Module):
 
 	def _read_notifications_from_danger_core(self):
 
+		alarm_notification = False
+
 		try:
 			message = {
 				'timestamp': str(self.last_timestamp)
@@ -55,9 +60,12 @@ class DangerModule(Module):
 
 					self.last_timestamp = int(notification['timestamp'])
 					if notification['type'] == 'danger':
-						self._trigger_alarm()
+						alarm_notification = True
 		except Exception:
 			print "unable to connect to danger core"
+
+		if alarm_notification:
+			self._trigger_alarm()
 
 		#restart pooling
 		t = threading.Timer(2, self._read_notifications_from_danger_core)
@@ -66,7 +74,41 @@ class DangerModule(Module):
 
 	def _trigger_alarm(self):
 		self.alarm = True
+		self.simulator.trigger_manager.fire_trigger(Trigger("alarm"))
+		print "ALARM"
+		self._escape()
 
+	def _escape(self):
+
+		#ESCAPE
+		for a in self.simulator.agents:
+
+			#schedule escape
+			room = self.simulator.building.room_at_position(a.p)
+
+			##ESCAPE TIME ROOMS
+			if hasattr(room, "escape_wait_time"):
+				wait_time = room.escape_wait_time
+				wait_time += random.random()*3
+			else:
+				room.escape_wait_time = 2 * random.random() * 10
+				wait_time = room.escape_wait_time
+
+			t = threading.Timer(wait_time, self.start_escape,args=[a])
+			t.setDaemon(True)
+			t.start()
+
+
+	def start_escape(self,agent):
+		if not type(agent.behavior) is EscapeBehavior:
+			agent.behavior.stop()
+			beh = EscapeBehavior()
+			beh.escape_regions = [ [(37, 30), (46, 0)],
+									[(46, 19), (51, 0)],
+									[(53, 7),  (63, 0)]  ]
+			agent.behavior = beh
+
+			beh.start()
 
 	def render_foreground(self, window):
 		if self.alarm:

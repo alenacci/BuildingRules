@@ -7,6 +7,7 @@ import concurrent.futures
 from triggers.trigger_manager import TriggerManager
 import modules
 from utils.worldTime import worldTime
+from behaviors.escape_behavior import EscapeBehavior
 
 #simulator
 sim = None
@@ -61,7 +62,7 @@ class Simulator:
 
 		self.agents = []
 
-		for i in range(0,80):
+		for i in range(0, 80):
 			agent = agents.Agent()
 
 			#random position
@@ -75,8 +76,11 @@ class Simulator:
 			beh.start()
 
 
+
 	def update(self):
 		self.time = worldTime() - self.start_time
+
+
 
 		for a in self.agents:
 			a.update()

@@ -10,12 +10,12 @@ class NoPathToTargetDestination(Exception):
 
 
 class MoveAction(Action):
-	def __init__(self,agent,ePoint):
+	def __init__(self, agent, ePoint, speed=3):
 		Action.__init__(self,agent)
 		self.s_point = None
 		self.e_point = ePoint
 		self.duration = None
-		self.speed = 1 + random.random()*3
+		self.speed = speed
 		self.path = None
 
 
@@ -35,7 +35,9 @@ class MoveAction(Action):
 
 	def _on_path_computation_ended(self, path_future):
 		self.wait = False
+
 		self.path = path_future.result()
+
 		if not self.path or self.path.length == 0:
 			#raise NoPathToTargetDestination()
 			#TODO right? maybe length = 0 should be dealt in different way

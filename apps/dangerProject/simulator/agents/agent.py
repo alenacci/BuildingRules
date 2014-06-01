@@ -3,7 +3,7 @@ import utils
 from behaviors.actions.moveAction import MoveAction
 from utils import event
 import simulator
-
+import copy
 
 class Agent(object):
 
@@ -80,8 +80,21 @@ class Agent(object):
 				self.current_room.agents.remove(self)
 			if room:
 				room.agents.append(self)
-		self.current_tile = tile
 
+
+		if self.current_tile is None or not self.current_tile == tile:
+
+			if self.current_tile:
+				self.current_tile.agents.remove(self)
+			if tile:
+				tile.agents.append(self)
+
+			self.current_tile = tile
+
+			others = (copy.copy(tile.agents))
+			others.remove(self)
+			if len(others) > 0:
+				self.on_meet_others(others)
 
 	""" events """
 	@event
@@ -92,6 +105,10 @@ class Agent(object):
 	def on_behavior_changed(self, behavior):
 		pass
 
+	@event
+	def on_meet_others(self, others):
+		"""called when the agent is in the same tile with others"""
+		pass
 
 	""" update functions """
 
