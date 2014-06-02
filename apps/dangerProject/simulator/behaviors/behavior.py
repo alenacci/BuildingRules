@@ -87,12 +87,9 @@ class Behavior:
 		#print " ___________"
 		#print "| ALERT!!!! |"
 		#print "'''''''''''''"
-		#self.task = tasks.fireTask.FireTask(self.agent, fire)
-		self.task = tasks.toiletTask.ToiletTask(self.agent)
+		self.task = tasks.fireTask.FireTask(self.agent, fire)
 		#print str(self.task)
 		self.task.start()
 
 	def update(self, alert = None):
-		if str(alert) == "fire":
-			self.fireReaction(alert)
 		pass

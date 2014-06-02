@@ -14,10 +14,26 @@ class FireTask(Task):
 
 		# MOVE AWAY
 		new_pos = self.agent.current_room.random_position()
-		while(new_pos.dist(self.fire.position) < 15 ):
+		while new_pos.dist(self.fire.position) < 5 :
 			new_pos = self.fire.room.random_position()
 		self.move_away = actions.MoveAction(agent,new_pos)
 		self.actions.append(self.move_away)
+
+		# SHAKING
+		for i in range (1, 10):
+			if i%2 == 0:
+				pos = new_pos
+			else:
+				pos = commons.Point(new_pos.x + 4, new_pos.y)
+		shake = actions.MoveAction(agent,pos)
+		self.actions.append(shake)
+
+
+		# RUN AWAY
+		## TODO AS PADU
+
+
+
 
 
 	def start(self):

@@ -29,15 +29,11 @@ class FireModule(Module):
 			window.blit(self.fire_image, pos )
 
 	def _on_fire_trigger(self,trigger):
-		room_id = trigger.room.id
-		room = self.simulator.building.rooms[room_id]
-		pos = room.random_position()
-		fire = Fire(room, pos)
+		fire = Fire(trigger.room, trigger.position)
 		self.fires.append(fire)
+		for a in simulator.sim.agents:
+			if str(a.current_room) == str(trigger.room):
+				a.behavior.fireReaction(fire)
 
 	def update_agent(self, agent, time):
-		if len(self.fires) > 0:
-			if str(simulator.sim.building.room_at_position(agent.p)) == str((self.fires[len(self.fires)-1]).room):
-				agent.alert = self.fires[len(self.fires)-1]
-
 		Module.update_agent(self, agent, time)

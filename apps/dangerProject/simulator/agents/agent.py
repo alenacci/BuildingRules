@@ -18,8 +18,6 @@ class Agent(object):
 		self.id = Agent.agents_count
 		Agent.agents_count += 1
 
-
-		self.alert = None
 		self._update_current_tile()
 
 
@@ -103,4 +101,4 @@ class Agent(object):
 			self.current_action.update()
 
 		if self.behavior:
-			self.behavior.update(alert = self.alert)
+			self.behavior.update()
