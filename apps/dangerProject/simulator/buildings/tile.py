@@ -9,6 +9,7 @@ class Tile:
 		self.y = y
 		self.walkable = True
 		self.room = room
+		self.agents = []
 
 
 	def __eq__(self, other):

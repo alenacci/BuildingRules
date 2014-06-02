@@ -37,3 +37,6 @@ class Module(object):
 	def render_agent(self, window, agent):
 		pass
 
+	def render_foreground(self, window):
+		pass
+

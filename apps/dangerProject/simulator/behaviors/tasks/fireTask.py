@@ -29,13 +29,6 @@ class FireTask(Task):
 		self.actions.append(shake)
 
 
-		# RUN AWAY
-		## TODO AS PADU
-
-
-
-
-
 	def start(self):
 		Task.start(self)
 

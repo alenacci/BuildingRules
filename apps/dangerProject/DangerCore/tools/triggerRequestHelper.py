@@ -25,3 +25,5 @@ def request_rules_real_time_update_async():
 #Request Rules to update the real time rules
 def request_rules_real_time_update():
 	urllib2.urlopen("http://localhost:5003/api/realtime/request_update").read()
+
+

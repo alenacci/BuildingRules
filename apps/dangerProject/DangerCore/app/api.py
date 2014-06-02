@@ -64,9 +64,10 @@ def getCurrentStatus():
 	message = {}
 
 	#TODO This is just a dummy implementation
+
 	if len(app.danger_core.bulletin_list) > 0:
 		b = app.danger_core.bulletin_list[0]
-		message['buildings'] = b.building
+		message['building'] = b.building
 		message['room'] = b.room
 		message['description'] = 'Unusual movements, smoke detected'
 		message['status'] = 'ALERT'

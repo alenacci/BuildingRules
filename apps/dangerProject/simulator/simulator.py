@@ -10,6 +10,8 @@ from triggers.trigger_manager import TriggerManager
 import modules
 from utils.worldTime import worldTime
 from triggers.trigger import Trigger
+from behaviors.escape_behavior import EscapeBehavior
+
 
 #simulator
 sim = None
@@ -64,7 +66,7 @@ class Simulator:
 
 		self.agents = []
 
-		for i in range(0,50):
+		for i in range(0, 80):
 			agent = agents.Agent()
 
 			#random position
@@ -78,8 +80,11 @@ class Simulator:
 			beh.start()
 
 
+
 	def update(self):
 		self.time = worldTime() - self.start_time
+
+
 
 		for a in self.agents:
 			a.update()
@@ -97,7 +102,7 @@ class Simulator:
 			except Exception:
 				mod.handle_exception()
 
-		#if self.time%3 > 0 and self.time%3 < .01:
-		if self.time > 3 and self.time < 3.01:
+		#if self.time%3 > 0 and self.time%3 < .1:
+		if self.time > 3 and self.time < 3.10:
 			room = self.building.random_room()
 			self.trigger_manager.fire_trigger(Trigger("fire", room, room.random_position()))

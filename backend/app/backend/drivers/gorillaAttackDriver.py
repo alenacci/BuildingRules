@@ -17,6 +17,10 @@ import datetime
 
 from app.backend.commons.errors import *
 from app.backend.drivers.genericTriggerDriver import GenericTriggerDriver
+import imp
+import os
+
+trigger = imp.load_source("requestHelper",os.path.join(os.path.dirname(__file__), '../../../../apps/dangerProject/VirtualSensor/tools/requestHelper.py'))
 
 class GorillaAttackDriver(GenericTriggerDriver):
 
@@ -50,7 +54,11 @@ class GorillaAttackDriver(GenericTriggerDriver):
 		import random
 
 		if self.parameters["operation"] == "GORILLA_ATTACK":
-			return True
+			status = trigger.check_sensor_status()
+			if status['status'] == 'True':
+				return True
+			else:
+				return False
 		else:
 			raise UnsupportedDriverParameterError(self.parameters["operation"])
 

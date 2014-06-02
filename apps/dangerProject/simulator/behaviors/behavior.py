@@ -1,5 +1,4 @@
 import tasks.toiletTask
-import tasks.fireTask
 import commons
 import random
 import simulator
@@ -11,8 +10,6 @@ class Behavior:
 	def __init__(self):
 		self.agent = None
 		self.task = None
-
-		self._next_noise_time = None
 
 	def setAgent(self, agent):
 		self.agent = agent
@@ -29,6 +26,7 @@ class Behavior:
 
 	def newAction(self):
 		decision = random.random()
+
 		if decision > 0.9:
 			self.toilet()
 		elif decision > 0.7:
@@ -51,7 +49,7 @@ class Behavior:
 
 		import actions
 
-		action = actions.MoveAction(self.agent, pos )
+		action = actions.MoveAction(self.agent, pos, speed=1 + random.random()*3 )
 		self.agent.current_action = action
 		action.end.connect(self.onActionEnded, True)
 		try:
@@ -82,14 +80,13 @@ class Behavior:
 		self.newAction()
 
 
-	###TODO MOVE AWAY ACCORDING TO MODULARITY
-	def fireReaction(self, fire):
-		#print " ___________"
-		#print "| ALERT!!!! |"
-		#print "'''''''''''''"
-		self.task = tasks.fireTask.FireTask(self.agent, fire)
-		#print str(self.task)
-		self.task.start()
+	def stop(self):
+		if self.task is not None:
+			self.task.stop()
+		else:
+			#XXX certe azioni non sono dentro un task!
+			self.agent.current_action.stop()
 
-	def update(self, alert = None):
+	def update(self):
+		"""Now is quite useless"""
 		pass
