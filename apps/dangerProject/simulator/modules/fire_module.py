@@ -29,7 +29,7 @@ class FireModule(Module):
 			window.blit(self.fire_image, pos )
 
 	def _on_fire_trigger(self,trigger):
-		room_id = trigger.room_id
+		room_id = trigger.room.id
 		room = self.simulator.building.rooms[room_id]
 		pos = room.random_position()
 		fire = Fire(room, pos)

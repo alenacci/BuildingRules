@@ -13,11 +13,11 @@ class FireTask(Task):
 
 
 		# MOVE AWAY
-		#new_pos = self.agent.current_room.random_position()
-		#while(new_pos.dist(self.fire.position) < 15 ):
-		#	new_pos = self.fire.room.random_position()
-		#self.move_away = actions.MoveAction(agent,new_pos)
-		#self.actions.append(self.move_away)
+		new_pos = self.agent.current_room.random_position()
+		while(new_pos.dist(self.fire.position) < 15 ):
+			new_pos = self.fire.room.random_position()
+		self.move_away = actions.MoveAction(agent,new_pos)
+		self.actions.append(self.move_away)
 
 
 	def start(self):

@@ -97,6 +97,6 @@ class Simulator:
 			except Exception:
 				mod.handle_exception()
 
-		#if self.time > 10:
-		#	room = self.building.random_room()
-		#	self.trigger_manager.fire_trigger(Trigger("fire", room.id, room.random_position()))
+		if self.time > 3 and self.time < 3.01:
+			room = self.building.random_room()
+			self.trigger_manager.fire_trigger(Trigger("fire", room, room.random_position()))
