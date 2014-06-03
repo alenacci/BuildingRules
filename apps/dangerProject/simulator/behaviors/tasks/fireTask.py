@@ -10,6 +10,7 @@ class FireTask(Task):
 	def __init__(self, agent, fire):
 		Task.__init__(self, agent)
 		self.fire = fire
+		self.counter = 0
 
 
 		# MOVE AWAY
@@ -19,20 +20,20 @@ class FireTask(Task):
 		self.move_away = actions.MoveAction(agent,new_pos)
 		self.actions.append(self.move_away)
 
-		# SHAKING
-		for i in range (1, 10):
-			if i%2 == 0:
-				pos = new_pos
-			else:
-				pos = commons.Point(new_pos.x + 4, new_pos.y)
-		shake = actions.MoveAction(agent,pos)
-		self.actions.append(shake)
-
 
 	def start(self):
 		Task.start(self)
 
 	def on_action_ended(self, action):
+		# SHAKING before escaping
+		if self.counter < 8:
+			pos = self.agent.p
+			if self.counter%2 == 0:
+				shake = actions.MoveAction(self.agent,commons.Point(pos.x+1, pos.y))
+			else:
+				shake = actions.MoveAction(self.agent,commons.Point(pos.x-1, pos.y))
+			self.actions.append(shake)
+			self.counter += 1
 		Task.on_action_ended(self, action)
 
 

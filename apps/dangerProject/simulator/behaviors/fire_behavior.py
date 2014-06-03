@@ -12,6 +12,7 @@ class FireBehavior(Behavior):
 		self.escape_regions = []
 
 
+
 	def start(self, fire):
 		#print " ___________"
 		#print "| ALERT!!!! |"
@@ -22,7 +23,7 @@ class FireBehavior(Behavior):
 		self.fire_task.start()
 
 	def escape(self):
-		self.escape_task = tasks.escapeTask.EscapeTask(self.agent, self.escape_regions)
+		self.escape_task = tasks.escapeTask.EscapeTask(self.agent, self.escape_regions[0])
 		self.escape_task.start()
 
 

@@ -37,8 +37,19 @@ class FireModule(Module):
 		for a in simulator.sim.agents:
 			# TODO __eq__
 			if str(a.current_room) == str(trigger.room):
-				a.behavior = FireBehavior()
-				a.behavior.start(fire)
+				if not type(a.behavior) is FireBehavior:
+					a.behavior.stop()
+					a.behavior = FireBehavior()
+					a.behavior.escape_regions = [ [(37, 30), (46, 0)],
+										[(46, 19), (51, 0)],
+										[(53, 7),  (63, 0)]  ]
+					a.behavior.start(fire)
+		#make the fire not walkable
+		for i in range(-1,3):
+			for j in range(-1, 3):
+				# if i,j<gridsize
+				self.simulator.building.grid.tiles[int(trigger.position.x)+i][int(trigger.position.y)+j].walkable = False
+
 
 	def update_agent(self, agent, time):
 		Module.update_agent(self, agent, time)

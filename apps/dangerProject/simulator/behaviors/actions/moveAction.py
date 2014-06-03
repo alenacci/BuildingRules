@@ -38,17 +38,20 @@ class MoveAction(Action):
 
 		self.path = path_future.result()
 
-		if not self.path or self.path.length == 0:
-			#raise NoPathToTargetDestination()
-			#TODO right? maybe length = 0 should be dealt in different way
-			self.end()
+		if self.path is not None:
+			if not self.path or self.path.length == 0:
+				#raise NoPathToTargetDestination()
+				#TODO right? maybe length = 0 should be dealt in different way
+				self.end()
 
-		#then, substitute the start and the end point
-		self.path.start = self.s_point
-		self.path.end = self.e_point
-		self.path.recomputeDistances()
-		self.duration = self.path.length / self.speed
-		Action.start(self)
+			#then, substitute the start and the end point
+			self.path.start = self.s_point
+			self.path.end = self.e_point
+			self.path.recomputeDistances()
+			self.duration = self.path.length / self.speed
+			Action.start(self)
+		else:
+			print("Null path. It is right?")
 
 	def update(self):
 

@@ -10,10 +10,10 @@ class EscapeTask(Task):
 	def __init__(self, agent, region):
 		Task.__init__(self, agent)
 
-		#x = region[0][0] + (region[1][0]-region[0][0])*random.random()
-		#y = region[0][1] + (region[1][1]-region[0][1])*random.random()
+		x = region[0][0] + (region[1][0]-region[0][0])*random.random()
+		y = region[0][1] + (region[1][1]-region[0][1])*random.random()
 
-		self.escape_point = Point(42, 10)
+		self.escape_point = Point(x, y)
 
 		#Wait before escaping
 		self.actions.append(actions.WaitAction(agent, random.random()*1))
