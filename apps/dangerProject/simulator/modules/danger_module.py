@@ -45,6 +45,7 @@ class DangerModule(Module):
 		alarm_notification = False
 
 		try:
+
 			message = {
 				'timestamp': str(self.last_timestamp)
 			}
@@ -54,6 +55,7 @@ class DangerModule(Module):
 
 			response = json.loads(urllib2.urlopen(req, json.dumps(message)).read())
 
+			print response
 
 			if response['new_notifications'] == 'True':
 				for notification in response['notifications']:
