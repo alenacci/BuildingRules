@@ -18,3 +18,12 @@ class AudioRecordsManager:
 	def get_new_filename(self,original):
 		self.samplesCount += 1
 		return "audioSample" + str(self.samplesCount) + os.path.splitext(original)[1]
+
+	#dumb function which returns the last audio file XXX
+	def get_file(self):
+		if len(os.listdir(self.AUDIO_DIR)) > 0:
+			filename = max(os.listdir(self.AUDIO_DIR))
+			return os.path.join("../" + self.AUDIO_DIR, filename)
+		else:
+			return None
+

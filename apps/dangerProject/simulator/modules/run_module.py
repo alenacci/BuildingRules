@@ -64,7 +64,8 @@ class RunModule(Module):
 		try:
 			response = urllib2.urlopen(req, json.dumps(message))
 		except Exception:
-			print "unable to connect to virtual sensor"
+			#print "unable to connect to virtual sensor"
+			pass
 
 	def _on_alarm_triggered(self, trigger):
 		self.disabled = True

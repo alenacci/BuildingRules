@@ -9,7 +9,7 @@ from tools.triggerRequestHelper import *
 from app.core.dangerCore import DangerCore
 from tools.log import *
 import os
-
+from flask import send_file
 
 
 @app.route('/api/send_bulletin', methods = ['POST'])
@@ -165,6 +165,33 @@ def requestAudioSensing():
 	response['status'] = 'OK'
 
 	return jsonify(response)
+
+#Download the audio file
+@app.route("/api/download_audio_sensing")
+def downloadAudioSensing():
+
+	aMgr = app.danger_core.audioRecordsManager
+	filepath = aMgr.get_file()
+
+	if filepath is not None:
+		return send_file(filepath)
+	else:
+		#give a "no content"
+		return '', 204
+
+
+#Download the audio file
+@app.route("/audioUploads/<filename>")
+def download2():
+
+	aMgr = app.danger_core.audioRecordsManager
+	filepath = aMgr.get_file()
+	if file is not None:
+		print "file " + filepath
+		return app.send_static_file(filepath)
+	else:
+		#give a "no content"
+		return '', 204
 
 #This method is used for upload an audio file
 #of the environment

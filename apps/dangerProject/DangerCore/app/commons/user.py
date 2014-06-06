@@ -1,7 +1,9 @@
 class User:
 
 
+
 	def __init__ (self, user_id, telephone=None, status=None, last_access=None, room=None):
+
 		self.user_id = user_id
 		self.room = room
 		self.telephone = telephone

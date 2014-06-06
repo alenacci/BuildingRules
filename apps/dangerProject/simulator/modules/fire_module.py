@@ -37,19 +37,26 @@ class FireModule(Module):
 			window.blit(self.fire_image, pos )
 
 	def _on_fire_trigger(self, trigger):
+
 		room = self.simulator.building.rooms[trigger.room_id]
 		position = room.random_position()
 		fire = Fire(room, position)
+
 		self.fires.append(fire)
+
+		#Escape
 		for a in simulator.sim.agents:
+
 			if a.current_room is not None and a.current_room == room:
 				if not type(a.behavior) is FireBehavior:
 					self._escape_agent(a,fire)
+
 		#make the fire not walkable
 		for i in range(-1,3):
 			for j in range(-1, 3):
 				# if i,j<gridsize
 				self.simulator.building.grid.tiles[int(position.x)+i][int(position.y)+j].walkable = False
+
 
 
 	def update_agent(self, agent, time):

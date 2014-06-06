@@ -81,6 +81,7 @@ class Agent(object):
 				self.current_room.agents.remove(self)
 			if room:
 				room.agents.append(self)
+
 				# the room is changed
 				self.on_room_changed(room)
 
@@ -116,6 +117,11 @@ class Agent(object):
 	@event
 	def on_meet_others(self, others):
 		"""called when the agent is in the same tile with others"""
+		pass
+
+	@event
+	def on_room_changed(self, room):
+		"""capped whenever the agent change room"""
 		pass
 
 	""" update functions """

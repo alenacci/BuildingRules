@@ -102,6 +102,7 @@ class Simulator:
 			except Exception:
 				mod.handle_exception()
 
+
 		#if self.time%3 > 0 and self.time%3 < .1:
 		'''if self.time > 3 and self.time < 3.10:
 			room = self.building.random_room()
