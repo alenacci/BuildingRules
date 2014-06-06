@@ -2,12 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="714e861b-58bd-4999-aeaa-700c805f0bf9" name="Default" comment="">
+<<<<<<< HEAD
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/dangerProject/simulator/modules/danger_module.py" afterPath="$PROJECT_DIR$/apps/dangerProject/simulator/modules/danger_module.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/tasks/fireTask.py" afterPath="$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/tasks/fireTask.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/dangerProject/simulator/modules/fire_module.py" afterPath="$PROJECT_DIR$/apps/dangerProject/simulator/modules/fire_module.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/dangerProject/DangerCore/log.txt" afterPath="$PROJECT_DIR$/apps/dangerProject/DangerCore/log.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/dangerProject/simulator/modules/run_module.py" afterPath="$PROJECT_DIR$/apps/dangerProject/simulator/modules/run_module.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/dangerProject/simulator/simulator.py" afterPath="$PROJECT_DIR$/apps/dangerProject/simulator/simulator.py" />
+=======
+>>>>>>> cffa53deb60d5eb8996d6ffc22412b3c9babca0e
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/dangerProject/DangerCore/app/commons/user.py" afterPath="$PROJECT_DIR$/apps/dangerProject/DangerCore/app/commons/user.py" />
     </list>
     <ignored path="BuildingRules.iws" />
@@ -53,11 +56,46 @@
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="api.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/apps/dangerProject/DangerCore/app/api.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.2" vertical-offset="2370" max-vertical-offset="2970">
               <caret line="176" column="10" selection-start-line="176" selection-start-column="10" selection-end-line="176" selection-end-column="10" />
+=======
+      <file leaf-file-name="user.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/apps/dangerProject/DangerCore/app/commons/user.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="3" column="89" selection-start="100" selection-end="100" vertical-scroll-proportion="0.0989011" vertical-offset="0" max-vertical-offset="455">
+>>>>>>> cffa53deb60d5eb8996d6ffc22412b3c9babca0e
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+<<<<<<< HEAD
+      <file leaf-file-name="connectionAnalyzer.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/dangerProject/DangerCore/app/core/connectionAnalyzer.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-7.8" vertical-offset="135" max-vertical-offset="1110">
+              <caret line="22" column="32" selection-start-line="22" selection-start-column="32" selection-end-line="22" selection-end-column="32" />
+=======
+      <file leaf-file-name="api.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/dangerProject/DangerCore/app/api.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="10" column="9" selection-start="364" selection-end="364" vertical-scroll-proportion="0.0" vertical-offset="2155" max-vertical-offset="3120">
+>>>>>>> cffa53deb60d5eb8996d6ffc22412b3c9babca0e
+              <folding>
+                <element signature="e#0#33#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="audioRecordsManager.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/dangerProject/DangerCore/app/core/audioRecordsManager.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="40" selection-start="79" selection-end="94" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="390">
               <folding />
             </state>
           </provider>
@@ -66,11 +104,8 @@
       <file leaf-file-name="connectionAnalyzer.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apps/dangerProject/DangerCore/app/core/connectionAnalyzer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.8" vertical-offset="135" max-vertical-offset="1110">
-              <caret line="22" column="32" selection-start-line="22" selection-start-column="32" selection-end-line="22" selection-end-column="32" />
-              <folding>
-                <element signature="e#0#33#0" expanded="true" />
-              </folding>
+            <state line="14" column="32" selection-start="265" selection-end="265" vertical-scroll-proportion="0.0" vertical-offset="15" max-vertical-offset="1080">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -135,10 +170,16 @@
         <option value="$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/fire_behavior.py" />
         <option value="$PROJECT_DIR$/apps/dangerProject/simulator/modules/fire_module.py" />
         <option value="$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/tasks/fireTask.py" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/apps/dangerProject/DangerCore/app/core/dangerCore.py" />
         <option value="$PROJECT_DIR$/apps/dangerProject/DangerCore/app/commons/user.py" />
         <option value="$PROJECT_DIR$/apps/dangerProject/VirtualSensor/app/virtualSensorCore.py" />
         <option value="$PROJECT_DIR$/apps/dangerProject/DangerCore/app/api.py" />
+=======
+        <option value="$PROJECT_DIR$/apps/dangerProject/DangerCore/app/api.py" />
+        <option value="$PROJECT_DIR$/apps/dangerProject/DangerCore/app/core/dangerCore.py" />
+        <option value="$PROJECT_DIR$/apps/dangerProject/DangerCore/app/commons/user.py" />
+>>>>>>> cffa53deb60d5eb8996d6ffc22412b3c9babca0e
       </list>
     </option>
   </component>
@@ -538,6 +579,14 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+<<<<<<< HEAD
+=======
+    <entry file="file://$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/path/path.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1350" />
+      </provider>
+    </entry>
+>>>>>>> cffa53deb60d5eb8996d6ffc22412b3c9babca0e
     <entry file="file://$PROJECT_DIR$/apps/dangerProject/simulator/buildings/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.2" vertical-offset="0" max-vertical-offset="150">
@@ -852,6 +901,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/apps/dangerProject/DangerCore/venv/lib/python2.7/site-packages/sqlalchemy/sql/functions.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.2047244" vertical-offset="7065" max-vertical-offset="7950">
@@ -861,6 +911,9 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/apps/dangerProject/DangerCore/app/core/connectionAnalyzer.py">
+=======
+    <entry file="file://$PROJECT_DIR$/apps/dangerProject/DangerCore/app/core/dangerCore.py">
+>>>>>>> cffa53deb60d5eb8996d6ffc22412b3c9babca0e
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-7.8" vertical-offset="135" max-vertical-offset="1110">
           <caret line="22" column="32" selection-start-line="22" selection-start-column="32" selection-end-line="22" selection-end-column="32" />
@@ -872,6 +925,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/apps/dangerProject/DangerCore/app/commons/user.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state vertical-scroll-proportion="0.11811024" vertical-offset="0" max-vertical-offset="635">
           <caret line="5" column="24" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
           <folding />
@@ -882,24 +936,46 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-8.44" vertical-offset="14" max-vertical-offset="1170">
           <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
+=======
+        <state line="10" column="9" selection-start="364" selection-end="364" vertical-scroll-proportion="0.0" vertical-offset="2155" max-vertical-offset="3120">
+>>>>>>> cffa53deb60d5eb8996d6ffc22412b3c9babca0e
           <folding>
             <element signature="e#0#30#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/apps/dangerProject/DangerCore/app/core/dangerCore.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-21.2" vertical-offset="100" max-vertical-offset="735">
           <caret line="46" column="23" selection-start-line="46" selection-start-column="23" selection-end-line="46" selection-end-column="23" />
+=======
+    <entry file="file://$PROJECT_DIR$/apps/dangerProject/DangerCore/app/core/audioRecordsManager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="40" selection-start="79" selection-end="94" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="390">
+>>>>>>> cffa53deb60d5eb8996d6ffc22412b3c9babca0e
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/apps/dangerProject/DangerCore/app/api.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2" vertical-offset="2370" max-vertical-offset="2970">
           <caret line="176" column="10" selection-start-line="176" selection-start-column="10" selection-end-line="176" selection-end-column="10" />
+=======
+    <entry file="file://$PROJECT_DIR$/apps/dangerProject/DangerCore/app/core/connectionAnalyzer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="32" selection-start="265" selection-end="265" vertical-scroll-proportion="0.0" vertical-offset="15" max-vertical-offset="1080">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/dangerProject/DangerCore/app/commons/user.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="89" selection-start="100" selection-end="100" vertical-scroll-proportion="0.0989011" vertical-offset="0" max-vertical-offset="455">
+>>>>>>> cffa53deb60d5eb8996d6ffc22412b3c9babca0e
           <folding />
         </state>
       </provider>
