@@ -33,24 +33,6 @@ def decodeBulletin():
 	return "Bullettin Sent"
 
 
-@app.route('/api/register_user', methods = ['POST'])
-def registerUser():
-	content = request.json
-	print "Ricevuto: " + str(content)
-
-	id = content['id']
-	room = content['room']
-
-	print "ID: " + id
-	print "Room: " + room
-
-	user = User(id, room)
-
-	app.danger_core.register_user(user)
-
-
-
-
 @app.route('/api/check_trigger_status', methods = ['POST'])
 def checkTriggerStatus():
 	content = request.json
@@ -201,3 +183,50 @@ def uploadAudio():
 	message['status'] = 'OK'
 
 	return jsonify(message)
+
+
+@app.route('/api/register_user', methods = ['POST'])
+def registerUser():
+	content = request.json
+	print "Ricevuto: " + str(content)
+
+	id = content['id']
+	room = content['room']
+
+	print "ID: " + str(id)
+	print "Room: " + str(room)
+
+	# TODO fix constructor
+	user = User(id, room=room)
+
+	app.danger_core.register_user(user)
+
+	return jsonify( { 'status': "ok" } )
+
+@app.route('/api/get_users', methods = ['POST'])
+def getUsers():
+	content = request.json
+	print "Ricevuto: " + str(content)
+
+	room = content['room']
+
+	users_count = len(app.danger_core.get_users_by_room(room))
+
+	return jsonify( { 'users': users_count } )
+
+
+@app.route('/api/get_all', methods = ['GET'])
+def getAllUsers():
+
+	users = app.danger_core.get_users_by_room("*")
+	users_json = []
+
+	for u in users:
+		user = {
+			'id': u.user_id,
+			'room': u.room
+		}
+		users_json.append(user)
+
+
+	return jsonify( { 'users': users_json } )

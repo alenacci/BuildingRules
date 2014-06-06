@@ -1,5 +1,6 @@
 from module import Module
 from behaviors.actions.moveAction import MoveAction
+from danger_module import DangerModule
 from renderer import Renderer
 import pygame
 import urllib2
@@ -57,7 +58,7 @@ class RunModule(Module):
 			'room'	: str(agent.current_room.id)
 		}
 
-		req = urllib2.Request('http://localhost:2560/api/notify_run')
+		req = urllib2.Request('http://' + DangerModule.IP + ':2560/api/notify_run')
 		req.add_header('Content-Type', 'application/json')
 
 		try:

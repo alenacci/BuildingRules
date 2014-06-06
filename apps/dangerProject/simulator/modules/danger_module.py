@@ -15,6 +15,7 @@ import random
 class DangerModule(Module):
 
 	ALARM_EFFECT_FREQUENCY = 2.3
+	IP = "192.168.43.172"
 
 	def __init__(self, simulator):
 
@@ -49,7 +50,7 @@ class DangerModule(Module):
 				'timestamp': str(self.last_timestamp)
 			}
 
-			req = urllib2.Request('http://localhost:2001/api/user/get_notifications')
+			req = urllib2.Request('http://'+ self.IP + ':2001/api/user/get_notifications')
 			req.add_header('Content-Type', 'application/json')
 
 			response = json.loads(urllib2.urlopen(req, json.dumps(message)).read())
@@ -86,17 +87,20 @@ class DangerModule(Module):
 			#schedule escape
 			room = self.simulator.building.room_at_position(a.p)
 
-			##ESCAPE TIME ROOMS
-			if hasattr(room, "escape_wait_time"):
-				wait_time = room.escape_wait_time
-				wait_time += random.random()*3
-			else:
-				room.escape_wait_time = 2 * random.random() * 10
-				wait_time = room.escape_wait_time
+			#if room is None the agent is already out of the building
+			if room is not None:
 
-			t = threading.Timer(wait_time, self.start_escape,args=[a])
-			t.setDaemon(True)
-			t.start()
+				##ESCAPE TIME ROOMS
+				if hasattr(room, "escape_wait_time"):
+					wait_time = room.escape_wait_time
+					wait_time += random.random()*3
+				else:
+					room.escape_wait_time = 2 * random.random() * 10
+					wait_time = room.escape_wait_time
+
+				t = threading.Timer(wait_time, self.start_escape,args=[a])
+				t.setDaemon(True)
+				t.start()
 
 
 	def start_escape(self,agent):

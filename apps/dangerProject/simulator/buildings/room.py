@@ -41,3 +41,6 @@ class Room:
 	def random_position(self):
 		tile = self.random_tile()
 		return Point(tile.x, tile.y)
+
+	def __eq__(self, other):
+		return other.id == self.id

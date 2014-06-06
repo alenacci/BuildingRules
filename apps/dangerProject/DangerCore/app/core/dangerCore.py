@@ -37,7 +37,7 @@ class DangerCore:
 					return True
 			return False
 
-
+	# Manage the registration of a user inside a room.
 	def register_user(self, user):
 		for u in self.user_list:
 			if u.__eq__(user):
@@ -45,3 +45,13 @@ class DangerCore:
 					u.room = user.room
 				return
 		self.user_list.append(user)
+
+	# Return a list of users depending on the room
+	def get_users_by_room(self, room_id):
+		if room_id == "*":
+			return self.user_list
+		list = []
+		for u in self.user_list:
+			if u.room == int(room_id):
+				list.append(u)
+		return list

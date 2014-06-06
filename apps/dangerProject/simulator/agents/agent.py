@@ -81,6 +81,8 @@ class Agent(object):
 				self.current_room.agents.remove(self)
 			if room:
 				room.agents.append(self)
+				# the room is changed
+				self.on_room_changed(room)
 
 
 		if self.current_tile is None or not self.current_tile == tile:
@@ -105,6 +107,11 @@ class Agent(object):
 	@event
 	def on_behavior_changed(self, behavior):
 		pass
+
+	@event
+	def on_room_changed(self, room):
+		pass
+
 
 	@event
 	def on_meet_others(self, others):
