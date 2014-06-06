@@ -1,0 +1,100 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#A71616"
+    tools:context="com.hpps.danger.buildingmanager.DangerActivity" >
+
+<!--   -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+         >
+
+         <Button
+                android:id="@+id/listen_button"
+                style="?metaButtonBarButtonStyle"
+                android:layout_height="40dip"
+                android:layout_width="150dip"
+                android:background="@drawable/listen_button"
+                android:layout_marginBottom="60dip"
+                android:text="Listen" />
+        
+        <TextView
+            android:id="@+id/fullscreen_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:keepScreenOn="true"
+            android:gravity="center"
+            android:text="POTENTIAL\nDANGER"
+            android:textColor="#FFFFFF"
+            android:textSize="50sp"
+            android:textStyle="bold" />
+        
+
+         <TextView
+            android:id="@+id/building_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Building:"/>
+        
+        <TextView
+            android:id="@+id/room_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Room:"/>
+        
+        <TextView
+            android:id="@+id/danger_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Description:"
+            android:layout_marginBottom="60dip"/>
+        
+    </LinearLayout>
+
+<!--       BOTTOM BUTTONS -->
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true" >
+
+        <LinearLayout
+            android:id="@+id/fullscreen_content_controls"
+            style="?metaButtonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:background="@color/black_overlay"
+            android:orientation="horizontal"
+            tools:ignore="UselessParent" >
+
+            <Button
+                android:id="@+id/confirm_button"
+                style="?metaButtonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Confirm Danger" />
+
+            <FrameLayout
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:background="#FFFFFF" >
+            </FrameLayout>
+
+            <Button
+                android:id="@+id/dummy_button"
+                style="?metaButtonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Ignore Danger" />
+        </LinearLayout>
+    </FrameLayout>
+
+</FrameLayout>
