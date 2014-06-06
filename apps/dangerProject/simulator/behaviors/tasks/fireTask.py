@@ -26,14 +26,14 @@ class FireTask(Task):
 
 	def on_action_ended(self, action):
 		# SHAKING before escaping
-		if self.counter < 8:
+		'''if self.counter < 8:
 			pos = self.agent.p
 			if self.counter%2 == 0:
 				shake = actions.MoveAction(self.agent,commons.Point(pos.x+1, pos.y), speed = 8)
 			else:
 				shake = actions.MoveAction(self.agent,commons.Point(pos.x-1, pos.y), speed = 8)
 			self.actions.append(shake)
-			self.counter += 1
+			self.counter += 1'''
 		Task.on_action_ended(self, action)
 
 
