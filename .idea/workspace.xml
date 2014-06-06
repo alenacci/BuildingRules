@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="714e861b-58bd-4999-aeaa-700c805f0bf9" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/dangerProject/DangerCore/app/api.py" afterPath="$PROJECT_DIR$/apps/dangerProject/DangerCore/app/api.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/dangerProject/DangerCore/app/core/dangerCore.py" afterPath="$PROJECT_DIR$/apps/dangerProject/DangerCore/app/core/dangerCore.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/tasks/fireTask.py" afterPath="$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/tasks/fireTask.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/dangerProject/DangerCore/app/commons/user.py" afterPath="$PROJECT_DIR$/apps/dangerProject/DangerCore/app/commons/user.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="BuildingRules.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -40,22 +36,40 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="user.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="user.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/apps/dangerProject/DangerCore/app/commons/user.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="43" selection-start="319" selection-end="319" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="285">
+            <state line="3" column="89" selection-start="100" selection-end="100" vertical-scroll-proportion="0.0989011" vertical-offset="0" max-vertical-offset="455">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="api.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="api.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apps/dangerProject/DangerCore/app/api.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="9" selection-start="364" selection-end="364" vertical-scroll-proportion="-5.5274725" vertical-offset="2665" max-vertical-offset="3120">
+            <state line="10" column="9" selection-start="364" selection-end="364" vertical-scroll-proportion="0.0" vertical-offset="2155" max-vertical-offset="3120">
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="audioRecordsManager.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/dangerProject/DangerCore/app/core/audioRecordsManager.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="40" selection-start="79" selection-end="94" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="390">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="connectionAnalyzer.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/dangerProject/DangerCore/app/core/connectionAnalyzer.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="14" column="32" selection-start="265" selection-end="265" vertical-scroll-proportion="0.0" vertical-offset="15" max-vertical-offset="1080">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -122,8 +136,8 @@
         <option value="$PROJECT_DIR$/apps/dangerProject/simulator/modules/fire_module.py" />
         <option value="$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/tasks/fireTask.py" />
         <option value="$PROJECT_DIR$/apps/dangerProject/DangerCore/app/api.py" />
-        <option value="$PROJECT_DIR$/apps/dangerProject/DangerCore/app/commons/user.py" />
         <option value="$PROJECT_DIR$/apps/dangerProject/DangerCore/app/core/dangerCore.py" />
+        <option value="$PROJECT_DIR$/apps/dangerProject/DangerCore/app/commons/user.py" />
       </list>
     </option>
   </component>
@@ -455,16 +469,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/apps/dangerProject/simulator/res/map_rooms.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/dangerProject/simulator/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="371" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/apps/dangerProject/simulator/behaviors/path/path.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1350" />
@@ -715,13 +719,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/dangerProject/DangerCore/app/commons/user.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="43" selection-start="319" selection-end="319" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="285">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/apps/dangerProject/DangerCore/app/core/dangerCore.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="46" column="34" selection-start="1294" selection-end="1294" vertical-scroll-proportion="0.0" vertical-offset="168" max-vertical-offset="795">
@@ -733,10 +730,31 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/apps/dangerProject/DangerCore/app/api.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="9" selection-start="364" selection-end="364" vertical-scroll-proportion="-5.5274725" vertical-offset="2665" max-vertical-offset="3120">
+        <state line="10" column="9" selection-start="364" selection-end="364" vertical-scroll-proportion="0.0" vertical-offset="2155" max-vertical-offset="3120">
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/dangerProject/DangerCore/app/core/audioRecordsManager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="40" selection-start="79" selection-end="94" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="390">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/dangerProject/DangerCore/app/core/connectionAnalyzer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="32" selection-start="265" selection-end="265" vertical-scroll-proportion="0.0" vertical-offset="15" max-vertical-offset="1080">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/dangerProject/DangerCore/app/commons/user.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="89" selection-start="100" selection-end="100" vertical-scroll-proportion="0.0989011" vertical-offset="0" max-vertical-offset="455">
+          <folding />
         </state>
       </provider>
     </entry>
