@@ -22,6 +22,9 @@ from app.backend.drivers.genericTriggerDriver import GenericTriggerDriver
 
 trigger = imp.load_source('bulletin', os.path.join(os.path.dirname(__file__), '../../../../apps/dangerProject/DangerCore/tools/triggerRequestHelper.py'))
 
+
+"""Check if a real Danger is triggered. In our implementation it waits for the building
+	manager to confirm the danger"""
 class DangerTriggerDriver(GenericTriggerDriver):
 
 
