@@ -54,8 +54,10 @@ class GorillaAttackDriver(GenericTriggerDriver):
 		import random
 
 		if self.parameters["operation"] == "GORILLA_ATTACK":
+			#Check the virtual sensor
 			status = trigger.check_sensor_status()
 			if status['status'] == 'True':
+				self.parameters["danger_room"] = status['room']
 				return True
 			else:
 				return False
