@@ -9,6 +9,7 @@ class DangerCore:
 
 	def __init__(self):
 		self.bulletin_list = []
+		self.user_list = []
 		self.TEST_confirmed_from_building_manager = False
 		self.audioRecordsManager = AudioRecordsManager()
 		self.notificationsManager = NotificationsManager()
@@ -35,3 +36,12 @@ class DangerCore:
 				if b.__eq__(bulletin):
 					return True
 			return False
+
+
+	def register_user(self, user):
+		for u in self.user_list:
+			if u.__eq__(user):
+				if u.room != user.room:
+					u.room = user.room
+				return
+		self.user_list.append(user)
