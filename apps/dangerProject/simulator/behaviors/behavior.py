@@ -53,16 +53,21 @@ class Behavior:
 		self.agent.current_action = action
 		action.end.connect(self.onActionEnded, True)
 		try:
+			#print str(action)
 			action.start()
 		except actions.NoPathToTargetDestination:
 			action.end()
 
-	def wait(self):
+	def wait(self, wait_time = None):
+		if wait_time == None:
+			wait_time = random.randint(1,10)
 		import actions
-		action = actions.WaitAction(self.agent, random.randint(1,10))
+		action = actions.WaitAction(self.agent, wait_time)
 		self.agent.current_action = action
 		action.end.connect(self.onActionEnded, True)
+		#print str(action) + str(wait_time)
 		action.start()
+
 
 	def toilet(self):
 		self.task = tasks.toiletTask.ToiletTask(self.agent)
@@ -73,6 +78,7 @@ class Behavior:
 	def onActionEnded(self,action):
 		#print str(action)
 		self.newAction()
+
 
 	def stop(self):
 		if self.task is not None:

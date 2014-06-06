@@ -23,7 +23,7 @@ class EscapeBehavior(Behavior):
 		self.task.end.connect(self.onEscapeEnded, False)
 		self.task.start()
 
-		#ESCAPE BEHAVIOR IS TRASMISSIBLE
+		#ESCAPE BEHAVIOR IS TRANSMISSIBLE
 		self.agent.on_meet_others.connect(self._on_meet_others, False)
 
 

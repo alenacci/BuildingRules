@@ -20,6 +20,7 @@ class Agent(object):
 
 		self._update_current_tile()
 
+
 	def setPosition(self,p):
 		self.p = p.dup()
 		self._update_current_tile()

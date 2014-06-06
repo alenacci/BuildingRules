@@ -3,6 +3,7 @@ from flask import request, jsonify
 from app.commons import *
 from app.commons.notification import Notification
 from app.commons.bulletin import Bulletin
+from app.commons.user import User
 from app.core import connectionAnalyzer
 from tools.triggerRequestHelper import *
 from app.core.dangerCore import DangerCore
@@ -30,6 +31,23 @@ def decodeBulletin():
 
 
 	return "Bullettin Sent"
+
+
+@app.route('/api/register_user', methods = ['POST'])
+def registerUser():
+	content = request.json
+	print "Ricevuto: " + str(content)
+
+	id = content['id']
+	room = content['room']
+
+	print "ID: " + id
+	print "Room: " + room
+
+	user = User(id, room)
+
+	app.danger_core.register_user(user)
+
 
 
 

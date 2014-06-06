@@ -4,10 +4,14 @@ from commons.point import *
 import behaviors.behavior as behavior
 import random
 import concurrent.futures
+
+import dangers
 from triggers.trigger_manager import TriggerManager
 import modules
 from utils.worldTime import worldTime
+from triggers.trigger import Trigger
 from behaviors.escape_behavior import EscapeBehavior
+
 
 #simulator
 sim = None
@@ -97,3 +101,8 @@ class Simulator:
 				mod.update(self.time)
 			except Exception:
 				mod.handle_exception()
+
+		if self.time%3 > 0 and self.time%3 < .1:
+		#if self.time > 3 and self.time < 3.10:
+			room = self.building.random_room()
+			self.trigger_manager.fire_trigger(Trigger("fire", room, room.random_position()))
