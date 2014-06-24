@@ -5,6 +5,7 @@ from commons.point import Point
 import simulator
 from behaviors.fire_behavior import FireBehavior
 from behaviors.escape_behavior import EscapeBehavior
+import random
 
 class Fire:
 	def __init__(self, room, position):
@@ -39,7 +40,9 @@ class FireModule(Module):
 	def _on_fire_trigger(self, trigger):
 
 		room = self.simulator.building.rooms[trigger.room_id]
-		position = room.random_position()
+		###XXX PSEUDO RANDOM
+		tile = random.Random(500).choice(room.tiles)
+		position = Point(tile.x,tile.y)
 		fire = Fire(room, position)
 
 		self.fires.append(fire)

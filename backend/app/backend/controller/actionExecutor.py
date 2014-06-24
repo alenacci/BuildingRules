@@ -62,6 +62,10 @@ class ActionExecutor:
 
 	def checkRuleTrigger(self, rule):
 
+		### TRIGGER RETURN VALUES ###
+		#set it as an empty set
+		rule.triggers_returned_values = {}
+
 		triggerManager = TriggerManager()
 		#trigger, originalModel, parameters = triggerManager.getTriggerAndTemplateAndParameterValues(rule.antecedent)
 		translatedTriggers = triggerManager.translateTrigger(rule.antecedent) 
@@ -90,6 +94,12 @@ class ActionExecutor:
 
 			try:
 				if driver.eventTriggered():
+					### RETURN VALUES ###
+					if driver.parameters.has_key('returnValues'):
+						rule.triggers_returned_values = dict(driver.parameters['returnValues'].items() +
+														rule.triggers_returned_values.items())
+
+
 					flash(message + ") the antecedent portion '" + trigger.ruleAntecedent + "' is TRUE...", "green")
 				else:
 					flash(message + ") the antecedent portion '" + trigger.ruleAntecedent + "' is FALSE...", "red")
@@ -114,6 +124,9 @@ class ActionExecutor:
 			localSimulationParameters = self.simulationParameters.copy()
 			localSimulationParameters.update({'ruleId' : rule.id, 'ruleText' : rule.getFullRepresentation()})
 			parameters.update({'simulationParameters' : localSimulationParameters})
+
+		### TRIGGER RETURN VALUES
+		parameters.update({'triggerReturnedValues' : rule.triggers_returned_values})
 
 		driver = actionManager.getActionDriver(action, parameters)
 

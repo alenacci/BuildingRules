@@ -15,7 +15,8 @@ import random
 class DangerModule(Module):
 
 	ALARM_EFFECT_FREQUENCY = 2.3
-	IP = "192.168.43.172"
+	RED_INTENSITY = 60
+	IP = "0.0.0.0"
 
 	def __init__(self, simulator):
 
@@ -120,7 +121,7 @@ class DangerModule(Module):
 	def render_foreground(self, window):
 		if self.alarm:
 			t = self.simulator.time
-			alpha = abs(math.sin( (t - self.start_alarm_time) * DangerModule.ALARM_EFFECT_FREQUENCY ) ) * 100
+			alpha = abs(math.sin( (t - self.start_alarm_time) * DangerModule.ALARM_EFFECT_FREQUENCY ) ) * DangerModule.RED_INTENSITY
 			self.surface.set_alpha(alpha)
 
 			window.blit(self.surface, (0, 0) )

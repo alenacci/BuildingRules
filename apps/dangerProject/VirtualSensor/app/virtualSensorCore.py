@@ -3,7 +3,7 @@ from app import app
 from app.bulletin import Bulletin
 import time
 
-IP = "192.168.43.172"
+IP = "0.0.0.0"
 
 #Request Rules to update the real time rules
 def request_rules_real_time_update_async():
@@ -15,8 +15,8 @@ def request_rules_real_time_update():
 
 class VirtualSensorCore:
 
-	UPDATE_PERIOD = 5
-	MIN_OCCUPIERS = 4
+	UPDATE_PERIOD = 6
+	MIN_OCCUPIERS = 3
 
 	def __init__(self):
 		self.bulletin_list = []
@@ -52,44 +52,53 @@ class VirtualSensorCore:
 	def checkTreshold(self):
 
 		over_threshold = False
-		rooms = self.get_room_list()
 
+		buildings = self.get_building_list()
 
+		for building in buildings:
+			rooms = self.get_room_list(building)
 
-		for room in rooms :
-			occupiers = self.users_in_room(room)
-			THRESHOLD = occupiers/2 + 1
-			runners = self.run_occurrences(room)
+			for room in rooms :
+				occupiers = self.users_in_room(room)
+				THRESHOLD = occupiers/2 + 1
+				runners = self.run_occurrences(room)
 
-			print "RUNNING" + str(runners) + "/" + str(occupiers) + " Room " + str(room)
+				#print "RUNNING" + str(runners) + "/" + str(occupiers) + " Room " + str(room)
 
-			if occupiers > VirtualSensorCore.MIN_OCCUPIERS and runners > THRESHOLD:
-				print "ALARM!!"
+				if occupiers > VirtualSensorCore.MIN_OCCUPIERS and runners > THRESHOLD:
+				#	print "ALARM!!"
 
-#				data = {
-#				'danger_type' : "escape",
-#				'buildings': b.buildings,
-#				'room' : b.room
-#				}
+	#				data = {
+	#				'danger_type' : "escape",
+	#				'buildings': b.buildings,
+	#				'room' : b.room
+	#				}
 
-#				req = urllib2.Request('http://localhost:2001/api/send_bulletin')
-#				req.add_header('Content-Type', 'application/json')
+	#				req = urllib2.Request('http://localhost:2001/api/send_bulletin')
+	#				req.add_header('Content-Type', 'application/json')
 
-#				response = urllib2.urlopen(req, json.dumps(data))
-				over_threshold = True
-				# TODO manage building
-				self.trigger_run = {'room':room, 'building':"BUILDING"}
-
+	#				response = urllib2.urlopen(req, json.dumps(data))
+					over_threshold = True
+					# TODO manage building
+					self.trigger_run = {'room':room, 'building':building}
 
 		if over_threshold:
 			request_rules_real_time_update_async()
 
-	def get_room_list(self):
+
+	def get_room_list(self, building):
 		rooms = []
 		for b in self.bulletin_list:
-			if b.room not in rooms:
+			if b.room not in rooms and b.building == building:
 				rooms.append(b.room)
 		return rooms
+
+	def get_building_list(self):
+		# TODO
+		if len(self.bulletin_list) > 0:
+			return [self.bulletin_list[0].building]
+		else:
+			return []
 
 	def run_occurrences(self,room):
 		count = 0
@@ -117,13 +126,11 @@ class VirtualSensorCore:
 
 	# Removes all bulletin that are older than 5 seconds
 	def update_bulletin_list(self):
-		print "PIRMA"
 		self.lock.acquire()
 		remove_list = []
 		for bulletin in self.bulletin_list:
 			if time.time() - bulletin.timestamp > self.UPDATE_PERIOD:
 				remove_list.append(bulletin)
-		print "AAA" + str(len(remove_list))
 
 		for bulletin in remove_list:
 			self.bulletin_list.remove(bulletin)

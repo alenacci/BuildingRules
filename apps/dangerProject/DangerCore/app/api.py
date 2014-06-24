@@ -69,7 +69,7 @@ def getCurrentStatus():
 		b = app.danger_core.bulletin_list[0]
 		message['building'] = b.building
 		message['room'] = b.room
-		message['description'] = 'Unusual movements, smoke detected'
+		message['description'] = 'Unusual movements'
 		message['status'] = 'ALERT'
 	else:
 		message['status'] = 'OK'

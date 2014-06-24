@@ -35,6 +35,7 @@ class Room:
 	def size(self):
 		return len(self.tiles)
 
+
 	def random_tile(self):
 		return random.choice(self.tiles)
 

@@ -69,12 +69,15 @@ class Agent(object):
 		if self.current_tile:
 			return self.current_tile.room
 
+
 	#update the tile where the agent is placed
 	#and the corresponding room
 	def _update_current_tile(self):
 		grid = simulator.sim.building.grid
 		tile = grid.tiles[int(self.x)][int(self.y)]
 		room = tile.room
+
+
 
 		if self.current_room != room:
 			if self.current_room:

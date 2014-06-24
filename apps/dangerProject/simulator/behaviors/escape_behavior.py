@@ -41,7 +41,6 @@ class EscapeBehavior(Behavior):
 	def _on_meet_others(self,others):
 		for a in others:
 			if a.behavior.__class__.__name__ != "EscapeBehavior":
-				print "INFECTED"
 				a.behavior.stop()
 				a.behavior = EscapeBehavior()
 				a.behavior.escape_regions = self.escape_regions

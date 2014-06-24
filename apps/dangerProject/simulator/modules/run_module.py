@@ -54,7 +54,7 @@ class RunModule(Module):
 		message = {
         	'user': agent.danger_name,
 			'state' : 'running',
-			'buildings' : 'simulator',
+			'building' : 'simulator',
 			'room'	: str(agent.current_room.id)
 		}
 

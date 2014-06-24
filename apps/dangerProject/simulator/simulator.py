@@ -74,7 +74,17 @@ class Simulator:
 			agent.setPosition(pos)
 
 			self.agents.append(agent)
+
+			#if i < 40:
 			beh = behavior.Behavior()
+			#else:
+			#	beh = EscapeBehavior()
+			#	beh.escape_regions = [ [(37, 30), (46, 0)],
+			#							[(46, 19), (51, 0)],
+			#							[(53, 7),  (63, 0)]  ]
+
+			agent.behavior = beh
+			beh.start()
 			agent.behavior = beh
 
 			beh.start()

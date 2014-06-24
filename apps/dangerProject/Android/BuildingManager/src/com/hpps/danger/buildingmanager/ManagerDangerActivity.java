@@ -2,7 +2,6 @@ package com.hpps.danger.buildingmanager;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.StatusLine;
@@ -14,7 +13,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
-
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -24,7 +23,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
-
 import com.hpps.danger.DangerApplication;
 
 /**
@@ -42,25 +40,27 @@ public class ManagerDangerActivity extends Activity {
 		TextView roomText = (TextView)findViewById(R.id.room_text);
 		TextView descriptionText = (TextView)findViewById(R.id.danger_text);
 
-		buildingText.setText("Building: " + getIntent().getExtras().getString("building"));
-		roomText.setText("CSE: " + getIntent().getExtras().getString("room"));
+		buildingText.setText("Room: " + getIntent().getExtras().getString("building"));
+		roomText.setText("Building: " + getIntent().getExtras().getString("room"));
 		descriptionText.setText("Description: " + getIntent().getExtras().getString("description"));
 
 		Button listenButton = (Button)findViewById(R.id.listen_button);
 
 		confirmButton.setOnClickListener(new OnClickListener() {
 
+			@SuppressLint("NewApi")
 			@Override
 			public void onClick(View v) {
-				new RequestTask(true).execute();
+				new RequestTask(true).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,"");
 			}
 		});
 
 
 		listenButton.setOnClickListener(new OnClickListener() {
+			@SuppressLint("NewApi")
 			@Override
 			public void onClick(View v) {
-				new AudioSensingTask().execute();
+				new AudioSensingTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,"");
 			}
 		});
 	}
@@ -162,6 +162,7 @@ public class ManagerDangerActivity extends Activity {
 
 			//Start playing when ready
 			try {
+				//this.wait(16000);
 				Thread.sleep(16000);
 				
 				if (waitForFile()) {
@@ -215,9 +216,13 @@ public class ManagerDangerActivity extends Activity {
 					//return false;
 				}
 				
+				attemps++;
+				
 				//wait 
 				try {
+					
 					Thread.sleep(2000);
+					//this.wait(2000);
 				} catch (InterruptedException e) {
 					return false;
 				}

@@ -32,12 +32,11 @@ class DangerActionDriver:
 
 	def __actualActuation(self):
 		operation = self.parameters['operation']
-		try:
-			print "room: " + self.parameters['danger_room']
-		except Exception,e :
-			print("error: " + str(e))
+		trigger_vals =  self.parameters['triggerReturnedValues']
+
 		print "send bulletin!!!"
-		bulletin.send_bulletin( danger_type=operation, building=self.parameters['buildingName'], room=self.parameters['roomName'])
+		print trigger_vals['building']
+		bulletin.send_bulletin( danger_type=operation, building=trigger_vals['building'], room=trigger_vals['room'])
 
 	def __simulatedActuation(self):
 		pass

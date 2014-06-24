@@ -31,7 +31,6 @@ class RealTimeExecutor:
 			msg = conn.recv()
 			print 'RECEIVED ' +  msg
 			if msg == 'update':
-				print 'DENTRO IF'
 				RealTimeExecutor.requestUpdate = True
 				conn.close()
 
