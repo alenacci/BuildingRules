@@ -105,7 +105,7 @@ class TooManyInputParametersError(Exception):
 class BuildingDepotError(Exception):
 	pass
 
-class AlredyAssignedPriorityError(Exception):
+class AlreadyAssignedPriorityError(Exception):
 	pass
 
 class BadInputError(Exception):

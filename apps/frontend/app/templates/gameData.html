@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<body>
+    <div>
+        <div style="float: left">
+            <div>
+                <div style="float:left">
+                    <h3>You</h3>
+                    {%if youHappy %}
+                        <img height="364" width="210" src="{{url_for('static', filename='images/gameImages/youHappy.jpg')}}">
+                    {% else %}
+                        <img height="364" width="210" src="{{url_for('static', filename='images/gameImages/youSad.jpg')}}">
+                    {% endif %}
+                </div>
+
+                <div style="float:left">
+                    <h3>Building Manager</h3>
+                    {%if managerHappy %}
+                        <img height="364" width="210" src="{{url_for('static', filename='images/gameImages/happyBuildingManager.jpg')}}">
+                    {% else %}
+                        <img height="364" width="210" src="{{url_for('static', filename='images/gameImages/sadBuildingManager.jpg')}}">
+                    {% endif %}
+                </div>
+            </div>
+
+            <div>
+                <button id="manageButton" style='width:80px; height:40px; bottom:auto; vertical-align: bottom;'>Manage Building</button>
+            </div>
+        </div>
+
+        <div style="float: left; border: 2px black dotted">
+            <h3>Last Update Time: {{time}}</h3>
+            <h3>Score: {{score}}</h3>
+            <br>
+            <h2 style="color: red"><b>Room Stats</b></h2>
+            <h3>Room Temp : {{infoRoom["RoomTemp"]}} </h3>
+            <h3>Ext Temp : {{infoRoom["ExtTemp"]}} </h3>
+            <h3>Humidity : {{infoRoom["Hum"]}} </h3>
+            <h3>Weather : {{infoRoom["Weather"]}} </h3>
+            <h3>Power consumption : {{infoRoom["Power"]}} </h3>
+            <br>
+
+            <h2 style="color: red"><b>Actuators Stats</b></h2>
+            {% for category in categoryList%}
+                <h3> {{category}}: {% if category in statusDict%}{{statusDict[category]}}{%endif%}</h3>
+            {% endfor %}
+        </div>
+
+        <div style="float: left; border: 2px black dotted">
+            <h2 style="color: red"><b>Ranking</b></h2>
+            {% for rank in ranking.items()%}
+                <h3> {{rank[0]}}: {{rank[1]}}</h3>
+            {% endfor %}
+        </div>
+
+        <div style="float: left; border: 2px black dotted">
+            <h2 style="color: red"><b>Room List</b></h2>
+            {% for room in roomList%}
+                <h3><a href='javascript:document.r_{{room.roomName}}.submit();'>{{room["roomName"]}} - {{room["description"]}}</a></h3>
+                <form name="r_{{room.roomName}}" action="/buildings/CSE/rooms/{{room.roomName}}/game/" method="POST"></form>
+            {% endfor %}
+        </div>
+    </div>
+    <script src="{{url_for('static', filename='js/game.js')}}"></script>
+</body>
+</html>

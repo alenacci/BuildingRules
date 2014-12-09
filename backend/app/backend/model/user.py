@@ -65,6 +65,30 @@ class User:
 
 		return roomList
 
+	def getRoomsDict(self):
+
+		from app.backend.model.room import Room
+
+		database = Database()
+		database.open()
+
+		query = "SELECT * FROM users_rooms WHERE user_uuid = '@@uuid@@';"
+		query = self.__replaceSqlQueryToken(query)
+		queryResult = database.executeReadQuery(query)
+		database.close()
+
+		roomList = []
+		for record in queryResult:
+			roomName = record[0]
+			buildingName = record[1]
+
+			room = Room(roomName = roomName,  buildingName = buildingName)
+			room.retrieve()
+
+			roomList.append(room.getDict())
+
+		return roomList
+
 	def getBuildings(self):		
 		
 		buildingList = []

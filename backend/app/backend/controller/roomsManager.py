@@ -80,8 +80,6 @@ class RoomsManager:
 			if conflictingAntecedentFound:
 				conflictingRuleList.append({"ruleId" : rule.id, "ruleBody" : rule.getFullRepresentation()})
 
-
-
 		return {"conflictingRules" : conflictingRuleList}
 
 
@@ -508,7 +506,7 @@ class RoomsManager:
 		# Checking that a priority is unique over the same category	
 		for r in roomRules:
 			if str(r.category) == str(category) and int(r.getPriority()) == int(priority):
-				raise AlredyAssignedPriorityError("In room " + roomName + " the priority " + str(priority) + " has alredy been assigned to another rule with the same category!")
+				raise AlreadyAssignedPriorityError("In room " + roomName + " the priority " + str(priority) + " has alredy been assigned to another rule with the same category!")
 
 		temporaryRuleSet = []
 		temporaryRuleSet.extend(roomRules)
@@ -532,8 +530,8 @@ class RoomsManager:
 					for t2 in otherRuleTriggers:
 						if t1 == t2:
 							deleteRule = True
-							break;
-					if deleteRule: break;
+							break
+					if deleteRule: break
 
 			if deleteRule:
 				del temporaryRuleSet[i]

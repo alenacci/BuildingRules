@@ -1,11 +1,13 @@
 
 ruleCategories = [];
+currentCategory = "SHOWALL";
+currentDayPeriod = "ALLPERIOD";
 
 function hideClass(className)
 {
 	var elements = document.getElementsByClassName(className), i;
 
-	for (var i = 0; i < elements.length; i ++) {
+	for (i = 0; i < elements.length; i ++) {
 	    elements[i].style.display = 'none';
 	}
 }
@@ -14,13 +16,181 @@ function showClass(className)
 {
 	var elements = document.getElementsByClassName(className), i;
 
-	for (var i = 0; i < elements.length; i ++) {
+	for (i = 0; i < elements.length; i ++) {
 	    elements[i].style.display = 'block';
 	}
 }
 
-function filterByRuleCategory(roomName, ruleCategory)
+function filterByDayPeriod(roomName, dayPeriod,fromCategoryFilter)
 {
+
+    currentDayPeriod = dayPeriod;
+    if (!fromCategoryFilter) {
+        filterByRuleCategory(roomName,currentCategory);
+    }
+    var i;
+
+
+	if (dayPeriod == "ALLPERIOD")
+	{
+		document.getElementById("btn_" + roomName + "_NIGHT").setAttribute("class", "btn");
+        document.getElementById("btn_" + roomName + "_EVENING").setAttribute("class", "btn");
+        document.getElementById("btn_" + roomName + "_AFTERNOON").setAttribute("class", "btn");
+        document.getElementById("btn_" + roomName + "_MORNING").setAttribute("class", "btn");
+		document.getElementById("btn_" + roomName + "_ALLPERIOD").setAttribute("class", "btn active");
+
+	} else if (dayPeriod == "MORNING")
+	{
+
+        var elements = document.getElementsByClassName('rule_' + roomName + "_AFTERNOON" );
+        for (i = 0; i < elements.length; i ++) {
+            if (elements[i].style.display == "block"){
+                elements[i].style.display = "none"
+            }
+        }
+
+        elements = document.getElementsByClassName('rule_' + roomName + "_EVENING" );
+        for (i = 0; i < elements.length; i ++) {
+            if (elements[i].style.display == "block"){
+                elements[i].style.display = "none"
+            }
+        }
+
+        elements = document.getElementsByClassName('rule_' + roomName + "_NIGHT" );
+        for (i = 0; i < elements.length; i ++) {
+            if (elements[i].style.display == "block"){
+                elements[i].style.display = "none"
+            }
+        }
+
+        elements = document.getElementsByClassName('rule_' + roomName + "_ALLPERIOD" );
+        for (i = 0; i < elements.length; i ++) {
+            if (elements[i].style.display == "block"){
+                elements[i].style.display = "none"
+            }
+        }
+
+		document.getElementById("btn_" + roomName + "_NIGHT").setAttribute("class", "btn");
+        document.getElementById("btn_" + roomName + "_EVENING").setAttribute("class", "btn");
+        document.getElementById("btn_" + roomName + "_AFTERNOON").setAttribute("class", "btn");
+        document.getElementById("btn_" + roomName + "_MORNING").setAttribute("class", "btn active");
+		document.getElementById("btn_" + roomName + "_ALLPERIOD").setAttribute("class", "btn");
+
+	} else if (dayPeriod == "AFTERNOON")
+	{
+        var elements = document.getElementsByClassName('rule_' + roomName + "_MORNING");
+        for (i = 0; i < elements.length; i ++) {
+            if (elements[i].style.display == "block"){
+                elements[i].style.display = "none"
+            }
+        }
+
+        elements = document.getElementsByClassName('rule_' + roomName + "_EVENING" );
+        for (var i = 0; i < elements.length; i ++) {
+            if (elements[i].style.display == "block"){
+                elements[i].style.display = "none"
+            }
+        }
+
+        elements = document.getElementsByClassName('rule_' + roomName + "_NIGHT" );
+        for (i = 0; i < elements.length; i ++) {
+            if (elements[i].style.display == "block"){
+                elements[i].style.display = "none"
+            }
+        }
+
+        elements = document.getElementsByClassName('rule_' + roomName + "_ALLPERIOD" );
+        for ( i = 0; i < elements.length; i ++) {
+            if (elements[i].style.display == "block"){
+                elements[i].style.display = "none"
+            }
+        }
+
+		document.getElementById("btn_" + roomName + "_NIGHT").setAttribute("class", "btn");
+        document.getElementById("btn_" + roomName + "_EVENING").setAttribute("class", "btn");
+        document.getElementById("btn_" + roomName + "_AFTERNOON").setAttribute("class", "btn active");
+        document.getElementById("btn_" + roomName + "_MORNING").setAttribute("class", "btn");
+		document.getElementById("btn_" + roomName + "_ALLPERIOD").setAttribute("class", "btn");
+
+	} else if (dayPeriod == "EVENING")
+	{
+        var elements = document.getElementsByClassName('rule_' + roomName + "_MORNING");
+        for ( i = 0; i < elements.length; i ++) {
+            if (elements[i].style.display == "block"){
+                elements[i].style.display = "none"
+            }
+        }
+
+        elements = document.getElementsByClassName('rule_' + roomName + "_AFTERNOON" );
+        for ( i = 0; i < elements.length; i ++) {
+            if (elements[i].style.display == "block"){
+                elements[i].style.display = "none"
+            }
+        }
+
+        elements = document.getElementsByClassName('rule_' + roomName + "_NIGHT" );
+        for ( i = 0; i < elements.length; i ++) {
+            if (elements[i].style.display == "block"){
+                elements[i].style.display = "none"
+            }
+        }
+
+        elements = document.getElementsByClassName('rule_' + roomName + "_ALLPERIOD" );
+        for ( i = 0; i < elements.length; i ++) {
+            if (elements[i].style.display == "block"){
+                elements[i].style.display = "none"
+            }
+        }
+
+		document.getElementById("btn_" + roomName + "_NIGHT").setAttribute("class", "btn");
+        document.getElementById("btn_" + roomName + "_EVENING").setAttribute("class", "btn active");
+        document.getElementById("btn_" + roomName + "_AFTERNOON").setAttribute("class", "btn");
+        document.getElementById("btn_" + roomName + "_MORNING").setAttribute("class", "btn");
+		document.getElementById("btn_" + roomName + "_ALLPERIOD").setAttribute("class", "btn");
+
+	}
+    else if (dayPeriod == "NIGHT")
+	{
+        var elements = document.getElementsByClassName('rule_' + roomName + "_MORNING");
+        for ( i = 0; i < elements.length; i ++) {
+            if (elements[i].style.display == "block"){
+                elements[i].style.display = "none"
+            }
+        }
+
+        elements = document.getElementsByClassName('rule_' + roomName + "_AFTERNOON" );
+        for ( i = 0; i < elements.length; i ++) {
+            if (elements[i].style.display == "block"){
+                elements[i].style.display = "none"
+            }
+        }
+
+        elements = document.getElementsByClassName('rule_' + roomName + "_EVENING" );
+        for ( i = 0; i < elements.length; i ++) {
+            if (elements[i].style.display == "block"){
+                elements[i].style.display = "none"
+            }
+        }
+
+        elements = document.getElementsByClassName('rule_' + roomName + "_ALLPERIOD" );
+        for ( i = 0; i < elements.length; i ++) {
+            if (elements[i].style.display == "block"){
+                elements[i].style.display = "none"
+            }
+        }
+
+		document.getElementById("btn_" + roomName + "_NIGHT").setAttribute("class", "btn active");
+        document.getElementById("btn_" + roomName + "_EVENING").setAttribute("class", "btn");
+        document.getElementById("btn_" + roomName + "_AFTERNOON").setAttribute("class", "btn");
+        document.getElementById("btn_" + roomName + "_MORNING").setAttribute("class", "btn");
+		document.getElementById("btn_" + roomName + "_ALLPERIOD").setAttribute("class", "btn");
+
+	}
+}
+
+function filterByRuleCategory(roomName, ruleCategory,fromDayPeriodFilter)
+{
+    currentCategory = ruleCategory;
 
 	if (ruleCategory == "SHOWALL")
 	{
@@ -45,6 +215,10 @@ function filterByRuleCategory(roomName, ruleCategory)
 		
 		document.getElementById("btn_" + roomName + "_" + ruleCategory).setAttribute("class", "btn active");
 	}
+
+    if (!fromDayPeriodFilter) {
+        filterByDayPeriod(roomName, currentDayPeriod, true);
+    }
 
 }
 
@@ -71,7 +245,7 @@ function hideAll()
 
 function hideMaps()
 {
-	hideAll()
+	hideAll();
 	show("btnShowMaps");
 
 }
@@ -93,7 +267,7 @@ function showAccessMaps()
 function showThermalZoneMaps()
 {
 	hideAll();
-	show("thZoneMap")
+	show("thZoneMap");
 	show("btnShowAccMaps");
 	show("btnHideMaps");
 }

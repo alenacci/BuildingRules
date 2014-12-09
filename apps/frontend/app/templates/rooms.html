@@ -30,7 +30,8 @@
 	</style>
 
 	<script type="text/javascript" src="{{ url_for('static', filename='js/rooms.js') }}"></script>
-	<script>
+
+    <script>
 	window.onload = function(){
 	init();
 	{% if alreadyLoggedIn %}
@@ -45,11 +46,11 @@
 	{#
 	{% if mTurkStatus.experimentCompleted %}
 		// THIS IS NEED TO SHOW THE END OF EXPERIMENT MESSAGE
-		alert("You finished your experiment!")
+		alert("You finished your experiment!");
 		window.location.hash="mTurkPanel";
 	{% else %}
 		{% if mTurkStatus.taskCompleted %}
-			alert("You finished your today task!")
+			alert("You finished your today task!");
 			window.location.hash="mTurkPanel";
 		{% endif %}
 	{% endif %}
@@ -126,7 +127,7 @@
 				<div class="alert alert-success">
 					<h4 align="center">You completed the whole expriment!</h4	> 
 
-					<h6 align="center">Now <a href="http://goo.gl/kXQ3wy" target="_blank">click here</a> to complete the experiment final survey. 
+					<h6 align="center">Now <a href="http://goo.gl/kXQ3wy" target="_blank">click here</a> to complete the experiment final survey. </h6>
 					<h6 align="center">Then <a href="https://docs.google.com/forms/d/1Z8HbFdFRbn09NFuQmetSp8bX1HJqt86_MK_dR8UMwz8/viewform" target="_blank">click here</a> to insert all your token as a work proof and finally get your Amazon Gift Card!</h6>
 				</div>
 			{% endif %}
@@ -154,6 +155,7 @@
 	<a name="buildingMap" id="buildingMap"></a>
 	    <div class="span8">
 	      <h1>My Rooms</h1>
+          <br>
 	      <p class="lead">With this page you can create your own simple rules for your own personal spaces. Just add the rules inside the correct box and... that's all!</p>
 	      <br>
 	      <a href="#rulesPanel" role="button" class="btn btn-primary ">Go to the rules panel!</a>
@@ -189,187 +191,14 @@
 			  	</div>
 			 </div>
 
-
-			{% for room in roomList %}
-
-
-				<a name="roomMenu_{{room.roomName}}" id="roomMenu_{{room.roomName}}"></a>
-				<div class="row"> 
-				<br>
-				<br>
-				<br>
-
-				  <div class="span8">
-				    <h3>Room {{room.roomName}} - {{room.description}}</h3>
-
-
-
-					<div class="bs-docs-example">
-			            <ul id="myTab" class="nav nav-tabs">
-			              <li class="active"><a href="#rulePanel_{{room.roomName}}" data-toggle="tab">Rules Editor</a></li>
-			              <li><a href="#roomBehavior_{{room.roomName}}" data-toggle="tab">Room Behavior</a></li>
-			              <li><a href="#ruleNavigator_{{room.roomName}}" data-toggle="tab">Rules Navigator</a></li>
-			            </ul>
-			            <div id="myTabContent" class="tab-content">
-			              <div class="tab-pane fade in active" id="rulePanel_{{room.roomName}}">
-
-			              		
-								<div class="btn-toolbar" style="background-color:#F5F5F5; padding:10px;">
-									  <h5>Filter by category</h5>
-									  <a href="javascript:filterByRuleCategory('{{room.roomName}}','SHOWALL')"><button class="btn active" id="btn_{{room.roomName}}_SHOWALL" style="font-size: x-small" >SHOW ALL</button></a>
-									  {% for category in categories %}
-									  	<a href="javascript:filterByRuleCategory('{{room.roomName}}','{{category}}')"><button class="btn" id="btn_{{room.roomName}}_{{category}}" style="font-size: x-small">{{category}}</button></a>
-									  	{{loop.counter }}
-									  {% endfor %}
-								</div>				    
-							    <hr>
-							    {% for rule in roomRules[room.roomName] %}
-							    	<blockquote {% if rule.id in activeRoomRules[room.roomName] %} style="color:#77AE3B;" {% endif %} class="rule_{{room.roomName}}_{{rule.category}}">
-							    		<p {% if rule.enabled %} {% else %} class="muted" {% endif %}>
-							    			{% if rule.enabled %} {% else %} <strike> {% endif %}
-							    				<b>if</b> {{rule.antecedent}} <b>then</b> {{rule.consequent}} 
-							    			{% if rule.enabled %} {% else %} </strike> {% endif %}
-											<small class="muted">
-											<span class="badge">{{rule["priority"]}}</span>
-												By:
-												{% if session.userUuid == rule.authorUuid%}
-													You
-												{% else %}
-													{{authorList[rule.authorUuid].personName}} - <i>{{authorList[rule.authorUuid].email}}</i>
-												{% endif %}
-
-												{% if rule.groupId %} 
-													(Group {{rule.groupId }}-{{groupList[rule.groupId].description}}
-													{% if rule.roomName %} 
-														{% if rule.roomName == room.roomName %} {% else %} / Room {{rule.roomName}} {% endif %} 
-													{% endif %}
-													)
-												{% endif %}
-
-												{% if rule.groupId and rule.roomName %}
-												- [<a href="{{request.path}}/../groups/{{rule.groupId}}/rooms/{{rule.roomName}}/rules/{{rule.id}}/edit">Edit</a>]
-												  [<a href="{{request.path}}/{{rule.roomName}}/rules/{{rule.id}}/delete">Delete</a>]
-												  
-												{% else %}
-													{% if rule.roomName %}
-														- [<a href="{{request.path}}/{{rule.roomName}}/rules/{{rule.id}}/edit">Edit</a>] [<a href="{{request.path}}/{{rule.roomName}}/rules/{{rule.id}}/delete">Delete</a>]
-														{% if rule.enabled %}
-															[<a href="{{request.path}}/{{rule.roomName}}/rules/{{rule.id}}/disable">Disable</a>]
-														{% else %}
-															[<a href="{{request.path}}/{{rule.roomName}}/rules/{{rule.id}}/enable">Enable</a>]
-														{% endif %}
-													{% endif %}
-												{% endif %}
-											</small>
-							    		</p>
-							    	</blockquote> 
-							    {% endfor %}
-								<br>
-						      	<a href="{{request.path}}/{{room.roomName}}/rules/add"><button type="button" class="btn  btn-primary ">Add a new rule</button></a>
-
-
-
-			              </div>
-			              <div class="tab-pane fade" id="roomBehavior_{{room.roomName}}">
-			              	<div class="container">
-			              	<iframe src="{{request.path}}/{{room.roomName}}/graphicalView" class="frame"></iframe>
-			              	</div>
-			              </div>
-			              <div class="tab-pane fade" id="ruleNavigator_{{room.roomName}}">
-			              	<div class="container">
-			              	
-			              		<table border="1" style="font-size:x-small;"> 
-								
-				              		{% for category in categories %}
-					              		<tr>
-					              			<td style="background-color:#72AC44; color:white;">{{category}}</td>
-					              			{% for rule in roomRules[room.roomName] %}
-					              				{% if category == rule.category %}
-					              					<td class="ruleNav_{{rule.triggersCategory[0]}}">
-					              						Priority: {{rule.priority}} 
-					              						<br>
-					              						{% if rule.enabled %} {% else %} <strike> {% endif %}
-					              							{% for triggerCategory in rule.triggersCategory %}
-					              								<b>{{triggerCategory}}</b> <br>
-					              							{% endfor %}
-					              						{% if rule.enabled %} {% else %} </strike> <b>(disabled)</b>{% endif %}
-					              						<br>
-					              						[<a href="javascript:alert('if {{rule.antecedent}} then {{rule.consequent}} ')">Info</a>]
-					              						[<a href="{{request.path}}/{{rule.roomName}}/rules/{{rule.id}}/edit">Edit</a>]
-					              						[<a href="{{request.path}}/{{rule.roomName}}/rules/{{rule.id}}/delete">Delete</a>]
-														{% if rule.enabled %}
-															[<a href="{{request.path}}/{{rule.roomName}}/rules/{{rule.id}}/disable">Disable</a>]
-														{% else %}
-															[<a href="{{request.path}}/{{rule.roomName}}/rules/{{rule.id}}/enable">Enable</a>]
-														{% endif %}
-
-					              					</td>
-					              				{% endif %}
-					              			{% endfor %}
-					              		</tr>
-				              		{% endfor %}
-			              		</table>
-
-			              	</div>
-			              </div>
-			            </div>
-			          </div>  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-				    
-
-				  </div>
-				  <div class="span4">
-				    <div class="well">
-			    
-				    
-				      <h4>Sensors</h4>
-				      <p>
-				      	{% for trigger in triggerList[room.roomName] %}
-				      		{{trigger.description}}, 
-				      	{% endfor %}
-				      </p>
-				      <br>
-				      <h4>Actuators</h4>
-				      <p>
-				      	{% for action in actionList[room.roomName] %}
-				      		{{action.description}}, 
-				      	{% endfor %}
-				      </p>
-				      <br>
-				      <h4>Occupants:</h4>
-				      <p>
-				      	{% for user in userList[room.roomName] %}
-				      		{{user.username}}, 
-				      	{% endfor %}				      	
-				      </p>
-				      <br>
-				      <h4>Part of groups: <br> <small>Click on the group name to see the room list</small></h4>
-
-				      	{% for group in roomGroupList[room.roomName] %}
-				      		<a href="javascript:openPopup('{{request.path}}/../groups/{{group.id}}');">{{group.id}}:{{group.description}}</a>, 
-				      	{% endfor %}				      	
-
-				    </div>
-				  </div>
-				</div>
-		  	{% endfor %}
 		</section>
 	{% endif %}
-
-
+    <div class="list-group">
+    {%for room in roomList %}
+        <a href="{{request.path}}/{{room.roomName}}" class="list-group-item">
+            <h4 class="list-group-item-heading">{{room.roomName}} - {{room.description}}</h4>
+        </a>
+    {% endfor %}
+    </div>
   {% endif %}
 {% endblock %}

@@ -7,12 +7,13 @@
         <link href="http://taitems.github.com/UX-Lab/core/css/prettify.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" />
         <link rel="stylesheet" href="http://taitems.github.com/UX-Lab/core/css/prettify.css" />
+        <link href="{{url_for('static', filename='css/list.css')}}" rel="stylesheet">
 
 
 		<style type="text/css">
 			body {
 				font-family: Helvetica, Arial, sans-serif;
-				font-size: 13px;
+				font-size: 20px;
 				padding: 0px;
 				margin: 0px;
 			}
@@ -46,6 +47,7 @@
     </head>
 
   <script>
+
 		function hideClass(className)
 		{
 			var elements = document.getElementsByClassName(className), i;
@@ -86,7 +88,7 @@
 
   </script>
 
-    <body {% if preloadGantt %} onload="document.simForm.submit(); showClass('loading');" {% else %} onload="hideClass('loading');" {% endif %}>
+    <body {% if preloadGantt %} onload="document.simForm.submit(); showClass('loading'); init();" {% else %} onload="hideClass('loading');" {% endif %}>
 
     	<div class="loading">
     		<h2>Currently performing the simulation... wait please...</h2>
@@ -111,10 +113,22 @@
 	    		 <br>
 	    		The external temperature is 
 	    		<select name="externalTemperature"><option>60F</option><option>61F</option><option>62F</option><option>63F</option><option>64F</option><option>65F</option><option>66F</option><option>67F</option><option>68F</option><option>69F</option><option>70F</option><option>71F</option><option>72F</option><option>73F</option><option>74F</option><option>75F</option><option>76F</option><option>77F</option><option>78F</option><option>79F</option><option>80F</option><option>81F</option><option>82F</option><option>83F</option><option>84F</option><option>85F</option><option>86F</option><option>87F</option><option>88F</option><option>89F</option><option>80F</option><option>81F</option><option>82F</option><option>83F</option><option>84F</option><option>85F</option><option>86F</option><option>87F</option><option>88F</option><option>89F</option></select>
-	    		<br>
-	    		and the weather is  
-	    		<select name="weather"><option>Sunny</option><option>Rainy</option><option>Cloudy</option></select>
-	    		<br>
+                <br>
+                <label class="weatherRadio">
+                    <input type="radio" name="weather" value="sunny" checked />
+                    <img src="{{url_for('static', filename='img/art_clear.png')}}">
+                </label>
+
+                <label class="weatherRadio">
+                   <input type="radio" name="weather" value="cloudy"/>
+                   <img src="{{url_for('static', filename='img/art_clouds.png')}}">
+                </label>
+
+                <label class="weatherRadio">
+                    <input type="radio" name="weather" value="rainy" />
+                    <img src="{{url_for('static', filename='img/art_rain.png')}}">
+                </label>
+                <br>
 	    		<input type="submit" value="Show me the room status!">
 	    	</form>
     	</div>
@@ -165,12 +179,12 @@
 				}
 			});
 
-			$(".gantt").popover({
+			//$(".gantt").popover({
 				//selector: ".bar",
 				//title: "I'm a popover",
 				//content: "And I'm the content of said popover.",
 				//trigger: "hover"
-			});
+			//});
 
 			prettyPrint();
 

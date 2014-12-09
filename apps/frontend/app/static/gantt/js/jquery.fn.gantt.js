@@ -1421,7 +1421,7 @@
 
             repositionLabel: function (element) {
                 setTimeout(function () {
-                    var $datapanel;
+                    var $dataPanel;
                     if (!element) {
                         $dataPanel = $(".fn-gantt .rightPanel .dataPanel");
                     }

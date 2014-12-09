@@ -236,7 +236,7 @@ class GroupsManager:
 			# Checking that a priority is unique over the same category	
 			for r in groupRules:
 				if str(r.category) == str(category) and int(r.getPriority()) == int(priority):
-					raise AlredyAssignedPriorityError("In group " + str(groupId) + " the priority " + str(priority) + " has alredy been assigned to another rule with the same category!")
+					raise AlreadyAssignedPriorityError("In group " + str(groupId) + " the priority " + str(priority) + " has alredy been assigned to another rule with the same category!")
 
 
 			temporaryRuleSet = []

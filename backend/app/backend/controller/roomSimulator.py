@@ -71,79 +71,78 @@ class RoomSimulator:
 				currentTimeMinutes = hour * 60 + minute
 
 				simulationParameters = {}
-		 		simulationParameters['roomTemperature'] = self.roomTemperature
-		 		simulationParameters['occupancy'] = self._getCurrentOccupancy(currentTimeMinutes)
-		 		simulationParameters['day'] = self._getCurrentDay()
-		 		simulationParameters['date'] = self._getCurrentDate()
-		 		simulationParameters['weather'] = self.weather
-		 		simulationParameters['externalTemperature'] = self.externalTemperature
-		 		simulationParameters['time'] = currentTime
-		 		simulationParameters['resultsBufferFile'] = simulationBufferFilePath
+				simulationParameters['roomTemperature'] = self.roomTemperature
+				simulationParameters['occupancy'] = self._getCurrentOccupancy(currentTimeMinutes)
+				simulationParameters['day'] = self._getCurrentDay()
+				simulationParameters['date'] = self._getCurrentDate()
+				simulationParameters['weather'] = self.weather
+				simulationParameters['externalTemperature'] = self.externalTemperature
+				simulationParameters['time'] = currentTime
+				simulationParameters['resultsBufferFile'] = simulationBufferFilePath
 
 				roomFilter = [ {'buildingName' : self.buildingName, 'roomName' : self.roomName} ]
 
 				actionExecutor = ActionExecutor(simulationParameters = simulationParameters, roomFilter = roomFilter)
 				actionExecutor.start()
 
-
-
-		f = open(simulationBufferFilePath)
-		lines = f.readlines()
-		f.close()
-
-		os.remove(simulationBufferFilePath) if os.path.exists(simulationBufferFilePath) else None
-
-		actionTargets = set()
-		actionTargetsRecordsNumber = {}
-		timeRecords = []
-
-		for line in lines:
-			
-			record = line.replace("\n","").split(";")	
-			timeRecords.append(record)
-			actionTargets.add(record[2])
-			if record[2] not in actionTargetsRecordsNumber.keys(): actionTargetsRecordsNumber[record[2]] = 0
-			actionTargetsRecordsNumber[record[2]] += 1
-
 		gantt = {}
-		for target in actionTargets:
-			gantt[target] = []
+		if os.path.exists(simulationBufferFilePath):
+			f = open(simulationBufferFilePath)
+			lines = f.readlines()
+			f.close()
 
-		I_DATE = 0
-		I_TIME = 1
-		I_TARGET = 2
-		I_STATUS = 3
-		I_RULE_ID = 4
-		I_RULE_TEXT = 5
+			os.remove(simulationBufferFilePath) if os.path.exists(simulationBufferFilePath) else None
+
+			actionTargets = set()
+			actionTargetsRecordsNumber = {}
+			timeRecords = []
+
+			for line in lines:
+
+				record = line.replace("\n","").split(";")
+				timeRecords.append(record)
+				actionTargets.add(record[2])
+				if record[2] not in actionTargetsRecordsNumber.keys(): actionTargetsRecordsNumber[record[2]] = 0
+				actionTargetsRecordsNumber[record[2]] += 1
+
+			for target in actionTargets:
+				gantt[target] = []
+
+			I_DATE = 0
+			I_TIME = 1
+			I_TARGET = 2
+			I_STATUS = 3
+			I_RULE_ID = 4
+			I_RULE_TEXT = 5
 
 
-		for target in actionTargets:
-			counter = 0
-			interval = {}
+			for target in actionTargets:
+				counter = 0
+				interval = {}
 
-			for record in timeRecords:
-				if record[2] == target:		
+				for record in timeRecords:
+					if record[2] == target:
 
-					if counter == 0:
-						interval["start"] = "00:00"		
-						interval["target"] = record[I_TARGET]
-						interval["status"] = record[I_STATUS]
-						interval["ruleId"] = record[I_RULE_ID]
-						interval["ruleText"] = record[I_RULE_TEXT]
+						if counter == 0:
+							interval["start"] = record[I_TIME]
+							interval["target"] = record[I_TARGET]
+							interval["status"] = record[I_STATUS]
+							interval["ruleId"] = record[I_RULE_ID]
+							interval["ruleText"] = record[I_RULE_TEXT]
 
-					if record[I_STATUS] != interval["status"] or counter == (actionTargetsRecordsNumber[target] - 1):
+						if record[I_STATUS] != interval["status"] or counter == (actionTargetsRecordsNumber[target] - 1):
 
-						interval["end"] = record[I_TIME]
-						gantt[target].append({"from": interval["start"], "to" : interval["end"], "status" : interval["status"], "ruleId" : interval["ruleId"], "ruleText" : interval["ruleText"]})
+							interval["end"] = record[I_TIME]
+							gantt[target].append({"from": interval["start"], "to" : interval["end"], "status" : interval["status"], "ruleId" : interval["ruleId"], "ruleText" : interval["ruleText"]})
 
-						interval["start"] = record[I_TIME]
-						interval["target"] = record[I_TARGET]
-						interval["status"] = record[I_STATUS]
-						interval["ruleId"] = record[I_RULE_ID]
-						interval["ruleText"] = record[I_RULE_TEXT]
-						interval["end"] = None
-
-					counter += 1
+							interval["start"] = record[I_TIME]
+							interval["target"] = record[I_TARGET]
+							interval["status"] = record[I_STATUS]
+							interval["ruleId"] = record[I_RULE_ID]
+							interval["ruleText"] = record[I_RULE_TEXT]
+							interval["end"] = "24:00"
+							print interval
+						counter += 1
 
 
 					
