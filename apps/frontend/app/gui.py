@@ -26,7 +26,19 @@ gui = Blueprint('gui', __name__, template_folder='templates')
 @gui.route('/')
 def index():
     if loggedIn():
-        return redirect(url_for('gui.buildings'))
+        #return redirect(url_for('gui.buildings'))
+
+        #---------------------ONLY FOR SIMULATION GAME PURPOSES -------- REMOVE!!!!!!-------------------------
+        response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms",
+                            {'username': session["username"], 'buildingName': "CSE",
+                             'sessionKey': session["sessionKey"], 'userUuid': session["userUuid"]})
+
+        if not successResponse(response):
+            return render_template('error.html', error=response['request-errorDescription'])
+
+        roomList = response["rooms"]
+        return render_template('game.html',roomName = roomList[0]["roomName"])
+        #------------------------------------------------------------------------------------------------------
 
     return render_template('home.html')
 

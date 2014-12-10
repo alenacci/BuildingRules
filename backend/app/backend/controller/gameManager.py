@@ -8,12 +8,16 @@
 # Milan, March 2014
 #
 ############################################################
+import json
+import os
+import random
 import re
 import datetime
 import sched
 import time
 import thread
 import operator
+import pickle
 from app.backend.controller.buildingsManager import BuildingsManager
 from app.backend.controller.roomSimulator import RoomSimulator
 from app.backend.controller.roomsManager import RoomsManager
@@ -68,36 +72,59 @@ class GameManager:
         response = buildingsManager.getRooms(buildingName=buildingName, username=username)
 
         rooms = response["rooms"]
-        print rooms
         for room in rooms:
-            valuesDict = {"ExtTemp" : "70F", "RoomTemp" : "66F", "Hum" : "20%" ,"Weather" : "sunny", "Power" : 0}
-            valuesDictControl = {"ExtTemp" : 70, "RoomTemp" : 66, "Hum" : 20,"Weather" : "sunny", "Power" : 0}
-            self.statusDict[room["roomName"]] = valuesDict
-            self.statusDictControl[room["roomName"]] = valuesDictControl
+            self.roomList.append(room["roomName"])
+
+        successData = self.dataRestore()
+        self.scoresRestore()
+        print self.statusDictControl
+        print self.statusDict
+        if not successData:
+            weather = random.randrange(1,3,1)
+            if weather == 1:
+                w = "sunny"
+            if weather == 2:
+                w="cloudy"
+            if weather == 3:
+                w = "rainy"
+        for room in rooms:
+            if not successData:
+                temp = random.randrange(59,72,1)
+                hum = random.randrange(15,40,1)
+                valuesDict = {"ExtTemp" : "70F", "RoomTemp" : str(temp)+"F", "Hum" : str(hum)+"%" ,"Weather" : w, "Power" : 0}
+                valuesDictControl = {"ExtTemp" : 70, "RoomTemp" : temp, "Hum" : hum,"Weather" : w, "Power" : 0}
+                self.statusDict[room["roomName"]] = valuesDict
+                self.statusDictControl[room["roomName"]] = valuesDictControl
+
             self.statusAction[room["roomName"]] = {}
             self.dataTarget[room["roomName"]] = []
-            self.roomList.append(room["roomName"])
+
             self.roomHappiness[room["roomName"]] = {"you":True,"manager":True}
         thread.start_new_thread(self.threadExec,(buildingName, ))
-        #thread.start_new_thread(self.mailServiceExec,())
+        thread.start_new_thread(self.mailServiceExec,())
 
 
     def upgradeValues(self, roomName, buildingName, username):
+
         if len(self.statusDict)==0 :
             self.initValues(buildingName,username)
 
         buildingsManager = BuildingsManager()
         roomsManager = RoomsManager()
         rooms = buildingsManager.getRooms(buildingName)
-        self.buildingUsers = []
+
         for room in rooms["rooms"]:
             users = roomsManager.getUsers(room["roomName"],buildingName)
             for user in users["users"]:
-                if user["username"] not in self.buildingUsers:
+                if user["username"] not in self.buildingUsers and '--' not in user["email"]:
                     self.buildingUsers.append(user["username"])
+
+        if len(self.scores) == 0:
+            self.scoresRestore()
 
         if username not in self.scores:
             self.scores[username] = 0
+
 
         returnInfo= {}
         returnInfo["statusDict"] =self.statusDict[roomName]
@@ -273,12 +300,13 @@ class GameManager:
             self.tempSimulator(room)
             self.humSimulator(room)
             self.powerSimulator(room)
-            self.showRanking()
 
-            roomsManager = RoomsManager()
-            users = roomsManager.getUsers(room,buildingName)
-            for user in users["users"]:
-                self.getScores(user["username"],room)
+            print self.buildingUsers
+            for user in self.buildingUsers:
+                self.getScores(user,room)
+
+            self.showRanking()
+            self.dataDump()
 
     def getScores(self,username,roomName):
         if username not in self.scores:
@@ -290,17 +318,25 @@ class GameManager:
             if self.statusAction[roomName]["WINDOWS"] == "OPEN":
                 managerHappy = False
 
+        if  self.statusDictControl[roomName]["Hum"] > 30 :
+            youHappy = False
+
         if  self.statusDictControl[roomName]["RoomTemp"] < 64 and self.statusDictControl[roomName]["RoomTemp"]> 72 :
             youHappy = False
-            self.scores[username] -= 1
-        else:
-            self.scores[username] += 1
 
-        if self.statusDictControl[roomName]["Power"] > 3000 :
+
+        if self.statusDictControl[roomName]["Power"] > 2000 :
             managerHappy = False
-            self.scores[username] -= 1
+
+        if managerHappy:
+            self.scores[username]+=1
         else:
-            self.scores[username] += 1
+            self.scores[username]-=1
+
+        if youHappy:
+            self.scores[username]+=1
+        else:
+            self.scores[username]-=1
         print self.scores[username]
 
         self.roomHappiness[roomName]["you"] = youHappy
@@ -322,7 +358,7 @@ class GameManager:
                     rooms = user.getRoomsDict()
                     if len(rooms)!= 0:
                         for room in rooms:
-                            if room["buildingName"] == "HG":
+                            if room["buildingName"] == "CSE":
                                 roomName = room["roomName"]
                                 message += "ROOM " + str(roomName) + " STATUS\n"
                                 message += "External Temperature: " + str(self.statusDict[roomName]["ExtTemp"]) + "\n"
@@ -343,6 +379,22 @@ class GameManager:
                         message += str(item[0]) + " " + str(item[1]) + "\n"
                     notificationManager.sendNotificationByEmail(userUuid,"Building Summary",message)
 
+    def changeWeather(self):
+        temp = random.randrange(55,68,1)
+        weather = random.randrange(1,3,1)
+        if weather == 1:
+            w = "sunny"
+        if weather == 2:
+            w="cloudy"
+        if weather == 3:
+            w = "rainy"
+        for room in self.roomList:
+            self.statusDict[room]["Weather"] = w
+            self.statusDictControl[room]["Weather"] = w
+            self.statusDict[room]["ExtTemp"] = str(temp)+"F"
+            self.statusDictControl[room]["Weather"] = temp
+
+
     def mailServiceExec(self,scheduler = None):
         if scheduler is None:
             scheduler = sched.scheduler(time.time, time.sleep)
@@ -351,16 +403,17 @@ class GameManager:
         if scheduler is not None:
             scheduler.enter(90, 1, self.mailServiceExec, ([scheduler]))
 
-        self.sendSummaryByEmail()
+        #self.sendSummaryByEmail()
+        self.changeWeather()
 
     def threadExec(self,buildingName,scheduler = None):
 
         if scheduler is None:
             scheduler = sched.scheduler(time.time, time.sleep)
-            scheduler.enter(60, 1, self.threadExec, ([buildingName, scheduler]))
+            scheduler.enter(1, 1, self.threadExec, ([buildingName, scheduler]))
             scheduler.run()
         if scheduler is not None:
-            scheduler.enter(60, 1, self.threadExec, ([buildingName, scheduler]))
+            scheduler.enter(600, 1, self.threadExec, ([buildingName, scheduler]))
 
         self.simulate(buildingName)
 
@@ -371,3 +424,59 @@ class GameManager:
             self.scores[i] = j
         return self.scores
 
+    def dataDump(self):
+        dataDumpFolder = "tools/gameData/"
+        if not os.path.exists(dataDumpFolder): os.makedirs(dataDumpFolder)
+
+        statusDictControlFile = "statusDictControlFile.json"
+        statusDictControlFilePath = (dataDumpFolder + "/" + statusDictControlFile).replace("//", "/")
+        os.remove(statusDictControlFilePath) if os.path.exists(statusDictControlFilePath) else None
+
+        outputStatus = open(statusDictControlFilePath,'wb')
+        json.dump(self.statusDictControl,outputStatus)
+
+        outputStatus.close()
+
+        scoresFile = "scoresFile.json"
+        scoresFilePath = (dataDumpFolder + "/" + scoresFile).replace("//", "/")
+        os.remove(scoresFilePath) if os.path.exists(scoresFilePath) else None
+
+        outputScores = open(scoresFilePath,'wb')
+        json.dump(self.scores,outputScores)
+
+        outputScores.close()
+
+
+
+    def dataRestore(self):
+        dataRestoreFolder = "tools/gameData/"
+        if not os.path.exists(dataRestoreFolder): return False
+
+        statusDictControlFile = "statusDictControlFile.json"
+        statusDictControlFilePath = (dataRestoreFolder + "/" + statusDictControlFile).replace("//", "/")
+        if not os.path.exists(statusDictControlFilePath): return False
+
+        inputStatus = open(statusDictControlFilePath,'rb')
+        self.statusDictControl = json.load(inputStatus)
+
+        inputStatus.close()
+
+        for room in self.roomList:
+            valuesDict = {"ExtTemp": str(self.statusDictControl[room]["ExtTemp"]) + "F", "RoomTemp":str(self.statusDictControl[room]["RoomTemp"]) + "F", "Hum":str(self.statusDictControl[room]["Hum"]) + "%","Weather":self.statusDictControl[room]["Weather"],"Power": self.statusDictControl[room]["Power"]}
+            self.statusDict[room] = valuesDict
+
+        return True
+
+
+    def scoresRestore(self):
+        dataRestoreFolder = "tools/gameData/"
+        if not os.path.exists(dataRestoreFolder): return False
+
+        scoresFile = "scoresFile.json"
+        scoresFilePath = (dataRestoreFolder + "/" + scoresFile).replace("//", "/")
+        if not os.path.exists(scoresFilePath): return False
+
+        with open(scoresFilePath,'rb') as inputScores:
+            self.scores = json.load(inputScores)
+
+        return True
