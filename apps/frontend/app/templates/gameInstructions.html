@@ -1,17 +1,16 @@
 {% extends "layout.html" %}
 {% block body %}
-    <h2>Game instructions</h2>
+    <h2 style="color: royalblue;text-align: center;border-radius: 20px 20px 20px 20px;background-color: #A9E2F3">Game instructions</h2>
+
 
     <br>
-    <br>
-    <h3 align="center">Thank you for your partecipation to this funny game!
-        <br>
+    <h3 align="center" style="text-decoration: underline"><b>Thank you for your partecipation to this funny game!</b></h3>
         <br>
         You are going to enter a virtual building.
         <br>
         There will be you (your avatar), your colleagues and the building manager.
         <br>
-    </h3>
+
     <br>
     <div class="alert alert-block" id="accessMap">
         <img src="{{url_for('static', filename='roomMaps/')}}{{mapFileName}}">
@@ -20,7 +19,7 @@
     </div>
     <br>
 
-    <h3>Your goal is to make your avatar and the building manager happy. <br>
+    Your goal is to make your avatar and the building manager happy. <br>
         To make your avatar happy you need to set room rules to increase his comfort.<br>
         To make the building manager happy you need to set rules to riduce the power consumption.<br><br>
 
@@ -28,7 +27,7 @@
         At the end of this experiment that will last 3 days, the player that will reach the highest score will be awarded with a 15 euro Amazon Gift Card.
         <br>
         <br>
-    </h3>
+
 
   <br>
 
@@ -39,7 +38,7 @@
       <h3>You will manage these rooms:</h3><br>
       {% for room in roomList %}{{room["roomName"]}} - {{room ["description"]}} <br>{% endfor %}
     <br>
-    <form method="post  " action="/buildings/CSE/rooms/{{roomList[0]['roomName']}}/game"><button type="submit" class="btn btn-large btn-primary">START GAME!</button></form>
+    <form method="post" action="/buildings/CSE/rooms/{{roomList[0]['roomName']}}/game"><button type="submit" class="btn btn-large btn-primary">START GAME!</button></form>
       <br>
 
   </div>

@@ -430,7 +430,7 @@ class GameManager:
             scheduler.enter(1, 1, self.threadExec, ([buildingName, scheduler]))
             scheduler.run()
         if scheduler is not None:
-            scheduler.enter(600, 1, self.threadExec, ([buildingName, scheduler]))
+            scheduler.enter(1800, 1, self.threadExec, ([buildingName, scheduler]))
 
         self.simulate(buildingName)
 
