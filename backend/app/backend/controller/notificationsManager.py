@@ -100,11 +100,8 @@ class NotificationsManager:
 
     def __send_message(self, recipient, subject, message):
 
-        #__MAIN_ADDRESS = 'energybox.buildingrules@gmail.com'
-        #__MAIN_PASSWORD  = 'buildingdepot'
-
-        __MAIN_ADDRESS = 'jacopo.f91@gmail.com'
-        __MAIN_PASSWORD  = 'jaco1991'
+        __MAIN_ADDRESS = 'energybox.buildingrules@gmail.com'
+        __MAIN_PASSWORD  = 'buildingdepot'
 
         fromaddr = __MAIN_ADDRESS
         toaddrs  = recipient
