@@ -28,7 +28,7 @@ def index():
     if loggedIn():
         #return redirect(url_for('gui.buildings'))
 
-        #---------------------ONLY FOR SIMULATION GAME PURPOSES -------- REMOVE!!!!!!-------------------------
+        #---------------------ONLY FOR SIMULATION PURPOSES -------- REMOVE!!!!!!-------------------------
         response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms",
                             {'username': session["username"], 'buildingName': "CSE",
                              'sessionKey': session["sessionKey"], 'userUuid': session["userUuid"]})
@@ -411,8 +411,6 @@ def game(buildingName=None, roomName=None):
 
     statusDict = {}
     infoRoom = {}
-    youHappy = True
-    managerHappy = True
 
     if request.method == 'POST':
 
@@ -434,11 +432,9 @@ def game(buildingName=None, roomName=None):
         infoRoom = returnInfo["statusDict"]
         target = returnInfo["target"]
         time = returnInfo["time"]
-        youHappy = returnInfo["happiness"]["you"]
-        managerHappy = returnInfo["happiness"]["manager"]
+        roomHappiness = returnInfo["happiness"]
         score = returnInfo["score"]
         ranking = returnInfo["ranking"]
-        usernames = returnInfo["usernames"]
 
         response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms",
                             {'username': session["username"], 'buildingName': buildingName,
@@ -448,8 +444,12 @@ def game(buildingName=None, roomName=None):
             return render_template('error.html', error=response['request-errorDescription'])
 
         roomList = response["rooms"]
+        for room in roomList:
+            if room["roomName"] == roomName:
+                description = room["description"]
 
-    return render_template('gameData.html', categoryList = target ,statusDict = statusDict, infoRoom = infoRoom, time = time, roomList = roomList, youHappy = youHappy, managerHappy = managerHappy, score = score,ranking= ranking)
+
+    return render_template('gameData.html', categoryList = target ,statusDict = statusDict, infoRoom = infoRoom, time = time, roomList = roomList, roomHappiness = roomHappiness, score = score,ranking= ranking, roomName = roomName, description = description)
 
 
 @gui.route('/removeMe2/<currentDay>/', methods=['GET', 'POST'])

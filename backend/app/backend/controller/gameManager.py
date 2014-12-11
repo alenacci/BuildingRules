@@ -34,6 +34,7 @@ class GameManager:
     targetHum = {}
     roomList = []
     scores = {}
+    sortedScores = []
     roomHappiness = {}
     buildingUsers = []
 
@@ -69,7 +70,7 @@ class GameManager:
     def initValues(self, buildingName, username):
         buildingsManager = BuildingsManager()
         buildingsManager.checkUserBinding(buildingName, username)
-        response = buildingsManager.getRooms(buildingName=buildingName, username=username)
+        response = buildingsManager.getRooms(buildingName=buildingName)
 
         rooms = response["rooms"]
         for room in rooms:
@@ -87,19 +88,20 @@ class GameManager:
                 w="cloudy"
             if weather == 3:
                 w = "rainy"
+            extTemp = random.randrange(55,68,1)
         for room in rooms:
             if not successData:
-                temp = random.randrange(59,72,1)
-                hum = random.randrange(15,40,1)
-                valuesDict = {"ExtTemp" : "70F", "RoomTemp" : str(temp)+"F", "Hum" : str(hum)+"%" ,"Weather" : w, "Power" : 0}
-                valuesDictControl = {"ExtTemp" : 70, "RoomTemp" : temp, "Hum" : hum,"Weather" : w, "Power" : 0}
+                temp = random.randrange(55,80,1)
+                hum = random.randrange(20,45,1)
+                valuesDict = {"ExtTemp" : str(extTemp)+"F", "RoomTemp" : str(temp)+"F", "Hum" : str(hum)+"%" ,"Weather" : w, "Power" : 0}
+                valuesDictControl = {"ExtTemp" : extTemp, "RoomTemp" : temp, "Hum" : hum,"Weather" : w, "Power" : 0}
                 self.statusDict[room["roomName"]] = valuesDict
                 self.statusDictControl[room["roomName"]] = valuesDictControl
 
             self.statusAction[room["roomName"]] = {}
             self.dataTarget[room["roomName"]] = []
 
-            self.roomHappiness[room["roomName"]] = {"you":True,"manager":True}
+            self.roomHappiness[room["roomName"]] = {"you":True,"whyYou":"","manager":True,"whyManager":""}
         thread.start_new_thread(self.threadExec,(buildingName, ))
         thread.start_new_thread(self.mailServiceExec,())
 
@@ -124,16 +126,19 @@ class GameManager:
 
         if username not in self.scores:
             self.scores[username] = 0
+            self.dataDump()
 
-
+        sortedScores = sorted(self.scores.items(), key=operator.itemgetter(1),reverse=True)
+        scores = ""
+        for item in sortedScores:
+            scores += str(item[0])+" - "+str(item[1])+" <br/> <br/>"
         returnInfo= {}
         returnInfo["statusDict"] =self.statusDict[roomName]
         returnInfo["statusAction"] = self.statusAction[roomName]
         returnInfo["target"] = self.dataTarget[roomName]
         returnInfo["score"] = self.scores[username]
-        returnInfo["ranking"] = self.scores
+        returnInfo["ranking"] = scores
         returnInfo["happiness"] = self.roomHappiness[roomName]
-        returnInfo["usernames"] = self.buildingUsers
         now = datetime.datetime.now()
         returnInfo["time"]= str(now.hour)+":"+str(now.minute)
         return returnInfo
@@ -282,6 +287,8 @@ class GameManager:
 
 
     def simulate(self,buildingName):
+        rm2 = RoomsManager()
+
         for room in self.roomList:
             now = datetime.datetime.now()
             h = now.hour
@@ -301,32 +308,39 @@ class GameManager:
             self.humSimulator(room)
             self.powerSimulator(room)
 
-            print self.buildingUsers
-            for user in self.buildingUsers:
-                self.getScores(user,room)
+            users = rm2.getUsers(room,buildingName)["users"]
 
-            self.showRanking()
+            print self.buildingUsers
+            for user in users:
+                if user["username"] in self.scores:
+                    self.getScores(user["username"],room)
+                    print str(user["username"]) + str(room)
+
             self.dataDump()
 
     def getScores(self,username,roomName):
-        if username not in self.scores:
-            self.scores[username] = 0
+        whyNotHappy = ""
+        whyManagerNotHappy = ""
         youHappy = True
         managerHappy = True
 
         if "TEMPERATURE" in self.statusAction[roomName] and "WINDOWS" in self.statusAction[roomName]:
             if self.statusAction[roomName]["WINDOWS"] == "OPEN":
                 managerHappy = False
+                whyManagerNotHappy = whyManagerNotHappy + "Did you open the window with the HVAC active? \n"
 
         if  self.statusDictControl[roomName]["Hum"] > 30 :
             youHappy = False
+            whyNotHappy = whyNotHappy + "Humidity over 30% \n"
 
         if  self.statusDictControl[roomName]["RoomTemp"] < 64 and self.statusDictControl[roomName]["RoomTemp"]> 72 :
             youHappy = False
+            whyNotHappy = whyNotHappy + "Room Temperature over 72F or under 64F \n"
 
 
         if self.statusDictControl[roomName]["Power"] > 2000 :
             managerHappy = False
+            whyManagerNotHappy = whyManagerNotHappy + "The power consumption is over 2000 W \n"
 
         if managerHappy:
             self.scores[username]+=1
@@ -341,6 +355,9 @@ class GameManager:
 
         self.roomHappiness[roomName]["you"] = youHappy
         self.roomHappiness[roomName]["manager"] = managerHappy
+
+        self.roomHappiness[roomName]["whyYou"] = whyNotHappy
+        self.roomHappiness[roomName]["whyManager"] = whyManagerNotHappy
 
     def sendSummaryByEmail(self):
         print "sendSummaryByEmail"
@@ -374,7 +391,7 @@ class GameManager:
                                 if self.roomHappiness[roomName]["manager"]: message += "Happy\n\n"
                                 else: message += "Sad\n\n"
                     message += "RANKING\n"
-                    ranking = self.showRanking().items()
+                    ranking = sorted(self.scores.items(), key=operator.itemgetter(1),reverse=True)
                     for item in ranking:
                         message += str(item[0]) + " " + str(item[1]) + "\n"
                     notificationManager.sendNotificationByEmail(userUuid,"Building Summary",message)
@@ -413,16 +430,9 @@ class GameManager:
             scheduler.enter(1, 1, self.threadExec, ([buildingName, scheduler]))
             scheduler.run()
         if scheduler is not None:
-            scheduler.enter(600, 1, self.threadExec, ([buildingName, scheduler]))
+            scheduler.enter(60, 1, self.threadExec, ([buildingName, scheduler]))
 
         self.simulate(buildingName)
-
-    def showRanking(self):
-        sortedScores = sorted(self.scores.items(), key=operator.itemgetter(1))
-        print sortedScores
-        for (i,j) in sortedScores:
-            self.scores[i] = j
-        return self.scores
 
     def dataDump(self):
         dataDumpFolder = "tools/gameData/"
@@ -460,7 +470,7 @@ class GameManager:
         self.statusDictControl = json.load(inputStatus)
 
         inputStatus.close()
-
+        print self.statusDictControl
         for room in self.roomList:
             valuesDict = {"ExtTemp": str(self.statusDictControl[room]["ExtTemp"]) + "F", "RoomTemp":str(self.statusDictControl[room]["RoomTemp"]) + "F", "Hum":str(self.statusDictControl[room]["Hum"]) + "%","Weather":self.statusDictControl[room]["Weather"],"Power": self.statusDictControl[room]["Power"]}
             self.statusDict[room] = valuesDict

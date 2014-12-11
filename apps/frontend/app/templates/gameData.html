@@ -7,33 +7,39 @@
 
 <body>
     <div>
+        <h2 style="color: red">Room : {{roomName}} - {{description}}</h2>
         <div style="float: left">
             <div>
                 <div style="float:left">
                     <h3>You</h3>
-                    {%if youHappy %}
+                    {%if roomHappiness["you"] %}
                         <img height="364" width="210" src="{{url_for('static', filename='images/gameImages/youHappy.jpg')}}">
                     {% else %}
                         <img height="364" width="210" src="{{url_for('static', filename='images/gameImages/youSad.jpg')}}">
                     {% endif %}
+                    <br><br>
+                    {%if roomHappiness["whyYou"]!=""%}<div> Why are you not happy? <br> {{roomHappiness["whyYou"]}}</div> <br><br>{% endif %}
+                    <div style="vertical-align: bottom">
+                        <button id="manageButton" style='width:80px; height:40px; bottom:auto; vertical-align: bottom;'>Manage Building</button>
+                    </div>
                 </div>
 
                 <div style="float:left">
                     <h3>Building Manager</h3>
-                    {%if managerHappy %}
+                    {%if roomHappiness["manager"] %}
                         <img height="364" width="210" src="{{url_for('static', filename='images/gameImages/happyBuildingManager.jpg')}}">
                     {% else %}
                         <img height="364" width="210" src="{{url_for('static', filename='images/gameImages/sadBuildingManager.jpg')}}">
                     {% endif %}
+                    <br><br>
+                    {%if roomHappiness["whyManager"]!=""%}<div> Why the manager is not happy? <br> {{roomHappiness["whyManager"]}}</div> {% endif %}
                 </div>
             </div>
 
-            <div>
-                <button id="manageButton" style='width:80px; height:40px; bottom:auto; vertical-align: bottom;'>Manage Building</button>
-            </div>
+
         </div>
 
-        <div style="float: left; border: 2px black dotted">
+        <div style="float: left; border-radius: 20px 40px 60px 80px">
             <h3>Last Update Time: {{time}}</h3>
             <h3>Score: {{score}}</h3>
             <br>
@@ -53,9 +59,9 @@
 
         <div style="float: left; border: 2px black dotted">
             <h2 style="color: red"><b>Ranking</b></h2>
-            {% for rank in ranking.items()%}
-                <h3> {{rank[0]}}: {{rank[1]}}</h3>
-            {% endfor %}
+
+                <h3> {% autoescape false %} {{ranking}} {% endautoescape %}</h3>
+
         </div>
 
         <div style="float: left; border: 2px black dotted">
