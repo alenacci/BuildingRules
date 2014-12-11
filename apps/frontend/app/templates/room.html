@@ -226,20 +226,20 @@
 
 
                           <h4>Sensors</h4>
-                          <p>
+                          <p style="font-size: 14px">
                             {% for trigger in triggerList[roomName] %}
                                 {{trigger.description}},
                             {% endfor %}
                           </p>
                           <br>
                           <h4>Actuators</h4>
-                          <p>
+                          <p style="font-size: 14px">
                             {% for action in actionList[roomName] %}
                                 {{action.description}},
                             {% endfor %}
                           </p>
                           <br>
-                          <h4>Occupants:</h4>
+                          <!--<h4>Occupants:</h4>
                           <p>
                             {% for user in userList[roomName] %}
                                 {{user.username}},
@@ -250,7 +250,7 @@
 
                             {% for group in roomGroupList[roomName] %}
                                 <a href="javascript:openPopup('{{request.path}}/../groups/{{group.id}}');">{{group.id}}:{{group.description}}</a>,
-                            {% endfor %}
+                            {% endfor %}-->
 
                         </div>
                       </div>

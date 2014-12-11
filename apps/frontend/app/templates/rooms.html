@@ -75,11 +75,6 @@
 	    <h3 id="myModalLabel">User Guide</h3>
 	  </div>
 
-  	<div class="alert alert-block" align="center">
-		<h3>New action policy!</h3><strong>From today, the rule editing will count as an action!</strong>
-		<br>Please, do NOT insert random rules! If you disagree with some policies, change existing rules!
-	</div>
-
 	  <div class="modal-body" align="center">
 	    <iframe width="670" height="410" src="//www.youtube.com/embed/p_J9PcgyATc?rel=0&vq=hd720" frameborder="0" allowfullscreen></iframe>
 	  </div>
@@ -90,13 +85,6 @@
 	    <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Close</button>
 	  </div>
 	</div>
-
-	{#
-  	<div class="alert alert-block" align="center">
-		<h1>New action policy!</h1><strong>From today, the rule editing will count as an action!</strong>
-		<br>Please, do NOT insert random rules! If you disagree with some policies, change existing rules!
-	</div>
-	#}
 
 	{#
 	<div class="form-actions"> 
@@ -157,8 +145,8 @@
 	      <h1>My Rooms</h1>
           <br>
 	      <p class="lead">With this page you can create your own simple rules for your own personal spaces. Just add the rules inside the correct box and... that's all!</p>
-	      <br>
-	      <a href="#rulesPanel" role="button" class="btn btn-primary ">Go to the rules panel!</a>
+
+	      <!--<a href="#rulesPanel" role="button" class="btn btn-primary ">Go to the rules panel!</a>-->
 	      <a href="#myModal" role="button" class="btn" data-toggle="modal" id="showGuideButton">Show the Video User Guide!</a>
 	    </div>
 	    <div class="span4">
@@ -187,7 +175,7 @@
 			  	<div id="thZoneMap">
 			  		<img src="{{url_for('static', filename='roomMaps/thermalZonesMap.png')}}">
 			  		<br>
-			  		<b>If your room has the same color of another room, you will share all the rules about the HEATING!</b>
+			  		<!--<b>If your room has the same color of another room, you will share all the rules about the HEATING!</b>-->
 			  	</div>
 			 </div>
 

@@ -59,7 +59,7 @@
 
                                 {% if session.logged_in %}
 					                <li><a id="swatch-link" href="{{url_for('gui.userguide')}}">User guide</a></li>
-					                {#<li><a id="swatch-link" href="{{url_for('gui.mturkinfo')}}">Experiment Info</a></li>#}
+					                <!--{#<li><a id="swatch-link" href="{{url_for('gui.mturkinfo')}}">Experiment Info</a></li>#}-->
 					                <li class="break"><a id="swatch-link" href="{{url_for('gui.logout')}}">Logout</a></li>
 				                {% else %}
 					                <li class="break"><a id="swatch-link" href="{{url_for('gui.login')}}">Login</a></li>

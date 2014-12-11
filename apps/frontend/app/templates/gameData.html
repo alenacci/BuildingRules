@@ -7,25 +7,22 @@
 
 <body>
     <div>
-        <h2 style="color: red">Room : {{roomName}} - {{description}}</h2>
+        <h2 style="color: blue;text-align: center">Room : {{roomName}} - {{description}}</h2>
         <div style="float: left">
             <div>
                 <div style="float:left">
-                    <h3>You</h3>
+                    <h3 style="text-align: center">You</h3>
                     {%if roomHappiness["you"] %}
                         <img height="364" width="210" src="{{url_for('static', filename='images/gameImages/youHappy.jpg')}}">
                     {% else %}
                         <img height="364" width="210" src="{{url_for('static', filename='images/gameImages/youSad.jpg')}}">
                     {% endif %}
                     <br><br>
-                    {%if roomHappiness["whyYou"]!=""%}<div> Why are you not happy? <br> {{roomHappiness["whyYou"]}}</div> <br><br>{% endif %}
-                    <div style="vertical-align: bottom">
-                        <button id="manageButton" style='width:80px; height:40px; bottom:auto; vertical-align: bottom;'>Manage Building</button>
-                    </div>
+                    {%if roomHappiness["whyYou"]!=""%}<div style=" padding:10px;border-radius: 20px 20px 20px 20px;background-color: lightsalmon"> <b>Why are you not happy?</b> <br> {{roomHappiness["whyYou"]}}</div> <br><br>{% endif %}
                 </div>
 
                 <div style="float:left">
-                    <h3>Building Manager</h3>
+                    <h3 style="text-align: center">Building Manager</h3>
                     {%if roomHappiness["manager"] %}
                         <img height="364" width="210" src="{{url_for('static', filename='images/gameImages/happyBuildingManager.jpg')}}">
                     {% else %}
@@ -39,7 +36,7 @@
 
         </div>
 
-        <div style="float: left; border-radius: 20px 40px 60px 80px">
+        <div style="padding:10px;float: left; border-radius: 20px 20px 20px 20px;background-color: gainsboro">
             <h3>Last Update Time: {{time}}</h3>
             <h3>Score: {{score}}</h3>
             <br>
@@ -57,17 +54,17 @@
             {% endfor %}
         </div>
 
-        <div style="float: left; border: 2px black dotted">
+        <div style="padding:10px;float: left; border-radius: 20px 20px 20px 20px;background-color: lightblue;margin-left: 20px">
             <h2 style="color: red"><b>Ranking</b></h2>
 
                 <h3> {% autoescape false %} {{ranking}} {% endautoescape %}</h3>
 
         </div>
 
-        <div style="float: left; border: 2px black dotted">
+        <div style="padding:10px;float: left; border-radius: 20px 20px 20px 20px;background-color: lightcyan;margin-left: 20px">
             <h2 style="color: red"><b>Room List</b></h2>
             {% for room in roomList%}
-                <h3><a href='javascript:document.r_{{room.roomName}}.submit();'>{{room["roomName"]}} - {{room["description"]}}</a></h3>
+                <h4 {% if room["roomName"]==roomName %} style="color:green" {% endif %}>{{room["roomName"]}} - {{room["description"]}} [<a href='javascript:document.r_{{room.roomName}}.submit();'>Show Status</a>] [<a href="/buildings/CSE/rooms/{{room.roomName}}" target="_blank">Manage</a>]</h4>
                 <form name="r_{{room.roomName}}" action="/buildings/CSE/rooms/{{room.roomName}}/game/" method="POST"></form>
             {% endfor %}
         </div>
