@@ -20,7 +20,7 @@ app.config.update(dict(
 app.config.from_envvar('FLASKR_SETTINGS', silent=True)
 
 server_port = 5004
-if server_ip == "137.110.160.48": server_port = 80
+if server_ip == "131.175.14.51": server_port = 80
 
 app.run(host=server_ip, port=server_port)
 
