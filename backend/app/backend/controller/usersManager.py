@@ -50,7 +50,7 @@ class UsersManager:
 		try:
 			user = User(username = newUserUsername)
 			user.retrieve()
-			raise UsernameNotAvailableError("The username " + newUserUsername + " has been alredy assigned")
+			raise UsernameNotAvailableError("The username " + newUserUsername + " has been already assigned")
 
 		except UserNotFoundError as e:
 		
@@ -86,7 +86,7 @@ class UsersManager:
 		try:
 			user = User(username = newUserUsername)
 			user.retrieve()
-			raise UsernameNotAvailableError("The username " + newUserUsername + " has been alredy assigned")
+			raise UsernameNotAvailableError("The username " + newUserUsername + " has been already assigned")
 
 		except UserNotFoundError as e:
 		

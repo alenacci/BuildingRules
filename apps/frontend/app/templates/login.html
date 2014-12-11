@@ -20,6 +20,11 @@
       <dd><input type=submit value=Login>
     </dl>
   </form>
+    {% if error != None %}
+    <div class="alert alert-block" align="center">
+      <h3>{{error}}</h3><br>
+    </div>
+    {% endif %}
 
 
 

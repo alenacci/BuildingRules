@@ -37,11 +37,16 @@ def index():
             return render_template('error.html', error=response['request-errorDescription'])
 
         roomList = response["rooms"]
-        return render_template('game.html',roomName = roomList[0]["roomName"])
+
+        mapFileName = "blankMap.png"
+        for r in roomList:
+            if r["description"] == "Office Room":
+                mapFileName = r["roomName"] + ".png"
+
+        return render_template('gameInstructions.html',roomList = roomList,mapFileName = mapFileName)
         #------------------------------------------------------------------------------------------------------
 
     return render_template('home.html')
-
 
 @gui.route('/partecipate/')
 @gui.route('/partecipate')

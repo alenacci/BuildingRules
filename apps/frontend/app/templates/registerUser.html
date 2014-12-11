@@ -11,7 +11,7 @@
 
   <h3>Warning</h3>
   <p>This is an experimental app. There is no mechanism of password recovery so please be very carefull about your personal data.</p>
-  <p>It is not required to insert your actual personal data.</p>
+  <p>It is not required to insert your actual personal data except for the email.</p>
   <p><b>Again: PLEASE REMEMBER YOUR USERNAME, PASSWORD and the user UUID that will be provided you after the registration process.</b></p>
 
 
@@ -23,18 +23,23 @@
   <form action="{{request.path}}" method=post>
     <dl>
       <dt>Person name:
-      <dd><input type=text name=personName>
+      <dd><input type=text name=personName required>
       <dt>Username:
-      <dd><input type=text name=username>
+      <dd><input type=text name=username required>
       <dt>Password:
-      <dd><input type=password name=password>
+      <dd><input type=password name=password required>
       <dt>Email:
-      <dd><input type=text name=email>
+      <dd><input type=text name=email required>
 
       <dd><input type=submit value=Register>
       <!--<input type=hidden name=email value={{source}}> -->
     </dl>
   </form>
+  {% if error != None %}
+  <div class="alert alert-block" align="center">
+      <h3>{{error}}</h3><br>
+    </div>
+    {% endif %}
 
 
   <br>
