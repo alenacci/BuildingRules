@@ -324,23 +324,51 @@ class GameManager:
         youHappy = True
         managerHappy = True
 
+        roomManager = RoomsManager()
+
+        now = datetime.datetime.now()
+        h = now.hour
+
+        if h > 8 or h < 18:
+            if "Office" in (roomManager.getInfo(roomName, "CSE"))["description"]:
+                if "COMPUTER" in self.statusAction[roomName]:
+                    if self.statusAction[roomName]["COMPUTER"] != "ON":
+                        youHappy = False
+                        whyNotHappy = whyNotHappy + "The PC is off during working time! <br/>"
+                else:
+                    youHappy = False
+                    whyNotHappy = whyNotHappy + "The PC is off during working time! <br/>"
+
+        #hvac + window open
         if "TEMPERATURE" in self.statusAction[roomName] and "WINDOWS" in self.statusAction[roomName]:
             if self.statusAction[roomName]["WINDOWS"] == "OPEN":
                 managerHappy = False
-                whyManagerNotHappy = whyManagerNotHappy + "Did you open the window with the HVAC active? \n"
+                whyManagerNotHappy = whyManagerNotHappy + "Did you open the window with the HVAC active? <br/>"
 
+        #not sunny + light off
+        if self.statusDict[roomName]["Weather"]!="sunny":
+            if "LIGHT" in self.statusAction[roomName]:
+                if self.statusAction[roomName]["LIGHT"] != "ON":
+                    youHappy = False
+                    whyNotHappy = whyNotHappy + "The Light are OFF and there is no sun outside <br/>"
+            else:
+                youHappy = False
+                whyNotHappy = whyNotHappy + "The Light are OFF and there is no sun outside <br/>"
+
+        #hum > 30
         if  self.statusDictControl[roomName]["Hum"] > 30 :
             youHappy = False
-            whyNotHappy = whyNotHappy + "Humidity over 30% \n"
+            whyNotHappy = whyNotHappy + "Humidity over 30% <br/>"
 
+        #room temp < 64 o > 72
         if  self.statusDictControl[roomName]["RoomTemp"] < 64 and self.statusDictControl[roomName]["RoomTemp"]> 72 :
             youHappy = False
-            whyNotHappy = whyNotHappy + "Room Temperature over 72F or under 64F \n"
+            whyNotHappy = whyNotHappy + "Room Temperature over 72F or under 64F <br/>"
 
 
         if self.statusDictControl[roomName]["Power"] > 2000 :
             managerHappy = False
-            whyManagerNotHappy = whyManagerNotHappy + "The power consumption is over 2000 W \n"
+            whyManagerNotHappy = whyManagerNotHappy + "The power consumption is over 2000 W <br/>"
 
         if managerHappy:
             self.scores[username]+=1

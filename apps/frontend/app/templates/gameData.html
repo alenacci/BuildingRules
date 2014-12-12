@@ -19,7 +19,7 @@
                         <img height="364" width="210" src="{{url_for('static', filename='images/gameImages/youSad.jpg')}}">
                     {% endif %}
                     <br><br>
-                    {%if roomHappiness["whyYou"]!=""%}<div style=" padding:10px;border-radius: 20px 20px 20px 20px;background-color: lightsalmon"> <b>Why are you not happy?</b> <br> {{roomHappiness["whyYou"]}}</div> <br><br>{% endif %}
+                    {%if roomHappiness["whyYou"]!=""%}<div style=" padding:10px;border-radius: 20px 20px 20px 20px;background-color: lightsalmon"> <b>Why are you not happy?</b> <br> {% autoescape false %}{{roomHappiness["whyYou"]}}{% endautoescape %}</div> <br><br>{% endif %}
                 </div>
 
                 <div style="float:left">
@@ -30,7 +30,7 @@
                         <img height="364" width="210" src="{{url_for('static', filename='images/gameImages/sadBuildingManager.jpg')}}">
                     {% endif %}
                     <br><br>
-                    {%if roomHappiness["whyManager"]!=""%}<div> Why the manager is not happy? <br> {{roomHappiness["whyManager"]}}</div> {% endif %}
+                    {%if roomHappiness["whyManager"]!=""%}<div> Why the manager is not happy? <br> {% autoescape false %}{{roomHappiness["whyManager"]}}{% endautoescape %}</div> {% endif %}
                 </div>
             </div>
 
