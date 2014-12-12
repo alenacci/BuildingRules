@@ -334,10 +334,10 @@ class GameManager:
                 if "COMPUTER" in self.statusAction[roomName]:
                     if self.statusAction[roomName]["COMPUTER"] != "ON":
                         youHappy = False
-                        whyNotHappy = whyNotHappy + "The PC is off during working time! <br/>"
+                        whyNotHappy = whyNotHappy + "The PC is off during working time!(8-18) <br/>"
                 else:
                     youHappy = False
-                    whyNotHappy = whyNotHappy + "The PC is off during working time! <br/>"
+                    whyNotHappy = whyNotHappy + "The PC is off during working time!(8-18) <br/>"
 
         #hvac + window open
         if "TEMPERATURE" in self.statusAction[roomName] and "WINDOWS" in self.statusAction[roomName]:
@@ -443,10 +443,10 @@ class GameManager:
     def mailServiceExec(self,scheduler = None):
         if scheduler is None:
             scheduler = sched.scheduler(time.time, time.sleep)
-            scheduler.enter(90, 1, self.mailServiceExec, ([scheduler]))
+            scheduler.enter(21600, 1, self.mailServiceExec, ([scheduler]))
             scheduler.run()
         if scheduler is not None:
-            scheduler.enter(90, 1, self.mailServiceExec, ([scheduler]))
+            scheduler.enter(21600, 1, self.mailServiceExec, ([scheduler]))
 
         #self.sendSummaryByEmail()
         self.changeWeather()

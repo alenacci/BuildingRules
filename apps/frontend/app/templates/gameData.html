@@ -20,6 +20,7 @@
                     {% endif %}
                     <br><br>
                     {%if roomHappiness["whyYou"]!=""%}<div style=" padding:10px;border-radius: 20px 20px 20px 20px;background-color: lightsalmon"> <b>Why are you not happy?</b> <br> {% autoescape false %}{{roomHappiness["whyYou"]}}{% endautoescape %}</div> <br><br>{% endif %}
+                    <p style="text-decoration: underline"><b>Info</b> : all the inserted, modified or deleted <br> rules are checked every 30 minutes!</p>
                 </div>
 
                 <div style="float:left">
@@ -70,6 +71,7 @@
             {% endfor %}
         </div>
     </div>
+
     <script src="{{url_for('static', filename='js/game.js')}}"></script>
 </body>
 </html>
