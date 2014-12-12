@@ -89,7 +89,7 @@
                             <ul id="myTab" class="nav nav-tabs">
                               <li><a href="#roomSummary_{{roomName}}" data-toggle="tab">Summary</a></li>
                               <li class="active"><a href="#rulePanel_{{roomName}}" data-toggle="tab">Rules Editor</a></li>
-                              <li><a href="#roomBehavior_{{roomName}}" data-toggle="tab">Room Behavior</a></li>
+                              <!--<li><a href="#roomBehavior_{{roomName}}" data-toggle="tab">Room Behavior</a></li>-->
                               <li><a href="#ruleNavigator_{{roomName}}" data-toggle="tab">Rules Navigator</a></li>
                             </ul>
                             <div id="myTabContent" class="tab-content">
@@ -167,7 +167,7 @@
 
 
                               </div>
-                              <div class="tab-pane fade" id="roomBehavior_{{roomName}}" style="overflow-x: hidden">
+                              <!--<div class="tab-pane fade" id="roomBehavior_{{roomName}}" style="overflow-x: hidden">
                                 <div class="container">
                                 {% if displayGantt %}
                                     <h2>Rules with time constraints</h2>
@@ -178,7 +178,7 @@
                                     <br>
                                 <iframe src="{{request.path}}/graphicalView" class="frame"></iframe>
                                 </div>
-                              </div>
+                              </div> -->
                               <div class="tab-pane fade" id="ruleNavigator_{{roomName}}">
                                 <div class="container">
 
