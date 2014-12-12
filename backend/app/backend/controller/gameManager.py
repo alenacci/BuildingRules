@@ -246,7 +246,7 @@ class GameManager:
                         deltaTemp -= hvacTemp
 
 
-            if deltaTemp >0:
+            if deltaTemp !=0:
                 self.statusDictControl[roomName]["RoomTemp"]+=deltaTemp
 
                 self.statusDict[roomName]["RoomTemp"] = str(self.statusDictControl[roomName]["RoomTemp"]) + "F"
@@ -284,7 +284,7 @@ class GameManager:
                         deltaHum -= hvacHum
                         print "abbasso"
                 print str(self.targetHum[roomName])+str(self.statusDictControl[roomName]["Hum"])+str(deltaHum)+"PROVAAA"
-            if deltaHum >0:
+            if deltaHum !=0:
                 self.statusDictControl[roomName]["Hum"]+=deltaHum
                 self.statusDict[roomName]["Hum"] = str(self.statusDictControl[roomName]["Hum"]) + "%"
 
@@ -463,7 +463,7 @@ class GameManager:
             scheduler.enter(1, 1, self.threadExec, ([buildingName, scheduler]))
             scheduler.run()
         if scheduler is not None:
-            scheduler.enter(1800, 1, self.threadExec, ([buildingName, scheduler]))
+            scheduler.enter(60, 1, self.threadExec, ([buildingName, scheduler]))
 
         self.simulate(buildingName)
 
