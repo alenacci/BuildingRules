@@ -334,7 +334,16 @@ class GameManager:
         now = datetime.datetime.now()
         h = now.hour
 
-        if h > 8 or h < 18:
+        if h > 18 or h < 8:
+            if "LIGHT" in self.statusAction[roomName]:
+                if self.statusAction[roomName]["LIGHT"] != "ON":
+                    youHappy = False
+                    whyNotHappy = whyNotHappy + "The Light are OFF and outside is very dark <br/>"
+            else:
+                youHappy = False
+                whyNotHappy = whyNotHappy + "The Light are OFF and outside is very dark <br/>"
+
+        if h > 8 and h < 18:
             if "Office" in (roomManager.getInfo(roomName, "CSE"))["description"]:
                 if "COMPUTER" in self.statusAction[roomName]:
                     if self.statusAction[roomName]["COMPUTER"] != "ON":
