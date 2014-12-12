@@ -240,9 +240,9 @@ class GameManager:
 
             if "RoomTemp" in self.statusDictControl[roomName] and roomName in self.targetTemp:
                 if str(self.targetTemp[roomName]) != str(self.statusDictControl[roomName]["RoomTemp"]):
-                    if self.statusDictControl[roomName]["RoomTemp"] < self.targetTemp[roomName]:
+                    if self.statusDictControl[roomName]["RoomTemp"] < int(self.targetTemp[roomName]):
                         deltaTemp += hvacTemp
-                    elif self.statusDictControl[roomName]["RoomTemp"] > self.targetTemp[roomName]:
+                    elif self.statusDictControl[roomName]["RoomTemp"] > int(self.targetTemp[roomName]):
                         deltaTemp -= hvacTemp
 
 
@@ -267,6 +267,7 @@ class GameManager:
                 newHums = []
                 newHums.append(humidities[0].replace("%",""))
                 newHums.append(humidities[1].replace("%",""))
+
                 print newHums
 
                 if self.statusDictControl[roomName]["Hum"]<newHums[0]:
@@ -276,14 +277,17 @@ class GameManager:
 
             if "Hum" in self.statusDictControl[roomName] and roomName in self.targetHum:
                 if str(self.targetHum[roomName]) != str(self.statusDictControl[roomName]["Hum"]):
-                    if self.statusDictControl[roomName]["Hum"] < self.targetHum[roomName]:
+                    if self.statusDictControl[roomName]["Hum"] < int(self.targetHum[roomName]):
                         deltaHum += hvacHum
-                    elif self.statusDictControl[roomName]["Hum"] > self.targetHum[roomName]:
+                        print "alzo"
+                    elif self.statusDictControl[roomName]["Hum"] > int(self.targetHum[roomName]):
                         deltaHum -= hvacHum
-
+                        print "abbasso"
+                print str(self.targetHum[roomName])+str(self.statusDictControl[roomName]["Hum"])+str(deltaHum)+"PROVAAA"
             if deltaHum >0:
                 self.statusDictControl[roomName]["Hum"]+=deltaHum
                 self.statusDict[roomName]["Hum"] = str(self.statusDictControl[roomName]["Hum"]) + "%"
+
 
 
     def simulate(self,buildingName):
@@ -317,6 +321,7 @@ class GameManager:
                     print str(user["username"]) + str(room)
 
             self.dataDump()
+            print self.statusAction
 
     def getScores(self,username,roomName):
         whyNotHappy = ""
