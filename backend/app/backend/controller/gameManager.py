@@ -121,12 +121,12 @@ class GameManager:
                 if user["username"] not in self.buildingUsers and '--' not in user["email"]:
                     self.buildingUsers.append(user["username"])
 
-        if len(self.scores) == 0:
-            self.scoresRestore()
+        self.scoresRestore()
+        self.dataRestore()
 
         if username not in self.scores:
             self.scores[username] = 0
-            self.dataDump()
+            self.scoresDump()
 
         sortedScores = sorted(self.scores.items(), key=operator.itemgetter(1),reverse=True)
         scores = ""
@@ -489,15 +489,6 @@ class GameManager:
 
         outputStatus.close()
 
-        scoresFile = "scoresFile.json"
-        scoresFilePath = (dataDumpFolder + "/" + scoresFile).replace("//", "/")
-        os.remove(scoresFilePath) if os.path.exists(scoresFilePath) else None
-
-        outputScores = open(scoresFilePath,'wb')
-        json.dump(self.scores,outputScores)
-
-        outputScores.close()
-
 
 
     def dataRestore(self):
@@ -518,6 +509,20 @@ class GameManager:
             self.statusDict[room] = valuesDict
 
         return True
+
+
+    def scoresDump(self):
+        dataDumpFolder = "tools/gameData/"
+        if not os.path.exists(dataDumpFolder): os.makedirs(dataDumpFolder)
+
+        scoresFile = "scoresFile.json"
+        scoresFilePath = (dataDumpFolder + "/" + scoresFile).replace("//", "/")
+        os.remove(scoresFilePath) if os.path.exists(scoresFilePath) else None
+
+        outputScores = open(scoresFilePath,'wb')
+        json.dump(self.scores,outputScores)
+
+        outputScores.close()
 
 
     def scoresRestore(self):
