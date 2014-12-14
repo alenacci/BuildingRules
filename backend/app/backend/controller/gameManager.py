@@ -401,6 +401,8 @@ class GameManager:
         self.roomHappiness[roomName]["whyYou"] = whyNotHappy
         self.roomHappiness[roomName]["whyManager"] = whyManagerNotHappy
 
+        self.scoresDump()
+
     def sendSummaryByEmail(self):
         print "sendSummaryByEmail"
         notificationManager = NotificationsManager()
