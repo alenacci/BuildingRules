@@ -108,7 +108,10 @@ class GameManager:
 
     def upgradeValues(self, roomName, buildingName, username):
 
-        if len(self.statusDict)==0 :
+        self.scoresRestore()
+        self.dataRestore()
+
+        if len(self.statusDict)==0 or len(self.statusDictControl)==0 :
             self.initValues(buildingName,username)
 
         buildingsManager = BuildingsManager()
@@ -120,9 +123,6 @@ class GameManager:
             for user in users["users"]:
                 if user["username"] not in self.buildingUsers and '--' not in user["email"]:
                     self.buildingUsers.append(user["username"])
-
-        self.scoresRestore()
-        self.dataRestore()
 
         if username not in self.scores:
             self.scores[username] = 0
@@ -206,6 +206,11 @@ class GameManager:
             self.statusDict[roomName]["Power"] = power
             self.statusDictControl[roomName]["Power"] = power
 
+            if len(self.statusDictControl)!= 0 :
+                self.dataDump()
+            else :
+                self.dataRestore()
+
 
 
     def tempSimulator(self, roomName):
@@ -235,9 +240,12 @@ class GameManager:
 
                 if self.statusDictControl[roomName]["RoomTemp"]<newTemps[0]:
                     self.targetTemp[roomName] = newTemps[0]
+                    self.tempDump()
                 if newTemps[1] < self.statusDictControl[roomName]["RoomTemp"]:
                     self.targetTemp[roomName] = newTemps[1]
+                    self.tempDump()
 
+            self.tempRestore()
             if "RoomTemp" in self.statusDictControl[roomName] and roomName in self.targetTemp:
                 if str(self.targetTemp[roomName]) != str(self.statusDictControl[roomName]["RoomTemp"]):
                     if self.statusDictControl[roomName]["RoomTemp"] < int(self.targetTemp[roomName]):
@@ -248,8 +256,12 @@ class GameManager:
 
             if deltaTemp !=0:
                 self.statusDictControl[roomName]["RoomTemp"]+=deltaTemp
-
                 self.statusDict[roomName]["RoomTemp"] = str(self.statusDictControl[roomName]["RoomTemp"]) + "F"
+
+            if len(self.statusDictControl)!= 0 :
+                self.dataDump()
+            else :
+                self.dataRestore()
 
 
 
@@ -272,9 +284,12 @@ class GameManager:
 
                 if self.statusDictControl[roomName]["Hum"]<newHums[0]:
                     self.targetHum[roomName] = newHums[0]
+                    self.humidityDump()
                 if newHums[1] < self.statusDictControl[roomName]["Hum"]:
                     self.targetHum[roomName] = newHums[1]
+                    self.humidityDump()
 
+            self.humidityRestore()
             if "Hum" in self.statusDictControl[roomName] and roomName in self.targetHum:
                 if str(self.targetHum[roomName]) != str(self.statusDictControl[roomName]["Hum"]):
                     if self.statusDictControl[roomName]["Hum"] < int(self.targetHum[roomName]):
@@ -287,6 +302,11 @@ class GameManager:
             if deltaHum !=0:
                 self.statusDictControl[roomName]["Hum"]+=deltaHum
                 self.statusDict[roomName]["Hum"] = str(self.statusDictControl[roomName]["Hum"]) + "%"
+
+            if len(self.statusDictControl)!= 0 :
+                self.dataDump()
+            else :
+                self.dataRestore()
 
 
 
@@ -303,10 +323,14 @@ class GameManager:
             else:
                 hTo = str(h+1)+":00 AM"
                 h = str(h)+":00 AM"
+
+            if len(self.statusDict) == 0: self.dataRestore()
+
             roomSimulator = RoomSimulator(buildingName=buildingName, roomName=room,
                                               occupancyTimeRangeFrom=h,
                                               occupancyTimeRangeTo=hTo, roomTemperature=self.statusDict[room]["RoomTemp"],
                                               externalTemperature=self.statusDict[room]["ExtTemp"], weather=self.statusDict[room]["Weather"])
+
             self.saveSim(roomSimulator.start(),h,room)
             self.tempSimulator(room)
             self.humSimulator(room)
@@ -320,8 +344,10 @@ class GameManager:
                     self.getScores(user["username"],room)
                     print str(user["username"]) + str(room)
 
-            self.dataDump()
-            print self.statusAction
+            if len(self.statusDictControl)!= 0 :
+                self.dataDump()
+            else :
+                self.dataRestore()
 
     def getScores(self,username,roomName):
         whyNotHappy = ""
@@ -539,3 +565,57 @@ class GameManager:
             self.scores = json.load(inputScores)
 
         return True
+
+    def humidityDump(self):
+        dataDumpFolder = "tools/gameData/"
+        if not os.path.exists(dataDumpFolder): os.makedirs(dataDumpFolder)
+
+        humFile = "humidityFile.json"
+        humFilePath = (dataDumpFolder + "/" + humFile).replace("//", "/")
+        os.remove(humFilePath) if os.path.exists(humFilePath) else None
+
+        outputHum = open(humFilePath,'wb')
+        json.dump(self.targetHum,outputHum)
+
+        outputHum.close()
+
+
+    def tempDump(self):
+        dataDumpFolder = "tools/gameData/"
+        if not os.path.exists(dataDumpFolder): os.makedirs(dataDumpFolder)
+
+        tempFile = "tempFile.json"
+        tempFilePath = (dataDumpFolder + "/" + tempFile).replace("//", "/")
+        os.remove(tempFilePath) if os.path.exists(tempFilePath) else None
+
+        outputTemp = open(tempFilePath,'wb')
+        json.dump(self.targetTemp,outputTemp)
+
+        outputTemp.close()
+
+
+    def humidityRestore(self):
+        dataRestoreFolder = "tools/gameData/"
+        if not os.path.exists(dataRestoreFolder): return False
+
+        humFile = "humidityFile.json"
+        humFilePath = (dataRestoreFolder + "/" + humFile).replace("//", "/")
+        if not os.path.exists(humFilePath): return False
+
+        with open(humFilePath,'rb') as inputHum:
+            self.targetHum = json.load(inputHum)
+
+
+
+        return True
+
+    def tempRestore(self):
+        dataRestoreFolder = "tools/gameData/"
+        if not os.path.exists(dataRestoreFolder): return False
+
+        tempFile = "tempFile.json"
+        tempFilePath = (dataRestoreFolder + "/" + tempFile).replace("//", "/")
+        if not os.path.exists(tempFilePath): return False
+
+        with open(tempFilePath,'rb') as inputTemp:
+            self.targetTemp = json.load(inputTemp)
