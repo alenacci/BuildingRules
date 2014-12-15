@@ -339,6 +339,7 @@ class GameManager:
             users = rm2.getUsers(room,buildingName)["users"]
 
             print self.buildingUsers
+            self.scoresRestore()
             for user in users:
                 if user["username"] in self.scores:
                     self.getScores(user["username"],room)
