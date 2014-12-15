@@ -162,7 +162,7 @@
                                         </blockquote>
                                     {% endfor %}
                                     <br>
-                                    <a style="text-decoration: none" href="{{request.path}}/rules/add"><input type="button" onclick="{{request.path}}/rules/add" value="Add a new rule"  ></a>
+                                    <form method="get" action="{{request.path}}/rules/add"> <input type="submit" value="Add a new rule"></form>
 
 
 
