@@ -414,44 +414,39 @@ def roomGraphicalView(buildingName=None, roomName=None):
 def game(buildingName=None, roomName=None):
     if not loggedIn():    return redirect(url_for('gui.login'))
 
-    statusDict = {}
-    infoRoom = {}
+    #get all the room information
+    response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/game",
+                            {
+                                'username': session["username"],
+                                'buildingName': buildingName,
+                                'roomName': roomName,
+                                'sessionKey': session["sessionKey"],
+                                'userUuid': session["userUuid"]
+                            })
 
-    if request.method == 'POST':
+    if successResponse(response):
+        returnInfo = response
+    else:
+        return render_template('error.html', error=response['request-errorDescription'])
+    statusDict = returnInfo["statusAction"]
+    infoRoom = returnInfo["statusDict"]
+    target = returnInfo["target"]
+    time = returnInfo["time"]
+    roomHappiness = returnInfo["happiness"]
+    score = returnInfo["score"]
+    ranking = returnInfo["ranking"]
 
-        #get all the room information
-        response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/game",
-                                {
-                                    'username': session["username"],
-                                    'buildingName': buildingName,
-                                    'roomName': roomName,
-                                    'sessionKey': session["sessionKey"],
-                                    'userUuid': session["userUuid"]
-                                })
+    response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms",
+                        {'username': session["username"], 'buildingName': buildingName,
+                         'sessionKey': session["sessionKey"], 'userUuid': session["userUuid"]})
 
-        if successResponse(response):
-            returnInfo = response
-        else:
-            return render_template('error.html', error=response['request-errorDescription'])
-        statusDict = returnInfo["statusAction"]
-        infoRoom = returnInfo["statusDict"]
-        target = returnInfo["target"]
-        time = returnInfo["time"]
-        roomHappiness = returnInfo["happiness"]
-        score = returnInfo["score"]
-        ranking = returnInfo["ranking"]
+    if not successResponse(response):
+        return render_template('error.html', error=response['request-errorDescription'])
 
-        response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms",
-                            {'username': session["username"], 'buildingName': buildingName,
-                             'sessionKey': session["sessionKey"], 'userUuid': session["userUuid"]})
-
-        if not successResponse(response):
-            return render_template('error.html', error=response['request-errorDescription'])
-
-        roomList = response["rooms"]
-        for room in roomList:
-            if room["roomName"] == roomName:
-                description = room["description"]
+    roomList = response["rooms"]
+    for room in roomList:
+        if room["roomName"] == roomName:
+            description = room["description"]
 
 
     return render_template('gameData.html', categoryList = target ,statusDict = statusDict, infoRoom = infoRoom, time = time, roomList = roomList, roomHappiness = roomHappiness, score = score,ranking= ranking, roomName = roomName, description = description)

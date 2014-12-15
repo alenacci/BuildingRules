@@ -5,7 +5,7 @@
     <title></title>
 </head>
 
-<body>
+<body style="background-color: #ffffff">
     <div>
         <h1 style="color: royalblue;text-align: center;border-radius: 20px 20px 20px 20px;background-color: #A9E2F3">Building Rules Game!</h1>
         <h2 style="color: blue;text-align: center">Room : {{roomName}} - {{description}}</h2>
@@ -19,8 +19,8 @@
                         <img height="364" width="210" src="{{url_for('static', filename='images/gameImages/youSad.jpg')}}">
                     {% endif %}
                     <br><br>
-                    {%if roomHappiness["whyYou"]!=""%}<div style=" padding:10px;border-radius: 20px 20px 20px 20px;background-color: lightsalmon"> <b>Why are you not happy?</b> <br> {% autoescape false %}{{roomHappiness["whyYou"]}}{% endautoescape %}</div> <br><br>{% endif %}
-                    <p style="text-decoration: underline"><b>Info</b> : all the inserted, modified or deleted <br> rules are checked every 30 minutes!</p>
+                    {%if roomHappiness["whyYou"]!=""%}<div style=" padding:5px;border-radius: 20px 20px 20px 20px;background-color: lightsalmon;width: 200px"> <b>Why are you not happy?</b> <br> {% autoescape false %}{{roomHappiness["whyYou"]}}{% endautoescape %}</div> <br><br>{% endif %}
+                    <p style="text-decoration: underline; width: 200px"><b>Info</b> : all the inserted, modified or deleted <br> rules are checked every 30 minutes!</p>
                 </div>
 
                 <div style="float:left">
@@ -31,7 +31,7 @@
                         <img height="364" width="210" src="{{url_for('static', filename='images/gameImages/sadBuildingManager.jpg')}}">
                     {% endif %}
                     <br><br>
-                    {%if roomHappiness["whyManager"]!=""%}<div> Why the manager is not happy? <br> {% autoescape false %}{{roomHappiness["whyManager"]}}{% endautoescape %}</div> {% endif %}
+                    {%if roomHappiness["whyManager"]!=""%}<div style=" padding:5px;border-radius: 20px 20px 20px 20px;background-color: lightsalmon;width: 200px"> <b> Why the manager is not happy? </b> <br> {% autoescape false %}{{roomHappiness["whyManager"]}}{% endautoescape %}</div> {% endif %}
                 </div>
             </div>
 
@@ -56,14 +56,14 @@
             {% endfor %}
         </div>
 
-        <div style="padding:10px;float: left; border-radius: 20px 20px 20px 20px;background-color: lightblue;margin-left: 20px">
+        <div style="padding:10px;float: left; border-radius: 20px 20px 20px 20px;background-color: lightblue;margin-left: 10px">
             <h2 style="color: red"><b>Ranking</b></h2>
 
                 <h3> {% autoescape false %} {{ranking}} {% endautoescape %}</h3>
 
         </div>
 
-        <div style="padding:10px;float: left; border-radius: 20px 20px 20px 20px;background-color: lightcyan;margin-left: 20px">
+        <div style="padding:10px;float: left; border-radius: 20px 20px 20px 20px;background-color: lightcyan;margin-left: 10px">
             <h2 style="color: red"><b>Room List</b></h2>
             {% for room in roomList%}
                 <h4 {% if room["roomName"]==roomName %} style="color:green" {% endif %}>{{room["roomName"]}} - {{room["description"]}} [<a href='javascript:document.r_{{room.roomName}}.submit();'>Show Status</a>] [<a href="/buildings/CSE/rooms/{{room.roomName}}" target="_blank">Manage</a>]</h4>
