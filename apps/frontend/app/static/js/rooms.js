@@ -291,3 +291,18 @@ function init()
 	showAccessMaps();
 	showMTurk();
 }
+
+function showGame()
+{
+	show('gameFrame');
+    hide('btnShowGame');
+	show('btnHideGame');
+}
+
+function hideGame()
+{
+	hide('gameFrame');
+    hide('btnHideGame');
+    show('btnShowGame');
+
+}

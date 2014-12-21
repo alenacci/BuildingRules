@@ -87,7 +87,7 @@
           </div>
         </div>-->
 
-        {#
+        <!--{#
         <div class="form-actions">
             <a name="mTurkPanel" id="mTurkPanel"></a>
             <a class="btn btn-lg btn-success" href="javascript:hideMTurk()" id="btnHideMTurk">Hide this panel</a>
@@ -135,7 +135,7 @@
             </div>
         </div>
         #}
-
+        -->
         <br>
 
 
@@ -167,8 +167,9 @@
 
                     <div id="ganttDiv">
                         <form name="submitForm" target="dataFrame" action="/buildings/CSE/rooms/{{roomList[0].roomName}}/game" method="post"></form>
-
-                        <iframe name="dataFrame" src="/buildings/CSE/rooms/{{roomList[0].roomName}}/game" style='height: 400px; width: 1160px; float: left; border: 2px black solid'>Not supported</iframe>
+                        <a class="btn btn-lg btn-success" href="javascript:showGame()" id="btnShowGame">Show Game</a>
+                        <a class="btn btn-lg btn-success" href="javascript:hideGame()" id="btnHideGame" style="display: none">Hide Game</a>
+                        <iframe id="gameFrame" src="/buildings/CSE/rooms/{{roomList[0].roomName}}/game" style='height: 700px; width: 1160px; float: left; border: 2px black solid;display: none'>Not supported</iframe>
                     </div>
                  </div>
 
