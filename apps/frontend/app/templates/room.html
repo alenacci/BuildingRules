@@ -29,50 +29,8 @@
 		.ruleNav_EXTERNAL_APP 			{background-color:#D0A9F5;}
 	</style>
 
-	<script type="text/javascript" src="{{ url_for('static', filename='js/rooms.js') }}"></script>
 
 
-
-    <script>
-	window.onload = function(){
-	//init();
-    /*{% if alreadyLoggedIn %}
-	{% else %}
-	document.getElementById('showGuideButton').click();
-	{% endif %}*/
-	};
-	{% for category in categories %}
-		ruleCategories.push("{{category}}");
-	{% endfor %}
-
-	{#
-	{% if mTurkStatus.experimentCompleted %}
-		// THIS IS NEED TO SHOW THE END OF EXPERIMENT MESSAGE
-		alert("You finished your experiment!");
-		window.location.hash="mTurkPanel";
-	{% else %}
-		{% if mTurkStatus.taskCompleted %}
-			alert("You finished your today task!");
-			window.location.hash="mTurkPanel";
-		{% endif %}
-	{% endif %}
-	#}
-
-	</script>
-
-	<script type="text/javascript">
-	var popupStyle = "top=10, left=10, width=350, height=250, status=no, menubar=no, toolbar=no, scrollbars=yes";
-
-	function openPopup(url)
-	{
-		window.open(url, "", popupStyle);
-	}
-	</script>
-
-    <!-- get the height of the frame -->
-    <script type="text/javascript">
-        $('.frame').css('height' , $(document).height()+'px');
-    </script>
 
     <a name="roomMenu_{{roomName}}" id="roomMenu_{{roomName}}"></a>
     <div class="row">
@@ -180,16 +138,16 @@
                                 </div>
                               </div> -->
                               <div class="tab-pane fade" id="ruleNavigator_{{roomName}}">
-                                <div class="container">
+                                <div class="container.small">
 
                                     <table border="1" style="border: 1px solid black">
 
                                         {% for category in categories %}
                                             <tr style="border: 1px solid black">
-                                                <td style="background-color:#72AC44; color:white; width:200px">{{category}}</td>
+                                                <td style="background-color:#72AC44; color:white">{{category}}</td>
                                                 {% for rule in roomRules[roomName] %}
                                                     {% if category == rule.category %}
-                                                        <td class="ruleNav_{{rule.triggersCategory[0]}}" style="width: 250px">
+                                                        <td class="ruleNav_{{rule.triggersCategory[0]}}">
                                                             Priority: {{rule.priority}}
                                                             <br>
                                                             {% if rule.enabled %} {% else %} <strike> {% endif %}
@@ -257,4 +215,48 @@
                     </div>
 
   {% endif %}
+        <script type="text/javascript" src="{{ url_for('static', filename='js/rooms.js') }}"></script>
+
+
+    <script>
+	/*window.onload = function(){
+	//init();
+    {% if alreadyLoggedIn %}
+	{% else %}
+	document.getElementById('showGuideButton').click();
+	{% endif %}
+	};*/
+	{% for category in categories %}
+		ruleCategories.push("{{category}}");
+	{% endfor %}
+
+	/*{#
+	{% if mTurkStatus.experimentCompleted %}
+		// THIS IS NEED TO SHOW THE END OF EXPERIMENT MESSAGE
+		alert("You finished your experiment!");
+		window.location.hash="mTurkPanel";
+	{% else %}
+		{% if mTurkStatus.taskCompleted %}
+			alert("You finished your today task!");
+			window.location.hash="mTurkPanel";
+		{% endif %}
+	{% endif %}
+	#}*/
+
+	</script>
+
+	<script type="text/javascript">
+	var popupStyle = "top=10, left=10, width=350, height=250, status=no, menubar=no, toolbar=no, scrollbars=yes";
+
+	function openPopup(url)
+	{
+		window.open(url, "", popupStyle);
+	}
+	</script>
+
+    <!-- get the height of the frame -->
+    <script type="text/javascript">
+        $('.frame').css('height' , $(document).height()+'px');
+    </script>
+
 {% endblock %}

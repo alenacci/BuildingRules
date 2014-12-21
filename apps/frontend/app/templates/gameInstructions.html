@@ -38,7 +38,7 @@
       <h3>You will manage these rooms:</h3><br>
       {% for room in roomList %}{{room["roomName"]}} - {{room ["description"]}} <br>{% endfor %}
     <br>
-    <form method="post" action="/buildings/CSE/rooms/{{roomList[0]['roomName']}}/game"><button type="submit" class="btn btn-large btn-primary">START GAME!</button></form>
+    <form method="post" action="/buildings/CSE/rooms"><button type="submit" class="btn btn-large btn-primary">START GAME!</button></form>
       <br>
 
   </div>
