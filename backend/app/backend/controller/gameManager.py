@@ -478,7 +478,7 @@ class GameManager:
             self.statusDict[room]["Weather"] = w
             self.statusDictControl[room]["Weather"] = w
             self.statusDict[room]["ExtTemp"] = str(temp)+"F"
-            self.statusDictControl[room]["Weather"] = temp
+            self.statusDictControl[room]["ExtTemp"] = temp
 
 
     def mailServiceExec(self,scheduler = None):
