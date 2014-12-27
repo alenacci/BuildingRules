@@ -17,12 +17,10 @@ import sched
 import time
 import thread
 import operator
-import pickle
 from app.backend.controller.buildingsManager import BuildingsManager
 from app.backend.controller.roomSimulator import RoomSimulator
 from app.backend.controller.roomsManager import RoomsManager
 from app.backend.controller.notificationsManager import NotificationsManager
-from app.backend.controller.usersManager import UsersManager
 
 
 class GameManager:

@@ -664,6 +664,17 @@ def room(buildingName=None, roomName=None):
 
     categories = response['categories']
 
+    response = rest.request("/api/tools/categories/translate", {
+        'username': session["username"],
+        'sessionKey': session["sessionKey"],
+        'userUuid': session["userUuid"]
+    })
+
+    if not successResponse(response):
+        return render_template('error.html', error=response['request-errorDescription'])
+
+    categoriesTranslation = response
+
     categoriesFilterList = []
     # CREATING THE LIST OF THE CHOSEN CATEGORIES
     for category in categories:
@@ -845,7 +856,7 @@ def room(buildingName=None, roomName=None):
     return render_template('room.html', roomList = roomList ,roomName=roomName, description = description, roomRules=roomRules, authorList=authorList,
                            groupList=groupList, triggerList=triggerList, actionList=actionList, userList=userList,
                            roomGroupList=roomGroupList, notificationList=notificationList, categories=categories,
-                           categoriesFilter=categoriesFilter, activeRoomRules=activeRoomRules,
+                           categoriesFilter=categoriesFilter, categoriesTranslation = categoriesTranslation, activeRoomRules=activeRoomRules,
                            alreadyLoggedIn=alreadyLoggedIn, mTurkStatus=mTurkStatus, periodMap=periodMap,displayGantt = displayGantt)
 
 

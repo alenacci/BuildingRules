@@ -123,6 +123,17 @@ class ActionManager:
 			result["translatedParams"] = translatedParams
 			return result
 
+	def translateCategory(self, ruleCategory):
+		checkData(locals())
+
+		actions = Actions()
+
+		translatedCategory = actions.translateCategories(ruleCategory)
+
+		result = {}
+		result["translation"] = translatedCategory
+		result["category"] = ruleCategory
+		return result
 
 
 	def getActionCategories(self):

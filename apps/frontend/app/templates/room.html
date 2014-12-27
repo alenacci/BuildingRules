@@ -73,7 +73,7 @@
                                           <h4>Filter by category</h4>
                                           <a href="javascript:filterByRuleCategory('{{roomName}}','SHOWALL',false)"><button class="btn active" id="btn_{{roomName}}_SHOWALL" >SHOW ALL</button></a>
                                           {% for category in categories %}
-                                            <a href="javascript:filterByRuleCategory('{{roomName}}','{{category}}',false)"><button class="btn" id="btn_{{roomName}}_{{category}}">{{category}}</button></a>
+                                            <a href="javascript:filterByRuleCategory('{{roomName}}','{{category}}',false)"><button class="btn" id="btn_{{roomName}}_{{category}}">{{categoriesTranslation[category]}}</button></a>
                                             {{loop.counter }}
                                           {% endfor %}
                                     </div>

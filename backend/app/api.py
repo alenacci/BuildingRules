@@ -1038,6 +1038,29 @@ def translateAction():
         except Exception as e:
             return returnError(e)
 
+@api.route('/api/tools/categories/translate', methods=['POST'])
+def translateCategories():
+    if request.method == 'POST':
+
+        sessionKey = validateInput(request.form['sessionKey'])
+        userUuid = validateInput(request.form['userUuid'])
+
+        try:
+            session = SessionManager()
+            session.checkSessionValidity(sessionKey, userUuid)
+            actionManager = ActionManager()
+
+            categoriesTranslation = {}
+
+            categories = actionManager.getActionCategories()
+            for category in categories :
+                temp = actionManager.translateCategory(ruleCategory = category)
+                categoriesTranslation[category] = temp["translation"]
+
+            return returnResult(categoriesTranslation)
+        except Exception as e:
+            return returnError(e)
+
 @api.route('/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/game', methods=['POST'])
 def gameValue(username=None, buildingName=None, roomName=None):
 

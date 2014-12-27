@@ -58,5 +58,20 @@ class Actions:
 				
 		raise RuleTranslationNotFoundError("Impossibile to translate " + actionTemplate)
 
+	def translateCategories(self, actionCategory):
+
+		database = Database()
+		database.open()
+		query = "SELECT * FROM action_translation WHERE category = '@@actionCategory@@';"
+		query = query.replace('@@actionCategory@@', actionCategory)
+		queryResult = database.executeReadQuery(query)
+		database.close()
+
+		if len(queryResult) > 0:
+			translation = queryResult[0][1]
+			return translation
+
+		raise RuleTranslationNotFoundError("Impossibile to translate " + actionCategory)
+
 	def __str__(self):
 		return "Actions: "
