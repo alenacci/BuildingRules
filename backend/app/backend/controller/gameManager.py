@@ -471,7 +471,7 @@ class GameManager:
         if weather == 1:
             w = "sunny"
         if weather == 2:
-            w="cloudy"
+            w = "cloudy"
         if weather == 3:
             w = "rainy"
         for room in self.roomList:
