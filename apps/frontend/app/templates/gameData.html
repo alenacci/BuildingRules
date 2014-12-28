@@ -52,7 +52,7 @@
 
             <h2 style="color: red"><b>Actuators Stats</b></h2>
             {% for category in categoryList%}
-                <h3> {{category}}: {% if category in statusDict%}{{statusDict[category]}}{%endif%}</h3>
+                <h3> {% if category in statusDict %} {% if statusDict[category] != "" %} {{category}}: {{statusDict[category]}}{%endif%}{%endif%}</h3>
             {% endfor %}
         </div>
 
