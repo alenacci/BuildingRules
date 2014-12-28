@@ -49,7 +49,6 @@
             <h3>Weather : {{infoRoom["Weather"]}} </h3>
             <h3>Power consumption : {{infoRoom["Power"]}} </h3>
             <br>
-
             <h2 style="color: red"><b>Actuators Stats</b></h2>
             {% for category in categoryList%}
                 <h3> {% if category in statusDict %} {{category}}: {{statusDict[category]}}{%endif%}</h3>
