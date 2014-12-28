@@ -288,7 +288,7 @@ function showMTurk()
 
 function init()
 {
-	showAccessMaps();
+	hideMaps();
 	showMTurk();
 }
 

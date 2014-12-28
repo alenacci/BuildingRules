@@ -12,7 +12,7 @@
         <div style="float: left">
             <div>
                 <div style="float:left">
-                    <h3 style="text-align: center">You</h3>
+                    <h3 style="text-align: center">You - {{username}}</h3>
                     {%if roomHappiness["you"] %}
                         <img height="364" width="210" src="{{url_for('static', filename='images/gameImages/youHappy.jpg')}}">
                     {% else %}
@@ -52,8 +52,9 @@
 
             <h2 style="color: red"><b>Actuators Stats</b></h2>
             {% for category in categoryList%}
-                <h3> {% if category in statusDict %} {% if statusDict[category] != "" %} {{category}}: {{statusDict[category]}}{%endif%}{%endif%}</h3>
+                <h3> {% if category in statusDict %} {{category}}: {{statusDict[category]}}{%endif%}</h3>
             {% endfor %}
+            {% if statusDict == {} %} <h3>No active rules</h3> {% endif %}
         </div>
 
         <div style="padding:10px;float: left; border-radius: 20px 20px 20px 20px;background-color: lightblue;margin-left: 10px">
@@ -66,7 +67,7 @@
         <div style="padding:10px;float: left; border-radius: 20px 20px 20px 20px;background-color: lightcyan;margin-left: 10px">
             <h2 style="color: red"><b>Room List</b></h2>
             {% for room in roomList%}
-                <h4 {% if room["roomName"]==roomName %} style="color:green" {% endif %}>{{room["roomName"]}} - {{room["description"]}} [<a href='javascript:document.r_{{room.roomName}}.submit();'>Show Status</a>] [<a href="/buildings/CSE/rooms/{{room.roomName}}" target="_blank">Manage</a>]</h4>
+                <h4 {% if room["roomName"]==roomName %} style="color:green" {% endif %}>{{room["roomName"]}} - {{room["description"]}} [<a href='javascript:document.r_{{room.roomName}}.submit();'>Status</a>] [<a href="/buildings/CSE/rooms/{{room.roomName}}" target="_blank">Manage</a>] [<a href="/buildings/CSE/rooms/{{room.roomName}}/rules/add" target="_blank">Add Rule</a>]</h4>
                 <form name="r_{{room.roomName}}" action="/buildings/CSE/rooms/{{room.roomName}}/game/" method="POST"></form>
             {% endfor %}
         </div>

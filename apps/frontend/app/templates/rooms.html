@@ -136,27 +136,7 @@
         </div>
         #}
         -->
-        <br>
 
-
-
-        <header class="jumbotron subhead" id="overview">
-        <a name="buildingMap" id="buildingMap"></a>
-            <div class="span8">
-              <h1>My Rooms</h1>
-              <br>
-              <p class="lead">With this page you can create your own simple rules for your own personal spaces. Just add the rules inside the correct box and... that's all!</p>
-
-              <!--<a href="#rulesPanel" role="button" class="btn btn-primary ">Go to the rules panel!</a>-->
-              <!--<a href="#myModal" role="button" class="btn" data-toggle="modal" id="showGuideButton">Show the Video User Guide!</a>-->
-            </div>
-            <div class="span4">
-            </div>
-        </header>
-
-        <br>
-        <br>
-        <br>
 
         {% if roomList %}
             <section id="typography">
@@ -167,8 +147,8 @@
 
                     <div id="ganttDiv">
                         <form name="submitForm" target="dataFrame" action="/buildings/CSE/rooms/{{roomList[0].roomName}}/game" method="post"></form>
-                        <a class="btn btn-lg btn-success" href="javascript:showGame()" id="btnShowGame">Show Game</a>
-                        <a class="btn btn-lg btn-success" href="javascript:hideGame()" id="btnHideGame" style="display: none">Hide Game</a>
+                        <a class="btn btn-lg btn-success" href="javascript:showGame()" id="btnShowGame" style="font-size: 20px">Show Game Control Panel</a>
+                        <a class="btn btn-lg btn-success" href="javascript:hideGame()" id="btnHideGame" style="display: none;font-size: 20px">Hide Game Control Panel</a>
                         <iframe id="gameFrame" src="/buildings/CSE/rooms/{{roomList[0].roomName}}/game" style='height: 700px; width: 1160px; float: left; border: 2px black solid;display: none'>Not supported</iframe>
                     </div>
                  </div>
@@ -192,6 +172,26 @@
 
             </section>
         {% endif %}
+        <header class="jumbotron subhead" id="overview">
+            <a name="buildingMap" id="buildingMap"></a>
+            <div class="span8">
+              <h1>My Rooms</h1>
+              <br>
+              <p class="lead">With this page you can create your own simple rules for your own personal spaces. Just add the rules inside the correct box and... that's all!</p>
+
+              <!--<a href="#rulesPanel" role="button" class="btn btn-primary ">Go to the rules panel!</a>-->
+              <!--<a href="#myModal" role="button" class="btn" data-toggle="modal" id="showGuideButton">Show the Video User Guide!</a>-->
+            </div>
+            <div class="span4">
+            </div>
+        </header>
+
+        <br>
+        <br>
+            <br>
+        <br>
+            <br>
+
         <div class="list-group">
         {%for room in roomList %}
             <a href="{{request.path}}/{{room.roomName}}" class="list-group-item">

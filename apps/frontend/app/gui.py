@@ -448,8 +448,13 @@ def game(buildingName=None, roomName=None):
         if room["roomName"] == roomName:
             description = room["description"]
 
+    for category in target:
+        if category in statusDict:
+            if statusDict[category]=="":
+                del statusDict[category]
 
-    return render_template('gameData.html', categoryList = target ,statusDict = statusDict, infoRoom = infoRoom, time = time, roomList = roomList, roomHappiness = roomHappiness, score = score,ranking= ranking, roomName = roomName, description = description)
+
+    return render_template('gameData.html', categoryList = target ,statusDict = statusDict, infoRoom = infoRoom, time = time, roomList = roomList, roomHappiness = roomHappiness, score = score,ranking= ranking, roomName = roomName, description = description, username = session["username"])
 
 
 @gui.route('/removeMe2/<currentDay>/', methods=['GET', 'POST'])
