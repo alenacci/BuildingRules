@@ -480,9 +480,10 @@ class GameManager:
         if scheduler is None:
             scheduler = sched.scheduler(time.time, time.sleep)
             scheduler.enter(21600, 1, self.mailServiceExec, ([scheduler]))
+            scheduler.enter(43200, 1, self.mailServiceExec, ([scheduler]))
             scheduler.run()
-        if scheduler is not None:
-            scheduler.enter(21600, 1, self.mailServiceExec, ([scheduler]))
+        #if scheduler is not None:
+        scheduler.enter(64800, 1, self.mailServiceExec, ([scheduler]))
 
         #self.sendSummaryByEmail()
         self.changeWeather()
@@ -491,10 +492,11 @@ class GameManager:
 
         if scheduler is None:
             scheduler = sched.scheduler(time.time, time.sleep)
-            scheduler.enter(1, 1, self.threadExec, ([buildingName, scheduler]))
-            scheduler.run()
-        if scheduler is not None:
+            scheduler.enter(0, 1, self.threadExec, ([buildingName, scheduler]))
             scheduler.enter(1800, 1, self.threadExec, ([buildingName, scheduler]))
+            scheduler.run()
+        #if scheduler is not None:
+        scheduler.enter(3600, 1, self.threadExec, ([buildingName, scheduler]))
 
         self.simulate(buildingName)
 
