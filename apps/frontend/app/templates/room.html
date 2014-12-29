@@ -52,8 +52,25 @@
                               <!-- add summary-->
                               <div class="tab-pane fade" id="roomSummary_{{roomName}}" style="overflow-x: hidden">
                                   <div class="container">
-                                    <iframe src="{{request.path}}/graphicalViewSummary" class="frame"></iframe>
+                                    <iframe src="{{request.path}}/graphicalViewSummary" class="frame" style="height: 400px"></iframe>
+                                      <div style="padding:10px;float: left; border-radius: 20px 20px 20px 20px;background-color: gainsboro">
+                                    Last Update Time: {{time}}<br>
+
+                                    <h3 style="color: red"><b>Room Stats</b></h3>
+                                    Room Temp : {{infoRoom["RoomTemp"]}}<br>
+                                    Ext Temp : {{infoRoom["ExtTemp"]}}<br>
+                                    Humidity : {{infoRoom["Hum"]}}<br>
+                                    Weather : {{infoRoom["Weather"]}}<br>
+                                    Power consumption : {{infoRoom["Power"]}}
+                                    <br>
+                                    <h3 style="color: red"><b>Actuators Stats</b></h3>
+                                    {% for category in categoryList%}
+                                        {% if category in statusDict %} {{category}}: {{statusDict[category]}}{%endif%}
+                                    {% endfor %}
+                                    {% if statusDict == {} %}No active rules {% endif %}
+                                    </div>
                                   </div>
+
                               </div>
                               <div class="tab-pane fade in active" id="rulePanel_{{roomName}}" >
                                     <div class="btn-toolbar" style="background-color:#F5F5F5; padding:10px;">
@@ -76,7 +93,7 @@
                                     </div>
                                     <hr>
                                     {% for rule in roomRules[roomName] %}
-                                        <blockquote {% if rule.id in activeRoomRules[roomName] %} style="color:#77AE3B;" {% endif %} class="rule_{{roomName}}_{{rule.category}} rule_{{roomName}}_{{periodMap[rule.antecedent]}}">
+                                        <blockquote {% if rule.id in activeRoomRules[roomName] %} style="background-color:lightgreen" {% endif %} class="rule_{{roomName}}_{{rule.category}} rule_{{roomName}}_{{periodMap[rule.antecedent]}}">
                                             <p {% if rule.enabled %} {% else %} class="muted" {% endif %}>
                                                 {% if rule.enabled %} {% else %} <strike> {% endif %}
                                                     <b>if</b> {{rule.antecedent}} <b>then</b> {{rule.consequent}}
@@ -141,7 +158,7 @@
 
                                         {% for category in categories %}
                                             <tr style="border: 1px solid black">
-                                                <td style="background-color:#72AC44; color:white">{{category}}</td>
+                                                <td style="background-color:#72AC44; color:white">{{categoriesTranslation[category]}}</td>
                                                 {% for rule in roomRules[roomName] %}
                                                     {% if category == rule.category %}
                                                         <td class="ruleNav_{{rule.triggersCategory[0]}}">

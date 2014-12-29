@@ -858,11 +858,50 @@ def room(buildingName=None, roomName=None):
             description = room["description"]
 
 
+    #ONLY FOR GAME
+    #get all the room information
+    response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/game",
+                            {
+                                'username': session["username"],
+                                'buildingName': buildingName,
+                                'roomName': roomName,
+                                'sessionKey': session["sessionKey"],
+                                'userUuid': session["userUuid"]
+                            })
+
+    if successResponse(response):
+        returnInfo = response
+    else:
+        return render_template('error.html', error=response['request-errorDescription'])
+    statusDict = returnInfo["statusAction"]
+    infoRoom = returnInfo["statusDict"]
+    target = returnInfo["target"]
+    time = returnInfo["time"]
+
+    response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms",
+                        {'username': session["username"], 'buildingName': buildingName,
+                         'sessionKey': session["sessionKey"], 'userUuid': session["userUuid"]})
+
+    if not successResponse(response):
+        return render_template('error.html', error=response['request-errorDescription'])
+
+    roomList = response["rooms"]
+    for room in roomList:
+        if room["roomName"] == roomName:
+            description = room["description"]
+
+    for category in target:
+        if category in statusDict:
+            if statusDict[category]=="":
+                del statusDict[category]
+
+
     return render_template('room.html', roomList = roomList ,roomName=roomName, description = description, roomRules=roomRules, authorList=authorList,
                            groupList=groupList, triggerList=triggerList, actionList=actionList, userList=userList,
                            roomGroupList=roomGroupList, notificationList=notificationList, categories=categories,
                            categoriesFilter=categoriesFilter, categoriesTranslation = categoriesTranslation, activeRoomRules=activeRoomRules,
-                           alreadyLoggedIn=alreadyLoggedIn, mTurkStatus=mTurkStatus, periodMap=periodMap,displayGantt = displayGantt)
+                           alreadyLoggedIn=alreadyLoggedIn, mTurkStatus=mTurkStatus, periodMap=periodMap,displayGantt = displayGantt, infoRoom=infoRoom, time = time, statusDict=statusDict,
+                           categoryList = target)
 
 
 @gui.route('/buildings/<buildingName>/groups/')
