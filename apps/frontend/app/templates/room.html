@@ -68,7 +68,7 @@
                                       <div style="padding:10px;float: left; border-radius: 20px 20px 20px 20px;background-color: gainsboro">
                                         <h3 style="color: red"><b>Actuators Stats</b></h3>
                                         {% for category in categoryList%}
-                                            {% if category in statusDict %} {{category}}: {{statusDict[category]}}{%endif%}
+                                            {% if category in statusDict %} {{category}}: {{statusDict[category]}}<br>{%endif%}
                                         {% endfor %}
                                         {% if statusDict == {} %}No active rules {% endif %}
 
@@ -147,6 +147,8 @@
                                         </blockquote>
                                     {% endfor %}
                                     <br>
+                                    <h4><b>Note:</b> Active rules are shown in green.</h4>
+                                    <br>
                                     <form method="get" action="{{request.path}}/rules/add"> <input type="submit" value="Add a new rule"></form>
 
 
@@ -166,12 +168,14 @@
                               </div> -->
                               <div class="tab-pane fade" id="ruleNavigator_{{roomName}}">
                                 <div class="container.small">
-
+                                    <h4>This table gives an overview of the inserted rules dividing them by category. <br>
+                                        Each rule is described by its trigger category and priority and you can edit, delete od disable them.
+                                    </h4> <br>
                                     <table border="1" style="border: 1px solid black">
 
                                         {% for category in categories %}
                                             <tr style="border: 1px solid black">
-                                                <td style="background-color:#72AC44; color:white">{{category}}</td>
+                                                <td style="background-color:#72AC44; color:white">{{categoriesTranslation[category]}}</td>
                                                 {% for rule in roomRules[roomName] %}
                                                     {% if category == rule.category %}
                                                         <td class="ruleNav_{{rule.triggersCategory[0]}}">
