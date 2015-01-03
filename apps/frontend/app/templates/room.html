@@ -52,9 +52,11 @@
                               <!-- add summary-->
                               <div class="tab-pane fade" id="roomSummary_{{roomName}}" style="overflow-x: hidden">
                                   <div class="container">
-                                      <div style="padding:10px;float: left; border-radius: 20px 20px 20px 20px;background-color: gainsboro">
+                                      <div style="padding:10px;float: left; border-radius: 20px 20px 20px 20px;background-color: gainsboro; margin-right: 10px">
                                         Last Update Time: {{infoRoom["LastSimTime"]}}<br>
-                                        Current Time: {{time}}<br>
+                                        Current Time: {{time}}
+                                      </div>
+                                      <div style="padding:10px;float: left; border-radius: 20px 20px 20px 20px;background-color: gainsboro; margin-right: 10px">
 
                                         <h3 style="color: red"><b>Room Stats</b></h3>
                                         Room Temp : {{infoRoom["RoomTemp"]}}<br>
@@ -62,13 +64,15 @@
                                         Humidity : {{infoRoom["Hum"]}}<br>
                                         Weather : {{infoRoom["Weather"]}}<br>
                                         Power consumption : {{infoRoom["Power"]}}
-                                        <br>
+                                      </div>
+                                      <div style="padding:10px;float: left; border-radius: 20px 20px 20px 20px;background-color: gainsboro">
                                         <h3 style="color: red"><b>Actuators Stats</b></h3>
                                         {% for category in categoryList%}
                                             {% if category in statusDict %} {{category}}: {{statusDict[category]}}{%endif%}
                                         {% endfor %}
                                         {% if statusDict == {} %}No active rules {% endif %}
-                                    </div>
+
+                                      </div>
                                     <iframe src="{{request.path}}/graphicalViewSummary" class="frame" style="height: 400px"></iframe>
 
                                   </div>
