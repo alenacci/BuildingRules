@@ -63,6 +63,8 @@ class GameManager:
         self.dataTarget[roomName] = data
 
 
+
+
     def initValues(self, buildingName, username):
         buildingsManager = BuildingsManager()
         buildingsManager.checkUserBinding(buildingName, username)
@@ -89,8 +91,8 @@ class GameManager:
             if not successData:
                 temp = random.randrange(55,80,1)
                 hum = random.randrange(20,45,1)
-                valuesDict = {"ExtTemp" : str(extTemp)+"F", "RoomTemp" : str(temp)+"F", "Hum" : str(hum)+"%" ,"Weather" : w, "Power" : 0}
-                valuesDictControl = {"ExtTemp" : extTemp, "RoomTemp" : temp, "Hum" : hum,"Weather" : w, "Power" : 0}
+                valuesDict = {"LastSimTime" : "Never","ExtTemp" : str(extTemp)+"F", "RoomTemp" : str(temp)+"F", "Hum" : str(hum)+"%" ,"Weather" : w, "Power" : 0}
+                valuesDictControl = {"LastSimTime" : "Never","ExtTemp" : extTemp, "RoomTemp" : temp, "Hum" : hum,"Weather" : w, "Power" : 0}
                 self.statusDict[room["roomName"]] = valuesDict
                 self.statusDictControl[room["roomName"]] = valuesDictControl
 
@@ -338,6 +340,10 @@ class GameManager:
                     self.getScores(user["username"],room)
                     #print str(user["username"]) + str(room)
 
+            now = datetime.datetime.now()
+            self.statusDict[room]["LastSimTime"] = str(now.hour)+":"+str(now.minute)
+            self.statusDictControl[room]["LastSimTime"] = str(now.hour)+":"+str(now.minute)
+
             if len(self.statusDictControl)!= 0 :
                 self.dataDump()
             else :
@@ -529,7 +535,7 @@ class GameManager:
         inputStatus.close()
         #print self.statusDictControl
         for room in self.roomList:
-            valuesDict = {"ExtTemp": str(self.statusDictControl[room]["ExtTemp"]) + "F", "RoomTemp":str(self.statusDictControl[room]["RoomTemp"]) + "F", "Hum":str(self.statusDictControl[room]["Hum"]) + "%","Weather":self.statusDictControl[room]["Weather"],"Power": self.statusDictControl[room]["Power"]}
+            valuesDict = {"LastSimTime" : str(self.statusDictControl[room]["LastSimTime"]), "ExtTemp": str(self.statusDictControl[room]["ExtTemp"]) + "F", "RoomTemp":str(self.statusDictControl[room]["RoomTemp"]) + "F", "Hum":str(self.statusDictControl[room]["Hum"]) + "%","Weather":self.statusDictControl[room]["Weather"],"Power": self.statusDictControl[room]["Power"]}
             self.statusDict[room] = valuesDict
 
         return True
@@ -600,8 +606,6 @@ class GameManager:
 
         with open(humFilePath,'rb') as inputHum:
             self.targetHum = json.load(inputHum)
-
-
 
         return True
 

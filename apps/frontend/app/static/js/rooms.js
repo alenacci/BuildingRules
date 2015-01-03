@@ -2,6 +2,7 @@
 ruleCategories = [];
 currentCategory = "SHOWALL";
 currentDayPeriod = "ALLPERIOD";
+currentStatus = "SHOWALLSTATUS";
 
 function hideClass(className)
 {
@@ -21,12 +22,14 @@ function showClass(className)
 	}
 }
 
-function filterByDayPeriod(roomName, dayPeriod,fromCategoryFilter)
+function filterByDayPeriod(roomName, dayPeriod,fromOtherFilter)
 {
 
     currentDayPeriod = dayPeriod;
-    if (!fromCategoryFilter) {
-        filterByRuleCategory(roomName,currentCategory);
+    if (!fromOtherFilter) {
+        filterByRuleCategory(roomName,currentCategory,true);
+        filterByStatus(roomName,currentStatus,true);
+
     }
     var i;
 
@@ -188,7 +191,7 @@ function filterByDayPeriod(roomName, dayPeriod,fromCategoryFilter)
 	}
 }
 
-function filterByRuleCategory(roomName, ruleCategory,fromDayPeriodFilter)
+function filterByRuleCategory(roomName, ruleCategory,fromOtherFilter)
 {
     currentCategory = ruleCategory;
 
@@ -216,7 +219,39 @@ function filterByRuleCategory(roomName, ruleCategory,fromDayPeriodFilter)
 		document.getElementById("btn_" + roomName + "_" + ruleCategory).setAttribute("class", "btn active");
 	}
 
-    if (!fromDayPeriodFilter) {
+    if (!fromOtherFilter) {
+        filterByStatus(roomName, currentStatus, true);
+        filterByDayPeriod(roomName, currentDayPeriod, true);
+    }
+
+}
+
+function filterByStatus(roomName, ruleStatus,fromOtherFilter)
+{
+    currentStatus = ruleStatus;
+
+    if (!fromOtherFilter) {
+        filterByRuleCategory(roomName,currentCategory,true);
+    }
+
+	if (ruleStatus == "SHOWALLSTATUS")
+    {
+        document.getElementById("btn_" + roomName + "_SHOWACTIVE").setAttribute("class", "btn");
+		document.getElementById("btn_" + roomName + "_SHOWALLSTATUS").setAttribute("class", "btn active");
+
+	} else {
+		elements = document.getElementsByClassName("inactiveRule");
+        for ( i = 0; i < elements.length; i ++) {
+            if (elements[i].style.display == "block"){
+                elements[i].style.display = "none"
+            }
+        }
+
+        document.getElementById("btn_" + roomName + "_SHOWALLSTATUS").setAttribute("class", "btn");
+		document.getElementById("btn_" + roomName + "_SHOWACTIVE").setAttribute("class", "btn active");
+	}
+
+    if (!fromOtherFilter) {
         filterByDayPeriod(roomName, currentDayPeriod, true);
     }
 
@@ -288,8 +323,9 @@ function showMTurk()
 
 function init()
 {
+    showGame();
 	hideMaps();
-	showMTurk();
+	//showMTurk();
 }
 
 function showGame()
