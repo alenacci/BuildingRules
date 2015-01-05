@@ -130,11 +130,14 @@
 
                                                     {% if rule.groupId and rule.roomName %}
                                                     - [<a href="{{request.path}}/../groups/{{rule.groupId}}/rooms/{{rule.roomName}}/rules/{{rule.id}}/edit">Edit</a>]
-                                                      [<a href="{{request.path}}/../{{rule.roomName}}/rules/{{rule.id}}/delete">Delete</a>]
-
+                                                        {% if session.userUuid == rule.authorUuid or session.userUuid == 1 %}
+                                                            [<a href="{{request.path}}/../{{rule.roomName}}/rules/{{rule.id}}/delete">Delete</a>]
+                                                        {% endif %}
                                                     {% else %}
                                                         {% if rule.roomName %}
+                                                            {% if session.userUuid == rule.authorUuid or session.userUuid == 1 %}
                                                             - [<a href="{{request.path}}/../{{rule.roomName}}/rules/{{rule.id}}/edit">Edit</a>] [<a href="{{request.path}}/../{{rule.roomName}}/rules/{{rule.id}}/delete">Delete</a>]
+                                                            {% endif %}
                                                             {% if rule.enabled %}
                                                                 [<a href="{{request.path}}/../{{rule.roomName}}/rules/{{rule.id}}/disable">Disable</a>]
                                                             {% else %}
@@ -188,8 +191,10 @@
                                                             {% if rule.enabled %} {% else %} </strike> <b>(disabled)</b>{% endif %}
                                                             <br>
                                                             [<a href="javascript:alert('if {{rule.antecedent}} then {{rule.consequent}} ')">Info</a>]
-                                                            [<a href="{{request.path}}/../{{rule.roomName}}/rules/{{rule.id}}/edit">Edit</a>]
-                                                            [<a href="{{request.path}}/../{{rule.roomName}}/rules/{{rule.id}}/delete">Delete</a>]
+                                                            {% if session.userUuid == rule.authorUuid or session.userUuid == 1%}
+                                                                [<a href="{{request.path}}/../{{rule.roomName}}/rules/{{rule.id}}/edit">Edit</a>]
+                                                                [<a href="{{request.path}}/../{{rule.roomName}}/rules/{{rule.id}}/delete">Delete</a>]
+                                                            {% endif %}
                                                             {% if rule.enabled %}
                                                                 [<a href="{{request.path}}/../{{rule.roomName}}/rules/{{rule.id}}/disable">Disable</a>]
                                                             {% else %}
