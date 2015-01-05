@@ -21,6 +21,8 @@ from app.backend.controller.buildingsManager import BuildingsManager
 from app.backend.controller.roomSimulator import RoomSimulator
 from app.backend.controller.roomsManager import RoomsManager
 from app.backend.controller.notificationsManager import NotificationsManager
+from app.backend.controller.usersManager import UsersManager
+from app.backend.model.rules import Rules
 
 
 class GameManager:
@@ -76,8 +78,8 @@ class GameManager:
 
         successData = self.dataRestore()
         self.scoresRestore()
-        print self.statusDictControl
-        print self.statusDict
+        #print self.statusDictControl
+        #print self.statusDict
         if not successData:
             weather = random.randrange(1,3,1)
             if weather == 1:
@@ -102,6 +104,7 @@ class GameManager:
             self.roomHappiness[room["roomName"]] = {"you":True,"whyYou":"","manager":True,"whyManager":""}
         thread.start_new_thread(self.threadExec,(buildingName, ))
         thread.start_new_thread(self.mailServiceExec,())
+
 
 
     def upgradeValues(self, roomName, buildingName, username):
@@ -129,7 +132,8 @@ class GameManager:
         sortedScores = sorted(self.scores.items(), key=operator.itemgetter(1),reverse=True)
         scores = ""
         for item in sortedScores:
-            scores += str(item[0])+" - "+str(item[1])+" <br/> <br/>"
+            if str(item[0]) != "admin":
+                scores += str(item[0])+" - "+str(item[1])+" <br/> <br/>"
         returnInfo= {}
         returnInfo["statusDict"] =self.statusDict[roomName]
         returnInfo["statusAction"] = self.statusAction[roomName]
@@ -308,6 +312,9 @@ class GameManager:
     def simulate(self,buildingName):
         rm2 = RoomsManager()
 
+        rules = Rules()
+        rules.resetActiveRules()
+
         for room in self.roomList:
             now = datetime.datetime.now()
             h = now.hour
@@ -356,9 +363,21 @@ class GameManager:
         managerHappy = True
 
         roomManager = RoomsManager()
+        userManager = UsersManager()
 
         now = datetime.datetime.now()
         h = now.hour
+
+        rules = Rules()
+        activeRulesId = rules.getActiveRulesId(buildingName="CSE",roomName=roomName)
+        authorsId = []
+        authorsUsername = []
+
+        for id in activeRulesId:
+            authorsId.append(roomManager.getRuleInfo(ruleId=id,roomName=roomName)["authorUuid"])
+
+        for id in authorsId:
+            authorsUsername.append(userManager.getInfo(uuid=id)["username"])
 
         if h > 18 or h < 8:
             if "LIGHT" in self.statusAction[roomName]:
@@ -419,7 +438,10 @@ class GameManager:
             self.scores[username]+=1
         else:
             self.scores[username]-=1
-        #print self.scores[username]
+
+        for user in authorsUsername:
+            if username == user:
+                self.scores[username] += 1
 
         self.roomHappiness[roomName]["you"] = youHappy
         self.roomHappiness[roomName]["manager"] = managerHappy
@@ -444,6 +466,7 @@ class GameManager:
                     message = ""
                     rooms = user.getRoomsDict()
                     if len(rooms)!= 0:
+                        message += "Hi " + str(notifUser) + "!\n\nHere is a summary of your ROOM STATS!\n\n"
                         for room in rooms:
                             if room["buildingName"] == "CSE":
                                 roomName = room["roomName"]
@@ -460,10 +483,11 @@ class GameManager:
                                 message += "BuildingManager Feeling: "
                                 if self.roomHappiness[roomName]["manager"]: message += "Happy\n\n"
                                 else: message += "Sad\n\n"
-                    message += "RANKING\n"
+                    message += "And the current RANKING\n"
                     ranking = sorted(self.scores.items(), key=operator.itemgetter(1),reverse=True)
                     for item in ranking:
-                        message += str(item[0]) + " " + str(item[1]) + "\n"
+                        if str(item[0]) != "admin":
+                            message += str(item[0]) + " " + str(item[1]) + "\n"
                     notificationManager.sendNotificationByEmail(userUuid,"Building Summary",message)
 
     def changeWeather(self):
@@ -491,7 +515,7 @@ class GameManager:
         #if scheduler is not None:
         scheduler.enter(64800, 1, self.mailServiceExec, ([scheduler]))
 
-        #self.sendSummaryByEmail()
+        self.sendSummaryByEmail()
         self.changeWeather()
 
     def threadExec(self,buildingName,scheduler = None):

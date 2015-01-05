@@ -22,18 +22,18 @@ from app.backend.controller.actionExecutor import ActionExecutor
 def start():
 	flash("BuildingRules Deamon is active...")
 
-	actionExecutor = ActionExecutor()
+	#actionExecutor = ActionExecutor()
 
-	while(1):
-		try:
-			actionExecutor.start()
-		except Exception as e:
-			import logging
-			logging.basicConfig(filename='logs/deamon.log')
-			logging.getLogger().addHandler(logging.StreamHandler())			
-			logging.exception("")
-			flash(e.message)
+	#while(1):
+	#	try:
+	#		actionExecutor.start()
+	#	except Exception as e:
+	#		import logging
+	#		logging.basicConfig(filename='logs/deamon.log')
+	#		logging.getLogger().addHandler(logging.StreamHandler())
+	#		logging.exception("")
+	#		flash(e.message)
 
-		time.sleep(600)
+	#	time.sleep(600)
 		
 

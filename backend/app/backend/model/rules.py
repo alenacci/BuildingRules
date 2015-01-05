@@ -47,21 +47,20 @@ class Rules:
 
 	def setActiveRule(self, buildingName, roomName, ruleId):
 
-
-
 		if not (buildingName and roomName and ruleId):
 			MissingInputDataError("Impossible to set an active rule without buildingName roomName or ruleId")
 
-		query = "INSERT INTO `active_rules` (`building_name`, `room_name`, `rule_id`) VALUES ('@@building_name@@', '@@room_name@@', @@rule_id@@);"
-		query = query.replace("@@building_name@@", buildingName)
-		query = query.replace("@@room_name@@", roomName)
-		query = query.replace("@@rule_id@@", str(ruleId))
+		rulesId = self.getActiveRulesId()
 
-
-		database = Database()
-		database.open()
-		database.executeWriteQuery(query)
-		database.close()
+		if ruleId not in rulesId:
+			query = "INSERT INTO `active_rules` (`building_name`, `room_name`, `rule_id`) VALUES ('@@building_name@@', '@@room_name@@', @@rule_id@@);"
+			query = query.replace("@@building_name@@", buildingName)
+			query = query.replace("@@room_name@@", roomName)
+			query = query.replace("@@rule_id@@", str(ruleId))
+			database = Database()
+			database.open()
+			database.executeWriteQuery(query)
+			database.close()
 
 
 	def resetActiveRules(self):

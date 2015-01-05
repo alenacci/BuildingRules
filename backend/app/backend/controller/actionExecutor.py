@@ -141,8 +141,11 @@ class ActionExecutor:
 		except Exception as e:
 			flash(message + ") Erro while actuating the consequent '" + rule.consequent + "'... " + str(e), 'red')
 
-		if not self.simulationParameters:
-			rules = Rules()
+		#TODO: remove comment after GAME
+		#if not self.simulationParameters:
+		rules = Rules()
+		#TODO: remove is stmt after GAME
+		if rule.antecedent != "nobody is in the room":
 			rules.setActiveRule(buildingName = rule.buildingName, roomName = rule.roomName, ruleId = rule.id)
 
 	def notifyIgnoredRule(self, rule):
@@ -160,9 +163,9 @@ class ActionExecutor:
 		buildings = Buildings()
 		buildingsManager = BuildingsManager()
 		groupsManager = GroupsManager()
-		rules = Rules()
+		#rules = Rules()
 
-		rules.resetActiveRules()
+		#rules.resetActiveRules()
 		
 		for building in buildings.getAllBuildings():
 
