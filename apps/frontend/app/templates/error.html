@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block body %}
   <p>{{error}}</p>
-  {%if error == "The requested session is expired"%}
+  {%if error == "The requested session is expired" or error == "Impossibile to find any session with the provided values" %}
     <a href="{{url_for('gui.login')}}"><button type="submit" class="btn btn-large btn-primary">Login</button></a>
   {% else %}
     <a href="javascript:window.history.back()"><button type="submit" class="btn btn-large btn-primary">Back</button></a>
