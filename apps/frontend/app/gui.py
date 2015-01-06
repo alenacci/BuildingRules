@@ -705,6 +705,9 @@ def room(buildingName=None, roomName=None):
     mTurkStatus = {}
     periodMap = {}
 
+    #onlyforgame
+    userRules = {}
+
     response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/rules",
                             {
                                 'username': session["username"],
@@ -895,13 +898,44 @@ def room(buildingName=None, roomName=None):
             if statusDict[category]=="":
                 del statusDict[category]
 
+    response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/rules",
+                            {
+                                'username': session["username"],
+                                'buildingName': buildingName,
+                                'roomName': roomName,
+                                'sessionKey': session["sessionKey"],
+                                'userUuid': session["userUuid"],
+                                'filterByAuthor': True,
+                                'includeGroupsRules': True,
+                                'orderByPriority': True,
+                                'categoriesFilter': categoriesFilter,
+                                'includeTriggerCategory': True
+                            })
+
+    if successResponse(response):
+        userRules[roomName] = response["rules"]
+    else:
+        return render_template('error.html', error=response['request-errorDescription'])
+
+    count = 0
+    for rule in userRules[roomName]:
+        dates = datetime.datetime.strptime(rule["creationTimestamp"],'%Y-%m-%d %H:%M:%S').date()
+        if dates == datetime.date.today():
+            count += 1
+    rulesCount = 0
+    if datetime.date.today() == datetime.datetime.strptime('2015-01-07','%Y-%m-%d').date():
+        rulesCount = 6-count
+    elif datetime.date.today() == datetime.datetime.strptime('2015-01-08','%Y-%m-%d'):
+        rulesCount = 4-count
+    elif datetime.date.today() == datetime.datetime.strptime('2015-01-09','%Y-%m-%d'):
+        rulesCount = 2-count
 
     return render_template('room.html', roomList = roomList ,roomName=roomName, description = description, roomRules=roomRules, authorList=authorList,
                            groupList=groupList, triggerList=triggerList, actionList=actionList, userList=userList,
                            roomGroupList=roomGroupList, notificationList=notificationList, categories=categories,
                            categoriesFilter=categoriesFilter, categoriesTranslation = categoriesTranslation, activeRoomRules=activeRoomRules,
                            alreadyLoggedIn=alreadyLoggedIn, mTurkStatus=mTurkStatus, periodMap=periodMap,displayGantt = displayGantt, infoRoom=infoRoom, time = time, statusDict=statusDict,
-                           categoryList = target)
+                           categoryList = target, rulesCount = rulesCount)
 
 
 @gui.route('/buildings/<buildingName>/groups/')
