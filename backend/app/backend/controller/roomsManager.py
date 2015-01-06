@@ -371,13 +371,30 @@ class RoomsManager:
 		ruleList = self.getRules(buildingName=buildingName,roomName=roomName,username=user.username)["rules"]
 		count = 0
 		for rule in ruleList:
-			date = datetime.strptime(rule["creationTimestamp"],'%Y-%m-%d %H:%M:%S').date()
-			if date == date.today():
+			dates = datetime.strptime(rule["creationTimestamp"],'%Y-%m-%d %H:%M:%S').date()
+			if dates == date.today():
 				count += 1
-		if count < 3:
-			return self.__addOrModifyRule(priority = priority, buildingName = buildingName, roomName = roomName, authorUuid = authorUuid, ruleBody = ruleBody)
-		else:
-			raise Exception("You exceeded the maximum number of rule inserts for today")
+
+		#---------------CHECK FOR GAME PURPOSE------------------
+		if date.today() == datetime.strptime('2015-01-07','%Y-%m-%d').date():
+			if count < 6:
+				return self.__addOrModifyRule(priority = priority, buildingName = buildingName, roomName = roomName, authorUuid = authorUuid, ruleBody = ruleBody)
+			else:
+				raise Exception("You exceeded the maximum number of rule inserts for today")
+
+		elif date.today() == datetime.strptime('2015-01-08','%Y-%m-%d'):
+			if count < 4:
+				return self.__addOrModifyRule(priority = priority, buildingName = buildingName, roomName = roomName, authorUuid = authorUuid, ruleBody = ruleBody)
+			else:
+				raise Exception("You exceeded the maximum number of rule inserts for today")
+
+		elif date.today() == datetime.strptime('2015-01-09','%Y-%m-%d'):
+			if count < 2:
+				return self.__addOrModifyRule(priority = priority, buildingName = buildingName, roomName = roomName, authorUuid = authorUuid, ruleBody = ruleBody)
+			else:
+				raise Exception("You exceeded the maximum number of rule inserts for today")
+
+		else: return self.__addOrModifyRule(priority = priority, buildingName = buildingName, roomName = roomName, authorUuid = authorUuid, ruleBody = ruleBody)
 
 	def editRule(self, ruleId, priority, buildingName, roomName, editorUuid, groupId, ruleBody = None, antecedent = None, consequent = None, enabled = True):
 		checkData(locals())
