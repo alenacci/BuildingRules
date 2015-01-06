@@ -11,6 +11,8 @@
 
 import sys
 import json
+from twisted.names import authority
+from datetime import datetime, date
 from app.backend.commons.errors import *
 from app.backend.commons.inputDataChecker import checkData
 from app.backend.model.room import Room
@@ -363,7 +365,20 @@ class RoomsManager:
 	def addRule(self, priority, buildingName, roomName, authorUuid, ruleBody):
 		checkData(locals())
 
-		return self.__addOrModifyRule(priority = priority, buildingName = buildingName, roomName = roomName, authorUuid = authorUuid, ruleBody = ruleBody)
+		from app.backend.model.user import User
+		user = User(uuid=authorUuid)
+		user.retrieve()
+
+		ruleList = self.getRules(buildingName=buildingName,roomName=roomName,username=user.username)["rules"]
+		count = 0
+		for rule in ruleList:
+			date = datetime.strptime(rule["creationTimestamp"],'%Y-%m-%d %H:%M:%S').date()
+			if date == date.today():
+				count += 1
+		if count < 3:
+			return self.__addOrModifyRule(priority = priority, buildingName = buildingName, roomName = roomName, authorUuid = authorUuid, ruleBody = ruleBody)
+		else:
+			raise Exception("You exceeded the maximum number of rule inserts for today")
 
 	def editRule(self, ruleId, priority, buildingName, roomName, editorUuid, groupId, ruleBody = None, antecedent = None, consequent = None, enabled = True):
 		checkData(locals())
@@ -429,9 +444,20 @@ class RoomsManager:
 			if editor.level < oldRule.getPriority():
 				raise UserCredentialError("You cannot modify this rule since it has a too high priority for your user level")			
 
-		authorUuid = editorUuid	
+		authorUuid = editorUuid
 
-		result = self.__addOrModifyRule(ruleId = ruleId, priority = priority, buildingName = buildingName, roomName = roomName, authorUuid = authorUuid, ruleBody = ruleBody, antecedent = antecedent, consequent = consequent, enabled = enabled)		
+		numOfEdits = 0
+		oldDate = oldRule.lastEditTimestamp.date()
+		newDate = date.today()
+
+		if oldDate < newDate:
+			numOfEdits = 1
+		else:
+			if oldRule.numOfEdits >= 2 :
+				raise  Exception("You exceeded the maximum number of rule modifications for today")
+
+
+		result = self.__addOrModifyRule(ruleId = ruleId, priority = priority, buildingName = buildingName, roomName = roomName, authorUuid = authorUuid, ruleBody = ruleBody, antecedent = antecedent, consequent = consequent, enabled = enabled,numOfEdits = numOfEdits)
 
 		from app.backend.controller.notificationsManager import NotificationsManager
 		notifications = NotificationsManager()
@@ -441,7 +467,7 @@ class RoomsManager:
 
 		return result
 
-	def __addOrModifyRule(self, priority = None, buildingName = None, roomName = None, authorUuid = None, ruleBody = None, ruleId = None, antecedent = None, consequent = None, enabled = True):
+	def __addOrModifyRule(self, priority = None, buildingName = None, roomName = None, authorUuid = None, ruleBody = None, ruleId = None, antecedent = None, consequent = None, enabled = True,numOfEdits = 0):
 		checkData(locals())
 		
 		import time,datetime
@@ -474,7 +500,7 @@ class RoomsManager:
 		from app.backend.model.room import Room
 
 		if not ruleId:
-			rule = Rule(priority = priority, category = category, buildingName = buildingName, roomName = roomName, authorUuid = authorUuid, antecedent = antecedent, consequent = consequent, enabled = True)
+			rule = Rule(priority = priority, category = category, buildingName = buildingName, roomName = roomName, authorUuid = authorUuid, antecedent = antecedent, consequent = consequent, enabled = True,numOfEdits = 0)
 		else:
 			rule = Rule(id = ruleId)
 			rule.retrieve()
@@ -485,7 +511,12 @@ class RoomsManager:
 			rule.consequent = consequent
 			rule.authorUuid = authorUuid
 			rule.authorUuid = authorUuid	
-			rule.enabled = enabled		
+			rule.enabled = enabled
+
+			if numOfEdits == 0:
+				rule.numOfEdits += 1
+			else:
+				rule.numOfEdits = 1
 
 			editor = rule.getAuthor()
 

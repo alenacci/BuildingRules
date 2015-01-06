@@ -768,20 +768,12 @@ def addRuleToRoom(username=None, buildingName=None, roomName=None):
             buildingsManager.checkUserBinding(buildingName, username)
             roomsManager = RoomsManager()
 
-            ruleList = roomsManager.getRules(buildingName=buildingName,roomName=roomName,username=username)["rules"]
-            count = 0
-            for rule in ruleList:
-                date = datetime.strptime(rule["creationTimestamp"],'%Y-%m-%d %H:%M:%S').date()
-                if date == date.today():
-                    count += 1
-            if count <= 3:
-                return returnResult(roomsManager.addRule(priority=priority, buildingName=buildingName, roomName=roomName,
+
+            return returnResult(roomsManager.addRule(priority=priority, buildingName=buildingName, roomName=roomName,
                                                      authorUuid=authorUuid, ruleBody=ruleBody))
-            else:
-                raise Exception("You exceeded the maximum number of rule inserts for today")
+
         except Exception as e:
             return returnError(e)
-
 
 @api.route('/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/rules/<ruleId>/edit', methods=['POST'])
 def editRuleInRoom(username=None, buildingName=None, roomName=None, ruleId=None):
@@ -795,7 +787,6 @@ def editRuleInRoom(username=None, buildingName=None, roomName=None, ruleId=None)
 
         groupId = request.form['groupId'] if 'groupId' in request.form.keys() else None
 
-        #authorUuid = userUuid
         editorUuid = userUuid
 
         try:
@@ -807,7 +798,7 @@ def editRuleInRoom(username=None, buildingName=None, roomName=None, ruleId=None)
 
             return returnResult(
                 roomsManager.editRule(ruleId=ruleId, priority=priority, buildingName=buildingName, roomName=roomName,
-                                      editorUuid=userUuid, ruleBody=ruleBody, groupId=groupId))
+                                      editorUuid=editorUuid, ruleBody=ruleBody, groupId=groupId))
         except Exception as e:
             return returnError(e)
 

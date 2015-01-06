@@ -1310,14 +1310,14 @@ def editRoomRule(buildingName=None, roomName=None, ruleId=None, groupId=None):
         if successResponse(response):
             flash("The rule has been saved correctly!")
             #return redirect(url_for('gui.rooms', buildingName = buildingName))
-            return redirect('/buildings/' + buildingName + '/rooms' + '#roomMenu_' + roomName)
+            return redirect(url_for('gui.room', buildingName = buildingName,roomName = roomName))
         else:
 
             if response["request-errorName"] == "RuleValidationError":
                 return redirect(url_for('gui.editRoomRule', buildingName=buildingName, roomName=roomName, ruleId=ruleId,
                                         ruleBody=ruleBody, priority=priority, conflictFound=True))
 
-            return render_template('ruleForm.html', error=response['request-errorDescription'], insertionForRoom=True)
+            return render_template('error.html', error=response['request-errorDescription'], insertionForRoom=True)
 
     else:
 

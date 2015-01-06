@@ -18,7 +18,7 @@ from app.backend.controller.triggerManager import TriggerManager
 
 class Rule:
 	def __init__(self, id = None, priority = None, category = None, buildingName = None, groupId = None, roomName = None, 
-				authorUuid = None, antecedent = None, consequent = None, enabled = False, deleted = False, creationTimestamp = None, lastEditTimestamp = None):
+				authorUuid = None, antecedent = None, consequent = None, enabled = False, deleted = False, creationTimestamp = None, lastEditTimestamp = None,numOfEdits = 0):
 
 			self.id = id
 			self.__priority = priority
@@ -33,6 +33,7 @@ class Rule:
 			self.deleted = deleted
 			self.creationTimestamp = creationTimestamp
 			self.lastEditTimestamp = lastEditTimestamp
+			self.numOfEdits = numOfEdits
 
 	def __repr__(self):
 		return repr((self.getDict()))			
@@ -55,6 +56,16 @@ class Rule:
 	def undoDelete(self):
 		if self.id:
 			self.deleted = False
+			self.store()
+
+	def increaseModifiedCounter(self):
+		if self.id:
+			self.numOfEdits += 1
+			self.store()
+
+	def decreaseModifiedCounter(self):
+		if self.id and self.numOfEdits > 0:
+			self.numOfEdits -= 1
 			self.store()
 
 	def getPriority(self, roomName = None, buildingName = None):
@@ -134,6 +145,7 @@ class Rule:
 		if self.deleted				!= None	:	queryTemplate = queryTemplate.replace("@@deleted@@", str(int(self.deleted)))
 		if self.creationTimestamp	!= None	:	queryTemplate = queryTemplate.replace("@@creation_timestamp@@", self.creationTimestamp.strftime('%Y-%m-%d %H:%M:%S'))
 		if self.lastEditTimestamp	!= None	:	queryTemplate = queryTemplate.replace("@@last_edit_timestamp@@", self.lastEditTimestamp.strftime('%Y-%m-%d %H:%M:%S'))
+		if self.numOfEdits		    != None	:	queryTemplate = queryTemplate.replace("@@numOfEdits@@", str(int(self.numOfEdits)))
 
 
 		groupId = str(self.groupId) if self.groupId else "-1"
@@ -170,16 +182,16 @@ class Rule:
 			query = """UPDATE rules SET 
 					priority = '@@priority@@', category = '@@category@@', building_name = '@@building_name@@', group_id = '@@group_id@@', room_name = '@@room_name@@', 
 					author_uuid = '@@author_uuid@@', antecedent = '@@antecedent@@', consequent = '@@consequent@@', enabled = '@@enabled@@', 
-					deleted = '@@deleted@@', creation_timestamp = '@@creation_timestamp@@', last_edit_timestamp = '@@last_edit_timestamp@@'
+					deleted = '@@deleted@@', creation_timestamp = '@@creation_timestamp@@', last_edit_timestamp = '@@last_edit_timestamp@@', numOfEdits = '@@numOfEdits@@'
 					WHERE id = '@@id@@';"""
 			updateQuery = True
 			
 		else:
 
 			query = """INSERT INTO rules (priority, category, building_name, group_id, room_name, author_uuid, antecedent, 
-					consequent, enabled, deleted, creation_timestamp, last_edit_timestamp) VALUES (
+					consequent, enabled, deleted, creation_timestamp, last_edit_timestamp, numOfEdits) VALUES (
 					'@@priority@@', '@@category@@', '@@building_name@@', '@@group_id@@', '@@room_name@@', '@@author_uuid@@', '@@antecedent@@', '@@consequent@@', '@@enabled@@', 
-					'@@deleted@@', '@@creation_timestamp@@', '@@last_edit_timestamp@@');"""
+					'@@deleted@@', '@@creation_timestamp@@', '@@last_edit_timestamp@@', '@@numOfEdits@@');"""
 
 
 		query = self.__replaceSqlQueryToken(query)
@@ -217,6 +229,7 @@ class Rule:
 			self.deleted = bool(int(queryResult[0][10]))
 			self.creationTimestamp = queryResult[0][11]
 			self.lastEditTimestamp = queryResult[0][12]
+			self.numOfEdits = int(queryResult[0][13])
 
 			groupId = int(queryResult[0][4])
 			roomName = queryResult[0][5]
@@ -284,6 +297,7 @@ class Rule:
 		response["deleted"] = self.deleted
 		response["creationTimestamp"] = self.creationTimestamp.strftime('%Y-%m-%d %H:%M:%S') if self.creationTimestamp else None
 		response["lastEditTimestamp"] = self.lastEditTimestamp.strftime('%Y-%m-%d %H:%M:%S') if self.lastEditTimestamp else None
+		response["numOfEdits"] = self.numOfEdits
 
 		return response	
 
