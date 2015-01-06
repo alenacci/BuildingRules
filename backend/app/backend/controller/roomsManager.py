@@ -11,7 +11,6 @@
 
 import sys
 import json
-from twisted.names import authority
 from datetime import datetime, date
 from app.backend.commons.errors import *
 from app.backend.commons.inputDataChecker import checkData
@@ -406,6 +405,11 @@ class RoomsManager:
 		writePermission = False
 		errorMessage = ""
 
+		ruleList = self.getRules(buildingName=buildingName,roomName=roomName,username=author.username)["rules"]
+
+		for r in ruleList:
+			if r["antecedent"] == antecedent and r["consequent"] == consequent :
+				raise Exception("The rule you were trying to insert is already in the room.")
 
 		# If this room is not related to a room, I cannot modify it from this method
 		if not oldRule.roomName:
