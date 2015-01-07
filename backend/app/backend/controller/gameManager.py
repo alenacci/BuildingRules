@@ -329,11 +329,15 @@ class GameManager:
             if(h > 12):
                 hTo = str(h-11)+":00 PM"
                 hToTo = str(h-10)+":00 PM"
+                h1 = str(h-12)+":00 PM"
                 h = str(h-12)+":00 PM"
+
             else:
                 hTo = str(h+1)+":00 AM"
                 hToTo = str(h+2)+":00 AM"
+                h1 = str(h)+":00 AM"
                 h = str(h)+":00 AM"
+
 
             boolControl = random.randrange(1,100,1)
             print str(boolControl)
@@ -341,9 +345,6 @@ class GameManager:
                 h = hTo
                 hTo = hToTo
 
-            print boolControl
-            print str(h)
-            print str(hTo)
 
             if len(self.statusDict) == 0: self.dataRestore()
 
@@ -352,7 +353,7 @@ class GameManager:
                                               occupancyTimeRangeTo=hTo, roomTemperature=self.statusDict[room]["RoomTemp"],
                                               externalTemperature=self.statusDict[room]["ExtTemp"], weather=self.statusDict[room]["Weather"])
 
-            self.saveSim(roomSimulator.start(),h,room)
+            self.saveSim(roomSimulator.start(),h1,room)
             self.tempSimulator(room)
             self.humSimulator(room)
             self.powerSimulator(room)

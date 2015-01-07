@@ -150,11 +150,8 @@ class RoomSimulator:
 							interval["ruleId"] = record[I_RULE_ID]
 							interval["ruleText"] = record[I_RULE_TEXT]
 							interval["end"] = "24:00"
-							print interval
 						counter += 1
 
-
-					
 		return {"simulation" : gantt}
 
 	def _getCurrentDate(self):
