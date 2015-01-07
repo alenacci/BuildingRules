@@ -157,6 +157,7 @@ class GameManager:
         audioPower = 80
         displayMonitorPower = 70
         projectorPower = 200
+        exhaustPower = 250
 
         if roomName in self.statusAction:
 
@@ -203,6 +204,10 @@ class GameManager:
             if "DISPLAYMONITOR" in self.statusAction[roomName] :
                 if self.statusAction[roomName]["DISPLAYMONITOR"] == "ON" :
                     power += displayMonitorPower
+
+            if "EXHAUST_FAN" in self.statusAction[roomName] :
+                if self.statusAction[roomName]["EXHAUST_FAN"] == "ON" :
+                    power += exhaustPower
 
 
             self.statusDict[roomName]["Power"] = power
@@ -425,14 +430,14 @@ class GameManager:
             whyNotHappy = whyNotHappy + "Room Temperature over 72F or under 64F <br/>"
 
 
-        if self.statusDictControl[roomName]["Power"] > 2000 :
+        if self.statusDictControl[roomName]["Power"] > 1660 :
             managerHappy = False
-            whyManagerNotHappy = whyManagerNotHappy + "The power consumption is over 2000 W <br/>"
+            whyManagerNotHappy = whyManagerNotHappy + "The power consumption is over 1660 W <br/>"
 
         if managerHappy:
             self.scores[username]+=1
         else:
-            self.scores[username]-=1
+            self.scores[username]-=3
 
         if youHappy:
             self.scores[username]+=1
