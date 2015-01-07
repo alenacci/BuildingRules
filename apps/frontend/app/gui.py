@@ -293,7 +293,7 @@ def roomGraphicalViewSummmary(buildingName=None, roomName=None):
         item["values"] = []
 
         today = datetime.date.today().strftime("%b %d %Y")
-        hours = re.findall("[0-9]{2}.[0-9]{2}",rule["antecedent"])
+        hours = re.findall("[0-9]{2}\.[0-9]{2}",rule["antecedent"])
         description = "if " + rule["antecedent"] + " then " + rule["consequent"]
         if  hours != []:
             unixTsFrom = EPOCH(today + " " + hours[0].replace(".",":"))
@@ -807,7 +807,9 @@ def room(buildingName=None, roomName=None):
         if rule["groupId"] and rule["groupId"] not in groupList.keys():
             groupList[rule["groupId"]] = None
         #DAYPERIOD -------
-        hours = re.findall("[0-9]{2}.[0-9]{2}",rule["antecedent"])
+        print rule["antecedent"]
+        hours = re.findall("[0-9]{2}\.[0-9]{2}",rule["antecedent"])
+        print hours
         if hours == []:
             periodMap[rule["antecedent"]]= "ALLPERIOD"
 
