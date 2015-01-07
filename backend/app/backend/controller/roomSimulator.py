@@ -47,8 +47,17 @@ class RoomSimulator:
 		occupancyTimeRangeMinuteFrom = self._getTimeInMinutes(self.occupancyTimeRangeFrom)
 		occupancyTimeRangeMinuteTo = self._getTimeInMinutes(self.occupancyTimeRangeTo)
 
+		## GAME ----poi togliere commento
+		#if currentTimeMinutes >= occupancyTimeRangeMinuteFrom and currentTimeMinutes <= occupancyTimeRangeMinuteTo:
+		#	return True
+		#else:
+		#	return False
 
-		if currentTimeMinutes >= occupancyTimeRangeMinuteFrom and currentTimeMinutes <= occupancyTimeRangeMinuteTo:
+		# ----- REMOVE AFTER GAME ------
+		now = datetime.datetime.now()
+
+		h = now.hour * 60
+		if h >= occupancyTimeRangeMinuteFrom and h < occupancyTimeRangeMinuteTo:
 			return True
 		else:
 			return False

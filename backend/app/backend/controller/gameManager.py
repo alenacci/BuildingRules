@@ -322,14 +322,28 @@ class GameManager:
 
         for room in self.roomList:
             now = datetime.datetime.now()
+
             h = now.hour
             hTo = 0
+
             if(h > 12):
                 hTo = str(h-11)+":00 PM"
+                hToTo = str(h-10)+":00 PM"
                 h = str(h-12)+":00 PM"
             else:
                 hTo = str(h+1)+":00 AM"
+                hToTo = str(h+2)+":00 AM"
                 h = str(h)+":00 AM"
+
+            boolControl = random.randrange(1,100,1)
+            print str(boolControl)
+            if boolControl > 50:
+                h = hTo
+                hTo = hToTo
+
+            print boolControl
+            print str(h)
+            print str(hTo)
 
             if len(self.statusDict) == 0: self.dataRestore()
 
@@ -425,7 +439,7 @@ class GameManager:
             whyNotHappy = whyNotHappy + "Humidity over 30% <br/>"
 
         #room temp < 64 o > 72
-        if  self.statusDictControl[roomName]["RoomTemp"] < 64 and self.statusDictControl[roomName]["RoomTemp"]> 72 :
+        if  self.statusDictControl[roomName]["RoomTemp"] < 64 or self.statusDictControl[roomName]["RoomTemp"]> 72 :
             youHappy = False
             whyNotHappy = whyNotHappy + "Room Temperature over 72F or under 64F <br/>"
 

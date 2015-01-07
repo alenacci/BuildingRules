@@ -807,9 +807,7 @@ def room(buildingName=None, roomName=None):
         if rule["groupId"] and rule["groupId"] not in groupList.keys():
             groupList[rule["groupId"]] = None
         #DAYPERIOD -------
-        print rule["antecedent"]
         hours = re.findall("[0-9]{2}\.[0-9]{2}",rule["antecedent"])
-        print hours
         if hours == []:
             periodMap[rule["antecedent"]]= "ALLPERIOD"
 
