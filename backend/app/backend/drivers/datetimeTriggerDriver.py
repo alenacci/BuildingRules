@@ -56,17 +56,17 @@ class DatetimeTriggerDriver(GenericTriggerDriver):
 		time = int(time.replace("AM", "").replace("PM", "").replace("am", "").replace("pm", ""))
 		if pm: time = int(time)+12
 		
-		return str(time)
+		return time
 
 	def __getIntFromDay(self, day):
 
-		if day.upper().startswith("MON"): return str(1)
-		if day.upper().startswith("TUE"): return str(2)
-		if day.upper().startswith("WED"): return str(3)
-		if day.upper().startswith("THU"): return str(4)
-		if day.upper().startswith("FRI"): return str(5)
-		if day.upper().startswith("SAT"): return str(6)
-		if day.upper().startswith("SUN"): return str(7)
+		if day.upper().startswith("MON"): return 1
+		if day.upper().startswith("TUE"): return 2
+		if day.upper().startswith("WED"): return 3
+		if day.upper().startswith("THU"): return 4
+		if day.upper().startswith("FRI"): return 5
+		if day.upper().startswith("SAT"): return 6
+		if day.upper().startswith("SUN"): return 7
 
 
 	def __simulatedEventTriggered(self):
@@ -90,8 +90,16 @@ class DatetimeTriggerDriver(GenericTriggerDriver):
 			par0 = self.__getIntFromTime(self.parameters['0'])
 			par1 = self.__getIntFromTime(self.parameters['1'])
 			now = self.__getIntFromTime(self.parameters["simulationParameters"]["time"][:2])
+			if par0 < par1 :
+				if now >= par0 and now <= par1:
+					return True
+				else:
+					return False
 
-			if now >= par0 and now <= par1:
+			print str(par0)
+			print str(par1)
+			print str(now)
+			if par0<=now<=24 or 0<=now<=par1:
 				return True
 			else:
 				return False

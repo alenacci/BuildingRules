@@ -143,8 +143,11 @@ class ActionExecutor:
 
 		#TODO: remove comment after GAME
 		#if not self.simulationParameters:
+		now = datetime.datetime.now()
+		hour = int(now.hour)
 		rules = Rules()
-		rules.setActiveRule(buildingName = rule.buildingName, roomName = rule.roomName, ruleId = rule.id)
+		if int(self.simulationParameters["time"][:2]) == hour:
+			rules.setActiveRule(buildingName = rule.buildingName, roomName = rule.roomName, ruleId = rule.id)
 
 	def notifyIgnoredRule(self, rule):
 		pass
