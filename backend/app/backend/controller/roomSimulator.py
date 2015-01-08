@@ -47,8 +47,17 @@ class RoomSimulator:
 		occupancyTimeRangeMinuteFrom = self._getTimeInMinutes(self.occupancyTimeRangeFrom)
 		occupancyTimeRangeMinuteTo = self._getTimeInMinutes(self.occupancyTimeRangeTo)
 
+		## GAME ----poi togliere commento
+		#if currentTimeMinutes >= occupancyTimeRangeMinuteFrom and currentTimeMinutes <= occupancyTimeRangeMinuteTo:
+		#	return True
+		#else:
+		#	return False
 
-		if currentTimeMinutes >= occupancyTimeRangeMinuteFrom and currentTimeMinutes <= occupancyTimeRangeMinuteTo:
+		# ----- REMOVE AFTER GAME ------
+		now = datetime.datetime.now()
+
+		h = now.hour * 60
+		if h >= occupancyTimeRangeMinuteFrom and h < occupancyTimeRangeMinuteTo:
 			return True
 		else:
 			return False
@@ -141,11 +150,8 @@ class RoomSimulator:
 							interval["ruleId"] = record[I_RULE_ID]
 							interval["ruleText"] = record[I_RULE_TEXT]
 							interval["end"] = "24:00"
-							print interval
 						counter += 1
 
-
-					
 		return {"simulation" : gantt}
 
 	def _getCurrentDate(self):

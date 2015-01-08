@@ -144,9 +144,7 @@ class ActionExecutor:
 		#TODO: remove comment after GAME
 		#if not self.simulationParameters:
 		rules = Rules()
-		#TODO: remove is stmt after GAME
-		if rule.antecedent != "nobody is in the room":
-			rules.setActiveRule(buildingName = rule.buildingName, roomName = rule.roomName, ruleId = rule.id)
+		rules.setActiveRule(buildingName = rule.buildingName, roomName = rule.roomName, ruleId = rule.id)
 
 	def notifyIgnoredRule(self, rule):
 		pass

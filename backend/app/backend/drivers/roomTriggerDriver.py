@@ -42,8 +42,8 @@ class RoomTriggerDriver(GenericTriggerDriver):
 
 	def __init__(self, parameters):
 		self.parameters = parameters
-		self.api_key = '7d0a9b2f-11bd-40da-8ff5-f7836fe468c3';
-		self.auth_token = '1';
+		self.api_key = '7d0a9b2f-11bd-40da-8ff5-f7836fe468c3'
+		self.auth_token = '1'
 		self.http = httplib2.Http()
 
 	
@@ -90,20 +90,21 @@ class RoomTriggerDriver(GenericTriggerDriver):
 	def __simulatedEventTriggered(self):
 
 		if self.parameters["operation"] == "CHECK_PRESENCE":
-			
-			if self.parameters["simulationParameters"]["occupancy"]:
-				return bool(self.parameters["simulationParameters"]["occupancy"])
-			else:
-				return getSimulationValue("occupancy", self.parameters["simulationParameters"]["time"], None)
+
+			#-------------GAME!!!!!!!!!! CONTROLLARE POI CON ALE SE VA BENE!!!!!!-----------------------
+			#if self.parameters["simulationParameters"]["occupancy"]:
+			return bool(self.parameters["simulationParameters"]["occupancy"])
+			#else:
+				#return not bool(self.parameters["simulationParameters"]["occupancy"])#return getSimulationValue("OCCUPANCY", self.parameters["simulationParameters"]["time"], None)
 
 
 		elif self.parameters["operation"] == "CHECK_ABSENCE":
 			
-			
-			if self.parameters["simulationParameters"]["occupancy"]:
-				return not bool(self.parameters["simulationParameters"]["occupancy"])
-			else:
-				return not getSimulationValue("occupancy", self.parameters["simulationParameters"]["time"], None)
+			#-------------GAME!!!!!!!!!! CONTROLLARE POI CON ALE SE VA BENE!!!!!!-----------------------
+			#if self.parameters["simulationParameters"]["occupancy"]:
+			return not bool(self.parameters["simulationParameters"]["occupancy"])
+			#else:
+			#	return not getSimulationValue("OCCUPANCY", self.parameters["simulationParameters"]["time"], None)
 			
 
 		elif self.parameters["operation"] == "TEMPERATURE_IN_RANGE":
@@ -123,48 +124,48 @@ class RoomTriggerDriver(GenericTriggerDriver):
 
 
 	def get_uuid_from_context(self, sensor_type, zone):
-	    try:
-	        response = self.http.request(
-	        "http://ob-ucsd-cse.ucsd.edu:8000/dataservice/api/sensors/context/Type=" + sensor_type + "+Room=Rm-" + zone,
-	        "GET",
-	        headers={'content-type':'application/json', 'X-BD-Api-Key': self.api_key, 'X-BD-Auth-Token': self.auth_token}
-	        )
-	        #print "response: ", response
+		try:
+			response = self.http.request(
+			"http://ob-ucsd-cse.ucsd.edu:8000/dataservice/api/sensors/context/Type=" + sensor_type + "+Room=Rm-" + zone,
+			"GET",
+			headers={'content-type':'application/json', 'X-BD-Api-Key': self.api_key, 'X-BD-Auth-Token': self.auth_token}
+			)
+			#print "response: ", response
 
-	    except Exception as e:
-	        raise BuildingDepotError('Could not search by given context! ' + str(e))
+		except Exception as e:
+			raise BuildingDepotError('Could not search by given context! ' + str(e))
 
-	    response = response[1]
-	    response_json = json.loads(response) 
-	    sensors_list = response_json["sensors"]
+		response = response[1]
+		response_json = json.loads(response)
+		sensors_list = response_json["sensors"]
 
-	    try:
-	        uuid = sensors_list[0]["uuid"]
-	    except Exception as e: 
-	        raise BuildingDepotError('Could not extract uuid out of response! ' + str(e) + " " + str(sensors_list))
-	    
-	    #print "Sensor uuid is " + uuid
-	    
-	    return uuid
+		try:
+			uuid = sensors_list[0]["uuid"]
+		except Exception as e:
+			raise BuildingDepotError('Could not extract uuid out of response! ' + str(e) + " " + str(sensors_list))
+
+		#print "Sensor uuid is " + uuid
+
+		return uuid
 
 	def read_present_value_by_uuid(self, sensor_uuid, sensorpoint_name = "PresentValue"):
-	    url = "http://ob-ucsd-cse.ucsd.edu:8000/dataservice/api/sensors/" + sensor_uuid + "/sensorpoints/" + sensorpoint_name + "/datapoints"
+		url = "http://ob-ucsd-cse.ucsd.edu:8000/dataservice/api/sensors/" + sensor_uuid + "/sensorpoints/" + sensorpoint_name + "/datapoints"
 
-	    try:
-	        response = self.http.request(
-	        url,
-	        "GET",
-	        headers={"X-BD-Api-Key": self.api_key, "X-BD-Auth-Token": self.auth_token}
-	        )
-	        #print response
-	        response_json = json.loads(response[1])
-	        datapoints = response_json["datapoints"]
-	        for time, data in datapoints[0].iteritems():
-	            value = float(data)
-	    except Exception as e:
-	    	raise BuildingDepotError('Error, could not read present value! ' + str(e))
+		try:
+			response = self.http.request(
+			url,
+			"GET",
+			headers={"X-BD-Api-Key": self.api_key, "X-BD-Auth-Token": self.auth_token}
+			)
+			#print response
+			response_json = json.loads(response[1])
+			datapoints = response_json["datapoints"]
+			for time, data in datapoints[0].iteritems():
+				value = float(data)
+		except Exception as e:
+			raise BuildingDepotError('Error, could not read present value! ' + str(e))
 
-	    return value		
+		return value
 
 	def __simulatedEventTriggeredWrapper(self):
 		print "[SIMULATION]" + "[" + self.parameters["simulationParameters"]["date"] + "]" + "[" + self.parameters["simulationParameters"]["time"] + "]", 
@@ -180,4 +181,3 @@ class RoomTriggerDriver(GenericTriggerDriver):
 	def __str__(self):
 		return "RoomTriggerDriver: "
 
-	    
