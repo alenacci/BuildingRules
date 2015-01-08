@@ -341,7 +341,7 @@ class GameManager:
 
             boolControl = random.randrange(1,100,1)
             print str(boolControl)
-            if boolControl > 50:
+            if boolControl > 70:
                 h = hTo
                 hTo = hToTo
 

@@ -925,9 +925,9 @@ def room(buildingName=None, roomName=None):
     rulesCount = 0
     if datetime.date.today() == datetime.datetime.strptime('2015-01-07','%Y-%m-%d').date():
         rulesCount = 6-count
-    elif datetime.date.today() == datetime.datetime.strptime('2015-01-08','%Y-%m-%d'):
+    elif datetime.date.today() == datetime.datetime.strptime('2015-01-08','%Y-%m-%d').date():
         rulesCount = 4-count
-    elif datetime.date.today() == datetime.datetime.strptime('2015-01-09','%Y-%m-%d'):
+    elif datetime.date.today() == datetime.datetime.strptime('2015-01-09','%Y-%m-%d').date():
         rulesCount = 2-count
 
     return render_template('room.html', roomList = roomList ,roomName=roomName, description = description, roomRules=roomRules, authorList=authorList,
