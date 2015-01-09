@@ -137,12 +137,12 @@
                                                             [<a href="{{request.path}}/../{{rule.roomName}}/rules/{{rule.id}}/delete">Delete</a>]
                                                     {% else %}
                                                         {% if rule.roomName %}
-                                                            - [<a href="{{request.path}}/../{{rule.roomName}}/rules/{{rule.id}}/edit">Edit</a>] {% if session.userUuid == 1 %} [<a href="{{request.path}}/../{{rule.roomName}}/rules/{{rule.id}}/delete">Delete</a>] {% endif %}
+                                                            {% if session.userUuid == 1 %}- [<a href="{{request.path}}/../{{rule.roomName}}/rules/{{rule.id}}/edit">Edit</a>] [<a href="{{request.path}}/../{{rule.roomName}}/rules/{{rule.id}}/delete">Delete</a>]
                                                             {% if rule.enabled %}
                                                                 [<a href="{{request.path}}/../{{rule.roomName}}/rules/{{rule.id}}/disable">Disable</a>]
                                                             {% else %}
                                                                 [<a href="{{request.path}}/../{{rule.roomName}}/rules/{{rule.id}}/enable">Enable</a>]
-                                                            {% endif %}
+                                                            {% endif %}{% endif %}
                                                         {% endif %}
                                                     {% endif %}
                                                 </small>
@@ -152,7 +152,7 @@
                                     <br>
                                     <h4><b>Note:</b> Active rules are shown in green.</h4>
                                     <br>
-                                    <form method="get" action="{{request.path}}/rules/add"> <input type="submit" value="Add a new rule"></form>
+                                    <!--<form method="get" action="{{request.path}}/rules/add"> <input type="submit" value="Add a new rule"></form>-->
 
 
 
@@ -191,17 +191,18 @@
                                                             {% if rule.enabled %} {% else %} </strike> <b>(disabled)</b>{% endif %}
                                                             <br>
                                                             [<a href="javascript:alert('if {{rule.antecedent}} then {{rule.consequent}} ')">Info</a>]
-                                                                [<a href="{{request.path}}/../{{rule.roomName}}/rules/{{rule.id}}/edit">Edit</a>]
                                                             {% if session.userUuid == 1 %}
+                                                                [<a href="{{request.path}}/../{{rule.roomName}}/rules/{{rule.id}}/edit">Edit</a>]
+
                                                                 [<a href="{{request.path}}/../{{rule.roomName}}/rules/{{rule.id}}/delete">Delete</a>]
-                                                            {% endif %}
+
                                                             {% if rule.enabled %}
 
                                                                 [<a href="{{request.path}}/../{{rule.roomName}}/rules/{{rule.id}}/disable">Disable</a>]
 
                                                             {% else %}
                                                                 [<a href="{{request.path}}/../{{rule.roomName}}/rules/{{rule.id}}/enable">Enable</a>]
-                                                            {% endif %}
+                                                            {% endif %}{% endif %}
 
                                                         </td>
                                                     {% endif %}
@@ -218,7 +219,7 @@
 
                       </div>
                       <div class="span4">
-                        <form method="get" action="{{request.path}}/rules/add"> <input type="submit" value="Add a new rule"></form>
+                        <!--<form method="get" action="{{request.path}}/rules/add"> <input type="submit" value="Add a new rule"></form>-->
                         <br>
                         <div class="well">
 

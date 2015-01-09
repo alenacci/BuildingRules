@@ -102,8 +102,8 @@ class GameManager:
             self.dataTarget[room["roomName"]] = []
 
             self.roomHappiness[room["roomName"]] = {"you":True,"whyYou":"","manager":True,"whyManager":""}
-        thread.start_new_thread(self.threadExec,(buildingName, ))
-        thread.start_new_thread(self.mailServiceExec,())
+        #thread.start_new_thread(self.threadExec,(buildingName, ))
+        #thread.start_new_thread(self.mailServiceExec,())
 
 
 
