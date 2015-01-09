@@ -238,19 +238,19 @@ class GameManager:
             if "TEMPERATURE" in self.statusAction[roomName] :
                 #check temp (es 64F-70F) -> if is out of range..flagHvac=1 TODO
                 temps = re.findall("[0-9]{2}F-[0-9]{2}F",self.statusAction[roomName]["TEMPERATURE"])
+                if len(temps)>0:
+                    temperatures = temps[0].strip().split("-")
 
-                temperatures = temps[0].strip().split("-")
+                    newTemps = []
+                    newTemps.append(temperatures[0].replace("F",""))
+                    newTemps.append(temperatures[1].replace("F",""))
 
-                newTemps = []
-                newTemps.append(temperatures[0].replace("F",""))
-                newTemps.append(temperatures[1].replace("F",""))
-
-                if self.statusDictControl[roomName]["RoomTemp"]<newTemps[0]:
-                    self.targetTemp[roomName] = newTemps[0]
-                    self.tempDump()
-                if newTemps[1] < self.statusDictControl[roomName]["RoomTemp"]:
-                    self.targetTemp[roomName] = newTemps[1]
-                    self.tempDump()
+                    if self.statusDictControl[roomName]["RoomTemp"]<newTemps[0]:
+                        self.targetTemp[roomName] = newTemps[0]
+                        self.tempDump()
+                    if newTemps[1] < self.statusDictControl[roomName]["RoomTemp"]:
+                        self.targetTemp[roomName] = newTemps[1]
+                        self.tempDump()
 
             self.tempRestore()
             if "RoomTemp" in self.statusDictControl[roomName] and roomName in self.targetTemp:
@@ -281,19 +281,20 @@ class GameManager:
             #HVAC humidity change
             if "HUMIDITY" in self.statusAction[roomName] :
                 hums = re.findall("[0-9]{2}%-[0-9]{2}%",self.statusAction[roomName]["HUMIDITY"])
-                humidities = hums[0].strip().split("-")
+                if len(hums)>0:
+                    humidities = hums[0].strip().split("-")
 
-                newHums = []
-                newHums.append(humidities[0].replace("%",""))
-                newHums.append(humidities[1].replace("%",""))
+                    newHums = []
+                    newHums.append(humidities[0].replace("%",""))
+                    newHums.append(humidities[1].replace("%",""))
 
 
-                if self.statusDictControl[roomName]["Hum"]<newHums[0]:
-                    self.targetHum[roomName] = newHums[0]
-                    self.humidityDump()
-                if newHums[1] < self.statusDictControl[roomName]["Hum"]:
-                    self.targetHum[roomName] = newHums[1]
-                    self.humidityDump()
+                    if self.statusDictControl[roomName]["Hum"]<newHums[0]:
+                        self.targetHum[roomName] = newHums[0]
+                        self.humidityDump()
+                    if newHums[1] < self.statusDictControl[roomName]["Hum"]:
+                        self.targetHum[roomName] = newHums[1]
+                        self.humidityDump()
 
             self.humidityRestore()
             if "Hum" in self.statusDictControl[roomName] and roomName in self.targetHum:
