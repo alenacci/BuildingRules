@@ -59,7 +59,7 @@ def execProcess(cmd):
 
 
 def getUserActionOnRule(action):
-	currentFile = "../../frontend/logs/api_requests.log"
+	currentFile = "../../apps/frontend/logs/api_requests.log"
 	cmd = "cat " + currentFile + " | grep rules | grep " + action + " | grep -c API_REQUEST"
 	output = execProcess(cmd).replace("\n","").strip()
 	return {action : output}
@@ -70,7 +70,7 @@ def getUserActionOnRulePerDay(action):
 	result = {}
 
 	for day in getExperimentDaysList():
-		currentFile = "../../frontend/logs/api_requests.log"
+		currentFile = "../../apps/frontend/logs/api_requests.log"
 		cmd = "cat " + currentFile + ' | grep rules | grep ' + action + ' | grep API_REQUEST | grep -c "> ' + day + '"'
 		output = execProcess(cmd).replace("\n","").strip()
 		result.update({ day : output })
@@ -81,7 +81,7 @@ def getUserActionOnRulePerDay(action):
 def getExperimentDaysList():
 	daysList = []
 
-	firstDay = date(2014,02,1)
+	firstDay = date(2015,01,7)
 	today = date.today()
 	deltaDays = (today - firstDay).days
 
