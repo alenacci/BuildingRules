@@ -27,10 +27,12 @@ from datetime import datetime
 
 class BuildingSimulator:
 
-	def __init__(self, buildingName = None, startDate = None, numberOfDays = None, roomFilter = None):
-		
+	def __init__(self, occupancyTimeRangeFrom = None, occupancyTimeRangeTo = None ,buildingName = None, startDate = None, numberOfDays = None, roomFilter = None):
+
 		checkData(locals())
 
+		self.occupancyTimeRangeFrom = occupancyTimeRangeFrom
+		self.occupancyTimeRangeTo = occupancyTimeRangeTo
 		self.buildingName = buildingName
 		self.startDate = startDate
 		self.numberOfDays = numberOfDays
@@ -57,7 +59,7 @@ class BuildingSimulator:
 			simulationResult = {}
 			for day in days:
 
-				roomSimulator = RoomSimulator(buildingName = self.buildingName, roomName = roomName, currentDate = day)
+				roomSimulator = RoomSimulator(occupancyTimeRangeFrom=self.occupancyTimeRangeFrom,occupancyTimeRangeTo=self.occupancyTimeRangeTo,buildingName = self.buildingName, roomName = roomName, currentDate = day,weather="Sunny")
 				simulationResult[day] = roomSimulator.start()
 
 			if not os.path.exists("tools/simulation/results/"): os.makedirs("tools/simulation/results/")
@@ -67,7 +69,7 @@ class BuildingSimulator:
 
 
 	def __str__(self):
-		return "BuildingSimulator: "		
+		return "BuildingSimulator: "
 
 
 

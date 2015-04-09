@@ -142,12 +142,12 @@ class ActionExecutor:
 			flash(message + ") Erro while actuating the consequent '" + rule.consequent + "'... " + str(e), 'red')
 
 		#TODO: remove comment after GAME
-		#if not self.simulationParameters:
-		now = datetime.datetime.now()
-		hour = int(now.hour)
-		rules = Rules()
-		if int(self.simulationParameters["time"][:2]) == hour:
-			rules.setActiveRule(buildingName = rule.buildingName, roomName = rule.roomName, ruleId = rule.id)
+		if not self.simulationParameters:
+			now = datetime.datetime.now()
+			hour = int(now.hour)
+			rules = Rules()
+			if int(self.simulationParameters["time"][:2]) == hour:
+				rules.setActiveRule(buildingName = rule.buildingName, roomName = rule.roomName, ruleId = rule.id)
 
 	def notifyIgnoredRule(self, rule):
 		pass
@@ -164,9 +164,9 @@ class ActionExecutor:
 		buildings = Buildings()
 		buildingsManager = BuildingsManager()
 		groupsManager = GroupsManager()
-		#rules = Rules()
+		rules = Rules()
 
-		#rules.resetActiveRules()
+		rules.resetActiveRules()
 		
 		for building in buildings.getAllBuildings():
 

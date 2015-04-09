@@ -36,9 +36,9 @@ api = Blueprint('api', __name__, template_folder='templates')
 
 @api.route('/api/test', methods=['GET', 'POST'])
 def test():
-    print "starting test 6..."
+    print "starting test 7..."
     test = Test()
-    test.test6()
+    test.test7()
     #test.test2()
     #test.test3()
     #test.test0()
