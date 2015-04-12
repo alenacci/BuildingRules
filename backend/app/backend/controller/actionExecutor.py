@@ -302,6 +302,8 @@ class ActionExecutor:
 
                 # Executing the rules per each room
                 # In the case I have the same action category, I'll take the action with higher priority
+                loserRules = {}
+                loserRules[self.simulationParameters["time"]] = {}
                 for roomName in roomScheduledRules.keys():
                     flash("Room [" + building.buildingName + "." + roomName + "]...", "blue")
                     ruleList = roomScheduledRules[roomName]
@@ -310,12 +312,11 @@ class ActionExecutor:
 
                     alreadyAppliedCategories = []
                     loserRulesList = []
-                    loserRules = {}
                     for rule in ruleList:
 
                         if rule.category not in alreadyAppliedCategories:
                             if len(loserRulesList)>0:
-                                loserRules[str(winnerRule)] = loserRulesList
+                                loserRules[self.simulationParameters["time"]][str(winnerRule)] = loserRulesList
                                 loserRulesList = []
 
                             alreadyAppliedCategories.append(rule.category)
@@ -325,14 +326,21 @@ class ActionExecutor:
                         else:
                             flash(building.buildingName + " - Room " + roomName + ", ruleId " + str(
                                 rule.id) + " ignored.")
-                            loserRulesList.append(rule)
+                            loserRulesList.append("if " + rule.antecedent + " then " + rule.consequent)
 
-                    newString = str(loserRules).replace("'","\"")
-                    flash("allaaaaah:"+str(newString))
-                    if not os.path.exists("tools/simulation/results/"):
-                        os.makedirs("tools/simulation/results/")
-                    out_file = open("tools/simulation/results/loser_" + roomName+str(self.simulationParameters["time"]) + ".json","w")
-                    out_file.write(json.dumps(str(newString), separators=(',', ':')))
+                    if not os.path.exists("tools/simulation/results/losers"):
+                        os.makedirs("tools/simulation/results/losers")
+                    if os.path.exists("tools/simulation/results/losers/loser_" + roomName + ".json"):
+                        in_file = open("tools/simulation/results/losers/loser_" + roomName + ".json","r")
+                        tempJson = json.load(in_file)
+                        tempJson[self.simulationParameters["time"]] = loserRules[self.simulationParameters["time"]]
+                        in_file.close()
+                    else:
+                        tempJson = loserRules
+
+
+                    out_file = open("tools/simulation/results/losers/loser_" + roomName + ".json","w")
+                    out_file.write(json.dumps(tempJson,separators =(',', ':')))
                     out_file.close()
 
                 flash("Executing actions for CRV Groups...", "yellow")

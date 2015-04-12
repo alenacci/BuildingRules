@@ -40,7 +40,7 @@ class RoomTriggerDriver(GenericTriggerDriver):
 	# parameters["operation"] = "AFTER"
 	# parameters["val_0"] = 
 
-	def __init__(self, parameters):
+	def     __init__(self, parameters):
 		self.parameters = parameters
 		self.api_key = '7d0a9b2f-11bd-40da-8ff5-f7836fe468c3'
 		self.auth_token = '1'

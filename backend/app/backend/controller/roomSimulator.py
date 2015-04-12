@@ -70,6 +70,9 @@ class RoomSimulator:
         simulationBufferFilePath = (simulationBufferFolder + "/" + simulationBufferFileName).replace("//", "/")
         os.remove(simulationBufferFilePath) if os.path.exists(simulationBufferFilePath) else None
 
+        if os.path.exists("tools/simulation/results/losers/loser_"+self.roomName+".json"):
+            os.remove("tools/simulation/results/losers/loser_"+self.roomName+".json")
+
         for hour in range(0, 24):
             for minute in range(0, 60, 60):
                 h = str(hour) if len(str(hour)) == 2 else "0" + str(hour)
