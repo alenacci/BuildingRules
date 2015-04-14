@@ -11,15 +11,14 @@
 
 
 import json
-import time
-from datetime import datetime
-from time import strptime
+
 from flask import request, session, g, redirect, url_for, abort, render_template, flash, jsonify, Blueprint
 from multiprocessing.connection import Client
 from app.backend.commons.console import flash
 
 from app.backend.commons.test import Test
 from app.backend.controller.gameManager import GameManager
+from app.backend.controller.graphGenerator import GraphGenerator
 from app.backend.controller.usersManager import UsersManager
 from app.backend.controller.sessionManager import SessionManager
 from app.backend.controller.buildingsManager import BuildingsManager
@@ -1049,6 +1048,24 @@ def translateCategories():
                 categoriesTranslation[category] = temp["translation"]
 
             return returnResult(categoriesTranslation)
+        except Exception as e:
+            return returnError(e)
+
+
+@api.route('/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/graph', methods=['POST'])
+def graphGeneration(username=None, buildingName=None, roomName=None):
+
+    if request.method == 'POST':
+
+        sessionKey = validateInput(request.form['sessionKey'])
+        userUuid = validateInput(request.form['userUuid'])
+
+        try:
+            session = SessionManager()
+            session.checkSessionValidity(sessionKey, userUuid)
+            graphGeneration = GraphGenerator()
+
+            return returnResult(graphGeneration.createGraphForRoom(roomName=roomName, buildingName = buildingName, username=username))
         except Exception as e:
             return returnError(e)
 

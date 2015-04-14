@@ -457,6 +457,58 @@ def game(buildingName=None, roomName=None):
     return render_template('gameData.html', categoryList = target ,statusDict = statusDict, infoRoom = infoRoom, time = time, roomList = roomList, roomHappiness = roomHappiness, score = score,ranking= ranking, roomName = roomName, description = description, username = session["username"])
 
 
+@gui.route('/buildings/<buildingName>/rooms/<roomName>/graph/', methods=['GET', 'POST'])
+@gui.route('/buildings/<buildingName>/rooms/<roomName>/graph', methods=['GET', 'POST'])
+def graph(buildingName=None, roomName=None):
+    if not loggedIn():    return redirect(url_for('gui.login'))
+
+    #get all the room information
+    response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/graph",
+                            {
+                                'username': session["username"],
+                                'buildingName': buildingName,
+                                'roomName': roomName,
+                                'sessionKey': session["sessionKey"],
+                                'userUuid': session["userUuid"]
+                            })
+
+    if successResponse(response):
+        import base64
+        image = base64.b64decode(response["image"])
+        if not os.path.exists("app/static/images/roomGraphs"): os.makedirs("app/static/images/roomGraphs")
+
+        with open("app/static/images/roomGraphs/"+roomName+".png","wb") as imageFile:
+            imageFile.write(image)
+        return render_template('roomGraph.html', graphPath = roomName )
+    else:
+        return render_template('error.html', error=response['request-errorDescription'])
+
+@gui.route('/buildings/<buildingName>/rooms/<roomName>/graph/update/', methods=['GET', 'POST'])
+@gui.route('/buildings/<buildingName>/rooms/<roomName>/graph/update', methods=['GET', 'POST'])
+def graphUpdate(buildingName=None, roomName=None):
+    if not loggedIn():    return redirect(url_for('gui.login'))
+
+    #get all the room information
+    response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/graph",
+                            {
+                                'username': session["username"],
+                                'buildingName': buildingName,
+                                'roomName': roomName,
+                                'sessionKey': session["sessionKey"],
+                                'userUuid': session["userUuid"]
+                            })
+
+    if successResponse(response):
+        import base64
+        image = base64.b64decode(response["image"])
+        if not os.path.exists("app/static/images/roomGraphs"): os.makedirs("app/static/images/roomGraphs")
+
+        with open("app/static/images/roomGraphs/"+roomName+".png","wb") as imageFile:
+            imageFile.write(image)
+        return json.dumps({'graphPath':roomName},200, {'Content-Type':'application/json'} )
+    else:
+        return render_template('error.html', error=response['request-errorDescription'])
+
 @gui.route('/removeMe2/<currentDay>/', methods=['GET', 'POST'])
 @gui.route('/removeMe2/<currentDay>', methods=['GET', 'POST'])
 def removeMe2(currentDay=None):

@@ -4,6 +4,7 @@ import re
 import rest
 import os
 import json
+from networkx import nx
 from graphviz import Digraph
 
 
@@ -106,16 +107,18 @@ for room in rooms:
 
     for state in statesList:
         nodeLabel = '<<TABLE BORDER="2" CELLBORDER="1" CELLSPACING="10">'
-        nodeLabel += '<TR><TD><FONT COLOR="red" POINT-SIZE="18">ACTUATORS STATE</FONT><BR/>'
+        nodeLabel += '<TR><TD BGCOLOR="black"><FONT COLOR="white" POINT-SIZE="18">ACTUATORS STATE</FONT></TD></TR>'
         archLabel = str(archIndex) +"&#92;n"
 
+        nodeLabel += '<TR><TD BGCOLOR="lightblue">'
         for actuators in state[3].items():
             nodeLabel += actuators[0] +": " +actuators[1] + "<BR/>"
 
         nodeLabel += "</TD></TR>"
 
-        nodeLabel += '<TR><TD><FONT COLOR="red" POINT-SIZE="18">ACTIVE RULES</FONT><BR/>'
+        nodeLabel += '<TR><TD BGCOLOR="black"><FONT COLOR="white" POINT-SIZE="18">ACTIVE RULES</FONT></TD></TR>'
 
+        nodeLabel += '<TR><TD BGCOLOR="#98FF98">' #green
         antecedentSet = set()
         for rule in state[0]:
             splittedRule = rule["ruleText"].strip().split("then")
@@ -124,8 +127,10 @@ for room in rooms:
 
 
         nodeLabel += "</TD></TR>"
-        nodeLabel += '<TR><TD><FONT COLOR="red" POINT-SIZE="18">LOSER RULES</FONT><BR/>'
+        nodeLabel += '<TR><TD BGCOLOR="black"><FONT COLOR="white" POINT-SIZE="18">LOSER RULES</FONT></TD></TR>'
 
+
+        nodeLabel += '<TR><TD BGCOLOR="#F75D59">' #red
         for rule in state[2]:
             splittedRule = rule.strip().split("then")
             nodeLabel += splittedRule[1] + "<BR/>"
@@ -148,7 +153,7 @@ for room in rooms:
             archLabel += "If time is between " + str(maxLower) + " and " + str(minHigher) + "\n"
 
         nodeLabel += "</TD></TR>"
-        nodeLabel += '<TR><TD><FONT COLOR="red" POINT-SIZE="18">TIME </FONT><BR/>' + str(state[1]) + "</TD></TR>"
+        nodeLabel += '<TR><TD BGCOLOR="black"><FONT COLOR="white" POINT-SIZE="18">TIME </FONT></TD></TR><TR><TD>' + str(state[1]) + " hours</TD></TR>"
         nodeLabel += "</TABLE>>"
 
         for duplicatedState in duplicatedStatesList:
@@ -158,6 +163,7 @@ for room in rooms:
 
         if dupBool :
             id = duplicatedStatesIds[nodeLabel]
+
             dot.edge(str(startingNodeIndex),str(id),str(archLabel))
             startingNodeIndex = id
             dupBool = False
