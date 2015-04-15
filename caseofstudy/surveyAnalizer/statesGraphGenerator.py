@@ -106,14 +106,22 @@ for room in rooms:
     duplicatedStatesIds = {}
     dupBool = False
 
+
+
     for state in statesList:
+        archList = []
         nodeLabel = '<<TABLE BORDER="2" CELLBORDER="1" CELLSPACING="10">'
         nodeLabel += '<TR><TD BGCOLOR="black"><FONT COLOR="white" POINT-SIZE="18">ACTUATORS STATE</FONT></TD></TR>'
         archLabel = str(archIndex) +"&#92;n"
+        archList.append(str(archIndex))
+        nodeStatDict = {}
 
         nodeLabel += '<TR><TD BGCOLOR="lightblue">'
+        nodeStatList = []
         for actuators in state[3].items():
             nodeLabel += actuators[0] +": " +actuators[1] + "<BR/>"
+            nodeStatList.append(actuators[0]+": " + actuators[1])
+        nodeStatDict["actuatorsState"] = nodeStatList
 
         nodeLabel += "</TD></TR>"
 
@@ -121,10 +129,13 @@ for room in rooms:
 
         nodeLabel += '<TR><TD BGCOLOR="#98FF98">' #green
         antecedentSet = set()
+        nodeStatList = []
         for rule in state[0]:
             splittedRule = rule["ruleText"].strip().split("then")
             nodeLabel += splittedRule[1] + "<BR/>"
             antecedentSet.add(splittedRule[0])
+            nodeStatList.append(splittedRule[1])
+        nodeStatDict["activeRules"] = nodeStatList
 
 
         nodeLabel += "</TD></TR>"
@@ -132,9 +143,12 @@ for room in rooms:
 
 
         nodeLabel += '<TR><TD BGCOLOR="#F75D59">' #red
+        nodeStatList = []
         for rule in state[2]:
             splittedRule = rule.strip().split("then")
             nodeLabel += splittedRule[1] + "<BR/>"
+            nodeStatList.append(splittedRule[1])
+        nodeStatDict["loserRules"] = nodeStatList
 
         lowerTimes = []
         higherTimes = []
@@ -147,15 +161,18 @@ for room in rooms:
                 higherTimes.append(float(times[1]))
             else :
                 archLabel += antecedent + "\n"
+                archList.append(antecedent)
 
         if lowerTimes and higherTimes :
             maxLower = max(lowerTimes)
             minHigher = min(higherTimes)
             archLabel += "If time is between " + str(maxLower) + " and " + str(minHigher) + "\n"
+            archList.append("If time is between " + str(maxLower) + " and " + str(minHigher))
 
         nodeLabel += "</TD></TR>"
         nodeLabel += '<TR><TD BGCOLOR="black"><FONT COLOR="white" POINT-SIZE="18">TIME </FONT></TD></TR><TR><TD>' + str(state[1]) + " hours</TD></TR>"
         nodeLabel += "</TABLE>>"
+        nodeStatDict["time"] = str(state[1])
 
         for duplicatedState in duplicatedStatesList:
             if duplicatedState == nodeLabel:
@@ -165,15 +182,16 @@ for room in rooms:
         if dupBool :
             id = duplicatedStatesIds[nodeLabel]
 
+            G.add_edge(startingNodeIndex,id,label = archList)
             dot.edge(str(startingNodeIndex),str(id),str(archLabel))
             startingNodeIndex = id
             dupBool = False
         else:
             dot.node(str(endingNodeInded),nodeLabel)
-            G.add_node(endingNodeInded,label=nodeLabel)
+            G.add_node(endingNodeInded,nodeStatDict)
 
             dot.edge(str(startingNodeIndex),str(endingNodeInded),str(archLabel))
-            G.add_edge(startingNodeIndex,endingNodeInded,label = archLabel)
+            G.add_edge(startingNodeIndex,endingNodeInded,label = archList)
 
             duplicatedStatesIds[nodeLabel] = endingNodeInded
             duplicatedStatesList.append(nodeLabel)
@@ -181,6 +199,63 @@ for room in rooms:
             endingNodeInded+=1
         archIndex += 1
 
+    nx.write_gpickle(G,"savedGraph.pickle")
 
-    dot.render('room-graph'+str(room)+'.gv', view=True)
+
+
+    G1 = nx.read_gpickle("savedGraph.pickle")
+
+    dot1 = Digraph(comment='Room Graph')
+    dot1.body.extend(['rankdir=LR'])
+    dot1.attr("node",shape="plaintext")
+
+    for n in G1.nodes():
+        #prendo info nodo
+
+        if G1.node[n]:
+            actuatorsState = G1.node[n]["actuatorsState"]
+            activeRules = G1.node[n]["activeRules"]
+            loserRules = G1.node[n]["loserRules"]
+            time = G1.node[n]["time"]
+
+            nodeLabel = '<<TABLE BORDER="2" CELLBORDER="1" CELLSPACING="10">'
+            nodeLabel += '<TR><TD BGCOLOR="black"><FONT COLOR="white" POINT-SIZE="18">ACTUATORS STATE</FONT></TD></TR>'
+
+            nodeLabel += '<TR><TD BGCOLOR="lightblue">'
+            for actuators in actuatorsState:
+                nodeLabel += actuators + "<BR/>"
+
+            nodeLabel += "</TD></TR>"
+            nodeLabel += '<TR><TD BGCOLOR="black"><FONT COLOR="white" POINT-SIZE="18">ACTIVE RULES</FONT></TD></TR>'
+            nodeLabel += '<TR><TD BGCOLOR="#98FF98">' #green
+
+            for rule in activeRules:
+                nodeLabel += rule + "<BR/>"
+
+
+            nodeLabel += "</TD></TR>"
+            nodeLabel += '<TR><TD BGCOLOR="black"><FONT COLOR="white" POINT-SIZE="18">LOSER RULES</FONT></TD></TR>'
+
+
+            nodeLabel += '<TR><TD BGCOLOR="#F75D59">' #red
+
+            for rule in loserRules:
+                nodeLabel += rule + "<BR/>"
+
+            nodeLabel += "</TD></TR>"
+            nodeLabel += '<TR><TD BGCOLOR="black"><FONT COLOR="white" POINT-SIZE="18">TIME </FONT></TD></TR><TR><TD>' + time + " hours</TD></TR>"
+            nodeLabel += "</TABLE>>"
+
+            dot1.node(str(n),nodeLabel)
+
+    for edge in G1.edges():
+        archList = G1.edge[edge[0]][edge[1]]["label"]
+        archLabel = ""
+        for arch in archList:
+            archLabel += arch + "\n"
+        dot1.edge(str(edge[0]),str(edge[1]),archLabel)
+
+    dot1.render('room-graph'+str(room)+'.gv', view=True)
+
+
 

@@ -462,6 +462,9 @@ def game(buildingName=None, roomName=None):
 def graph(buildingName=None, roomName=None):
     if not loggedIn():    return redirect(url_for('gui.login'))
 
+    type = "node"
+    if request.method == 'POST':
+        type = request.form["graphType"]
     #get all the room information
     response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/graph",
                             {
@@ -469,7 +472,8 @@ def graph(buildingName=None, roomName=None):
                                 'buildingName': buildingName,
                                 'roomName': roomName,
                                 'sessionKey': session["sessionKey"],
-                                'userUuid': session["userUuid"]
+                                'userUuid': session["userUuid"],
+                                'graphType' : type
                             })
 
     if successResponse(response):
@@ -488,26 +492,29 @@ def graph(buildingName=None, roomName=None):
 def graphUpdate(buildingName=None, roomName=None):
     if not loggedIn():    return redirect(url_for('gui.login'))
 
+    if request.method == 'POST':
+        type = request.form["graphType"]
     #get all the room information
-    response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/graph",
-                            {
-                                'username': session["username"],
-                                'buildingName': buildingName,
-                                'roomName': roomName,
-                                'sessionKey': session["sessionKey"],
-                                'userUuid': session["userUuid"]
-                            })
+        response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/graph",
+                                {
+                                    'username': session["username"],
+                                    'buildingName': buildingName,
+                                    'roomName': roomName,
+                                    'sessionKey': session["sessionKey"],
+                                    'userUuid': session["userUuid"],
+                                    'graphType':type
+                                })
 
-    if successResponse(response):
-        import base64
-        image = base64.b64decode(response["image"])
-        if not os.path.exists("app/static/images/roomGraphs"): os.makedirs("app/static/images/roomGraphs")
+        if successResponse(response):
+            import base64
+            image = base64.b64decode(response["image"])
+            if not os.path.exists("app/static/images/roomGraphs"): os.makedirs("app/static/images/roomGraphs")
 
-        with open("app/static/images/roomGraphs/"+roomName+".png","wb") as imageFile:
-            imageFile.write(image)
-        return json.dumps({'graphPath':roomName},200, {'Content-Type':'application/json'} )
-    else:
-        return render_template('error.html', error=response['request-errorDescription'])
+            with open("app/static/images/roomGraphs/"+roomName+".png","wb") as imageFile:
+                imageFile.write(image)
+            return json.dumps({'graphPath':roomName},200, {'Content-Type':'application/json'} )
+        else:
+            return render_template('error.html', error=response['request-errorDescription'])
 
 @gui.route('/removeMe2/<currentDay>/', methods=['GET', 'POST'])
 @gui.route('/removeMe2/<currentDay>', methods=['GET', 'POST'])

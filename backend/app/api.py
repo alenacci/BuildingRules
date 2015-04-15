@@ -1059,13 +1059,16 @@ def graphGeneration(username=None, buildingName=None, roomName=None):
 
         sessionKey = validateInput(request.form['sessionKey'])
         userUuid = validateInput(request.form['userUuid'])
+        graphType = request.form["graphType"]
 
         try:
             session = SessionManager()
             session.checkSessionValidity(sessionKey, userUuid)
             graphGeneration = GraphGenerator()
 
-            return returnResult(graphGeneration.createGraphForRoom(roomName=roomName, buildingName = buildingName, username=username))
+            graphGeneration.createGraph(roomName=roomName, buildingName = buildingName, username=username,type=graphType)
+
+            return returnResult(graphGeneration.drawGraphForRoom(roomName=roomName, buildingName = buildingName, username=username,type = graphType))
         except Exception as e:
             return returnError(e)
 

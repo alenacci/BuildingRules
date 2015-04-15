@@ -3,6 +3,7 @@ from app.backend.controller.buildingsManager import BuildingsManager
 __author__ = 'jacopo'
 
 from graphviz import Digraph
+from networkx import nx
 import os
 import re
 import json
@@ -11,9 +12,31 @@ class GraphGenerator:
     def __init__(self):
         pass
 
-    def createGraphForRoom(self, buildingName=None, roomName=None, username= None):
+    def createGraph(self, buildingName=None, roomName=None, username= None, type=None):
         buildingsManager = BuildingsManager()
         buildingsManager.checkUserBinding(buildingName, username)
+
+        if type=="node":
+            self.editGraph(buildingName,roomName,type)
+        elif type=="actuatorsState":
+            self.editGraph(buildingName,roomName,type)
+
+    def editGraph(self,buildingName=None, roomName=None,type=None):
+        if type=="node":
+            if os.path.exists("tools/simulation/graphs/"+buildingName+"/"+roomName+"_node.pickle"):
+                pass
+            else:
+                self.createGraphIdenticalNode(buildingName,roomName)
+        elif type=="actuatorsState":
+            if os.path.exists("tools/simulation/graphs/"+buildingName+"/"+roomName+"_actuatorsState.pickle"):
+                pass
+            else:
+                self.fromNodeToActuatorsState(buildingName,roomName)
+        elif type=="blabla":
+            pass
+
+
+    def createGraphIdenticalNode(self, buildingName=None, roomName=None):
 
         roomData = self.fetchDataFromJSON(roomName)
         losersData = self.fetchLosersFromJSON(roomName)
@@ -53,13 +76,7 @@ class GraphGenerator:
                     loserRulesSet = set()
                     count = 0
 
-
-
-        dot = Digraph(comment='Room Graph',format="png")
-
-        dot.body.extend(['rankdir=LR'])
-
-        dot.attr("node",shape="plaintext")
+        G = nx.DiGraph()
 
         endingNodeInded = 0
         startingNodeIndex = -1
@@ -71,34 +88,30 @@ class GraphGenerator:
         dupBool = False
 
         for state in statesList:
-            nodeLabel = '<<TABLE BORDER="2" CELLBORDER="1" CELLSPACING="10">'
-            nodeLabel += '<TR><TD BGCOLOR="black"><FONT COLOR="white" POINT-SIZE="18">ACTUATORS STATE</FONT></TD></TR>'
-            archLabel = str(archIndex) +"&#92;n"
 
-            nodeLabel += '<TR><TD BGCOLOR="lightblue">'
+            nodeStatDict = {}
+
+            nodeStatList = []
+            archList = []
+            archList.append(str(archIndex))
             for actuators in state[3].items():
-                nodeLabel += actuators[0] +": " +actuators[1] + "<BR/>"
 
-            nodeLabel += "</TD></TR>"
+                nodeStatList.append(actuators[0]+": " + actuators[1])
+            nodeStatDict["actuatorsState"] = nodeStatList
 
-            nodeLabel += '<TR><TD BGCOLOR="black"><FONT COLOR="white" POINT-SIZE="18">ACTIVE RULES</FONT></TD></TR>'
-
-            nodeLabel += '<TR><TD BGCOLOR="#98FF98">' #green
             antecedentSet = set()
+            nodeStatList = []
             for rule in state[0]:
                 splittedRule = rule["ruleText"].strip().split("then")
-                nodeLabel += splittedRule[1] + "<BR/>"
                 antecedentSet.add(splittedRule[0])
+                nodeStatList.append(splittedRule[1])
+            nodeStatDict["activeRules"] = nodeStatList
 
-
-            nodeLabel += "</TD></TR>"
-            nodeLabel += '<TR><TD BGCOLOR="black"><FONT COLOR="white" POINT-SIZE="18">LOSER RULES</FONT></TD></TR>'
-
-
-            nodeLabel += '<TR><TD BGCOLOR="#F75D59">' #red
+            nodeStatList = []
             for rule in state[2]:
                 splittedRule = rule.strip().split("then")
-                nodeLabel += splittedRule[1] + "<BR/>"
+                nodeStatList.append(splittedRule[1])
+            nodeStatDict["loserRules"] = nodeStatList
 
             lowerTimes = []
             higherTimes = []
@@ -109,45 +122,77 @@ class GraphGenerator:
                 if len(times) > 0 :
                     lowerTimes.append(float(times[0]))
                     higherTimes.append(float(times[1]))
-                else :
-                    archLabel += antecedent + "\n"
+                else:
+                    archList.append(antecedent)
 
             if lowerTimes and higherTimes :
                 maxLower = max(lowerTimes)
                 minHigher = min(higherTimes)
-                archLabel += "If time is between " + str(maxLower) + " and " + str(minHigher) + "\n"
+                archList.append("If time is between " + str(maxLower) + " and " + str(minHigher))
 
-            nodeLabel += "</TD></TR>"
-            nodeLabel += '<TR><TD BGCOLOR="black"><FONT COLOR="white" POINT-SIZE="18">TIME </FONT></TD></TR><TR><TD>' + str(state[1]) + " hours</TD></TR>"
-            nodeLabel += "</TABLE>>"
+
+            nodeStatDict["time"] = str(state[1])
 
             for duplicatedState in duplicatedStatesList:
-                if duplicatedState == nodeLabel:
+                if duplicatedState == str(nodeStatDict):
                     dupBool = True
                     break
 
             if dupBool :
-                id = duplicatedStatesIds[nodeLabel]
-                dot.edge(str(startingNodeIndex),str(id),str(archLabel))
+                id = duplicatedStatesIds[str(nodeStatDict)]
+                G.add_edge(startingNodeIndex,id,label = archList)
+
                 startingNodeIndex = id
                 dupBool = False
             else:
-                dot.node(str(endingNodeInded),nodeLabel)
-                dot.edge(str(startingNodeIndex),str(endingNodeInded),str(archLabel))
-                duplicatedStatesIds[nodeLabel] = endingNodeInded
-                duplicatedStatesList.append(nodeLabel)
+                G.add_node(endingNodeInded,nodeStatDict)
+
+                G.add_edge(startingNodeIndex,endingNodeInded,label = archList)
+
+                duplicatedStatesIds[str(nodeStatDict)] = endingNodeInded
+                duplicatedStatesList.append(str(nodeStatDict))
                 startingNodeIndex = endingNodeInded
                 endingNodeInded+=1
             archIndex += 1
 
-        if not os.path.exists("tools/simulation/graphs/"+roomName): os.makedirs("tools/simulation/graphs/"+roomName)
-        dot.render("tools/simulation/graphs/" + roomName + '/room-graph',view=True)
-        response = {}
+        if not os.path.exists("tools/simulation/graphs/"+buildingName+"/"+roomName): os.makedirs("tools/simulation/graphs/"+buildingName+"/"+roomName)
+        nx.write_gpickle(G,"tools/simulation/graphs/"+buildingName+"/" + roomName + "/room-graph_node.pickle")
 
-        import base64
-        with open("tools/simulation/graphs/" + roomName + "/room-graph.png", "rb") as image_file:
-            response["image"] = base64.b64encode(image_file.read())
-        return response
+    def fromNodeToActuatorsState(self,buildingName,roomName):
+        G = nx.read_gpickle("tools/simulation/graphs/" +buildingName+"/"+ roomName + "/room-graph_node.pickle")
+
+        G2 = nx.DiGraph()
+
+        identicalActuatorsStates = {}
+        identicalActuatorsStates[-1] = -1
+        for n in G.nodes():
+            for n2 in G.nodes():
+                if G.node[n] and G.node[n2]:
+                    actuatorsStateN = G.node[n]["actuatorsState"]
+                    actuatorsStateN2 = G.node[n2]["actuatorsState"]
+                    if set(actuatorsStateN) == set(actuatorsStateN2):
+                        #UNION OF THE ACTIVE RULES IN THE OVERALL STATE
+                        G.node[n]["activeRules"] = list(set.union(set(G.node[n]["activeRules"]),set(G.node[n2]["activeRules"])))
+                        #INTERSECTION OF THE LOSER RULES IN THE OVERALL STATE
+                        G.node[n]["loserRules"] = list(set.intersection(set(G.node[n]["loserRules"]),set(G.node[n2]["loserRules"])))
+                        if n2 not in identicalActuatorsStates:
+                            identicalActuatorsStates[n2] = n
+            if G.node[n]:
+                if identicalActuatorsStates[n] == n :
+                    G2.add_node(n,actuatorsState = G.node[n]["actuatorsState"],activeRules=G.node[n]["activeRules"],loserRules = G.node[n]["loserRules"])
+            else:
+                G2.add_node(n)
+
+        for e in G.edges() :
+            archList = G.edge[e[0]][e[1]]["label"]
+            if identicalActuatorsStates[e[0]] != identicalActuatorsStates[e[1]]:
+                G2.add_edge(identicalActuatorsStates[e[0]],identicalActuatorsStates[e[1]],label=archList)
+
+        print identicalActuatorsStates
+
+        if not os.path.exists("tools/simulation/graphs/"+buildingName+"/"+roomName): os.makedirs("tools/simulation/graphs/"+buildingName+"/"+roomName)
+        nx.write_gpickle(G2,"tools/simulation/graphs/"+buildingName+"/" + roomName + "/room-graph_actuatorsState.pickle")
+
 
 
     def fetchDataFromJSON(self,roomName):
@@ -170,3 +215,74 @@ class GraphGenerator:
         else:
             strHour = strHour + ":00"
         return strHour
+
+    def drawGraphForRoom(self,roomName,buildingName,username,type):
+        buildingsManager = BuildingsManager()
+        buildingsManager.checkUserBinding(buildingName, username)
+
+        G = nx.read_gpickle("tools/simulation/graphs/" +buildingName+"/"+ roomName + "/room-graph_" + type + ".pickle")
+        dot = Digraph(comment='Room Graph',format="png")
+
+        dot.body.extend(['rankdir=LR'])
+
+        dot.attr("node",shape="plaintext")
+
+        for n in G.nodes():
+        #prendo info nodo
+
+            if G.node[n]:
+                nodeLabel = '<<TABLE BORDER="2" CELLBORDER="1" CELLSPACING="10">'
+
+                if "actuatorsState" in G.node[n]:
+                    actuatorsState = G.node[n]["actuatorsState"]
+
+                    nodeLabel += '<TR><TD BGCOLOR="black"><FONT COLOR="white" POINT-SIZE="18">ACTUATORS STATE</FONT></TD></TR>'
+                    nodeLabel += '<TR><TD BGCOLOR="lightblue">'
+                    for actuators in actuatorsState:
+                        nodeLabel += actuators + "<BR/>"
+
+                    nodeLabel += "</TD></TR>"
+
+                if "activeRules" in G.node[n]:
+                    activeRules = G.node[n]["activeRules"]
+                    nodeLabel += '<TR><TD BGCOLOR="black"><FONT COLOR="white" POINT-SIZE="18">ACTIVE RULES</FONT></TD></TR>'
+                    nodeLabel += '<TR><TD BGCOLOR="#98FF98">' #green
+
+                    for rule in activeRules:
+                        nodeLabel += rule + "<BR/>"
+
+                    nodeLabel += "</TD></TR>"
+
+                if "loserRules" in G.node[n]:
+                    loserRules = G.node[n]["loserRules"]
+                    nodeLabel += '<TR><TD BGCOLOR="black"><FONT COLOR="white" POINT-SIZE="18">LOSER RULES</FONT></TD></TR>'
+                    nodeLabel += '<TR><TD BGCOLOR="#F75D59">' #red
+
+                    for rule in loserRules:
+                        nodeLabel += rule + "<BR/>"
+
+                    nodeLabel += "</TD></TR>"
+
+                if "time" in G.node[n]:
+                    time = G.node[n]["time"]
+                    nodeLabel += '<TR><TD BGCOLOR="black"><FONT COLOR="white" POINT-SIZE="18">TIME </FONT></TD></TR><TR><TD>' + time + " hours</TD></TR>"
+
+                nodeLabel += "</TABLE>>"
+
+                dot.node(str(n),nodeLabel)
+
+        for edge in G.edges():
+            archList = G.edge[edge[0]][edge[1]]["label"]
+            archLabel = ""
+            for arch in archList:
+                archLabel += arch + "\n"
+            dot.edge(str(edge[0]),str(edge[1]),archLabel)
+
+        dot.render("tools/simulation/graphs/"+buildingName+"/" + roomName + "/room-graph", view=True)
+
+        response = {}
+        import base64
+        with open("tools/simulation/graphs/" +buildingName+"/"+ roomName + "/room-graph.png", "rb") as image_file:
+            response["image"] = base64.b64encode(image_file.read())
+        return response
+

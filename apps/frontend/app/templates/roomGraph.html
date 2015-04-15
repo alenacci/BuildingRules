@@ -5,52 +5,59 @@
 
   {% if session.logged_in %}
 
-    <img id="graphImg" alt="Graph Image" src="{{url_for('static', filename='images/roomGraphs/')}}{{graphPath}}.png" data-zoom-image="{{url_for('static', filename='images/roomGraphs/')}}{{graphPath}}.png"/>
+
+    <img id="graphImg" alt="Graph Image" src="{{url_for('static', filename='images/roomGraphs/')}}{{graphPath}}.png"/>
+
     <div id="term"></div>
   {% endif %}
-                <script src="{{url_for('static', filename='js/jquery-1.8.3.min.js')}}"></script>
-    <script src="{{url_for('static', filename='js/jquery.elevatezoom.js')}}"></script>
-        <script src="{{url_for('static', filename='js/jquery.terminal-0.8.8.js')}}"></script>
+  <script src="{{url_for('static', filename='js/jquery-1.8.3.min.js')}}"></script>
+  <script src="{{url_for('static', filename='js/jquery.terminal-0.8.8.js')}}"></script>
   <script>
-     jQuery('#graphImg').elevateZoom({
-            zoomWindowPosition:6,
-             zoomWindowWidth:800,
-            zoomWindowHeight:500});
-    </script>
 
-    <script>
+
+
+     $(document).ready(function() {
+        $('#graphImg').click(function() {
+            window.open("{{url_for('static', filename='images/roomGraphs/')}}{{graphPath}}.png");
+        });
+    });
+
      jQuery(function($) {
     $('#term').terminal(function(command, term) {
         if (command !== '') {
-            try {
-                /*var result = window.eval(command);
-                if (result !== undefined) {
-                    term.echo(new String(command));
-
-                }*/
-                if (command == 'refresh'){
-                    refreshImage();
-                }
-            } catch(e) {
-                term.error(new String(e));
+            if (command == 'editGraph -t identicalNode'){
+                changeGraphType("node");
+            }
+            else if (command == 'editGraph -t actuatorsState'){
+                changeGraphType("actuatorsState");
+            }
+            else {
+                term.error(new String("Command unknown"));
             }
         } else {
            term.echo('');
         }
     }, {
-        greetings: 'Javascript Interpreter',
+        greetings: 'BuildingRules Graph Navigator',
         name: 'js_demo',
+        onBlur: false,
         height: 200,
         prompt: 'js> '});
     });
-     function refreshImage() {
+
+     function changeGraphType(type) {
          $.ajax({
-             type: 'GET',
+             type: 'POST',
              cache: false,
+             data:{graphType:type},
              url: "{{request.path}}/update",
              success: function (resp) {
                  var json = JSON.parse(resp);
-                 $('#graphImg').attr('src', "{{url_for('static', filename='images/roomGraphs/')}}" + json["graphPath"] + ".png");
+                 d = new Date();
+
+
+                 $('#graphImg').attr({'src':"{{url_for('static', filename='images/roomGraphs/')}}" + json["graphPath"] + ".png?"+ d.getTime(),
+                 'data-zoom-image': "{{url_for('static', filename='images/roomGraphs/')}}" + json["graphPath"] + ".png?"+ d.getTime()});
              }
          });
      }
