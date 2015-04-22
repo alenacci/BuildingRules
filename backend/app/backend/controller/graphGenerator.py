@@ -1,3 +1,4 @@
+from app.backend.controller.buildingSimulator import BuildingSimulator
 from app.backend.controller.buildingsManager import BuildingsManager
 
 __author__ = 'jacopo'
@@ -37,6 +38,10 @@ class GraphGenerator:
 
 
     def createGraphIdenticalNode(self, buildingName=None, roomName=None):
+
+        buildingSimulator = BuildingSimulator(occupancyTimeRangeFrom="8:00AM", occupancyTimeRangeTo="6:00PM", buildingName=buildingName, startDate="2014-09-15", numberOfDays=1,
+                                              roomFilter=roomName)
+        buildingSimulator.start()
 
         roomData = self.fetchDataFromJSON(roomName)
         losersData = self.fetchLosersFromJSON(roomName)
@@ -232,6 +237,7 @@ class GraphGenerator:
 
             if G.node[n]:
                 nodeLabel = '<<TABLE BORDER="2" CELLBORDER="1" CELLSPACING="10">'
+                nodeLabel += '<TR><TD BGCOLOR="white"><FONT COLOR="black" POINT-SIZE="18">STATE ID: ' + str(n) +'</FONT></TD></TR>'
 
                 if "actuatorsState" in G.node[n]:
                     actuatorsState = G.node[n]["actuatorsState"]
