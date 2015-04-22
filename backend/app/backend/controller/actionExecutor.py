@@ -74,7 +74,7 @@ class ActionExecutor:
 
         message = "Rule " + str(rule.id) + " (" + str(rule.buildingName)
 
-        flash(message + ") checking the '" + rule.antecedent + "'...", "gray")
+        #flash(message + ") checking the '" + rule.antecedent + "'...", "gray")
         for triggerInfo in translatedTriggers["triggers"]:
 
             trigger = triggerInfo["trigger"]
@@ -100,16 +100,16 @@ class ActionExecutor:
                         rule.triggers_returned_values = dict(driver.parameters['returnValues'].items() +
                                                              rule.triggers_returned_values.items())
 
-                    flash(message + ") the antecedent portion '" + trigger.ruleAntecedent + "' is TRUE...", "green")
+                    #flash(message + ") the antecedent portion '" + trigger.ruleAntecedent + "' is TRUE...", "green")
                 else:
-                    flash(message + ") the antecedent portion '" + trigger.ruleAntecedent + "' is FALSE...", "red")
-                    flash(message + ") NOT ACTUATED - the antecedent '" + rule.antecedent + "' is FALSE...", "red")
+                    #flash(message + ") the antecedent portion '" + trigger.ruleAntecedent + "' is FALSE...", "red")
+                    #flash(message + ") NOT ACTUATED - the antecedent '" + rule.antecedent + "' is FALSE...", "red")
                     return False
             except Exception as e:
-                flash(message + ") error while reading the trigger! " + str(e), 'red')
+                #flash(message + ") error while reading the trigger! " + str(e), 'red')
                 return False
 
-        flash(message + ") ACTUATED the antecedent '" + rule.antecedent + "' is TRUE...", "green")
+        #flash(message + ") ACTUATED the antecedent '" + rule.antecedent + "' is TRUE...", "green")
         return True
 
 
@@ -134,7 +134,7 @@ class ActionExecutor:
         if rule.groupId: message += ".g[" + str(rule.groupId) + "]"
         if rule.roomName: message += ".r[" + str(rule.roomName) + "]"
 
-        flash(message + ") actuated; consequent is '" + rule.consequent + "'...")
+        #flash(message + ") actuated; consequent is '" + rule.consequent + "'...")
         try:
             driver.actuate()
         except Exception as e:
@@ -159,7 +159,7 @@ class ActionExecutor:
 
         analyzedRoomCounter = 0
 
-        flash("Starting the actuation process...", "yellow")
+        #flash("Starting the actuation process...", "yellow")
 
         buildings = Buildings()
         buildingsManager = BuildingsManager()
@@ -170,7 +170,7 @@ class ActionExecutor:
 
         for building in buildings.getAllBuildings():
 
-            flash("Working on buildings '" + building.buildingName + "'...", "blue")
+            #flash("Working on buildings '" + building.buildingName + "'...", "blue")
 
             triggeredRules = []
             triggeredRulesId = []
@@ -178,8 +178,8 @@ class ActionExecutor:
             # Getting all the triggered rules for the considered buildings
             buildingRules = building.getRules()
 
-            if len(buildingRules) == 0:
-                flash("Nothing to do...")
+            #if len(buildingRules) == 0:
+                #flash("Nothing to do...")
 
             if len(buildingRules):
                 for rule in buildingRules:
@@ -188,9 +188,9 @@ class ActionExecutor:
                     if only_real_time_triggers:
                         if not rule.hasRealTimeAntecedent():
                             continue
-                        else:
-                            flash("rule with realtime antecedent " + str(rule.id), "blue")
-                    ###
+                        #else:
+                            #flash("rule with realtime antecedent " + str(rule.id), "blue")
+
 
                     if rule.roomName and not rule.groupId:
 
@@ -221,8 +221,8 @@ class ActionExecutor:
                                 triggeredRules.append(newRule)
                                 triggeredRulesId.append(newRule.id)
 
-                flash(building.buildingName + " - Total rules: " + str(len(buildingRules)), "gray")
-                flash(building.buildingName + " - Triggered rules: " + str(len(triggeredRules)), "gray")
+                #flash(building.buildingName + " - Total rules: " + str(len(buildingRules)), "gray")
+                #flash(building.buildingName + " - Triggered rules: " + str(len(triggeredRules)), "gray")
 
 
                 # Now, let us partition rules among "Pure-Room-Rules" and "CRVG-Rules"
@@ -292,12 +292,12 @@ class ActionExecutor:
                         raise UnknownError(
                             "The rule with id " + rule.id + " has both the groupId and roomName field not null.")
 
-                flash(building.buildingName + " - Number of rooms: " + str(len(roomScheduledRules.keys())), "gray")
-                flash(building.buildingName + " - Number of CRV Groups: " + str(len(crvgScheduledRules.keys())), "gray")
+                #flash(building.buildingName + " - Number of rooms: " + str(len(roomScheduledRules.keys())), "gray")
+                #flash(building.buildingName + " - Number of CRV Groups: " + str(len(crvgScheduledRules.keys())), "gray")
 
                 actuatedRulesCounter = 0
 
-                flash("Executing actions for rooms...", "yellow")
+                #flash("Executing actions for rooms...", "yellow")
 
 
                 # Executing the rules per each room
@@ -305,7 +305,7 @@ class ActionExecutor:
                 loserRules = {}
                 loserRules[self.simulationParameters["time"]] = {}
                 for roomName in roomScheduledRules.keys():
-                    flash("Room [" + building.buildingName + "." + roomName + "]...", "blue")
+                    #flash("Room [" + building.buildingName + "." + roomName + "]...", "blue")
                     ruleList = roomScheduledRules[roomName]
                     #Let us order by rule priority
                     ruleList = sorted(ruleList, key=lambda rule: rule.getPriority(), reverse=True)
@@ -324,8 +324,8 @@ class ActionExecutor:
                             actuatedRulesCounter += 1
                             winnerRule = rule.id
                         else:
-                            flash(building.buildingName + " - Room " + roomName + ", ruleId " + str(
-                                rule.id) + " ignored.")
+                            #flash(building.buildingName + " - Room " + roomName + ", ruleId " + str(
+                                #rule.id) + " ignored.")
                             loserRulesList.append("if " + rule.antecedent + " then " + rule.consequent)
 
                     if not os.path.exists("tools/simulation/results/losers"):
@@ -343,9 +343,9 @@ class ActionExecutor:
                     out_file.write(json.dumps(tempJson,separators =(',', ':')))
                     out_file.close()
 
-                flash("Executing actions for CRV Groups...", "yellow")
+                #flash("Executing actions for CRV Groups...", "yellow")
                 for crvgId in crvgScheduledRules.keys():
-                    flash("Group " + building.buildingName + ".g[" + str(crvgId) + "]...", "blue")
+                    #flash("Group " + building.buildingName + ".g[" + str(crvgId) + "]...", "blue")
                     ruleList = crvgScheduledRules[crvgId]
 
                     #Let us order by rule priority
@@ -362,13 +362,13 @@ class ActionExecutor:
                                 rule.id) + " ignored.")
                             self.notifyIgnoredRule(rule)
 
-        flash("The actuation process is ended.", "yellow")
+        #flash("The actuation process is ended.", "yellow")
         endTimeMilliseconds = long((time.time() + 0.5) * 1000)
         opTimeMilliseconds = endTimeMilliseconds - startTimeMilliseconds
-        flash("RunTimeRuleActuation:::RoomFilter=" + str(self.roomFilter) + "::Time=" + str(
-            opTimeMilliseconds) + "::NumberOfRules:" + str(analyzedRoomCounter) + "::TriggeredRules:" + str(
-            len(triggeredRules)) + "::ActuatedRules:" + str(actuatedRulesCounter) + "::IgnoredRules:" + str(
-            len(triggeredRules) - actuatedRulesCounter))
+        #flash("RunTimeRuleActuation:::RoomFilter=" + str(self.roomFilter) + "::Time=" + str(
+            #opTimeMilliseconds) + "::NumberOfRules:" + str(analyzedRoomCounter) + "::TriggeredRules:" + str(
+            #len(triggeredRules)) + "::ActuatedRules:" + str(actuatedRulesCounter) + "::IgnoredRules:" + str(
+            #len(triggeredRules) - actuatedRulesCounter))
 
     def __str__(self):
         return "ActionExecutor: "

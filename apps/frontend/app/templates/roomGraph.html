@@ -18,7 +18,7 @@
 
      $(document).ready(function() {
         $('#graphImg').click(function() {
-            window.open("{{url_for('static', filename='images/roomGraphs/')}}{{graphPath}}.png");
+            window.open("{{url_for('static', filename='images/roomGraphs/')}}{{graphPath}}.png?"+ d.getTime());
         });
     });
 
@@ -56,8 +56,7 @@
                  d = new Date();
 
 
-                 $('#graphImg').attr({'src':"{{url_for('static', filename='images/roomGraphs/')}}" + json["graphPath"] + ".png?"+ d.getTime(),
-                 'data-zoom-image': "{{url_for('static', filename='images/roomGraphs/')}}" + json["graphPath"] + ".png?"+ d.getTime()});
+                 $('#graphImg').attr({'src':"{{url_for('static', filename='images/roomGraphs/')}}" + json["graphPath"] + ".png?"+ d.getTime()});
              }
          });
      }
