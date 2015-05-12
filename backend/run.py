@@ -26,6 +26,9 @@ def startMailService():
 def startDatabaseDumper():
 	os.system("python runDatabaseDumper.py")
 
+def startThorSimulator():
+	os.system("python runThorSimulator.py")
+
 
 ### MAIN STARTS HERE
 
@@ -39,10 +42,13 @@ mailServiceThread = Thread(target = startMailService)
 #mailServiceThread.start()
 
 databaseDumperThread = Thread(target = startDatabaseDumper)
-databaseDumperThread.start()
+#databaseDumperThread.start()
 
 deamonThread = Thread(target = startDeamon)
 deamonThread.start()
+
+thorSimulatorThread = Thread(target = startThorSimulator())
+thorSimulatorThread.start()
 
 realTimeThread = Thread(target = startRealTimeExecutor())
 realTimeThread.start()

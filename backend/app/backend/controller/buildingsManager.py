@@ -35,7 +35,7 @@ class BuildingsManager:
 		buildingList = []
 
 		for building in buildings.getAllBuildings():
-			buildingList.append(building.getDic())
+			buildingList.append(building.getDict())
 
 		return {"buildings" : buildingList}
 
