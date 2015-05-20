@@ -124,7 +124,7 @@ class GraphGenerator:
                         for item in categoryState.items():
                             stateUniqueId.append(item[0]+item[1])
                         for item in activeRules:
-                            stateUniqueId.append(item["ruleText"])
+                            stateUniqueId.append(item["ruleText"].strip().split("then")[1])
 
                         statesList.append((activeRules,count,loserRulesGlobalList,categoryState.copy(),restartNode,sorted(stateUniqueId)))
                         restartNode = False
