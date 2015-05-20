@@ -6,14 +6,23 @@ class GraphAnalyzer:
         pass
 
     def analyzeAll(self,buildingName, roomName):
-        self.analyzeLoserRules(buildingName,roomName)
+        returnInfo = {}
+        returnInfo["uselessRules"] = self.analyzeLoserRules(buildingName,roomName)
+        return returnInfo
 
     def analyzeLoserRules(self, buildingName, roomName):
         G = self.readFromMinBbg(buildingName,roomName)
-        loserRules = []
+        loserRules = set()
         for n in G.nodes():
-            print G.node[n]["loserRules"]
-        return
+            if "loserRules" in G.node[n]:
+                for loserRule in G.node[n]["loserRules"]:
+                    loserRules.add(str(loserRule["ruleId"]))
+        for n in G.nodes():
+            if "activeRules" in G.node[n]:
+                for activeRule in G.node[n]["activeRules"]:
+                    if str(activeRule["ruleId"]) in loserRules:
+                        loserRules.remove(activeRule["ruleId"])
+        return list(loserRules)
 
     def readFromBbg(self, buildingName, roomName):
         return nx.read_gpickle("tools/simulation/graphs/" +buildingName+"/"+ roomName + "/room-graph_node.pickle")

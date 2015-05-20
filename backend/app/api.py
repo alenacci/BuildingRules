@@ -1087,10 +1087,10 @@ def graphAnalyzer(username=None, buildingName=None, roomName=None):
             session.checkSessionValidity(sessionKey, userUuid)
             graphAnalyzer = GraphAnalyzer()
 
-            resp = {}
+            resp = ""
             if analyzeType == "all":
                 resp = graphAnalyzer.analyzeAll(buildingName = buildingName,roomName=roomName)
-
+                print "API:"+ str(resp)
             return returnResult(resp)
         except Exception as e:
             return returnError(e)

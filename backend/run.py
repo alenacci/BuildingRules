@@ -48,7 +48,7 @@ deamonThread = Thread(target = startDeamon)
 deamonThread.start()
 
 thorSimulatorThread = Thread(target = startThorSimulator())
-thorSimulatorThread.start()
+#thorSimulatorThread.start()
 
 realTimeThread = Thread(target = startRealTimeExecutor())
 realTimeThread.start()

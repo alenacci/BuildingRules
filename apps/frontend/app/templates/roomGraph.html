@@ -32,7 +32,8 @@
                 changeGraphType("actuatorsState");
             }
             else if (command == 'analyze -all'){
-                analyze("all");
+
+                analyze("all", term);
             }
             else {
                 term.error(new String("Command unknown"));
@@ -64,15 +65,17 @@
          });
      }
 
-     function analyze(type) {
+     function analyze(type, term) {
+         term.error(new String("appena dentro la funzione"));
          $.ajax({
              type: 'POST',
              cache: false,
              data:{analyzeType:type},
              url: "{{request.path}}/update",
              success: function (resp) {
-                 var json = JSON.parse(resp);
-                 term.echo(json);
+                 var json1 = JSON.parse(resp);
+                 term.error(new String("dentro ajax!"));
+
 
              }
          });

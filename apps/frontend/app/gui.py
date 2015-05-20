@@ -507,6 +507,7 @@ def graphUpdate(buildingName=None, roomName=None):
                                 'userUuid': session["userUuid"],
                                 'analyzeType' : analyzeType
                             })
+            print "GUI:"+str(response)
             return jsonify(results = response)
         type = request.form["graphType"]
     #get all the room information

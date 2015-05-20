@@ -191,10 +191,8 @@ class GraphGenerator:
             #nodeStatDict["time"] = str(state[1])
 
             for duplicatedState in duplicatedStatesList:
-                print str(duplicatedState) +  "===\n" + str(state[5])
                 if duplicatedState == str(state[5]):
                     dupBool = True
-                    print "Uguale"
                     break
 
             if state[4] :
