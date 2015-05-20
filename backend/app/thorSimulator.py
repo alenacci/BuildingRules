@@ -1,6 +1,10 @@
 import os
 import math
+import urllib2
+import datetime
+import time
 from flask import json
+import matplotlib.pyplot as plt
 
 from app.backend.controller.buildingsManager import BuildingsManager
 
@@ -31,10 +35,23 @@ def start():
 
     internalTempDict = {}
 
+    restReadDone = False
+    try:
+        url = 'http://api.openweathermap.org/data/2.5/forecast?q=Milano,it&units=Imperial'
+        response = urllib2.urlopen(url).read()
+        restReadDone = True
+    except Exception as e:
+        print(e.message)
+
+    if restReadDone:
+
+        if not os.path.exists("tools/simulation/ThorSim/"):
+            os.makedirs("tools/simulation/ThorSim/")
 
 
-
-
+        out_file = open("tools/simulation/ThorSim/weather.json","w")
+        out_file.write(response)
+        out_file.close()
 
 
     for building in buildings["buildings"]:
@@ -62,9 +79,22 @@ def start():
                 transientDurationHvac = 0
                 transientExpCoefHvac=0.0
 
+                intTempGraphValues = []
+                extTempGraphValues = []
+                hvacTempGraphValues = []
+                xValues = []
+                hourGraph = 0
+
+                extTemp = 40
+                firstOpened = True
+                firstClosed = True
+                day = 1
                 for simulation in roomData.items():
+                    print simulation
                     for hour in range(0,24,1):
-                        extTemp = getExtTemp(building["buildingName"], hour)
+                        temp = getExtTemp(day,hour)
+                        if temp != "":
+                            extTemp = int(temp)
 
                         for category in simulation[1]["simulation"].items() :
                             for ruleDetail in category[1]:
@@ -118,11 +148,45 @@ def start():
                         saveData["hvac"] = hvacTemp
                         saveData["intTemp"] = intTemp
                         saveData["extTemp"] = extTemp
-                        internalTempDict[hour] = saveData
+                        internalTempDict[hourGraph + hour] = saveData
+                        xValues.append(hourGraph + hour)
+                        intTempGraphValues.append(intTemp)
+                        extTempGraphValues.append(extTemp)
+                        hvacTempGraphValues.append(hvacTemp)
 
+                        if (hourGraph + hour != 0) :
+                            if internalTempDict[hourGraph + hour - 1]["windows"] != internalTempDict[hourGraph + hour]["windows"] :
+
+
+                                if internalTempDict[hourGraph + hour - 1]["windows"] == "OPEN" :
+                                    if firstOpened :
+                                        firstOpened = False
+                                        plt.axvline(x=hourGraph + hour-1,linestyle="dotted",color="red",label ="Windows Closed")
+                                    else :
+                                        plt.axvline(x=hourGraph + hour-1,linestyle="dotted",color="red")
+
+                                else :
+                                    if firstClosed :
+                                        firstClosed= False
+                                        plt.axvline(x=hourGraph + hour-1,linestyle="dotted",color="green",label ="Windows Opened")
+                                    else:
+                                        plt.axvline(x=hourGraph + hour-1,linestyle="dotted",color="green")
+
+                    hourGraph += 24
+                    day += 1
+                plt.plot(xValues,intTempGraphValues,label="intTemp")
+                plt.plot(xValues,extTempGraphValues,label="extTemp")
+                plt.plot(xValues,hvacTempGraphValues,label="hvacTemp",linestyle = "dashed")
+                plt.legend(loc="lower right")
+                plt.title(building["buildingName"]+" - "+room["roomName"])
+                plt.xlabel("Time [h]")
+                plt.ylabel("Temperature [F]")
+                plt.savefig("tools/simulation/ThorSim/"+building["buildingName"]+"/"+room["roomName"]+ "/ThorSimResultsGraph.png")
+                plt.close()
                 jsonResultsPath = "tools/simulation/ThorSim/"+building["buildingName"]+"/"+room["roomName"]+ "/ThorSimResultsData.json"
                 outputResults = open(jsonResultsPath,'wb')
                 json.dump(internalTempDict,outputResults)
+
 
 
 
@@ -137,5 +201,24 @@ def fetchDataFromJSON(roomName):
         return ""
 
 
-def getExtTemp(buildingName, hour):
-    return 40
+def getExtTemp(day,hour):
+    if os.path.exists("tools/simulation/ThorSim/weather.json"):
+        in_file = open("tools/simulation/ThorSim/weather.json","r")
+        in_data = json.load(in_file)
+        for record in in_data["list"]:
+            if record["dt_txt"] == strTime(day,hour):
+                return record["main"]["temp"]
+        return ""
+
+def strTime(day,hour):
+    currentDateTime = datetime.datetime.today() + datetime.timedelta(days=day)
+    currentDateTime = currentDateTime.strftime("%Y-%m-%d")
+    strHour = str(hour)
+    if len(strHour) == 1:
+        strHour = "0" + str(hour)
+
+    currentDateTimeStr = str(currentDateTime)
+
+    currentDateTimeStr += " " + strHour + ":00:00"
+
+    return currentDateTimeStr

@@ -1,5 +1,7 @@
-from app.backend.controller.buildingSimulator import BuildingSimulator
+from random import randint
 from app.backend.controller.buildingsManager import BuildingsManager
+from app.backend.controller.roomSimulator import RoomSimulator
+from app.backend.controller.roomsManager import RoomsManager
 
 __author__ = 'jacopo'
 
@@ -39,54 +41,101 @@ class GraphGenerator:
 
     def createGraphIdenticalNode(self, buildingName=None, roomName=None):
 
-        buildingSimulator = BuildingSimulator(occupancyTimeRangeFrom="8:00AM", occupancyTimeRangeTo="6:00PM", buildingName=buildingName, startDate="2014-09-15", numberOfDays=1,
-                                              roomFilter=roomName)
-        buildingSimulator.start()
+        days=["2014-09-15"]
 
-        roomData = self.fetchDataFromJSON(roomName)
-        losersData = self.fetchLosersFromJSON(roomName)
-        oldActiveRulesText = []
-        simulation=["2014-09-15"]
+        roomsManager = RoomsManager()
 
+        rules = roomsManager.getRules(roomName=roomName,buildingName=buildingName)["rules"]
+        temperatureSet = set()
+        minTemperature = 10000
+
+        for rule in rules:
+            if "antecedent" in rule:
+                antecedent = rule["antecedent"]
+                temperatures = re.findall("room temperature is between ([0-9]{2})F and ([0-9]{2})F",antecedent)
+                if len(temperatures) > 0:
+
+                    if int(temperatures[0][0])<minTemperature :
+                        minTemperature = int(temperatures[0][0])
+                    temperatureSet.add(temperatures[0])
+
+        externalTemperature = minTemperature - 1
+
+        internalTemperatures = set()
+
+        for temperatures in temperatureSet:
+            internalTemperatures.add(int(temperatures[0]))
+            internalTemperatures.add(int(temperatures[1]))
+
+        internalTemperatures = sorted(internalTemperatures)
+
+
+        simulationTemps = set()
+        for i in range(0,len(internalTemperatures)-1):
+            simulationTemp = randint(internalTemperatures[i],internalTemperatures[i+1])
+            simulationTemps.add(simulationTemp)
+
+        simulationTemps.add(externalTemperature)
+        simulationTemps = sorted(simulationTemps)
+
+
+        simulationResult = {}
         statesList = []
-        categoryState = {}
-        count = 0
+        for day in days:
 
-        for data in simulation:
-            loserRulesSet = set()
-            for hour in range(0,24,1):
-                activeRules = []
-                activeRulesText = []
-                strHour = self.convertIntToHour(hour)
-                for category in roomData[data]["simulation"].items() :
-                    for activation in category[1]:
-                        if float(activation["from"].replace(":",".")) <= hour <= float(activation["to"].replace(":",".")) :
-                            activeRules.append(activation)
-                            activeRulesText.append(activation["ruleText"])
-                            categoryState[category[0]] = activation["status"]
 
-                count += 1
-                if strHour in losersData:
-                    losersDataHour = losersData[strHour]
 
-                    for rule in activeRules:
-                        if rule["ruleId"] in losersDataHour:
-                            loserRulesList = losersDataHour[rule["ruleId"]]
-                            for loserRule in loserRulesList:
-                                loserRulesSet.add(loserRule)
+            count = 0
+            for intTemp in simulationTemps:
+                restartNode = True
+                roomSimulator = RoomSimulator(occupancyTimeRangeFrom="8:00AM",occupancyTimeRangeTo="6:00PM",buildingName = buildingName, roomName = roomName, currentDate = day,roomTemperature=str(intTemp)+"F")
+                simulationResult[day] = roomSimulator.start()
 
-                if set(oldActiveRulesText) != set(activeRulesText) :
-                    oldActiveRulesText = activeRulesText
-                    statesList.append((activeRules,count,loserRulesSet,categoryState.copy()))
-                    loserRulesSet = set()
-                    count = 0
+
+                losersData = self.fetchLosersFromJSON(roomName)
+
+                loserRulesSet = set()
+                categoryState = {}
+                oldActiveRulesText = []
+                for hour in range(0,24,1):
+                    activeRules = []
+                    activeRulesText = []
+                    strHour = self.convertIntToHour(hour)
+                    for category in simulationResult[day]["simulation"].items() :
+                        for activation in category[1]:
+                            if float(activation["from"].replace(":",".")) <= hour <= float(activation["to"].replace(":",".")) :
+                                activeRules.append(activation)
+                                activeRulesText.append(activation["ruleText"])
+                                categoryState[category[0]] = activation["status"]
+
+                    count += 1
+                    if strHour in losersData:
+                        losersDataHour = losersData[strHour]
+
+                        for rule in activeRules:
+                            if rule["ruleId"] in losersDataHour:
+                                loserRulesList = losersDataHour[rule["ruleId"]]
+                                for loserRule in loserRulesList:
+                                    loserRulesSet.add(loserRule)
+
+                    if set(oldActiveRulesText) != set(activeRulesText) :
+                        oldActiveRulesText = activeRulesText
+                        statesList.append((activeRules,count,loserRulesSet,categoryState.copy(),restartNode))
+                        restartNode = False
+                        loserRulesSet = set()
+                        count = 0
+
+
+        if not os.path.exists("tools/simulation/results/"): os.makedirs("tools/simulation/results/")
+        out_file = open("tools/simulation/results/" + roomName + ".json","w")
+        out_file.write(json.dumps(simulationResult, separators=(',', ':')))
+        out_file.close()
+
 
         G = nx.DiGraph()
 
         endingNodeInded = 0
         startingNodeIndex = -1
-
-        archIndex = 0
 
         duplicatedStatesList = []
         duplicatedStatesIds = {}
@@ -98,11 +147,10 @@ class GraphGenerator:
 
             nodeStatList = []
             archList = []
-            archList.append(str(archIndex))
             for actuators in state[3].items():
 
                 nodeStatList.append(actuators[0]+": " + actuators[1])
-            nodeStatDict["actuatorsState"] = nodeStatList
+            nodeStatDict["actuatorsState"] = sorted(nodeStatList)
 
             antecedentSet = set()
             nodeStatList = []
@@ -110,18 +158,17 @@ class GraphGenerator:
                 splittedRule = rule["ruleText"].strip().split("then")
                 antecedentSet.add(splittedRule[0])
                 nodeStatList.append(splittedRule[1])
-            nodeStatDict["activeRules"] = nodeStatList
+            nodeStatDict["activeRules"] = sorted(nodeStatList)
 
             nodeStatList = []
             for rule in state[2]:
                 splittedRule = rule.strip().split("then")
                 nodeStatList.append(splittedRule[1])
-            nodeStatDict["loserRules"] = nodeStatList
+            nodeStatDict["loserRules"] = sorted(nodeStatList)
 
             lowerTimes = []
             higherTimes = []
-            maxLower = 0
-            minHigher = 0
+
             for antecedent in antecedentSet:
                 times = re.findall("[0-9]{2}.[0-9]{2}",antecedent)
                 if len(times) > 0 :
@@ -136,29 +183,44 @@ class GraphGenerator:
                 archList.append("If time is between " + str(maxLower) + " and " + str(minHigher))
 
 
-            nodeStatDict["time"] = str(state[1])
+            #nodeStatDict["time"] = str(state[1])
 
             for duplicatedState in duplicatedStatesList:
                 if duplicatedState == str(nodeStatDict):
                     dupBool = True
                     break
 
+            if state[4] :
+                startingNodeIndex = -1
+
             if dupBool :
                 id = duplicatedStatesIds[str(nodeStatDict)]
-                G.add_edge(startingNodeIndex,id,label = archList)
 
+                oldLabel = G.get_edge_data(startingNodeIndex,id)
+                if oldLabel != None:
+                    if oldLabel["label"] != None:
+                        sortedOldLabel = sorted(oldLabel["label"])
+                        label = oldLabel["label"]
+                        if (sorted(archList) != sortedOldLabel):
+                            label.append("OR")
+                            for item in archList:
+                                label.append(item)
+                    else:
+                        label = archList
+                else:
+                    label = archList
+                G.add_edge(startingNodeIndex,id,label = label)
                 startingNodeIndex = id
                 dupBool = False
             else:
                 G.add_node(endingNodeInded,nodeStatDict)
-
                 G.add_edge(startingNodeIndex,endingNodeInded,label = archList)
 
                 duplicatedStatesIds[str(nodeStatDict)] = endingNodeInded
                 duplicatedStatesList.append(str(nodeStatDict))
                 startingNodeIndex = endingNodeInded
                 endingNodeInded+=1
-            archIndex += 1
+
 
         if not os.path.exists("tools/simulation/graphs/"+buildingName+"/"+roomName): os.makedirs("tools/simulation/graphs/"+buildingName+"/"+roomName)
         nx.write_gpickle(G,"tools/simulation/graphs/"+buildingName+"/" + roomName + "/room-graph_node.pickle")
@@ -193,7 +255,7 @@ class GraphGenerator:
             if identicalActuatorsStates[e[0]] != identicalActuatorsStates[e[1]]:
                 G2.add_edge(identicalActuatorsStates[e[0]],identicalActuatorsStates[e[1]],label=archList)
 
-        print identicalActuatorsStates
+        #print identicalActuatorsStates
 
         if not os.path.exists("tools/simulation/graphs/"+buildingName+"/"+roomName): os.makedirs("tools/simulation/graphs/"+buildingName+"/"+roomName)
         nx.write_gpickle(G2,"tools/simulation/graphs/"+buildingName+"/" + roomName + "/room-graph_actuatorsState.pickle")
@@ -280,6 +342,7 @@ class GraphGenerator:
         for edge in G.edges():
             archList = G.edge[edge[0]][edge[1]]["label"]
             archLabel = ""
+            #print archList
             for arch in archList:
                 archLabel += arch + "\n"
             dot.edge(str(edge[0]),str(edge[1]),archLabel)

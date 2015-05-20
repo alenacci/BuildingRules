@@ -22,7 +22,7 @@ class Test:
     def test7(self):
         print "start test!"
         from app.backend.controller.buildingSimulator import BuildingSimulator
-        buildingSimulator = BuildingSimulator(occupancyTimeRangeFrom="8:00AM", occupancyTimeRangeTo="6:00PM", buildingName="CSE", startDate="2014-09-15", numberOfDays=1,
+        buildingSimulator = BuildingSimulator(occupancyTimeRangeFrom="8:00AM", occupancyTimeRangeTo="6:00PM", buildingName="CSE", startDate="2014-09-15", numberOfDays=2,
                                               roomFilter=None)
         buildingSimulator.start()
 
