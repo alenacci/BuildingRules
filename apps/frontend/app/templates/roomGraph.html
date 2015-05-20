@@ -31,6 +31,9 @@
             else if (command == 'editGraph -t actuatorsState'){
                 changeGraphType("actuatorsState");
             }
+            else if (command == 'analyze -all'){
+                analyze("all");
+            }
             else {
                 term.error(new String("Command unknown"));
             }
@@ -57,6 +60,20 @@
 
 
                  $('#graphImg').attr({'src':"{{url_for('static', filename='images/roomGraphs/')}}" + json["graphPath"] + ".png?"+ d.getTime()});
+             }
+         });
+     }
+
+     function analyze(type) {
+         $.ajax({
+             type: 'POST',
+             cache: false,
+             data:{analyzeType:type},
+             url: "{{request.path}}/update",
+             success: function (resp) {
+                 var json = JSON.parse(resp);
+                 term.echo(json);
+
              }
          });
      }

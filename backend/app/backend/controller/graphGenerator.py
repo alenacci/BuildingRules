@@ -82,19 +82,16 @@ class GraphGenerator:
         simulationResult = {}
         statesList = []
         for day in days:
-
-
-
             count = 0
+
             for intTemp in simulationTemps:
                 restartNode = True
                 roomSimulator = RoomSimulator(occupancyTimeRangeFrom="8:00AM",occupancyTimeRangeTo="6:00PM",buildingName = buildingName, roomName = roomName, currentDate = day,roomTemperature=str(intTemp)+"F")
                 simulationResult[day] = roomSimulator.start()
 
-
                 losersData = self.fetchLosersFromJSON(roomName)
 
-                loserRulesSet = set()
+                loserRulesGlobalList = []
                 categoryState = {}
                 oldActiveRulesText = []
                 for hour in range(0,24,1):
@@ -116,13 +113,22 @@ class GraphGenerator:
                             if rule["ruleId"] in losersDataHour:
                                 loserRulesList = losersDataHour[rule["ruleId"]]
                                 for loserRule in loserRulesList:
-                                    loserRulesSet.add(loserRule)
+                                    if loserRule not in loserRulesGlobalList:
+                                        loserRulesGlobalList.append(loserRule)
 
                     if set(oldActiveRulesText) != set(activeRulesText) :
+                        stateUniqueId = []
                         oldActiveRulesText = activeRulesText
-                        statesList.append((activeRules,count,loserRulesSet,categoryState.copy(),restartNode))
+                        for item in loserRulesGlobalList:
+                            stateUniqueId.append(item["ruleText"])
+                        for item in categoryState.items():
+                            stateUniqueId.append(item[0]+item[1])
+                        for item in activeRules:
+                            stateUniqueId.append(item["ruleText"])
+
+                        statesList.append((activeRules,count,loserRulesGlobalList,categoryState.copy(),restartNode,sorted(stateUniqueId)))
                         restartNode = False
-                        loserRulesSet = set()
+                        loserRulesGlobalList = []
                         count = 0
 
 
@@ -157,13 +163,12 @@ class GraphGenerator:
             for rule in state[0]:
                 splittedRule = rule["ruleText"].strip().split("then")
                 antecedentSet.add(splittedRule[0])
-                nodeStatList.append(splittedRule[1])
+                nodeStatList.append(rule)
             nodeStatDict["activeRules"] = sorted(nodeStatList)
 
             nodeStatList = []
             for rule in state[2]:
-                splittedRule = rule.strip().split("then")
-                nodeStatList.append(splittedRule[1])
+                nodeStatList.append(rule)
             nodeStatDict["loserRules"] = sorted(nodeStatList)
 
             lowerTimes = []
@@ -186,15 +191,17 @@ class GraphGenerator:
             #nodeStatDict["time"] = str(state[1])
 
             for duplicatedState in duplicatedStatesList:
-                if duplicatedState == str(nodeStatDict):
+                print str(duplicatedState) +  "===\n" + str(state[5])
+                if duplicatedState == str(state[5]):
                     dupBool = True
+                    print "Uguale"
                     break
 
             if state[4] :
                 startingNodeIndex = -1
 
             if dupBool :
-                id = duplicatedStatesIds[str(nodeStatDict)]
+                id = duplicatedStatesIds[str(state[5])]
 
                 oldLabel = G.get_edge_data(startingNodeIndex,id)
                 if oldLabel != None:
@@ -216,8 +223,8 @@ class GraphGenerator:
                 G.add_node(endingNodeInded,nodeStatDict)
                 G.add_edge(startingNodeIndex,endingNodeInded,label = archList)
 
-                duplicatedStatesIds[str(nodeStatDict)] = endingNodeInded
-                duplicatedStatesList.append(str(nodeStatDict))
+                duplicatedStatesIds[str(state[5])] = endingNodeInded
+                duplicatedStatesList.append(str(state[5]))
                 startingNodeIndex = endingNodeInded
                 endingNodeInded+=1
 
@@ -239,9 +246,17 @@ class GraphGenerator:
                     actuatorsStateN2 = G.node[n2]["actuatorsState"]
                     if set(actuatorsStateN) == set(actuatorsStateN2):
                         #UNION OF THE ACTIVE RULES IN THE OVERALL STATE
-                        G.node[n]["activeRules"] = list(set.union(set(G.node[n]["activeRules"]),set(G.node[n2]["activeRules"])))
+                        for rule in G.node[n2]["activeRules"]:
+                            if rule not in G.node[n]["activeRules"]:
+                                G.node[n]["activeRules"].append(rule)
+
                         #INTERSECTION OF THE LOSER RULES IN THE OVERALL STATE
-                        G.node[n]["loserRules"] = list(set.intersection(set(G.node[n]["loserRules"]),set(G.node[n2]["loserRules"])))
+                        supportList = []
+                        for rule in G.node[n2]["loserRules"]:
+                            if rule in G.node[n]["loserRules"]:
+                                supportList.append(rule)
+                        G.node[n]["loserRules"] = list(supportList)
+
                         if n2 not in identicalActuatorsStates:
                             identicalActuatorsStates[n2] = n
             if G.node[n]:
@@ -254,8 +269,6 @@ class GraphGenerator:
             archList = G.edge[e[0]][e[1]]["label"]
             if identicalActuatorsStates[e[0]] != identicalActuatorsStates[e[1]]:
                 G2.add_edge(identicalActuatorsStates[e[0]],identicalActuatorsStates[e[1]],label=archList)
-
-        #print identicalActuatorsStates
 
         if not os.path.exists("tools/simulation/graphs/"+buildingName+"/"+roomName): os.makedirs("tools/simulation/graphs/"+buildingName+"/"+roomName)
         nx.write_gpickle(G2,"tools/simulation/graphs/"+buildingName+"/" + roomName + "/room-graph_actuatorsState.pickle")
@@ -317,7 +330,8 @@ class GraphGenerator:
                     nodeLabel += '<TR><TD BGCOLOR="#98FF98">' #green
 
                     for rule in activeRules:
-                        nodeLabel += rule + "<BR/>"
+                        splittedRuleActive = rule["ruleText"].strip().split("then")
+                        nodeLabel += splittedRuleActive[1] + "<BR/>"
 
                     nodeLabel += "</TD></TR>"
 
@@ -327,7 +341,8 @@ class GraphGenerator:
                     nodeLabel += '<TR><TD BGCOLOR="#F75D59">' #red
 
                     for rule in loserRules:
-                        nodeLabel += rule + "<BR/>"
+                        splittedRule = rule["ruleText"].strip().split("then")
+                        nodeLabel += splittedRule[1] + "<BR/>"
 
                     nodeLabel += "</TD></TR>"
 
@@ -342,7 +357,7 @@ class GraphGenerator:
         for edge in G.edges():
             archList = G.edge[edge[0]][edge[1]]["label"]
             archLabel = ""
-            #print archList
+
             for arch in archList:
                 archLabel += arch + "\n"
             dot.edge(str(edge[0]),str(edge[1]),archLabel)

@@ -462,9 +462,12 @@ def game(buildingName=None, roomName=None):
 def graph(buildingName=None, roomName=None):
     if not loggedIn():    return redirect(url_for('gui.login'))
 
-    type = "node"
+    graphType = "node"
     if request.method == 'POST':
-        type = request.form["graphType"]
+        if "graphType" in request.form :
+            graphType = request.form["graphType"]
+
+
     #get all the room information
     response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/graph",
                             {
@@ -473,7 +476,7 @@ def graph(buildingName=None, roomName=None):
                                 'roomName': roomName,
                                 'sessionKey': session["sessionKey"],
                                 'userUuid': session["userUuid"],
-                                'graphType' : type
+                                'graphType' : graphType
                             })
 
     if successResponse(response):
@@ -493,6 +496,18 @@ def graphUpdate(buildingName=None, roomName=None):
     if not loggedIn():    return redirect(url_for('gui.login'))
 
     if request.method == 'POST':
+        if "analyzeType" in request.form:
+            analyzeType = request.form["analyzeType"]
+            response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/graphAnalyzer",
+                            {
+                                'username': session["username"],
+                                'buildingName': buildingName,
+                                'roomName': roomName,
+                                'sessionKey': session["sessionKey"],
+                                'userUuid': session["userUuid"],
+                                'analyzeType' : analyzeType
+                            })
+            return jsonify(results = response)
         type = request.form["graphType"]
     #get all the room information
         response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/graph",

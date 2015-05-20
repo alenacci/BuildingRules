@@ -326,7 +326,10 @@ class ActionExecutor:
                         else:
                             #flash(building.buildingName + " - Room " + roomName + ", ruleId " + str(
                                 #rule.id) + " ignored.")
-                            loserRulesList.append("if " + rule.antecedent + " then " + rule.consequent)
+                            loserRuleDict = {}
+                            loserRuleDict["ruleId"] = rule.id
+                            loserRuleDict["ruleText"] = "if " + rule.antecedent + " then " + rule.consequent
+                            loserRulesList.append(loserRuleDict)
 
                     if not os.path.exists("tools/simulation/results/losers"):
                         os.makedirs("tools/simulation/results/losers")

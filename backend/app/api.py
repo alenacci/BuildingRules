@@ -18,6 +18,7 @@ from app.backend.commons.console import flash
 
 from app.backend.commons.test import Test
 from app.backend.controller.gameManager import GameManager
+from app.backend.controller.graphAnalyzer import GraphAnalyzer
 from app.backend.controller.graphGenerator import GraphGenerator
 from app.backend.controller.usersManager import UsersManager
 from app.backend.controller.sessionManager import SessionManager
@@ -1071,6 +1072,29 @@ def graphGeneration(username=None, buildingName=None, roomName=None):
             return returnResult(graphGeneration.drawGraphForRoom(roomName=roomName, buildingName = buildingName, username=username,type = graphType))
         except Exception as e:
             return returnError(e)
+
+@api.route('/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/graphAnalyzer', methods=['POST'])
+def graphAnalyzer(username=None, buildingName=None, roomName=None):
+
+    if request.method == 'POST':
+
+        sessionKey = validateInput(request.form['sessionKey'])
+        userUuid = validateInput(request.form['userUuid'])
+        analyzeType = request.form["analyzeType"]
+
+        try:
+            session = SessionManager()
+            session.checkSessionValidity(sessionKey, userUuid)
+            graphAnalyzer = GraphAnalyzer()
+
+            resp = {}
+            if analyzeType == "all":
+                resp = graphAnalyzer.analyzeAll(buildingName = buildingName,roomName=roomName)
+
+            return returnResult(resp)
+        except Exception as e:
+            return returnError(e)
+
 
 @api.route('/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/game', methods=['POST'])
 def gameValue(username=None, buildingName=None, roomName=None):
