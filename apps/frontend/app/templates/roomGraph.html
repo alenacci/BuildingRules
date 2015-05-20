@@ -23,7 +23,7 @@
     });
 
      jQuery(function($) {
-    $('#term').terminal(function(command, term) {
+    $('#term').terminal(function(command,term) {
         if (command !== '') {
             if (command == 'editGraph -t identicalNode'){
                 changeGraphType("node");
@@ -33,7 +33,9 @@
             }
             else if (command == 'analyze -all'){
 
-                analyze("all", term);
+                analyze("all",function(text) {
+                    term.echo(new String(text));
+                });
             }
             else {
                 term.error(new String("Command unknown"));
@@ -41,6 +43,9 @@
         } else {
            term.echo('');
         }
+
+
+
     }, {
         greetings: 'BuildingRules Graph Navigator',
         name: 'js_demo',
@@ -65,21 +70,19 @@
          });
      }
 
-     function analyze(type, term) {
-         term.error(new String("appena dentro la funzione"));
-         $.ajax({
-             type: 'POST',
-             cache: false,
-             data:{analyzeType:type},
-             url: "{{request.path}}/update",
-             success: function (resp) {
-                 var json1 = JSON.parse(resp);
-                 term.error(new String("dentro ajax!"));
+    function analyze(type,callback) {
+             $.ajax({
+                 type: 'POST',
+                 cache: false,
+                 data:{analyzeType:type},
+                 url: "{{request.path}}/update",
+                 success: function (resp) {
+                     callback("UselessRules: " + resp["uselessRules"]);
+                 }
+             });
+         }
 
 
-             }
-         });
-     }
     </script>
 
 {% endblock %}

@@ -12,7 +12,7 @@
 import json
 import re
 from datetime import timedelta
-from flask import request, session, g, redirect, url_for, abort, render_template, flash, jsonify, Blueprint
+from flask import request, session, g, redirect, url_for, abort, render_template, flash, jsonify, Blueprint, Response
 import time
 import datetime
 import os
@@ -508,7 +508,8 @@ def graphUpdate(buildingName=None, roomName=None):
                                 'analyzeType' : analyzeType
                             })
             print "GUI:"+str(response)
-            return jsonify(results = response)
+
+            return jsonify(**response)
         type = request.form["graphType"]
     #get all the room information
         response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/graph",
