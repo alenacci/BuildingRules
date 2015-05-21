@@ -24,6 +24,7 @@
 
      jQuery(function($) {
     $('#term').terminal(function(command,term) {
+        var rNumb = /\d+/;
         if (command !== '') {
             if (command == 'editGraph -t bbg'){
                 changeGraphType("bbg");
@@ -32,13 +33,32 @@
                 changeGraphType("minbbg");
             }
             else if (command == 'analyze -all'){
-
+                term.echo(new String("Be sure you have run 'editGraph -t minbbg'"),'b');
                 analyze("all",function(text) {
                     term.echo(new String(text));
                 });
             }
+            else if(command.indexOf("disablerule")>-1){
+                id = command.match(rNumb)[0];
+                disableRule(id,function(text) {
+                    term.echo(new String(text));
+                });
+            }
+            else if(command.indexOf("enablerule")>-1){
+                id = command.match(rNumb)[0];
+                enableRule(id,function(text) {
+                    term.echo(new String(text));
+                });
+            }
+            else if (command == "help"){
+                term.echo(new String("editGraph -t bbg\t Draw Building Behaviour Graph\n" +
+                        "editGraph -t minbbg\t Draw Building Behaviour Graph Minimized\n" +
+                        "analyze -all\t Run all the analysis on the graph\n" +
+                        "disablerule RULEID\t Disable the RULEID rule\n" +
+                        "enablerule RULEID\t Enable the RULEID rule\n"));
+            }
             else {
-                term.error(new String("Command unknown"));
+                term.error(new String("Command unknown - type help"));
             }
         } else {
            term.echo('');
@@ -47,11 +67,11 @@
 
 
     }, {
-        greetings: 'BuildingRules Graph Navigator',
+        greetings: 'BuildingRules Graph Navigator  -  type help',
         name: 'js_demo',
         onBlur: false,
-        height: 200,
-        prompt: 'js> '});
+        height: 400,
+        prompt: 'manager@bRules: # '});
     });
 
      function changeGraphType(type) {
@@ -79,6 +99,30 @@
                  success: function (resp) {
                      callback("UselessRules: " + resp["uselessRules"] + ";\nUncontrolledStates: " + resp["uncontrolledStates"] + ";\nUncontrolledActuators: " + resp["uncontrolledActuators"]
                      + ";\nStability: " + resp["cycleExistence"]);
+                 }
+             });
+         }
+
+     function disableRule(ruleId,callback) {
+             $.ajax({
+                 type: 'POST',
+                 cache: false,
+                 data:{disableRule:ruleId},
+                 url: "{{request.path}}/update",
+                 success: function (resp) {
+                     callback("Rule "+ruleId+" disabled - run editGraph -t bbg");
+                 }
+             });
+         }
+
+      function enableRule(ruleId,callback) {
+             $.ajax({
+                 type: 'POST',
+                 cache: false,
+                 data:{enableRule:parseInt(ruleId)},
+                 url: "{{request.path}}/update",
+                 success: function (resp) {
+                     callback("Rule "+ruleId+" enabled - run editGraph -t bbg");
                  }
              });
          }

@@ -510,28 +510,54 @@ def graphUpdate(buildingName=None, roomName=None):
             print "GUI:"+str(response)
 
             return jsonify(**response)
-        type = request.form["graphType"]
-    #get all the room information
-        response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/graph",
-                                {
-                                    'username': session["username"],
-                                    'buildingName': buildingName,
-                                    'roomName': roomName,
-                                    'sessionKey': session["sessionKey"],
-                                    'userUuid': session["userUuid"],
-                                    'graphType':type
-                                })
+        elif "graphType" in request.form:
+            type = request.form["graphType"]
+            #get all the room information
+            response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/graph",
+                                    {
+                                        'username': session["username"],
+                                        'buildingName': buildingName,
+                                        'roomName': roomName,
+                                        'sessionKey': session["sessionKey"],
+                                        'userUuid': session["userUuid"],
+                                        'graphType':type
+                                    })
 
-        if successResponse(response):
-            import base64
-            image = base64.b64decode(response["image"])
-            if not os.path.exists("app/static/images/roomGraphs"): os.makedirs("app/static/images/roomGraphs")
+            if successResponse(response):
+                import base64
+                image = base64.b64decode(response["image"])
+                if not os.path.exists("app/static/images/roomGraphs"): os.makedirs("app/static/images/roomGraphs")
 
-            with open("app/static/images/roomGraphs/"+roomName+".png","wb") as imageFile:
-                imageFile.write(image)
-            return json.dumps({'graphPath':roomName},200, {'Content-Type':'application/json'} )
-        else:
-            return render_template('error.html', error=response['request-errorDescription'])
+                with open("app/static/images/roomGraphs/"+roomName+".png","wb") as imageFile:
+                    imageFile.write(image)
+                return json.dumps({'graphPath':roomName},200, {'Content-Type':'application/json'} )
+            else:
+                return render_template('error.html', error=response['request-errorDescription'])
+        elif "disableRule" in request.form:
+            ruleId = request.form["disableRule"]
+            response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/rules/<ruleId>/disable", {
+                'username': session["username"],
+                'buildingName': buildingName,
+                'roomName': roomName,
+                'ruleId': ruleId,
+                'sessionKey': session["sessionKey"],
+                'userUuid': session["userUuid"]
+            })
+            if successResponse(response):
+                return jsonify(**response)
+        elif "enableRule" in request.form:
+            ruleId = request.form["enableRule"]
+            print ruleId
+            response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/rules/<ruleId>/enable", {
+                'username': session["username"],
+                'buildingName': buildingName,
+                'roomName': roomName,
+                'ruleId': ruleId,
+                'sessionKey': session["sessionKey"],
+                'userUuid': session["userUuid"]
+            })
+            if successResponse(response):
+                return jsonify(**response)
 
 @gui.route('/removeMe2/<currentDay>/', methods=['GET', 'POST'])
 @gui.route('/removeMe2/<currentDay>', methods=['GET', 'POST'])

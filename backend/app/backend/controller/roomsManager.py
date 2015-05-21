@@ -544,8 +544,9 @@ class RoomsManager:
 		if not ruleId and not rule.checkIfUnique():
 			raise DuplicatedRuleError("The submitted rule has already been saved for the considered room.")
 
-		if ruleId and not rule.checkIfUnique():
-			raise DuplicatedRuleError("The edited rule has already been saved for the considered room.")
+		#TODO:verificare cosa comporta
+		#if ruleId and not rule.checkIfUnique():
+		#	raise DuplicatedRuleError("The edited rule has already been saved for the considered room.")
 
 		# excludedRuleId is needed to ignore the rule that the user want to edit
 		excludedRuleId = ruleId if ruleId else None		
