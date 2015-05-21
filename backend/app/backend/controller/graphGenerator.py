@@ -42,6 +42,7 @@ class GraphGenerator:
     def createGraphIdenticalNode(self, buildingName=None, roomName=None):
 
         days=["2014-09-15"]
+        #days=["2014-09-15", "2014-09-16","2014-09-17","2014-09-18","2014-09-19"]
 
         roomsManager = RoomsManager()
 
@@ -81,20 +82,22 @@ class GraphGenerator:
 
         simulationResult = {}
         statesList = []
-        for day in days:
-            count = 0
+        for intTemp in simulationTemps:
 
-            for intTemp in simulationTemps:
-                restartNode = True
+            count = 0
+            loserRulesGlobalList = []
+            categoryState = {}
+            oldActiveRulesText = []
+            restartNode = True
+            for day in days:
+
                 roomSimulator = RoomSimulator(occupancyTimeRangeFrom="8:00AM",occupancyTimeRangeTo="6:00PM",buildingName = buildingName, roomName = roomName, currentDate = day,roomTemperature=str(intTemp)+"F")
                 simulationResult[day] = roomSimulator.start()
 
                 losersData = self.fetchLosersFromJSON(roomName)
 
-                loserRulesGlobalList = []
-                categoryState = {}
-                oldActiveRulesText = []
-                for hour in range(0,24,1):
+
+                for hour in range(0,23,1):
                     activeRules = []
                     activeRulesText = []
                     strHour = self.convertIntToHour(hour)
