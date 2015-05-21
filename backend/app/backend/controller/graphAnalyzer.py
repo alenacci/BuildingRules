@@ -53,6 +53,14 @@ class GraphAnalyzer:
                     actionCategory = str(action["category"])
                     if action["category"] == "APP_PROJECTOR":
                         actionCategory = "PROJECTOR"
+                    if action["category"] == "APP_COMPUTER":
+                        actionCategory = "COMPUTER"
+                    if action["category"] == "APP_DESKLIGHT":
+                        actionCategory = "DESKLIGHT"
+                    if action["category"] == "APP_PRINTER":
+                        actionCategory = "PRINTER"
+                    if action["category"] == "APP_DISPLAYMONITOR":
+                        actionCategory = "DISPLAYMONITOR"
                     if action["category"] == "APP_AUDIO":
                         actionCategory = "AUDIO"
                     if action["category"] == "HVAC_TEMP":
