@@ -77,7 +77,7 @@
                  data:{analyzeType:type},
                  url: "{{request.path}}/update",
                  success: function (resp) {
-                     callback("UselessRules: " + resp["uselessRules"]);
+                     callback("UselessRules: " + resp["uselessRules"] + ";\nUncontrolledStates: " + resp["uncontrolledStates"]);
                  }
              });
          }

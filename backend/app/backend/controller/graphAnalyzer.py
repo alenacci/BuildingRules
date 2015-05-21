@@ -8,7 +8,21 @@ class GraphAnalyzer:
     def analyzeAll(self,buildingName, roomName):
         returnInfo = {}
         returnInfo["uselessRules"] = self.analyzeLoserRules(buildingName,roomName)
+        returnInfo["uncontrolledStates"] = self.analyseUncontrolledStates(buildingName,roomName)
         return returnInfo
+
+    def analyseUncontrolledStates(self,buildingName,roomName):
+        G = self.readFromBbg(buildingName,roomName)
+
+        uncontrolledStates = set()
+        for n in G.nodes():
+            if "activeRules" not in G.node[n]:
+                if n != -1:
+                    uncontrolledStates.add(n)
+            else:
+                if not G.node[n]["activeRules"]:
+                    uncontrolledStates.add(n)
+        return list(uncontrolledStates)
 
     def analyzeLoserRules(self, buildingName, roomName):
         G = self.readFromMinBbg(buildingName,roomName)
