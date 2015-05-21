@@ -190,8 +190,7 @@ class GraphGenerator:
                 minHigher = min(higherTimes)
                 archList.append("If time is between " + str(maxLower) + " and " + str(minHigher))
 
-
-            #nodeStatDict["time"] = str(state[1])
+            nodeStatDict["time"] = str(state[1])
 
             for duplicatedState in duplicatedStatesList:
                 if duplicatedState == str(state[5]):
@@ -229,7 +228,6 @@ class GraphGenerator:
                 startingNodeIndex = endingNodeInded
                 endingNodeInded+=1
 
-
         if not os.path.exists("tools/simulation/graphs/"+buildingName+"/"+roomName): os.makedirs("tools/simulation/graphs/"+buildingName+"/"+roomName)
         nx.write_gpickle(G,"tools/simulation/graphs/"+buildingName+"/" + roomName + "/room-graph_bbg.pickle")
 
@@ -248,7 +246,7 @@ class GraphGenerator:
                     if set(actuatorsStateN) == set(actuatorsStateN2):
                         #UNION OF THE ACTIVE RULES IN THE OVERALL STATE
                         for rule in G.node[n2]["activeRules"]:
-                            if rule not in G.node[n]["activeRules"]:
+                            if str(rule["ruleText"]) not in str(G.node[n]["activeRules"]):
                                 G.node[n]["activeRules"].append(rule)
 
                         #INTERSECTION OF THE LOSER RULES IN THE OVERALL STATE
@@ -310,6 +308,9 @@ class GraphGenerator:
 
         for n in G.nodes():
         #prendo info nodo
+            if n == -1:
+                nodeLabel = '<<TABLE BORDER="2" CELLBORDER="1" CELLSPACING="10"><TR><TD BGCOLOR="white"><FONT COLOR="black" POINT-SIZE="18">START</FONT></TD></TR></TABLE>>'
+                dot.node(str(n),nodeLabel)
 
             if G.node[n]:
                 nodeLabel = '<<TABLE BORDER="2" CELLBORDER="1" CELLSPACING="10">'
@@ -332,7 +333,12 @@ class GraphGenerator:
 
                     for rule in activeRules:
                         splittedRuleActive = rule["ruleText"].strip().split("then")
-                        nodeLabel += splittedRuleActive[1] + "<BR/>"
+                        if splittedRuleActive[1] not in nodeLabel:
+                            nodeLabel += "<B>" + rule["ruleId"] + "</B> - " + splittedRuleActive[1] + "<BR/>"
+                        else:
+                            splittedLabel = nodeLabel.strip().split("- " + splittedRuleActive[1])
+                            nodeLabel = splittedLabel[0] + ", " + "<B>" + rule["ruleId"] + "</B> - " + splittedRuleActive[1] + splittedLabel[1]
+
 
                     nodeLabel += "</TD></TR>"
 
@@ -343,7 +349,7 @@ class GraphGenerator:
 
                     for rule in loserRules:
                         splittedRule = rule["ruleText"].strip().split("then")
-                        nodeLabel += splittedRule[1] + "<BR/>"
+                        nodeLabel += "<B>" + str(rule["ruleId"])+ "</B> - " + splittedRule[1] + "<BR/>"
 
                     nodeLabel += "</TD></TR>"
 

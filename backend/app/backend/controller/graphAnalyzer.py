@@ -83,7 +83,7 @@ class GraphAnalyzer:
 
 
     def readFromBbg(self, buildingName, roomName):
-        return nx.read_gpickle("tools/simulation/graphs/" +buildingName+"/"+ roomName + "/room-graph_node.pickle")
+        return nx.read_gpickle("tools/simulation/graphs/" +buildingName+"/"+ roomName + "/room-graph_bbg.pickle")
 
     def readFromMinBbg(self, buildingName, roomName):
-        return nx.read_gpickle("tools/simulation/graphs/" +buildingName+"/"+ roomName + "/room-graph_actuatorsState.pickle")
+        return nx.read_gpickle("tools/simulation/graphs/" +buildingName+"/"+ roomName + "/room-graph_minbbg.pickle")
