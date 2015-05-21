@@ -47,7 +47,7 @@ databaseDumperThread = Thread(target = startDatabaseDumper)
 deamonThread = Thread(target = startDeamon)
 deamonThread.start()
 
-thorSimulatorThread = Thread(target = startThorSimulator())
+#thorSimulatorThread = Thread(target = startThorSimulator())
 #thorSimulatorThread.start()
 
 realTimeThread = Thread(target = startRealTimeExecutor())
