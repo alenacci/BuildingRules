@@ -1,4 +1,5 @@
 from networkx import nx
+from app.backend.controller.roomsManager import RoomsManager
 
 class GraphAnalyzer:
 
@@ -9,6 +10,7 @@ class GraphAnalyzer:
         returnInfo = {}
         returnInfo["uselessRules"] = self.analyzeLoserRules(buildingName,roomName)
         returnInfo["uncontrolledStates"] = self.analyseUncontrolledStates(buildingName,roomName)
+        returnInfo["uncontrolledActuators"] = self.analyzeUncontrolledActuators(buildingName,roomName)
         return returnInfo
 
     def analyseUncontrolledStates(self,buildingName,roomName):
@@ -37,6 +39,39 @@ class GraphAnalyzer:
                     if str(activeRule["ruleId"]) in loserRules:
                         loserRules.remove(activeRule["ruleId"])
         return list(loserRules)
+
+    def analyzeUncontrolledActuators(self, buildingName, roomName):
+        G = self.readFromMinBbg(buildingName,roomName)
+        roomsManager = RoomsManager()
+        actionList = roomsManager.getActions(roomName,buildingName)["actions"]
+        actionListCopy = list(actionList)
+        actionExcluded = ["SEND_COMPLAIN", "DANGER"]
+        for action in actionList:
+            for n in G.nodes():
+                if "actuatorsState" in G.node[n]:
+                    actionCategory = str(action["category"])
+                    if action["category"] == "APP_PROJECTOR":
+                        actionCategory = "PROJECTOR"
+                    if action["category"] == "APP_AUDIO":
+                        actionCategory = "AUDIO"
+                    if action["category"] == "HVAC_TEMP":
+                        actionCategory = "TEMPERATURE"
+                    if action["category"] == "HVAC_HUM":
+                        actionCategory = "HUMIDITY"
+                    if action["category"] == "APP_COFFEE":
+                        actionCategory = "COFFEE"
+
+                    if actionCategory in actionExcluded:
+                        if action in actionListCopy:
+                            actionListCopy.remove(action)
+                    elif actionCategory in str(G.node[n]["actuatorsState"]):
+                        if action in actionListCopy:
+                            actionListCopy.remove(action)
+
+        actionUncontrolled = set()
+        for action in actionListCopy:
+            actionUncontrolled.add(action["category"])
+        return list(actionUncontrolled)
 
     def readFromBbg(self, buildingName, roomName):
         return nx.read_gpickle("tools/simulation/graphs/" +buildingName+"/"+ roomName + "/room-graph_node.pickle")
