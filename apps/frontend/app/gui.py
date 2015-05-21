@@ -462,7 +462,7 @@ def game(buildingName=None, roomName=None):
 def graph(buildingName=None, roomName=None):
     if not loggedIn():    return redirect(url_for('gui.login'))
 
-    graphType = "node"
+    graphType = "bbg"
     if request.method == 'POST':
         if "graphType" in request.form :
             graphType = request.form["graphType"]

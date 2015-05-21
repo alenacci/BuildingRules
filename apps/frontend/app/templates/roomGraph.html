@@ -25,11 +25,11 @@
      jQuery(function($) {
     $('#term').terminal(function(command,term) {
         if (command !== '') {
-            if (command == 'editGraph -t identicalNode'){
-                changeGraphType("node");
+            if (command == 'editGraph -t bbg'){
+                changeGraphType("bbg");
             }
-            else if (command == 'editGraph -t actuatorsState'){
-                changeGraphType("actuatorsState");
+            else if (command == 'editGraph -t minbbg'){
+                changeGraphType("minbbg");
             }
             else if (command == 'analyze -all'){
 
@@ -77,7 +77,8 @@
                  data:{analyzeType:type},
                  url: "{{request.path}}/update",
                  success: function (resp) {
-                     callback("UselessRules: " + resp["uselessRules"] + ";\nUncontrolledStates: " + resp["uncontrolledStates"] + ";\nUncontrolledActuators: " + resp["uncontrolledActuators"]);
+                     callback("UselessRules: " + resp["uselessRules"] + ";\nUncontrolledStates: " + resp["uncontrolledStates"] + ";\nUncontrolledActuators: " + resp["uncontrolledActuators"]
+                     + ";\nStability: " + resp["cycleExistence"]);
                  }
              });
          }

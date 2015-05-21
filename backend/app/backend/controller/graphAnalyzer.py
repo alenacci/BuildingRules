@@ -11,6 +11,7 @@ class GraphAnalyzer:
         returnInfo["uselessRules"] = self.analyzeLoserRules(buildingName,roomName)
         returnInfo["uncontrolledStates"] = self.analyseUncontrolledStates(buildingName,roomName)
         returnInfo["uncontrolledActuators"] = self.analyzeUncontrolledActuators(buildingName,roomName)
+        returnInfo["cycleExistence"] = self.analyzeCycleExistence(buildingName,roomName)
         return returnInfo
 
     def analyseUncontrolledStates(self,buildingName,roomName):
@@ -72,6 +73,14 @@ class GraphAnalyzer:
         for action in actionListCopy:
             actionUncontrolled.add(action["category"])
         return list(actionUncontrolled)
+
+    def analyzeCycleExistence(self, buildingName, roomName):
+        G = self.readFromMinBbg(buildingName,roomName)
+        if not list(nx.simple_cycles(G)):
+            return "No Cycle Found - Your room may be unstable"
+        return "Cycle Found - Your room seems to be stable"
+
+
 
     def readFromBbg(self, buildingName, roomName):
         return nx.read_gpickle("tools/simulation/graphs/" +buildingName+"/"+ roomName + "/room-graph_node.pickle")

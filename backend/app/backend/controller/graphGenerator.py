@@ -19,18 +19,18 @@ class GraphGenerator:
         buildingsManager = BuildingsManager()
         buildingsManager.checkUserBinding(buildingName, username)
 
-        if type=="node":
+        if type=="bbg":
             self.editGraph(buildingName,roomName,type)
-        elif type=="actuatorsState":
+        elif type=="minbbg":
             self.editGraph(buildingName,roomName,type)
 
     def editGraph(self,buildingName=None, roomName=None,type=None):
-        if type=="node":
+        if type=="bbg":
             if os.path.exists("tools/simulation/graphs/"+buildingName+"/"+roomName+"_node.pickle"):
                 pass
             else:
                 self.createGraphIdenticalNode(buildingName,roomName)
-        elif type=="actuatorsState":
+        elif type=="minbbg":
             if os.path.exists("tools/simulation/graphs/"+buildingName+"/"+roomName+"_actuatorsState.pickle"):
                 pass
             else:
@@ -231,10 +231,10 @@ class GraphGenerator:
 
 
         if not os.path.exists("tools/simulation/graphs/"+buildingName+"/"+roomName): os.makedirs("tools/simulation/graphs/"+buildingName+"/"+roomName)
-        nx.write_gpickle(G,"tools/simulation/graphs/"+buildingName+"/" + roomName + "/room-graph_node.pickle")
+        nx.write_gpickle(G,"tools/simulation/graphs/"+buildingName+"/" + roomName + "/room-graph_bbg.pickle")
 
     def fromNodeToActuatorsState(self,buildingName,roomName):
-        G = nx.read_gpickle("tools/simulation/graphs/" +buildingName+"/"+ roomName + "/room-graph_node.pickle")
+        G = nx.read_gpickle("tools/simulation/graphs/" +buildingName+"/"+ roomName + "/room-graph_bbg.pickle")
 
         G2 = nx.DiGraph()
 
@@ -272,7 +272,7 @@ class GraphGenerator:
                 G2.add_edge(identicalActuatorsStates[e[0]],identicalActuatorsStates[e[1]],label=archList)
 
         if not os.path.exists("tools/simulation/graphs/"+buildingName+"/"+roomName): os.makedirs("tools/simulation/graphs/"+buildingName+"/"+roomName)
-        nx.write_gpickle(G2,"tools/simulation/graphs/"+buildingName+"/" + roomName + "/room-graph_actuatorsState.pickle")
+        nx.write_gpickle(G2,"tools/simulation/graphs/"+buildingName+"/" + roomName + "/room-graph_minbbg.pickle")
 
 
 
