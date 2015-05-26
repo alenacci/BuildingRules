@@ -50,6 +50,12 @@
                     term.echo(new String(text));
                 });
             }
+            else if (command.indexOf("addRule")>-1){
+                rule = command.replace("addRule ","");
+                addRule(rule,function(text) {
+                    term.echo(new String(text));
+                });
+            }
             else if (command == "help"){
                 term.echo(new String("editGraph -t bbg\t Draw Building Behaviour Graph\n" +
                         "editGraph -t minbbg\t Draw Building Behaviour Graph Minimized\n" +
@@ -120,6 +126,17 @@
                  type: 'POST',
                  cache: false,
                  data:{enableRule:parseInt(ruleId)},
+                 url: "{{request.path}}/update",
+                 success: function (resp) {
+                     callback("Rule Inserted");
+                 }
+             });
+         }
+      function addRule(rule,callback) {
+             $.ajax({
+                 type: 'POST',
+                 cache: false,
+                 data:{addRule:rule},
                  url: "{{request.path}}/update",
                  success: function (resp) {
                      callback("Rule "+ruleId+" enabled - run editGraph -t bbg");

@@ -558,6 +558,23 @@ def graphUpdate(buildingName=None, roomName=None):
             })
             if successResponse(response):
                 return jsonify(**response)
+        elif "addRule" in request.form:
+            print request.form["addRule"]
+            split = request.form["addRule"].split(" - ")
+            print split[0]
+            print split[1]
+            response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/rules/add", {
+                'username': session["username"],
+                'buildingName': buildingName,
+                'roomName': roomName,
+                'priority': split[1],
+                'ruleBody': split[0],
+                'sessionKey': session["sessionKey"],
+                'userUuid': session["userUuid"]
+            })
+            print response
+            if successResponse(response):
+                return jsonify(**response)
 
 @gui.route('/removeMe2/<currentDay>/', methods=['GET', 'POST'])
 @gui.route('/removeMe2/<currentDay>', methods=['GET', 'POST'])
