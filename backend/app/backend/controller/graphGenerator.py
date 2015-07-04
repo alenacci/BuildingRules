@@ -29,18 +29,21 @@ class GraphGenerator:
             if os.path.exists("tools/simulation/graphs/"+buildingName+"/"+roomName+"_node.pickle"):
                 pass
             else:
-                self.createGraphIdenticalNode(buildingName,roomName)
+                self.generateBBG(buildingName,roomName)
         elif type=="minbbg":
             if os.path.exists("tools/simulation/graphs/"+buildingName+"/"+roomName+"_actuatorsState.pickle"):
                 pass
             else:
-                self.fromNodeToActuatorsState(buildingName,roomName)
+                self.generateMinBBG(buildingName,roomName)
+        #put here other type
         elif type=="blabla":
             pass
 
 
-    def createGraphIdenticalNode(self, buildingName=None, roomName=None):
+    #generate pickle BBG
+    def generateBBG(self, buildingName=None, roomName=None):
 
+        #put here the simulation days
         days=["2014-09-15"]
         #days=["2014-09-15", "2014-09-16","2014-09-17","2014-09-18","2014-09-19"]
 
@@ -231,7 +234,8 @@ class GraphGenerator:
         if not os.path.exists("tools/simulation/graphs/"+buildingName+"/"+roomName): os.makedirs("tools/simulation/graphs/"+buildingName+"/"+roomName)
         nx.write_gpickle(G,"tools/simulation/graphs/"+buildingName+"/" + roomName + "/room-graph_bbg.pickle")
 
-    def fromNodeToActuatorsState(self,buildingName,roomName):
+    #generate minBBG pickle from BBG pickle
+    def generateMinBBG(self,buildingName,roomName):
         G = nx.read_gpickle("tools/simulation/graphs/" +buildingName+"/"+ roomName + "/room-graph_bbg.pickle")
 
         G2 = nx.DiGraph()
@@ -295,6 +299,7 @@ class GraphGenerator:
             strHour = strHour + ":00"
         return strHour
 
+    #draw graph from pickle
     def drawGraphForRoom(self,roomName,buildingName,username,type):
         buildingsManager = BuildingsManager()
         buildingsManager.checkUserBinding(buildingName, username)

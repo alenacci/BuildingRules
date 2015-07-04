@@ -462,13 +462,16 @@ def game(buildingName=None, roomName=None):
 def graph(buildingName=None, roomName=None):
     if not loggedIn():    return redirect(url_for('gui.login'))
 
+    #set default type graph
     graphType = "bbg"
+
+    #check other type
     if request.method == 'POST':
         if "graphType" in request.form :
             graphType = request.form["graphType"]
 
 
-    #get all the room information
+    #call the api that generate the graph
     response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/graph",
                             {
                                 'username': session["username"],

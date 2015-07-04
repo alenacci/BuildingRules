@@ -1069,6 +1069,7 @@ def graphGeneration(username=None, buildingName=None, roomName=None):
 
             graphGeneration.createGraph(roomName=roomName, buildingName = buildingName, username=username,type=graphType)
 
+            #this method return the base64 image
             return returnResult(graphGeneration.drawGraphForRoom(roomName=roomName, buildingName = buildingName, username=username,type = graphType))
         except Exception as e:
             return returnError(e)
