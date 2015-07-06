@@ -6,7 +6,7 @@
   {% if session.logged_in %}
 
 
-    <img id="graphImg" alt="Graph Image" src="{{url_for('static', filename='images/roomGraphs/')}}{{graphPath}}.png"/>
+    <img class="img_responsive" id="graphImg" alt="Graph Image" src="{{url_for('static', filename='images/roomGraphs/')}}{{graphPath}}.png"/>
 
     <div id="term"></div>
   {% endif %}

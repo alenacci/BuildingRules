@@ -35,13 +35,17 @@
     <a name="roomMenu_{{roomName}}" id="roomMenu_{{roomName}}"></a>
     <div class="row">
 
-                      <div class="span11">
-                        <div style="padding:10px; border-radius: 20px 20px 20px 20px;background-color: gainsboro; margin-right: 10px">
+                      <div class="col-md-9">
+                        <div style="padding:10px; border-radius: 20px 20px 20px 20px;background-color: gainsboro; margin-right: 10px; margin-top: 10px">
                                         <center><b>{{rulesCount}} Rule </b> inserts remaining in this room for today!<br>You can edit each rule twice per day</center>
 
-                        </div><br>
-                        <h3>Room {{roomName}} - {{description}}</h3>
-                        <br>
+                        </div>
+                        <div style="padding:10px; border-radius: 20px 20px 20px 20px;background-color: gainsboro; margin-right: 10px; margin-top: 10px">
+                                        <center>No Suggestion</center>
+
+                        </div>
+                        <h1 class="page-header">Room {{roomName}} <small>{{description}} </small> </h1>
+
 
 
                         <div class="bs-docs-example">
@@ -56,7 +60,7 @@
                               <!-- add summary-->
                               <div class="tab-pane fade" id="roomSummary_{{roomName}}" style="overflow-x: hidden">
                                   <div class="container">
-                                      <div style="padding:10px;float: left; border-radius: 20px 20px 20px 20px;background-color: gainsboro; margin-right: 10px">
+                                      <!-- INFO FOR GAME! <div style="padding:10px;float: left; border-radius: 20px 20px 20px 20px;background-color: gainsboro; margin-right: 10px">
                                         Last Update Time: {{infoRoom["LastSimTime"]}}<br>
                                         Current Time: {{time}}
                                       </div>
@@ -77,6 +81,7 @@
                                         {% if statusDict == {} %}No active rules {% endif %}
 
                                       </div>
+                                      -->
                                     <iframe src="{{request.path}}/graphicalViewSummary" class="frame" style="height: 400px"></iframe>
 
                                   </div>
@@ -88,7 +93,7 @@
                                           <a href="javascript:filterByStatus('{{roomName}}','SHOWALLSTATUS',false)"><button class="btn active" id="btn_{{roomName}}_SHOWALLSTATUS">SHOW ALL</button></a>
                                           <a href="javascript:filterByStatus('{{roomName}}','SHOWACTIVE',false)"><button class="btn" id="btn_{{roomName}}_SHOWACTIVE">SHOW ACTIVE</button></a>
                                     </div>
-                                    <hr>
+                                      
 
                                     <div class="btn-toolbar" style="background-color:#F5F5F5; padding:10px;">
                                           <h4>Filter by day period</h4>
@@ -98,13 +103,12 @@
                                           <a href="javascript:filterByDayPeriod('{{roomName}}','EVENING',false)"><button class="btn" id="btn_{{roomName}}_EVENING">EVENING</button></a>
                                           <a href="javascript:filterByDayPeriod('{{roomName}}','NIGHT',false)"><button class="btn" id="btn_{{roomName}}_NIGHT">NIGHT</button></a>
                                     </div>
-                                    <hr>
                                     <!-- AA  -->
                                     <div class="btn-toolbar" style="background-color:#F5F5F5; padding:10px;">
                                           <h4>Filter by category</h4>
                                           <a href="javascript:filterByRuleCategory('{{roomName}}','SHOWALL',false)"><button class="btn active" id="btn_{{roomName}}_SHOWALL" >SHOW ALL</button></a>
                                           {% for category in categories %}
-                                            <a href="javascript:filterByRuleCategory('{{roomName}}','{{category}}',false)"><button class="btn" id="btn_{{roomName}}_{{category}}">{{categoriesTranslation[category]}}</button></a>
+                                            <a href="javascript:filterByRuleCategory('{{roomName}}','{{category}}',false)"><button class="btn" style="margin: 3px" id="btn_{{roomName}}_{{category}}">{{categoriesTranslation[category]}}</button></a>
                                             {{loop.counter }}
                                           {% endfor %}
                                     </div>
@@ -218,39 +222,40 @@
 
 
                       </div>
-                      <div class="span4">
+                      <div>
                         <!--<form method="get" action="{{request.path}}/rules/add"> <input type="submit" value="Add a new rule"></form>-->
                         <br>
-                        <div class="well">
+                        <div class="col-md-3">
 
+                          <div class="well">
+                            <h4>Sensors</h4>
+                            <p style="font-size: 14px">
+                              {% for trigger in triggerList[roomName] %}
+                                  {{trigger.description}}<br>
+                              {% endfor %}
+                            </p>
+                          </div>
+                          <div class="well">
+                            <h4>Actuators</h4>
+                            <p style="font-size: 14px">
+                              {% for action in actionList[roomName] %}
+                                  {{action.description}}<br>
+                              {% endfor %}
+                            </p>
+                            <br>
+                            <!--<h4>Occupants:</h4>
+                            <p>
+                              {% for user in userList[roomName] %}
+                                  {{user.username}},
+                              {% endfor %}
+                            </p>
+                            <br>
+                            <h4>Part of groups: <br> <small>Click on the group name to see the room list</small></h4>
 
-                          <h4>Sensors</h4>
-                          <p style="font-size: 14px">
-                            {% for trigger in triggerList[roomName] %}
-                                {{trigger.description}},
-                            {% endfor %}
-                          </p>
-                          <br>
-                          <h4>Actuators</h4>
-                          <p style="font-size: 14px">
-                            {% for action in actionList[roomName] %}
-                                {{action.description}},
-                            {% endfor %}
-                          </p>
-                          <br>
-                          <!--<h4>Occupants:</h4>
-                          <p>
-                            {% for user in userList[roomName] %}
-                                {{user.username}},
-                            {% endfor %}
-                          </p>
-                          <br>
-                          <h4>Part of groups: <br> <small>Click on the group name to see the room list</small></h4>
-
-                            {% for group in roomGroupList[roomName] %}
-                                <a href="javascript:openPopup('{{request.path}}/../groups/{{group.id}}');">{{group.id}}:{{group.description}}</a>,
-                            {% endfor %}-->
-
+                              {% for group in roomGroupList[roomName] %}
+                                  <a href="javascript:openPopup('{{request.path}}/../groups/{{group.id}}');">{{group.id}}:{{group.description}}</a>,
+                              {% endfor %}-->
+                          </div>
                         </div>
                       </div>
                     </div>
