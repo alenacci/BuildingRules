@@ -142,7 +142,7 @@
             <section id="typography">
 
                 <a name="rulesPanel" id="rulesPanel"></a>
-                <div class="form-actions">
+                <div class="row">
 
 
                     <div id="ganttDiv">
@@ -153,18 +153,18 @@
                     </div>
                  </div>
 
-                <div class="form-actions">
+                <div class="row">
                     <a class="btn btn-lg btn-success" href="javascript:showMaps()" id="btnShowMaps">Show Map</a>
                     <a class="btn btn-lg btn-success" href="javascript:hideMaps()" id="btnHideMaps">Hide Map</a>
                     <a class="btn btn-lg btn-success" href="javascript:showThermalZoneMaps()" id="btnShowThMaps">Show Shared Actuation Zones Map</a>
                     <a class="btn btn-lg btn-success" href="javascript:showAccessMaps()" id="btnShowAccMaps">Show Access Rights Map</a>
                     <div id="accessMap">
-                        <img src="{{url_for('static', filename='roomMaps/')}}{{mapFileName}}">
+                        <img class="img-responsive" src="{{url_for('static', filename='roomMaps/')}}{{mapFileName}}">
                         <br>
                         <b>This maps shows the rooms you can access</b>
                     </div>
                     <div id="thZoneMap">
-                        <img src="{{url_for('static', filename='roomMaps/thermalZonesMap.png')}}">
+                        <img class="img-responsive" src="{{url_for('static', filename='roomMaps/thermalZonesMap.png')}}">
                         <br>
                         <!--<b>If your room has the same color of another room, you will share all the rules about the HEATING!</b>-->
                     </div>
@@ -172,9 +172,13 @@
 
             </section>
         {% endif %}
+
+        <br>
+        <br>
+
         <header class="jumbotron subhead" id="overview">
             <a name="buildingMap" id="buildingMap"></a>
-            <div class="span8">
+            <div class="row">
               <h1>My Rooms</h1>
               <br>
               <p class="lead">With this page you can create your own simple rules for your own personal spaces. Just add the rules inside the correct box and... that's all!</p>
@@ -185,12 +189,6 @@
             <div class="span4">
             </div>
         </header>
-
-        <br>
-        <br>
-            <br>
-        <br>
-            <br>
 
         <div class="list-group">
         {%for room in roomList %}
