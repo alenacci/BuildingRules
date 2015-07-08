@@ -487,8 +487,16 @@ def graph(buildingName=None, roomName=None):
         image = base64.b64decode(response["image"])
         if not os.path.exists("app/static/images/roomGraphs"): os.makedirs("app/static/images/roomGraphs")
 
+
         with open("app/static/images/roomGraphs/"+roomName+".png","wb") as imageFile:
             imageFile.write(image)
+
+        import PIL.Image
+        with open("app/static/images/roomGraphs/"+roomName+".png","r") as imageFile2:
+            im = PIL.Image.open(imageFile2)
+            im.save("app/static/images/roomGraphs/"+roomName+".pdf", format = 'PDF')
+            #newFileName="app/static/images/roomGraphs/"+roomName
+            #PIL.Image.Image.save(im,newFileName)
         return render_template('roomGraph.html', graphPath = roomName )
     else:
         return render_template('error.html', error=response['request-errorDescription'])
@@ -533,6 +541,10 @@ def graphUpdate(buildingName=None, roomName=None):
 
                 with open("app/static/images/roomGraphs/"+roomName+".png","wb") as imageFile:
                     imageFile.write(image)
+                import PIL.Image
+                with open("app/static/images/roomGraphs/"+roomName+".png","r") as imageFile2:
+                    im = PIL.Image.open(imageFile2)
+                    im.save("app/static/images/roomGraphs/"+roomName+".pdf", format = 'PDF')
                 return json.dumps({'graphPath':roomName},200, {'Content-Type':'application/json'} )
             else:
                 return render_template('error.html', error=response['request-errorDescription'])
