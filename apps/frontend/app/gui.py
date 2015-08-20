@@ -494,7 +494,7 @@ def graph(buildingName=None, roomName=None):
         import PIL.Image
         with open("app/static/images/roomGraphs/"+roomName+".png","r") as imageFile2:
             im = PIL.Image.open(imageFile2)
-            im.save("app/static/images/roomGraphs/"+roomName+".pdf", format = 'PDF')
+            #im.save("app/static/images/roomGraphs/"+roomName+".pdf", format = 'PDF')
             #newFileName="app/static/images/roomGraphs/"+roomName
             #PIL.Image.Image.save(im,newFileName)
         return render_template('roomGraph.html', graphPath = roomName )
@@ -544,7 +544,7 @@ def graphUpdate(buildingName=None, roomName=None):
                 import PIL.Image
                 with open("app/static/images/roomGraphs/"+roomName+".png","r") as imageFile2:
                     im = PIL.Image.open(imageFile2)
-                    im.save("app/static/images/roomGraphs/"+roomName+".pdf", format = 'PDF')
+                    #im.save("app/static/images/roomGraphs/"+roomName+".pdf", format = 'PDF')
                 return json.dumps({'graphPath':roomName},200, {'Content-Type':'application/json'} )
             else:
                 return render_template('error.html', error=response['request-errorDescription'])

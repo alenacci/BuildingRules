@@ -6,15 +6,17 @@
   {% if session.logged_in %}
 
     <div class="row" style="margin-top: 20px">
-        <iframe src="{{url_for('static', filename='images/roomGraphs/')}}{{graphPath}}.pdf" id="iframeGraph" style="position: relative; width: 100%; height: 400px;">
-            <!--<html>
+        <!--<iframe src="{{url_for('static', filename='images/roomGraphs/')}}{{graphPath}}.pdf" id="iframeGraph" style="position: relative; width: 100%; height: 400px;">
+            <html>
                 <body marginwidth="0" marginheight="0" style="background-color: rgb(38,38,38)">
-                    <embed id="embedGraph" width="100%" height="100%" name="plugin" src="{{url_for('static', filename='images/roomGraphs/')}}{{graphPath}}.pdf" type="application/pdf"><div id="annotationContainer"><style>#annotationContainer {    overflow: hidden;     position: absolute;     pointer-events: none;     top: 0;     left: 0;     right: 0;     bottom: 0;     display: -webkit-box;     -webkit-box-align: center;     -webkit-box-pack: center; } .annotation {     position: absolute;     pointer-events: auto; } textarea.annotation {     resize: none; } input.annotation[type='password'] {     position: static;     width: 200px;     margin-top: 100px; } </style></div></body><style type="text/css"></style></html>-->
-        </iframe>
+                    <embed id="embedGraph" width="100%" height="100%" name="plugin" src="{{url_for('static', filename='images/roomGraphs/')}}{{graphPath}}.pdf" type="application/pdf"><div id="annotationContainer"><style>#annotationContainer {    overflow: hidden;     position: absolute;     pointer-events: none;     top: 0;     left: 0;     right: 0;     bottom: 0;     display: -webkit-box;     -webkit-box-align: center;     -webkit-box-pack: center; } .annotation {     position: absolute;     pointer-events: auto; } textarea.annotation {     resize: none; } input.annotation[type='password'] {     position: static;     width: 200px;     margin-top: 100px; } </style></div></body><style type="text/css"></style></html>
+        </iframe>-->
+        <img id="graphImg" alt="Graph Image" src="{{url_for('static', filename='images/roomGraphs/')}}{{graphPath}}.png" style="position: relative; width: 100%; height: 400px;"/>
     </div>
     <!--<img class="img_responsive" id="graphImg" alt="Graph Image" src="{{url_for('static', filename='images/roomGraphs/')}}{{graphPath}}.png"/> -->
 
-    <div class="row" style="margin-top: 20px">
+
+
         <div id="term"></div>
     </div>
   {% endif %}
@@ -98,8 +100,8 @@
                  var json = JSON.parse(resp);
                  d = new Date();
 
-                 $('#iframeGraph').attr({'src':"{{url_for('static', filename='images/roomGraphs/')}}" + json["graphPath"] + ".pdf?"+ d.getTime()});
-                // $('#graphImg').attr({'src':"{{url_for('static', filename='images/roomGraphs/')}}" + json["graphPath"] + ".png?"+ d.getTime()});
+                 //$('#iframeGraph').attr({'src':"{{url_for('static', filename='images/roomGraphs/')}}" + json["graphPath"] + ".pdf?"+ d.getTime()});
+                 $('#graphImg').attr({'src':"{{url_for('static', filename='images/roomGraphs/')}}" + json["graphPath"] + ".png?"+ d.getTime()});
                  //$('#embedGraph').attr({'src':"{{url_for('static', filename='images/roomGraphs/')}}" + json["graphPath"] + ".pdf?"+ d.getTime()});
              }
          });

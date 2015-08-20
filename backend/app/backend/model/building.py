@@ -26,7 +26,7 @@ class Building:
 
 	def getRooms(self):
 
-		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ") : non yet tested"
+		#print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ") : non yet tested"
 
 		from app.backend.model.room import Room
 		
@@ -68,7 +68,7 @@ class Building:
 
 
 	def getGroups(self):
-		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ") : non yet tested"
+		#print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ") : non yet tested"
 
 		from app.backend.model.group import Group
 		
@@ -90,7 +90,7 @@ class Building:
 
 	def getCrossRoomValidationGroups(self, roomName = None, validationCategories = None):
 
-		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ") : non yet tested"
+		#print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ") : non yet tested"
 
 		from app.backend.model.group import Group
 		
@@ -257,7 +257,7 @@ class Building:
 
 
 	def delete(self):
-		print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ") : Consistency check not performed - class Building"
+		#print "\t\t\t\t\t\t\t\tTODO (" + self.__class__.__name__ + ":" + sys._getframe().f_code.co_name + ") : Consistency check not performed - class Building"
 
 		database = Database()
 		database.open()
