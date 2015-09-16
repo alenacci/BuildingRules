@@ -135,7 +135,7 @@ class WeatherTriggerDriver(GenericTriggerDriver):
 
 
 	def __simulatedEventTriggeredWrapper(self):
-		print "[SIMULATION]" + "[" + self.parameters["simulationParameters"]["date"] + "]" + "[" + self.parameters["simulationParameters"]["time"] + "]", 
+		#print "[SIMULATION]" + "[" + self.parameters["simulationParameters"]["date"] + "]" + "[" + self.parameters["simulationParameters"]["time"] + "]",
 		return self.__simulatedEventTriggered()
 	
 

@@ -1,4 +1,6 @@
 from random import randint
+import time
+import datetime
 from app.backend.controller.buildingsManager import BuildingsManager
 from app.backend.controller.roomGraphSimulator import RoomGraphSimulator
 from app.backend.controller.roomsManager import RoomsManager
@@ -44,8 +46,9 @@ class GraphGenerator:
     def generateBBG(self, buildingName=None, roomName=None):
 
         #put here the simulation days
-        days=["2014-09-15"]
-        #days=["2014-09-15", "2014-09-16","2014-09-17","2014-09-18","2014-09-19"]
+        ts = time.time()
+        st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d')
+        days=[st]
 
         roomsManager = RoomsManager()
 
@@ -102,8 +105,6 @@ class GraphGenerator:
 
             losersData = self.fetchLosersFromJSON(roomName)
 
-            #print losersData
-
             for hour in range(0, 23):
                 strHour = self.convertIntToHour(hour)
                 statesList[hour] = []
@@ -127,15 +128,10 @@ class GraphGenerator:
 
                             for rule in activeRules:
                                 if rule["ruleId"] in losersDataHour[state[0]]:
-                                    #if strHour == "12:00":
-                                    #    print losersDataHour[state[0]][rule["ruleId"]]
                                     loserRulesList = losersDataHour[state[0]][rule["ruleId"]]
                                     for loserRule in loserRulesList:
                                         if loserRule not in loserRulesGlobalList:
                                             loserRulesGlobalList.append(loserRule)
-                        if strHour == "12:00":
-                            print loserRulesGlobalList
-
 
                         statesList[hour].append((activeRules,count,loserRulesGlobalList,categoryState.copy()))
                         loserRulesGlobalList = []
@@ -159,52 +155,135 @@ class GraphGenerator:
         startingNodeIndexDict = {}
         archList = {}
 
-        #print statesList
         for hour in range(0,23):
             startingNodeIndexDict[hour] = set()
             archList[hour] = {}
 
             if not statesList[hour]:
-                for startingNodeIndex in startingNodeIndexDict[hour-1]:
-                    stateUniqueId = []
-                    nodeStatDict = {}
+                if hour != 0:
+                    for startingNodeIndex in startingNodeIndexDict[hour-1]:
+                        stateUniqueId = []
+                        nodeStatDict = {}
 
-                    #nodeStatDict["time"] = "0"
+                        #nodeStatDict["time"] = "0"
 
-                    nodeStatDict["activeRules"] = []
-                    nodeStatDict["loserRules"] = []
+                        nodeStatDict["activeRules"] = []
+                        nodeStatDict["loserRules"] = []
 
-                    #prendo i vecchi actuatorsState
-                    oldNodeActuatorsState = G.node[startingNodeIndex]["actuatorsState"]
-                    nodeStatDict["actuatorsState"] = sorted(oldNodeActuatorsState)
-                    for actuators in oldNodeActuatorsState:
-                        stateUniqueId.append(str(actuators))
+                        #prendo i vecchi actuatorsState
+                        oldNodeActuatorsState = G.node[startingNodeIndex]["actuatorsState"]
+                        nodeStatDict["actuatorsState"] = sorted(oldNodeActuatorsState)
+                        for actuators in oldNodeActuatorsState:
+                            stateUniqueId.append(str(actuators))
 
-                    archList[hour][str(stateUniqueId)] = []
+                        archList[hour][str(stateUniqueId)] = []
 
-                    for duplicatedState in duplicatedStatesList:
-                        if duplicatedState == str(stateUniqueId):
-                            dupBool = True
-                            break
+                        for duplicatedState in duplicatedStatesList:
+                            if duplicatedState == str(stateUniqueId):
+                                dupBool = True
+                                break
 
-                    if dupBool:
-                        id = duplicatedStatesIds[str(stateUniqueId)]
-                        startingNodeIndexDict[hour].add(id)
-                        if startingNodeIndex != id:
-                            G.add_edge(startingNodeIndex,id,label=archList[hour][str(stateUniqueId)])
-                        dupBool = False
-                    else:
-                        G.add_node(endingNodeIndex, nodeStatDict)
-                        duplicatedStatesList.append(str(stateUniqueId))
-                        duplicatedStatesIds[str(stateUniqueId)] = endingNodeIndex
-                        startingNodeIndexDict[hour].add(endingNodeIndex)
-                        if startingNodeIndex != endingNodeIndex:
-                            G.add_edge(startingNodeIndex,endingNodeIndex,label=archList[hour][str(stateUniqueId)])
-                        endingNodeIndex += 1
+                        if dupBool:
+                            id = duplicatedStatesIds[str(stateUniqueId)]
+                            startingNodeIndexDict[hour].add(id)
+                            if startingNodeIndex != id:
+                                G.add_edge(startingNodeIndex,id,label=archList[hour][str(stateUniqueId)])
+                            dupBool = False
+                        else:
+                            G.add_node(endingNodeIndex, nodeStatDict)
+                            duplicatedStatesList.append(str(stateUniqueId))
+                            duplicatedStatesIds[str(stateUniqueId)] = endingNodeIndex
+                            startingNodeIndexDict[hour].add(endingNodeIndex)
+                            if startingNodeIndex != endingNodeIndex:
+                                G.add_edge(startingNodeIndex,endingNodeIndex,label=archList[hour][str(stateUniqueId)])
+                            endingNodeIndex += 1
+
 
             for state in statesList[hour]:
                 if hour != 0:
-                    for startingNodeIndex in startingNodeIndexDict[hour-1]:
+                    if statesList[hour-1] != []:
+                        for startingNodeIndex in startingNodeIndexDict[hour-1]:
+                            stateUniqueId = []
+                            nodeStatDict = {}
+
+                            #nodeStatDict["time"] = str(state[1])
+
+                            antecedentSet = set()
+                            nodeStatList = []
+                            for rule in state[0]:
+                                splittedRule = rule["ruleText"].strip().split("then")
+                                stateUniqueId.insert(0,rule["ruleText"])
+                                antecedentSet.add(splittedRule[0])
+                                nodeStatList.append(rule)
+                            nodeStatDict["activeRules"] = sorted(nodeStatList)
+
+
+                            nodeStatList = []
+                            for rule in state[2]:
+                                splittedRule = rule["ruleText"].strip().split("then")
+                                antecedentSet.add(splittedRule[0])
+                                nodeStatList.append(rule)
+                                stateUniqueId.insert(1,rule["ruleText"])
+                            nodeStatDict["loserRules"] = sorted(nodeStatList)
+
+                            nodeStatList = []
+                            actuatorsStatusDict = {}
+                            for actuators in state[3].items():
+                                nodeStatList.append(actuators[0]+": " + actuators[1])
+                                stateUniqueId.append(str(actuators[0]+": " + actuators[1]))
+                                actuatorsStatusDict[actuators[0]] = actuators[1]
+
+                            #prendo i vecchi actuatorsState
+                            oldNodeActuatorsState = G.node[startingNodeIndex]["actuatorsState"]
+
+                            for oldNodeActuatorState in oldNodeActuatorsState:
+                                splittedOldActuatorState = oldNodeActuatorState.strip().split(": ")
+                                if splittedOldActuatorState[0] not in actuatorsStatusDict:
+                                    nodeStatList.append(oldNodeActuatorState)
+                                    stateUniqueId.append(str(oldNodeActuatorState))
+
+
+                            nodeStatDict["actuatorsState"] = sorted(nodeStatList)
+
+                            stateUniqueId = sorted(stateUniqueId)
+
+                            archList[hour][str(stateUniqueId)] = []
+                            lowerTimes = []
+                            higherTimes = []
+
+                            for antecedent in antecedentSet:
+                                times = re.findall("[0-9]{2}.[0-9]{2}",antecedent)
+                                if len(times) > 0:
+                                    lowerTimes.append(float(times[0]))
+                                    higherTimes.append(float(times[1]))
+                                else:
+                                    archList[hour][str(stateUniqueId)].append(antecedent)
+
+                            if lowerTimes and higherTimes :
+                                maxLower = max(lowerTimes)
+                                minHigher = min(higherTimes)
+                                archList[hour][str(stateUniqueId)].append("If time is between " + str(maxLower) + " and " + str(minHigher))
+
+                            for duplicatedState in duplicatedStatesList:
+                                if duplicatedState == str(stateUniqueId):
+                                    dupBool = True
+                                    break
+
+                            if dupBool:
+                                id = duplicatedStatesIds[str(stateUniqueId)]
+                                startingNodeIndexDict[hour].add(id)
+                                if startingNodeIndex != id:
+                                    G.add_edge(startingNodeIndex,id,label=archList[hour][str(stateUniqueId)])
+                                dupBool = False
+                            else:
+                                G.add_node(endingNodeIndex, nodeStatDict)
+                                duplicatedStatesList.append(str(stateUniqueId))
+                                duplicatedStatesIds[str(stateUniqueId)] = endingNodeIndex
+                                startingNodeIndexDict[hour].add(endingNodeIndex)
+                                if startingNodeIndex != endingNodeIndex:
+                                    G.add_edge(startingNodeIndex,endingNodeIndex,label=archList[hour][str(stateUniqueId)])
+                                endingNodeIndex += 1
+                    else:
                         stateUniqueId = []
                         nodeStatDict = {}
 
@@ -214,7 +293,7 @@ class GraphGenerator:
                         nodeStatList = []
                         for rule in state[0]:
                             splittedRule = rule["ruleText"].strip().split("then")
-                            stateUniqueId.insert(0,rule["ruleText"])
+                            stateUniqueId.append(rule["ruleText"])
                             antecedentSet.add(splittedRule[0])
                             nodeStatList.append(rule)
                         nodeStatDict["activeRules"] = sorted(nodeStatList)
@@ -225,26 +304,13 @@ class GraphGenerator:
                             splittedRule = rule["ruleText"].strip().split("then")
                             antecedentSet.add(splittedRule[0])
                             nodeStatList.append(rule)
-                            stateUniqueId.insert(1,rule["ruleText"])
+                            stateUniqueId.append(rule["ruleText"])
                         nodeStatDict["loserRules"] = sorted(nodeStatList)
 
                         nodeStatList = []
-                        actuatorsStatusDict = {}
                         for actuators in state[3].items():
                             nodeStatList.append(actuators[0]+": " + actuators[1])
                             stateUniqueId.append(str(actuators[0]+": " + actuators[1]))
-                            actuatorsStatusDict[actuators[0]] = actuators[1]
-
-                        #prendo i vecchi actuatorsState
-                        oldNodeActuatorsState = G.node[startingNodeIndex]["actuatorsState"]
-
-                        for oldNodeActuatorState in oldNodeActuatorsState:
-                            splittedOldActuatorState = oldNodeActuatorState.strip().split(": ")
-                            if splittedOldActuatorState[0] not in actuatorsStatusDict:
-                                nodeStatList.append(oldNodeActuatorState)
-                                stateUniqueId.append(str(oldNodeActuatorState))
-
-
                         nodeStatDict["actuatorsState"] = sorted(nodeStatList)
 
                         stateUniqueId = sorted(stateUniqueId)
@@ -266,24 +332,25 @@ class GraphGenerator:
                             minHigher = min(higherTimes)
                             archList[hour][str(stateUniqueId)].append("If time is between " + str(maxLower) + " and " + str(minHigher))
 
+
+
                         for duplicatedState in duplicatedStatesList:
                             if duplicatedState == str(stateUniqueId):
                                 dupBool = True
                                 break
 
+
                         if dupBool:
                             id = duplicatedStatesIds[str(stateUniqueId)]
                             startingNodeIndexDict[hour].add(id)
-                            if startingNodeIndex != id:
-                                G.add_edge(startingNodeIndex,id,label=archList[hour][str(stateUniqueId)])
+                            G.add_edge(-1,id,label=archList[hour][str(stateUniqueId)])
                             dupBool = False
                         else:
                             G.add_node(endingNodeIndex, nodeStatDict)
                             duplicatedStatesList.append(str(stateUniqueId))
                             duplicatedStatesIds[str(stateUniqueId)] = endingNodeIndex
                             startingNodeIndexDict[hour].add(endingNodeIndex)
-                            if startingNodeIndex != endingNodeIndex:
-                                G.add_edge(startingNodeIndex,endingNodeIndex,label=archList[hour][str(stateUniqueId)])
+                            G.add_edge(-1,endingNodeIndex,label=archList[hour][str(stateUniqueId)])
                             endingNodeIndex += 1
 
                 else:

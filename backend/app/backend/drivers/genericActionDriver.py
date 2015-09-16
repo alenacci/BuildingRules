@@ -31,7 +31,7 @@ class GenericActionDriver:
 		pass
 
 	def __simulatedActuationWrapper(self):
-		print "[SIMULATION]" + "[" + self.parameters["simulationParameters"]["date"] + "]" + "[" + self.parameters["simulationParameters"]["time"] + "]", 
+		#print "[SIMULATION]" + "[" + self.parameters["simulationParameters"]["date"] + "]" + "[" + self.parameters["simulationParameters"]["time"] + "]",
 		self.__simulatedActuation()
 
 	def actuate(self):

@@ -36,15 +36,30 @@
     <div class="row">
 
                       <div class="col-md-9">
-                        <div style="padding:10px; border-radius: 20px 20px 20px 20px;background-color: gainsboro; margin-right: 10px; margin-top: 10px">
+                        <!--<div style="padding:10px; border-radius: 20px 20px 20px 20px;background-color: gainsboro; margin-right: 10px; margin-top: 10px">
                                         <center><b>{{rulesCount}} Rule </b> inserts remaining in this room for today!<br>You can edit each rule twice per day</center>
 
-                        </div>
-                        <div style="padding:10px; border-radius: 20px 20px 20px 20px;background-color: gainsboro; margin-right: 10px; margin-top: 10px">
-                                        <center>No Suggestion</center>
+                        </div>-->
+                        <div style="padding:10px; padding-left:40px; border-radius: 20px 20px 20px 20px;background-color: gainsboro; margin-right: 10px; margin-top: 10px">
+                            <h4 style="font-weight: bold">Suggestions</h4>
+                            {% if analysisDict == {} %}
+                                <center>No Suggestion</center>
+                            {% else %}
+                                <ul>
+                                <li><p style="font-size: 16px; display: inline; font-weight: bold;">Uncontrolled Actuators:</p> {{analysisDict.uncontrolledActuators}}</li>
+                                <li><p style="font-size: 16px; display: inline; font-weight: bold;">Uncontrolled States:</p> {{analysisDict.uncontrolledStates}}</li>
+                                <li><p style="font-size: 16px; display: inline; font-weight: bold;">Useless Rules:</p>
+                                    {% for uselessRule in analysisDict.uselessRules %}
+                                        <ul>{{ uselessRule }}</ul>
+                                    {% endfor %}
+                                </li>
+                                <!--<li>Room Stability: {{analysisDict.cycleExistence}}</li>-->
+                                </ul>
+                            {% endif %}
+
 
                         </div>
-                        <h1 class="page-header">Room {{roomName}} <small>{{description}} <a href="{{request.path}}/graph">Show Graph</a> </small> </h1>
+                        <h1 class="page-header">Room {{roomName}} <small>{{description}} <!--<a href="{{request.path}}/graph">Show Graph</a> --></small> </h1>
 
 
 
@@ -57,36 +72,7 @@
                             </ul>
                             <div id="myTabContent" class="tab-content">
 
-                              <!-- add summary-->
-                              <div class="tab-pane fade" id="roomSummary_{{roomName}}" style="overflow-x: hidden">
-                                  <div class="container">
-                                      <!-- INFO FOR GAME! <div style="padding:10px;float: left; border-radius: 20px 20px 20px 20px;background-color: gainsboro; margin-right: 10px">
-                                        Last Update Time: {{infoRoom["LastSimTime"]}}<br>
-                                        Current Time: {{time}}
-                                      </div>
-                                      <div style="padding:10px;float: left; border-radius: 20px 20px 20px 20px;background-color: gainsboro; margin-right: 10px">
 
-                                        <h3 style="color: red"><b>Room Stats</b></h3>
-                                        Room Temp : {{infoRoom["RoomTemp"]}}<br>
-                                        Ext Temp : {{infoRoom["ExtTemp"]}}<br>
-                                        Humidity : {{infoRoom["Hum"]}}<br>
-                                        Weather : {{infoRoom["Weather"]}}<br>
-                                        Power consumption : {{infoRoom["Power"]}}
-                                      </div>
-                                      <div style="padding:10px;float: left; border-radius: 20px 20px 20px 20px;background-color: gainsboro">
-                                        <h3 style="color: red"><b>Actuators Stats</b></h3>
-                                        {% for category in categoryList%}
-                                            {% if category in statusDict %} {{category}}: {{statusDict[category]}}<br>{%endif%}
-                                        {% endfor %}
-                                        {% if statusDict == {} %}No active rules {% endif %}
-
-                                      </div>
-                                      -->
-                                    <iframe src="{{request.path}}/graphicalViewSummary" class="frame" style="height: 400px"></iframe>
-
-                                  </div>
-
-                              </div>
                               <div class="tab-pane fade in active" id="rulePanel_{{roomName}}" >
                                     <div class="btn-toolbar" style="background-color:#F5F5F5; padding:10px;">
                                           <h4>Filter by status</h4>
@@ -141,12 +127,12 @@
                                                             [<a href="{{request.path}}/../{{rule.roomName}}/rules/{{rule.id}}/delete">Delete</a>]
                                                     {% else %}
                                                         {% if rule.roomName %}
-                                                            {% if session.userUuid == 1 %}- [<a href="{{request.path}}/../{{rule.roomName}}/rules/{{rule.id}}/edit">Edit</a>] [<a href="{{request.path}}/../{{rule.roomName}}/rules/{{rule.id}}/delete">Delete</a>]
+                                                            - [<a href="{{request.path}}/../{{rule.roomName}}/rules/{{rule.id}}/edit">Edit</a>] [<a href="{{request.path}}/../{{rule.roomName}}/rules/{{rule.id}}/delete">Delete</a>]
                                                             {% if rule.enabled %}
                                                                 [<a href="{{request.path}}/../{{rule.roomName}}/rules/{{rule.id}}/disable">Disable</a>]
                                                             {% else %}
                                                                 [<a href="{{request.path}}/../{{rule.roomName}}/rules/{{rule.id}}/enable">Enable</a>]
-                                                            {% endif %}{% endif %}
+                                                            {% endif %}
                                                         {% endif %}
                                                     {% endif %}
                                                 </small>

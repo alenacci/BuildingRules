@@ -9,25 +9,28 @@ import subprocess
 __BACKEND_SERVER_PORT = "5003"
 
 def startWebServer():
-	os.system("python runWebServer.py")
+    os.system("python runWebServer.py")
 
 def startDeamon():
-	os.system("python runDeamon.py")
+    os.system("python runDeamon.py")
+
+def startGraphDeamon():
+    os.system("python runGraphDeamon.py")
 
 def startRealTimeExecutor():
-	os.system("python runRealTimeExecutor.py")
+    os.system("python runRealTimeExecutor.py")
 
 def startWeatherService():
-	os.system("python runWeatherService.py")
+    os.system("python runWeatherService.py")
 
 def startMailService():
-	os.system("python runMailService.py")
+    os.system("python runMailService.py")
 
 def startDatabaseDumper():
-	os.system("python runDatabaseDumper.py")
+    os.system("python runDatabaseDumper.py")
 
 def startThorSimulator():
-	os.system("python runThorSimulator.py")
+    os.system("python runThorSimulator.py")
 
 
 ### MAIN STARTS HERE
@@ -46,6 +49,9 @@ databaseDumperThread = Thread(target = startDatabaseDumper)
 
 deamonThread = Thread(target = startDeamon)
 deamonThread.start()
+
+graphDeamonThread = Thread(target = startGraphDeamon)
+graphDeamonThread.start()
 
 #thorSimulatorThread = Thread(target = startThorSimulator())
 #thorSimulatorThread.start()

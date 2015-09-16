@@ -26,25 +26,7 @@ gui = Blueprint('gui', __name__, template_folder='templates')
 @gui.route('/')
 def index():
     if loggedIn():
-        #return redirect(url_for('gui.buildings'))
-
-        #---------------------ONLY FOR SIMULATION PURPOSES -------- REMOVE!!!!!!-------------------------
-        response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms",
-                            {'username': session["username"], 'buildingName': "CSE",
-                             'sessionKey': session["sessionKey"], 'userUuid': session["userUuid"]})
-
-        if not successResponse(response):
-            return render_template('error.html', error=response['request-errorDescription'])
-
-        roomList = response["rooms"]
-
-        mapFileName = "blankMap.png"
-        for r in roomList:
-            if r["description"] == "Office Room":
-                mapFileName = r["roomName"] + ".png"
-
-        return render_template('gameInstructions.html',roomList = roomList,mapFileName = mapFileName)
-        #------------------------------------------------------------------------------------------------------
+        return redirect(url_for('gui.rooms', buildingName="JOL"))
 
     return render_template('home.html')
 
@@ -162,7 +144,7 @@ def logout():
 def buildings():
     if not loggedIn():    return redirect(url_for('gui.login'))
 
-    response = rest.request("/api/users/<username>/buildings",
+    '''response = rest.request("/api/users/<username>/buildings",
                             {'username': session["username"], 'sessionKey': session["sessionKey"],
                              'userUuid': session["userUuid"]})
 
@@ -172,7 +154,8 @@ def buildings():
     if "buildings" not in response.keys():
         return render_template('error.html', error=response['request-errorDescription'])
 
-    return render_template('buildings.html', buildings=response["buildings"])
+    return render_template('buildings.html', buildings=response["buildings"])'''
+    return redirect(url_for('gui.rooms', buildingName="JOL"))
 
 
 @gui.route('/buildings/<buildingName>/')
@@ -997,7 +980,7 @@ def room(buildingName=None, roomName=None):
 
     #ONLY FOR GAME
     #get all the room information
-    response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/game",
+    '''response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/game",
                             {
                                 'username': session["username"],
                                 'buildingName': buildingName,
@@ -1013,7 +996,7 @@ def room(buildingName=None, roomName=None):
     statusDict = returnInfo["statusAction"]
     infoRoom = returnInfo["statusDict"]
     target = returnInfo["target"]
-    time = returnInfo["time"]
+    time = returnInfo["time"]'''
 
     response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms",
                         {'username': session["username"], 'buildingName': buildingName,
@@ -1027,10 +1010,10 @@ def room(buildingName=None, roomName=None):
         if room["roomName"] == roomName:
             description = room["description"]
 
-    for category in target:
+    '''for category in target:
         if category in statusDict:
             if statusDict[category]=="":
-                del statusDict[category]
+                del statusDict[category]'''
 
     response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/rules",
                             {
@@ -1051,25 +1034,59 @@ def room(buildingName=None, roomName=None):
     else:
         return render_template('error.html', error=response['request-errorDescription'])
 
-    count = 0
-    for rule in userRules[roomName]:
-        dates = datetime.datetime.strptime(rule["creationTimestamp"],'%Y-%m-%d %H:%M:%S').date()
-        if dates == datetime.date.today():
-            count += 1
-    rulesCount = 0
-    if datetime.date.today() == datetime.datetime.strptime('2015-01-07','%Y-%m-%d').date():
-        rulesCount = 6-count
-    elif datetime.date.today() == datetime.datetime.strptime('2015-01-08','%Y-%m-%d').date():
-        rulesCount = 4-count
-    elif datetime.date.today() == datetime.datetime.strptime('2015-01-09','%Y-%m-%d').date():
-        rulesCount = 2-count
+    __ANALISYS_PATH = "tmp/analysis/"
+    analysisDict = {}
+
+
+    if os.path.exists(__ANALISYS_PATH):
+        with open(__ANALISYS_PATH + roomName + ".json","r") as fp:
+            analysisDict = json.load(fp=fp)
+            if analysisDict["uncontrolledStates"] == []:
+                analysisDict["uncontrolledStates"] = "You are safely controlling your room"
+            else:
+                analysisDict["uncontrolledStates"] = "There are some cases in which you are not controlling the room"
+
+            auxList = []
+
+            if analysisDict["uncontrolledActuators"] == []:
+                analysisDict["uncontrolledActuators"] = "You are safely controlling every device"
+            else:
+                uncontrolledActuatorsString = ""
+                for uncontrolledActuator in analysisDict["uncontrolledActuators"]:
+                    uncontrolledActuatorsString += uncontrolledActuator + ", "
+
+                analysisDict["uncontrolledActuators"] = "You are not controlling " + uncontrolledActuatorsString
+
+            auxList = []
+
+            if analysisDict["uselessRules"] == []:
+                analysisDict["uselessRules"] = "No useless rules found"
+            else:
+                uselessRulesString = ""
+                for uselessRule in analysisDict["uselessRules"]:
+                    response = rest.request("/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/rules/<ruleId>", {
+                        'username': session["username"],
+                        'buildingName': buildingName,
+                        'roomName': roomName,
+                        'ruleId': uselessRule,
+                        'sessionKey': session["sessionKey"],
+                        'userUuid': session["userUuid"]
+                    })
+                    if not successResponse(response):
+                        return render_template('error.html', error=response['request-errorDescription'])
+
+                    auxList.append("if " + response["antecedent"] + " then " + response["consequent"])
+
+
+                analysisDict["uselessRules"] = auxList
+
+
 
     return render_template('room.html', roomList = roomList ,roomName=roomName, description = description, roomRules=roomRules, authorList=authorList,
                            groupList=groupList, triggerList=triggerList, actionList=actionList, userList=userList,
                            roomGroupList=roomGroupList, notificationList=notificationList, categories=categories,
                            categoriesFilter=categoriesFilter, categoriesTranslation = categoriesTranslation, activeRoomRules=activeRoomRules,
-                           alreadyLoggedIn=alreadyLoggedIn, mTurkStatus=mTurkStatus, periodMap=periodMap,displayGantt = displayGantt, infoRoom=infoRoom, time = time, statusDict=statusDict,
-                           categoryList = target, rulesCount = rulesCount)
+                           alreadyLoggedIn=alreadyLoggedIn, mTurkStatus=mTurkStatus, periodMap=periodMap,displayGantt = displayGantt,analysisDict=analysisDict)
 
 
 @gui.route('/buildings/<buildingName>/groups/')

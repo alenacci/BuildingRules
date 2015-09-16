@@ -1097,7 +1097,7 @@ def graphAnalyzer(username=None, buildingName=None, roomName=None):
             return returnError(e)
 
 
-@api.route('/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/game', methods=['POST'])
+'''@api.route('/api/users/<username>/buildings/<buildingName>/rooms/<roomName>/game', methods=['POST'])
 def gameValue(username=None, buildingName=None, roomName=None):
 
     if request.method == 'POST':
@@ -1112,7 +1112,7 @@ def gameValue(username=None, buildingName=None, roomName=None):
 
             return returnResult(gameManager.upgradeValues(roomName=roomName, buildingName = buildingName, username=username))
         except Exception as e:
-            return returnError(e)
+            return returnError(e)'''
 
 
 ##REAL  TIME UPDATE

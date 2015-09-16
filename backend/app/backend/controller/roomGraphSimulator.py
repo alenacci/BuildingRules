@@ -16,7 +16,7 @@ import string
 import random
 
 from app.backend.commons.inputDataChecker import checkData
-from app.backend.controller.actionExecutor import ActionExecutor
+from app.backend.controller.actionExecutorSimulation import ActionExecutorSimulation
 
 
 class RoomGraphSimulator:
@@ -72,7 +72,7 @@ class RoomGraphSimulator:
 
                                 roomFilter = [{'buildingName': self.buildingName, 'roomName': self.roomName}]
 
-                                actionExecutor = ActionExecutor(simulationParameters=simulationParameters, roomFilter=roomFilter)
+                                actionExecutor = ActionExecutorSimulation(simulationParameters=simulationParameters, roomFilter=roomFilter)
                                 actionExecutor.start()
                                 count += 1
 
