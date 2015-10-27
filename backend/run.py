@@ -15,7 +15,7 @@ def startDeamon():
     os.system("python runDeamon.py")
 
 def startGraphDeamon():
-    os.system("python runGraphDeamon.py")
+   os.system("python runGraphDeamon.py")
 
 def startRealTimeExecutor():
     os.system("python runRealTimeExecutor.py")
@@ -31,6 +31,9 @@ def startDatabaseDumper():
 
 def startThorSimulator():
     os.system("python runThorSimulator.py")
+
+def startOptimizationDaemon():
+    os.system("python runOptimizationDaemon")
 
 
 ### MAIN STARTS HERE
@@ -50,11 +53,14 @@ databaseDumperThread = Thread(target = startDatabaseDumper)
 deamonThread = Thread(target = startDeamon)
 deamonThread.start()
 
-graphDeamonThread = Thread(target = startGraphDeamon)
-graphDeamonThread.start()
+# graphDeamonThread = Thread(target = startGraphDeamon)
+# graphDeamonThread.start()
 
-#thorSimulatorThread = Thread(target = startThorSimulator())
-#thorSimulatorThread.start()
+# thorSimulatorThread = Thread(target = startThorSimulator())
+# thorSimulatorThread.start()
+
+optimizationDaemon = Thread(target = startOptimizationDaemon)
+optimizationDaemon.start()
 
 realTimeThread = Thread(target = startRealTimeExecutor())
 realTimeThread.start()

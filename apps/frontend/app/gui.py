@@ -26,7 +26,7 @@ gui = Blueprint('gui', __name__, template_folder='templates')
 @gui.route('/')
 def index():
     if loggedIn():
-        return redirect(url_for('gui.rooms', buildingName="JOL"))
+        return redirect(url_for('gui.rooms', buildingName="CSE"))
 
     return render_template('home.html')
 

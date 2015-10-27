@@ -229,7 +229,7 @@ class Rule:
 			self.deleted = bool(int(queryResult[0][10]))
 			self.creationTimestamp = queryResult[0][11]
 			self.lastEditTimestamp = queryResult[0][12]
-			self.numOfEdits = int(queryResult[0][13])
+			#self.numOfEdits = int(queryResult[0][13])
 
 			groupId = int(queryResult[0][4])
 			roomName = queryResult[0][5]

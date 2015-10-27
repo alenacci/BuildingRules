@@ -19,7 +19,7 @@ from app.backend.controller.actionExecutor import ActionExecutor
 def start():
 	flash("BuildingRules Deamon is active...")
 
-	actionExecutor = ActionExecutor(buildingFilter="JOL")
+	actionExecutor = ActionExecutor(buildingFilter="CSE")
 
 	while(1):
 		try:

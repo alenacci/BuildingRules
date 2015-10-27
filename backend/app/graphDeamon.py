@@ -1,4 +1,5 @@
 __author__ = 'jacopo'
+_building_ = "CSE"
 
 from app.backend.commons.console import flash
 
@@ -15,17 +16,17 @@ def start():
 
     graphAnalyzer = GraphAnalyzer()
 
-    rooms = buildingsManager.getRooms(buildingName="JOL")["rooms"]
+    rooms = buildingsManager.getRooms(buildingName=_building_)["rooms"]
 
     while (1):
         try:
             for room in rooms:
-                graphGenerator.generateBBG(buildingName="JOL", roomName=room["roomName"])
-                graphGenerator.generateMinBBG(buildingName="JOL", roomName=room["roomName"])
+                graphGenerator.generateBBG(buildingName=_building_, roomName=room["roomName"])
+                graphGenerator.generateMinBBG(buildingName=_building_, roomName=room["roomName"])
 
-                #graphGenerator.drawGraphForRoom(buildingName="JOL", roomName=room["roomName"],username="admin",type="bbg")
+                graphGenerator.drawGraphForRoom(buildingName=_building_, roomName=room["roomName"],username="admin",type="bbg")
 
-                analisysDict = graphAnalyzer.analyzeAll(buildingName="JOL", roomName=room["roomName"])
+                analisysDict = graphAnalyzer.analyzeAll(buildingName=_building_, roomName=room["roomName"])
 
                 if not os.path.exists(__ANALISYS_PATH):
                     os.makedirs(__ANALISYS_PATH)
