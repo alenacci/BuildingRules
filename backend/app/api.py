@@ -31,6 +31,8 @@ from app.backend.controller.triggerManager import TriggerManager
 from app.backend.controller.actionManager import ActionManager
 from app.backend.controller.mTurkManager import MTurkManager
 
+from app.backend.controller.ruleOptimizer import RuleOptimizer
+
 api = Blueprint('api', __name__, template_folder='templates')
 
 
@@ -1113,6 +1115,21 @@ def gameValue(username=None, buildingName=None, roomName=None):
             return returnResult(gameManager.upgradeValues(roomName=roomName, buildingName = buildingName, username=username))
         except Exception as e:
             return returnError(e)'''
+
+@api.route('/api/rule_optimizer/truth_table/<building>/<room>', methods=['GET'])
+def getTruthTable(building, room):
+    if request.method == 'GET':
+        # TODO: temporarily not singleton
+        ruleOptimizer = RuleOptimizer(building)
+        ruleOptimizer.run()
+        truthTable = ruleOptimizer.truthTables[room]
+
+        return returnResult(truthTable.getDict())
+
+
+
+
+
 
 
 ##REAL  TIME UPDATE

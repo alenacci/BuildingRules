@@ -9,15 +9,12 @@ from app.backend.model.truthTable.rule import Rule
 
 class TruthTable:
     def __init__(self, room):
+        self.rules = []
 
         triggerManager = TriggerManager()
         actionManager = ActionManager()
 
         roomRules = room.getRules()
-
-        self.triggerList = []
-        self.actionList = []
-        self.rules = []
 
         for rule in roomRules:
             antecedents = triggerManager.translateTrigger(rule.antecedent)
@@ -27,24 +24,44 @@ class TruthTable:
 
             for t in antecedents['triggers']:
                 trigger = Trigger(t)
-                trigger.printInfo()
-
-                if trigger.category not in self.triggerList:
-                    self.triggerList.append(trigger.category)
-
                 triggers.append(trigger)
 
             action = Action(consequent)
-            action.printInfo()
-
-            if action.category not in self.actionList:
-                self.actionList.append(action.category)
 
             rule = Rule(triggers, action)
             self.rules.append(rule)
 
-        print self.triggerList
-        print self.actionList
+        # print self.triggerList
+        # print self.actionList
+        #
+        # for rule in self.rules:
+        #     rule.printInfo()
+
+    def getDict(self):
+        labels = self.getLabels()
+        rules = []
 
         for rule in self.rules:
-            rule.printInfo()
+            rules.append(rule.getDict())
+
+        return {
+            "triggerLabels": labels["triggers"],
+            "actionLabels:": labels["actions"],
+            "rules": rules
+        }
+
+    def getLabels(self):
+        triggerLabels = []
+        actionLabels = []
+
+        for rule in self.rules:
+            for trigger in rule.triggers:
+                if trigger.category not in triggerLabels:
+                    triggerLabels.append(trigger.category)
+            if rule.action.category not in actionLabels:
+                actionLabels.append(rule.action.category)
+
+        return {
+            "triggers": triggerLabels,
+            "actions": actionLabels
+        }

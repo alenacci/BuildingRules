@@ -4,6 +4,7 @@ from app.backend.controller.buildingsManager import BuildingsManager
 from app.backend.model.truthTable.truthTable import TruthTable
 from app.backend.model.room import Room
 
+
 class RuleOptimizer:
     def __init__(self, building):
         self.building = building
@@ -18,6 +19,6 @@ class RuleOptimizer:
             roomName = room["roomName"]
             # TODO: remove if and reindent !!!TEMPORARY!!!
             if  roomName == '2111':
-                room = Room(roomName, _building_)
+                room = Room(roomName, self.building)
                 truthTable = TruthTable(room)
                 self.truthTables[roomName] = truthTable

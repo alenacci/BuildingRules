@@ -8,14 +8,5 @@ class Action:
         if len(self.params) == 0:
             self.params = action[1].actionName
 
-    def compare(self, otherAction):
-        #TODO: compare on category
-        pass
-
-    def printInfo(self):
-        print "ACTION:"
-        print self.category
-        print self.params
-        print "\n"
-
-    #TODO: translate params?
+    def getDict(self):
+        return self.__dict__

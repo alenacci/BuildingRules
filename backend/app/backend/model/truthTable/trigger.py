@@ -8,12 +8,5 @@ class Trigger:
         if len(self.params) == 0:
             self.params = trigger['trigger'].triggerName
 
-    def compare(self, otherTrigger):
-        #TODO: implementare confronto su category
-        pass
-
-    def printInfo(self):
-        print "TRIGGER:"
-        print self.category
-        print self.params
-        print "\n"
+    def getDict(self):
+        return self.__dict__

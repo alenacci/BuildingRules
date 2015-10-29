@@ -1,5 +1,6 @@
 __author__ = 'andreuke'
 
+
 class Rule:
     def __init__(self, triggers = None, action = None):
         self.triggers = triggers if triggers else []
@@ -11,7 +12,13 @@ class Rule:
     def setAction(self, action):
         self.action = action
 
-    def printInfo(self):
+    def getDict(self):
+        triggers = []
+
         for trigger in self.triggers:
-            trigger.printInfo()
-        self.action.printInfo()
+            triggers.append(trigger.getDict())
+
+        return {
+            "triggers": triggers,
+            "action": self.action.getDict()
+        }
