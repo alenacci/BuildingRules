@@ -46,7 +46,7 @@ class TruthTable:
 
         return {
             "triggerLabels": labels["triggers"],
-            "actionLabels:": labels["actions"],
+            "actionLabels": labels["actions"],
             "rules": rules
         }
 
