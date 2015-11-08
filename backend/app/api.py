@@ -13,6 +13,8 @@
 import json
 
 from flask import request, session, g, redirect, url_for, abort, render_template, flash, jsonify, Blueprint
+from flask.ext.cors import CORS, cross_origin
+
 from multiprocessing.connection import Client
 from app.backend.commons.console import flash
 
@@ -1117,6 +1119,7 @@ def gameValue(username=None, buildingName=None, roomName=None):
             return returnError(e)'''
 
 @api.route('/api/rule_optimizer/truth_table/<building>/<room>', methods=['GET'])
+@cross_origin(origin='*',headers=['Content-Type','Authorization'])
 def getTruthTable(building, room):
     if request.method == 'GET':
         # TODO: temporarily not singleton

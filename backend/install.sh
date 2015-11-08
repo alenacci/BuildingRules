@@ -1,3 +1,4 @@
+#!/bin/bash
 echo "Installing Building Rules Backend!"
 echo "First of all, removing old installation..."
 ./uninstall.sh
@@ -6,6 +7,7 @@ mkdir venv
 virtualenv venv
 source venv/bin/activate
 pip install flask==0.9
+pip install -U flask-cors
 pip install MySQL-python
 pip install requests
 pip install httplib2
