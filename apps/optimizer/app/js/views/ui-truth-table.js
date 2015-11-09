@@ -4,79 +4,85 @@ function UITruthTable() {
     var table = null;
     var headers = null;
 
+    var container = null;
+
     ///////////// PUBLIC METHODS /////////////
     this.render = function() {
         console.log("UITruthTable.render()");
         var truthTableModel = pageViewController.truthTableViewController.truthTableModel;
 
         headers = truthTableModel.triggerLabels.concat(truthTableModel.actionLabels);
-        var secondColumnBegin = truthTableModel.triggerLabels.length;
 
-        var columns = [], data = [];
-
-        headers.forEach(function(h, i) {
-            columns.push({
-                field: 'field' + i,
-                title: h
-            })
-        });
+        var data = [];
 
         truthTableModel.rules.forEach(function(rule) {
-            row = {};
+            row = [];
             rule['triggers'].forEach(function(trigger) {
                 var column = headers.indexOf(trigger['category']);
                 var params = translateParams(trigger['params']);
-                row['field'+column] = params;
+                row[column] = params;
             });
             var action = rule['action'];
             var actionColumn = headers.indexOf(action['category']);
 
             var params = translateParams(action['params']);
-            row['field'+actionColumn] = params;
+            row[actionColumn] = params;
             data.push(row);
         });
 
-        //// Table Header
-        //table.append('thead').append('tr')
-        //    .selectAll('th')
-        //    .data(headers).enter()
-        //    .append('th')
-        //    .classed('data-field', true)
-        //    .text(function(d, i) {
-        //        return d;
-        //    })
-        //    .classed("second-column-begin", function(d, i) {
-        //        if(i == secondColumnBegin) {
-        //            return true;
-        //        }
-        //        return false;
-        //    });
-        //
-        //// Table body
-        //table.append('tbody')
-        //    .selectAll('tr')
-        //    .data(data).enter()
-        //    .append('tr')
-        //    .selectAll('td')
-        //    .data(function(d, i) {
-        //        console.log(d);
-        //        return d;
-        //    })
-        //    .enter()
-        //    .append('td')
-        //    .text(function(d,i) {
-        //        console.log(d);
-        //    })
+        /************* Table Header *************/
+        var header = table.append('thead');
 
+        header.append('tr')
+            .selectAll('th')
+            .data(['Triggers', 'Actions']).enter()
+            .append('th')
+            .text(ƒ())
+            .attr('colspan', function(d,i) {
+                switch(i) {
+                    case 0:
+                        return truthTableModel.triggerLabels.length;
+                    case 1:
+                        return truthTableModel.actionLabels.length;
+                }
+            })
+            .class("cell main-header")
+            .classed("second-column-begin", function(d, i) {
+                return i != 0;
+            });
 
+        header.append('tr')
+            .selectAll('th')
+            .data(headers).enter()
+            .append('th')
+            .class('cell')
+            .class('sub-header')
+            .text(function(d, i) {
+                return d;
+            })
+            .classed("second-column-begin", function(d, i) {
+                return i == truthTableModel.triggerLabels.length
+            });
 
-        table = $('table');
-        table.bootstrapTable('destroy').bootstrapTable({
-            columns: columns,
-            data: data
-        });
-
-
+        /************* Table Body *************/
+        table.append('tbody')
+            .selectAll('tr')
+            .data(data).enter()
+            .append('tr')
+            .each(function(d) {
+                for(var i = 0; i < headers.length; i++) {
+                    d3.select(this)
+                        .append('td')
+                        .class('cell')
+                        .classed("second-column-begin", function() {
+                            return i == truthTableModel.triggerLabels.length;
+                        })
+                        .classed("blank", function() {
+                            return d[i] == undefined
+                        })
+                        .text(d[i])
+                }
+            })
     };
 
 
@@ -91,8 +97,13 @@ function UITruthTable() {
 
 
     var init = function() {
-        table = d3.select('body')
+        container = d3.select('#content-main');
+        table = container
             .append('table')
-            .attr('class','table table-hover')
+            .attr('class','table table-hover table-striped table-bordered')
+        var button = container
+            .append('button')
+            .text('Binarize')
+            .class('btn btn-primary')
     }();
 };

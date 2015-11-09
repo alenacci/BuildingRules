@@ -15,11 +15,9 @@ function TruthTableViewController(building, room) {
 
     ///////////// PRIVATE METHODS ////////////
     var retrieveData = function() {
-        var query = "http://localhost:5003/api/rule_optimizer/truth_table/" + building + "/" + room;
+        var query = "api/rule_optimizer/truth_table/" + building + "/" + room;
 
-        d3.json(query, function (error, json) {
-            if (error) return;
-            if (!json["request-success"] || json["request-error"]) return;
+        getQuery(query, function(json) {
             self.truthTableModel.setDataFromJSON(json);
         });
     };
