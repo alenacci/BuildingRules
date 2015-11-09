@@ -16,6 +16,9 @@ from flask import request, session, g, redirect, url_for, abort, render_template
 from flask.ext.cors import CORS, cross_origin
 
 from multiprocessing.connection import Client
+
+from app import app
+
 from app.backend.commons.console import flash
 
 from app.backend.commons.test import Test
@@ -36,6 +39,9 @@ from app.backend.controller.mTurkManager import MTurkManager
 from app.backend.controller.ruleOptimizer import RuleOptimizer
 
 api = Blueprint('api', __name__, template_folder='templates')
+
+# Allow call for every api from every domain
+cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 
 @api.route('/api/test', methods=['GET', 'POST'])
@@ -58,9 +64,13 @@ def index():
 @api.route('/api/users/<username>/login', methods=['POST'])
 def login(username=None):
     if request.method == 'POST':
+        print "iN"
+        print request.__dict__
+        print request.form['password']
 
         password = validateInput(request.form['password'])
         session = SessionManager()
+
 
         try:
             loginResult = session.login(username, password)
@@ -218,8 +228,8 @@ def userInfoUuid(uuid=None):
         except Exception as e:
             return returnError(e)
 
-
 @api.route('/api/users/<username>/buildings', methods=['POST'])
+@cross_origin(origin='*',headers=['Content-Type','Authorization'])
 def userBuildings(username=None):
     if request.method == 'POST':
 
@@ -307,6 +317,7 @@ def deleteGroup(username=None, buildingName=None, groupId=None):
 
 
 @api.route('/api/users/<username>/buildings/<buildingName>/rooms', methods=['POST'])
+@cross_origin(origin='*',headers=['Content-Type','Authorization'])
 def buildingRooms(username=None, buildingName=None):
     if request.method == 'POST':
 
