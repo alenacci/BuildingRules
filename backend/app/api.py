@@ -1142,6 +1142,16 @@ def getTruthTable(building, room):
         return returnResult(truthTable.getDict())
 
 
+@api.route('/api/rule_optimizer/binary_truth_table/<building>/<room>', methods=['GET'])
+@cross_origin(origin='*',headers=['Content-Type','Authorization'])
+def getBinaryTable(building, room):
+    if request.method == 'GET':
+        # TODO: temporarily not singleton
+        ruleOptimizer = RuleOptimizer(building, room)
+        truthTable = ruleOptimizer.run()
+
+        return returnResult(truthTable.getBinarizedTable())
+
 
 
 

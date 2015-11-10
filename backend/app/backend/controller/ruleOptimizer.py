@@ -25,3 +25,4 @@ class RuleOptimizer:
         truthTable = TruthTable(room)
         # self.truthTables[roomName] = truthTable
         return truthTable
+

@@ -9,8 +9,19 @@ function TruthTableViewController(building, room) {
     this.truthTableModel = null;
 
     ///////////// PUBLIC METHODS /////////////
-    this.drawTable = function() {
-        truthTableView.render();
+    this.drawTable = function(binary) {
+        if(binary)
+            truthTableView.renderBinary();
+        else
+            truthTableView.render();
+    };
+
+    this.getBinaryTable = function() {
+        var query = "api/rule_optimizer/binary_truth_table/" + building + "/" + room;
+
+        getQuery(query, function(json) {
+            self.truthTableModel.setDataFromJSON(json);
+        });
     };
 
     ///////////// PRIVATE METHODS ////////////
@@ -21,7 +32,6 @@ function TruthTableViewController(building, room) {
             self.truthTableModel.setDataFromJSON(json);
         });
     };
-
 
     var init = function() {
         self.truthTableModel = new TruthTableModel(self);

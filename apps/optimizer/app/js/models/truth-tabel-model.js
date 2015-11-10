@@ -6,6 +6,7 @@ function TruthTableModel() {
     self.triggerLabels = [];
     self.actionLabels = [];
     self.rules = [];
+    self.binary = undefined;
 
     ///////////// PUBLIC METHODS //////////////
     this.setDataFromJSON = function(json) {
@@ -14,8 +15,9 @@ function TruthTableModel() {
         self.triggerLabels = json['triggerLabels'];
         self.actionLabels = json['actionLabels'];
         self.rules = json['rules'];
+        self.binary = json['binary'];
 
-        pageViewController.truthTableViewController.drawTable();
+        pageViewController.truthTableViewController.drawTable(self.binary);
     };
 
     var init = function() {
