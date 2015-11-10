@@ -1134,9 +1134,10 @@ def gameValue(username=None, buildingName=None, roomName=None):
 def getTruthTable(building, room):
     if request.method == 'GET':
         # TODO: temporarily not singleton
-        ruleOptimizer = RuleOptimizer(building)
-        ruleOptimizer.run()
-        truthTable = ruleOptimizer.truthTables[room]
+        ruleOptimizer = RuleOptimizer(building, room)
+        truthTable = ruleOptimizer.run()
+        # truthTable = ruleOptimizer.getTruthTable(room)
+        # truthTable = ruleOptimizer.truthTables[room]
 
         return returnResult(truthTable.getDict())
 

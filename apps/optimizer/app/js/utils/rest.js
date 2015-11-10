@@ -1,3 +1,49 @@
+var sessionParams = undefined;
+
+/***
+ * Query the API after being logged and having created a session.
+ * @param query
+ * @param fun
+ */
+apiQuery = function(query, fun) {
+    var executeQuery = function() {
+        postQuery(query, fun, sessionParams);
+    };
+
+    if(!sessionParams) {
+        login(executeQuery)
+    }
+    else {
+        executeQuery();
+    }
+};
+
+/***
+ * Login API query
+ * @param callback
+ */
+login = function(callback) {
+    var query = "api/users/admin/login";
+    var params = [
+        {key: "password",
+            value:"brulesAdmin2014"
+        }
+    ];
+    postQuery(query, function(json) {
+        sessionParams = [
+            {key: "userUuid", value: json['userUuid']},
+            {key: "sessionKey", value: json['sessionKey']},
+        ];
+
+        callback();
+    }, params);
+};
+
+/***
+ * GET HTTP request
+ * @param query
+ * @param fun
+ */
 getQuery = function(query, fun) {
     d3.json("http://localhost:5003/" + query, function(error, json) {
         if (error) return;
@@ -6,6 +52,12 @@ getQuery = function(query, fun) {
     });
 };
 
+/***
+ * POST HTTP request
+ * @param query
+ * @param fun
+ * @param postParams
+ */
 postQuery = function(query, fun, postParams) {
     //d3.json("http://localhost:5003/" + query, function(error, json) {
     //

@@ -1,79 +1,94 @@
 function PageViewController() {
     ///////////// PRIVATE VARIABLES /////////////
     var self = this;
-    var sessionParams;
-    var model;
+    this.model = undefined;
 
     ///////////// PUBLIC VARIABLES //////////////
-    this.truthTableViewController = null;
+    self.truthTableViewController = null;
+    self.building = undefined;
+    self.room = undefined;
 
 
     ///////////// PUBLIC METHODS /////////////
-    this.truthTable = function(building, room) {
-        this.truthTableViewController = new TruthTableViewController(building, room);
+    this.truthTable = function() {
+        this.truthTableViewController = new TruthTableViewController(self.building, self.room);
     };
 
     this.drawSidebar = function() {
-        var buildings = model.buildings;
+        var buildings = self.model.buildings;
 
-        d3.select('#sidebar')
+        // SELECT
+        var buildingLabels = d3.select('#sidebar')
             .selectAll('ul')
-            .data(buildings).enter()
+            .data(buildings);
+
+        // ENTER
+        buildingLabels
+            .enter()
             .append('ul')
             .class('nav nav-sidebar')
-            .text(ƒ('name'))
-            .selectAll('li')
-            .data(ƒ('rooms')).enter()
-            .append('li')
-            .append('a')
-            .attr('href', "")
-            .text(ƒ('roomName'))
+            .text(ƒ('name'));
+
+        // EXIT
+        buildingLabels.exit().remove();
+
+
+        buildingLabels.each(function() {
+
+            // SELECT
+            var roomLabels = d3.select(this)
+                .selectAll('li')
+                .data(ƒ('rooms'));
+
+            // ENTER
+            roomLabels.enter()
+                .append('li')
+                .append('a')
+                .attr('href', "#")
+                .text(ƒ('roomName'))
+                .on("click", function(d) {
+                    self.building = d['buildingName'];
+                    self.room = d['roomName'];
+                    self.truthTable();
+                    self.drawSidebar();
+                });
+
+            // UPDATE
+            roomLabels.classed("active", function(d) {
+                return self.building == d['buildingName'] && self.room == d['roomName'];
+            });
+
+            // EXIT
+            roomLabels.exit().remove();
+        });
+
     };
 
     ///////////// PRIVATE METHODS /////////////
     var retrieveBuildingsAndRooms = this.retrieve = function() {
-            postQuery("api/users/admin/buildings", function(json) {
+            apiQuery("api/users/admin/buildings", function(json) {
                 var buildings = json['buildings'];
 
-                model = new Model();
+                self.model = new Model();
 
                 buildings.forEach(function(b) {
                     var buildingName = b['buildingName'];
-                    postQuery("api/users/admin/buildings/" + buildingName + "/rooms", function(json){
+                    apiQuery("api/users/admin/buildings/" + buildingName + "/rooms", function(json){
 
                         var buildingRooms = {
                             name: buildingName,
                             rooms: json['rooms']
                         };
-                        model.buildings.push(buildingRooms);
+                        self.model.buildings.push(buildingRooms);
                         self.drawSidebar();
-                    }, sessionParams);
+                    });
                 });
-
-
-
-            }, sessionParams)
+            });
     };
 
-    var login = function(callback) {
-        var query = "api/users/admin/login";
-        var params = [
-            {key: "password",
-                value:"brulesAdmin2014"
-            }
-        ];
-        postQuery(query, function(json) {
-            sessionParams = [
-                {key: "userUuid", value: json['userUuid']},
-                {key: "sessionKey", value: json['sessionKey']},
-            ];
-
-            callback();
-        }, params);
-    };
 
     var init = function() {
-        login(retrieveBuildingsAndRooms);
+        retrieveBuildingsAndRooms();
     }();
 
 };

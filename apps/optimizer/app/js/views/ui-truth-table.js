@@ -30,6 +30,9 @@ function UITruthTable() {
             data.push(row);
         });
 
+
+        //TODO: d3 pattern?
+
         /************* Table Header *************/
         var header = table.append('thead');
 
@@ -98,12 +101,24 @@ function UITruthTable() {
 
     var init = function() {
         container = d3.select('#content-main');
-        table = container
+
+        table = container.selectAll('table')
+            .data([""]);
+
+        table.enter()
             .append('table')
-            .attr('class','table table-hover table-striped table-bordered')
-        var button = container
+            .attr('class','table table-hover table-striped table-bordered');
+
+        table.selectAll('*').remove();
+
+        var button = container.selectAll('button')
+            .data(["Binarize", "Minimize"]);
+
+        button.enter()
             .append('button')
-            .text('Binarize')
+            .text(ƒ())
             .class('btn btn-primary')
+
+
     }();
 };

@@ -11,10 +11,12 @@ class TruthTable:
     def __init__(self, room):
         self.rules = []
 
+        print room
+
         triggerManager = TriggerManager()
         actionManager = ActionManager()
 
-        roomRules = room.getRules()
+        roomRules = room.getRules(includeDisabled = True)
 
         for rule in roomRules:
             antecedents = triggerManager.translateTrigger(rule.antecedent)
@@ -22,6 +24,7 @@ class TruthTable:
 
             triggers = []
 
+            # TODO: add Meta-info
             for t in antecedents['triggers']:
                 trigger = Trigger(t)
                 triggers.append(trigger)
@@ -65,3 +68,7 @@ class TruthTable:
             "triggers": triggerLabels,
             "actions": actionLabels
         }
+
+
+    def getBinarizeddTable(self):
+        for
