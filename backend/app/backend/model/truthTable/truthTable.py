@@ -68,7 +68,3 @@ class TruthTable:
             "triggers": triggerLabels,
             "actions": actionLabels
         }
-
-
-    def getBinarizeddTable(self):
-        for
