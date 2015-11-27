@@ -90,6 +90,7 @@ body {
 .cell {
     /*border-left: solid 1px #ddd;*/
     text-align: center;
+    white-space: nowrap;
 }
 .cell.main-header {
     /*background: #cfcfcf;*/
@@ -103,4 +104,21 @@ body {
 }
 .cell.blank{
     /*background: #eeeeee;*/
+}
+
+.disabled {
+    color: slategrey;
+}
+
+.deleted {
+    text-decoration: line-through;
+}
+
+td.cell.id {
+    font-weight: bold;
+}
+
+td.cell.priority {
+    color: orangered;
+    font-weight: bold;
 }

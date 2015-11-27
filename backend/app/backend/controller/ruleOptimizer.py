@@ -10,7 +10,6 @@ class RuleOptimizer:
         self.building = building
         self.room = room
         self.truthTables = {}
-        pass
 
     def run(self):
         # buildingsManager = BuildingsManager()

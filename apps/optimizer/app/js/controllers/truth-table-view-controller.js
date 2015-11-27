@@ -10,17 +10,14 @@ function TruthTableViewController(building, room) {
 
     ///////////// PUBLIC METHODS /////////////
     this.drawTable = function(binary) {
-        if(binary)
-            truthTableView.renderBinary();
-        else
-            truthTableView.render();
+        truthTableView.render();
     };
 
     this.getBinaryTable = function() {
         var query = "api/rule_optimizer/binary_truth_table/" + building + "/" + room;
 
         getQuery(query, function(json) {
-            self.truthTableModel.setDataFromJSON(json);
+            self.truthTableModel.setDataFromBinaryJSON(json);
         });
     };
 

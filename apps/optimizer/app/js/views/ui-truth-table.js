@@ -2,223 +2,143 @@ function UITruthTable() {
     ///////////// PRIVATE VARIABLES /////////////
     var self = this;
     var table = null;
-    var superHeaders = null;
     var headers = null;
+    var rows = null;
 
     var container = null;
 
     ///////////// PUBLIC METHODS /////////////
     this.render = function() {
-        var truthTableModel = pageViewController.truthTableViewController.truthTableModel;
-
-        headers = truthTableModel.triggerLabels.concat(truthTableModel.actionLabels);
-
-        var data = [];
-
-        truthTableModel.rules.forEach(function(rule) {
-            row = [];
-            rule['triggers'].forEach(function(trigger) {
-                var column = headers.indexOf(trigger['category']);
-                var value = translateParams(trigger);
-                row[column] = value;
-            });
-            var action = rule['action'];
-            var actionColumn = headers.indexOf(action['category']);
-
-            var value = translateParams(action);
-            row[actionColumn] = value;
-            data.push(row);
-        });
-
-
-        //TODO: d3 pattern?
-
-        /************* Table Header *************/
-        var header = table.append('thead');
-
-        header.append('tr')
-            .selectAll('th')
-            .data(['Triggers', 'Actions']).enter()
-            .append('th')
-            .text(ƒ())
-            .attr('colspan', function(d,i) {
-                switch(i) {
-                    case 0:
-                        return truthTableModel.triggerLabels.length;
-                    case 1:
-                        return truthTableModel.actionLabels.length;
-                }
-            })
-            .class("cell main-header")
-            .classed("second-column-begin", function(d, i) {
-                return i != 0;
-            });
-
-        header.append('tr')
-            .selectAll('th')
-            .data(headers).enter()
-            .append('th')
-            .class('cell')
-            .class('sub-header')
-            .text(function(d, i) {
-                return d;
-            })
-            .classed("second-column-begin", function(d, i) {
-                return i == truthTableModel.triggerLabels.length
-            });
-
-        /************* Table Body *************/
-        table.append('tbody')
-            .selectAll('tr')
-            .data(data).enter()
-            .append('tr')
-            .each(function(d) {
-                for(var i = 0; i < headers.length; i++) {
-                    d3.select(this)
-                        .append('td')
-                        .class('cell')
-                        .classed("second-column-begin", function() {
-                            return i == truthTableModel.triggerLabels.length;
-                        })
-                        .classed("blank", function() {
-                            return d[i] == undefined
-                        })
-                        .text(d[i])
-                }
-            })
-    };
-
-    this.renderBinary = function() {
         table.selectAll('*').remove();
 
         var truthTableModel = pageViewController.truthTableViewController.truthTableModel;
-
-        var triggerHeaders = [];
-        var triggerSuperHeaders = [];
-        var actionHeaders = [];
-        var actionSuperHeaders = [];
-
-        var superHeaders = [];
-
-        truthTableModel.triggerLabels.forEach(function(d) {
-            triggerSuperHeaders = triggerSuperHeaders.concat({category: d['category'], span: d['values'].length});
-            triggerHeaders = triggerHeaders.concat(d['values']);
-        });
-
-        truthTableModel.actionLabels.forEach(function(d) {
-            actionSuperHeaders = actionSuperHeaders.concat({category: d['category'], span: d['values'].length});
-            actionHeaders = actionHeaders.concat(d['values']);
-        });
-
-        headers = triggerHeaders.concat(actionHeaders);
-        superHeaders = triggerSuperHeaders.concat(actionSuperHeaders);
-
-        var headersDivider = 0;
-        triggerSuperHeaders.forEach(function(t) {
-            headersDivider += t['span'];
-        });
-
-
-        var data = [];
-
-        truthTableModel.rules.forEach(function(rule) {
-            row = [];
-            rule['triggers'].forEach(function(trigger) {
-                var column = headers.indexOf(trigger['category']);
-                var value = translateParams(trigger);
-                row[column] = value;
-            });
-            var action = rule['action'];
-            var actionColumn = headers.indexOf(action['category']);
-
-            var value = translateParams(action);
-            row[actionColumn] = value;
-            data.push(row);
-        });
-
-
-        //TODO: d3 pattern?
+        headers = truthTableModel.headers;
+        rows = truthTableModel.rows;
 
         /************* Table Header *************/
         var header = table.append('thead');
 
-        header.append('tr')
-            .selectAll('th')
-            .data(['Triggers', 'Actions']).enter()
-            .append('th')
-            .text(ƒ())
-            .attr('colspan', function(d,i) {
-                switch(i) {
-                    case 0:
-                        return triggerHeaders.length;
-                    case 1:
-                        return actionHeaders.length;
+        //var headerRow = headers;
+        var headerRow = clone(headers);
+        var level = 0;
+        var firstActionIndex = 2;
+
+        for(; headerRow.length != 0; level++) {
+            var newSpan = 0;
+
+            console.log(headerRow);
+
+            headerRow.unshift({'name':'ID'});
+            headerRow.push({'name':'Priority'});
+
+            header.append('tr')
+                .selectAll('th')
+                .data(headerRow).enter()
+                .append('th')
+                .text(function(d,i){
+                    if(i != 0 && i != headerRow.length-1 || level == 0) {
+                        return d['name'];
+                    }
+                })
+                .attr('colspan', function(d) {
+                    return getTotalChildren(d);
+                })
+                .class('cell')
+                .classed('main-header', function() {
+                    return level == 0;
+                })
+                .each(function(d,i){
+                    if(i < firstActionIndex) {
+                        var span = (d.children === undefined) ? 1 : d.children.length;
+                        newSpan += span;
+                    }
+                })
+                .classed('second-column-begin', function(d,i) {
+                    return i == firstActionIndex;
+                })
+                .attr('title', ƒ('description'))
+                .classed('id', function(d,i) {
+                    return i == 0;
+                })
+                .classed('priority', function(d,i) {
+                    return i == headerRow.length-1;
+                });
+
+
+            // Build the new level of headers
+            hR = [];
+            headerRow.forEach(function(h) {
+                if(h.children) {
+                    hR = hR.concat(h.children);
                 }
-            })
-            .class("cell main-header")
-            .classed("second-column-begin", function(d, i) {
-                return i != 0;
             });
-
-        header.append('tr')
-            .selectAll('th')
-            .data(superHeaders).enter()
-            .append('th')
-            .text(ƒ('category'))
-            .attr('colspan', ƒ('span'))
-            .class("cell main-header")
-            .classed("second-column-begin", function(d, i) {
-                return i == triggerSuperHeaders.length;
-            });
-
-        header.append('tr')
-            .selectAll('th')
-            .data(headers).enter()
-            .append('th')
-            .class('cell')
-            .class('sub-header')
-            .text(function(d, i) {
-                return d;
-            })
-            .classed("second-column-begin", function(d, i) {
-                return i == headersDivider;
-            });
+            headerRow = hR;
+            firstActionIndex = newSpan;
+        }
 
         /************* Table Body *************/
         table.append('tbody')
             .selectAll('tr')
-            .data(data).enter()
+            .data(rows).enter()
             .append('tr')
+            .classed('deleted', ƒ('deleted'))
+            .classed('disabled', function(d){
+                return !d.enabled;
+            })
             .each(function(d) {
-                var categories = [];
-                for(var i = 0; i < headers.length; i++) {
+                var cells = d['values'];
+
+                cells[truthTableModel.headersIndexes.length] = ({'value': d['priority']});
+                cells.unshift({'value': d['id']});
+
+                for(var i = 0; i < cells.length; i++) {
                     d3.select(this)
                         .append('td')
                         .class('cell')
                         .classed("second-column-begin", function() {
-                            return i == headersDivider;
+                            return i == truthTableModel.getFirstActionIndex() + 1;
                         })
                         .classed("blank", function() {
-                            return d[i] == undefined
+                            return cells[i] == undefined
                         })
-                        .text(function() {
-                            if(d[i]) {
-                                categories
+                        .text(function(){
+                            if(cells[i]) {
+                                return cells[i].value;
                             }
-                            return d[i]
                         })
-
+                        .attr('title', function(){
+                            if(cells[i]) {
+                                return cells[i].description;
+                            }
+                        })
+                        .classed('id', function() {
+                            return i == 0;
+                        })
+                        .classed('priority', function() {
+                            return i == cells.length-1;
+                        });
                 }
             })
     };
 
+    //////////// PRIVATE METHODS /////////////
+    var getTotalChildren = function(header, total) {
+        var total = total | 0;
 
-    ///////////// PRIVATE METHODS /////////////
-    var translateParams = function(element) {
-        console.log(element)
-        return element['params'] != "" ? element['params'][0] + " - " + element['params'][1] : element['name']
+        var children = header.children;
+
+        if(children) {
+            for(var i = 0; i < children.length; i++) {
+                var child = children[i];
+                total = getTotalChildren(child, total);
+            }
+        }
+        else {
+            total += 1;
+        }
+        return total;
+
     };
-
 
     var init = function() {
         container = d3.select('#content-main');
