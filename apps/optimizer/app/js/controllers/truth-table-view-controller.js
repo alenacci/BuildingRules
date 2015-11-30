@@ -23,6 +23,14 @@ function TruthTableViewController(building, room) {
         });
     };
 
+    this.getMinimizedTable = function(json) {
+        var query = "api/rule_optimizer/minimized_truth_table/" + building + "/" + room;
+
+        getQuery(query, function(json) {
+            self.truthTableModel.setDataFromBinaryJSON(json);
+        });
+    };
+
     ///////////// PRIVATE METHODS ////////////
     var retrieveData = function() {
         var query = "api/rule_optimizer/truth_table/" + building + "/" + room;

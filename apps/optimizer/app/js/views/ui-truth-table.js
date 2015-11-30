@@ -177,6 +177,10 @@ function UITruthTable() {
                 switch(i) {
                     case 0:
                         pageViewController.truthTableViewController.getBinaryTable();
+                        break;
+                    case 1:
+                        pageViewController.truthTableViewController.getMinimizedTable();
+                        break;
                 }
             })
 

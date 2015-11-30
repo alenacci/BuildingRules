@@ -12,12 +12,35 @@ class TruthTable:
         self.room = room
         self.rules = {}
 
-        rules = room.getRules(includeDisabled = True)
+        self.dict = {}
+        self.binaryDict = {}
+        self.minimizedDict = {}
+
+        rules = room.getRules(includeDisabled=True)
         for rule in rules:
             self.rules[rule.id] = rule
 
-
+    # Getters
     def getDict(self):
+        if not self.dict:
+            self.dict = self.makeDict()
+
+        return self.dict
+
+    def getBinarizedTable(self):
+        if not self.binaryDict:
+            self.binaryDict = self.makeBinarizedTable()
+
+        return self.binaryDict
+
+    def getMinimizedTable(self):
+        if not self.minimizedDict:
+            self.minimizedDict = self.makeMinimizedTable()
+
+        return self.minimizedDict
+
+    # Make dicts
+    def makeDict(self):
         triggerManager = TriggerManager()
         actionManager = ActionManager()
 
@@ -39,15 +62,14 @@ class TruthTable:
             # Action
             action = self.makeAction(consequent)
 
-
             ruleMin['triggers'] = triggers
             ruleMin['action'] = action
 
             rules.append(ruleMin)
 
-        return {'rules':rules}
+        return {'rules': rules}
 
-    def getBinarizedTable(self):
+    def makeBinarizedTable(self):
         triggerManager = TriggerManager()
         actionManager = ActionManager()
 
@@ -146,7 +168,7 @@ class TruthTable:
             #         actionsDict[action['category']].append(a)
 
 
-            #TODO: Action not intervalized
+            # TODO: Action not intervalized
             if 'translatedParams' in action.keys():
                 if action['category'] not in actionsIntervalsDict:
                     actionsIntervalsDict[action['category']] = []
@@ -156,12 +178,12 @@ class TruthTable:
                     if 'translatedParams' in d.keys():
                         name = d['translatedParams']['0']
                         if '1' in d['translatedParams'].keys():
-                             name += " - " + d['translatedParams']['1']
+                            name += " - " + d['translatedParams']['1']
                         actionList.append(name)
 
                 actionName = action['translatedParams']['0']
 
-                if '1'in action['translatedParams'].keys():
+                if '1' in action['translatedParams'].keys():
                     actionName += " - " + action['translatedParams']['1']
 
                 if actionName not in actionList:
@@ -179,7 +201,6 @@ class TruthTable:
                     a['name'] = action['name']
                     a['description'] = action['description']
                     actionsDict[action['category']].append(a)
-
 
         triggerLabels = []
         actionLabels = []
@@ -204,7 +225,6 @@ class TruthTable:
 
             child = self.makeSubCategory(key, value)
             actionLabels.append(child)
-
 
         ruleList = self.getDict()['rules']
         rules = {}
@@ -239,10 +259,9 @@ class TruthTable:
             for i in range(len(ones)):
                 o = ones[i]
 
-
                 one = {}
                 one['id'] = str(r['id'])
-                if(len(ones) > 1):
+                if (len(ones) > 1):
                     one['id'] += alphabet[i]
                 one['enabled'] = r['enabled']
                 one['deleted'] = r['deleted']
@@ -266,16 +285,59 @@ class TruthTable:
         labels.append(triggers)
         labels.append(actions)
 
-
         return {
             'labels': labels,
             'rules': rules.values()
         }
 
-    def getMinimizedTable(self):
-        # TODO:
-        pass
+    def makeMinimizedTable(self):
+        binaryDict = self.getBinarizedTable()
 
+        rules = binaryDict['rules']
+        labels = binaryDict['labels']
+
+        miniRules = []
+
+        for r in rules:
+            rule = {}
+            rule['action'] = r['action']
+
+            oldOnes = {d['value']: d for d in r['ones']}
+            miniOnes = self.minimize(set(oldOnes.keys()))
+
+            ones = []
+
+            for o in miniOnes:
+                one = {}
+                if o in oldOnes:
+                    oldOne = oldOnes[o]
+                    one['deleted'] = oldOne['deleted']
+                    one['enabled'] = oldOne['enabled']
+                    one['priority'] = oldOne['priority']
+                    one['id'] = oldOne['id']
+                    one['value'] = oldOne['value']
+                else:
+                    one['deleted'] = false
+                    one['enabled'] = true
+                    one['priority'] = 50
+                    one['id'] = 'NEW'
+                    one['value'] = o
+                ones.append(one)
+
+            rule['ones'] = ones
+
+            miniRules.append(rule)
+
+
+
+        return {
+            'labels': labels,
+            'rules': miniRules
+        }
+
+
+
+    # Support functions
     def makeTriggers(self, antecedents):
         triggers = []
 
@@ -332,13 +394,13 @@ class TruthTable:
         entries = sorted(value, key=lambda k: k['name'])
 
         values = []
-        for i in range(0,len(entries)-1):
+        for i in range(0, len(entries) - 1):
             label = {}
-            label['name'] = entries[i]['name'] + " - " + entries[i+1]['name']
+            label['name'] = entries[i]['name'] + " - " + entries[i + 1]['name']
             label['description'] = entries[i]['description']
             params = {}
             params['0'] = entries[i]['name']
-            params['1'] = entries[i+1]['name']
+            params['1'] = entries[i + 1]['name']
             label['params'] = params
 
             values.append(label)
@@ -362,7 +424,8 @@ class TruthTable:
                     values = []
                     for t in triggers:
                         if t['category'] == cat and 'translatedParams' in t.keys():
-                            if t['translatedParams']['0'] <= trigger['params']['0'] and t['translatedParams']['1'] >= trigger['params']['1']:
+                            if t['translatedParams']['0'] <= trigger['params']['0'] and t['translatedParams']['1'] >= \
+                                    trigger['params']['1']:
                                 indexes.append(i)
 
                 # Make alternatives
@@ -384,7 +447,7 @@ class TruthTable:
                 newStrings = []
                 for v in values:
                     for s in strings:
-                        newStrings.append(s+v)
+                        newStrings.append(s + v)
                 strings = newStrings
 
             # Simple name
@@ -402,3 +465,15 @@ class TruthTable:
                         strings[i] += value
 
         return strings
+
+    def minimize(self, ones):
+        from quine_mccluskey.qm import QuineMcCluskey
+
+        qm = QuineMcCluskey()
+
+        miniOnes = qm.simplify_los(ones, dc=set([]))
+
+        print 'before: ' + str(len(ones)) + ' - after: ' + str(len(miniOnes))
+
+        return miniOnes
+
