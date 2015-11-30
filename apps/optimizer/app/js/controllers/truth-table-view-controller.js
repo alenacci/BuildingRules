@@ -9,9 +9,11 @@ function TruthTableViewController(building, room) {
     this.truthTableModel = null;
 
     ///////////// PUBLIC METHODS /////////////
-    this.drawTable = function(binary) {
+    this.drawTable = function() {
+        fillHeader(self.truthTableModel.rows.length);
         truthTableView.render();
     };
+
 
     this.getBinaryTable = function() {
         var query = "api/rule_optimizer/binary_truth_table/" + building + "/" + room;
@@ -30,9 +32,14 @@ function TruthTableViewController(building, room) {
         });
     };
 
+    var fillHeader = function(rules) {
+        truthTableView.fillHeader(building, room, rules);
+    };
+
     var init = function() {
         self.truthTableModel = new TruthTableModel(self);
         truthTableView = new UITruthTable(self);
+        fillHeader();
         retrieveData();
     }();
 

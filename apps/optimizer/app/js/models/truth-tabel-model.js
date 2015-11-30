@@ -13,7 +13,8 @@ function TruthTableModel() {
 
     ///////////// PUBLIC METHODS //////////////
     this.setDataFromJSON = function(json) {
-        console.log(json);
+        self.rows = [];
+        self.headersIndexes = []
 
         var rules = json['rules'];
 
@@ -35,10 +36,10 @@ function TruthTableModel() {
 
         });
 
-        getHeaderIndex(self.headers);
+        self.headersIndexes = getHeaderIndexes(self.headers);
 
-        console.log(self.headers);
-        console.log(self.getFirstActionIndex());
+        //console.log(self.headers);
+        //console.log(self.getFirstActionIndex());
 
         // ROWS
         rules.forEach(function(rule) {
@@ -77,19 +78,49 @@ function TruthTableModel() {
     };
 
     this.setDataFromBinaryJSON = function(json) {
-        // TODO:
         self.headers = json['labels'];
+        self.rows = [];
+        self.headersIndexes = getHeaderIndexes(self.headers);
+
+        var rules = json['rules'];
+
+        rules.forEach(function(rule) {
+            ones = rule['ones'];
+
+            ones.forEach(function(one) {
+                var row = {};
+                row.id = one['id'];
+                row.enabled = one['enabled'];
+                row.deleted = one['deleted'];
+                row.priority = one['priority'];
+                row.values = [];
+
+                for(var i = 0; i < one['value'].length; i++) {
+                    var cell = {};
+                    cell.value = one['value'][i];
+                    row.values[i] = cell
+                }
+
+                var column = self.headersIndexes.lastIndexOf(rule['action']);
+                var cell = {};
+                cell.value = '1';
+                row.values[column] = cell;
 
 
-        self.rows = []
+                self.rows.push(row);
+            });
+
+        });
+
+        console.log(self.rows);
 
         pageViewController.truthTableViewController.drawTable();
     };
 
     this.getFirstActionIndex = function() {
         var current = self.headers[ACTIONS];
-        while(current.children) {
-            current = current.children
+        while(current.children || current[0].children) {
+            current = current.children || current[0].children
         }
         return self.headersIndexes.lastIndexOf(current[0].name);
     };
@@ -107,17 +138,22 @@ function TruthTableModel() {
         headerList.push(header);
     };
 
-    var getHeaderIndex = function(headers, indexes) {
+    var getHeaderIndexes = function(headers, indexes) {
+        indexes = indexes
+        if(!indexes) {
+            indexes = []
+        }
         headers.forEach(function(h) {
             var current = h;
             if(current.children) {
                 current = current.children;
-                getHeaderIndex(current);
+                getHeaderIndexes(current, indexes);
             }
             else {
-                self.headersIndexes.push(current.name);
+                indexes.push(current.name);
             }
         });
+        return indexes;
     };
 
     var translateParams = function(element) {

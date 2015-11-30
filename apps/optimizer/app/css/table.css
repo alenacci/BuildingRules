@@ -80,8 +80,23 @@ body {
         padding-left: 40px;
     }
 }
+
+.main #header {
+    display:inline-block;
+}
+
 .main .page-header {
     margin-top: 0;
+}
+
+#buttons {
+    vert-align: middle;
+    display:inline-block;
+    margin-left: 10px;
+}
+
+#buttons button {
+    margin: 2px;
 }
 
 /*

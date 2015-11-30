@@ -104,36 +104,71 @@ class TruthTable:
                         t['name'] = trigger['name']
                         t['description'] = trigger['description']
                         triggersDict[trigger['category']].append(t)
+            #
+            # # Action Intervals
+            # if 'translatedParams' in action.keys():
+            #     if '0' in action['translatedParams'].keys() and '1' in action['translatedParams'].keys():
+            #         if action['category'] not in actionsIntervalsDict:
+            #             actionsIntervalsDict[action['category']] = []
+            #
+            #         intervalList = [d['name'] for d in actionsIntervalsDict[action['category']]]
+            #         if action['translatedParams']['0'] not in intervalList:
+            #             a = {}
+            #             a['name'] = action['translatedParams']['0']
+            #             a['description'] = action['description']
+            #             actionsIntervalsDict[action['category']].append(a)
+            #         if action['translatedParams']['1'] not in intervalList:
+            #             a = {}
+            #             a['name'] = action['translatedParams']['1']
+            #             a['description'] = action['description']
+            #             actionsIntervalsDict[action['category']].append(a)
+            #
+            #     elif '0' in action['translatedParams'].keys():
+            #         if action['category'] not in action:
+            #             actionsDict[action['category']] = []
+            #
+            #             actionList = [d['name'] for d in actionsDict[action['category']]]
+            #             if action['translatedParams']['0'] not in actionList:
+            #                 a = {}
+            #                 a['name'] = action['translatedParams']['0']
+            #                 a['description'] = action['description']
+            #                 actionsDict[action['category']].append(a)
+            # # Action Discrete
+            # else:
+            #     if action['category'] not in actionsDict:
+            #         actionsDict[action['category']] = []
+            #
+            #     actionList = [d['name'] for d in actionsDict[action['category']]]
+            #     if action['name'] not in actionList:
+            #         a = {}
+            #         a['name'] = action['name']
+            #         a['description'] = action['description']
+            #         actionsDict[action['category']].append(a)
 
-            # Action Intervals
+
+            #TODO: Action not intervalized
             if 'translatedParams' in action.keys():
-                if '0' in action['translatedParams'].keys() and '1' in action['translatedParams'].keys():
-                    if action['category'] not in actionsIntervalsDict:
-                        actionsIntervalsDict[action['category']] = []
+                if action['category'] not in actionsIntervalsDict:
+                    actionsIntervalsDict[action['category']] = []
 
-                    intervalList = [d['name'] for d in actionsIntervalsDict[action['category']]]
-                    if action['translatedParams']['0'] not in intervalList:
-                        a = {}
-                        a['name'] = action['translatedParams']['0']
-                        a['description'] = action['description']
-                        actionsIntervalsDict[action['category']].append(a)
-                    if action['translatedParams']['1'] not in intervalList:
-                        a = {}
-                        a['name'] = action['translatedParams']['1']
-                        a['description'] = action['description']
-                        actionsIntervalsDict[action['category']].append(a)
+                actionList = []
+                for d in actionsIntervalsDict[action['category']]:
+                    if 'translatedParams' in d.keys():
+                        name = d['translatedParams']['0']
+                        if '1' in d['translatedParams'].keys():
+                             name += " - " + d['translatedParams']['1']
+                        actionList.append(name)
 
-                elif '0' in action['translatedParams'].keys():
-                    if action['category'] not in action:
-                        actionsDict[action['category']] = []
+                actionName = action['translatedParams']['0']
 
-                        actionList = [d['name'] for d in actionsDict[action['category']]]
-                        if action['translatedParams']['0'] not in actionList:
-                            a = {}
-                            a['name'] = action['translatedParams']['0']
-                            a['description'] = action['description']
-                            actionsDict[action['category']].append(a)
-            # Action Discrete
+                if '1'in action['translatedParams'].keys():
+                    actionName += " - " + action['translatedParams']['1']
+
+                if actionName not in actionList:
+                    a = {}
+                    a['name'] = actionName
+                    a['description'] = action['description']
+                    actionsIntervalsDict[action['category']].append(a)
             else:
                 if action['category'] not in actionsDict:
                     actionsDict[action['category']] = []
@@ -144,6 +179,7 @@ class TruthTable:
                     a['name'] = action['name']
                     a['description'] = action['description']
                     actionsDict[action['category']].append(a)
+
 
         triggerLabels = []
         actionLabels = []
@@ -164,50 +200,56 @@ class TruthTable:
             actionLabels.append(child)
 
         for key, value in actionsIntervalsDict.iteritems():
-            values = self.makeIntervals(value)
+            # values = self.makeIntervals(value)
 
-            child = self.makeSubCategory(key, values)
+            child = self.makeSubCategory(key, value)
             actionLabels.append(child)
 
 
-        rules = self.getDict()['rules']
+        ruleList = self.getDict()['rules']
+        rules = {}
 
-        for r in rules:
+        for r in ruleList:
             triggers = r['triggers']
 
             ones = self.getOnes(triggers, triggerLabels)
             print triggers
             print ones
 
+            action = r['action']
+
+            if 'translatedParams' in action.keys():
+                params = action['translatedParams']
+                actionName = params['0']
+                if '1' in params.keys():
+                    actionName += " - " + params['1']
+
+            else:
+                actionName = action['name']
+            if actionName not in rules.keys():
+                rule = {}
+                rule['action'] = actionName
+                rule['ones'] = []
+
+                rules[actionName] = rule
+
+            import string
+            alphabet = list(string.ascii_lowercase)
+
+            for i in range(len(ones)):
+                o = ones[i]
 
 
+                one = {}
+                one['id'] = str(r['id'])
+                if(len(ones) > 1):
+                    one['id'] += alphabet[i]
+                one['enabled'] = r['enabled']
+                one['deleted'] = r['deleted']
+                one['priority'] = r['priority']
+                one['value'] = o
 
-        # # RULES
-        # rules = []
-        #
-        # for r in self.rules:
-        #     triggers = []
-        #     for trigger in r.triggers:
-        #         if trigger.category in triggersIntervalsDict:
-        #             intervals = triggersIntervalsDict[trigger.category]
-        #             for i in range(0, len(intervals)-1):
-        #                 if int(intervals[i]) >= int(trigger.params['0']) and int(intervals[i+1]) <= int(trigger.params['1']):
-        #                     interval = intervals[i] + " - " + intervals[i+1]
-        #                     triggers.append({'super-category': trigger.category, 'category': interval, 'name': 1, 'params': ''})
-        #         elif trigger.category in triggersDict:
-        #             triggers.append({'super-category': trigger.category, 'category': trigger.name, 'name': 1, 'params': ''})
-        #
-        #     action = None
-        #     if r.action.category in actionsIntervalsDict:
-        #         intervals = actionsIntervalsDict[r.action.category]
-        #         for i in range(0, len(intervals) - 1):
-        #             if int(intervals[i]) >= int(r.action.params['0']) and int(intervals[i+1]) <= int(r.action.params['1']):
-        #                 interval = intervals[i] + " - " + intervals[i+1]
-        #                 action = {'super-category': r.action.category, 'category': interval, 'name': 1, 'params': ''}
-        #     elif r.action.category in actionsDict:
-        #             action = {'super-category': r.action.category, 'category': r.action.name, 'name': 1, 'params': ''}
-        #
-        #     rules.append({'action': action, 'triggers': triggers})
+                rules[actionName]['ones'].append(one)
 
         labels = []
 
@@ -227,7 +269,12 @@ class TruthTable:
 
         return {
             'labels': labels,
+            'rules': rules.values()
         }
+
+    def getMinimizedTable(self):
+        # TODO:
+        pass
 
     def makeTriggers(self, antecedents):
         triggers = []
@@ -261,7 +308,6 @@ class TruthTable:
 
         return action
 
-
     def makeSubCategory(self, key, value):
         subcategory = {}
         subcategory['name'] = key
@@ -286,7 +332,6 @@ class TruthTable:
         entries = sorted(value, key=lambda k: k['name'])
 
         values = []
-        # values.append("<" + entries[0])
         for i in range(0,len(entries)-1):
             label = {}
             label['name'] = entries[i]['name'] + " - " + entries[i+1]['name']
@@ -297,27 +342,63 @@ class TruthTable:
             label['params'] = params
 
             values.append(label)
-        # values.append(entries[-1] + ">")
 
         return values
 
     def getOnes(self, triggers, triggerLabels):
-        string = ""
-
+        strings = [""]
 
         for category in triggerLabels:
             cat = category['name']
-            for trigger in category['children']:
-                value = None
-                for t in triggers:
-                    if t['category'] == cat:
-                        if t['name'] == trigger['name']:
-                            value = '1'
-                        if 'translatedParams' in t.keys() and 'params' in trigger.keys():
-                            if t['translatedParams']['0'] <= trigger['params']['0'] and t['translatedParams']['1'] >= trigger['params']['1']:
-                                value = '1'
-                if value == None:
-                    value = '-'
-                string += value
-        return string
 
+            children = category['children']
+
+            # Intervals Duplication
+            if 'params' in children[0].keys():
+                indexes = []
+
+                for i in range(len(children)):
+                    trigger = children[i]
+                    values = []
+                    for t in triggers:
+                        if t['category'] == cat and 'translatedParams' in t.keys():
+                            if t['translatedParams']['0'] <= trigger['params']['0'] and t['translatedParams']['1'] >= trigger['params']['1']:
+                                indexes.append(i)
+
+                # Make alternatives
+                for i in indexes:
+                    value = ''
+                    for j in range(len(children)):
+                        if j == i:
+                            value += '1'
+                        else:
+                            value += '-'
+                    values.append(value)
+
+
+                # If nothing is present
+                if values == []:
+                    values = ['-' * len(children)]
+
+                # Append all new alternatives to all other
+                newStrings = []
+                for v in values:
+                    for s in strings:
+                        newStrings.append(s+v)
+                strings = newStrings
+
+            # Simple name
+            else:
+                for trigger in children:
+                    value = None
+                    for t in triggers:
+                        if t['category'] == cat:
+                            if t['name'] == trigger['name']:
+                                value = '1'
+                    if value == None:
+                        value = '-'
+
+                    for i in range(len(strings)):
+                        strings[i] += value
+
+        return strings

@@ -26,7 +26,7 @@ function UITruthTable() {
         for(; headerRow.length != 0; level++) {
             var newSpan = 0;
 
-            console.log(headerRow);
+            //console.log(headerRow);
 
             headerRow.unshift({'name':'ID'});
             headerRow.push({'name':'Priority'});
@@ -121,6 +121,19 @@ function UITruthTable() {
             })
     };
 
+    self.fillHeader = function(building, room, rules) {
+        var header = d3.select('#content-main')
+            .select('h1')
+            .text(function() {
+                return building + " " + room;
+            });
+
+        if(rules) {
+            header.append('small')
+                .text(' - ' + rules + " rules")
+        }
+    };
+
     //////////// PRIVATE METHODS /////////////
     var getTotalChildren = function(header, total) {
         var total = total | 0;
@@ -152,7 +165,8 @@ function UITruthTable() {
 
         table.selectAll('*').remove();
 
-        var button = container.selectAll('button')
+        var button = container.select('#buttons')
+            .selectAll('button')
             .data(["Binarize", "Minimize"]);
 
         button.enter()
