@@ -303,7 +303,7 @@ class TruthTable:
             rule['action'] = r['action']
 
             oldOnes = {d['value']: d for d in r['ones']}
-            miniOnes = self.minimize(set(oldOnes.keys()))
+            miniOnes = self.minimize(oldOnes.keys(), labels)
 
             ones = []
 
@@ -317,8 +317,8 @@ class TruthTable:
                     one['id'] = oldOne['id']
                     one['value'] = oldOne['value']
                 else:
-                    one['deleted'] = false
-                    one['enabled'] = true
+                    one['deleted'] = False
+                    one['enabled'] = True
                     one['priority'] = 50
                     one['id'] = 'NEW'
                     one['value'] = o
@@ -458,7 +458,7 @@ class TruthTable:
                         if t['category'] == cat:
                             if t['name'] == trigger['name']:
                                 value = '1'
-                    if value == None:
+                    if value is None:
                         value = '-'
 
                     for i in range(len(strings)):
@@ -466,14 +466,113 @@ class TruthTable:
 
         return strings
 
-    def minimize(self, ones):
-        from quine_mccluskey.qm import QuineMcCluskey
+    def minimize(self, ones, labels):
+        triggersLabels = self.makeTriggerLabels(labels)
 
+        print ''
+        print 'Minimizing', ones
+        collapsedOnes, dc, indexes = self.getOnesAndDontCares(ones, triggersLabels)
+        print collapsedOnes, dc, indexes
+
+        miniOnes = self.__simplify(collapsedOnes, dc=dc)
+        print miniOnes
+
+        expandedOnes = self.expandOnes(miniOnes, indexes, len(ones[0]))
+        print expandedOnes
+
+        return expandedOnes
+
+    def makeTriggerLabels(self, labels):
+        triggerLabels = []
+
+        categories = labels[0]['children']
+
+        for cat in categories:
+            triggers = cat['children']
+
+            for t in triggers:
+                triggerLabels.append(t['name'])
+
+        return triggerLabels
+
+    def getOnesAndDontCares(self, ones, triggersLabels):
+
+        indexes = []
+
+        # Get non-dc indexes
+        for i in range(len(ones[0])):
+            for one in ones:
+                if one[i] != '-':
+                    if i not in indexes:
+                        indexes.append(i)
+
+        # Minimize ones dimension
+        miniOnes = []
+        for one in ones:
+            newOne = ""
+            for i in indexes:
+                newOne += one[i]
+            miniOnes.append(newOne)
+
+        # Minimize Labels accordingly
+        miniLabels = []
+        for i in indexes:
+            miniLabels.append(triggersLabels[i])
+
+        dc = self.makeDontCares(miniLabels)
+
+        return miniOnes, dc, indexes
+
+    def makeDontCares(self, labels):
+        DCs = []
+
+        domains = []
+        domains.append(set(['OCCUPANCY_TRUE', 'OCCUPANCY_FALSE']))
+        domains.append(set(['SUNNY', 'RAINY', 'CLOUDY']))
+
+        for domain in domains:
+            indexes = []
+            if domain.issubset(set(labels)):
+                for d in domain:
+                    indexes.append(labels.index(d))
+
+            if indexes:
+                dc = ""
+                for i in range(len(labels)):
+                    if i in indexes:
+                        dc += "0"
+                    else:
+                        dc += "-"
+                DCs.append(dc)
+
+        return DCs
+
+    def expandOnes(self, ones, indexes, length):
+        newOnes = []
+
+        for o in ones:
+            one = ""
+            count = 0
+
+            for i in range(length):
+                if i in indexes:
+                    one += o[count]
+                    count += 1
+                else:
+                    one += '-'
+
+            newOnes.append(one)
+        return newOnes
+
+    def __simplify(self, ones, dc):
+        return self.__tabular(ones, dc)
+
+    def __quineMcCluskey(self, ones, dc):
+        from quine_mccluskey.qm import QuineMcCluskey
         qm = QuineMcCluskey()
 
-        miniOnes = qm.simplify_los(ones, dc=set([]))
+        return qm.simplify_los(set(ones), set(dc))
 
-        print 'before: ' + str(len(ones)) + ' - after: ' + str(len(miniOnes))
-
-        return miniOnes
-
+    def __tabular(self, ones, dc):
+        from app.backend.model.truthTable.quine_mccluskey.driver import *
+        return minimize(ones,dc)
