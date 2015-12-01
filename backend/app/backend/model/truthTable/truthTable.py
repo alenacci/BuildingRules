@@ -211,7 +211,7 @@ class TruthTable:
             triggerLabels.append(child)
 
         for key, value in triggersIntervalsDict.iteritems():
-            values = self.makeIntervals(value)
+            values = self.makeIntervals(value, bounds=key == 'TIME')
 
             child = self.makeSubCategory(key, values)
             triggerLabels.append(child)
@@ -389,11 +389,23 @@ class TruthTable:
 
         return subcategory
 
-    def makeIntervals(self, value):
+    def makeIntervals(self, value, bounds=False):
         # Sort by dict['name'] inside the list
         entries = sorted(value, key=lambda k: k['name'])
 
         values = []
+
+        if bounds and entries[0]['name'] != '00':
+            first = {}
+            first['name'] = '00 - ' + entries[0]['name']
+            first['description'] = entries[0]['description']
+            params = {}
+            params['0'] = '00'
+            params['1'] = entries[0]['name']
+            first['params'] = params
+            values.append(first)
+
+
         for i in range(0, len(entries) - 1):
             label = {}
             label['name'] = entries[i]['name'] + " - " + entries[i + 1]['name']
@@ -405,28 +417,44 @@ class TruthTable:
 
             values.append(label)
 
+        if bounds and entries[-1]['name'] != '23':
+            last = {}
+            last['name'] = entries[-1]['name'] + " - 23"
+            last['description'] = entries[-1]['description']
+            params = {}
+            params['0'] = entries[-1]['name']
+            params['1'] = '23'
+            last['params'] = params
+            values.append(last)
+
         return values
 
-    def getOnes(self, triggers, triggerLabels):
+    def getOnes(self, triggers, categoryLabels):
         strings = [""]
 
-        for category in triggerLabels:
+        for category in categoryLabels:
             cat = category['name']
 
             children = category['children']
 
             # Intervals Duplication
-            if 'params' in children[0].keys():
+            if 'params' in children[0].keys() and '1' in children[0]['params'].keys():
                 indexes = []
 
                 for i in range(len(children)):
-                    trigger = children[i]
+                    triggerLabel = children[i]
                     values = []
-                    for t in triggers:
-                        if t['category'] == cat and 'translatedParams' in t.keys():
-                            if t['translatedParams']['0'] <= trigger['params']['0'] and t['translatedParams']['1'] >= \
-                                    trigger['params']['1']:
-                                indexes.append(i)
+                    for trigger in triggers:
+                        if trigger['category'] == cat and 'translatedParams' in trigger.keys():
+                            # Same-day interval
+                            if trigger['translatedParams']['0'] <= trigger['translatedParams']['1']:
+                                if trigger['translatedParams']['0'] <= triggerLabel['params']['0'] and trigger['translatedParams']['1'] >= triggerLabel['params']['1']:
+                                    indexes.append(i)
+                            # Bound
+                            else:
+                                if trigger['translatedParams']['0'] <= triggerLabel['params']['0'] and '23' >= triggerLabel['params']['1']\
+                                        or '00' <= triggerLabel['params']['0'] and trigger['translatedParams']['1'] >= triggerLabel['params']['1']:
+                                    indexes.append(i)
 
                 # Make alternatives
                 for i in indexes:
