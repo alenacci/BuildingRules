@@ -11,6 +11,7 @@ pip install -U flask-cors
 pip install MySQL-python
 pip install requests
 pip install httplib2
+pip install numpy
 
 # Downloading and installing Z3
 wget http://www.alessandronacci.it/repo/BuildingRulesInstaller/z3-x64-ubuntu-12.04.zip

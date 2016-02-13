@@ -1,5 +1,6 @@
 var triggerPortions = 1;
 var maxTriggerPortions = 5;
+var cachedParams = {}
 
 function updatePriority(value)
 {
@@ -91,6 +92,11 @@ function triggerSelected(groupId)
 
 	triggerCategory = getTriggerCategory(triggerText);
 
+	if (triggerCategory == "DEFAULT")
+	{
+		compose()
+	}
+
 	if (triggerCategory == "TEMPERATURE")	
 	{
 		show('temperature_box_' + groupId);
@@ -110,7 +116,6 @@ function triggerSelected(groupId)
 	{
 		show('day_box_' + groupId);
 	}
-
 
 }
 
@@ -160,6 +165,8 @@ function compose()
 
 	antecent = "if ";
 
+	triggerParams = {};
+
 	for (var i=0; i < triggerPortions; i++){
 
 		groupId = i;
@@ -175,25 +182,56 @@ function compose()
 		dateMonthTo = document.getElementById("date_month_to_" + groupId);
 		day = document.getElementById("day_" + groupId);
 		triggerText = triggerBox.options[triggerBox.selectedIndex].text;
-		
+
 		triggerCategory = getTriggerCategory(triggerText);
 
 		if (triggerCategory == "DEFAULT"){
-			antecent += triggerText + ", ";
+			if(triggerText != 'Select a trigger') {
+				if(triggerText == 'it is sunny' || triggerText == 'it is cloudy' || triggerText == 'it is rainy') {
+					triggerParams['weather'] = triggerText
+				}
+				else if(triggerText == 'someone is in the room') {
+					triggerParams['occupancy'] = true
+				}
+				else if(triggerText == 'nobody is in the room') {
+					triggerParams['occupancy'] = false
+				}
+
+
+				antecent += triggerText + ", ";
+			}
+			else {
+				antecent += ', '
+			}
 		}
 
 		if (triggerCategory == "TEMPERATURE")
 		{
 			tempFromText = temperatureFrom.options[temperatureFrom.selectedIndex].text;
 			tempToText = temperatureTo.options[temperatureTo.selectedIndex].text;
-			antecent += triggerText + " " + tempFromText + " and " + tempToText + ", ";
+			if(tempFromText != '-' && tempToText != '-') {
+				antecent += triggerText + " " + tempFromText + " and " + tempToText + ", ";
+				if(triggerText == 'external temperature is between') {
+					triggerParams['external_temp_min'] = tempFromText
+					triggerParams['external_temp_max'] = tempToText
+				}
+				else if(triggerText == 'room temperature is between') {
+					triggerParams['room_temp_min'] = tempFromText
+					triggerParams['room_temp_max'] = tempToText
+				}
+			}
 		}
 
 		if (triggerCategory == "TIME")
 		{
 			timeFromText = timeFrom.options[timeFrom.selectedIndex].text;
 			timeToText = timeTo.options[timeTo.selectedIndex].text;
-			antecent += triggerText + " " + timeFromText + " and " + timeToText + ", ";
+
+			if(timeFromText != '-' && timeToText != '-') {
+				antecent += triggerText + " " + timeFromText + " and " + timeToText + ", ";
+				triggerParams['start_time'] = timeFromText
+				triggerParams['end_time'] = timeToText
+			}
 		}
 
 		if (triggerCategory == "DATE")
@@ -203,16 +241,28 @@ function compose()
 			dateDayToText = dateDayTo.options[dateDayTo.selectedIndex].text;
 			dateMonthToText = dateMonthTo.options[dateMonthTo.selectedIndex].text;
 
+			if(dateDayFromText != 'Day' && dateMonthFromText != 'Month' &&
+				dateDayToText != 'Day' && dateMonthToText != 'Month') {
+				triggerParams['start_date'] = dateMonthFromText+'-'+dateDayFromText
+				triggerParams['end_date'] = dateMonthToText+'-'+dateDayToText
+			}
+
 			antecent += triggerText + " " + dateDayFromText + "/" + dateMonthFromText + " and " + dateDayToText + "/" + dateMonthToText + ", ";
 		}
 
 		if (triggerCategory == "DAY")
 		{
 			dayText = day.options[day.selectedIndex].text;
+
+			if(dayText != '-') {
+				triggerParams['day'] = dayText
+			}
 			antecent += triggerText + " " + dayText + ", ";
 		}
 
 	}
+
+	influenceQuery(triggerParams);
 
 	antecent = antecent.slice(0, -2);
 
@@ -333,6 +383,21 @@ function updateTemperatureSetpoint()
 
 }
 
+function influenceQuery(triggerParams) {
+	if(JSON.stringify(triggerParams) == JSON.stringify(cachedParams)) {
+		return
+	}
+
+	cachedParams = triggerParams
+
+	postQuery('api/influence_metric', renderGauge, triggerParams);
+}
+
+
+function renderGauge(value) {
+	console.log(value)
+}
+
 function ruleBodyAlert()
 {
 	alert("Please use the 'Rule Composer' below to create your rule! :) ")
@@ -374,6 +439,9 @@ function init()
 
 	hideAllActionSubBox();
 }
+
+
+
 
 
 	

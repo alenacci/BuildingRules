@@ -1162,7 +1162,24 @@ def getMinimizedTable(building, room):
 
         return returnResult(truthTable.getMinimizedTable())
 
+@api.route('/api/rule_optimizer/discretized_truth_table/<building>/<room>', methods=['GET'])
+@cross_origin(origin='*',headers=['Content-Type','Authorization'])
+def getDiscretizedTable(building, room):
+    if request.method == 'GET':
+        # TODO: temporarily not singleton
+        ruleOptimizer = RuleOptimizer(building, room)
+        truthTable = ruleOptimizer.run()
 
+        return returnResult(truthTable.getDiscreteMinimizedTable())
+
+
+@api.route('/api/influence_metric', methods=['POST'])
+@cross_origin(origin='*',headers=['Content-Type','Authorization'])
+def getInfluence():
+    if request.method == 'POST':
+        print request.form
+
+        return 'ok'
 
 
 
