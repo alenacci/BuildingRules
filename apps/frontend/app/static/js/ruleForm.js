@@ -2,6 +2,7 @@ var triggerPortions = 1;
 var maxTriggerPortions = 5;
 var cachedParams = {}
 
+
 function updatePriority(value)
 {
 	priorityTextBox = document.getElementById('priorityTextBox');
@@ -403,13 +404,14 @@ function toCelsius(degree) {
 
 
 function renderGauge(value) {
-	console.log(value)
+	console.log(value['probability'])
+	powerGauge.update(value['probability'])
 }
 
 function ruleBodyAlert()
 {
 	alert("Please use the 'Rule Composer' below to create your rule! :) ")
-	
+
 }
 
 function addTriggerPortion()
@@ -435,6 +437,8 @@ function removeTriggerPortion()
 }
 
 
+
+
 function init()
 {
 
@@ -446,6 +450,17 @@ function init()
 	}
 
 	hideAllActionSubBox();
+
+	powerGauge = gauge('#power-gauge', {
+		size: 300,
+		clipWidth: 300,
+		clipHeight: 200,
+		ringWidth: 60,
+		minValue: 0.001,
+		maxValue: 1,
+		transitionMs: 4000,
+	});
+	powerGauge.render()
 }
 
 

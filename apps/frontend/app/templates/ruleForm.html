@@ -2,8 +2,12 @@
 {% block body %}
   {% if session.logged_in %}
 
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/gauge.css') }}">
   <script type="text/javascript" src="{{ url_for('static', filename='js/ruleForm.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='js/rest.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/gauge.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/d3.min.js') }}"></script>
+
 
   <script>
   window.onload = function(){
@@ -456,6 +460,9 @@
       </div>
     </div>
 
+      <hr>
+      <div id="power-gauge"></div>
+
     <div class="control-group">
       <div class="controls">
       {% if rule %}
@@ -465,6 +472,7 @@
       {% endif %}
       </div>
    </div>
+
 
   </form>
 
