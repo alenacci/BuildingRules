@@ -405,7 +405,15 @@ function toCelsius(degree) {
 
 function renderGauge(value) {
 	console.log(value['probability'])
-	powerGauge.update(value['probability'])
+	probability = value['probability']
+	powerGauge.update(probability)
+
+	if(0.05<=probability && probability<=0.3) {
+		document.getElementById('submit-button').removeAttribute('disabled')
+	}
+	else {
+		document.getElementById('submit-button').setAttribute('disabled', true)
+	}
 }
 
 function ruleBodyAlert()

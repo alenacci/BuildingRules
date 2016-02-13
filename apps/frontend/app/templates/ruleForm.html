@@ -461,14 +461,15 @@
     </div>
 
       <hr>
+      <h3 class="muted">Influence</h3>
       <div id="power-gauge"></div>
 
     <div class="control-group">
       <div class="controls">
       {% if rule %}
-        <button type="submit" class="btn btn-large btn-primary">Save the modifications!</button>
+        <button id="submit-button" type="submit" disabled class="btn btn-large btn-primary">Save the modifications!</button>
       {% else %}
-        <button type="submit" class="btn btn-large btn-primary">Save the new rule!</button>
+        <button id="submit-button" type="submit" disabled class="btn btn-large btn-primary">Save the new rule!</button>
       {% endif %}
       </div>
    </div>
