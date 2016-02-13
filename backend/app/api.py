@@ -1177,9 +1177,33 @@ def getDiscretizedTable(building, room):
 @cross_origin(origin='*',headers=['Content-Type','Authorization'])
 def getInfluence():
     if request.method == 'POST':
-        print request.form
+        params = request.form
+        print params
 
-        return 'ok'
+        external_temp_min = round(float(params['external_temp_min'])) if 'external_temp_min' in params.keys() else None
+        external_temp_max = round(float(params['external_temp_max'])) if 'external_temp_max' in params.keys() else None
+        weather = params['weather'] if 'weather' in params.keys() else None
+        occupancy = getBoolFromString(params['occupancy']) if 'occupancy' in params.keys() else None
+        room_temp_min = round(float(params['room_temp_min'])) if 'room_temp_min' in params.keys() else None
+        room_temp_max = round(float(params['room_temp_max'])) if 'room_temp_max' in params.keys() else None
+        start_date = params['start_date'] if 'start_date' in params.keys() else None
+        end_date = params['end_date'] if 'end_date' in params.keys() else None
+        start_time = int(params['start_time'][:2]) if 'start_time' in params.keys() else None
+        end_time = int(params['end_time'][:2]) if 'end_time' in params.keys() else None
+        day = params['day'] if 'day' in params.keys() else None
+        priority = float(params['priority']) if 'priority' in params.keys() else None
+
+        print external_temp_min, external_temp_max, weather, occupancy, \
+            room_temp_min, room_temp_max, start_date, end_date, start_time, end_time, day, priority
+
+        from app.backend.controller.influenceManager.influenceManager import probability
+
+        p = probability(external_temp_min, external_temp_max, weather, occupancy,
+                    room_temp_min, room_temp_max, start_date, end_date,
+                    start_time, end_time, day, priority)
+        print p
+
+        return returnResult({'probability':p})
 
 
 
@@ -1221,7 +1245,6 @@ def returnError(errorException):
 def getBoolFromString(stringValue):
     if stringValue.upper() == "TRUE": return True
     return False
-
 
 def validateInput(formValue):
     if "'" in formValue or '"' in formValue:

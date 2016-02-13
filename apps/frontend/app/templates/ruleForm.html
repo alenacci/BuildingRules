@@ -435,23 +435,23 @@
       <div class="controls">
 
       {% if insertionForGroup %}
-        <bold class="muted">LOW</bold> <input type="range" min ="0" max="{{session.maxGroupPriority}}" name="priority" id="priority" value="{% if rule %}{{rule.priority}}{% endif %}" onchange="updatePriority(this.value);"> <bold class="muted">HIGH</bold>
-        <input type="text" name="priorityTextBox" id="priorityTextBox" readonly="" class="input-small" value="{% if rule %}{{rule.priority}}{% else %}{% if priority %}{{priority}}{% else %}{{session.maxGroupPriority // 2}}{% endif %}{% endif %}">
+        <bold class="muted">LOW</bold> <input type="range" min ="1" max="5" name="priority" id="priority" value="3" onchange="updatePriority(this.value);"> <bold class="muted">HIGH</bold>
+        <input type="text" name="priorityTextBox" id="priorityTextBox" readonly="" class="input-small" value="3">
       {% endif %}
 
       {% if insertionForRoom %}
-        <bold class="muted">LOW</bold> <input type="range" min ="0" max="{{session.maxRoomPriority}}" name="priority" id="priority" value="{% if rule %}{{rule.priority}}{% endif %}" onchange="updatePriority(this.value);"> <bold class="muted">HIGH</bold>
-        <input type="text" name="priorityTextBox" id="priorityTextBox" readonly="" class="input-small" value="{% if rule %}{{rule.priority}}{% else %}{% if priority %}{{priority}}{% else %}{{session.maxRoomPriority // 2}}{% endif %}{% endif %}">
+        <bold class="muted">LOW</bold> <input type="range" min ="1" max="5" name="priority" id="priority" value="3" onchange="updatePriority(this.value);"> <bold class="muted">HIGH</bold>
+        <input type="text" name="priorityTextBox" id="priorityTextBox" readonly="" class="input-small" value="3">
       {% endif %}
       
       <br>
       <small class="muted"><b>Allowed priority values:</b></small>
       {% if insertionForGroup %}
         <br>
-        <small class="muted">Group priority: [0-{{session.maxGroupPriority}}]</small>
+        <small class="muted">Group priority: [0-5]</small>
       {% endif %}
       <br>
-      <small class="muted">Room priority: [0-{{session.maxRoomPriority}}]</small>
+      <small class="muted">Room priority: [0-5]</small>
 
       </div>
     </div>

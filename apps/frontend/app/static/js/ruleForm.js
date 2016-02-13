@@ -6,6 +6,7 @@ function updatePriority(value)
 {
 	priorityTextBox = document.getElementById('priorityTextBox');
 	priorityTextBox.value = value;
+	compose()
 }
 
 function updateActionBlind(value)
@@ -212,12 +213,12 @@ function compose()
 			if(tempFromText != '-' && tempToText != '-') {
 				antecent += triggerText + " " + tempFromText + " and " + tempToText + ", ";
 				if(triggerText == 'external temperature is between') {
-					triggerParams['external_temp_min'] = tempFromText
-					triggerParams['external_temp_max'] = tempToText
+					triggerParams['external_temp_min'] = toCelsius(tempFromText)
+					triggerParams['external_temp_max'] = toCelsius(tempToText)
 				}
 				else if(triggerText == 'room temperature is between') {
-					triggerParams['room_temp_min'] = tempFromText
-					triggerParams['room_temp_max'] = tempToText
+					triggerParams['room_temp_min'] = toCelsius(tempFromText)
+					triggerParams['room_temp_max'] = toCelsius(tempToText)
 				}
 			}
 		}
@@ -261,6 +262,8 @@ function compose()
 		}
 
 	}
+
+	triggerParams['priority'] = parseFloat(document.getElementById("priority").value) / 5.0;
 
 	influenceQuery(triggerParams);
 
@@ -391,6 +394,11 @@ function influenceQuery(triggerParams) {
 	cachedParams = triggerParams
 
 	postQuery('api/influence_metric', renderGauge, triggerParams);
+}
+
+function toCelsius(degree) {
+	degree = parseFloat(degree.substr(0,2))
+	return (degree-32) * 5.0 / 9.0
 }
 
 
