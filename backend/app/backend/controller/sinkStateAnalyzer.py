@@ -8,10 +8,17 @@ def sinkStateAnalysis(building, room):
     INFLUENCE_MAX = 0.3
 
     room = Room(roomName=room, buildingName=building)
-    # rules = room.getRules(includeDisabled=True)
+    roomRules = room.getRules(includeDisabled=True)
+    rulesDescriptions = {int(r.id): 'if ' + r.antecedent + ' then ' + r.consequent for r in roomRules}
+
+
+
+    print 'rules'
+    print rulesDescriptions
+
     truthTable = TruthTable(room)
     rules = truthTable.getDict()['rules']
-    print rules
+    # print rules
 
     assertive_rules = {}
     useless_rules = {}
@@ -93,7 +100,7 @@ def sinkStateAnalysis(building, room):
         rule = {}
         rule['id'] = r['id']
         rule['influence'] = prob
-        rule['description'] = getRuleString(r['id'])
+        rule['description'] = rulesDescriptions[r['id']]
 
         if prob < INFLUENCE_MIN:
             useless_rules[rule['id']] = rule
@@ -107,7 +114,7 @@ def sinkStateAnalysis(building, room):
         info = {}
         info['id'] = r['id']
         info['influence'] = prob
-        info['description'] = getRuleString(r['id'])
+        info['description'] = rulesDescriptions[r['id']]
 
         if action not in actions.keys():
             actions[action] = []
@@ -149,6 +156,7 @@ def sinkStateAnalysis(building, room):
     # Step 4: Semi-sinks
 
     response = {}
+    response['rules'] = rulesDescriptions
     response['assertive_rules'] = assertive_rules
     response['useless_rules'] = useless_rules
     response['sinks'] = sinks
