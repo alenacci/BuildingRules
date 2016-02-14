@@ -8,8 +8,49 @@ function UITruthTable() {
     var container = null;
 
     ///////////// PUBLIC METHODS /////////////
+    this.init = function() {
+        container = d3.select('#content-main');
+
+        container.selectAll('#rules').remove();
+
+        table = container.selectAll('table')
+            .data([""]);
+
+        table.enter()
+            .append('table')
+            .attr('class','table table-hover table-striped table-bordered');
+
+        table.selectAll('*').remove();
+
+        var button = container.select('#buttons')
+            .selectAll('button')
+            .data(["Binarize", "Minimize", "Discretize"]);
+
+        button.enter()
+            .append('button')
+            .text(ƒ())
+            .class('btn btn-primary')
+            .on('click', function(d,i) {
+                switch(i) {
+                    case 0:
+                        pageViewController.truthTableViewController.getBinaryTable();
+                        break;
+                    case 1:
+                        pageViewController.truthTableViewController.getMinimizedTable();
+                        break;
+                    case 2:
+                        pageViewController.truthTableViewController.getDiscretizedTable();
+                        break;
+                }
+            })
+    }
+
     this.render = function() {
         table.selectAll('*').remove();
+
+        self.init();
+
+
 
         var truthTableModel = pageViewController.truthTableViewController.truthTableModel;
         headers = truthTableModel.headers;
@@ -154,36 +195,6 @@ function UITruthTable() {
     };
 
     var init = function() {
-        container = d3.select('#content-main');
-
-        table = container.selectAll('table')
-            .data([""]);
-
-        table.enter()
-            .append('table')
-            .attr('class','table table-hover table-striped table-bordered');
-
-        table.selectAll('*').remove();
-
-        var button = container.select('#buttons')
-            .selectAll('button')
-            .data(["Binarize", "Minimize"]);
-
-        button.enter()
-            .append('button')
-            .text(ƒ())
-            .class('btn btn-primary')
-            .on('click', function(d,i) {
-                switch(i) {
-                    case 0:
-                        pageViewController.truthTableViewController.getBinaryTable();
-                        break;
-                    case 1:
-                        pageViewController.truthTableViewController.getMinimizedTable();
-                        break;
-                }
-            })
-
-
+        self.init();
     }();
 };

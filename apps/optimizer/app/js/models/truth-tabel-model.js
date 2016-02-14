@@ -79,6 +79,7 @@ function TruthTableModel() {
 
     this.setDataFromBinaryJSON = function(json) {
         self.headers = json['labels'];
+        console.log(self.headers)
         self.rows = [];
         self.headersIndexes = getHeaderIndexes(self.headers);
 

@@ -152,7 +152,7 @@ def sinkStateAnalysis(building, room):
     response['assertive_rules'] = assertive_rules
     response['useless_rules'] = useless_rules
     response['sinks'] = sinks
-    response['semi-sinks'] = semi_sinks
+    response['semi_sinks'] = semi_sinks
 
     return response
 

@@ -29,13 +29,16 @@
 
     <!-- Views -->
     <script src="js/views/ui-truth-table.js"></script>
+    <script src="js/views/ui-sink-state.js"></script>
 
     <!-- View-Controllers-->
     <script src="js/controllers/page-view-controller.js"></script>
     <script src="js/controllers/truth-table-view-controller.js"></script>
+    <script src="js/controllers/sink-state-view-controller.js"></script>
 
     <!-- Models -->
     <script src="js/models/truth-tabel-model.js"></script>
+    <script src="js/models/sink-state-model.js"></script>
     <script src="js/models/model.js"></script>
 
 
@@ -53,9 +56,9 @@
                 <a class="navbar-brand" href="#">BuildingRules 3.0 >_optimizer-app</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="active"><a href="#">Truth Table</a></li>
-                    <li><a href="#">Decision Tree</a></li>
+                <ul id='links' class="nav navbar-nav navbar-right">
+                    <li id='truth-table-link' class="active" onclick="pageViewController.updateLinks(this.id)"><a href="#">Truth Table</a></li>
+                    <li id='sink-state-link' onclick="pageViewController.updateLinks(this.id)" ><a href="#">Sink State Analysis</a></li>
                 </ul>
             </div>
         </div>

@@ -31,6 +31,14 @@ function TruthTableViewController(building, room) {
         });
     };
 
+    this.getDiscretizedTable= function(json) {
+        var query = "api/rule_optimizer/discretized_truth_table/" + building + "/" + room;
+
+        getQuery(query, function(json) {
+            self.truthTableModel.setDataFromJSON(json);
+        });
+    };
+
     ///////////// PRIVATE METHODS ////////////
     var retrieveData = function() {
         var query = "api/rule_optimizer/truth_table/" + building + "/" + room;

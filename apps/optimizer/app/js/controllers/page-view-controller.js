@@ -5,13 +5,33 @@ function PageViewController() {
 
     ///////////// PUBLIC VARIABLES //////////////
     self.truthTableViewController = null;
+    self.sinkStateViewController = null;
     self.building = undefined;
     self.room = undefined;
+    self.selectedLink = 'truth-table-link';
 
 
     ///////////// PUBLIC METHODS /////////////
+    this.updateLinks = function(id) {
+        self.selectedLink = id;
+        console.log(self.selectedLink);
+
+        d3.select('#links')
+            .selectAll('li')
+            .classed('active', function() {
+                return this['id'] == id;
+            });
+
+        self.renderContent();
+
+    };
+
     this.truthTable = function() {
         this.truthTableViewController = new TruthTableViewController(self.building, self.room);
+    };
+
+    this.sinkStates = function() {
+        this.sinkStateViewController = new SinkStateViewController(self.building, self.room);
     };
 
     this.drawSidebar = function() {
@@ -49,7 +69,8 @@ function PageViewController() {
                 .on("click", function(d) {
                     self.building = d['buildingName'];
                     self.room = d['roomName'];
-                    self.truthTable();
+
+                    self.renderContent();
                     self.drawSidebar();
                 });
 
@@ -62,6 +83,15 @@ function PageViewController() {
             roomLabels.exit().remove();
         });
 
+    };
+
+    this.renderContent = function() {
+        if(self.selectedLink == 'truth-table-link') {
+            self.truthTable()
+        }
+        else if(self.selectedLink == 'sink-state-link') {
+            self.sinkStates()
+        }
     };
 
     ///////////// PRIVATE METHODS /////////////
@@ -87,8 +117,10 @@ function PageViewController() {
     };
 
 
+
     var init = function() {
         retrieveBuildingsAndRooms();
+
     }();
 
 };
