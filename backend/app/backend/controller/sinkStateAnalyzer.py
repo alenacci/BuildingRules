@@ -147,14 +147,6 @@ def sinkStateAnalysis(building, room):
 
                         semi_sinks[r['id']] = r
 
-
-
-    # Step 3: Sinks
-    actions_to_check = ['windows_open','wake_up_pc','turn on the room light','turn on the printer','turn on my desk light','turn on display monitors']
-
-
-    # Step 4: Semi-sinks
-
     response = {}
     response['rules'] = rulesDescriptions
     response['assertive_rules'] = assertive_rules
