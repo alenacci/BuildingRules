@@ -143,7 +143,7 @@ def date_probability(start_date, end_date):
 
 
 def time_probability(start_time, end_time):
-    return (end_time - start_time + 1) / 24.0
+    return abs(end_time - start_time + 1) / 24.0
 
 
 def day_probability():

@@ -1205,6 +1205,14 @@ def getInfluence():
 
         return returnResult({'probability':p})
 
+@api.route('/api/sink_state_analysis/<building>/<room>', methods=['GET'])
+@cross_origin(origin='*',headers=['Content-Type','Authorization'])
+def sinkStateAnalysis(building, room):
+    if request.method == 'GET':
+        from app.backend.controller.sinkStateAnalyzer import sinkStateAnalysis
+
+        return returnResult(sinkStateAnalysis(building, room))
+
 
 
 
