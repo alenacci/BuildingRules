@@ -55,7 +55,7 @@ function UISinkState() {
         table.append('h3').text('Useless Rules');
         if(Object.keys(uselessRules).length > 0) {
             for (r in uselessRules) {
-                rule = assertiveRules[r];
+                rule = uselessRules[r];
                 paragraph = table.append('p')
                 paragraph.append('b').text(r)
                 paragraph.append('i').text(' - ' + rule.description)
