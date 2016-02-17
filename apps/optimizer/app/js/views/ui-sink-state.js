@@ -52,6 +52,19 @@ function UISinkState() {
             table.append('h5').text('No rules')
         }
 
+        table.append('h3').text('Useless Rules');
+        if(Object.keys(uselessRules).length > 0) {
+            for (r in uselessRules) {
+                rule = assertiveRules[r];
+                paragraph = table.append('p')
+                paragraph.append('b').text(r)
+                paragraph.append('i').text(' - ' + rule.description)
+                paragraph.append('b').text(' - influence: ' + rule.influence)
+            }
+        }else {
+            table.append('h5').text('No rules')
+        }
+
         table.append('h3').text('Sinks');
         if(Object.keys(sinks).length > 0) {
             for (r in sinks) {
