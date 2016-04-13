@@ -46,7 +46,7 @@ function UISinkState() {
                 paragraph = table.append('p')
                 paragraph.append('b').text(r)
                 paragraph.append('i').text(' - ' + rule.description)
-                paragraph.append('b').text(' - influence: ' + rule.influence)
+                paragraph.append('b').text(' - influence: ' + toPercentage(rule.influence));
             }
         }else {
             table.append('h5').text('No rules')
@@ -59,7 +59,7 @@ function UISinkState() {
                 paragraph = table.append('p')
                 paragraph.append('b').text(r)
                 paragraph.append('i').text(' - ' + rule.description)
-                paragraph.append('b').text(' - influence: ' + rule.influence)
+                paragraph.append('b').text(' - influence: ' + toPercentage(rule.influence))
             }
         }else {
             table.append('h5').text('No rules')
@@ -72,7 +72,7 @@ function UISinkState() {
                 paragraph = table.append('p')
                 paragraph.append('b').text(r)
                 paragraph.append('i').text(' - ' + rule.description)
-                paragraph.append('b').text(' - influence: ' + rule.influence)
+                paragraph.append('b').text(' - influence: ' + toPercentage(rule.influence))
                 list = table.append('ul')
                 list.append('li').text('No opposite rules defined!')
 
@@ -88,7 +88,7 @@ function UISinkState() {
                 paragraph = table.append('p')
                 paragraph.append('b').text(r)
                 paragraph.append('i').text(' - ' + rule.description)
-                paragraph.append('b').text(' - influence: ' + rule.influence)
+                paragraph.append('b').text(' - influence: ' + toPercentage(rule.influence))
                 list = table.append('ul');
                 for(var i = 0; i < rule.opposites.length; i++) {
                     o = rule.opposites[i];
@@ -97,7 +97,7 @@ function UISinkState() {
                     paragraph = p.append('p')
                     paragraph.append('b').text(o.id)
                     paragraph.append('i').text(' - ' + o.description)
-                    paragraph.append('b').text(' - influence: ' + o.influence)
+                    paragraph.append('b').text(' - influence: ' + toPercentage(o.influence))
 
                 }
             }
@@ -126,6 +126,10 @@ function UISinkState() {
 
 
 //////////// PRIVATE METHODS /////////////
+
+    var toPercentage = function(floatNumber) {
+        return (floatNumber*100).toFixed(2) + "%"
+    };
 
     var init = function() {
         container = d3.select('#content-main');
