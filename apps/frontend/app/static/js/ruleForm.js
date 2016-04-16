@@ -408,7 +408,7 @@ function renderGauge(value) {
 	probability = value['probability']
 	powerGauge.update(probability)
 
-	if(0.05<=probability && probability<=0.3) {
+	if(0.005<=probability && probability<=0.3) {
 		document.getElementById('submit-button').removeAttribute('disabled')
 	}
 	else {
